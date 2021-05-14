@@ -4,7 +4,7 @@ import os
 from dataset_utilities import load_file,preprocessing,get_vocab, create_graphs_of_words
 
 
-def retrieve_recommendations(train_path,test_path,n,size):
+def compute_recommendations(train_path,test_path,n,size):
 
     train_data, y_train = load_file(train_path)
     test_data, y_test = load_file(test_path)
@@ -96,7 +96,7 @@ def join_rec(dict_results, k,recType):
 
 
 
-def retrieve_similar_class(train_context, test_context,gt_context, result_file,n_classes,n_items,size,recType):
+def get_recommendations(train_context, test_context,gt_context, result_file,n_classes,n_items,size,recType):
 
     with open(result_file, 'a', encoding='utf8', errors='ignore') as res:
         with open(test_context, 'r', errors='ignore', encoding='utf-8') as f:
@@ -105,7 +105,7 @@ def retrieve_similar_class(train_context, test_context,gt_context, result_file,n
             print(lenght)
             if lenght < 10:
                 for i in range(0, lenght):
-                        results = retrieve_recommendations(train_context, test_context, i, size)
+                        results = compute_recommendations(train_context, test_context, i, size)
                         rec_graph = join_rec(results, n_classes,recType)
                 gt_data, gt_label = load_file(gt_context)
                 for gt in gt_data:
