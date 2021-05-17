@@ -13,13 +13,16 @@ To run the tool, you need to install the following python libraries:
 The folder is structured as follows:
 ```
  	|--- Datasets		It contains the training, testing, and ground truth files 											
-						for all datasets and configurations
+				for all datasets and configurations
+				
 	|--- Results 		This folder stores the results of the metrics computation 			   
-						process
+				process
 						
-	|--- utilities.py   It contains functions used to preprocess the textual    								
-	                    textual files		   
+	|--- utilities.py   	It contains functions used to preprocess the textual    								
+	                    	textual files
+				
 	|--- GNN_engine.py	It contains functions used to enable the GNN engine
+	
 	|--- main.py		It performs the ten-fold validation 
       
 ```
