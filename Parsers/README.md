@@ -1,6 +1,6 @@
-## MORGAN: A  Recommender System to Assist the Specification of Metamodels and Models
+## MORGAN parsers
 
-This repository contains all needed materials to replicate the experiments presented in the paper. We structured the content as follows:
+This subfolder contains the parsers used to exctract the data from metamodels and models. They are structured as follows
 
- - **Parsers** folder contains the two parsers used to exctract information from metamodels and models 
- - **MORGAN** folder contains the Python implementation of the tool and the datasets employed in the evaluation
+ - **org.eclipse.ecore.parsers** project exctracts the metaclassess and the corresponding structural features using the EMF utilities. The original ecore files are stored in the *input_ecore* folder.
+ - **org.eclipse.modisco.parser** project contains the MoDisco utilities employed to exctract classes and the corresponding class members from the the xmi files stored in the *input_xmi* folder
