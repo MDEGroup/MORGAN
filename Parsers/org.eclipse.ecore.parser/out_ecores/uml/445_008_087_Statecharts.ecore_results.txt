@@ -1,0 +1,8 @@
+uml	BooleanExpression (value,String,attribute) 
+uml	StateMachine (top,State,ref) (transitions,Transition,ref) 
+uml	State (state_container,StateMachine,ref) (deferrableEvents,Event,ref) (internalTransitions,Transition,ref) 
+uml	CompositeState (isConcurrent,Boolean,attribute) (subVertexes,StateVertex,ref) 
+uml	Transition (transS_container,State,ref) (guard,Guard,ref) (transSM_container,StateMachine,ref) (trigger,Event,ref) (source,StateVertex,ref) (target,StateVertex,ref) 
+uml	Event (evt_container,Transition,ref) (targets,State,ref) 
+uml	Guard (expression,BooleanExpression,ref) (gua_container,Transition,ref) 
+uml	StateVertex (outgoing,Transition,ref) (incoming,Transition,ref) (sv_container,CompositeState,ref) 

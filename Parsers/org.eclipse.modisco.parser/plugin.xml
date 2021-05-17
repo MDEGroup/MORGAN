@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+
+   <extension
+         point="org.eclipse.ui.commands">
+      <category
+            id="it.disim.univaq.modisco.injector.commands.category"
+            name="Sample Category">
+      </category>
+      <command
+            categoryId="it.disim.univaq.modisco.injector.commands.category"
+            name="Sample Command"
+            id="it.disim.univaq.modisco.injector.commands.sampleCommand">
+      </command>
+   </extension>
+   <extension
+         point="org.eclipse.ui.handlers">
+      <handler
+            class="it.disim.univaq.modisco.injector.handlers.SampleHandler"
+            commandId="it.disim.univaq.modisco.injector.commands.sampleCommand">
+      </handler>
+   </extension>
+   <extension
+         point="org.eclipse.ui.bindings">
+      <key
+            commandId="it.disim.univaq.modisco.injector.commands.sampleCommand"
+            schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"
+            contextId="org.eclipse.ui.contexts.window"
+            sequence="M1+6">
+      </key>
+   </extension>
+   <extension
+         point="org.eclipse.ui.menus">
+      <menuContribution
+            locationURI="menu:org.eclipse.ui.main.menu?after=additions">
+         <menu
+               id="it.disim.univaq.modisco.injector.menus.sampleMenu"
+               label="Sample Menu"
+               mnemonic="M">
+            <command
+                  commandId="it.disim.univaq.modisco.injector.commands.sampleCommand"
+                  id="it.disim.univaq.modisco.injector.menus.sampleCommand"
+                  mnemonic="S">
+            </command>
+         </menu>
+      </menuContribution>
+      <menuContribution
+            locationURI="toolbar:org.eclipse.ui.main.toolbar?after=additions">
+         <toolbar
+               id="it.disim.univaq.modisco.injector.toolbars.sampleToolbar">
+            <command
+                  id="it.disim.univaq.modisco.injector.toolbars.sampleCommand"
+                  commandId="it.disim.univaq.modisco.injector.commands.sampleCommand"
+                  icon="icons/sample.png"
+                  tooltip="Say hello world">
+            </command>
+         </toolbar>
+      </menuContribution>
+   </extension>
+
+</plugin>

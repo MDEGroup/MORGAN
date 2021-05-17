@@ -1,0 +1,8 @@
+uml	TimeConstraint (type,TimeConstraintType,attribute) (timeConstraintSpecification,TimeConstraintSpecification,ref) 
+uml	TimeConstraintSpecification (stopTimestamp,ELong,attribute) (id,EString,attribute) (expectedLength,ELong,attribute) (startTimestamp,ELong,attribute) 
+uml	State (label,EString,attribute) (timeConstraints,TimeConstraint,ref) (lastProcessedEvent,null,ref) (outTransitions,Transition,ref) (inTransitions,Transition,ref) (eventTokens,EventToken,ref) 
+uml	StateMachine (context,EventProcessingContext,attribute) (priority,EInt,attribute) (eventPattern,null,ref) (states,State,ref) 
+uml	Transition (preState,State,ref) (guard,Guard,ref) (postState,State,ref) 
+uml	Guard (eventType,null,ref) 
+uml	InternalExecutionModel (context,EventProcessingContext,attribute) (stateMachines,StateMachine,ref) (latestEvent,null,ref) (eventTokens,EventToken,ref) 
+uml	EventToken (currentState,State,ref) (recordedEvents,null,ref) 
