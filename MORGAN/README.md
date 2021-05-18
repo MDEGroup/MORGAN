@@ -37,11 +37,11 @@ To replicate the experiment, you need to specify the following parameters in the
  - *result:* path to store the results 
  - *n_classes*: number of recommended metaclasses/classes 
  - *n_items:*: number of recommended structural features/class members
- - *size:* size of the testing models (=1 for Π/3, =2 for 2Π/3)
+ - *size:* the size of the testing models (=1 for Π/3, =2 for 2Π/3)
  - *recType:* a string value to specify the type of retrieved recommendation (='class' for the metaclasses/classes, ='struct' for structural features/class members)
 
 
-A possible configuration the **get_recommendations** function for one round can be the following:
+A possible configuration of the **get_recommendations** function for one round can be the following:
 
     get_recommendations(train_context= './Datasets/D_beta/C1.1/train1.txt', test_context='./Datasets/D_beta/C1.1/test_1/'+filename,gt_context= './Datasets/D_beta/C1.1/gt_1/',  result_file='./Results/results_ecore_test_1.txt',n_classes=4,n_items=4,size=2,recType='struct')
 In particular, the above setting produces the results for metamodel's structural features using the configuration C1.1 
