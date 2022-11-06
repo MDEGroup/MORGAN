@@ -1,15 +1,29 @@
 from GNN_engine import get_recommendations
-import os
+import os, time
+from dataset_utilities import enrich_data, mapping_vce_terms
+import nltk
+
+def main():
 
 
-for i in range(1, 10):
-    train_context = './Datasets/D_beta/C1.1/train' + str(i) + '.txt'
-    test_context = './Datasets/D_beta/C1.1/test_' + str(i) + '/'
+    for i in range(1, 11):
 
-    gt_path= './Datasets/D_beta/C1.1/gt_' + str(i) + '/'
-    result = './Results/results_ecore_test_'+str(i)+'.txt'
+        print('Start round ', i)
 
-    for file in os.listdir(test_context):
-        get_recommendations(train_context=train_context, test_context=test_context+file,gt_context=gt_path+file,
-                            result_file=result,n_classes=4,n_items=4,size=2,recType='struct')
+        root ="C:\\Users\\claud\\OneDrive\\Desktop\\XES_ten_folder_small\\"
 
+        train_context = root+'train' + str(i) + '.txt'
+        test_context = root+'test'+str(i)+'/'
+        gt_path = root+'gt_'+str(i)+'/'
+        result = root+'/results_round'+str(i)+'.csv'
+
+        preprocessed_train, train_data, labels = enrich_data(train_context)
+
+        for file in os.listdir(test_context):
+            get_recommendations(train_preprocessed=preprocessed_train,train_data=train_data, test_context=test_context+file,
+                                result_file=result, n_classes=10, n_items=10, size=2, recType='class')
+
+
+
+if __name__ == "__main__":
+    main()

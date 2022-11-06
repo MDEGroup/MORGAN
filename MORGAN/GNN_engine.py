@@ -1,26 +1,17 @@
-from grakel.kernels import WeisfeilerLehman
-from grakel.utils import graph_from_networkx
 import os
-from dataset_utilities import load_file,preprocessing,get_vocab, create_graphs_of_words
+
+from grakel.kernels import  WeisfeilerLehmanOptimalAssignment
+from grakel.utils import graph_from_networkx
+
+from custom_kernel_matrix import CustomKernelMatrix
+from dataset_utilities import get_vocab, create_graphs_of_words, mapping_vce_terms, precision_sim, precision, recall, recall_sim, \
+    success_rate, success_rate_sim, get_gt_classes,enrich_data, load_file, get_sysnonyms_recommeded_items, augment_rec_items, find_unique_values
 
 
-def compute_recommendations(train_path,test_path,n,size):
 
-    train_data, y_train = load_file(train_path)
-    test_data, y_test = load_file(test_path)
+
+def compute_recommendations(G_train, train_data, G_test, n, size):
     ranked_list = ()
-    # Read and pre-process test data
-
-    train_preprocessed = preprocessing(train_data)
-    test_preprocessed = preprocessing(test_data)
-
-    # Extract vocabulary
-    vocab = get_vocab(train_preprocessed, test_preprocessed)
-    G_train_nx = create_graphs_of_words(train_preprocessed, vocab, 3)
-    G_test_nx = create_graphs_of_words(test_preprocessed, vocab, 3)
-    G_train = list(graph_from_networkx(G_train_nx, node_labels_tag='label'))
-    G_test = list(graph_from_networkx(G_test_nx, node_labels_tag='label'))
-
 
     list_sim = []
     for g, rec in zip(G_train, train_data):
@@ -31,8 +22,8 @@ def compute_recommendations(train_path,test_path,n,size):
                 elif size == 2:
                     tot = (len(G_test[n]) * size) / 3
 
-                if tot > 0:
-                    sim = compute_kernel_similarity(g, G_test[n][0:int(tot)])
+                # if tot > 0:
+                    sim = compute_kernel_similarity(g, G_test[n])
                     if sim[0][0] > 0:
                         tuple_g = rec, sim[0][0]
                         list_sim.append(tuple_g)
@@ -47,39 +38,13 @@ def compute_recommendations(train_path,test_path,n,size):
 
 
 def compute_kernel_similarity(g_train,g_test):
-    sp_kernel = WeisfeilerLehman(n_iter=1, normalize=False)
+    #sp_kernel = WeisfeilerLehmanOptimalAssignment(n_iter=1, normalize=False)
+    sp_kernel = CustomKernelMatrix()
+
     sp_kernel.fit_transform([g_train])
     sp_kernel.transform([g_test])
     return sp_kernel.transform([g_test])
 
-def success_rate(predicted, actual, n):
-    if actual:
-        match = [value for value in predicted if value in actual]
-        if len(match) >= n:
-            return 1
-        else:
-            return 0
-    else:
-        return 0
-
-
-def precision(predicted,actual):
-    if actual and predicted:
-        true_p = len([value for value in predicted if value in actual])
-        false_p = len([value for value in predicted if value not in actual])
-
-        return (true_p / (true_p + false_p))*100
-    else:
-        return 0
-
-
-def recall(predicted,actual):
-    if actual and predicted:
-        true_p = len([value for value in predicted if value in actual])
-        false_n = len([value for value in actual if value not in predicted])
-        return (true_p/(true_p + false_n))*100
-    else:
-        return 0
 
 
 def join_rec(dict_results, k,recType):
@@ -94,45 +59,103 @@ def join_rec(dict_results, k,recType):
 
     return combined_list
 
-
-
-def get_recommendations(train_context, test_context,gt_context, result_file,n_classes,n_items,size,recType):
-
-    with open(result_file, 'a', encoding='utf8', errors='ignore') as res:
-        with open(test_context, 'r', errors='ignore', encoding='utf-8') as f:
-            res.write(os.path.basename(test_context)+'\n')
-            lenght=len(f.readlines())
-            print(lenght)
-            if lenght < 10:
-                for i in range(0, lenght):
-                        results = compute_recommendations(train_context, test_context, i, size)
-                        rec_graph = join_rec(results, n_classes,recType)
-                gt_data, gt_label = load_file(gt_context)
-                for gt in gt_data:
-                    rec_graph = rec_graph[0:n_items]
-                    print("recommended ", rec_graph)
-                    gt_graph = gt.split(' ')
-                    if recType == 'class':
-                        gt_graph = gt_graph[0:1]
-                    elif recType == 'struct':
-                        gt_graph = gt_graph[1:-1]
-                    print("gt class ", gt_graph)
-                    pr = precision(rec_graph,gt_graph)
-                    print(pr)
-                    rec= recall(rec_graph, gt_graph)
-                    if pr == 0.0 or rec == 0.0:
-                        f1 = 0.0
-                    else:
-                        f1 = 2 * (pr * rec) / (pr + rec)
-
-                    succ = success_rate(rec_graph,gt_graph, 1)
-
-                    res.write(str(pr)+ ','+ str(rec) + ','+str(f1)+','+str(succ) + '\n')
+def join_rec_2(dict_results):
+    #cut_rec = dict_results[0:k]
+    combined_list = []
+    for elem in dict_results:
+        combined_list = elem[0].split(' ')
+        print(combined_list)
+    return combined_list
 
 
 
 
 
+def get_recommendations(train_preprocessed, train_data,test_context, result_file,n_classes,n_items,size,recType):
+
+
+        with open(result_file, 'a', encoding='utf8', errors='ignore') as res:
+
+                with open(test_context, 'r', errors='ignore', encoding='utf-8') as f:
+
+                    res.write(os.path.basename(test_context)+',')
+                    lenght = len(f.readlines())
+                    #print(os.path.basename(test_context))
+                    test_preprocessed, test_data, test_labels = enrich_data(test_context)
+
+
+                    #test_preprocessed=preprocessing(test_context)
+                    # Extract vocabulary
+                    vocab = get_vocab(train_preprocessed, test_preprocessed)
+                    G_train_nx = create_graphs_of_words(train_preprocessed, vocab, 3)
+                    G_test_nx = create_graphs_of_words(test_preprocessed, vocab, 3)
+                    G_train = list(graph_from_networkx(G_train_nx, node_labels_tag='label'))
+                    G_test = list(graph_from_networkx(G_test_nx, node_labels_tag='label'))
+
+                    for i in range(0, lenght):
+                            results = compute_recommendations(G_train, train_data, G_test, i, size)
+                            rec_graph = join_rec(results, n_classes,recType)
+
+                    if recType == "class":
+                        gt_data = get_gt_classes(test_context)
+                    if recType == "struct":
+                        label, gt_data = load_file(test_context)
+
+                    if gt_data:
+                        rec_graph = set(rec_graph)
+                        rec_graph = list(rec_graph)[0:n_items]
+                        list_gt_global = []
+                        for gt in gt_data:
+                            #print("recommended ", rec_graph)
+                            gt_graph = gt.split(' ')
+                            #print(gt_graph)
+                            if recType == 'class':
+                                list_gt_global = gt_data
+                            elif recType == 'struct':
+                                list_gt_global.extend(gt_graph[1:-1])
+
+
+                        #list_gt_global = list(set(list_gt_global))
+                        #print('rec ', rec_graph)
+
+
+                        print('rec list ', rec_graph)
+                        dict_terms = mapping_vce_terms("C:\\Users\\claud\\OneDrive\\Desktop\\Grakel\\Grakel\\unique_values.txt")
+                        for rec in rec_graph:
+                            print("new rec list", dict_terms.get(rec))
+
+
+
+                        res.write(' '.join(rec_graph)+',')
+                        #res.write(' '.join(gt_graph))
+                        if list_gt_global:
+
+                            ### exact match ###
+                            succ_std = success_rate(rec_graph, list_gt_global, 1)
+                            print('success rate std', success_rate(rec_graph, list_gt_global, 1))
+                            pr_std = precision(rec_graph, list_gt_global)
+                            print('precision std ', precision(rec_graph, list_gt_global))
+                            rec_std = recall(rec_graph, list_gt_global)
+                            print('recall std', recall(rec_graph, list_gt_global))
+                            if pr_std == 0.0 or rec_std == 0.0:
+                                f1_std = 0.0
+                            else:
+                                f1_std = 2 * (pr_std * rec_std) / (pr_std + rec_std)
+                            print('f1 std', f1_std)
+
+
+                            res.write(str(pr_std) + ',' + str(rec_std) + ','+str(f1_std)+','+str(succ_std) +
+                                      '\n')
+
+
+
+def read_file_as_list(file):
+    list_keys = []
+    with open(file, 'r') as f:
+        for k in f:
+            #print(k.strip())
+            list_keys.append(k.strip().replace('\n',''))
+    return list_keys
 
 
 
