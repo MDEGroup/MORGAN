@@ -1,0 +1,8 @@
+model	Entity (features,Feature,ref) (owns,Relation,ref) (bequeathesTo,Entity,ref) (featuresId,idFeature,ref) (ownedBy,Relation,ref) (inherits,Entity,ref) 
+model	Type (name,EString,attribute) 
+model	Relation (unidirectional,EBoolean,attribute) (optional,EBoolean,attribute) (owner,Entity,ref) (slave,Entity,ref) (associates,AssociationEntity,ref) 
+model	Model (name,EString,attribute) (types,Type,ref) (connector,DatabaseConnection,ref) 
+model	idFeature (generationType,EString,attribute) 
+model	DatabaseConnection (jdbcDriver,EString,attribute) (jdbcUser,EString,attribute) (jdbcPrefix,EString,attribute) (jdbcUrl,EString,attribute) (jdbcPassword,EString,attribute) (persistenceUnit,EString,attribute) 
+model	AssociationEntity (features,Feature,ref) (relation,Relation,ref) 
+model	Feature (xmltransient,EBoolean,attribute) (nullable,EBoolean,attribute) (name,EString,attribute) (type,Type,ref) 

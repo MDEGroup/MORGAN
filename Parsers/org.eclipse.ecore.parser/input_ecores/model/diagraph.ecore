@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="diagraph" nsURI="http://isoe-2012-diagraph-dsmlv4" nsPrefix="diagraph">
+  <eClassifiers xsi:type="ecore:EClass" name="DEdge" abstract="true" eSuperTypes="#//DGraphElement">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="target" lowerBound="1"
+        eType="#//DNode"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="targetReference" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EReference"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="propagated" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="DGraphElement" abstract="true">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="semanticRole" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//ENamedElement"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="icon" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="graph" eType="#//DGraph"
+        eOpposite="#//DGraph/elements"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="abztract" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="DNode" eSuperTypes="#//DLabeledElement #//DOwnedElement">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="viewNavigation" eType="#//DViewNavigation"
+        containment="true" eOpposite="#//DViewNavigation/navigationSource"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="shape" eType="#//DShape"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="layout" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="navigationLink" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="containments" upperBound="-1"
+        eType="#//DContainment" containment="true" eOpposite="#//DContainment/node"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="DLabeledEdge" eSuperTypes="#//DOwnedEdge #//DLabeledElement #//DLineEdge">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="sourceReference" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EReference"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="DReference" eSuperTypes="#//DLineEdge"/>
+  <eClassifiers xsi:type="ecore:EClass" name="DNestedEdge" eSuperTypes="#//DOwnedEdge">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="source" lowerBound="1"
+        eType="#//DContainment"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="DGraph">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="elements" upperBound="-1"
+        eType="#//DGraphElement" containment="true" eOpposite="#//DGraphElement/graph"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="pointOfView" lowerBound="1"
+        eType="#//DPointOfView"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="viewName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="facade1" eType="#//DGraphHandler"
+        transient="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="facade2" eType="#//DGraphHandler"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="DLabeledElement" abstract="true" eSuperTypes="#//DGraphElement">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="eClaz" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EClass"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="dlabels" upperBound="-1"
+        eType="#//DLabel" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="labls" upperBound="-1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="expression" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="DOwnedElement" abstract="true">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="owner" eType="#//DNode"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="DOwnedEdge" abstract="true" eSuperTypes="#//DOwnedElement #//DEdge"/>
+  <eClassifiers xsi:type="ecore:EDataType" name="DGraphHandler" instanceClassName="org.isoe.diagraph.diagraph.helpers.IGraphHandler"/>
+  <eClassifiers xsi:type="ecore:EClass" name="DCompartmentEdge" eSuperTypes="#//DNestedEdge">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="partitionName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="depth" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="DPointOfView" eSuperTypes="#//DNode"/>
+  <eClassifiers xsi:type="ecore:EClass" name="DViewNavigation">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="id" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
+        transient="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="navigationTarget" eType="#//DGraph"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="navigationSource" eType="#//DNode"
+        eOpposite="#//DNode/viewNavigation"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="DAffixedEdge" eSuperTypes="#//DNestedEdge"/>
+  <eClassifiers xsi:type="ecore:EClass" name="DLabel">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="attribute" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EAttribute"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="propagated" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="inferred" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="abztract" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="DLineEdge" abstract="true" eSuperTypes="#//DSimpleEdge">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="arrows" upperBound="2"
+        eType="#//DShape"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="DShape">
+    <eLiterals name="dot" value="2"/>
+    <eLiterals name="triangle" value="1"/>
+    <eLiterals name="circle" value="3"/>
+    <eLiterals name="vee"/>
+    <eLiterals name="rectangle" value="4"/>
+    <eLiterals name="roundedRect" value="5"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="DNavigationEdge" eSuperTypes="#//DSimpleEdge"/>
+  <eClassifiers xsi:type="ecore:EClass" name="DGeneric" eSuperTypes="#//DLabeledElement"/>
+  <eClassifiers xsi:type="ecore:EClass" name="DContainment">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="node" lowerBound="1" eType="#//DNode"
+        eOpposite="#//DNode/containments"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="edges" upperBound="-1"
+        eType="#//DNestedEdge"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="DSimpleEdge" abstract="true" eSuperTypes="#//DEdge">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="source" lowerBound="1"
+        eType="#//DNode"/>
+  </eClassifiers>
+</ecore:EPackage>

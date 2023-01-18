@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="expressions"
+    nsURI="http://www.informatik.hu-berlin.de/sam/meta-tools/expressions" nsPrefix="expressions">
+  <eClassifiers xsi:type="ecore:EClass" name="Expression" abstract="true"/>
+  <eClassifiers xsi:type="ecore:EClass" name="BinaryOperator" abstract="true" eSuperTypes="#//Expression">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="op1" ordered="false" lowerBound="1"
+        eType="#//Expression" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="op2" ordered="false" lowerBound="1"
+        eType="#//Expression" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="UnaryOperator" abstract="true" eSuperTypes="#//Expression">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="op" ordered="false" lowerBound="1"
+        eType="#//Expression" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Implies" eSuperTypes="#//BinaryOperator"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Or" eSuperTypes="#//BinaryOperator"/>
+  <eClassifiers xsi:type="ecore:EClass" name="And" eSuperTypes="#//BinaryOperator"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Neg" eSuperTypes="#//UnaryOperator"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Model">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="constraints" ordered="false"
+        upperBound="-1" eType="#//Expression" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Feature" eSuperTypes="#//Expression">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="All" eSuperTypes="#//QuantifyOperator"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Number" eSuperTypes="#//QuantifyOperator">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Any" eSuperTypes="#//QuantifyOperator"/>
+  <eClassifiers xsi:type="ecore:EClass" name="ComparisonOperator" eSuperTypes="#//Expression">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="op1" lowerBound="1" eType="#//ComparisonOperand"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="op2" lowerBound="1" eType="#//ComparisonOperand"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="GE" eSuperTypes="#//ComparisonOperator"/>
+  <eClassifiers xsi:type="ecore:EClass" name="G" eSuperTypes="#//ComparisonOperator"/>
+  <eClassifiers xsi:type="ecore:EClass" name="LE" eSuperTypes="#//ComparisonOperator"/>
+  <eClassifiers xsi:type="ecore:EClass" name="L" eSuperTypes="#//ComparisonOperator"/>
+  <eClassifiers xsi:type="ecore:EClass" name="E" eSuperTypes="#//ComparisonOperator"/>
+  <eClassifiers xsi:type="ecore:EClass" name="D" eSuperTypes="#//ComparisonOperator"/>
+  <eClassifiers xsi:type="ecore:EClass" name="ComparisonOperand" eSuperTypes="#//Expression"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Quantity" eSuperTypes="#//ComparisonOperand">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Function" eSuperTypes="#//ComparisonOperand">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="op" lowerBound="1" eType="#//Feature"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Count" eSuperTypes="#//Function"/>
+  <eClassifiers xsi:type="ecore:EClass" name="QuantifyOperator" eSuperTypes="#//Expression">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="op" lowerBound="1" eType="#//Feature"
+        containment="true"/>
+  </eClassifiers>
+</ecore:EPackage>

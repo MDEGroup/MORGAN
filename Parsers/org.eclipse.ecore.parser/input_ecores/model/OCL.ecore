@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="ocl" nsURI="http://www.example.org/ocl" nsPrefix="ocl">
+  <eSubpackages name="dm" nsURI="http://www.example.org/ocl/dm" nsPrefix="DM">
+    <eClassifiers xsi:type="ecore:EClass" name="EEntity" eSuperTypes="#//type/EClassifier">
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2003/XMLType#//String"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="ends" upperBound="-1"
+          eType="#//dm/EAssociationEnd" containment="true"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="attributes" upperBound="-1"
+          eType="#//dm/EAttribute" containment="true"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="EAssociationEnd">
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="mult" eType="#//dm/EMultiplicity"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="target" lowerBound="1"
+          eType="#//dm/EEntity"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="opp" lowerBound="1" eType="#//dm/EAssociationEnd"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="EDataModel">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="classes" upperBound="-1"
+          eType="#//dm/EEntity" containment="true"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="EAttribute">
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="type" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EEnum" name="EMultiplicity" instanceClassName="java.lang.Object">
+      <eLiterals name="one" value="1" literal="1"/>
+      <eLiterals name="many" value="-1" literal="*"/>
+    </eClassifiers>
+  </eSubpackages>
+  <eSubpackages name="exp" nsURI="http://www.example.org/ocl/exp" nsPrefix="EXP">
+    <eClassifiers xsi:type="ecore:EEnum" name="EIteratorKind" instanceClassName="java.lang.Object">
+      <eLiterals name="forAll"/>
+      <eLiterals name="exists" value="1"/>
+      <eLiterals name="collect" value="2"/>
+      <eLiterals name="select" value="3"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EEnum" name="EOperator" instanceClassName="java.lang.Object">
+      <eLiterals name="equal" value="1" literal="="/>
+      <eLiterals name="allInstances"/>
+      <eLiterals name="greater" value="2" literal=">"/>
+      <eLiterals name="less" value="3" literal="&lt;"/>
+      <eLiterals name="notEqual" value="4" literal="&lt;>"/>
+      <eLiterals name="greaterOrEqual" value="6" literal=">="/>
+      <eLiterals name="lessOrEqual" value="7" literal="&lt;="/>
+      <eLiterals name="AND" value="8" literal="and"/>
+      <eLiterals name="OR" value="9" literal="or"/>
+      <eLiterals name="size" value="12"/>
+      <eLiterals name="isEmpty" value="13"/>
+      <eLiterals name="oclIsUndefined" value="14"/>
+      <eLiterals name="flatten" value="15"/>
+      <eLiterals name="notEmpty" value="16"/>
+      <eLiterals name="isUnique" value="17"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="EVariableExp" eSuperTypes="#//exp/EOclExpression">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="referredVariable" eType="#//exp/EVariable"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="ETypeExp" eSuperTypes="#//exp/EOclExpression">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="referredType" lowerBound="1"
+          eType="#//type/EClassifier"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="ELoopExp" abstract="true" eSuperTypes="#//exp/ECallExp">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="body" lowerBound="1"
+          eType="#//exp/EOclExpression" containment="true" eOpposite="#//exp/EOclExpression/loopBodyOwner"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="iterator" upperBound="-1"
+          eType="#//exp/EVariable" containment="true" eOpposite="#//exp/EVariable/loopExp"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="EFeatureCallExp" abstract="true" eSuperTypes="#//exp/ECallExp"/>
+    <eClassifiers xsi:type="ecore:EClass" name="EAssociationClassCallExp" eSuperTypes="#//exp/ENavigationCallExp">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="referredAssociationEnds"
+          lowerBound="1" eType="#//dm/EAssociationEnd"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="ENumericLiteralExp" abstract="true"
+        eSuperTypes="#//exp/EPrimitiveType"/>
+    <eClassifiers xsi:type="ecore:EClass" name="ELiteralExp" abstract="true" eSuperTypes="#//exp/EOclExpression"/>
+    <eClassifiers xsi:type="ecore:EClass" name="EVariable">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="loopExp" eType="#//exp/ELoopExp"
+          eOpposite="#//exp/ELoopExp/iterator"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="initExpression" eType="#//exp/EOclExpression"
+          containment="true" eOpposite="#//exp/EOclExpression/initializedElement"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="EPropertyCallExp" eSuperTypes="#//exp/ENavigationCallExp">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="referredProperty" lowerBound="1"
+          eType="#//dm/EAttribute"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="EIteratorExp" eSuperTypes="#//exp/ELoopExp">
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="kind" eType="#//exp/EIteratorKind"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="EOclExpression" abstract="true">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="loopBodyOwner" eType="#//exp/ELoopExp"
+          eOpposite="#//exp/ELoopExp/body"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="appliedElement" eType="#//exp/ECallExp"
+          eOpposite="#//exp/ECallExp/source"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="initializedElement" eType="#//exp/EVariable"
+          eOpposite="#//exp/EVariable/initExpression"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="parentCall" eType="#//exp/EOperationCallExp"
+          eOpposite="#//exp/EOperationCallExp/argument"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="parentNav" eType="#//exp/ENavigationCallExp"
+          eOpposite="#//exp/ENavigationCallExp/qualifier"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="ECallExp" abstract="true" eSuperTypes="#//exp/EOclExpression">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="source" eType="#//exp/EOclExpression"
+          containment="true" eOpposite="#//exp/EOclExpression/appliedElement"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="EIntegerLiteralExp" eSuperTypes="#//exp/ENumericLiteralExp">
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="integerValue" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EIntegerObject"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="EPrimitiveType" abstract="true" eSuperTypes="#//exp/ELiteralExp"/>
+    <eClassifiers xsi:type="ecore:EClass" name="ENavigationCallExp" abstract="true"
+        eSuperTypes="#//exp/EFeatureCallExp">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="qualifier" upperBound="-1"
+          eType="#//exp/EOclExpression" containment="true" eOpposite="#//exp/EOclExpression/parentNav"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="EOperationCallExp" eSuperTypes="#//exp/EFeatureCallExp">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="argument" upperBound="-1"
+          eType="#//exp/EOclExpression" containment="true" eOpposite="#//exp/EOclExpression/parentCall"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="referredOperation" eType="#//exp/EOperator"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="EStringLiteralExp" eSuperTypes="#//exp/EPrimitiveType">
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="stringValue" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="EBooleanLiteralExp" eSuperTypes="#//exp/EPrimitiveType">
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="booleanValue" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBooleanObject"/>
+    </eClassifiers>
+  </eSubpackages>
+  <eSubpackages name="type" nsURI="http://www.example.org/ocl/type" nsPrefix="TYPE">
+    <eClassifiers xsi:type="ecore:EClass" name="EClassifier" abstract="true"/>
+    <eClassifiers xsi:type="ecore:EClass" name="EDataType" abstract="true" eSuperTypes="#//type/EClassifier"/>
+    <eClassifiers xsi:type="ecore:EClass" name="EInvalidType" eSuperTypes="#//type/EClassifier"/>
+    <eClassifiers xsi:type="ecore:EClass" name="EVoidType" eSuperTypes="#//type/EClassifier"/>
+    <eClassifiers xsi:type="ecore:EClass" name="EAnyType" eSuperTypes="#//type/EClassifier"/>
+    <eClassifiers xsi:type="ecore:EClass" name="EMessageType" eSuperTypes="#//type/EClassifier">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="referredSignal" eType="#//type/ESignal"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="referredOperation" eType="#//exp/EOperator"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="ECollectionType" eSuperTypes="#//type/EDataType">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="elementType" lowerBound="1"
+          eType="#//type/EClassifier"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="EPrimitiveType" eSuperTypes="#//type/EDataType"/>
+    <eClassifiers xsi:type="ecore:EClass" name="ETupleType" eSuperTypes="#//type/EDataType"/>
+    <eClassifiers xsi:type="ecore:EClass" name="EOrderedSetType" eSuperTypes="#//type/ECollectionType"/>
+    <eClassifiers xsi:type="ecore:EClass" name="ESequenceType" eSuperTypes="#//type/ECollectionType"/>
+    <eClassifiers xsi:type="ecore:EClass" name="EBagType" eSuperTypes="#//type/ECollectionType"/>
+    <eClassifiers xsi:type="ecore:EClass" name="ESetType" eSuperTypes="#//type/ECollectionType"/>
+    <eClassifiers xsi:type="ecore:EClass" name="ESignal"/>
+  </eSubpackages>
+</ecore:EPackage>

@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="attroverridesecondarytable"
+    nsURI="http://www.eclipse.org/emf/teneo/samples/emf/annotations/attroverridesecondarytable"
+    nsPrefix="attroverridesecondarytable">
+  <eClassifiers xsi:type="ecore:EClass" name="Address">
+    <eAnnotations source="teneo.jpa">
+      <details key="value" value="@Embeddable"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="street" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="city" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="country" eType="#//Country"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Person">
+    <eAnnotations source="teneo.jpa">
+      <details key="value" value="@Inheritance(strategy=SINGLE_TABLE)&#xA;"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="age" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Employee" eSuperTypes="#//Person">
+    <eAnnotations source="teneo.jpa">
+      <details key="value" value="@SecondaryTable(name=&quot;secondary_table&quot;)"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="address" eType="#//Address">
+      <eAnnotations source="teneo.jpa">
+        <details key="value" value="@Embedded&#xA;@AttributeOverrides({&#xA;&#x9;@AttributeOverride(name=&quot;name&quot; column=@Column(name=&quot;other_name&quot; table=&quot;secondary_table&quot;)),&#xA;&#x9;@AttributeOverride(name=&quot;street&quot; column=@Column(name=&quot;other_street&quot; table=&quot;secondary_table&quot;)),&#xA;&#x9;@AttributeOverride(name=&quot;city&quot; column=@Column(name=&quot;other_city&quot; table=&quot;secondary_table&quot;))&#xA;})&#xA;@AssociationOverrides({&#xA;&#x9;@AssociationOverride(name=&quot;country&quot; joinColumns=@JoinColumn(name=&quot;addr_country&quot; table=&quot;secondary_table&quot;))&#xA;})"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="employeeNumber" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
+      <eAnnotations source="teneo.jpa">
+        <details key="value" value="@Column(name=&quot;emp_num&quot; table=&quot;secondary_table&quot;)"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="NonEmployee" eSuperTypes="#//Person">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="address" eType="#//Address">
+      <eAnnotations source="teneo.jpa">
+        <details key="value" value="@Embedded"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Country">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+</ecore:EPackage>

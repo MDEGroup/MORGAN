@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="dronesSimulation" nsURI="http://inf.mit.bme.hu/kortargyalo/dronesSimulation"
+    nsPrefix="dronesSimulation">
+  <eClassifiers xsi:type="ecore:EClass" name="DronesSimulation">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="scenario" lowerBound="1"
+        eType="ecore:EClass ../../hu.bme.mit.inf.kortargyalo.drones.structure.model/model/dronesStructure.ecore#//Scenario"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="taskInstances" upperBound="-1"
+        eType="#//TaskInstance" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="droneInstances" upperBound="-1"
+        eType="#//DroneInstance" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="DroneInstance">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="drone" lowerBound="1" eType="ecore:EClass ../../hu.bme.mit.inf.kortargyalo.drones.structure.model/model/dronesStructure.ecore#//Drone"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="position" lowerBound="1"
+        eType="ecore:EClass ../../hu.bme.mit.inf.kortargyalo.drones.structure.model/model/dronesStructure.ecore#//Position"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="currentRole" eType="#//RoleInstance"
+        eOpposite="#//RoleInstance/allocatedDrone"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="observations" upperBound="-1"
+        eType="#//Observation" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="currentBattery" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDouble"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="state" eType="#//DroneState"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="TaskInstance">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="task" eType="ecore:EClass ../../hu.bme.mit.inf.kortargyalo.drones.structure.model/model/dronesStructure.ecore#//Task"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="roleInstances" lowerBound="1"
+        upperBound="-1" eType="#//RoleInstance" containment="true" eOpposite="#//RoleInstance/taskInstance"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="state" eType="#//TaskState"
+        defaultValueLiteral="NOT_STARTED"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="RoleInstance">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="role" eType="ecore:EClass ../../hu.bme.mit.inf.kortargyalo.drones.structure.model/model/dronesStructure.ecore#//Role"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="taskInstance" lowerBound="1"
+        eType="#//TaskInstance" eOpposite="#//TaskInstance/roleInstances"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="allocatedDrone" eType="#//DroneInstance"
+        eOpposite="#//DroneInstance/currentRole"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Observation" abstract="true">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="time" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//ELong"
+        defaultValueLiteral="0"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="id" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//ELong"
+        iD="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ObstacleObservation" eSuperTypes="#//Observation">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="obstacle" lowerBound="1"
+        eType="ecore:EClass ../../hu.bme.mit.inf.kortargyalo.drones.structure.model/model/dronesStructure.ecore#//Obstacle"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="DroneObservation" eSuperTypes="#//Observation">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="drone" lowerBound="1" eType="ecore:EClass ../../hu.bme.mit.inf.kortargyalo.drones.structure.model/model/dronesStructure.ecore#//Drone"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="position" lowerBound="1"
+        eType="ecore:EClass ../../hu.bme.mit.inf.kortargyalo.drones.structure.model/model/dronesStructure.ecore#//Position"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="TaskState">
+    <eLiterals name="NOT_STARTED"/>
+    <eLiterals name="WAITING" value="1"/>
+    <eLiterals name="IN_PROGRESS" value="2"/>
+    <eLiterals name="DONE" value="3"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="DroneState">
+    <eLiterals name="CREATED"/>
+    <eLiterals name="HOVERING" value="1"/>
+    <eLiterals name="MOVING" value="2"/>
+    <eLiterals name="DONE" value="3"/>
+  </eClassifiers>
+</ecore:EPackage>

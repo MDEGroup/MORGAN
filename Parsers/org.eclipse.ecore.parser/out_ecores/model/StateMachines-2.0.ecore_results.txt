@@ -1,0 +1,7 @@
+model	ConnectionPointReference (entry,Pseudostate,ref) (exit,Pseudostate,ref) 
+model	Vertex (outgoing,Transition,ref) (incoming,Transition,ref) 
+model	Pseudostate (kind,PseudoStateKind,attribute) 
+model	StateMachine (region,Region,ref) 
+model	State (entry,Behavior,ref) (exit,Behavior,ref) (deferrableTrigger,Trigger,ref) (doActivity,Behavior,ref) (connection,ConnectionPointReference,ref) (connectionPoint,Pseudostate,ref) (region,Region,ref) (submachine,StateMachine,ref) 
+model	Transition (kind,TransitionKind,attribute) (trigger,Trigger,ref) 
+model	Region (subvertex,Vertex,ref) (transition,Transition,ref) 

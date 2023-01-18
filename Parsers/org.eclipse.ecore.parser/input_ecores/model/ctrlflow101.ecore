@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="ctrlflow101"
+    nsURI="http://ctrlflow101" nsPrefix="_ctrlflow101">
+  <eClassifiers xsi:type="ecore:EClass" name="Function" eSuperTypes="#//SequenceNode">
+    <eAnnotations source="diagraph">
+      <details key="node"/>
+      <details key="pov"/>
+      <details key="cont=Function.decompositions"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="decompositions" upperBound="-1"
+        eType="#//Function" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="sequenceNodes" upperBound="-1"
+        eType="#//Sequence" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="tokens" upperBound="-1"
+        eType="#//Token" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="SequenceNode" abstract="true">
+    <eAnnotations source="diagraph">
+      <details key="node"/>
+      <details key="label=name"/>
+      <details key="ref=controlFlowEdge"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="controlFlowEdge" upperBound="-1"
+        eType="#//SequenceNode"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="tMin" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="tMax" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Sequence" abstract="true" eSuperTypes="#//SequenceNode">
+    <eAnnotations source="diagraph">
+      <details key="node"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="weight" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="And" eSuperTypes="#//Sequence">
+    <eAnnotations source="diagraph">
+      <details key="node"/>
+    </eAnnotations>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Or" eSuperTypes="#//Sequence">
+    <eAnnotations source="diagraph">
+      <details key="node"/>
+    </eAnnotations>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Start" eSuperTypes="#//Sequence">
+    <eAnnotations source="diagraph">
+      <details key="node"/>
+    </eAnnotations>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Final" eSuperTypes="#//Sequence">
+    <eAnnotations source="diagraph">
+      <details key="node"/>
+    </eAnnotations>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Loop" eSuperTypes="#//Sequence">
+    <eAnnotations source="diagraph">
+      <details key="node"/>
+    </eAnnotations>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Token">
+    <eAnnotations source="diagraph">
+      <details key="node"/>
+    </eAnnotations>
+  </eClassifiers>
+</ecore:EPackage>

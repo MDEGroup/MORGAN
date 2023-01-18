@@ -1,0 +1,266 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="graphpattern" nsURI="http://www.sidiff.org/graphpattern/1.0"
+    nsPrefix="graphpattern">
+  <eAnnotations source="http://www.eclipse.org/OCL/Import">
+    <details key="ecore" value="http://www.eclipse.org/emf/2002/Ecore"/>
+  </eAnnotations>
+  <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore">
+    <details key="invocationDelegates" value="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot"/>
+    <details key="settingDelegates" value="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot"/>
+    <details key="validationDelegates" value="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot"/>
+  </eAnnotations>
+  <eClassifiers xsi:type="ecore:EClass" name="GraphPattern" eSuperTypes="#//PatternElement">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="nodes" upperBound="-1"
+        eType="#//NodePattern" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="pattern" lowerBound="1"
+        eType="#//Pattern" eOpposite="#//Pattern/graphs"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="dependencyGraph" eType="#//DependencyGraph"
+        containment="true" eOpposite="#//DependencyGraph/graph"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="subgraphs" upperBound="-1"
+        eType="#//SubGraph" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="NodePattern" eSuperTypes="#//GraphElement">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore">
+      <details key="constraints" value="TheNameOfANodeMustBeUniqueWithinAGraph"/>
+    </eAnnotations>
+    <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
+      <details key="TheNameOfANodeMustBeUniqueWithinAGraph" value="not(self.graph.nodes->exists(n | n &lt;> self and n.name &lt;> null and n.name = self.name))"/>
+    </eAnnotations>
+    <eOperations name="getAttribute" eType="#//AttributePattern">
+      <eParameters name="type" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EAttribute"/>
+    </eOperations>
+    <eOperations name="getOutgoings" upperBound="-1" eType="#//EdgePattern">
+      <eParameters name="type" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EReference"/>
+    </eOperations>
+    <eOperations name="getOutgoing" eType="#//EdgePattern">
+      <eParameters name="type" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EReference"/>
+    </eOperations>
+    <eOperations name="getOutgoing" eType="#//EdgePattern">
+      <eParameters name="type" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EReference"/>
+      <eParameters name="target" eType="#//NodePattern"/>
+    </eOperations>
+    <eOperations name="getOutgoing" eType="#//EdgePattern">
+      <eParameters name="type" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EReference"/>
+      <eParameters name="target" eType="#//NodePattern"/>
+      <eParameters name="stereotype" eType="#//Stereotype"/>
+    </eOperations>
+    <eOperations name="getIncoming" eType="#//EdgePattern">
+      <eParameters name="type" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EReference"/>
+    </eOperations>
+    <eOperations name="getIncomings" upperBound="-1" eType="#//EdgePattern">
+      <eParameters name="type" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EReference"/>
+    </eOperations>
+    <eOperations name="getIncident" upperBound="-1" eType="#//EdgePattern"/>
+    <eOperations name="getIncident" upperBound="-1" eType="#//EdgePattern">
+      <eParameters name="adjacent" eType="#//NodePattern"/>
+    </eOperations>
+    <eOperations name="removeIncident" upperBound="-1" eType="#//EdgePattern"/>
+    <eOperations name="removeIncident" upperBound="-1" eType="#//EdgePattern">
+      <eParameters name="node" eType="#//NodePattern"/>
+    </eOperations>
+    <eOperations name="getAdjacent" upperBound="-1" eType="#//NodePattern"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="outgoings" upperBound="-1"
+        eType="#//EdgePattern" containment="true" eOpposite="#//EdgePattern/source"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="type" lowerBound="1" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EClass"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="attributes" upperBound="-1"
+        eType="#//AttributePattern" containment="true" eOpposite="#//AttributePattern/node"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="matching" eType="#//Matching"
+        containment="true" eOpposite="#//Matching/node"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="incomings" upperBound="-1"
+        eType="#//EdgePattern" eOpposite="#//EdgePattern/target"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="associations" upperBound="-1"
+        eType="#//Association" containment="true" eOpposite="#//Association/source"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="EdgePattern" eSuperTypes="#//GraphElement">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore">
+      <details key="constraints" value="TheOppositeOfTheOppositeMayNotBeAReferenceDifferentFromThisOne TheOppositeMayNotBeItsOwnOpposite TheOppositeTypesAreNotMetaModelConform EdgeSourceAndTypeAreNotMetaModelConform EdgeTargetAndTypeAreNotMetaModelConform"/>
+    </eAnnotations>
+    <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
+      <details key="TheOppositeOfTheOppositeMayNotBeAReferenceDifferentFromThisOne"
+          value="(self.opposite &lt;> null) implies (self.opposite.opposite = self)"/>
+      <details key="TheOppositeMayNotBeItsOwnOpposite" value="self.opposite &lt;> self"/>
+      <details key="TheOppositeTypesAreNotMetaModelConform" value="((self.opposite &lt;> null) and (self.type.eOpposite &lt;> null)) implies (self.opposite.type = self.type.eOpposite)"/>
+      <details key="EdgeSourceAndTypeAreNotMetaModelConform" value="((self.type &lt;> null) and (self.source &lt;> null) and (self.source.type &lt;> null)) implies self.source.type.eAllReferences->includes(self.type)"/>
+      <details key="EdgeTargetAndTypeAreNotMetaModelConform" value="((self.type &lt;> null) and (self.target &lt;> null) and (self.target.type &lt;> null)) implies ((self.type.eType = self.target.type) or (self.target.type.eAllSuperTypes->includes(self.type.eType) or (self.type.eType.instanceTypeName = 'org.eclipse.emf.ecore.EObject')))"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="target" lowerBound="1"
+        eType="#//NodePattern" eOpposite="#//NodePattern/incomings"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="source" lowerBound="1"
+        eType="#//NodePattern" eOpposite="#//NodePattern/outgoings"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="opposite" eType="#//EdgePattern"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="type" lowerBound="1" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EReference"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="AttributePattern" eSuperTypes="#//GraphElement">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore">
+      <details key="constraints" value="TheAttributeTypeAndTheContainingClassAreNotMetaModelConform TheNameOfTheAttributeVariableIsEqualToANameOfANode"/>
+    </eAnnotations>
+    <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
+      <details key="TheAttributeTypeAndTheContainingClassAreNotMetaModelConform" value="((self.type &lt;> null) and (self.node &lt;> null) and (self.node.type &lt;> null)) implies (self.node.type.eAllAttributes->includes(self.type))"/>
+      <details key="TheNameOfTheAttributeVariableIsEqualToANameOfANode" value="not(self.isVariable() and self.graph.nodes->exists(n | (n.name &lt;> null) and n.name = self.name))"/>
+    </eAnnotations>
+    <eOperations name="isConstant" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    <eOperations name="isVariable" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    <eOperations name="isExpression" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="type" lowerBound="1" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EAttribute"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="node" eType="#//NodePattern"
+        eOpposite="#//NodePattern/attributes"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="constant" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"
+        changeable="false" transient="true" derived="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="variables" upperBound="-1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString" changeable="false"
+        transient="true" derived="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EDataType" name="EIterator" instanceClassName="java.util.Iterator&lt;org.eclipse.emf.ecore.EObject>"
+      serializable="false"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Matching" abstract="true">
+    <eOperations name="iterator" eType="#//EIterator"/>
+    <eOperations name="size" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    <eOperations name="isEmpty" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    <eOperations name="add">
+      <eParameters name="match" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EObject"/>
+    </eOperations>
+    <eOperations name="remove" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
+      <eParameters name="match" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EObject"/>
+    </eOperations>
+    <eOperations name="contains" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
+      <eParameters name="match" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EObject"/>
+    </eOperations>
+    <eOperations name="clear"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="matches" upperBound="-1"
+        eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EObject" volatile="true"
+        transient="true" derived="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="node" eType="#//NodePattern"
+        eOpposite="#//NodePattern/matching"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Bundle" eSuperTypes="#//Pattern">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="profiles" upperBound="-1"
+        eType="#//Profile"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="domains" upperBound="-1"
+        eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EPackage"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Pattern" eSuperTypes="#//PatternElement">
+    <eOperations name="getPattern" eType="#//Pattern">
+      <eParameters name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eOperations>
+    <eOperations name="getParameter" eType="#//Parameter">
+      <eParameters name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eOperations>
+    <eOperations name="getGraph" eType="#//GraphPattern">
+      <eParameters name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eOperations>
+    <eOperations name="getAllGraphPatterns" upperBound="-1" eType="#//GraphPattern"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="graphs" upperBound="-1"
+        eType="#//GraphPattern" containment="true" eOpposite="#//GraphPattern/pattern"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="parameters" upperBound="-1"
+        eType="#//Parameter" containment="true" eOpposite="#//Parameter/pattern"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="assignments" upperBound="-1"
+        eType="#//Assignment" containment="true" eOpposite="#//Assignment/pattern"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="bundle" eType="#//Bundle"
+        changeable="false" volatile="true" transient="true" derived="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="patterns" upperBound="-1"
+        eType="#//Pattern" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="PatternElement" abstract="true" eSuperTypes="#//Extendable">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="description" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Parameter" eSuperTypes="#//PatternElement">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore">
+      <details key="constraints" value="TheNameOfTheParameterIsNotUnique"/>
+    </eAnnotations>
+    <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
+      <details key="TheNameOfTheParameterIsNotUnique" value="not(self.pattern.parameters->exists(p |p &lt;> self and p.name = self.name))"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="pattern" eType="#//Pattern"
+        eOpposite="#//Pattern/parameters"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="EObjectList">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="content" unique="false"
+        upperBound="-1" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EObject"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="label" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
+        defaultValueLiteral=""/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="DependencyGraph">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="independent" upperBound="-1"
+        eType="#//DependencyNode"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="graph" eType="#//GraphPattern"
+        eOpposite="#//GraphPattern/dependencyGraph"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="nodes" upperBound="-1"
+        eType="#//DependencyNode" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="edges" upperBound="-1"
+        eType="#//DependencyEdge" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="DependencyNode">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="outgoings" upperBound="-1"
+        eType="#//DependencyEdge" eOpposite="#//DependencyEdge/source"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="incomings" upperBound="-1"
+        eType="#//DependencyEdge" eOpposite="#//DependencyEdge/target"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="nodes" upperBound="-1"
+        eType="#//NodePattern"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="DependencyEdge">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="source" eType="#//DependencyNode"
+        eOpposite="#//DependencyNode/outgoings"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="target" eType="#//DependencyNode"
+        eOpposite="#//DependencyNode/incomings"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Association" eSuperTypes="#//PatternElement">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="source" lowerBound="1"
+        eType="#//NodePattern" eOpposite="#//NodePattern/associations"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="target" lowerBound="1"
+        eType="#//GraphElement"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Stereotype">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="profile" lowerBound="1"
+        eType="#//Profile" eOpposite="#//Profile/stereotypes"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ParameterBinding" abstract="true">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="parameter" lowerBound="1"
+        eType="#//Parameter"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Assignment">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="assignment" upperBound="-1"
+        eType="#//ParameterBinding" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="pattern" eType="#//Pattern"
+        eOpposite="#//Pattern/assignments"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ObjectBinding" eSuperTypes="#//ParameterBinding">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="value" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EObject"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ValueBinding" eSuperTypes="#//ParameterBinding">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="SubGraph" eSuperTypes="#//PatternElement">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="elements" upperBound="-1"
+        eType="#//GraphElement" eOpposite="#//GraphElement/subgraphs"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="subgraphs" upperBound="-1"
+        eType="#//SubGraph" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="GraphElement" abstract="true" eSuperTypes="#//PatternElement">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="subgraphs" upperBound="-1"
+        eType="#//SubGraph" eOpposite="#//SubGraph/elements"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="graph" lowerBound="1" eType="#//GraphPattern"
+        changeable="false" volatile="true" transient="true" derived="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Profile">
+    <eOperations name="getStereotype" eType="#//Stereotype">
+      <eParameters name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eOperations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="stereotypes" upperBound="-1"
+        eType="#//Stereotype" containment="true" eOpposite="#//Stereotype/profile"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="description" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="id" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Resource" abstract="true" interface="true">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="contents" upperBound="-1"
+        eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EObject" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Extendable" abstract="true" interface="true">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="stereotypes" upperBound="-1"
+        eType="#//Stereotype"/>
+  </eClassifiers>
+</ecore:EPackage>

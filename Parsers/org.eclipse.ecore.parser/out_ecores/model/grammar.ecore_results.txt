@@ -1,0 +1,6 @@
+model	LHS (node,null,ref) (parentRule,Rule,ref) 
+model	ConnexionInstruction (m,EString,attribute) (d,null,ref) (parentEmbedding,Embedding,ref) 
+model	Embedding (instructions,ConnexionInstruction,ref) (ParentRule,Rule,ref) 
+model	Grammar (rules,Rule,ref) 
+model	Rule (name,EString,attribute) (priority,EInt,attribute) (lhs,LHS,ref) (EmbeddingMechanism,Embedding,ref) (rhs,RHS,ref) (parentGrammar,Grammar,ref) 
+model	RHS (subGraph,null,ref) (parentRule,Rule,ref) 

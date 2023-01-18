@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="grammar" nsURI="http://grammar/1.0" nsPrefix="grammar">
+  <eClassifiers xsi:type="ecore:EClass" name="Grammar" eSuperTypes="../../GraphModel/model/graph.ecore#//Named">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="rules" upperBound="-1"
+        eType="#//Rule" containment="true" eOpposite="#//Rule/parentGrammar"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Rule">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="parentGrammar" lowerBound="1"
+        eType="#//Grammar" eOpposite="#//Grammar/rules"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="lhs" lowerBound="1" eType="#//LHS"
+        containment="true" eOpposite="#//LHS/parentRule"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="rhs" lowerBound="1" eType="#//RHS"
+        containment="true" eOpposite="#//RHS/parentRule"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="priority" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="EmbeddingMechanism" lowerBound="1"
+        eType="#//Embedding" containment="true" eOpposite="#//Embedding/ParentRule"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="LHS">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="parentRule" lowerBound="1"
+        eType="#//Rule" eOpposite="#//Rule/lhs"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="node" lowerBound="1" eType="ecore:EClass ../../GraphModel/model/graph.ecore#//Node"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="RHS">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="parentRule" lowerBound="1"
+        eType="#//Rule" eOpposite="#//Rule/rhs"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="subGraph" lowerBound="1"
+        eType="ecore:EClass ../../GraphModel/model/graph.ecore#//Graph"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Embedding">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="ParentRule" lowerBound="1"
+        eType="#//Rule" eOpposite="#//Rule/EmbeddingMechanism"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="instructions" upperBound="-1"
+        eType="#//ConnexionInstruction" containment="true" eOpposite="#//ConnexionInstruction/parentEmbedding"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ConnexionInstruction">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="parentEmbedding" lowerBound="1"
+        eType="#//Embedding" eOpposite="#//Embedding/instructions"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="m" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="d" eType="ecore:EClass ../../GraphModel/model/graph.ecore#//Node"/>
+  </eClassifiers>
+</ecore:EPackage>

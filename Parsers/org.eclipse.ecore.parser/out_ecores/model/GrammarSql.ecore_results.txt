@@ -1,0 +1,6 @@
+model	Table (name,EString,attribute) (elements,EObject,ref) 
+model	Column (isNotNull,EBoolean,attribute) (name,EString,attribute) (type,EString,attribute) 
+model	Reference (fromT,Table,ref) (fromC,Column,ref) 
+model	Model (tables,Table,ref) 
+model	PrimaryKey (col,Column,ref) 
+model	ForeignKey (localColumns,Column,ref) (ref,Reference,ref) 

@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="cevinedit" nsURI="http://cevinedit/1.0" nsPrefix="cevinedit">
+  <eClassifiers xsi:type="ecore:EClass" name="CEViNEditRoot">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="diagram" lowerBound="1"
+        eType="#//Diagram" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="sourceMM" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Diagram">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="containsElem" upperBound="-1"
+        eType="#//PersonalizedElement" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="modelExtension" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="PersonalizedElement" abstract="true">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="icon" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="NodeEClass" eSuperTypes="#//PersonalizedElement">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="backgroundColor" eType="#//Color"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="borderColor" eType="#//Color"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="borderTexture" eType="#//Texture"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="borderWidth" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="brightness" eType="#//Brightness"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="figure" eType="#//NodeFigure"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="resizable" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="size" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="labelPlacement" eType="#//Placement"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="labelFontStyle" eType="#//FontStyle"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="label" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="imagePath" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="listPointsPolygon" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="LinkEClass" eSuperTypes="#//PersonalizedElement #//Link">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="source" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="target" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="CompartmentEReferenceCont" eSuperTypes="#//PersonalizedElement">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="collapsible" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="layout" eType="#//LayoutCompartment"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="AffixedEReferenceCont" eSuperTypes="#//PersonalizedElement"/>
+  <eClassifiers xsi:type="ecore:EClass" name="LabelEAttribute" eSuperTypes="#//PersonalizedElement"/>
+  <eClassifiers xsi:type="ecore:EClass" name="LinkEReferenceNonCont" eSuperTypes="#//PersonalizedElement #//Link"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Link" abstract="true" eSuperTypes="#//PersonalizedElement">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="brightness" eType="#//Brightness"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="color" eType="#//Color"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="labelFontStyle" eType="#//FontStyle"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="sourceDecoration" eType="#//LinkFigure"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="targetDecoration" eType="#//LinkFigure"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="texture" eType="#//Texture"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="width" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="label" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="Color">
+    <eLiterals name="Default"/>
+    <eLiterals name="Black" value="1"/>
+    <eLiterals name="Blue" value="2"/>
+    <eLiterals name="Cyan" value="3"/>
+    <eLiterals name="Gray" value="4"/>
+    <eLiterals name="Green" value="5"/>
+    <eLiterals name="Orange" value="6"/>
+    <eLiterals name="Red" value="7"/>
+    <eLiterals name="White" value="8"/>
+    <eLiterals name="Yellow" value="9"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="Texture">
+    <eLiterals name="Default"/>
+    <eLiterals name="Dash" value="1"/>
+    <eLiterals name="Dot" value="2"/>
+    <eLiterals name="Solid" value="3"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="Brightness">
+    <eLiterals name="Default"/>
+    <eLiterals name="Dark" value="1"/>
+    <eLiterals name="Light" value="2"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="FontStyle">
+    <eLiterals name="Default"/>
+    <eLiterals name="Bold" value="1"/>
+    <eLiterals name="Italic" value="2"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="NodeFigure">
+    <eLiterals name="Default"/>
+    <eLiterals name="Ellipse" value="1"/>
+    <eLiterals name="Polygon" value="2"/>
+    <eLiterals name="Rectangle" value="3"/>
+    <eLiterals name="Rounded" value="4"/>
+    <eLiterals name="SVG" value="5"/>
+    <eLiterals name="Image" value="6" literal="Image"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="LinkFigure">
+    <eLiterals name="Default"/>
+    <eLiterals name="Arrow" value="1"/>
+    <eLiterals name="ClosedArrow" value="2"/>
+    <eLiterals name="FilledClosedArrow" value="3"/>
+    <eLiterals name="Rhomb" value="4"/>
+    <eLiterals name="FilledRhomb" value="5"/>
+    <eLiterals name="Square" value="6"/>
+    <eLiterals name="FilledSquare" value="7"/>
+    <eLiterals name="None" value="8"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="Placement">
+    <eLiterals name="External"/>
+    <eLiterals name="Internal" value="1"/>
+    <eLiterals name="None" value="2"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="LayoutCompartment">
+    <eLiterals name="Free"/>
+    <eLiterals name="List" value="1"/>
+  </eClassifiers>
+</ecore:EPackage>

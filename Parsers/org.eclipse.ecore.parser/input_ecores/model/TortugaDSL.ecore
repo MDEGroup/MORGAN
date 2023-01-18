@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="tortugaDSL" nsURI="http://www.uqbar.org/paco/dsl/TortugaDSL"
+    nsPrefix="tortugaDSL">
+  <eClassifiers xsi:type="ecore:EClass" name="TortugaProgram">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="sentences" upperBound="-1"
+        eType="#//SENTENCE" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="SENTENCE"/>
+  <eClassifiers xsi:type="ecore:EClass" name="MOVE" eSuperTypes="#//SENTENCE">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="amount" eType="#//EXPRESSION"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="FORWARD" eSuperTypes="#//MOVE"/>
+  <eClassifiers xsi:type="ecore:EClass" name="LEFT" eSuperTypes="#//MOVE"/>
+  <eClassifiers xsi:type="ecore:EClass" name="RIGHT" eSuperTypes="#//MOVE"/>
+  <eClassifiers xsi:type="ecore:EClass" name="SET_X" eSuperTypes="#//MOVE"/>
+  <eClassifiers xsi:type="ecore:EClass" name="SET_Y" eSuperTypes="#//MOVE"/>
+  <eClassifiers xsi:type="ecore:EClass" name="DRAWING_SENTENCE" eSuperTypes="#//SENTENCE"/>
+  <eClassifiers xsi:type="ecore:EClass" name="PENDOWN" eSuperTypes="#//DRAWING_SENTENCE"/>
+  <eClassifiers xsi:type="ecore:EClass" name="PENUP" eSuperTypes="#//DRAWING_SENTENCE"/>
+  <eClassifiers xsi:type="ecore:EClass" name="COLOREABLE" eSuperTypes="#//DRAWING_SENTENCE">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="color" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="colorSpec" eType="#//COLOR_SPEC"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="PENCOLOR" eSuperTypes="#//COLOREABLE"/>
+  <eClassifiers xsi:type="ecore:EClass" name="CANVAS_COLOR" eSuperTypes="#//COLOREABLE"/>
+  <eClassifiers xsi:type="ecore:EClass" name="COLOR_SPEC">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="red" eType="#//EXPRESSION"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="green" eType="#//EXPRESSION"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="blue" eType="#//EXPRESSION"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="alpha" eType="#//EXPRESSION"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="FONT_SPEC" eSuperTypes="#//DRAWING_SENTENCE"/>
+  <eClassifiers xsi:type="ecore:EClass" name="FONT_SIZE" eSuperTypes="#//FONT_SPEC">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="size" eType="#//EXPRESSION"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="FONT_STYLE" eSuperTypes="#//FONT_SPEC">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="style" eType="#//FontStyleValues"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="FontStyleValues"/>
+  <eClassifiers xsi:type="ecore:EClass" name="CLEAR" eSuperTypes="#//DRAWING_SENTENCE"/>
+  <eClassifiers xsi:type="ecore:EClass" name="HOME" eSuperTypes="#//DRAWING_SENTENCE"/>
+  <eClassifiers xsi:type="ecore:EClass" name="DRAW_STRING" eSuperTypes="#//DRAWING_SENTENCE">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="text" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="REFERENCIABLE">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="MAKE" eSuperTypes="#//SENTENCE #//REFERENCIABLE">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="value" eType="#//EXPRESSION"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="VARIABLE_REF" eSuperTypes="#//EXPRESSION">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="toVar" eType="#//REFERENCIABLE"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="EXPRESSION"/>
+  <eClassifiers xsi:type="ecore:EClass" name="VALUE" eSuperTypes="#//EXPRESSION">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="val" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDouble"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="CONTENT" eSuperTypes="#//SENTENCE">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="var" eType="#//MAKE"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="OPERATION" eSuperTypes="#//SENTENCE">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="targetVariable" eType="#//MAKE"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="valOne" eType="#//EXPRESSION"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="valTwo" eType="#//EXPRESSION"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="SUM" eSuperTypes="#//OPERATION"/>
+  <eClassifiers xsi:type="ecore:EClass" name="SUBTRACT" eSuperTypes="#//OPERATION"/>
+  <eClassifiers xsi:type="ecore:EClass" name="MULTIPLY" eSuperTypes="#//OPERATION"/>
+  <eClassifiers xsi:type="ecore:EClass" name="DIVIDE" eSuperTypes="#//OPERATION"/>
+  <eClassifiers xsi:type="ecore:EClass" name="CONTROL_SENTENCES" eSuperTypes="#//SENTENCE">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="commands" upperBound="-1"
+        eType="#//SENTENCE" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="REPEAT" eSuperTypes="#//CONTROL_SENTENCES">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="times" eType="#//EXPRESSION"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="TO" eSuperTypes="#//CONTROL_SENTENCES">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="parameters" upperBound="-1"
+        eType="#//PARAM" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="PARAM" eSuperTypes="#//REFERENCIABLE"/>
+  <eClassifiers xsi:type="ecore:EClass" name="PROCEDURE_CALL" eSuperTypes="#//SENTENCE">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="to" eType="#//TO"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="params" upperBound="-1"
+        eType="#//EXPRESSION" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="IF" eSuperTypes="#//CONTROL_SENTENCES">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="condition" eType="#//BOOLEAN_EXPRESSION"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="BOOLEAN_EXPRESSION">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="op1" eType="#//EXPRESSION"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="op2" eType="#//EXPRESSION"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="EQUALS" eSuperTypes="#//BOOLEAN_EXPRESSION"/>
+  <eClassifiers xsi:type="ecore:EClass" name="GREATER_THAN" eSuperTypes="#//BOOLEAN_EXPRESSION"/>
+  <eClassifiers xsi:type="ecore:EClass" name="LESSER_THAN" eSuperTypes="#//BOOLEAN_EXPRESSION"/>
+  <eClassifiers xsi:type="ecore:EClass" name="BOLD" eSuperTypes="#//FontStyleValues"/>
+  <eClassifiers xsi:type="ecore:EClass" name="ITALIC" eSuperTypes="#//FontStyleValues"/>
+  <eClassifiers xsi:type="ecore:EClass" name="PLAIN" eSuperTypes="#//FontStyleValues"/>
+</ecore:EPackage>

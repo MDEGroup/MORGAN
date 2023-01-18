@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="dsml"
+    nsURI="http://isoe-2012-dsml-dsml" nsPrefix="dsml">
+  <eClassifiers xsi:type="ecore:EClass" name="DEdge" abstract="true" eSuperTypes="#//DGraphElement">
+    <eAnnotations source="diagraph"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="targetNode" eType="#//DNode"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="targetReference" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EReference"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="sourceNode" eType="#//DNode"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="eTargetReferenceBridge"
+        eType="#//DReferenceBridge"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="DGraphElement" abstract="true">
+    <eAnnotations source="diagraph"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="DNode" eSuperTypes="#//DGraphElement #//DClassElement #//DContainedElement">
+    <eAnnotations source="diagraph">
+      <details key="node" value=""/>
+      <details key="kref=labels" value=""/>
+      <details key="ref=parentPointOfView" value=""/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="edges" upperBound="-1"
+        eType="#//DEdge" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="pointOfView" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="pointOfViewName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="parentPointOfView" eType="#//DNode"
+        eOpposite="#//DNode/childrenPointOfView"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="childrenPointOfView" upperBound="-1"
+        eType="#//DNode" eOpposite="#//DNode/parentPointOfView"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="labels" upperBound="-1"
+        eType="#//DLabel" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="DLink" eSuperTypes="#//DContainedEdge #//DClassElement">
+    <eAnnotations source="diagraph">
+      <details key="link" value=""/>
+      <details key="cont=DNode.edges" value=""/>
+      <details key="lsrc=sourceNode" value=""/>
+      <details key="ltrg=targetNode" value=""/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="sourceReference" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EReference"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="eSourceReferenceBridge"
+        eType="#//DReferenceBridge"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="linkLabels" upperBound="-1"
+        eType="#//DLabel"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="DReference" eSuperTypes="#//DEdge">
+    <eAnnotations source="diagraph">
+      <details key="link" value=""/>
+      <details key="cont=DNode.edges" value=""/>
+      <details key="lsrc=sourceNode" value=""/>
+      <details key="ltrg=targetNode" value=""/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="nonGraphicalProperty" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="DContainment" eSuperTypes="#//DContainedEdge">
+    <eAnnotations source="diagraph">
+      <details key="link" value=""/>
+      <details key="cont=DNode.edges" value=""/>
+      <details key="lsrc=sourceNode" value=""/>
+      <details key="ltrg=targetNode" value=""/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="compartment" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="DGraph">
+    <eAnnotations source="diagraph">
+      <details key="node" value=""/>
+      <details key="pov:concreteSyntax" value=""/>
+      <details key="ref=rootPointOfView" value=""/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="nodes" upperBound="-1"
+        eType="#//DNode" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="rootPointOfView" lowerBound="1"
+        eType="#//DNode"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="DClassElement" abstract="true">
+    <eAnnotations source="diagraph"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="eClass" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EClass"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="labelAttribute" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EAttribute"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="eClassBridge" eType="#//DClassBridge"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="DContainedElement" abstract="true" eSuperTypes="#//DGraphElement">
+    <eAnnotations source="diagraph"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="containment" eType="#//DNode"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="eContainmentReferenceBridge"
+        eType="#//DReferenceBridge"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="DContainedEdge" abstract="true" eSuperTypes="#//DContainedElement #//DEdge">
+    <eAnnotations source="diagraph"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="DAttributeBridge" eSuperTypes="#//DModelElementBridge">
+    <eAnnotations source="diagraph">
+      <details key="node" value=""/>
+    </eAnnotations>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="DReferenceBridge" eSuperTypes="#//DModelElementBridge">
+    <eAnnotations source="diagraph">
+      <details key="node" value=""/>
+    </eAnnotations>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="DClassBridge" eSuperTypes="#//DModelElementBridge">
+    <eAnnotations source="diagraph">
+      <details key="node" value=""/>
+    </eAnnotations>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Diagraph">
+    <eAnnotations source="diagraph">
+      <details key="node" value=""/>
+      <details key="pov" value=""/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="dConcreteSyntax" lowerBound="1"
+        eType="#//DGraph" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="dAbstractSyntax" lowerBound="1"
+        eType="#//DSemanticBridge" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="DSemanticBridge">
+    <eAnnotations source="diagraph">
+      <details key="node" value=""/>
+      <details key="kref=dModelElements" value=""/>
+      <details key="pov:abstractSyntax" value=""/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="dModelElements" upperBound="-1"
+        eType="#//DModelElementBridge" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="DModelElementBridge">
+    <eAnnotations source="diagraph">
+      <details key="node" value=""/>
+      <details key="label=ecoreName" value=""/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="ecoreName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="ecorePath" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="DLabel">
+    <eAnnotations source="diagraph">
+      <details key="node" value=""/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="eAttributeBridge" eType="#//DAttributeBridge"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+</ecore:EPackage>

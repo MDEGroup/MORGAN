@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="RobotProjectModel" nsURI="http://www.example.org/RobotProjectModel"
+    nsPrefix="RobotProjectModel">
+  <eAnnotations source="http://www.eclipse.org/OCL/Import">
+    <details key="ecore" value="http://www.eclipse.org/emf/2002/Ecore"/>
+  </eAnnotations>
+  <eClassifiers xsi:type="ecore:EClass" name="Instruction" abstract="true" interface="true"/>
+  <eClassifiers xsi:type="ecore:EClass" name="MoveStraight" eSuperTypes="#//TimedInstruction">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="distance" eType="#//Distance"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Robot">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="instructions" upperBound="-1"
+        eType="#//Instruction" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="TimedInstruction" abstract="true" eSuperTypes="#//Instruction">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="duration" lowerBound="1"
+        eType="#//Duration" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Turn" eSuperTypes="#//TimedInstruction">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="angle" lowerBound="1" eType="#//Angle"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Amount">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Duration" eSuperTypes="#//Amount">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="timeUnit" lowerBound="1"
+        eType="#//TimeUnit"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Function" eSuperTypes="#//Instruction">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="instructionBlock" eType="#//InstructionBlock"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="DistanceUnit">
+    <eLiterals name="CENTIMETERS" value="2266" literal="cm"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="AngleUnit">
+    <eLiterals name="DEGREES" value="95" literal="deg"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="TimeUnit">
+    <eLiterals name="SECONDS" value="1000" literal="s"/>
+    <eLiterals name="MILLISECONDS" value="1" literal="ms"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Call" eSuperTypes="#//Instruction">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="destination" lowerBound="1"
+        eType="#//Function"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Distance" eSuperTypes="#//Amount">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="distanceUnit" eType="#//DistanceUnit"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Angle" eSuperTypes="#//Amount">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="angleUnit" eType="#//AngleUnit"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Condition" abstract="true"/>
+  <eClassifiers xsi:type="ecore:EClass" name="SensorActivation" eSuperTypes="#//Condition"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Grab" eSuperTypes="#//Instruction"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Release" eSuperTypes="#//Instruction"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Wait" eSuperTypes="#//TimedInstruction"/>
+  <eClassifiers xsi:type="ecore:EClass" name="If" eSuperTypes="#//Instruction">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="condition" lowerBound="1"
+        eType="#//Condition" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="falseBlock" eType="#//InstructionBlock"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="trueBlock" lowerBound="1"
+        eType="#//InstructionBlock" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="InstructionBlock" eSuperTypes="#//Instruction">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="instructions" lowerBound="1"
+        upperBound="-1" eType="#//Instruction" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="DetectedType">
+    <eLiterals name="NULL"/>
+    <eLiterals name="BALL" value="1"/>
+    <eLiterals name="WALL" value="2"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="DetectedObjectIs" eSuperTypes="#//Condition">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="rightOperand" lowerBound="1"
+        eType="#//DetectedType"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="HomeDirection" eSuperTypes="#//Angle"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Print" eSuperTypes="#//Instruction">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="string" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+</ecore:EPackage>

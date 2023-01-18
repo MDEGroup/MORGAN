@@ -1,0 +1,7 @@
+model	SpecialisationCourse (specialisation,EString,attribute) 
+model	School (address,EString,attribute) (name,EString,attribute) (numberOfTeachers,EInt,attribute) (currentYear,EInt,attribute) (courses,Course,ref) (teachers,Teacher,ref) (lastYear,Year,ref) (teachersWithMostCourses,Teacher,ref) (years,Year,ref) 
+model	Year (startingDate,EInt,attribute) (school,School,ref) (schoolClasses,SchoolClass,ref) 
+model	Teacher (name,EString,attribute) (courses,Course,ref) (school,School,ref) (homeroomedClass,SchoolClass,ref) 
+model	SchoolClass (code,EChar,attribute) (courses,Course,ref) (year,Year,ref) (students,Student,ref) (homeroomTeacher,Teacher,ref) 
+model	Course (subject,EString,attribute) (weight,EInt,attribute) (schoolClass,SchoolClass,ref) (teacher,Teacher,ref) (school,School,ref) 
+model	Student (name,EString,attribute) (schoolClass,SchoolClass,ref) 

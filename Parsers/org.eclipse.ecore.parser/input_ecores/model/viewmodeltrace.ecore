@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="viewmodeltrace" nsURI="http://inf.mit.bme.hu/emf/2017/ViewModelTrace"
+    nsPrefix="viewmodeltrace">
+  <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+    <details key="modelDirectory" value="/hu.bme.mit.inf.viewmodel.runtime.model/src-gen"/>
+    <details key="prefix" value="ViewModelTrace"/>
+    <details key="fileExtensions" value="viewmodeltrace"/>
+    <details key="providerName" value="BME MIT FTSRG"/>
+    <details key="operationReflection" value="false"/>
+    <details key="basePackage" value="hu.bme.mit.inf.viewmodel.runtime.model"/>
+  </eAnnotations>
+  <eClassifiers xsi:type="ecore:EClass" name="ViewModelTrace">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="traceModelId" unique="false"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="logicModel" eType="ecore:EClass logicmodel.ecore#//LogicModel"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="traces" ordered="false"
+        upperBound="-1" eType="#//Trace" containment="true" resolveProxies="false"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="MatchArgumentTuple">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="elements" ordered="false"
+        upperBound="-1" eType="#//MatchArgument" containment="true" resolveProxies="false"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="MatchArgument" abstract="true">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="parameterName" unique="false"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="EObjectMatchArgument" eSuperTypes="#//MatchArgument">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="value" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EObject"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="JavaObjectMatchArgument" eSuperTypes="#//MatchArgument">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" unique="false" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="TraceState">
+    <eLiterals name="USED"/>
+    <eLiterals name="UNUSED"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Trace" abstract="true">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="traceName" unique="false"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="argumentTuple" eType="#//MatchArgumentTuple"
+        containment="true" resolveProxies="false"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="state" unique="false" eType="#//TraceState"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="VariableInstantiationTrace" eSuperTypes="#//Trace">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="variables" ordered="false"
+        upperBound="-1" eType="#//StringVariablePair" containment="true" resolveProxies="false"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="StringVariablePair">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="key" unique="false" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="value" eType="ecore:EClass logicmodel.ecore#//Variable"
+        containment="true" resolveProxies="false"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ConstraintTrace" eSuperTypes="#//Trace">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="localVariables" ordered="false"
+        upperBound="-1" eType="ecore:EClass logicmodel.ecore#//Variable" containment="true"
+        resolveProxies="false"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="constraints" ordered="false"
+        upperBound="-1" eType="ecore:EClass logicmodel.ecore#//Constraint" containment="true"
+        resolveProxies="false"/>
+  </eClassifiers>
+</ecore:EPackage>

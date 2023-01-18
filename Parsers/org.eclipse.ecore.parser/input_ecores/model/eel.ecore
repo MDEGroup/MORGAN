@@ -1,0 +1,254 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="eel" nsURI="http://fr.tblf.energy.estimation/eel/" nsPrefix="fr.tblf.energy.estimation.eel">
+  <eAnnotations source="http://www.eclipse.org/OCL/Import">
+    <details key="ecore" value="http://www.eclipse.org/emf/2002/Ecore"/>
+  </eAnnotations>
+  <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore">
+    <details key="invocationDelegates" value="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot"/>
+    <details key="settingDelegates" value="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot"/>
+    <details key="validationDelegates" value="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot"/>
+  </eAnnotations>
+  <eClassifiers xsi:type="ecore:EClass" name="Platform">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="variables" upperBound="-1"
+        eType="#//Variable" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="measures" upperBound="-1"
+        eType="#//Measure" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Variable">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBigDecimal"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="vibility" lowerBound="1"
+        eType="#//Visibility"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="Visibility">
+    <eLiterals name="LOCAL"/>
+    <eLiterals name="GLOBAL" value="1"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Measure" abstract="true">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="Root measure"/>
+    </eAnnotations>
+    <eOperations name="type" eType="#//Type">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
+        <details key="body" value="null"/>
+      </eAnnotations>
+    </eOperations>
+    <eOperations name="value" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBigDecimal">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
+        <details key="body" value="0"/>
+      </eAnnotations>
+    </eOperations>
+    <eOperations name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
+        <details key="body" value="''"/>
+      </eAnnotations>
+    </eOperations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
+        <details key="derivation" value="name()"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="subname" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="targetClass" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="targetOperation" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="uncertainty" eType="#//MeasurementUncertainty"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="TypedMeasure" abstract="true" eSuperTypes="#//Measure">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="Define Measure elements that have a hand-defined type"/>
+    </eAnnotations>
+    <eOperations name="type" eType="#//Type">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
+        <details key="body" value="self.type"/>
+      </eAnnotations>
+    </eOperations>
+    <eOperations name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
+        <details key="body" value="targetClass+'.'+ if subname &lt;> null then subname else type().toString() endif"/>
+      </eAnnotations>
+    </eOperations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="type" lowerBound="1" eType="#//Type"
+        transient="true" derived="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="MeasureValue" eSuperTypes="#//TypedMeasure">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="Measure with a type and a value hand-defined by the user"/>
+    </eAnnotations>
+    <eOperations name="value" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBigDecimal">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
+        <details key="body" value="self.value"/>
+      </eAnnotations>
+    </eOperations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBigDecimal"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="MeasureOCL" eSuperTypes="#//MeasureValue">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="oclQuery" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="MeasureAttribute" eSuperTypes="#//MeasureValue">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="Measure where the value corresponds to the value of an attribute in the decorated model"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="att" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="MeasureCast" eSuperTypes="#//TypedMeasure">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="Changes the type of a Measure"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="measure" lowerBound="1"
+        eType="#//Measure"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="MeasureBinaryOperation" abstract="true"
+      eSuperTypes="#//TypedMeasure">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="Define the measure computed through operations between measures."/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="left" eType="#//Measure"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="right" eType="#//Measure"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="MeasureBinaryProductOperation" eSuperTypes="#//MeasureBinaryOperation">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="Multiplies the value of two measures. No type checking"/>
+    </eAnnotations>
+    <eOperations name="value" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBigDecimal">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
+        <details key="body" value="self.left.value() * self.right.value()"/>
+      </eAnnotations>
+    </eOperations>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="MeasureBinarySumOperation" eSuperTypes="#//MeasureBinaryOperation">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="Sums the value of two measures. No type checking"/>
+    </eAnnotations>
+    <eOperations name="value" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBigDecimal">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
+        <details key="body" value="self.left.value() + self.right.value()"/>
+      </eAnnotations>
+    </eOperations>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="EnergyComputation" eSuperTypes="#//MeasureBinaryProductOperation">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="Computes an energy : multiplies a power by a duration, and forces the typing to Type::Energy"/>
+    </eAnnotations>
+    <eOperations name="type" eType="#//Type">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
+        <details key="body" value="Type::Energy"/>
+      </eAnnotations>
+    </eOperations>
+    <eOperations name="value" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBigDecimal">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
+        <details key="body" value="self.left.value() * self.right.value()"/>
+        <details key="pre_isPowerAndDuration" value="(self.left.type() = Type::Power and self.right.type() = Type::Duration) or (self.right.type() = Type::Power and self.left.type() = Type::Duration)"/>
+      </eAnnotations>
+    </eOperations>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="PowerComputation" eSuperTypes="#//MeasureBinaryProductOperation">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="Computes an energy : multiplies a power by a duration, and forces the typing to Type::Energy"/>
+    </eAnnotations>
+    <eOperations name="type" eType="#//Type">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
+        <details key="body" value="Type::Power"/>
+      </eAnnotations>
+    </eOperations>
+    <eOperations name="value" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBigDecimal">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
+        <details key="body" value="self.left.value() * self.right.value()"/>
+        <details key="pre_isCurrentAndVoltage" value="(self.left.type() = Type::Voltage and self.right.type() = Type::Current) or (self.right.type() = Type::Current and self.left.type() = Type::Voltage)"/>
+      </eAnnotations>
+    </eOperations>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="RealTimeDuration" eSuperTypes="#//MeasureValue">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="Corresponds to the simulator's duration. Has to be specified by the execution engine."/>
+    </eAnnotations>
+    <eOperations name="type" eType="#//Type">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
+        <details key="body" value="Type::Duration"/>
+      </eAnnotations>
+    </eOperations>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="MeasureUnboundOperation" abstract="true"
+      eSuperTypes="#//TypedMeasure">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="Measures computed by a non-finite set of measures"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="measures" ordered="false"
+        lowerBound="1" upperBound="-1" eType="#//Measure">
+      <eAnnotations source="http://www.eclipse.org/OCL/Collection">
+        <details key="nullFree" value="false"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="MeasureUnboundSumOperation" eSuperTypes="#//MeasureUnboundOperation">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="Measures computed by the addition of a non-finite set of measures"/>
+    </eAnnotations>
+    <eOperations name="value" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBigDecimal">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
+        <details key="body" value="self.measures -> iterate(m: Measure; acc: Real = 0.0 | acc + m.value())"/>
+      </eAnnotations>
+    </eOperations>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="MeasureUnboundProductOperation" eSuperTypes="#//MeasureUnboundOperation">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="Measures computed by product of a non-finite set of measures"/>
+    </eAnnotations>
+    <eOperations name="value" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBigDecimal">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
+        <details key="body" value="self.measures -> iterate(m: Measure; acc: Real = 1.0 | acc * m.value())"/>
+      </eAnnotations>
+    </eOperations>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="Type" serializable="false">
+    <eLiterals name="Energy"/>
+    <eLiterals name="Duration" value="1"/>
+    <eLiterals name="Power" value="2"/>
+    <eLiterals name="Current" value="3"/>
+    <eLiterals name="Voltage" value="4"/>
+    <eLiterals name="Scalar" value="5"/>
+    <eLiterals name="Frequency" value="6"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="MeasurementUncertainty">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="information" eType="#//MeasurementUncertaintyInformation"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="standardUncertainty" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBigDecimal"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="NormalDistribution" eSuperTypes="#//MeasurementUncertaintyInformation">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="meanValue" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBigDecimal"
+        derived="true">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
+        <details key="derivation" value="Measure.allInstances()->select(v |&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;v.uncertainty = (MeasurementUncertainty.allInstances()->select(u |&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;u.information = self)->asOrderedSet()->first()))->asOrderedSet()->first().value()"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="standardDeviation" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBigDecimal"
+        derived="true">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
+        <details key="derivation" value="MeasurementUncertainty.allInstances()->select(u |&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;u.information = self)->asOrderedSet()->first().standardUncertainty"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Interval" eSuperTypes="#//MeasurementUncertaintyInformation">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="lowerEndpoint" lowerBound="1"
+        eType="#//Measure" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="upperEndpoint" lowerBound="1"
+        eType="#//Measure" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="MeasurementUncertaintyInformation" abstract="true"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Sampling" eSuperTypes="#//MeasurementUncertaintyInformation">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="samples" upperBound="-1"
+        eType="#//Sample" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="measurementProcedure" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Integral" eSuperTypes="#//MeasurementUncertaintyInformation">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="interval" lowerBound="1"
+        eType="#//Interval"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="function" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Sample">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="quantity" upperBound="-1"
+        eType="#//Measure" containment="true"/>
+  </eClassifiers>
+</ecore:EPackage>

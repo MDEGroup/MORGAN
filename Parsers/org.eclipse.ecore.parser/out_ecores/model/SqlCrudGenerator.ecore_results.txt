@@ -1,0 +1,6 @@
+model	Table (name,EString,attribute) (foreignsKeys,ForeignKey,ref) (columns,Column,ref) (primaryKey,PrimaryKey,ref) 
+model	Column (name,EString,attribute) (dataType,DataType,ref) 
+model	Schema (name,EString,attribute) (tables,Table,ref) 
+model	PrimaryKey (ids,Column,ref) 
+model	DataType (dataType,ENUM_DATA_TYPE,attribute) (precision,EInt,attribute) 
+model	ForeignKey (reference,Table,ref) (refsFrom,Column,ref) (refsTo,Column,ref) 

@@ -1,0 +1,7 @@
+model	POBox (number,EInt,attribute) 
+model	Order (name,EString,attribute) (channel,OrderChannel,attribute) (address,Address,ref) (customer,Customer,ref) 
+model	StreetAddress (city,EString,attribute) (street,EString,attribute) 
+model	Address (zip,EString,attribute) (name,EString,attribute) 
+model	Customer (name,EString,attribute) (fullName,EString,attribute) (addresses,Address,ref) 
+model	Product (price,EInt,attribute) (name,EString,attribute) 
+model	CustomerDb (orders,Order,ref) (customers,Customer,ref) (products,Product,ref) 

@@ -1,0 +1,6 @@
+model	Order (number,EString,attribute) (comments,EString,attribute) (transactions,Transaction,ref) (customer,Customer,ref) 
+model	Transaction (number,EString,attribute) (paidDate,EDate,attribute) (endDate,EDate,attribute) (price,EDouble,attribute) (startDate,EDate,attribute) (product,Product,ref) (order,Order,ref) 
+model	Customer (address,EString,attribute) (comments,EString,attribute) (surname,EString,attribute) (familyName,EString,attribute) (telephoneNr,EString,attribute) (hotel,EString,attribute) 
+model	ProductCategory (name,EString,attribute) (parent,ProductCategory,ref) (subCategorys,ProductCategory,ref) (products,Product,ref) 
+model	Product (number,EIntegerObject,attribute) (name,EString,attribute) (description,EString,attribute) (priceCategory,PriceCategory,ref) (productCategory,ProductCategory,ref) 
+model	PriceCategory (name,EString,attribute) (prices,EDouble,attribute) 

@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="relationworld"
+    nsURI="http://relationworld" nsPrefix="_relationworld">
+  <eClassifiers xsi:type="ecore:EClass" name="ThingA" eSuperTypes="#//SourceNode #//NamedElement">
+    <eAnnotations source="diagraph">
+      <details key="node"/>
+      <details key="label=since"/>
+    </eAnnotations>
+    <eOperations name="compare" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt">
+      <eParameters name="personne" eType="#//ThingA"/>
+    </eOperations>
+    <eOperations name="pred" eType="#//ThingA"/>
+    <eOperations name="succ" eType="#//ThingA"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="since" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDate"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ThingB" eSuperTypes="#//TargetNode #//NamedElement">
+    <eAnnotations source="diagraph">
+      <details key="node"/>
+      <details key="label=step"/>
+    </eAnnotations>
+    <eOperations name="compare" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt">
+      <eParameters name="role" eType="#//ThingB"/>
+    </eOperations>
+    <eOperations name="pred" eType="#//ThingB"/>
+    <eOperations name="succ" eType="#//ThingB"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="step" eType="#//Scale"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="RelatedTo" eSuperTypes="#//Arrow #//NamedElement">
+    <eAnnotations source="diagraph">
+      <details key="link"/>
+      <details key="lsrc=thingA"/>
+      <details key="ltrg=thingB"/>
+      <details key="cont=World.relations"/>
+    </eAnnotations>
+    <eOperations name="validate" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="thingA" eType="#//ThingA"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="thingB" eType="#//ThingB"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="World" eSuperTypes="#//Category">
+    <eAnnotations source="diagraph">
+      <details key="node"/>
+      <details key="pov"/>
+    </eAnnotations>
+    <eOperations name="compare" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt">
+      <eParameters name="role1" eType="#//ThingB"/>
+      <eParameters name="role2" eType="#//ThingB"/>
+    </eOperations>
+    <eOperations name="compare" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt">
+      <eParameters name="personne1" eType="#//ThingA"/>
+      <eParameters name="personne2" eType="#//ThingA"/>
+    </eOperations>
+    <eOperations name="affectation" eType="#//RelatedTo">
+      <eParameters name="role" eType="#//ThingB"/>
+      <eParameters name="personne" eType="#//ThingA"/>
+    </eOperations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="thingsa" upperBound="-1"
+        eType="#//ThingA" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="thingsb" upperBound="-1"
+        eType="#//ThingB" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="relations" upperBound="-1"
+        eType="#//RelatedTo" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="SourceNode" abstract="true">
+    <eAnnotations source="diagraph"/>
+    <eOperations name="compare" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt">
+      <eParameters name="noeud" eType="#//SourceNode"/>
+    </eOperations>
+    <eOperations name="pred" eType="#//SourceNode"/>
+    <eOperations name="succ" eType="#//SourceNode"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Arrow" abstract="true">
+    <eAnnotations source="diagraph"/>
+    <eOperations name="validate" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="source" eType="#//SourceNode"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="cible" eType="#//TargetNode"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Category" abstract="true">
+    <eAnnotations source="diagraph"/>
+    <eOperations name="compare" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt">
+      <eParameters name="n1" eType="#//TargetNode"/>
+      <eParameters name="n2" eType="#//TargetNode"/>
+    </eOperations>
+    <eOperations name="compare" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt">
+      <eParameters name="n1" eType="#//SourceNode"/>
+      <eParameters name="n2" eType="#//SourceNode"/>
+    </eOperations>
+    <eOperations name="affectation" eType="#//Arrow">
+      <eParameters name="source" eType="#//TargetNode"/>
+      <eParameters name="cible" eType="#//SourceNode"/>
+    </eOperations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="sources" upperBound="-1"
+        eType="#//SourceNode"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="fleches" upperBound="-1"
+        eType="#//Arrow"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="nom" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="targets" upperBound="-1"
+        eType="#//TargetNode"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="Scale">
+    <eLiterals name="nothing"/>
+    <eLiterals name="one" value="1"/>
+    <eLiterals name="two" value="2"/>
+    <eLiterals name="three" value="3"/>
+    <eLiterals name="four" value="4"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="TargetNode" abstract="true">
+    <eAnnotations source="diagraph"/>
+    <eOperations name="compare" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt">
+      <eParameters name="noeud" eType="#//TargetNode"/>
+    </eOperations>
+    <eOperations name="pred" eType="#//TargetNode"/>
+    <eOperations name="succ" eType="#//TargetNode"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="NamedElement" abstract="true">
+    <eAnnotations source="diagraph">
+      <details key="label=name"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+</ecore:EPackage>

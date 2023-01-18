@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="turtlebotmission" nsURI="http://www.chalmers.se/turtlebotmission"
+    nsPrefix="turtlebotmission">
+  <eClassifiers xsi:type="ecore:EClass" name="TurtleBot" eSuperTypes="#//NamedElement">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="area" lowerBound="1" eType="#//Area"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="waypointtypes" lowerBound="1"
+        upperBound="-1" eType="#//WaypointType" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="bot_start" lowerBound="1"
+        eType="#//WayPoint"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="waypoints" lowerBound="1"
+        upperBound="-1" eType="#//WayPoint" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="missions" upperBound="-1"
+        eType="#//Mission" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="NamedElement" abstract="true">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Area">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="xmax" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="ymax" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="WaypointType" eSuperTypes="#//NamedElement"/>
+  <eClassifiers xsi:type="ecore:EClass" name="WayPoint" eSuperTypes="#//NamedElement">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="coord_x" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="coord_y" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="waypointtypes" lowerBound="1"
+        upperBound="-1" eType="#//WaypointType"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Mission" eSuperTypes="#//NamedElement">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="task" lowerBound="1" upperBound="-1"
+        eType="#//Task" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Task" abstract="true"/>
+  <eClassifiers xsi:type="ecore:EClass" name="LineTask" eSuperTypes="#//Task">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="waypoints" lowerBound="1"
+        upperBound="-1" eType="#//WayPoint"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ShortestPathTask" eSuperTypes="#//Task">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="waypoints" lowerBound="1"
+        upperBound="-1" eType="#//WayPoint"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ReturnToStartTask" eSuperTypes="#//Task"/>
+</ecore:EPackage>

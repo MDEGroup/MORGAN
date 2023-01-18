@@ -1,0 +1,8 @@
+model	Group (groupType,GroupType,attribute) (name,EString,attribute) (features,SimpleFeature,ref) 
+model	Configurator (name,EString,attribute) (features,Feature,ref) (groups,Group,ref) 
+model	IntegerValueDependency (value,EInt,attribute) (target,IntegerFeature,ref) 
+model	IntegerFeature (minValue,EInt,attribute) (maxValue,EInt,attribute) (step,EInt,attribute) (value,EInt,attribute) 
+model	Dependency (not,EBoolean,attribute) 
+model	BinaryDependency (operator,BinaryOperator,attribute) (leftHand,Dependency,ref) (rightHand,Dependency,ref) 
+model	IsSelectedDependency (target,Feature,ref) 
+model	Feature (name,EString,attribute) (mandatory,EBoolean,attribute) (selected,EBoolean,attribute) (features,Feature,ref) (groups,Group,ref) (dependencies,Dependency,ref) 

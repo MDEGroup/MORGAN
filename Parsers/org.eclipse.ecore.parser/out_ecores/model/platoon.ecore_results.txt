@@ -1,0 +1,8 @@
+model	Vehicle (name,EString,attribute) 
+model	Constraints (lbound,EInt,attribute) (ubound,EInt,attribute) 
+model	Root (route,Route,ref) (platoon,Platoon,ref) (constraints,Constraints,ref) 
+model	Platoon (followingVehicle,FollowingVehicle,ref) (leaderVehicle,LeaderVehicle,ref) 
+model	FollowingVehicle (following,Vehicle,ref) 
+model	LeaderVehicle (route,Route,ref) 
+model	Forward (distance,EInt,attribute) 
+model	Route (name,EString,attribute) (routeCommands,routeCommand,ref) 

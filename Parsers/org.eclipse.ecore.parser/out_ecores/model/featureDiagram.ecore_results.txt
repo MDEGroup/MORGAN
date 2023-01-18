@@ -1,0 +1,6 @@
+model	Operator (owningFeature,Feature,ref) 
+model	Constraint (owningCE,ConstraintEdge,ref) 
+model	Model (name,String,attribute) 
+model	FeatureDiagram (graphTypeTree,Boolean,attribute) (features,Feature,ref) (constraintEdges,ConstraintEdge,ref) (root,Feature,ref) 
+model	ConstraintEdge (constraint,Constraint,ref) (source,Feature,ref) (target,Feature,ref) 
+model	Feature (name,String,attribute) (optional,Boolean,attribute) (selected,Boolean,attribute) (models,Model,ref) (children,Feature,ref) (owningFeatureDiagram,FeatureDiagram,ref) (operator,Operator,ref) (parents,Feature,ref) 

@@ -1,0 +1,4 @@
+model	State (name,EString,attribute) (owningCompositeState,CompositeState,ref) (owningStateMachine,StateMachine,ref) 
+model	StateMachine (ownedState,State,ref) (ownedTransition,Transition,ref) 
+model	Transition (effect,EString,attribute) (trigger,EString,attribute) (owningCompositeState,CompositeState,ref) (owningStateMachine,StateMachine,ref) (source,State,ref) (target,State,ref) 
+model	CompositeState (ownedSubState,State,ref) (ownedSubTransition,Transition,ref) 

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="PersonCompany" nsURI="PersonCompany" nsPrefix="PersonCompany">
+  <eClassifiers xsi:type="ecore:EClass" name="Person">
+    <eOperations name="employer" ordered="false" upperBound="-1" eType="#//Company"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" ordered="false" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="PersonJob_Job_role_job"
+        ordered="false" upperBound="-1" eType="#//Job" eOpposite="#//Job/PersonJob_Person_role_employee"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Company">
+    <eOperations name="employee" ordered="false" upperBound="-1" eType="#//Person"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" ordered="false" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="CompanyJob_Job_role_job"
+        ordered="false" upperBound="-1" eType="#//Job" eOpposite="#//Job/CompanyJob_Company_role_employer"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Job">
+    <eOperations name="bossPlus" ordered="false" upperBound="-1" eType="#//Job"/>
+    <eOperations name="workerPlus" ordered="false" upperBound="-1" eType="#//Job"/>
+    <eOperations name="workerPlusOnSet" ordered="false" upperBound="-1" eType="#//Job">
+      <eParameters name="s" ordered="false" upperBound="-1" eType="#//Job"/>
+    </eOperations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="salary" ordered="false"
+        lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="PersonJob_Person_role_employee"
+        ordered="false" lowerBound="1" eType="#//Person" eOpposite="#//Person/PersonJob_Job_role_job"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="CompanyJob_Company_role_employer"
+        ordered="false" lowerBound="1" eType="#//Company" eOpposite="#//Company/CompanyJob_Job_role_job"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="BossWorker_Job_role_worker"
+        ordered="false" upperBound="-1" eType="#//Job" eOpposite="#//Job/BossWorker_Job_role_boss"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="BossWorker_Job_role_boss"
+        ordered="false" eType="#//Job" eOpposite="#//Job/BossWorker_Job_role_worker"/>
+  </eClassifiers>
+</ecore:EPackage>

@@ -1,0 +1,6 @@
+model	Project (departmentWide,EBoolean,attribute) (name,EString,attribute) (contributions,Contribution,ref) (projectTeam,Employee,ref) (lead,Manager,ref) 
+model	Department (name,EString,attribute) (parentDepartment,Department,ref) (manager,Manager,ref) (subDepartments,Department,ref) (employees,Employee,ref) 
+model	Employee (name,EString,attribute) (salary,EInt,attribute) (projects,Project,ref) (contributions,Contribution,ref) (department,Department,ref) 
+model	AllHolder (all,AllBase,ref) 
+model	Manager (leads,Project,ref) (managedDepartment,Department,ref) 
+model	Contribution (description,EString,attribute) (project,Project,ref) (employee,Employee,ref) 

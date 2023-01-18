@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="gametournament" nsURI="http://com.sii/gametournament/1.0" nsPrefix="gametournament">
+  <eClassifiers xsi:type="ecore:EClass" name="Tournament">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore">
+      <details key="constraints" value="checkName"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="location" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="startDate" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDate"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="endDate" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDate"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="game" lowerBound="1" eType="#//Game"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="gamers" upperBound="-1"
+        eType="#//Gamer" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="finalPhase" lowerBound="1"
+        eType="#//FinalPhase" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="qualificationPhase" lowerBound="1"
+        eType="#//QualificationPhase" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="prize" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Gamer">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="firstName" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="lastName" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="pseudo" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="victories" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="matches" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Game">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="type" lowerBound="1" eType="#//GameType"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="QualificationPhase">
+    <eOperations name="createPools" eType="#//Pool"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="pools" lowerBound="1" upperBound="16"
+        eType="#//Pool" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="FinalPhase">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="finalists" lowerBound="1"
+        upperBound="16" eType="#//Gamer" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="qualificationphase" lowerBound="1"
+        eType="#//QualificationPhase"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="GameType">
+    <eLiterals name="ACTION"/>
+    <eLiterals name="RPG" value="1"/>
+    <eLiterals name="FPS" value="2"/>
+    <eLiterals name="STRATEGIC" value="3"/>
+    <eLiterals name="COMBAT" value="4"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Pool">
+    <eOperations name="generateClassment"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="participants" lowerBound="4"
+        upperBound="4" eType="#//Gamer" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="classment" lowerBound="4"
+        upperBound="4" eType="#//Gamer"/>
+  </eClassifiers>
+</ecore:EPackage>

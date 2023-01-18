@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="myumlclassdiagram" nsURI="http://myumlclassdiagram/1.0" nsPrefix="myumlclassdiagram">
+  <eClassifiers xsi:type="ecore:EClass" name="Package" eSuperTypes="#//NamedElement">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="Classes" upperBound="-1"
+        eType="#//Class" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Class" eSuperTypes="#//NamedElement">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="Attributes" upperBound="-1"
+        eType="#//Attribute" containment="true" eOpposite="#//Attribute/Owner"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="Methods" upperBound="-1"
+        eType="#//Method" containment="true" eOpposite="#//Method/Owner"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="Visibility" eType="#//EVisibility"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="EType">
+    <eLiterals name="integer"/>
+    <eLiterals name="string" value="2"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="NamedElement" abstract="true">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="Name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Attribute" eSuperTypes="#//NamedElement">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="Type" eType="#//EType"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="Visibility" eType="#//EVisibility"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="Owner" lowerBound="1" eType="#//Class"
+        eOpposite="#//Class/Attributes"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Method" eSuperTypes="#//NamedElement">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="Returns" eType="#//EReturnType"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="Parameters" upperBound="-1"
+        eType="#//Parameter" containment="true" eOpposite="#//Parameter/Owner"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="Visibility" eType="#//EVisibility"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="Owner" lowerBound="1" eType="#//Class"
+        eOpposite="#//Class/Methods"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="EVisibility">
+    <eLiterals name="public"/>
+    <eLiterals name="protected" value="1"/>
+    <eLiterals name="private" value="2"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="EReturnType">
+    <eLiterals name="void"/>
+    <eLiterals name="integer"/>
+    <eLiterals name="string" value="2"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Parameter" eSuperTypes="#//NamedElement">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="Type" eType="#//EType"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="Owner" eType="#//Method"
+        eOpposite="#//Method/Parameters"/>
+  </eClassifiers>
+</ecore:EPackage>

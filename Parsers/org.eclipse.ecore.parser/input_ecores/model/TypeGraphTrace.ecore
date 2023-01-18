@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="TypeGraphTrace" nsURI="platform:/plugin/TypeGraphBasic/model/TypeGraphTrace.ecore"
+    nsPrefix="TypeGraphTrace">
+  <eClassifiers xsi:type="ecore:EClass" name="Trace">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="programGraph" eType="ecore:EClass TypeGraphBasic.ecore#//TypeGraph"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="methodSignatures" upperBound="-1"
+        eType="#//MethodSignatureTrace" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="classLists" upperBound="-1"
+        eType="#//ClassListTrace" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="MethodSignatureTrace">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="tMethodSignature" eType="ecore:EClass TypeGraphBasic.ecore#//TMethodSignature"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="signatureString" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
+        iD="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ClassListTrace">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="tClasses" upperBound="-1"
+        eType="ecore:EClass TypeGraphBasic.ecore#//TClass"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="concatSignature" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
+        iD="true"/>
+  </eClassifiers>
+</ecore:EPackage>

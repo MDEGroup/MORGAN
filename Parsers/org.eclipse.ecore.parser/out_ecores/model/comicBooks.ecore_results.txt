@@ -1,0 +1,7 @@
+model	Artist (name,EString,attribute) (booksCoverArtistFor,Book,ref) (booksArtistFor,Book,ref) 
+model	Series (seriesName,EString,attribute) (booksInSeries,Book,ref) 
+model	Book (name,EString,attribute) (publicationDate,EString,attribute) (seriesPartOf,Series,ref) (artists,Artist,ref) (coverArtist,Artist,ref) (publisher,Publisher,ref) (writers,Writer,ref) (editors,Editor,ref) 
+model	Publisher (publishersName,EString,attribute) (booksPublished,Book,ref) 
+model	Editor (name,EString,attribute) (booksEditorFor,Book,ref) 
+model	Writer (name,EString,attribute) (booksWriterFor,Book,ref) 
+model	ComicBookCollection (books,Book,ref) (publishingCompanies,Publisher,ref) (artists,Artist,ref) (series,Series,ref) (writers,Writer,ref) (editors,Editor,ref) 

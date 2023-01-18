@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="tables" nsURI="urn:uuid:27aa178c-696e-4d7d-a9d6-8cb6a8899d8c/metamodel/tables"
+    nsPrefix="tables">
+  <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore">
+    <details key="invocationDelegates" value="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot"/>
+    <details key="settingDelegates" value="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot"/>
+    <details key="validationDelegates" value="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot"/>
+  </eAnnotations>
+  <eAnnotations source="emf.gen">
+    <details key="basePackage" value="sma.hm"/>
+  </eAnnotations>
+  <eClassifiers xsi:type="ecore:EClass" name="Database">
+    <eAnnotations source="gmf.diagram"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="tables" upperBound="-1"
+        eType="#//Table" containment="true" eOpposite="#//Table/database"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Table">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore">
+      <details key="constraints" value="PrimaryKeyInThisTable AttributeNamesUnique"/>
+    </eAnnotations>
+    <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
+      <details key="PrimaryKeyInThisTable" value="self.primary_key = null or self.primary_key.table = self"/>
+      <details key="AttributeNamesUnique" value="&#xA;&#x9;&#x9;&#x9;self.columns->isUnique(name)"/>
+    </eAnnotations>
+    <eAnnotations source="gmf.node">
+      <details key="tool.name" value="Table"/>
+      <details key="label" value="name"/>
+      <details key="label.icon" value="false"/>
+      <details key="figure" value="rectangle"/>
+      <details key="size" value="200,150"/>
+      <details key="border.color" value="0,0,0"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="columns" upperBound="-1"
+        eType="#//Column" containment="true" eOpposite="#//Column/table">
+      <eAnnotations source="gmf.compartment">
+        <details key="layout" value="list"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="database" lowerBound="1"
+        eType="#//Database" eOpposite="#//Database/tables"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="primary_key" eType="#//Column"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Column">
+    <eAnnotations source="gmf.node">
+      <details key="tool.name" value="Column"/>
+      <details key="label" value="name,type"/>
+      <details key="label.pattern" value="{0}:{1}"/>
+      <details key="label.icon" value="false"/>
+      <details key="figure" value="rectangle"/>
+      <details key="border.color" value="0,0,0"/>
+      <details key="margin" value="1"/>
+      <details key="size" value="180,20"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="type" lowerBound="1" eType="#//Type"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="table" lowerBound="1" eType="#//Table"
+        eOpposite="#//Table/columns"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="foreign_key" eType="#//ForeignKey"
+        containment="true" eOpposite="#//ForeignKey/column"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ForeignKey">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore">
+      <details key="constraints" value="TargetHasPrimaryKey PrimaryKeyTypeMatches"/>
+    </eAnnotations>
+    <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
+      <details key="TargetHasPrimaryKey" value="self.target.primary_key &lt;> null"/>
+      <details key="PrimaryKeyTypeMatches" value="self.target.primary_key.type = self.column.type"/>
+    </eAnnotations>
+    <eAnnotations source="gmf.link">
+      <details key="tool.name" value="ForeignKey"/>
+      <details key="label" value="name"/>
+      <details key="source" value="column"/>
+      <details key="target" value="target"/>
+      <details key="target.decoration" value="arrow"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="target" lowerBound="1"
+        eType="#//Table"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="column" lowerBound="1"
+        eType="#//Column" eOpposite="#//Column/foreign_key"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="Type">
+    <eLiterals name="integer"/>
+    <eLiterals name="float" value="1"/>
+    <eLiterals name="string" value="2"/>
+    <eLiterals name="datetime" value="3"/>
+    <eLiterals name="bool" value="4"/>
+  </eClassifiers>
+</ecore:EPackage>

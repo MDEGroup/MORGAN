@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="ASCII"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="statemachines" nsURI="http://org.tetrabox.examples.statemachines.interpretedstatemachinesmt/statemachines/" nsPrefix="statemachines">
+  <eClassifiers xsi:type="ecore:EClass" name="CustomSystem">
+    <eOperations name="initialize">
+      <eAnnotations source="aspect"/>
+      <eParameters name="args" upperBound="-1">
+        <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+      </eParameters>
+    </eOperations>
+    <eOperations name="main">
+      <eAnnotations source="aspect"/>
+    </eOperations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="statemachine" lowerBound="1" eType="//almostuml/StateMachine" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="events" upperBound="-1" eType="//CustomEvent" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="CustomEvent" eSuperTypes="//almostuml/Event"/>
+  <eClassifiers xsi:type="ecore:EClass" name="EventOccurrence">
+    <eAnnotations source="aspect"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="event" lowerBound="1" eType="//CustomEvent">
+      <eAnnotations source="aspect"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Util">
+    <eAnnotations source="aspect"/>
+    <eOperations name="log">
+      <eAnnotations source="aspect"/>
+      <eParameters name="l">
+        <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+      </eParameters>
+    </eOperations>
+  </eClassifiers>
+  <eSubpackages name="almostuml" nsURI="http://org.tetrabox.examples.statemachines.interpretedstatemachinesmt/statemachines/almostuml/" nsPrefix="almostuml">
+    <eClassifiers xsi:type="ecore:EClass" name="StateMachine" eSuperTypes="//almostuml/NamedElement">
+      <eOperations name="run">
+        <eAnnotations source="aspect"/>
+      </eOperations>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="region" lowerBound="1" upperBound="-1" eType="//almostuml/Region" containment="true" eOpposite="//almostuml/Region/stateMachine"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="queue" upperBound="-1" eType="//EventOccurrence" containment="true">
+        <eAnnotations source="aspect"/>
+      </eStructuralFeatures>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="Region" eSuperTypes="//almostuml/NamedElement">
+      <eOperations name="initialize">
+        <eAnnotations source="aspect"/>
+      </eOperations>
+      <eOperations name="handleEvent">
+        <eAnnotations source="aspect"/>
+        <eParameters name="eventOccurrence" eType="//EventOccurrence"/>
+      </eOperations>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="subvertex" upperBound="-1" eType="//almostuml/Vertex" containment="true" eOpposite="//almostuml/Vertex/container"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="transition" upperBound="-1" eType="//almostuml/Transition" containment="true"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="stateMachine" eType="//almostuml/StateMachine" eOpposite="//almostuml/StateMachine/region"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="currentState" unique="false" eType="//almostuml/State">
+        <eAnnotations source="aspect"/>
+      </eStructuralFeatures>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="State" eSuperTypes="//almostuml/NamedElement //almostuml/Vertex">
+      <eOperations name="setAsCurrent">
+        <eAnnotations source="aspect"/>
+      </eOperations>
+      <eOperations name="handle">
+        <eAnnotations source="aspect"/>
+        <eParameters name="eventOccurrence" eType="//EventOccurrence"/>
+      </eOperations>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="entry" eType="//almostuml/Behavior"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="exit" eType="//almostuml/Behavior"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="doActivity" eType="//almostuml/Behavior"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="region" upperBound="-1" eType="//almostuml/Region" containment="true"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="Vertex" abstract="true" eSuperTypes="//almostuml/NamedElement">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="container" eType="//almostuml/Region" eOpposite="//almostuml/Region/subvertex"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="Transition" eSuperTypes="//almostuml/NamedElement">
+      <eOperations name="fire">
+        <eAnnotations source="aspect"/>
+      </eOperations>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="source" lowerBound="1" eType="//almostuml/Vertex"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="target" lowerBound="1" eType="//almostuml/Vertex"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="trigger" upperBound="-1" eType="//almostuml/Trigger" containment="true"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="guard" eType="//almostuml/Constraint" containment="true"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="effect" eType="//almostuml/Behavior" containment="true"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="Trigger" eSuperTypes="//almostuml/NamedElement">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="event" lowerBound="1" eType="//almostuml/Event"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="Constraint" abstract="true"/>
+    <eClassifiers xsi:type="ecore:EClass" name="Behavior" abstract="true" eSuperTypes="//almostuml/NamedElement"/>
+    <eClassifiers xsi:type="ecore:EClass" name="NamedElement" abstract="true">
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="name">
+        <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+      </eStructuralFeatures>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="Event" abstract="true" eSuperTypes="//almostuml/NamedElement"/>
+    <eClassifiers xsi:type="ecore:EClass" name="FinalState" eSuperTypes="//almostuml/State">
+      <eOperations name="handle">
+        <eAnnotations source="aspect"/>
+        <eParameters name="eventOccurrence" eType="//EventOccurrence"/>
+      </eOperations>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="Pseudostate" eSuperTypes="//almostuml/State">
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="kind" lowerBound="1" eType="//almostuml/PseudostateKind"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EEnum" name="PseudostateKind">
+      <eLiterals name="initial"/>
+      <eLiterals name="join" value="2"/>
+      <eLiterals name="fork" value="2"/>
+      <eLiterals name="junction" value="3"/>
+      <eLiterals name="choice" value="4"/>
+    </eClassifiers>
+  </eSubpackages>
+</ecore:EPackage>

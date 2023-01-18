@@ -1,0 +1,5 @@
+model	Trigger (expression,EString,attribute) 
+model	StateMachine (transitions,Transition,ref) (states,State,ref) 
+model	State (incoming,Transition,ref) (outgoing,Transition,ref) (doAction,null,ref) 
+model	Transition (guard,null,ref) (trigger,Trigger,ref) (source,State,ref) (target,State,ref) 
+model	NamedElement (name,EString,attribute) 

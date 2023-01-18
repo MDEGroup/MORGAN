@@ -1,0 +1,8 @@
+model	Qualification (Language,Nationality,attribute) (hasPCExperience,EBoolean,attribute) (programminLanguage,ProgrammingLanguage,attribute) (hasProgrammingExperience,EBoolean,attribute) 
+model	RegistrationSystem (teachingAssistants,TeachingAssistant,ref) (students,Student,ref) 
+model	Address (zip,EString,attribute) (city,EString,attribute) (street,EString,attribute) (state,EString,attribute) 
+model	Notebook (OperatingSystem,OperatingSystem,attribute) (hasWLAN,EBoolean,attribute) 
+model	TeachingAssistant (room,Room,ref) 
+model	Person (firstname,EString,attribute) (gender,Gender,attribute) (subject,Subject,attribute) (lastname,EString,attribute) (qualification,Qualification,ref) (contactinfo,Contact,ref) (notebook,Notebook,ref) 
+model	Room (roomNr,EInt,attribute) (hasComputers,EBoolean,attribute) (sockets,EBoolean,attribute) (seats,EInt,attribute) 
+model	Contact (Email,EString,attribute) (phonenumber,EString,attribute) (address,Address,ref) 

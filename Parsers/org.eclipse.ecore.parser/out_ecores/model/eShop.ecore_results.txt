@@ -1,0 +1,5 @@
+model	Sale (amount,EInt,attribute) (paid,EBoolean,attribute) (id,EInt,attribute) (purchaser,Customer,ref) (lines,SaleLine,ref) 
+model	Customer (name,EInt,attribute) (sale,Sale,ref) (portal,Portal,ref) 
+model	SaleLine (quantity,EInt,attribute) (sale,Sale,ref) (product,Product,ref) 
+model	Portal (name,EString,attribute) (url,EString,attribute) (customers,Customer,ref) 
+model	Product (price,EInt,attribute) (stock,EInt,attribute) (salesLines,SaleLine,ref) 

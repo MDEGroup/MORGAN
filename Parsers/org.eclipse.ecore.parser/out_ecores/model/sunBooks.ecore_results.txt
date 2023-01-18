@@ -1,0 +1,6 @@
+model	PromotionType (discount,String,attribute) (none,String,attribute) 
+model	BookType (itemId,String,attribute) (iSBN,Long,attribute) (price,String,attribute) (name,String,attribute) (description,String,attribute) (publicationDate,Date,attribute) (bookCategory,BookCategoryType1,attribute) (authors,AuthorsType,ref) (promotion,PromotionType,ref) 
+model	AuthorsType (authorName,String,attribute) 
+model	DocumentRoot (mixed,EFeatureMapEntry,attribute) (xSISchemaLocation,EStringToStringMapEntry,ref) (xMLNSPrefixMap,EStringToStringMapEntry,ref) (collection,CollectionType,ref) 
+model	CollectionType (books,BooksType,ref) 
+model	BooksType (book,BookType,ref) 

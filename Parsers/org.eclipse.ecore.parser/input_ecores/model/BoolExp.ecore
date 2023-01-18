@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="boolexp" nsURI="http://boolexp/" nsPrefix="boolexp">
+  <eClassifiers xsi:type="ecore:EClass" name="Exp" abstract="true"/>
+  <eClassifiers xsi:type="ecore:EClass" name="BinExp" abstract="true" eSuperTypes="#//Exp">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="lhs" lowerBound="1" eType="#//Exp"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="rhs" lowerBound="1" eType="#//Exp"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Lit" abstract="true" eSuperTypes="#//Exp"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Tru" eSuperTypes="#//Lit"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Fals" eSuperTypes="#//Lit"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Not" eSuperTypes="#//Exp">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="exp" lowerBound="1" eType="#//Exp"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="And" eSuperTypes="#//BinExp"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Or" eSuperTypes="#//BinExp"/>
+</ecore:EPackage>

@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="universityextended"
+    nsURI="http://universityextended/1.0" nsPrefix="universityextended">
+  <eClassifiers xsi:type="ecore:EClass" name="University">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="persons" upperBound="-1"
+        eType="#//people/Person" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="visits" upperBound="-1"
+        eType="#//connection/Visits" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="courses" upperBound="-1"
+        eType="#//administration/Course" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="times" upperBound="-1"
+        eType="#//administration/Time" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="rooms" upperBound="-1"
+        eType="#//administration/Room" containment="true"/>
+  </eClassifiers>
+  <eSubpackages name="people" nsURI="http://universityextended/1.0/people" nsPrefix="people">
+    <eClassifiers xsi:type="ecore:EClass" name="Person">
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="Student" eSuperTypes="#//people/Person">
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="matriculationnumber"
+          eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//ELong"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="courseVisit" upperBound="-1"
+          eType="#//connection/Visits" eOpposite="#//connection/Visits/student"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="Professor" eSuperTypes="#//people/Person">
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="rank" eType="#//people/SalaryRank"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="lectures" upperBound="-1"
+          eType="#//administration/Lecture" eOpposite="#//administration/Lecture/lecturer"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="Assistant" eSuperTypes="#//people/Person">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="tutorial" upperBound="-1"
+          eType="#//administration/Tutorial" eOpposite="#//administration/Tutorial/tutor"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="isDoctoralCandidate"
+          eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EEnum" name="SalaryRank">
+      <eLiterals name="W1"/>
+      <eLiterals name="W2" value="1"/>
+      <eLiterals name="W3" value="2"/>
+    </eClassifiers>
+  </eSubpackages>
+  <eSubpackages name="administration" nsURI="http://universityextended/1.0/administration"
+      nsPrefix="administration">
+    <eClassifiers xsi:type="ecore:EClass" name="Course">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="lecture" lowerBound="1"
+          eType="#//administration/Lecture" containment="true" eOpposite="#//administration/Lecture/course"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="tutorial" eType="#//administration/Tutorial"
+          containment="true" eOpposite="#//administration/Tutorial/course"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="title" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="startOfCourse" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDate"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="endOfCourse" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDate"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="visitor" upperBound="-1"
+          eType="#//connection/Visits" eOpposite="#//connection/Visits/course"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="Lecture" eSuperTypes="#//administration/Event">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="course" lowerBound="1"
+          eType="#//administration/Course" eOpposite="#//administration/Course/lecture"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="lecturer" lowerBound="1"
+          eType="#//people/Professor" eOpposite="#//people/Professor/lectures"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="captions" lowerBound="1"
+          upperBound="-1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="Tutorial" eSuperTypes="#//administration/Event">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="course" lowerBound="1"
+          eType="#//administration/Course" eOpposite="#//administration/Course/tutorial"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="tutor" lowerBound="1"
+          eType="#//people/Assistant" eOpposite="#//people/Assistant/tutorial"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EEnum" name="Building">
+      <eLiterals name="A"/>
+      <eLiterals name="B" value="1"/>
+      <eLiterals name="C" value="2"/>
+      <eLiterals name="D" value="3"/>
+      <eLiterals name="E" value="4"/>
+      <eLiterals name="F" value="5"/>
+      <eLiterals name="G" value="6"/>
+      <eLiterals name="H" value="7"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="Room">
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="building" lowerBound="1"
+          eType="#//administration/Building"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="floor" lowerBound="1"
+          eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="roomnumber" lowerBound="1"
+          eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="Time">
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="day" lowerBound="1" eType="#//administration/DayOfWeek"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="startHour" lowerBound="1"
+          eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="endHour" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EEnum" name="DayOfWeek">
+      <eLiterals name="Monday"/>
+      <eLiterals name="Tuesday" value="1"/>
+      <eLiterals name="Wednesday" value="2"/>
+      <eLiterals name="Thursday" value="3"/>
+      <eLiterals name="Friday" value="4"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="Event">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="time" lowerBound="1"
+          eType="#//administration/Time"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="room" lowerBound="1"
+          eType="#//administration/Room"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="title" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eClassifiers>
+  </eSubpackages>
+  <eSubpackages name="connection" nsURI="http://universityextended/1.0/connection"
+      nsPrefix="connection">
+    <eClassifiers xsi:type="ecore:EClass" name="Visits">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="course" lowerBound="1"
+          eType="#//administration/Course" eOpposite="#//administration/Course/visitor"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="student" lowerBound="1"
+          eType="#//people/Student" eOpposite="#//people/Student/courseVisit"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="motivation" eType="#//connection/Motivation"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EEnum" name="Motivation">
+      <eLiterals name="HIGH_INTEREST"/>
+      <eLiterals name="AVERAGE_INTEREST" value="2"/>
+      <eLiterals name="LOW_INTEREST" value="1"/>
+    </eClassifiers>
+  </eSubpackages>
+</ecore:EPackage>

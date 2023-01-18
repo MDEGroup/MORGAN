@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="tdt4250" nsURI="http://com/eclipse/tdt4250/assignment1" nsPrefix="com.eclipse.tdt4250.assignment1">
+  <eClassifiers xsi:type="ecore:EClass" name="StudyProgram">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="students" upperBound="-1"
+        eType="#//Student" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="specialisations" upperBound="10"
+        eType="#//Specialisation" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="obligatory_courses" upperBound="-1"
+        eType="#//Course" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="number_of_semesters" lowerBound="4"
+        upperBound="10" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="#//StudyProgramName"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Course">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="code" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
+      <eAnnotations source="https:///org/eclipse/emf/ecore/util/ExtendedMetaData">
+        <details key="maxLength" value="7"/>
+        <details key="minLength" value="6"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="study_points" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EFloat"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="level" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="semester" eType="#//Semester"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Student">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="studentID" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt">
+      <eAnnotations source="org.eclipse.emf.ecore.util.EcoreUtil.getConstraints/setConstraints">
+        <details key="totalDigits" value="6"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="courses" upperBound="-1"
+        eType="#//Course" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="current_semester" lowerBound="1"
+        upperBound="10" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="CourseGroup">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="mandatory_courses" eType="#//Course"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="elective_courses" eType="#//Course"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="specialisation" eType="#//Specialisation"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Specialisation">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="students" upperBound="-1"
+        eType="#//Student" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="further_specialisation"
+        eType="#//Specialisation"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="course_group" eType="#//CourseGroup"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="StudyProgramName">
+    <eLiterals name="computer_science_5_years"/>
+    <eLiterals name="computer_science_2_years" value="1"/>
+    <eLiterals name="informatics" value="2"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="Semester">
+    <eLiterals name="spring"/>
+    <eLiterals name="autumn" value="1"/>
+  </eClassifiers>
+</ecore:EPackage>

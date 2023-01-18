@@ -1,0 +1,7 @@
+model	OrState (states,BaseState,ref) 
+model	StateModels (stateModels,StateModel,ref) 
+model	BaseState (name,EString,attribute) 
+model	Expr (value,EString,attribute) 
+model	State (set,EBoolean,attribute) (expr,Expr,ref) 
+model	Transition (condition,Expr,ref) (source,BaseState,ref) (target,State,ref) 
+model	StateModel (name,EString,attribute) (transitions,Transition,ref) (states,BaseState,ref) 

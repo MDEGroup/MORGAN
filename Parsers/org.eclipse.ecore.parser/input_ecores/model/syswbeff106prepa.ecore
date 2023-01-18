@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="syswbeff106prepa"
+    nsURI="http://syswbeff106prepa" nsPrefix="_syswbeff106prepa">
+  <eAnnotations source="diagen">
+    <details key="knownas=simple world" value=""/>
+    <details key="origin=http://org.isoe.fr" value=""/>
+    <details key="leftparent=nil" value=""/>
+    <details key="rightparent=nil" value=""/>
+    <details key="requires=nil" value=""/>
+    <details key="context=startup" value=""/>
+  </eAnnotations>
+  <eAnnotations source="diastyle.node.vertical">
+    <details key="layout=vertical" value=""/>
+  </eAnnotations>
+  <eClassifiers xsi:type="ecore:EClass" name="AbstractFunction" abstract="true">
+    <eAnnotations source="diagraph">
+      <details key="node" value=""/>
+      <details key="view=functionArchitecture" value=""/>
+      <details key="label=name"/>
+      <details key="afx=inputports"/>
+      <details key="afx=outputports"/>
+    </eAnnotations>
+    <eAnnotations source="diagraph">
+      <details key="node" value=""/>
+      <details key="view=functionPattern" value=""/>
+      <details key="label=name"/>
+    </eAnnotations>
+    <eAnnotations source="diagraph">
+      <details key="node"/>
+      <details key="view=catalog"/>
+      <details key="label=name"/>
+    </eAnnotations>
+    <eAnnotations source="diagraph">
+      <details key="node"/>
+      <details key="label=name"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="associations" eType="#//AbstractFunction"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="inputports" upperBound="-1"
+        eType="#//InputPort" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="outputports" upperBound="-1"
+        eType="#//OutputPort" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="flows" upperBound="-1"
+        eType="#//Flow" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="System">
+    <eAnnotations source="diagraph">
+      <details key="node" value=""/>
+      <details key="label=id"/>
+      <details key="cref=functionalArchitecture" value=""/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="functionalArchitecture"
+        eType="#//Function" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="id" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="PatternCatalog">
+    <eAnnotations source="diagraph">
+      <details key="node" value=""/>
+      <details key="label=id" value=""/>
+      <details key="nav:catalog" value=""/>
+    </eAnnotations>
+    <eAnnotations source="diagraph">
+      <details key="node" value=""/>
+      <details key="pov" value=""/>
+      <details key="cref=patterns" value=""/>
+      <details key="view=catalog" value=""/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="id" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="patterns" upperBound="-1"
+        eType="#//Pattern" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Workbench">
+    <eAnnotations source="diagraph">
+      <details key="node" value=""/>
+      <details key="pov" value=""/>
+      <details key="cref=catalog" value=""/>
+      <details key="cref=systemView"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="systemView" eType="#//System"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="catalog" upperBound="-1"
+        eType="#//PatternCatalog" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Pattern" eSuperTypes="#//AbstractFunction">
+    <eAnnotations source="diagraph">
+      <details key="node"/>
+      <details key="cont=PatternCatalog.patterns"/>
+      <details key="nav:functionPattern"/>
+      <details key="view=catalog"/>
+      <details key="ref=equivalent"/>
+    </eAnnotations>
+    <eAnnotations source="diagraph">
+      <details key="node" value=""/>
+      <details key="pov" value=""/>
+      <details key="view=functionPattern" value=""/>
+      <details key="cont=Pattern.pdecompositions"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="equivalent" eType="#//Pattern"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="pdecompositions" upperBound="-1"
+        eType="#//Pattern" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Function" eSuperTypes="#//AbstractFunction">
+    <eAnnotations source="diagraph">
+      <details key="node"/>
+      <details key="nav:functionArchitecture"/>
+      <details key="cont=System.functionalArchitecture"/>
+    </eAnnotations>
+    <eAnnotations source="diagraph">
+      <details key="node" value=""/>
+      <details key="pov" value=""/>
+      <details key="view=functionArchitecture" value=""/>
+      <details key="cont=Function.fdecompositions"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="fdecompositions" upperBound="-1"
+        eType="#//Function" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="InputPort" eSuperTypes="#//Port">
+    <eAnnotations source="diagraph">
+      <details key="node"/>
+      <details key="view=functionArchitecture"/>
+    </eAnnotations>
+    <eAnnotations source="diagraph">
+      <details key="node"/>
+      <details key="view=functionPattern"/>
+    </eAnnotations>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="OutputPort" eSuperTypes="#//Port">
+    <eAnnotations source="diagraph">
+      <details key="node"/>
+      <details key="view=functionArchitecture"/>
+    </eAnnotations>
+    <eAnnotations source="diagraph">
+      <details key="node"/>
+      <details key="view=functionPattern"/>
+    </eAnnotations>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Port" abstract="true">
+    <eAnnotations source="diagraph">
+      <details key="node"/>
+      <details key="label=name"/>
+      <details key="view=functionArchitecture"/>
+    </eAnnotations>
+    <eAnnotations source="diagraph">
+      <details key="node"/>
+      <details key="label=name"/>
+      <details key="view=functionPattern"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Flow">
+    <eAnnotations source="diagraph">
+      <details key="link"/>
+      <details key="cont=AbstractFunction.flows"/>
+      <details key="lsrc=from"/>
+      <details key="ltrg=to"/>
+      <details key="view=functionArchitecture"/>
+    </eAnnotations>
+    <eAnnotations source="diagraph">
+      <details key="link"/>
+      <details key="cont=AbstractFunction.flows"/>
+      <details key="lsrc=from"/>
+      <details key="ltrg=to"/>
+      <details key="view=functionPattern"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="from" eType="#//OutputPort"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="to" eType="#//InputPort"/>
+  </eClassifiers>
+</ecore:EPackage>

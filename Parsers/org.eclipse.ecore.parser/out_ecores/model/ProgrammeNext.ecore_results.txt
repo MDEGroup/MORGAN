@@ -1,0 +1,7 @@
+model	Department (name,EString,attribute) (courses,Course,ref) (programmes,Programme,ref) 
+model	Specialization (name,EString,attribute) (availableSpecializations,Specialization,ref) (studyYears,StudyYear,ref) 
+model	Semester (semesterType,SemesterType,attribute) (courses,SemesterCourse,ref) 
+model	Course (taugtIn,SemesterType,attribute) (code,EString,attribute) (level,CourseLevel,attribute) (credits,EFloat,attribute) (name,EString,attribute) 
+model	Programme (code,EString,attribute) (name,EString,attribute) (programmeType,ProgrammeType,attribute) (availableSpecializations,Specialization,ref) (studyYears,StudyYear,ref) 
+model	StudyYear (year,EInt,attribute) (semesters,Semester,ref) 
+model	SemesterCourse (courseType,CourseType,attribute) (semesterCourse,Course,ref) 

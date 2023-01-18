@@ -1,0 +1,6 @@
+model	List (places,Place,ref) (members,Person,ref) 
+model	LivingPlace (persons,Person,ref) 
+model	WorkingPosition (description,EString,attribute) (persons,Person,ref) (works,WorkPlace,ref) 
+model	Person (name,EString,attribute) (works,WorkingPosition,ref) (list,List,ref) (home,LivingPlace,ref) 
+model	WorkPlace (position,WorkingPosition,ref) 
+model	Place (address,EString,attribute) 

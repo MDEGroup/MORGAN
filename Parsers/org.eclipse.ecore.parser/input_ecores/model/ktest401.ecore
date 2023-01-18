@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="ktest401"
+    nsURI="http://ktest401" nsPrefix="_ktest401">
+  <eAnnotations source="diagen">
+    <details key="knownas=simple world"/>
+    <details key="origin=http://org.isoe.fr"/>
+    <details key="leftparent=nil" value=""/>
+    <details key="rightparent=nil" value=""/>
+    <details key="requires=nil" value=""/>
+    <details key="context=startup"/>
+  </eAnnotations>
+  <eClassifiers xsi:type="ecore:EClass" name="World">
+    <eAnnotations source="diagraph">
+      <details key="node"/>
+      <details key="pov"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="things" upperBound="-1"
+        eType="#//Thing" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="e1s" upperBound="-1" eType="#//Article"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Thing" eSuperTypes="#//NamedElement">
+    <eAnnotations source="diagraph">
+      <details key="node"/>
+      <details key="nav:vwthing"/>
+      <details key="kref=lines"/>
+    </eAnnotations>
+    <eAnnotations source="diagraph">
+      <details key="node"/>
+      <details key="pov"/>
+      <details key="cref=e0s"/>
+      <details key="view=vwthing"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="id" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="relations" upperBound="-1"
+        eType="#//RelatedTo" containment="true" eOpposite="#//RelatedTo/fromThing"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="lines" upperBound="-1"
+        eType="#//Line" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="e0s" upperBound="-1" eType="#//EClass0"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="NamedElement" abstract="true">
+    <eAnnotations source="diagraph">
+      <details key="label=name"/>
+    </eAnnotations>
+    <eAnnotations source="diagraph">
+      <details key="node"/>
+      <details key="view=vwthing"/>
+      <details key="label=name"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="RelatedTo" eSuperTypes="#//NamedElement">
+    <eAnnotations source="diagraph">
+      <details key="link"/>
+      <details key="cont=Thing.relations"/>
+      <details key="lsrc=fromThing"/>
+      <details key="ltrg=toThing"/>
+    </eAnnotations>
+    <eAnnotations source="diagraph">
+      <details key="node"/>
+      <details key="view=vwthing"/>
+      <details key="label=since"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="fromThing" eType="#//Thing"
+        eOpposite="#//Thing/relations"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="toThing" eType="#//Thing"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="since" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="e1s" upperBound="-1" eType="#//EClass1"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Line" eSuperTypes="#//NamedElement">
+    <eAnnotations source="diagraph">
+      <details key="node"/>
+      <details key="labels=quant:articleAid"/>
+    </eAnnotations>
+    <eAnnotations source="diagraph">
+      <details key="link"/>
+      <details key="view=vwthing"/>
+      <details key="label=quant"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="src" eType="#//Thing"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="trg" eType="#//Article"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="quant" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="articleAid" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
+        changeable="false" volatile="true" transient="true" defaultValueLiteral=""
+        derived="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Article" eSuperTypes="#//NamedElement">
+    <eAnnotations source="diagraph">
+      <details key="node"/>
+      <details key="label=aid"/>
+    </eAnnotations>
+    <eAnnotations source="diagraph">
+      <details key="node"/>
+      <details key="view=vwthing"/>
+      <details key="label=aid"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="aid" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="EClass0" eSuperTypes="#//NamedElement">
+    <eAnnotations source="diagraph">
+      <details key="node"/>
+      <details key="view=vwthing"/>
+    </eAnnotations>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="EClass1" eSuperTypes="#//NamedElement">
+    <eAnnotations source="diagraph">
+      <details key="link"/>
+      <details key="view=vwthing"/>
+      <details key="labels=foo:bar"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="EReference0" eType="#//RelatedTo"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="EReference1" eType="#//EClass0"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="foo" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="bar" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+</ecore:EPackage>

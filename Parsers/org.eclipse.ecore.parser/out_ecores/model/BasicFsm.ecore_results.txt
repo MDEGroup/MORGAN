@@ -1,0 +1,4 @@
+model	VarDecl (name,EString,attribute) (value,EJavaObject,attribute) 
+model	State (name,EString,attribute) (in,Trans,ref) (decls,VarDecl,ref) (out,Trans,ref) 
+model	Trans (event,EChar,attribute) (tgt,State,ref) (src,State,ref) (guard,Guard,ref) (action,Action,ref) 
+model	Machine (name,EString,attribute) (states,State,ref) (trans,Trans,ref) 

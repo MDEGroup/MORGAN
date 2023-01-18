@@ -1,0 +1,7 @@
+model	Specialization (name,EString,attribute) (specializationChoicePointSemester,EInt,attribute) (requiredSpecialization,Specialization,ref) (courses,Course,ref) (semesters,Semester,ref) (programme,Programme,ref) 
+model	Department (name,EString,attribute) (shortName,EString,attribute) (courses,Course,ref) (programmes,Programme,ref) 
+model	Semester (year,EInt,attribute) (type,semesterType,attribute) (possibleCourses,Course,ref) (programme,Programme,ref) 
+model	StudyPlan (specializations,Specialization,ref) (chosenSemesters,ChosenSemester,ref) (programme,Programme,ref) 
+model	Course (code,EString,attribute) (level,courseLevel,attribute) (name,EString,attribute) (semesters,semesterType,attribute) (type,courseType,attribute) (credtis,EFloat,attribute) 
+model	ChosenSemester (courses,Course,ref) (semester,Semester,ref) 
+model	Programme (name,EString,attribute) (years,EInt,attribute) (specializations,Specialization,ref) (semesters,Semester,ref) 

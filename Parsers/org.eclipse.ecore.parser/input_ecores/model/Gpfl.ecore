@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="gpfl" nsURI="http://www.mleduc.fr/gpfl/Gpfl" nsPrefix="gpfl">
+  <eClassifiers xsi:type="ecore:EClass" name="Program">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="automatas" upperBound="-1"
+        eType="#//AutomataDef" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="initStmts" upperBound="-1"
+        eType="#//GExpression" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="stmts" upperBound="-1"
+        eType="#//GExpression" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="GExpression">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="expression" eType="#//GExpression"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Field">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="value" eType="#//GExpression"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="AutomataDef">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="init" eType="#//State"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="states" upperBound="-1"
+        eType="#//State" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="State">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="transitions" upperBound="-1"
+        eType="#//Transition" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Transition">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="event" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="target" eType="#//State"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="CondStmt" eSuperTypes="#//GExpression">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="exp" eType="#//GExpression"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="stmts" upperBound="-1"
+        eType="#//GExpression" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="IterStmt" eSuperTypes="#//GExpression">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="exp" eType="#//GExpression"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="stmts" upperBound="-1"
+        eType="#//GExpression" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="InterruptStmt" eSuperTypes="#//GExpression">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="timeout" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="periodic" eType="#//GExpression"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="stmts" upperBound="-1"
+        eType="#//GExpression" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="NopCmd" eSuperTypes="#//GExpression"/>
+  <eClassifiers xsi:type="ecore:EClass" name="AcceptCmd" eSuperTypes="#//GExpression"/>
+  <eClassifiers xsi:type="ecore:EClass" name="DropCmd" eSuperTypes="#//GExpression"/>
+  <eClassifiers xsi:type="ecore:EClass" name="SendCmd" eSuperTypes="#//GExpression">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="port" eType="#//GExpression"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="fields" upperBound="-1"
+        eType="#//Field" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="AlarmCmd" eSuperTypes="#//GExpression">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="exp" eType="#//GExpression"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="SetCmd" eSuperTypes="#//GExpression">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="exp" eType="#//GExpression"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="AutomatonCmd" eSuperTypes="#//GExpression">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="automaton" eType="#//AutomataDef"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="StpCmd" eSuperTypes="#//GExpression">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="automaton" eType="#//AutomatonCmd"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="event" eType="#//GExpression"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="errors" upperBound="-1"
+        eType="#//GExpression" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="CmdAnd" eSuperTypes="#//GExpression">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="left" eType="#//GExpression"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="right" eType="#//GExpression"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="CmdEq" eSuperTypes="#//GExpression">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="left" eType="#//GExpression"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="right" eType="#//GExpression"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="CmdNEq" eSuperTypes="#//GExpression">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="left" eType="#//GExpression"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="right" eType="#//GExpression"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="CmdGECompare" eSuperTypes="#//GExpression">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="left" eType="#//GExpression"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="right" eType="#//GExpression"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="CmdLECompare" eSuperTypes="#//GExpression">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="left" eType="#//GExpression"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="right" eType="#//GExpression"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="CmdGCompare" eSuperTypes="#//GExpression">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="left" eType="#//GExpression"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="right" eType="#//GExpression"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="CmdLCompare" eSuperTypes="#//GExpression">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="left" eType="#//GExpression"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="right" eType="#//GExpression"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="CmdAdd" eSuperTypes="#//GExpression">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="left" eType="#//GExpression"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="right" eType="#//GExpression"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="CmdSub" eSuperTypes="#//GExpression">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="left" eType="#//GExpression"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="right" eType="#//GExpression"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="IntLitCmd" eSuperTypes="#//GExpression">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="GBoolTrue" eSuperTypes="#//GExpression"/>
+  <eClassifiers xsi:type="ecore:EClass" name="GBoolFalse" eSuperTypes="#//GExpression"/>
+  <eClassifiers xsi:type="ecore:EClass" name="StringLit" eSuperTypes="#//GExpression">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Variable" eSuperTypes="#//GExpression">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="PortLit" eSuperTypes="#//GExpression">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="inSide" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="InPort" eSuperTypes="#//GExpression"/>
+  <eClassifiers xsi:type="ecore:EClass" name="OutPort" eSuperTypes="#//GExpression"/>
+</ecore:EPackage>

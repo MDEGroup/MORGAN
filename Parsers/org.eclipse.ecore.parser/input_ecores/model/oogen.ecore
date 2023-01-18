@@ -1,0 +1,354 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="oogen" nsURI="https://oogen.aut.bme.hu" nsPrefix="oogen">
+  <eClassifiers xsi:type="ecore:EClass" name="OOPackage">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
+        iD="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="classes" upperBound="-1"
+        eType="#//OOClass" containment="true" eOpposite="#//OOClass/package"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="enums" upperBound="-1"
+        eType="#//OOEnumeration" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="OOClass" eSuperTypes="#//OOCommentOwner">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" unique="false" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString" iD="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="members" upperBound="-1"
+        eType="#//OOMember" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="package" eType="#//OOPackage"
+        eOpposite="#//OOPackage/classes"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="keep" unique="false" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean" defaultValueLiteral="false"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="languages" unique="false"
+        upperBound="-1" eType="#//OOLanguage"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="methods" upperBound="-1"
+        eType="#//OOMethod" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="constructors" lowerBound="1"
+        upperBound="-1" eType="#//OOConstructor" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="OOMember" eSuperTypes="#//OOVariable">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="visibility" ordered="false"
+        unique="false" lowerBound="1" eType="#//OOVisibility"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="static" ordered="false"
+        unique="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="languages" unique="false"
+        upperBound="-1" eType="#//OOLanguage"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="OOBaseType">
+    <eLiterals name="INT"/>
+    <eLiterals name="LONG" value="1"/>
+    <eLiterals name="DOUBLE" value="2"/>
+    <eLiterals name="STRING" value="3"/>
+    <eLiterals name="OBJECT" value="4"/>
+    <eLiterals name="BYTE" value="5" literal="BYTE"/>
+    <eLiterals name="BOOLEAN" value="6"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="OOVariable" eSuperTypes="#//OOStatement">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" unique="false" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString" iD="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="type" lowerBound="1" eType="#//OOType"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="initializerExpression"
+        eType="#//OOExpression"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="transient" unique="false"
+        lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"
+        defaultValueLiteral="false"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="OOType">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="baseType" ordered="false"
+        unique="false" lowerBound="1" eType="#//OOBaseType"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="arrayDimensions" ordered="false"
+        unique="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"
+        defaultValueLiteral="0"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="collectionType" unique="false"
+        lowerBound="1" eType="#//OOCollectionType"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="classType" eType="#//OOClass"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="arraySizeExpressions" upperBound="-1"
+        eType="#//OOExpression" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="enumType" eType="#//OOEnumeration"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="numberOfIndirections" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"
+        defaultValueLiteral="0"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="OOVisibility">
+    <eLiterals name="PRIVATE"/>
+    <eLiterals name="PACKAGE" value="1"/>
+    <eLiterals name="PROTECTED" value="2"/>
+    <eLiterals name="PUBLIC" value="3"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="OOMethod" eSuperTypes="#//OOCommentOwner">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="parameters" upperBound="-1"
+        eType="#//OOVariable" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="returnType" eType="#//OOType"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="statements" upperBound="-1"
+        eType="#//OOStatement" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="visibility" ordered="false"
+        unique="false" lowerBound="1" eType="#//OOVisibility"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" unique="false" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString" iD="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="static" unique="false"
+        lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"
+        defaultValueLiteral="false"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="languages" unique="false"
+        upperBound="-1" eType="#//OOLanguage"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="OOModel">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="oopackage" eType="#//OOPackage"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="packages" upperBound="-1"
+        eType="#//OOPackage" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="globalVariables" upperBound="-1"
+        eType="#//OOVariable" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="globalFunctions" upperBound="-1"
+        eType="#//OOMethod" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="OOCollectionType">
+    <eLiterals name="NONE"/>
+    <eLiterals name="SET" value="1"/>
+    <eLiterals name="LIST" value="2"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="OOStatement" eSuperTypes="#//OOCommentOwner"/>
+  <eClassifiers xsi:type="ecore:EClass" name="OOExpression" eSuperTypes="#//OOStatement"/>
+  <eClassifiers xsi:type="ecore:EClass" name="OOReturn" eSuperTypes="#//OOStatement">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="returnedExpresssion" eType="#//OOExpression"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="OOArithmeticExpression" eSuperTypes="#//OOExpression"/>
+  <eClassifiers xsi:type="ecore:EClass" name="OOIndexing" eSuperTypes="#//OOExpression">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="indexExpression" lowerBound="1"
+        eType="#//OOExpression"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="collectionExpression" lowerBound="1"
+        eType="#//OOExpression"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="OOAssignmentExpression" eSuperTypes="#//OOExpression">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="leftSide" lowerBound="1"
+        eType="#//OOExpression"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="rightSide" lowerBound="1"
+        eType="#//OOExpression"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="OOTwoOperandArithmeticExpression" eSuperTypes="#//OOArithmeticExpression">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="rightSide" lowerBound="1"
+        eType="#//OOExpression"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="leftSide" lowerBound="1"
+        eType="#//OOExpression"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="OOAdditionExpression" eSuperTypes="#//OOTwoOperandAssignableExpression"/>
+  <eClassifiers xsi:type="ecore:EClass" name="OOSubtractionExpression" eSuperTypes="#//OOTwoOperandAssignableExpression"/>
+  <eClassifiers xsi:type="ecore:EClass" name="OODivisionExpression" eSuperTypes="#//OOTwoOperandAssignableExpression"/>
+  <eClassifiers xsi:type="ecore:EClass" name="OOIntegerDivisionExpression" eSuperTypes="#//OOTwoOperandAssignableExpression"/>
+  <eClassifiers xsi:type="ecore:EClass" name="OOMultiplicationExpression" eSuperTypes="#//OOTwoOperandAssignableExpression"/>
+  <eClassifiers xsi:type="ecore:EClass" name="OOPowerExpression" eSuperTypes="#//OOTwoOperandArithmeticExpression"/>
+  <eClassifiers xsi:type="ecore:EClass" name="OORootExpression" eSuperTypes="#//OOTwoOperandArithmeticExpression"/>
+  <eClassifiers xsi:type="ecore:EClass" name="OOBitwiseOrExpression" eSuperTypes="#//OOTwoOperandAssignableExpression"/>
+  <eClassifiers xsi:type="ecore:EClass" name="OOBitwiseXorExpression" eSuperTypes="#//OOTwoOperandAssignableExpression"/>
+  <eClassifiers xsi:type="ecore:EClass" name="OOBitwiseAndExpression" eSuperTypes="#//OOTwoOperandAssignableExpression"/>
+  <eClassifiers xsi:type="ecore:EClass" name="OOLogicalExpression" eSuperTypes="#//OOExpression"/>
+  <eClassifiers xsi:type="ecore:EClass" name="OOAndExpression" eSuperTypes="#//OOTwoOperandLogicalExpression"/>
+  <eClassifiers xsi:type="ecore:EClass" name="OOOrExpression" eSuperTypes="#//OOTwoOperandLogicalExpression"/>
+  <eClassifiers xsi:type="ecore:EClass" name="OOXorExpression" eSuperTypes="#//OOTwoOperandLogicalExpression"/>
+  <eClassifiers xsi:type="ecore:EClass" name="OONotExpression" eSuperTypes="#//OOOneOperandLogicalExpression"/>
+  <eClassifiers xsi:type="ecore:EClass" name="OOTwoOperandLogicalExpression" eSuperTypes="#//OOLogicalExpression">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="leftSide" lowerBound="1"
+        eType="#//OOExpression"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="rightSide" lowerBound="1"
+        eType="#//OOExpression"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="OOOneOperandLogicalExpression" eSuperTypes="#//OOLogicalExpression">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="operand" lowerBound="1"
+        eType="#//OOExpression"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="OODoubleLiteral" eSuperTypes="#//OOArithmeticExpression">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" unique="false" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDouble"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="OOFloatLiteral" eSuperTypes="#//OOArithmeticExpression">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" unique="false" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EFloat"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="OOIntegerLiteral" eSuperTypes="#//OOArithmeticExpression">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" unique="false" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="OOLongLiteral" eSuperTypes="#//OOArithmeticExpression">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" unique="false" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//ELong"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="OOIf" eSuperTypes="#//OOConditionalStatement">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="elseStatements" upperBound="-1"
+        eType="#//OOStatement" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="elseIf" eType="#//OOIf"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="OOFor" eSuperTypes="#//OOConditionalStatement">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="initStatement" lowerBound="1"
+        eType="#//OOStatement"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="incrementExpression" lowerBound="1"
+        eType="#//OOExpression" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="OOConditionalStatement" eSuperTypes="#//OOStatement #//OOCompoundStatement">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="condition" lowerBound="1"
+        eType="#//OOExpression" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="OOWhile" eSuperTypes="#//OOConditionalStatement"/>
+  <eClassifiers xsi:type="ecore:EClass" name="OODoWhile" eSuperTypes="#//OOConditionalStatement"/>
+  <eClassifiers xsi:type="ecore:EClass" name="OOEmptyStatement" eSuperTypes="#//OOStatement"/>
+  <eClassifiers xsi:type="ecore:EClass" name="OOForEach" eSuperTypes="#//OOStatement">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="traversedVariable" lowerBound="1"
+        eType="#//OOVariable"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="loopVariable" lowerBound="1"
+        eType="#//OOVariable" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="bodyStatements" upperBound="-1"
+        eType="#//OOStatement" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="OOBitWiseLeftShift" eSuperTypes="#//OOTwoOperandAssignableExpression"/>
+  <eClassifiers xsi:type="ecore:EClass" name="OOBitWiseRightShift" eSuperTypes="#//OOTwoOperandAssignableExpression"/>
+  <eClassifiers xsi:type="ecore:EClass" name="OOBitWiseComplement" eSuperTypes="#//OOOneOperandArithmeticExpression"/>
+  <eClassifiers xsi:type="ecore:EClass" name="OOLanguageSpecificExpression" eSuperTypes="#//OOExpression #//OOLogicalExpression">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="snippets" upperBound="-1"
+        eType="#//OOLanguageSpecificSnippet" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="OOLanguageSpecificSnippet">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="code" unique="false" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="lang" unique="false" lowerBound="1"
+        eType="#//OOLanguage" defaultValueLiteral="JAVA"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="OOLanguage">
+    <eLiterals name="JAVA"/>
+    <eLiterals name="CPP" value="1"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="OOTypeCast" eSuperTypes="#//OOExpression">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="type" lowerBound="1" eType="#//OOType"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="expression" lowerBound="1"
+        eType="#//OOExpression"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="OOBoolLiteral" eSuperTypes="#//OOExpression">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" unique="false" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="OONewClass" eSuperTypes="#//OOExpression">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="constructorParameterExpressions"
+        upperBound="-1" eType="#//OOExpression"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="className" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="OOEqualsExpression" eSuperTypes="#//OOComparatorExpression"/>
+  <eClassifiers xsi:type="ecore:EClass" name="OOComparatorExpression" eSuperTypes="#//OOLogicalExpression">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="leftSide" lowerBound="1"
+        eType="#//OOExpression"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="rightSide" lowerBound="1"
+        eType="#//OOExpression"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="OOLogicalLiteral" eSuperTypes="#//OOLogicalExpression">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" unique="false" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="OOGreaterThanExpression" eSuperTypes="#//OOComparatorExpression"/>
+  <eClassifiers xsi:type="ecore:EClass" name="OOLessThanExpression" eSuperTypes="#//OOComparatorExpression"/>
+  <eClassifiers xsi:type="ecore:EClass" name="OONotEqualsExpression" eSuperTypes="#//OOComparatorExpression"/>
+  <eClassifiers xsi:type="ecore:EClass" name="OOGreaterEqualsExpression" eSuperTypes="#//OOComparatorExpression"/>
+  <eClassifiers xsi:type="ecore:EClass" name="OOLessEqualsExpression" eSuperTypes="#//OOComparatorExpression"/>
+  <eClassifiers xsi:type="ecore:EClass" name="OOCompoundStatement" eSuperTypes="#//OOStatement">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="bodyStatements" upperBound="-1"
+        eType="#//OOStatement" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="OOSwitch" eSuperTypes="#//OOStatement">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="controllerExpression" lowerBound="1"
+        eType="#//OOExpression"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="caseStatements" upperBound="-1"
+        eType="#//OOCase" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="defaultStatement" eType="#//OODefault"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="OOCase" eSuperTypes="#//OOCompoundStatement">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="expression" lowerBound="1"
+        eType="#//OOExpression"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="OOBreak" eSuperTypes="#//OOStatement"/>
+  <eClassifiers xsi:type="ecore:EClass" name="OODefault" eSuperTypes="#//OOCompoundStatement"/>
+  <eClassifiers xsi:type="ecore:EClass" name="OOTwoOperandAssignableExpression" eSuperTypes="#//OOTwoOperandArithmeticExpression">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="assigned" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean" defaultValueLiteral="false"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="OOModuloExpression" eSuperTypes="#//OOTwoOperandAssignableExpression"/>
+  <eClassifiers xsi:type="ecore:EClass" name="OOContinue" eSuperTypes="#//OOStatement"/>
+  <eClassifiers xsi:type="ecore:EClass" name="OOVariableDeclarationList" eSuperTypes="#//OOStatement">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="variableDeclarations" lowerBound="1"
+        upperBound="-1" eType="#//OOVariable" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="OOOneOperandArithmeticExpression" eSuperTypes="#//OOArithmeticExpression">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="operand" lowerBound="1"
+        eType="#//OOExpression"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="OOBracketedExpression" eSuperTypes="#//OOOneOperandArithmeticExpression"/>
+  <eClassifiers xsi:type="ecore:EClass" name="OOPostfixIncrementExpression" eSuperTypes="#//OOOneOperandArithmeticExpression"/>
+  <eClassifiers xsi:type="ecore:EClass" name="OOPrefixIncrementExpression" eSuperTypes="#//OOOneOperandArithmeticExpression"/>
+  <eClassifiers xsi:type="ecore:EClass" name="OOPostfixDecrementExpression" eSuperTypes="#//OOOneOperandArithmeticExpression"/>
+  <eClassifiers xsi:type="ecore:EClass" name="OOPrefixDecrementExpression" eSuperTypes="#//OOOneOperandArithmeticExpression"/>
+  <eClassifiers xsi:type="ecore:EClass" name="OOPlusExpression" eSuperTypes="#//OOOneOperandArithmeticExpression"/>
+  <eClassifiers xsi:type="ecore:EClass" name="OOMinusExpression" eSuperTypes="#//OOOneOperandArithmeticExpression"/>
+  <eClassifiers xsi:type="ecore:EClass" name="OOTernaryOperator" eSuperTypes="#//OOLogicalExpression">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="condition" lowerBound="1"
+        eType="#//OOExpression"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="positiveBranch" lowerBound="1"
+        eType="#//OOExpression"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="negativeBranch" lowerBound="1"
+        eType="#//OOExpression"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="OOFieldReferenceExpression" eSuperTypes="#//OOExpression">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="fieldName" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="fieldOwner" lowerBound="1"
+        eType="#//OOExpression"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="OOVariableReferenceExpression" eSuperTypes="#//OOExpression">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="variable" lowerBound="1"
+        eType="#//OOVariable"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="OOInitializerList" eSuperTypes="#//OOExpression">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="initializerExpressions"
+        lowerBound="1" upperBound="-1" eType="#//OOExpression" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="OOThisLiteral" eSuperTypes="#//OOExpression"/>
+  <eClassifiers xsi:type="ecore:EClass" name="OONullLiteral" eSuperTypes="#//OOExpression"/>
+  <eClassifiers xsi:type="ecore:EClass" name="OOFunctionCallExpression" eSuperTypes="#//OOExpression">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="argumentExpressions" upperBound="-1"
+        eType="#//OOExpression" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="functionName" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="ownerExpression" eType="#//OOExpression"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="OOStringLiteral" eSuperTypes="#//OOExpression">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="OOConstructor">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="visibility" lowerBound="1"
+        eType="#//OOVisibility"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="parameters" upperBound="-1"
+        eType="#//OOVariable" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="className" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="statements" upperBound="-1"
+        eType="#//OOStatement" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="OONewArray" eSuperTypes="#//OOExpression">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="arrayType" lowerBound="1"
+        eType="#//OOType"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="initializerList" eType="#//OOInitializerList"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="OOComment">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="text" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
+        defaultValueLiteral=""/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="isBlockComment" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean" defaultValueLiteral="false"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="OOCommentOwner">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="beforeComments" upperBound="-1"
+        eType="#//OOComment" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="afterComments" upperBound="-1"
+        eType="#//OOComment" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="OOEnumeration" eSuperTypes="#//OOCommentOwner">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="options" lowerBound="1"
+        upperBound="-1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="package" eType="#//OOPackage"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="OOEmptyExpression" eSuperTypes="#//OOExpression"/>
+</ecore:EPackage>

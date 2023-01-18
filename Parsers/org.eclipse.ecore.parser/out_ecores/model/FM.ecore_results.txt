@@ -1,0 +1,8 @@
+model	Constraints (rules,Rule,ref) 
+model	RuleElement (open_operator,EString,attribute) (close_operator,EString,attribute) (right_side,Var,ref) (left_side,Var,ref) 
+model	Var (not,EBoolean,attribute) (name,EString,attribute) 
+model	Node (close_relation,EString,attribute) (open_relation,EString,attribute) (children,Child,ref) 
+model	FeatureDiagram (root,Child,ref) 
+model	Rule (elements,Formula,ref) 
+model	FeatureModel (diagram,FeatureDiagram,ref) (constraints,Constraints,ref) 
+model	Child (name,EString,attribute) (mandatory,EBoolean,attribute) 

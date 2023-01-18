@@ -1,0 +1,7 @@
+model	Sequencer (name,EString,attribute) (laboratory,Laboratory,ref) (runs,Run,ref) 
+model	Sequenced (run,Run,ref) (sample,Sample,ref) 
+model	Individual (gender,Gender,attribute) (name,EString,attribute) (Mother,Individual,ref) (family,Family,ref) (Father,Individual,ref) (samples,Sample,ref) 
+model	Sample (id,EString,attribute) (individual,Individual,ref) 
+model	Family (name,EString,attribute) (laboratory,Laboratory,ref) (individuals,Individual,ref) 
+model	Run (date,EDate,attribute) (name,EString,attribute) (sequenced,Sequenced,ref) (sequencer,Sequencer,ref) 
+model	Laboratory (sequencers,Sequencer,ref) (families,Family,ref) 

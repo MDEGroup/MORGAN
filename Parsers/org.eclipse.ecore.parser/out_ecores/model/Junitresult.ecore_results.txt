@@ -1,0 +1,7 @@
+model	Testsuite (hostname,EString,attribute) (system_err,EString,attribute) (package,EString,attribute) (system_out,EString,attribute) (disabled,EInt,attribute) (time,EDouble,attribute) (id,EInt,attribute) (timestamp,EDate,attribute) (skipped,EInt,attribute) (testcases,Testcase,ref) (properties,Property,ref) 
+model	NegativeResult (message,EString,attribute) (type,EString,attribute) (value,EString,attribute) 
+model	Testcase (system_err,EString,attribute) (classname,EString,attribute) (name,EString,attribute) (system_out,EString,attribute) (time,EDouble,attribute) (assertions,EString,attribute) (status,EString,attribute) (failures,Failure,ref) (errors,Error,ref) (skipped,Skipped,ref) 
+model	Testrun (ignored,EInt,attribute) (project,EString,attribute) (started,EInt,attribute) 
+model	AbstractAggregatedTest (tests,EInt,attribute) (failures,EInt,attribute) (name,EString,attribute) (errors,EInt,attribute) (testsuites,Testsuite,ref) 
+model	Property (name,EString,attribute) (value,EString,attribute) 
+model	Testsuites (disabled,EInt,attribute) (time,EDouble,attribute) 

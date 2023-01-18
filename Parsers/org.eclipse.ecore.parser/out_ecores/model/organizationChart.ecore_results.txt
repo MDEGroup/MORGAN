@@ -1,0 +1,5 @@
+model	Function (name,EString,attribute) (isPerformedBy,Employee,ref) 
+model	Employee (firstname,EString,attribute) (title,EString,attribute) (lastname,EString,attribute) (trigraph,EString,attribute) (performs,Function,ref) (manager,Employee,ref) (leads,OrganizationalStructure,ref) (manages,Employee,ref) (location,Location,ref) (belongsTo,OrganizationalStructure,ref) 
+model	Organization (name,EString,attribute) (structures,OrganizationalStructure,ref) (locations,Location,ref) (employees,Employee,ref) 
+model	OrganizationalStructure (name,EString,attribute) (type,StructureType,attribute) (subStructures,OrganizationalStructure,ref) (manager,Employee,ref) (owns,Function,ref) (employees,Employee,ref) 
+model	Location (name,EString,attribute) (employees,Employee,ref) 

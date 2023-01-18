@@ -1,0 +1,7 @@
+model	Comment (content,EString,attribute) 
+model	Profession (name,EString,attribute) 
+model	Own (ownerName,EString,attribute) (since,EString,attribute) (person,Person,ref) (thing,Thing,ref) 
+model	World (persons,Person,ref) (things,Thing,ref) (professions,Profession,ref) 
+model	NamedElement (name,EString,attribute) (comment,Comment,ref) 
+model	Person (forName,EString,attribute) (birthDate,EString,attribute) (profession,Profession,ref) 
+model	Thing (id,EInt,attribute) (ownership,Own,ref) (ownerships,Own,ref) 

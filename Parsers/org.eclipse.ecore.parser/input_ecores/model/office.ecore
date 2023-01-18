@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="office"
+    nsURI="http://emftext.org/office" nsPrefix="office">
+  <eClassifiers xsi:type="ecore:EClass" name="OfficeModel" eSuperTypes="#//NamedElement">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="elements" upperBound="-1"
+        eType="#//OfficeElement" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Employee" eSuperTypes="#//OfficeElement">
+    <eAnnotations source="OWL_CONSTRAINT">
+      <details key="A Ph.D. can't be without co-workers." value="not (  Employee_title value &quot;Ph.D.&quot; ) or  (  (  Employee_title value &quot;Ph.D.&quot; ) and  (  Employee_worksWith min 1  Employee ) ) "/>
+    </eAnnotations>
+    <eAnnotations source="OWL_CONSTRAINT">
+      <details key="A professor can't be without a Ph.D. assistant." value="not (  Employee_title value &quot;Prof.&quot; ) or  (  (  Employee_title value &quot;Prof.&quot; ) and  (  Employee_worksWith min 1  (  Employee_title value &quot;Ph.D.&quot; ) ) ) "/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="worksIn" lowerBound="1"
+        eType="#//Office" eOpposite="#//Office/employees"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="worksWith" upperBound="-1"
+        eType="#//Employee"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="title" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Office" eSuperTypes="#//OfficeElement">
+    <eAnnotations source="OWL_DEFINITION">
+      <details key="ProfessorsOffice" value=" Office_employees min 1  (  Employee_title value &quot;Prof.&quot; ) "/>
+      <details key="The professors office can  only be occupied by the professor alone."
+          value=" Office_employees max 1  Employee "/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="employees" upperBound="-1"
+        eType="#//Employee" eOpposite="#//Employee/worksIn"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="NamedElement" abstract="true">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="OfficeElement" abstract="true" eSuperTypes="#//NamedElement"/>
+</ecore:EPackage>

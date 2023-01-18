@@ -1,0 +1,8 @@
+model	Pattern (equivalent,Pattern,ref) (pdecompositions,Pattern,ref) 
+model	Function (fdecompositions,Function,ref) 
+model	AbstractFunction (name,EString,attribute) (associations,AbstractFunction,ref) (flows,Flow,ref) (outputports,OutputPort,ref) (inputports,InputPort,ref) 
+model	Port (name,EString,attribute) 
+model	PatternCatalog (id,EString,attribute) (patterns,Pattern,ref) 
+model	Workbench (systemView,System,ref) (catalog,PatternCatalog,ref) 
+model	System (id,EString,attribute) (functionalArchitecture,Function,ref) 
+model	Flow (from,OutputPort,ref) (to,InputPort,ref) 

@@ -1,0 +1,16 @@
+model	Activity 
+model	Doctor DocID,property Name,property Department,property Specialization,property PhoneNumber,property Address,property prescribeMedicine,operation prescribeTests,operation checkReports,operation 
+model	Patient PatientID,property Name,property Address,property Age,property WardNo,property Gender,property payBills,operation 
+model	Ward wardNo,property Location,property 
+model	Department deptID,property Name,property DocID,property addDept,operation deleteDept,operation addDoc,operation deleteDoc,operation 
+model	date 
+model	date2 
+model	Bill BillNo,property patientName,property amount,property 
+model	Receptionist bookWard,operation generateBill,operation maintainPatientDetails,operation 
+model	StateMachine 
+model	Doctor_Patient checks,property doctor,property 
+model	Doctor_Department department,property belongs to,property 
+model	Patient_Receptionist give appointment,property patient,property 
+model	Patient_Ward alloted to,property patient,property 
+model	Patient_Bill pays bill,property patient,property 
+model	Receptionist_Bill bill,property generates bill,property 

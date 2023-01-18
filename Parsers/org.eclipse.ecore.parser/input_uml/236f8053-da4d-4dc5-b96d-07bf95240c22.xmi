@@ -1,0 +1,1083 @@
+<xmi:XMI xmi:version="2.1" xmlns:xmi="http://schema.omg.org/spec/XMI/2.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:uml="http://www.eclipse.org/uml2/5.0.0/UML">
+  <uml:Model xmi:id="_wmDacJUkEeqqGZh46IEtXQ" name="Hotel Booking System">
+    <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+      <eAnnotations xmi:id="_wmDacZUkEeqqGZh46IEtXQ" source="genmymodel">
+        <details xmi:id="_wmDacpUkEeqqGZh46IEtXQ" key="uuid" value="236f8053-da4d-4dc5-b96d-07bf95240c22"/>
+        <details xmi:id="_wmDac5UkEeqqGZh46IEtXQ" key="author" value="Mark Heydon"/>
+        <details xmi:id="_wmDadJUkEeqqGZh46IEtXQ" key="company" value="MHCG LTD"/>
+        <details xmi:id="_wmDadZUkEeqqGZh46IEtXQ" key="gmm-documentation" value="&lt;p&gt;Simple hotel booking system meant as a starting point for a more customised solution.&lt;/p&gt;&#xA;"/>
+      </eAnnotations>
+    </xmi:Extension>
+    <ownedComment xmi:id="_wmDadpUkEeqqGZh46IEtXQ" annotatedElement="_wmDam5UkEeqqGZh46IEtXQ" body="context Booking::numberOfNights: Integer&#xA;  derive: self.checkOutDate - self.checkInDate -- in days&#xA;&#xA;context Booking&#xA;  inv: self.numberOfNights &gt; 0&#xA;  inv: self.checkInDate &lt; self.checkOutDate&#xA;">
+      <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+        <eAnnotations xmi:id="_wmDad5UkEeqqGZh46IEtXQ" source="genmymodel">
+          <details xmi:id="_wmDaeJUkEeqqGZh46IEtXQ" key="uuid" value="_qUdmAGNpEDaaFLVFZPf-TA"/>
+        </eAnnotations>
+      </xmi:Extension>
+    </ownedComment>
+    <packageImport xmi:id="_wmDaeZUkEeqqGZh46IEtXQ" importingNamespace="_wmDacJUkEeqqGZh46IEtXQ">
+      <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+        <eAnnotations xmi:id="_wmDaepUkEeqqGZh46IEtXQ" source="genmymodel">
+          <details xmi:id="_wmDae5UkEeqqGZh46IEtXQ" key="uuid" value="_lFM4sYEyEeipCpVU7M5dbw"/>
+        </eAnnotations>
+      </xmi:Extension>
+      <importedPackage href="http://www.omg.org/spec/UML/20131001/PrimitiveTypes.xmi#/"/>
+    </packageImport>
+    <packagedElement xsi:type="uml:Class" xmi:id="_wmDafJUkEeqqGZh46IEtXQ" name="HotelBusiness">
+      <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+        <eAnnotations xmi:id="_wmDafZUkEeqqGZh46IEtXQ" source="genmymodel">
+          <details xmi:id="_wmDafpUkEeqqGZh46IEtXQ" key="uuid" value="_Ty0esGNhEDa3FuYtHP-2qA"/>
+          <details xmi:id="_wmDaf5UkEeqqGZh46IEtXQ" key="gmm-documentation" value="&lt;p&gt;Business that manages one or more hotels.&lt;/p&gt;&#xA;"/>
+        </eAnnotations>
+      </xmi:Extension>
+    </packagedElement>
+    <packagedElement xsi:type="uml:Class" xmi:id="_wmDagJUkEeqqGZh46IEtXQ" name="Guest">
+      <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+        <eAnnotations xmi:id="_wmDagZUkEeqqGZh46IEtXQ" source="genmymodel">
+          <details xmi:id="_wmDagpUkEeqqGZh46IEtXQ" key="uuid" value="_WcaXIGNhEDa3FuYtHP-2qA"/>
+          <details xmi:id="_wmDag5UkEeqqGZh46IEtXQ" key="gmm-documentation" value="&lt;p&gt;An individual that is invovled with a Booking a Room in a Hotel.&lt;/p&gt;&#xA;"/>
+        </eAnnotations>
+      </xmi:Extension>
+      <generalization xmi:id="_wmDahJUkEeqqGZh46IEtXQ" general="_wmEBuZUkEeqqGZh46IEtXQ" specific="_wmDagJUkEeqqGZh46IEtXQ">
+        <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+          <eAnnotations xmi:id="_wmDahZUkEeqqGZh46IEtXQ" source="genmymodel">
+            <details xmi:id="_wmDahpUkEeqqGZh46IEtXQ" key="uuid" value="_hAQKcGawEDaSK8ZoE6vloQ"/>
+          </eAnnotations>
+        </xmi:Extension>
+      </generalization>
+    </packagedElement>
+    <packagedElement xsi:type="uml:Class" xmi:id="_wmDah5UkEeqqGZh46IEtXQ" name="Room">
+      <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+        <eAnnotations xmi:id="_wmDaiJUkEeqqGZh46IEtXQ" source="genmymodel">
+          <details xmi:id="_wmDaiZUkEeqqGZh46IEtXQ" key="uuid" value="_bNVIcWNhEDa3FuYtHP-2qA"/>
+          <details xmi:id="_wmDaipUkEeqqGZh46IEtXQ" key="gmm-documentation" value="&lt;p&gt;A physical room within a Hotel of a specific RoomType.&lt;/p&gt;&#xA;"/>
+        </eAnnotations>
+      </xmi:Extension>
+      <ownedAttribute xmi:id="_wmDai5UkEeqqGZh46IEtXQ" name="name" visibility="public">
+        <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+          <eAnnotations xmi:id="_wmDajJUkEeqqGZh46IEtXQ" source="genmymodel">
+            <details xmi:id="_wmDajZUkEeqqGZh46IEtXQ" key="uuid" value="_YArJwWNiEDa3FuYtHP-2qA"/>
+            <details xmi:id="_wmDajpUkEeqqGZh46IEtXQ" key="gmm-documentation" value="&lt;p&gt;Room name or number.&amp;nbsp; Some way of identifying it by staff in the business.&lt;/p&gt;&#xA;"/>
+          </eAnnotations>
+        </xmi:Extension>
+        <type xsi:type="uml:PrimitiveType" href="http://www.omg.org/spec/UML/20131001/PrimitiveTypes.xmi#//String"/>
+      </ownedAttribute>
+    </packagedElement>
+    <packagedElement xsi:type="uml:Class" xmi:id="_wmDaj5UkEeqqGZh46IEtXQ" name="RoomType">
+      <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+        <eAnnotations xmi:id="_wmDakJUkEeqqGZh46IEtXQ" source="genmymodel">
+          <details xmi:id="_wmDakZUkEeqqGZh46IEtXQ" key="uuid" value="_b6SVEWNhEDa3FuYtHP-2qA"/>
+          <details xmi:id="_wmDakpUkEeqqGZh46IEtXQ" key="gmm-documentation" value="&lt;p&gt;A RoomType within a Hotel.&lt;/p&gt;&#xA;"/>
+        </eAnnotations>
+      </xmi:Extension>
+      <ownedAttribute xmi:id="_wmDak5UkEeqqGZh46IEtXQ" name="name">
+        <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+          <eAnnotations xmi:id="_wmDalJUkEeqqGZh46IEtXQ" source="genmymodel">
+            <details xmi:id="_wmDalZUkEeqqGZh46IEtXQ" key="uuid" value="_sXpwUWNqEDaaFLVFZPf-TA"/>
+            <details xmi:id="_wmDalpUkEeqqGZh46IEtXQ" key="gmm-documentation" value="&lt;p&gt;Name of the room type, e.g. Single, Double, Twin, Suite, Conference Room, etc.&lt;/p&gt;&#xA;"/>
+          </eAnnotations>
+        </xmi:Extension>
+        <type xsi:type="uml:PrimitiveType" href="http://www.omg.org/spec/UML/20131001/PrimitiveTypes.xmi#//String"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:id="_wmDal5UkEeqqGZh46IEtXQ" name="pricePerNight" type="_wmDau5UkEeqqGZh46IEtXQ">
+        <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+          <eAnnotations xmi:id="_wmDamJUkEeqqGZh46IEtXQ" source="genmymodel">
+            <details xmi:id="_wmDamZUkEeqqGZh46IEtXQ" key="uuid" value="_MmE_oGNrEDaaFLVFZPf-TA"/>
+            <details xmi:id="_wmDampUkEeqqGZh46IEtXQ" key="gmm-documentation" value="&lt;p&gt;The price of staying one night in this type of room in the linked hotel.&lt;/p&gt;&#xA;"/>
+          </eAnnotations>
+        </xmi:Extension>
+      </ownedAttribute>
+    </packagedElement>
+    <packagedElement xsi:type="uml:Class" xmi:id="_wmDam5UkEeqqGZh46IEtXQ" name="Booking">
+      <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+        <eAnnotations xmi:id="_wmDanJUkEeqqGZh46IEtXQ" source="genmymodel">
+          <details xmi:id="_wmDanZUkEeqqGZh46IEtXQ" key="uuid" value="_c2YJ4WNhEDa3FuYtHP-2qA"/>
+          <details xmi:id="_wmDanpUkEeqqGZh46IEtXQ" key="gmm-documentation" value="&lt;p&gt;A booking for one or more Rooms in a Hotel for/by a Guest.&lt;/p&gt;&#xA;"/>
+        </eAnnotations>
+      </xmi:Extension>
+      <ownedAttribute xmi:id="_wmDan5UkEeqqGZh46IEtXQ" name="bookingDate" type="_wmDat5UkEeqqGZh46IEtXQ">
+        <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+          <eAnnotations xmi:id="_wmDaoJUkEeqqGZh46IEtXQ" source="genmymodel">
+            <details xmi:id="_wmDaoZUkEeqqGZh46IEtXQ" key="uuid" value="_TtyUEGNpEDaaFLVFZPf-TA"/>
+            <details xmi:id="_wmDaopUkEeqqGZh46IEtXQ" key="gmm-documentation" value="&lt;p&gt;Date the booking was originally made.&lt;/p&gt;&#xA;"/>
+          </eAnnotations>
+        </xmi:Extension>
+      </ownedAttribute>
+      <ownedAttribute xmi:id="_wmDao5UkEeqqGZh46IEtXQ" name="checkInDate" type="_wmDat5UkEeqqGZh46IEtXQ">
+        <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+          <eAnnotations xmi:id="_wmDapJUkEeqqGZh46IEtXQ" source="genmymodel">
+            <details xmi:id="_wmDapZUkEeqqGZh46IEtXQ" key="uuid" value="_ZWgQEGNpEDaaFLVFZPf-TA"/>
+            <details xmi:id="_wmDappUkEeqqGZh46IEtXQ" key="gmm-documentation" value="&lt;p&gt;The date the guest(s) are due to arrive and check-in to the hotel.&lt;/p&gt;&#xA;"/>
+          </eAnnotations>
+        </xmi:Extension>
+      </ownedAttribute>
+      <ownedAttribute xmi:id="_wmDap5UkEeqqGZh46IEtXQ" name="checkOutDate" type="_wmDat5UkEeqqGZh46IEtXQ">
+        <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+          <eAnnotations xmi:id="_wmDaqJUkEeqqGZh46IEtXQ" source="genmymodel">
+            <details xmi:id="_wmDaqZUkEeqqGZh46IEtXQ" key="uuid" value="_bU2zIGNpEDaaFLVFZPf-TA"/>
+            <details xmi:id="_wmDaqpUkEeqqGZh46IEtXQ" key="gmm-documentation" value="&lt;p&gt;The date the guest(s) are due to check-out of the hotel and leave.&lt;/p&gt;&#xA;"/>
+          </eAnnotations>
+        </xmi:Extension>
+      </ownedAttribute>
+      <ownedAttribute xmi:id="_wmDaq5UkEeqqGZh46IEtXQ" name="/numberOfNights">
+        <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+          <eAnnotations xmi:id="_wmDarJUkEeqqGZh46IEtXQ" source="genmymodel">
+            <details xmi:id="_wmDarZUkEeqqGZh46IEtXQ" key="uuid" value="_jjdMQGNpEDaaFLVFZPf-TA"/>
+            <details xmi:id="_wmDarpUkEeqqGZh46IEtXQ" key="gmm-documentation" value="&lt;p&gt;The total number of nights the guest(s) will be staying.&lt;/p&gt;&#xA;"/>
+          </eAnnotations>
+        </xmi:Extension>
+        <type xsi:type="uml:PrimitiveType" href="http://www.omg.org/spec/UML/20131001/PrimitiveTypes.xmi#//Integer"/>
+      </ownedAttribute>
+    </packagedElement>
+    <packagedElement xsi:type="uml:DataType" xmi:id="_wmDar5UkEeqqGZh46IEtXQ" name="PersonName">
+      <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+        <eAnnotations xmi:id="_wmDasJUkEeqqGZh46IEtXQ" source="genmymodel">
+          <details xmi:id="_wmDasZUkEeqqGZh46IEtXQ" key="uuid" value="_cvlv8WNiEDa3FuYtHP-2qA"/>
+          <details xmi:id="_wmDaspUkEeqqGZh46IEtXQ" key="gmm-documentation" value="&lt;p&gt;Name of a person, typically first name and last name.&lt;/p&gt;&#xA;"/>
+        </eAnnotations>
+      </xmi:Extension>
+    </packagedElement>
+    <packagedElement xsi:type="uml:DataType" xmi:id="_wmDas5UkEeqqGZh46IEtXQ" name="Address">
+      <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+        <eAnnotations xmi:id="_wmDatJUkEeqqGZh46IEtXQ" source="genmymodel">
+          <details xmi:id="_wmDatZUkEeqqGZh46IEtXQ" key="uuid" value="_nwYj4WNiEDa3FuYtHP-2qA"/>
+          <details xmi:id="_wmDatpUkEeqqGZh46IEtXQ" key="gmm-documentation" value="&lt;p&gt;Address that a person lives at, usually street, city and postal code at least.&lt;/p&gt;&#xA;"/>
+        </eAnnotations>
+      </xmi:Extension>
+    </packagedElement>
+    <packagedElement xsi:type="uml:DataType" xmi:id="_wmDat5UkEeqqGZh46IEtXQ" name="Date">
+      <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+        <eAnnotations xmi:id="_wmDauJUkEeqqGZh46IEtXQ" source="genmymodel">
+          <details xmi:id="_wmDauZUkEeqqGZh46IEtXQ" key="uuid" value="_VUZFgGNpEDaaFLVFZPf-TA"/>
+          <details xmi:id="_wmDaupUkEeqqGZh46IEtXQ" key="gmm-documentation" value="&lt;p&gt;Standard date with day, month and year.&lt;/p&gt;&#xA;"/>
+        </eAnnotations>
+      </xmi:Extension>
+    </packagedElement>
+    <packagedElement xsi:type="uml:DataType" xmi:id="_wmDau5UkEeqqGZh46IEtXQ" name="Real">
+      <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+        <eAnnotations xmi:id="_wmDavJUkEeqqGZh46IEtXQ" source="genmymodel">
+          <details xmi:id="_wmDavZUkEeqqGZh46IEtXQ" key="uuid" value="_YTuSgGNrEDaaFLVFZPf-TA"/>
+        </eAnnotations>
+      </xmi:Extension>
+    </packagedElement>
+    <packagedElement xsi:type="uml:Class" xmi:id="_wmDavpUkEeqqGZh46IEtXQ" name="Hotel">
+      <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+        <eAnnotations xmi:id="_wmDav5UkEeqqGZh46IEtXQ" source="genmymodel">
+          <details xmi:id="_wmDawJUkEeqqGZh46IEtXQ" key="uuid" value="_VseH8GNhEDa3FuYtHP-2qA"/>
+          <details xmi:id="_wmDawZUkEeqqGZh46IEtXQ" key="gmm-documentation" value="&lt;p&gt;An individual hotel.&lt;/p&gt;&#xA;"/>
+        </eAnnotations>
+      </xmi:Extension>
+      <ownedAttribute xmi:id="_wmDawpUkEeqqGZh46IEtXQ" name="name">
+        <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+          <eAnnotations xmi:id="_wmDaw5UkEeqqGZh46IEtXQ" source="genmymodel">
+            <details xmi:id="_wmDaxJUkEeqqGZh46IEtXQ" key="uuid" value="_8G_3sGNiEDa3FuYtHP-2qA"/>
+            <details xmi:id="_wmDaxZUkEeqqGZh46IEtXQ" key="gmm-documentation" value="&lt;p&gt;Name of the hotel.&lt;/p&gt;&#xA;"/>
+          </eAnnotations>
+        </xmi:Extension>
+        <type xsi:type="uml:PrimitiveType" href="http://www.omg.org/spec/UML/20131001/PrimitiveTypes.xmi#//String"/>
+      </ownedAttribute>
+    </packagedElement>
+    <packagedElement xsi:type="uml:Association" xmi:id="_wmDaxpUkEeqqGZh46IEtXQ" name="HotelBusiness_Hotel" memberEnd="_wmDaypUkEeqqGZh46IEtXQ _wmDa0ZUkEeqqGZh46IEtXQ" navigableOwnedEnd="_wmDaypUkEeqqGZh46IEtXQ">
+      <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+        <eAnnotations xmi:id="_wmDax5UkEeqqGZh46IEtXQ" source="genmymodel">
+          <details xmi:id="_wmDayJUkEeqqGZh46IEtXQ" key="uuid" value="_zCA6E2NrEDaaFLVFZPf-TA"/>
+          <details xmi:id="_wmDayZUkEeqqGZh46IEtXQ" key="gmm-documentation" value="&lt;p&gt;A Hotel is part of a HotelBusiness.&amp;nbsp; The system needs at least one Hotel to be valid.&lt;/p&gt;&#xA;"/>
+        </eAnnotations>
+      </xmi:Extension>
+      <ownedEnd xmi:id="_wmDaypUkEeqqGZh46IEtXQ" name="hotel" type="_wmDavpUkEeqqGZh46IEtXQ" owningAssociation="_wmDaxpUkEeqqGZh46IEtXQ" association="_wmDaxpUkEeqqGZh46IEtXQ">
+        <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+          <eAnnotations xmi:id="_wmDay5UkEeqqGZh46IEtXQ" source="genmymodel">
+            <details xmi:id="_wmDazJUkEeqqGZh46IEtXQ" key="uuid" value="_zCA6EGNrEDaaFLVFZPf-TA"/>
+          </eAnnotations>
+        </xmi:Extension>
+        <lowerValue xsi:type="uml:LiteralInteger" xmi:id="_wmDazZUkEeqqGZh46IEtXQ" value="1">
+          <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+            <eAnnotations xmi:id="_wmDazpUkEeqqGZh46IEtXQ" source="genmymodel">
+              <details xmi:id="_wmDaz5UkEeqqGZh46IEtXQ" key="uuid" value="_zCA6EWNrEDaaFLVFZPf-TA"/>
+            </eAnnotations>
+          </xmi:Extension>
+        </lowerValue>
+        <upperValue xsi:type="uml:LiteralUnlimitedNatural" xmi:id="_wmDa0JUkEeqqGZh46IEtXQ" value="*"/>
+      </ownedEnd>
+      <ownedEnd xmi:id="_wmDa0ZUkEeqqGZh46IEtXQ" name="hotelBusiness" type="_wmDafJUkEeqqGZh46IEtXQ" owningAssociation="_wmDaxpUkEeqqGZh46IEtXQ" association="_wmDaxpUkEeqqGZh46IEtXQ">
+        <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+          <eAnnotations xmi:id="_wmDa0pUkEeqqGZh46IEtXQ" source="genmymodel">
+            <details xmi:id="_wmDa05UkEeqqGZh46IEtXQ" key="uuid" value="_zCATAWNrEDaaFLVFZPf-TA"/>
+          </eAnnotations>
+        </xmi:Extension>
+        <lowerValue xsi:type="uml:LiteralInteger" xmi:id="_wmDa1JUkEeqqGZh46IEtXQ" value="1">
+          <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+            <eAnnotations xmi:id="_wmDa1ZUkEeqqGZh46IEtXQ" source="genmymodel">
+              <details xmi:id="_wmDa1pUkEeqqGZh46IEtXQ" key="uuid" value="_zCATAmNrEDaaFLVFZPf-TA"/>
+            </eAnnotations>
+          </xmi:Extension>
+        </lowerValue>
+        <upperValue xsi:type="uml:LiteralUnlimitedNatural" xmi:id="_wmDa15UkEeqqGZh46IEtXQ" value="1"/>
+      </ownedEnd>
+    </packagedElement>
+    <packagedElement xsi:type="uml:Association" xmi:id="_wmDa2JUkEeqqGZh46IEtXQ" name="Hotel_RoomType" memberEnd="_wmDa3JUkEeqqGZh46IEtXQ _wmDa45UkEeqqGZh46IEtXQ" navigableOwnedEnd="_wmDa3JUkEeqqGZh46IEtXQ">
+      <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+        <eAnnotations xmi:id="_wmDa2ZUkEeqqGZh46IEtXQ" source="genmymodel">
+          <details xmi:id="_wmDa2pUkEeqqGZh46IEtXQ" key="uuid" value="_Gy5Dk2NsEDaaFLVFZPf-TA"/>
+          <details xmi:id="_wmDa25UkEeqqGZh46IEtXQ" key="gmm-documentation" value="&lt;p&gt;Hotels have one or more RoomTypes.&lt;/p&gt;&#xA;"/>
+        </eAnnotations>
+      </xmi:Extension>
+      <ownedEnd xmi:id="_wmDa3JUkEeqqGZh46IEtXQ" name="roomType" type="_wmDaj5UkEeqqGZh46IEtXQ" owningAssociation="_wmDa2JUkEeqqGZh46IEtXQ" association="_wmDa2JUkEeqqGZh46IEtXQ">
+        <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+          <eAnnotations xmi:id="_wmDa3ZUkEeqqGZh46IEtXQ" source="genmymodel">
+            <details xmi:id="_wmDa3pUkEeqqGZh46IEtXQ" key="uuid" value="_Gy5DkGNsEDaaFLVFZPf-TA"/>
+          </eAnnotations>
+        </xmi:Extension>
+        <lowerValue xsi:type="uml:LiteralInteger" xmi:id="_wmDa35UkEeqqGZh46IEtXQ" value="1">
+          <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+            <eAnnotations xmi:id="_wmDa4JUkEeqqGZh46IEtXQ" source="genmymodel">
+              <details xmi:id="_wmDa4ZUkEeqqGZh46IEtXQ" key="uuid" value="_Gy5DkWNsEDaaFLVFZPf-TA"/>
+            </eAnnotations>
+          </xmi:Extension>
+        </lowerValue>
+        <upperValue xsi:type="uml:LiteralUnlimitedNatural" xmi:id="_wmDa4pUkEeqqGZh46IEtXQ" value="*"/>
+      </ownedEnd>
+      <ownedEnd xmi:id="_wmDa45UkEeqqGZh46IEtXQ" name="hotel" type="_wmDavpUkEeqqGZh46IEtXQ" owningAssociation="_wmDa2JUkEeqqGZh46IEtXQ" association="_wmDa2JUkEeqqGZh46IEtXQ">
+        <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+          <eAnnotations xmi:id="_wmDa5JUkEeqqGZh46IEtXQ" source="genmymodel">
+            <details xmi:id="_wmDa5ZUkEeqqGZh46IEtXQ" key="uuid" value="_Gy2nUWNsEDaaFLVFZPf-TA"/>
+          </eAnnotations>
+        </xmi:Extension>
+        <lowerValue xsi:type="uml:LiteralInteger" xmi:id="_wmDa5pUkEeqqGZh46IEtXQ" value="1">
+          <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+            <eAnnotations xmi:id="_wmDa55UkEeqqGZh46IEtXQ" source="genmymodel">
+              <details xmi:id="_wmDa6JUkEeqqGZh46IEtXQ" key="uuid" value="_Gy4cgGNsEDaaFLVFZPf-TA"/>
+            </eAnnotations>
+          </xmi:Extension>
+        </lowerValue>
+        <upperValue xsi:type="uml:LiteralUnlimitedNatural" xmi:id="_wmDa6ZUkEeqqGZh46IEtXQ" value="1"/>
+      </ownedEnd>
+    </packagedElement>
+    <packagedElement xsi:type="uml:Association" xmi:id="_wmDa6pUkEeqqGZh46IEtXQ" name="RoomType_Room" memberEnd="_wmDa7pUkEeqqGZh46IEtXQ _wmDa9ZUkEeqqGZh46IEtXQ" navigableOwnedEnd="_wmDa7pUkEeqqGZh46IEtXQ _wmDa9ZUkEeqqGZh46IEtXQ">
+      <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+        <eAnnotations xmi:id="_wmDa65UkEeqqGZh46IEtXQ" source="genmymodel">
+          <details xmi:id="_wmDa7JUkEeqqGZh46IEtXQ" key="uuid" value="_We5CY2NsEDaaFLVFZPf-TA"/>
+          <details xmi:id="_wmDa7ZUkEeqqGZh46IEtXQ" key="gmm-documentation" value="&lt;p&gt;RoomTypes (within a Hotel) will have one or more Rooms of that type which can be Booked.&amp;nbsp; A Hotel could have zero Rooms of a specific RoomType but then Bookings would be able to made for any rooms.&amp;nbsp; I.e. it is insufficient to have a RoomType without any Rooms in a working system although technically possible.&lt;/p&gt;&#xA;"/>
+        </eAnnotations>
+      </xmi:Extension>
+      <ownedEnd xmi:id="_wmDa7pUkEeqqGZh46IEtXQ" name="room" type="_wmDah5UkEeqqGZh46IEtXQ" owningAssociation="_wmDa6pUkEeqqGZh46IEtXQ" association="_wmDa6pUkEeqqGZh46IEtXQ">
+        <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+          <eAnnotations xmi:id="_wmDa75UkEeqqGZh46IEtXQ" source="genmymodel">
+            <details xmi:id="_wmDa8JUkEeqqGZh46IEtXQ" key="uuid" value="_We5CYGNsEDaaFLVFZPf-TA"/>
+          </eAnnotations>
+        </xmi:Extension>
+        <lowerValue xsi:type="uml:LiteralInteger" xmi:id="_wmDa8ZUkEeqqGZh46IEtXQ">
+          <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+            <eAnnotations xmi:id="_wmDa8pUkEeqqGZh46IEtXQ" source="genmymodel">
+              <details xmi:id="_wmDa85UkEeqqGZh46IEtXQ" key="uuid" value="_We5CYWNsEDaaFLVFZPf-TA"/>
+            </eAnnotations>
+          </xmi:Extension>
+        </lowerValue>
+        <upperValue xsi:type="uml:LiteralUnlimitedNatural" xmi:id="_wmDa9JUkEeqqGZh46IEtXQ" value="*"/>
+      </ownedEnd>
+      <ownedEnd xmi:id="_wmDa9ZUkEeqqGZh46IEtXQ" name="roomType" type="_wmDaj5UkEeqqGZh46IEtXQ" owningAssociation="_wmDa6pUkEeqqGZh46IEtXQ" association="_wmDa6pUkEeqqGZh46IEtXQ">
+        <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+          <eAnnotations xmi:id="_wmDa9pUkEeqqGZh46IEtXQ" source="genmymodel">
+            <details xmi:id="_wmDa95UkEeqqGZh46IEtXQ" key="uuid" value="_We4bUGNsEDaaFLVFZPf-TA"/>
+          </eAnnotations>
+        </xmi:Extension>
+        <lowerValue xsi:type="uml:LiteralInteger" xmi:id="_wmDa-JUkEeqqGZh46IEtXQ" value="1">
+          <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+            <eAnnotations xmi:id="_wmDa-ZUkEeqqGZh46IEtXQ" source="genmymodel">
+              <details xmi:id="_wmDa-pUkEeqqGZh46IEtXQ" key="uuid" value="_We4bUWNsEDaaFLVFZPf-TA"/>
+            </eAnnotations>
+          </xmi:Extension>
+        </lowerValue>
+        <upperValue xsi:type="uml:LiteralUnlimitedNatural" xmi:id="_wmDa-5UkEeqqGZh46IEtXQ" value="1"/>
+      </ownedEnd>
+    </packagedElement>
+    <packagedElement xsi:type="uml:Association" xmi:id="_wmDa_JUkEeqqGZh46IEtXQ" name="Guest_Room" memberEnd="_wmDbAJUkEeqqGZh46IEtXQ _wmDbB5UkEeqqGZh46IEtXQ" navigableOwnedEnd="_wmDbB5UkEeqqGZh46IEtXQ _wmDbAJUkEeqqGZh46IEtXQ">
+      <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+        <eAnnotations xmi:id="_wmDa_ZUkEeqqGZh46IEtXQ" source="genmymodel">
+          <details xmi:id="_wmDa_pUkEeqqGZh46IEtXQ" key="uuid" value="_T4qxlWNtEDaaFLVFZPf-TA"/>
+          <details xmi:id="_wmDa_5UkEeqqGZh46IEtXQ" key="gmm-documentation" value="&lt;p&gt;A Guest can occupy a Room.&lt;/p&gt;&#xA;"/>
+        </eAnnotations>
+      </xmi:Extension>
+      <ownedEnd xmi:id="_wmDbAJUkEeqqGZh46IEtXQ" name="occupied" type="_wmDah5UkEeqqGZh46IEtXQ" owningAssociation="_wmDa_JUkEeqqGZh46IEtXQ" association="_wmDa_JUkEeqqGZh46IEtXQ">
+        <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+          <eAnnotations xmi:id="_wmDbAZUkEeqqGZh46IEtXQ" source="genmymodel">
+            <details xmi:id="_wmDbApUkEeqqGZh46IEtXQ" key="uuid" value="_T4qxkmNtEDaaFLVFZPf-TA"/>
+          </eAnnotations>
+        </xmi:Extension>
+        <lowerValue xsi:type="uml:LiteralInteger" xmi:id="_wmDbA5UkEeqqGZh46IEtXQ">
+          <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+            <eAnnotations xmi:id="_wmDbBJUkEeqqGZh46IEtXQ" source="genmymodel">
+              <details xmi:id="_wmDbBZUkEeqqGZh46IEtXQ" key="uuid" value="_T4qxk2NtEDaaFLVFZPf-TA"/>
+            </eAnnotations>
+          </xmi:Extension>
+        </lowerValue>
+        <upperValue xsi:type="uml:LiteralUnlimitedNatural" xmi:id="_wmDbBpUkEeqqGZh46IEtXQ" value="*"/>
+      </ownedEnd>
+      <ownedEnd xmi:id="_wmDbB5UkEeqqGZh46IEtXQ" name="occupant" type="_wmDagJUkEeqqGZh46IEtXQ" owningAssociation="_wmDa_JUkEeqqGZh46IEtXQ" association="_wmDa_JUkEeqqGZh46IEtXQ">
+        <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+          <eAnnotations xmi:id="_wmDbCJUkEeqqGZh46IEtXQ" source="genmymodel">
+            <details xmi:id="_wmDbCZUkEeqqGZh46IEtXQ" key="uuid" value="_T4qKgmNtEDaaFLVFZPf-TA"/>
+          </eAnnotations>
+        </xmi:Extension>
+        <lowerValue xsi:type="uml:LiteralInteger" xmi:id="_wmDbCpUkEeqqGZh46IEtXQ" value="1">
+          <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+            <eAnnotations xmi:id="_wmDbC5UkEeqqGZh46IEtXQ" source="genmymodel">
+              <details xmi:id="_wmDbDJUkEeqqGZh46IEtXQ" key="uuid" value="_T4qxkGNtEDaaFLVFZPf-TA"/>
+            </eAnnotations>
+          </xmi:Extension>
+        </lowerValue>
+        <upperValue xsi:type="uml:LiteralUnlimitedNatural" xmi:id="_wmDbDZUkEeqqGZh46IEtXQ" value="1"/>
+      </ownedEnd>
+    </packagedElement>
+    <packagedElement xsi:type="uml:Association" xmi:id="_wmDbDpUkEeqqGZh46IEtXQ" name="/hotel" memberEnd="_wmDbEpUkEeqqGZh46IEtXQ _wmDbG5UkEeqqGZh46IEtXQ" navigableOwnedEnd="_wmDbEpUkEeqqGZh46IEtXQ _wmDbG5UkEeqqGZh46IEtXQ">
+      <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+        <eAnnotations xmi:id="_wmDbD5UkEeqqGZh46IEtXQ" source="genmymodel">
+          <details xmi:id="_wmDbEJUkEeqqGZh46IEtXQ" key="uuid" value="_KXlAZGNuEDaaFLVFZPf-TA"/>
+          <details xmi:id="_wmDbEZUkEeqqGZh46IEtXQ" key="gmm-documentation" value="&lt;p&gt;Bookings are at a specific Hotel.&lt;/p&gt;&#xA;"/>
+        </eAnnotations>
+      </xmi:Extension>
+      <ownedEnd xmi:id="_wmDbEpUkEeqqGZh46IEtXQ" name="hotel" type="_wmDavpUkEeqqGZh46IEtXQ" owningAssociation="_wmDbDpUkEeqqGZh46IEtXQ" association="_wmDbDpUkEeqqGZh46IEtXQ">
+        <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+          <eAnnotations xmi:id="_wmDbE5UkEeqqGZh46IEtXQ" source="genmymodel">
+            <details xmi:id="_wmDbFJUkEeqqGZh46IEtXQ" key="uuid" value="_KXlAYWNuEDaaFLVFZPf-TA"/>
+          </eAnnotations>
+        </xmi:Extension>
+        <lowerValue xsi:type="uml:LiteralInteger" xmi:id="_wmDbFZUkEeqqGZh46IEtXQ" value="1">
+          <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+            <eAnnotations xmi:id="_wmDbFpUkEeqqGZh46IEtXQ" source="genmymodel">
+              <details xmi:id="_wmDbF5UkEeqqGZh46IEtXQ" key="uuid" value="_KXlAYmNuEDaaFLVFZPf-TA"/>
+            </eAnnotations>
+          </xmi:Extension>
+        </lowerValue>
+        <upperValue xsi:type="uml:LiteralInteger" xmi:id="_wmDbGJUkEeqqGZh46IEtXQ" value="1">
+          <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+            <eAnnotations xmi:id="_wmDbGZUkEeqqGZh46IEtXQ" source="genmymodel">
+              <details xmi:id="_wmDbGpUkEeqqGZh46IEtXQ" key="uuid" value="_KXlAY2NuEDaaFLVFZPf-TA"/>
+            </eAnnotations>
+          </xmi:Extension>
+        </upperValue>
+      </ownedEnd>
+      <ownedEnd xmi:id="_wmDbG5UkEeqqGZh46IEtXQ" name="booking" type="_wmDam5UkEeqqGZh46IEtXQ" owningAssociation="_wmDbDpUkEeqqGZh46IEtXQ" association="_wmDbDpUkEeqqGZh46IEtXQ">
+        <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+          <eAnnotations xmi:id="_wmDbHJUkEeqqGZh46IEtXQ" source="genmymodel">
+            <details xmi:id="_wmDbHZUkEeqqGZh46IEtXQ" key="uuid" value="_KXjyQmNuEDaaFLVFZPf-TA"/>
+          </eAnnotations>
+        </xmi:Extension>
+        <lowerValue xsi:type="uml:LiteralInteger" xmi:id="_wmDbHpUkEeqqGZh46IEtXQ">
+          <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+            <eAnnotations xmi:id="_wmDbH5UkEeqqGZh46IEtXQ" source="genmymodel">
+              <details xmi:id="_wmDbIJUkEeqqGZh46IEtXQ" key="uuid" value="_KXkZUGNuEDaaFLVFZPf-TA"/>
+            </eAnnotations>
+          </xmi:Extension>
+        </lowerValue>
+        <upperValue xsi:type="uml:LiteralUnlimitedNatural" xmi:id="_wmDbIZUkEeqqGZh46IEtXQ" value="*"/>
+      </ownedEnd>
+    </packagedElement>
+    <packagedElement xsi:type="uml:Actor" xmi:id="_wmDbIpUkEeqqGZh46IEtXQ" name="Guest">
+      <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+        <eAnnotations xmi:id="_wmDbI5UkEeqqGZh46IEtXQ" source="genmymodel">
+          <details xmi:id="_wmDbJJUkEeqqGZh46IEtXQ" key="uuid" value="_JZlQoGN6EDadV45R_-upHg"/>
+          <details xmi:id="_wmDbJZUkEeqqGZh46IEtXQ" key="gmm-documentation" value="&lt;p&gt;A Guest that wants to make a booking.&lt;/p&gt;&#xA;"/>
+        </eAnnotations>
+      </xmi:Extension>
+    </packagedElement>
+    <packagedElement xsi:type="uml:Actor" xmi:id="_wmDbJpUkEeqqGZh46IEtXQ" name="Receptionist">
+      <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+        <eAnnotations xmi:id="_wmDbJ5UkEeqqGZh46IEtXQ" source="genmymodel">
+          <details xmi:id="_wmDbKJUkEeqqGZh46IEtXQ" key="uuid" value="_MwQ4kGN6EDadV45R_-upHg"/>
+          <details xmi:id="_wmDbKZUkEeqqGZh46IEtXQ" key="gmm-documentation" value="&lt;p&gt;Front-line staff, such as a receiptionist.&lt;/p&gt;&#xA;"/>
+        </eAnnotations>
+      </xmi:Extension>
+    </packagedElement>
+    <packagedElement xsi:type="uml:Actor" xmi:id="_wmDbKpUkEeqqGZh46IEtXQ" name="Manager">
+      <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+        <eAnnotations xmi:id="_wmDbK5UkEeqqGZh46IEtXQ" source="genmymodel">
+          <details xmi:id="_wmDbLJUkEeqqGZh46IEtXQ" key="uuid" value="_RhZsUWN6EDadV45R_-upHg"/>
+          <details xmi:id="_wmDbLZUkEeqqGZh46IEtXQ" key="gmm-documentation" value="&lt;p&gt;Hotel manager can do everything front-line staff can plus some additional admin tasks.&lt;/p&gt;&#xA;"/>
+        </eAnnotations>
+      </xmi:Extension>
+      <generalization xmi:id="_wmDbLpUkEeqqGZh46IEtXQ" general="_wmDbJpUkEeqqGZh46IEtXQ" specific="_wmDbKpUkEeqqGZh46IEtXQ">
+        <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+          <eAnnotations xmi:id="_wmDbL5UkEeqqGZh46IEtXQ" source="genmymodel">
+            <details xmi:id="_wmDbMJUkEeqqGZh46IEtXQ" key="uuid" value="_VmVhYWN6EDadV45R_-upHg"/>
+          </eAnnotations>
+        </xmi:Extension>
+      </generalization>
+    </packagedElement>
+    <packagedElement xsi:type="uml:Actor" xmi:id="_wmDbMZUkEeqqGZh46IEtXQ" name="Administrator">
+      <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+        <eAnnotations xmi:id="_wmDbMpUkEeqqGZh46IEtXQ" source="genmymodel">
+          <details xmi:id="_wmDbM5UkEeqqGZh46IEtXQ" key="uuid" value="_XGqrsWN6EDadV45R_-upHg"/>
+          <details xmi:id="_wmDbNJUkEeqqGZh46IEtXQ" key="gmm-documentation" value="&lt;p&gt;Overall system administrator.&lt;/p&gt;&#xA;"/>
+        </eAnnotations>
+      </xmi:Extension>
+    </packagedElement>
+    <packagedElement xsi:type="uml:UseCase" xmi:id="_wmDbNZUkEeqqGZh46IEtXQ" name="Manage Hotels">
+      <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+        <eAnnotations xmi:id="_wmDbNpUkEeqqGZh46IEtXQ" source="genmymodel">
+          <details xmi:id="_wmDbN5UkEeqqGZh46IEtXQ" key="uuid" value="_YqWE8GN6EDadV45R_-upHg"/>
+          <details xmi:id="_wmDbOJUkEeqqGZh46IEtXQ" key="gmm-documentation" value="&lt;p&gt;Hotel is added or edited.&lt;/p&gt;&#xA;&#xA;&lt;p&gt;&lt;em&gt;(Standard add/edit procedre be would applicable)&lt;/em&gt;&lt;/p&gt;&#xA;&#xA;&lt;p&gt;&amp;nbsp;&lt;/p&gt;&#xA;"/>
+        </eAnnotations>
+      </xmi:Extension>
+    </packagedElement>
+    <packagedElement xsi:type="uml:UseCase" xmi:id="_wmDbOZUkEeqqGZh46IEtXQ" name="Manage Room Types">
+      <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+        <eAnnotations xmi:id="_wmDbOpUkEeqqGZh46IEtXQ" source="genmymodel">
+          <details xmi:id="_wmDbO5UkEeqqGZh46IEtXQ" key="uuid" value="_cf6BQWN6EDadV45R_-upHg"/>
+          <details xmi:id="_wmDbPJUkEeqqGZh46IEtXQ" key="gmm-documentation" value="&lt;p&gt;Room Type is added or edited.&lt;/p&gt;&#xA;&#xA;&lt;p&gt;&lt;em&gt;(Standard add/edit procedre be would applicable)&lt;/em&gt;&lt;/p&gt;&#xA;"/>
+        </eAnnotations>
+      </xmi:Extension>
+    </packagedElement>
+    <packagedElement xsi:type="uml:UseCase" xmi:id="_wmDbPZUkEeqqGZh46IEtXQ" name="Manage Rooms">
+      <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+        <eAnnotations xmi:id="_wmDbPpUkEeqqGZh46IEtXQ" source="genmymodel">
+          <details xmi:id="_wmDbP5UkEeqqGZh46IEtXQ" key="uuid" value="_d2ZTEWN6EDadV45R_-upHg"/>
+          <details xmi:id="_wmDbQJUkEeqqGZh46IEtXQ" key="gmm-documentation" value="&lt;p&gt;Room is added or edited.&lt;/p&gt;&#xA;&#xA;&lt;p&gt;&lt;em&gt;(Standard add/edit procedre be would applicable)&lt;/em&gt;&lt;/p&gt;&#xA;"/>
+        </eAnnotations>
+      </xmi:Extension>
+    </packagedElement>
+    <packagedElement xsi:type="uml:Association" xmi:id="_wmDbQZUkEeqqGZh46IEtXQ" name="Add/delete Hotels_Administrator" memberEnd="_wmDbRJUkEeqqGZh46IEtXQ _wmDbTZUkEeqqGZh46IEtXQ" navigableOwnedEnd="_wmDbRJUkEeqqGZh46IEtXQ _wmDbTZUkEeqqGZh46IEtXQ">
+      <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+        <eAnnotations xmi:id="_wmDbQpUkEeqqGZh46IEtXQ" source="genmymodel">
+          <details xmi:id="_wmDbQ5UkEeqqGZh46IEtXQ" key="uuid" value="_gRVrgWN6EDadV45R_-upHg"/>
+        </eAnnotations>
+      </xmi:Extension>
+      <ownedEnd xmi:id="_wmDbRJUkEeqqGZh46IEtXQ" name="administrator" type="_wmDbMZUkEeqqGZh46IEtXQ" owningAssociation="_wmDbQZUkEeqqGZh46IEtXQ" association="_wmDbQZUkEeqqGZh46IEtXQ">
+        <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+          <eAnnotations xmi:id="_wmDbRZUkEeqqGZh46IEtXQ" source="genmymodel">
+            <details xmi:id="_wmDbRpUkEeqqGZh46IEtXQ" key="uuid" value="_gRVEcmN6EDadV45R_-upHg"/>
+          </eAnnotations>
+        </xmi:Extension>
+        <lowerValue xsi:type="uml:LiteralInteger" xmi:id="_wmDbR5UkEeqqGZh46IEtXQ">
+          <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+            <eAnnotations xmi:id="_wmDbSJUkEeqqGZh46IEtXQ" source="genmymodel">
+              <details xmi:id="_wmDbSZUkEeqqGZh46IEtXQ" key="uuid" value="_gRVEc2N6EDadV45R_-upHg"/>
+            </eAnnotations>
+          </xmi:Extension>
+        </lowerValue>
+        <upperValue xsi:type="uml:LiteralInteger" xmi:id="_wmDbSpUkEeqqGZh46IEtXQ" value="1">
+          <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+            <eAnnotations xmi:id="_wmDbS5UkEeqqGZh46IEtXQ" source="genmymodel">
+              <details xmi:id="_wmDbTJUkEeqqGZh46IEtXQ" key="uuid" value="_gRVrgGN6EDadV45R_-upHg"/>
+            </eAnnotations>
+          </xmi:Extension>
+        </upperValue>
+      </ownedEnd>
+      <ownedEnd xmi:id="_wmDbTZUkEeqqGZh46IEtXQ" name="add/delete Hotels" type="_wmDbNZUkEeqqGZh46IEtXQ" owningAssociation="_wmDbQZUkEeqqGZh46IEtXQ" association="_wmDbQZUkEeqqGZh46IEtXQ">
+        <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+          <eAnnotations xmi:id="_wmDbTpUkEeqqGZh46IEtXQ" source="genmymodel">
+            <details xmi:id="_wmDbT5UkEeqqGZh46IEtXQ" key="uuid" value="_gRUdYWN6EDadV45R_-upHg"/>
+          </eAnnotations>
+        </xmi:Extension>
+        <lowerValue xsi:type="uml:LiteralInteger" xmi:id="_wmDbUJUkEeqqGZh46IEtXQ">
+          <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+            <eAnnotations xmi:id="_wmDbUZUkEeqqGZh46IEtXQ" source="genmymodel">
+              <details xmi:id="_wmDbUpUkEeqqGZh46IEtXQ" key="uuid" value="_gRVEcGN6EDadV45R_-upHg"/>
+            </eAnnotations>
+          </xmi:Extension>
+        </lowerValue>
+        <upperValue xsi:type="uml:LiteralInteger" xmi:id="_wmDbU5UkEeqqGZh46IEtXQ" value="1">
+          <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+            <eAnnotations xmi:id="_wmDbVJUkEeqqGZh46IEtXQ" source="genmymodel">
+              <details xmi:id="_wmDbVZUkEeqqGZh46IEtXQ" key="uuid" value="_gRVEcWN6EDadV45R_-upHg"/>
+            </eAnnotations>
+          </xmi:Extension>
+        </upperValue>
+      </ownedEnd>
+    </packagedElement>
+    <packagedElement xsi:type="uml:Association" xmi:id="_wmDbVpUkEeqqGZh46IEtXQ" name="Manager_Add/delete Room Types" memberEnd="_wmDbWZUkEeqqGZh46IEtXQ _wmDbYpUkEeqqGZh46IEtXQ" navigableOwnedEnd="_wmDbWZUkEeqqGZh46IEtXQ _wmDbYpUkEeqqGZh46IEtXQ">
+      <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+        <eAnnotations xmi:id="_wmDbV5UkEeqqGZh46IEtXQ" source="genmymodel">
+          <details xmi:id="_wmDbWJUkEeqqGZh46IEtXQ" key="uuid" value="_guNNsmN6EDadV45R_-upHg"/>
+        </eAnnotations>
+      </xmi:Extension>
+      <ownedEnd xmi:id="_wmDbWZUkEeqqGZh46IEtXQ" name="add/delete Room Types" type="_wmDbOZUkEeqqGZh46IEtXQ" owningAssociation="_wmDbVpUkEeqqGZh46IEtXQ" association="_wmDbVpUkEeqqGZh46IEtXQ">
+        <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+          <eAnnotations xmi:id="_wmDbWpUkEeqqGZh46IEtXQ" source="genmymodel">
+            <details xmi:id="_wmDbW5UkEeqqGZh46IEtXQ" key="uuid" value="_guMmo2N6EDadV45R_-upHg"/>
+          </eAnnotations>
+        </xmi:Extension>
+        <lowerValue xsi:type="uml:LiteralInteger" xmi:id="_wmDbXJUkEeqqGZh46IEtXQ">
+          <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+            <eAnnotations xmi:id="_wmDbXZUkEeqqGZh46IEtXQ" source="genmymodel">
+              <details xmi:id="_wmDbXpUkEeqqGZh46IEtXQ" key="uuid" value="_guNNsGN6EDadV45R_-upHg"/>
+            </eAnnotations>
+          </xmi:Extension>
+        </lowerValue>
+        <upperValue xsi:type="uml:LiteralInteger" xmi:id="_wmDbX5UkEeqqGZh46IEtXQ" value="1">
+          <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+            <eAnnotations xmi:id="_wmDbYJUkEeqqGZh46IEtXQ" source="genmymodel">
+              <details xmi:id="_wmDbYZUkEeqqGZh46IEtXQ" key="uuid" value="_guNNsWN6EDadV45R_-upHg"/>
+            </eAnnotations>
+          </xmi:Extension>
+        </upperValue>
+      </ownedEnd>
+      <ownedEnd xmi:id="_wmDbYpUkEeqqGZh46IEtXQ" name="manager" type="_wmDbKpUkEeqqGZh46IEtXQ" owningAssociation="_wmDbVpUkEeqqGZh46IEtXQ" association="_wmDbVpUkEeqqGZh46IEtXQ">
+        <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+          <eAnnotations xmi:id="_wmDbY5UkEeqqGZh46IEtXQ" source="genmymodel">
+            <details xmi:id="_wmDbZJUkEeqqGZh46IEtXQ" key="uuid" value="_guMmoGN6EDadV45R_-upHg"/>
+          </eAnnotations>
+        </xmi:Extension>
+        <lowerValue xsi:type="uml:LiteralInteger" xmi:id="_wmDbZZUkEeqqGZh46IEtXQ">
+          <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+            <eAnnotations xmi:id="_wmDbZpUkEeqqGZh46IEtXQ" source="genmymodel">
+              <details xmi:id="_wmDbZ5UkEeqqGZh46IEtXQ" key="uuid" value="_guMmoWN6EDadV45R_-upHg"/>
+            </eAnnotations>
+          </xmi:Extension>
+        </lowerValue>
+        <upperValue xsi:type="uml:LiteralInteger" xmi:id="_wmDbaJUkEeqqGZh46IEtXQ" value="1">
+          <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+            <eAnnotations xmi:id="_wmDbaZUkEeqqGZh46IEtXQ" source="genmymodel">
+              <details xmi:id="_wmDbapUkEeqqGZh46IEtXQ" key="uuid" value="_guMmomN6EDadV45R_-upHg"/>
+            </eAnnotations>
+          </xmi:Extension>
+        </upperValue>
+      </ownedEnd>
+    </packagedElement>
+    <packagedElement xsi:type="uml:Association" xmi:id="_wmDba5UkEeqqGZh46IEtXQ" name="Manager_Add/delete Rooms" memberEnd="_wmDbbpUkEeqqGZh46IEtXQ _wmDbd5UkEeqqGZh46IEtXQ" navigableOwnedEnd="_wmDbbpUkEeqqGZh46IEtXQ _wmDbd5UkEeqqGZh46IEtXQ">
+      <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+        <eAnnotations xmi:id="_wmDbbJUkEeqqGZh46IEtXQ" source="genmymodel">
+          <details xmi:id="_wmDbbZUkEeqqGZh46IEtXQ" key="uuid" value="_hMynJGN6EDadV45R_-upHg"/>
+        </eAnnotations>
+      </xmi:Extension>
+      <ownedEnd xmi:id="_wmDbbpUkEeqqGZh46IEtXQ" name="add/delete Rooms" type="_wmDbPZUkEeqqGZh46IEtXQ" owningAssociation="_wmDba5UkEeqqGZh46IEtXQ" association="_wmDba5UkEeqqGZh46IEtXQ">
+        <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+          <eAnnotations xmi:id="_wmDbb5UkEeqqGZh46IEtXQ" source="genmymodel">
+            <details xmi:id="_wmDbcJUkEeqqGZh46IEtXQ" key="uuid" value="_hMynIWN6EDadV45R_-upHg"/>
+          </eAnnotations>
+        </xmi:Extension>
+        <lowerValue xsi:type="uml:LiteralInteger" xmi:id="_wmDbcZUkEeqqGZh46IEtXQ">
+          <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+            <eAnnotations xmi:id="_wmDbcpUkEeqqGZh46IEtXQ" source="genmymodel">
+              <details xmi:id="_wmDbc5UkEeqqGZh46IEtXQ" key="uuid" value="_hMynImN6EDadV45R_-upHg"/>
+            </eAnnotations>
+          </xmi:Extension>
+        </lowerValue>
+        <upperValue xsi:type="uml:LiteralInteger" xmi:id="_wmDbdJUkEeqqGZh46IEtXQ" value="1">
+          <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+            <eAnnotations xmi:id="_wmDbdZUkEeqqGZh46IEtXQ" source="genmymodel">
+              <details xmi:id="_wmDbdpUkEeqqGZh46IEtXQ" key="uuid" value="_hMynI2N6EDadV45R_-upHg"/>
+            </eAnnotations>
+          </xmi:Extension>
+        </upperValue>
+      </ownedEnd>
+      <ownedEnd xmi:id="_wmDbd5UkEeqqGZh46IEtXQ" name="manager" type="_wmDbKpUkEeqqGZh46IEtXQ" owningAssociation="_wmDba5UkEeqqGZh46IEtXQ" association="_wmDba5UkEeqqGZh46IEtXQ">
+        <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+          <eAnnotations xmi:id="_wmDbeJUkEeqqGZh46IEtXQ" source="genmymodel">
+            <details xmi:id="_wmDbeZUkEeqqGZh46IEtXQ" key="uuid" value="_hMxZAWN6EDadV45R_-upHg"/>
+          </eAnnotations>
+        </xmi:Extension>
+        <lowerValue xsi:type="uml:LiteralInteger" xmi:id="_wmDbepUkEeqqGZh46IEtXQ">
+          <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+            <eAnnotations xmi:id="_wmDbe5UkEeqqGZh46IEtXQ" source="genmymodel">
+              <details xmi:id="_wmDbfJUkEeqqGZh46IEtXQ" key="uuid" value="_hMyAEGN6EDadV45R_-upHg"/>
+            </eAnnotations>
+          </xmi:Extension>
+        </lowerValue>
+        <upperValue xsi:type="uml:LiteralInteger" xmi:id="_wmDbfZUkEeqqGZh46IEtXQ" value="1">
+          <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+            <eAnnotations xmi:id="_wmDbfpUkEeqqGZh46IEtXQ" source="genmymodel">
+              <details xmi:id="_wmDbf5UkEeqqGZh46IEtXQ" key="uuid" value="_hMynIGN6EDadV45R_-upHg"/>
+            </eAnnotations>
+          </xmi:Extension>
+        </upperValue>
+      </ownedEnd>
+    </packagedElement>
+    <packagedElement xsi:type="uml:UseCase" xmi:id="_wmDbgJUkEeqqGZh46IEtXQ" name="Make Booking">
+      <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+        <eAnnotations xmi:id="_wmDbgZUkEeqqGZh46IEtXQ" source="genmymodel">
+          <details xmi:id="_wmDbgpUkEeqqGZh46IEtXQ" key="uuid" value="_iJKv0WN6EDadV45R_-upHg"/>
+          <details xmi:id="_wmDbg5UkEeqqGZh46IEtXQ" key="gmm-documentation" value="&lt;p&gt;A room in a hotel is booked by a guest.&lt;/p&gt;&#xA;&#xA;&lt;ol&gt;&#xA;&#9;&lt;li&gt;Guest or Receptionist starts the booking process.&lt;/li&gt;&#xA;&#9;&lt;li&gt;The user selects the hotel, dates of the booking and room type&amp;nbsp;required.&lt;/li&gt;&#xA;&#9;&lt;li&gt;The system shows availability for the dates and room type&amp;nbsp;along with the price.&#xA;&#9;&lt;ol&gt;&#xA;&#9;&#9;&lt;li&gt;&lt;em&gt;No availability in this hotel&lt;/em&gt;: The system suggests other hotels in the same business with availability.&lt;/li&gt;&#xA;&#9;&#9;&lt;li&gt;&lt;em&gt;No availability in any hotel&lt;/em&gt;: The system informs the user and terminates the use case.&lt;/li&gt;&#xA;&#9;&lt;/ol&gt;&#xA;&#9;&lt;/li&gt;&#xA;&#9;&lt;li&gt;The user accepts the booking, assuming the price and availability&amp;nbsp;is acceptable.&#xA;&#9;&lt;ol&gt;&#xA;&#9;&#9;&lt;li&gt;&lt;em&gt;Guest doesn&amp;#39;t like price or what is being offered&lt;/em&gt;: Use case terminates.&lt;/li&gt;&#xA;&#9;&lt;/ol&gt;&#xA;&#9;&lt;/li&gt;&#xA;&#9;&lt;li&gt;The system requests the guest name and addresses.&lt;/li&gt;&#xA;&#9;&lt;li&gt;The user completes the booking by entering&amp;nbsp;the name and address information of all the guests.&#xA;&#9;&lt;ol&gt;&#xA;&#9;&#9;&lt;li&gt;&lt;em&gt;Guest is&amp;nbsp;already known to the business&lt;/em&gt;: Continue to next step.&lt;/li&gt;&#xA;&#9;&lt;/ol&gt;&#xA;&#9;&lt;/li&gt;&#xA;&#9;&lt;li&gt;The system creates the booking and gives it a booking number.&lt;/li&gt;&#xA;&#9;&lt;li&gt;The system allocates the rooms by setting the Booking to a status of &amp;#39;BOOKED&amp;#39;.&lt;/li&gt;&#xA;&#9;&lt;li&gt;The user is given the booking number for reference.&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;&#xA;&lt;p&gt;&amp;nbsp;&lt;/p&gt;&#xA;"/>
+        </eAnnotations>
+      </xmi:Extension>
+    </packagedElement>
+    <packagedElement xsi:type="uml:UseCase" xmi:id="_wmDbhJUkEeqqGZh46IEtXQ" name="Cancel Booking">
+      <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+        <eAnnotations xmi:id="_wmDbhZUkEeqqGZh46IEtXQ" source="genmymodel">
+          <details xmi:id="_wmDbhpUkEeqqGZh46IEtXQ" key="uuid" value="_i3MTcWN6EDadV45R_-upHg"/>
+          <details xmi:id="_wmDbh5UkEeqqGZh46IEtXQ" key="gmm-documentation" value="&lt;p&gt;A booking is cancelled.&lt;/p&gt;&#xA;&#xA;&lt;ol&gt;&#xA;&#9;&lt;li&gt;A Guest or Receptionist requests to cancel a booking.&lt;/li&gt;&#xA;&#9;&lt;li&gt;The user enters the booking reference number or the dates and guest name to find the booking.&lt;/li&gt;&#xA;&#9;&lt;li&gt;The system retrieves the booking.&lt;/li&gt;&#xA;&#9;&lt;li&gt;The user confirms they want to cancel the booking.&lt;/li&gt;&#xA;&#9;&lt;li&gt;The system cancels the booking by de-allocating the rooms (changes the status to &amp;#39;CANCELLED&amp;#39; on the Booking).&lt;/li&gt;&#xA;&#9;&lt;li&gt;The booking is cancelled and the user is informed.&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;"/>
+        </eAnnotations>
+      </xmi:Extension>
+    </packagedElement>
+    <packagedElement xsi:type="uml:Association" xmi:id="_wmDbiJUkEeqqGZh46IEtXQ" name="Guest_Make Booking" memberEnd="_wmDbi5UkEeqqGZh46IEtXQ _wmDblJUkEeqqGZh46IEtXQ" navigableOwnedEnd="_wmDbi5UkEeqqGZh46IEtXQ _wmDblJUkEeqqGZh46IEtXQ">
+      <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+        <eAnnotations xmi:id="_wmDbiZUkEeqqGZh46IEtXQ" source="genmymodel">
+          <details xmi:id="_wmDbipUkEeqqGZh46IEtXQ" key="uuid" value="_kzAf5WN6EDadV45R_-upHg"/>
+        </eAnnotations>
+      </xmi:Extension>
+      <ownedEnd xmi:id="_wmDbi5UkEeqqGZh46IEtXQ" name="make Booking" type="_wmDbgJUkEeqqGZh46IEtXQ" owningAssociation="_wmDbiJUkEeqqGZh46IEtXQ" association="_wmDbiJUkEeqqGZh46IEtXQ">
+        <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+          <eAnnotations xmi:id="_wmDbjJUkEeqqGZh46IEtXQ" source="genmymodel">
+            <details xmi:id="_wmDbjZUkEeqqGZh46IEtXQ" key="uuid" value="_kzAf4mN6EDadV45R_-upHg"/>
+          </eAnnotations>
+        </xmi:Extension>
+        <lowerValue xsi:type="uml:LiteralInteger" xmi:id="_wmDbjpUkEeqqGZh46IEtXQ">
+          <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+            <eAnnotations xmi:id="_wmDbj5UkEeqqGZh46IEtXQ" source="genmymodel">
+              <details xmi:id="_wmDbkJUkEeqqGZh46IEtXQ" key="uuid" value="_kzAf42N6EDadV45R_-upHg"/>
+            </eAnnotations>
+          </xmi:Extension>
+        </lowerValue>
+        <upperValue xsi:type="uml:LiteralInteger" xmi:id="_wmDbkZUkEeqqGZh46IEtXQ" value="1">
+          <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+            <eAnnotations xmi:id="_wmDbkpUkEeqqGZh46IEtXQ" source="genmymodel">
+              <details xmi:id="_wmDbk5UkEeqqGZh46IEtXQ" key="uuid" value="_kzAf5GN6EDadV45R_-upHg"/>
+            </eAnnotations>
+          </xmi:Extension>
+        </upperValue>
+      </ownedEnd>
+      <ownedEnd xmi:id="_wmDblJUkEeqqGZh46IEtXQ" name="guest" type="_wmDbIpUkEeqqGZh46IEtXQ" owningAssociation="_wmDbiJUkEeqqGZh46IEtXQ" association="_wmDbiJUkEeqqGZh46IEtXQ">
+        <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+          <eAnnotations xmi:id="_wmDblZUkEeqqGZh46IEtXQ" source="genmymodel">
+            <details xmi:id="_wmDblpUkEeqqGZh46IEtXQ" key="uuid" value="_ky_40WN6EDadV45R_-upHg"/>
+          </eAnnotations>
+        </xmi:Extension>
+        <lowerValue xsi:type="uml:LiteralInteger" xmi:id="_wmDbl5UkEeqqGZh46IEtXQ">
+          <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+            <eAnnotations xmi:id="_wmDbmJUkEeqqGZh46IEtXQ" source="genmymodel">
+              <details xmi:id="_wmDbmZUkEeqqGZh46IEtXQ" key="uuid" value="_kzAf4GN6EDadV45R_-upHg"/>
+            </eAnnotations>
+          </xmi:Extension>
+        </lowerValue>
+        <upperValue xsi:type="uml:LiteralInteger" xmi:id="_wmDbmpUkEeqqGZh46IEtXQ" value="1">
+          <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+            <eAnnotations xmi:id="_wmDbm5UkEeqqGZh46IEtXQ" source="genmymodel">
+              <details xmi:id="_wmDbnJUkEeqqGZh46IEtXQ" key="uuid" value="_kzAf4WN6EDadV45R_-upHg"/>
+            </eAnnotations>
+          </xmi:Extension>
+        </upperValue>
+      </ownedEnd>
+    </packagedElement>
+    <packagedElement xsi:type="uml:Association" xmi:id="_wmDbnZUkEeqqGZh46IEtXQ" name="Guest_Cancel Booking" memberEnd="_wmDboJUkEeqqGZh46IEtXQ _wmDbqZUkEeqqGZh46IEtXQ" navigableOwnedEnd="_wmDboJUkEeqqGZh46IEtXQ _wmDbqZUkEeqqGZh46IEtXQ">
+      <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+        <eAnnotations xmi:id="_wmDbnpUkEeqqGZh46IEtXQ" source="genmymodel">
+          <details xmi:id="_wmDbn5UkEeqqGZh46IEtXQ" key="uuid" value="_lMv1l2N6EDadV45R_-upHg"/>
+        </eAnnotations>
+      </xmi:Extension>
+      <ownedEnd xmi:id="_wmDboJUkEeqqGZh46IEtXQ" name="cancel Booking" type="_wmDbhJUkEeqqGZh46IEtXQ" owningAssociation="_wmDbnZUkEeqqGZh46IEtXQ" association="_wmDbnZUkEeqqGZh46IEtXQ">
+        <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+          <eAnnotations xmi:id="_wmDboZUkEeqqGZh46IEtXQ" source="genmymodel">
+            <details xmi:id="_wmDbopUkEeqqGZh46IEtXQ" key="uuid" value="_lMv1lGN6EDadV45R_-upHg"/>
+          </eAnnotations>
+        </xmi:Extension>
+        <lowerValue xsi:type="uml:LiteralInteger" xmi:id="_wmDbo5UkEeqqGZh46IEtXQ">
+          <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+            <eAnnotations xmi:id="_wmDbpJUkEeqqGZh46IEtXQ" source="genmymodel">
+              <details xmi:id="_wmDbpZUkEeqqGZh46IEtXQ" key="uuid" value="_lMv1lWN6EDadV45R_-upHg"/>
+            </eAnnotations>
+          </xmi:Extension>
+        </lowerValue>
+        <upperValue xsi:type="uml:LiteralInteger" xmi:id="_wmDbppUkEeqqGZh46IEtXQ" value="1">
+          <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+            <eAnnotations xmi:id="_wmDbp5UkEeqqGZh46IEtXQ" source="genmymodel">
+              <details xmi:id="_wmDbqJUkEeqqGZh46IEtXQ" key="uuid" value="_lMv1lmN6EDadV45R_-upHg"/>
+            </eAnnotations>
+          </xmi:Extension>
+        </upperValue>
+      </ownedEnd>
+      <ownedEnd xmi:id="_wmDbqZUkEeqqGZh46IEtXQ" name="guest" type="_wmDbIpUkEeqqGZh46IEtXQ" owningAssociation="_wmDbnZUkEeqqGZh46IEtXQ" association="_wmDbnZUkEeqqGZh46IEtXQ">
+        <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+          <eAnnotations xmi:id="_wmDbqpUkEeqqGZh46IEtXQ" source="genmymodel">
+            <details xmi:id="_wmDbq5UkEeqqGZh46IEtXQ" key="uuid" value="_lMv1kWN6EDadV45R_-upHg"/>
+          </eAnnotations>
+        </xmi:Extension>
+        <lowerValue xsi:type="uml:LiteralInteger" xmi:id="_wmDbrJUkEeqqGZh46IEtXQ">
+          <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+            <eAnnotations xmi:id="_wmDbrZUkEeqqGZh46IEtXQ" source="genmymodel">
+              <details xmi:id="_wmDbrpUkEeqqGZh46IEtXQ" key="uuid" value="_lMv1kmN6EDadV45R_-upHg"/>
+            </eAnnotations>
+          </xmi:Extension>
+        </lowerValue>
+        <upperValue xsi:type="uml:LiteralInteger" xmi:id="_wmDbr5UkEeqqGZh46IEtXQ" value="1">
+          <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+            <eAnnotations xmi:id="_wmDbsJUkEeqqGZh46IEtXQ" source="genmymodel">
+              <details xmi:id="_wmDbsZUkEeqqGZh46IEtXQ" key="uuid" value="_lMv1k2N6EDadV45R_-upHg"/>
+            </eAnnotations>
+          </xmi:Extension>
+        </upperValue>
+      </ownedEnd>
+    </packagedElement>
+    <packagedElement xsi:type="uml:Association" xmi:id="_wmDbspUkEeqqGZh46IEtXQ" name="Receptionist_Make Booking" memberEnd="_wmDbtZUkEeqqGZh46IEtXQ _wmDbvpUkEeqqGZh46IEtXQ" navigableOwnedEnd="_wmDbtZUkEeqqGZh46IEtXQ _wmDbvpUkEeqqGZh46IEtXQ">
+      <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+        <eAnnotations xmi:id="_wmDbs5UkEeqqGZh46IEtXQ" source="genmymodel">
+          <details xmi:id="_wmDbtJUkEeqqGZh46IEtXQ" key="uuid" value="_l5EwF2N6EDadV45R_-upHg"/>
+        </eAnnotations>
+      </xmi:Extension>
+      <ownedEnd xmi:id="_wmDbtZUkEeqqGZh46IEtXQ" name="make Booking" type="_wmDbgJUkEeqqGZh46IEtXQ" owningAssociation="_wmDbspUkEeqqGZh46IEtXQ" association="_wmDbspUkEeqqGZh46IEtXQ">
+        <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+          <eAnnotations xmi:id="_wmDbtpUkEeqqGZh46IEtXQ" source="genmymodel">
+            <details xmi:id="_wmDbt5UkEeqqGZh46IEtXQ" key="uuid" value="_l5EwFGN6EDadV45R_-upHg"/>
+          </eAnnotations>
+        </xmi:Extension>
+        <lowerValue xsi:type="uml:LiteralInteger" xmi:id="_wmDbuJUkEeqqGZh46IEtXQ">
+          <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+            <eAnnotations xmi:id="_wmDbuZUkEeqqGZh46IEtXQ" source="genmymodel">
+              <details xmi:id="_wmDbupUkEeqqGZh46IEtXQ" key="uuid" value="_l5EwFWN6EDadV45R_-upHg"/>
+            </eAnnotations>
+          </xmi:Extension>
+        </lowerValue>
+        <upperValue xsi:type="uml:LiteralInteger" xmi:id="_wmDbu5UkEeqqGZh46IEtXQ" value="1">
+          <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+            <eAnnotations xmi:id="_wmDbvJUkEeqqGZh46IEtXQ" source="genmymodel">
+              <details xmi:id="_wmDbvZUkEeqqGZh46IEtXQ" key="uuid" value="_l5EwFmN6EDadV45R_-upHg"/>
+            </eAnnotations>
+          </xmi:Extension>
+        </upperValue>
+      </ownedEnd>
+      <ownedEnd xmi:id="_wmDbvpUkEeqqGZh46IEtXQ" name="receptionist" type="_wmDbJpUkEeqqGZh46IEtXQ" owningAssociation="_wmDbspUkEeqqGZh46IEtXQ" association="_wmDbspUkEeqqGZh46IEtXQ">
+        <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+          <eAnnotations xmi:id="_wmDbv5UkEeqqGZh46IEtXQ" source="genmymodel">
+            <details xmi:id="_wmDbwJUkEeqqGZh46IEtXQ" key="uuid" value="_l5EwEWN6EDadV45R_-upHg"/>
+          </eAnnotations>
+        </xmi:Extension>
+        <lowerValue xsi:type="uml:LiteralInteger" xmi:id="_wmDbwZUkEeqqGZh46IEtXQ">
+          <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+            <eAnnotations xmi:id="_wmDbwpUkEeqqGZh46IEtXQ" source="genmymodel">
+              <details xmi:id="_wmDbw5UkEeqqGZh46IEtXQ" key="uuid" value="_l5EwEmN6EDadV45R_-upHg"/>
+            </eAnnotations>
+          </xmi:Extension>
+        </lowerValue>
+        <upperValue xsi:type="uml:LiteralInteger" xmi:id="_wmDbxJUkEeqqGZh46IEtXQ" value="1">
+          <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+            <eAnnotations xmi:id="_wmDbxZUkEeqqGZh46IEtXQ" source="genmymodel">
+              <details xmi:id="_wmDbxpUkEeqqGZh46IEtXQ" key="uuid" value="_l5EwE2N6EDadV45R_-upHg"/>
+            </eAnnotations>
+          </xmi:Extension>
+        </upperValue>
+      </ownedEnd>
+    </packagedElement>
+    <packagedElement xsi:type="uml:Association" xmi:id="_wmDbx5UkEeqqGZh46IEtXQ" name="Receptionist_Cancel Booking" memberEnd="_wmDbypUkEeqqGZh46IEtXQ _wmDb05UkEeqqGZh46IEtXQ" navigableOwnedEnd="_wmDbypUkEeqqGZh46IEtXQ _wmDb05UkEeqqGZh46IEtXQ">
+      <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+        <eAnnotations xmi:id="_wmDbyJUkEeqqGZh46IEtXQ" source="genmymodel">
+          <details xmi:id="_wmDbyZUkEeqqGZh46IEtXQ" key="uuid" value="_mU3UMWN6EDadV45R_-upHg"/>
+        </eAnnotations>
+      </xmi:Extension>
+      <ownedEnd xmi:id="_wmDbypUkEeqqGZh46IEtXQ" name="cancel Booking" type="_wmDbhJUkEeqqGZh46IEtXQ" owningAssociation="_wmDbx5UkEeqqGZh46IEtXQ" association="_wmDbx5UkEeqqGZh46IEtXQ">
+        <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+          <eAnnotations xmi:id="_wmDby5UkEeqqGZh46IEtXQ" source="genmymodel">
+            <details xmi:id="_wmDbzJUkEeqqGZh46IEtXQ" key="uuid" value="_mU2tIWN6EDadV45R_-upHg"/>
+          </eAnnotations>
+        </xmi:Extension>
+        <lowerValue xsi:type="uml:LiteralInteger" xmi:id="_wmDbzZUkEeqqGZh46IEtXQ">
+          <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+            <eAnnotations xmi:id="_wmDbzpUkEeqqGZh46IEtXQ" source="genmymodel">
+              <details xmi:id="_wmDbz5UkEeqqGZh46IEtXQ" key="uuid" value="_mU2tImN6EDadV45R_-upHg"/>
+            </eAnnotations>
+          </xmi:Extension>
+        </lowerValue>
+        <upperValue xsi:type="uml:LiteralInteger" xmi:id="_wmDb0JUkEeqqGZh46IEtXQ" value="1">
+          <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+            <eAnnotations xmi:id="_wmDb0ZUkEeqqGZh46IEtXQ" source="genmymodel">
+              <details xmi:id="_wmDb0pUkEeqqGZh46IEtXQ" key="uuid" value="_mU3UMGN6EDadV45R_-upHg"/>
+            </eAnnotations>
+          </xmi:Extension>
+        </upperValue>
+      </ownedEnd>
+      <ownedEnd xmi:id="_wmDb05UkEeqqGZh46IEtXQ" name="receptionist" type="_wmDbJpUkEeqqGZh46IEtXQ" owningAssociation="_wmDbx5UkEeqqGZh46IEtXQ" association="_wmDbx5UkEeqqGZh46IEtXQ">
+        <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+          <eAnnotations xmi:id="_wmDb1JUkEeqqGZh46IEtXQ" source="genmymodel">
+            <details xmi:id="_wmDb1ZUkEeqqGZh46IEtXQ" key="uuid" value="_mU2GEWN6EDadV45R_-upHg"/>
+          </eAnnotations>
+        </xmi:Extension>
+        <lowerValue xsi:type="uml:LiteralInteger" xmi:id="_wmDb1pUkEeqqGZh46IEtXQ">
+          <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+            <eAnnotations xmi:id="_wmDb15UkEeqqGZh46IEtXQ" source="genmymodel">
+              <details xmi:id="_wmDb2JUkEeqqGZh46IEtXQ" key="uuid" value="_mU2GEmN6EDadV45R_-upHg"/>
+            </eAnnotations>
+          </xmi:Extension>
+        </lowerValue>
+        <upperValue xsi:type="uml:LiteralInteger" xmi:id="_wmDb2ZUkEeqqGZh46IEtXQ" value="1">
+          <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+            <eAnnotations xmi:id="_wmDb2pUkEeqqGZh46IEtXQ" source="genmymodel">
+              <details xmi:id="_wmDb25UkEeqqGZh46IEtXQ" key="uuid" value="_mU2tIGN6EDadV45R_-upHg"/>
+            </eAnnotations>
+          </xmi:Extension>
+        </upperValue>
+      </ownedEnd>
+    </packagedElement>
+    <packagedElement xsi:type="uml:UseCase" xmi:id="_wmDb3JUkEeqqGZh46IEtXQ" name="Guest Check-in">
+      <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+        <eAnnotations xmi:id="_wmDb3ZUkEeqqGZh46IEtXQ" source="genmymodel">
+          <details xmi:id="_wmDb3pUkEeqqGZh46IEtXQ" key="uuid" value="_nN6cEWN6EDadV45R_-upHg"/>
+          <details xmi:id="_wmDb35UkEeqqGZh46IEtXQ" key="gmm-documentation" value="&lt;p&gt;A guest arrives at the hotel at the specific time in a booking.&lt;/p&gt;&#xA;&#xA;&lt;ol&gt;&#xA;&#9;&lt;li&gt;The guest provides the Receptionist with a booking reference number or their name.&lt;/li&gt;&#xA;&#9;&lt;li&gt;The Receptionist enters/searches the details to find the booking.&lt;/li&gt;&#xA;&#9;&lt;li&gt;The system retrieves the booking.&lt;/li&gt;&#xA;&#9;&lt;li&gt;The user confirms the check-in with the Guest to make sure the room types and duration are correct.&#xA;&#9;&lt;ol&gt;&#xA;&#9;&#9;&lt;li&gt;&lt;em&gt;Booking details incorrect&lt;/em&gt;: The Receptionist would have to potentially cancel and re-book depending on the problem.&lt;/li&gt;&#xA;&#9;&lt;/ol&gt;&#xA;&#9;&lt;/li&gt;&#xA;&#9;&lt;li&gt;The system records the date/time the Guest(s) checked-in to the relevant room and changes the Booking to &amp;#39;ARRIVED&amp;#39;.&lt;/li&gt;&#xA;&#9;&lt;li&gt;The Receptionist gives the room keys (or other relevant material) to the guest.&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;"/>
+        </eAnnotations>
+      </xmi:Extension>
+    </packagedElement>
+    <packagedElement xsi:type="uml:UseCase" xmi:id="_wmDb4JUkEeqqGZh46IEtXQ" name="Guest Check-out">
+      <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+        <eAnnotations xmi:id="_wmDb4ZUkEeqqGZh46IEtXQ" source="genmymodel">
+          <details xmi:id="_wmDb4pUkEeqqGZh46IEtXQ" key="uuid" value="_n8D7gWN6EDadV45R_-upHg"/>
+          <details xmi:id="_wmDb45UkEeqqGZh46IEtXQ" key="gmm-documentation" value="&lt;p&gt;A guest is ready to leave the hotel and checks-out.&lt;/p&gt;&#xA;&#xA;&lt;ol&gt;&#xA;&#9;&lt;li&gt;The guest request to check-out.&lt;/li&gt;&#xA;&#9;&lt;li&gt;The Receptionist enters/searches the room name(/number).&lt;/li&gt;&#xA;&#9;&lt;li&gt;The system retrieves the details.&lt;/li&gt;&#xA;&#9;&lt;li&gt;The Receptionist deals with any billing issues -- outside the scope of the system.&lt;/li&gt;&#xA;&#9;&lt;li&gt;The guest pays the bill -- again outside the scope.&lt;/li&gt;&#xA;&#9;&lt;li&gt;The user confirms the check-out.&lt;/li&gt;&#xA;&#9;&lt;li&gt;The system records the check-out date/time against the&amp;nbsp;the Booking and changes the status to &amp;#39;DEPARTED&amp;#39;.&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;"/>
+        </eAnnotations>
+      </xmi:Extension>
+    </packagedElement>
+    <packagedElement xsi:type="uml:Association" xmi:id="_wmDb5JUkEeqqGZh46IEtXQ" name="Receptionist_Guest Check-in" memberEnd="_wmDb55UkEeqqGZh46IEtXQ _wmDb8JUkEeqqGZh46IEtXQ" navigableOwnedEnd="_wmDb55UkEeqqGZh46IEtXQ _wmDb8JUkEeqqGZh46IEtXQ">
+      <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+        <eAnnotations xmi:id="_wmDb5ZUkEeqqGZh46IEtXQ" source="genmymodel">
+          <details xmi:id="_wmDb5pUkEeqqGZh46IEtXQ" key="uuid" value="_qdAOQWN6EDadV45R_-upHg"/>
+        </eAnnotations>
+      </xmi:Extension>
+      <ownedEnd xmi:id="_wmDb55UkEeqqGZh46IEtXQ" name="guest Check-in" type="_wmDb3JUkEeqqGZh46IEtXQ" owningAssociation="_wmDb5JUkEeqqGZh46IEtXQ" association="_wmDb5JUkEeqqGZh46IEtXQ">
+        <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+          <eAnnotations xmi:id="_wmDb6JUkEeqqGZh46IEtXQ" source="genmymodel">
+            <details xmi:id="_wmDb6ZUkEeqqGZh46IEtXQ" key="uuid" value="_qc_nNGN6EDadV45R_-upHg"/>
+          </eAnnotations>
+        </xmi:Extension>
+        <lowerValue xsi:type="uml:LiteralInteger" xmi:id="_wmDb6pUkEeqqGZh46IEtXQ">
+          <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+            <eAnnotations xmi:id="_wmDb65UkEeqqGZh46IEtXQ" source="genmymodel">
+              <details xmi:id="_wmDb7JUkEeqqGZh46IEtXQ" key="uuid" value="_qc_nNWN6EDadV45R_-upHg"/>
+            </eAnnotations>
+          </xmi:Extension>
+        </lowerValue>
+        <upperValue xsi:type="uml:LiteralInteger" xmi:id="_wmDb7ZUkEeqqGZh46IEtXQ" value="1">
+          <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+            <eAnnotations xmi:id="_wmDb7pUkEeqqGZh46IEtXQ" source="genmymodel">
+              <details xmi:id="_wmDb75UkEeqqGZh46IEtXQ" key="uuid" value="_qdAOQGN6EDadV45R_-upHg"/>
+            </eAnnotations>
+          </xmi:Extension>
+        </upperValue>
+      </ownedEnd>
+      <ownedEnd xmi:id="_wmDb8JUkEeqqGZh46IEtXQ" name="receptionist" type="_wmDbJpUkEeqqGZh46IEtXQ" owningAssociation="_wmDb5JUkEeqqGZh46IEtXQ" association="_wmDb5JUkEeqqGZh46IEtXQ">
+        <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+          <eAnnotations xmi:id="_wmDb8ZUkEeqqGZh46IEtXQ" source="genmymodel">
+            <details xmi:id="_wmDb8pUkEeqqGZh46IEtXQ" key="uuid" value="_qc_nMWN6EDadV45R_-upHg"/>
+          </eAnnotations>
+        </xmi:Extension>
+        <lowerValue xsi:type="uml:LiteralInteger" xmi:id="_wmDb85UkEeqqGZh46IEtXQ">
+          <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+            <eAnnotations xmi:id="_wmDb9JUkEeqqGZh46IEtXQ" source="genmymodel">
+              <details xmi:id="_wmDb9ZUkEeqqGZh46IEtXQ" key="uuid" value="_qc_nMmN6EDadV45R_-upHg"/>
+            </eAnnotations>
+          </xmi:Extension>
+        </lowerValue>
+        <upperValue xsi:type="uml:LiteralInteger" xmi:id="_wmDb9pUkEeqqGZh46IEtXQ" value="1">
+          <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+            <eAnnotations xmi:id="_wmDb95UkEeqqGZh46IEtXQ" source="genmymodel">
+              <details xmi:id="_wmEBgJUkEeqqGZh46IEtXQ" key="uuid" value="_qc_nM2N6EDadV45R_-upHg"/>
+            </eAnnotations>
+          </xmi:Extension>
+        </upperValue>
+      </ownedEnd>
+    </packagedElement>
+    <packagedElement xsi:type="uml:Association" xmi:id="_wmEBgZUkEeqqGZh46IEtXQ" name="Receptionist_Guest Check-out" memberEnd="_wmEBhJUkEeqqGZh46IEtXQ _wmEBjZUkEeqqGZh46IEtXQ" navigableOwnedEnd="_wmEBhJUkEeqqGZh46IEtXQ _wmEBjZUkEeqqGZh46IEtXQ">
+      <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+        <eAnnotations xmi:id="_wmEBgpUkEeqqGZh46IEtXQ" source="genmymodel">
+          <details xmi:id="_wmEBg5UkEeqqGZh46IEtXQ" key="uuid" value="_q3vCcGN6EDadV45R_-upHg"/>
+        </eAnnotations>
+      </xmi:Extension>
+      <ownedEnd xmi:id="_wmEBhJUkEeqqGZh46IEtXQ" name="guest Check-out" type="_wmDb4JUkEeqqGZh46IEtXQ" owningAssociation="_wmEBgZUkEeqqGZh46IEtXQ" association="_wmEBgZUkEeqqGZh46IEtXQ">
+        <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+          <eAnnotations xmi:id="_wmEBhZUkEeqqGZh46IEtXQ" source="genmymodel">
+            <details xmi:id="_wmEBhpUkEeqqGZh46IEtXQ" key="uuid" value="_q3ubY2N6EDadV45R_-upHg"/>
+          </eAnnotations>
+        </xmi:Extension>
+        <lowerValue xsi:type="uml:LiteralInteger" xmi:id="_wmEBh5UkEeqqGZh46IEtXQ">
+          <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+            <eAnnotations xmi:id="_wmEBiJUkEeqqGZh46IEtXQ" source="genmymodel">
+              <details xmi:id="_wmEBiZUkEeqqGZh46IEtXQ" key="uuid" value="_q3ubZGN6EDadV45R_-upHg"/>
+            </eAnnotations>
+          </xmi:Extension>
+        </lowerValue>
+        <upperValue xsi:type="uml:LiteralInteger" xmi:id="_wmEBipUkEeqqGZh46IEtXQ" value="1">
+          <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+            <eAnnotations xmi:id="_wmEBi5UkEeqqGZh46IEtXQ" source="genmymodel">
+              <details xmi:id="_wmEBjJUkEeqqGZh46IEtXQ" key="uuid" value="_q3ubZWN6EDadV45R_-upHg"/>
+            </eAnnotations>
+          </xmi:Extension>
+        </upperValue>
+      </ownedEnd>
+      <ownedEnd xmi:id="_wmEBjZUkEeqqGZh46IEtXQ" name="receptionist" type="_wmDbJpUkEeqqGZh46IEtXQ" owningAssociation="_wmEBgZUkEeqqGZh46IEtXQ" association="_wmEBgZUkEeqqGZh46IEtXQ">
+        <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+          <eAnnotations xmi:id="_wmEBjpUkEeqqGZh46IEtXQ" source="genmymodel">
+            <details xmi:id="_wmEBj5UkEeqqGZh46IEtXQ" key="uuid" value="_q3ubYGN6EDadV45R_-upHg"/>
+          </eAnnotations>
+        </xmi:Extension>
+        <lowerValue xsi:type="uml:LiteralInteger" xmi:id="_wmEBkJUkEeqqGZh46IEtXQ">
+          <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+            <eAnnotations xmi:id="_wmEBkZUkEeqqGZh46IEtXQ" source="genmymodel">
+              <details xmi:id="_wmEBkpUkEeqqGZh46IEtXQ" key="uuid" value="_q3ubYWN6EDadV45R_-upHg"/>
+            </eAnnotations>
+          </xmi:Extension>
+        </lowerValue>
+        <upperValue xsi:type="uml:LiteralInteger" xmi:id="_wmEBk5UkEeqqGZh46IEtXQ" value="1">
+          <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+            <eAnnotations xmi:id="_wmEBlJUkEeqqGZh46IEtXQ" source="genmymodel">
+              <details xmi:id="_wmEBlZUkEeqqGZh46IEtXQ" key="uuid" value="_q3ubYmN6EDadV45R_-upHg"/>
+            </eAnnotations>
+          </xmi:Extension>
+        </upperValue>
+      </ownedEnd>
+    </packagedElement>
+    <packagedElement xsi:type="uml:AssociationClass" xmi:id="_wmEBlpUkEeqqGZh46IEtXQ" name="RoomBookingStatus" memberEnd="_wmEBnJUkEeqqGZh46IEtXQ _wmEBo5UkEeqqGZh46IEtXQ" navigableOwnedEnd="_wmEBnJUkEeqqGZh46IEtXQ _wmEBo5UkEeqqGZh46IEtXQ">
+      <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+        <eAnnotations xmi:id="_wmEBl5UkEeqqGZh46IEtXQ" source="genmymodel">
+          <details xmi:id="_wmEBmJUkEeqqGZh46IEtXQ" key="uuid" value="_p-Y_kGavEDaSK8ZoE6vloQ"/>
+        </eAnnotations>
+      </xmi:Extension>
+      <ownedAttribute xmi:id="_wmEBmZUkEeqqGZh46IEtXQ" name="status" type="_wmEBqpUkEeqqGZh46IEtXQ">
+        <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+          <eAnnotations xmi:id="_wmEBmpUkEeqqGZh46IEtXQ" source="genmymodel">
+            <details xmi:id="_wmEBm5UkEeqqGZh46IEtXQ" key="uuid" value="_t8udYWavEDaSK8ZoE6vloQ"/>
+          </eAnnotations>
+        </xmi:Extension>
+      </ownedAttribute>
+      <ownedEnd xmi:id="_wmEBnJUkEeqqGZh46IEtXQ" name="room" type="_wmDah5UkEeqqGZh46IEtXQ" owningAssociation="_wmEBlpUkEeqqGZh46IEtXQ" association="_wmEBlpUkEeqqGZh46IEtXQ">
+        <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+          <eAnnotations xmi:id="_wmEBnZUkEeqqGZh46IEtXQ" source="genmymodel">
+            <details xmi:id="_wmEBnpUkEeqqGZh46IEtXQ" key="uuid" value="_p-a0wWavEDaSK8ZoE6vloQ"/>
+          </eAnnotations>
+        </xmi:Extension>
+        <lowerValue xsi:type="uml:LiteralInteger" xmi:id="_wmEBn5UkEeqqGZh46IEtXQ" value="1">
+          <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+            <eAnnotations xmi:id="_wmEBoJUkEeqqGZh46IEtXQ" source="genmymodel">
+              <details xmi:id="_wmEBoZUkEeqqGZh46IEtXQ" key="uuid" value="_p-bb0GavEDaSK8ZoE6vloQ"/>
+            </eAnnotations>
+          </xmi:Extension>
+        </lowerValue>
+        <upperValue xsi:type="uml:LiteralUnlimitedNatural" xmi:id="_wmEBopUkEeqqGZh46IEtXQ" value="1"/>
+      </ownedEnd>
+      <ownedEnd xmi:id="_wmEBo5UkEeqqGZh46IEtXQ" name="booking" type="_wmDam5UkEeqqGZh46IEtXQ" owningAssociation="_wmEBlpUkEeqqGZh46IEtXQ" association="_wmEBlpUkEeqqGZh46IEtXQ">
+        <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+          <eAnnotations xmi:id="_wmEBpJUkEeqqGZh46IEtXQ" source="genmymodel">
+            <details xmi:id="_wmEBpZUkEeqqGZh46IEtXQ" key="uuid" value="_p-aNsGavEDaSK8ZoE6vloQ"/>
+          </eAnnotations>
+        </xmi:Extension>
+        <lowerValue xsi:type="uml:LiteralInteger" xmi:id="_wmEBppUkEeqqGZh46IEtXQ">
+          <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+            <eAnnotations xmi:id="_wmEBp5UkEeqqGZh46IEtXQ" source="genmymodel">
+              <details xmi:id="_wmEBqJUkEeqqGZh46IEtXQ" key="uuid" value="_p-aNsWavEDaSK8ZoE6vloQ"/>
+            </eAnnotations>
+          </xmi:Extension>
+        </lowerValue>
+        <upperValue xsi:type="uml:LiteralUnlimitedNatural" xmi:id="_wmEBqZUkEeqqGZh46IEtXQ" value="*"/>
+      </ownedEnd>
+    </packagedElement>
+    <packagedElement xsi:type="uml:Enumeration" xmi:id="_wmEBqpUkEeqqGZh46IEtXQ" name="BookingStatus">
+      <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+        <eAnnotations xmi:id="_wmEBq5UkEeqqGZh46IEtXQ" source="genmymodel">
+          <details xmi:id="_wmEBrJUkEeqqGZh46IEtXQ" key="uuid" value="_vwaBgGavEDaSK8ZoE6vloQ"/>
+        </eAnnotations>
+      </xmi:Extension>
+      <ownedLiteral xmi:id="_wmEBrZUkEeqqGZh46IEtXQ" name="BOOKED" enumeration="_wmEBqpUkEeqqGZh46IEtXQ">
+        <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+          <eAnnotations xmi:id="_wmEBrpUkEeqqGZh46IEtXQ" source="genmymodel">
+            <details xmi:id="_wmEBr5UkEeqqGZh46IEtXQ" key="uuid" value="_1JK18GavEDaSK8ZoE6vloQ"/>
+          </eAnnotations>
+        </xmi:Extension>
+      </ownedLiteral>
+      <ownedLiteral xmi:id="_wmEBsJUkEeqqGZh46IEtXQ" name="CANCELLED" enumeration="_wmEBqpUkEeqqGZh46IEtXQ">
+        <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+          <eAnnotations xmi:id="_wmEBsZUkEeqqGZh46IEtXQ" source="genmymodel">
+            <details xmi:id="_wmEBspUkEeqqGZh46IEtXQ" key="uuid" value="_2QH28WavEDaSK8ZoE6vloQ"/>
+          </eAnnotations>
+        </xmi:Extension>
+      </ownedLiteral>
+      <ownedLiteral xmi:id="_wmEBs5UkEeqqGZh46IEtXQ" name="ARRIVED" enumeration="_wmEBqpUkEeqqGZh46IEtXQ">
+        <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+          <eAnnotations xmi:id="_wmEBtJUkEeqqGZh46IEtXQ" source="genmymodel">
+            <details xmi:id="_wmEBtZUkEeqqGZh46IEtXQ" key="uuid" value="_3fz9MGavEDaSK8ZoE6vloQ"/>
+          </eAnnotations>
+        </xmi:Extension>
+      </ownedLiteral>
+      <ownedLiteral xmi:id="_wmEBtpUkEeqqGZh46IEtXQ" name="DEPARTED" enumeration="_wmEBqpUkEeqqGZh46IEtXQ">
+        <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+          <eAnnotations xmi:id="_wmEBt5UkEeqqGZh46IEtXQ" source="genmymodel">
+            <details xmi:id="_wmEBuJUkEeqqGZh46IEtXQ" key="uuid" value="_4vyXUGavEDaSK8ZoE6vloQ"/>
+          </eAnnotations>
+        </xmi:Extension>
+      </ownedLiteral>
+    </packagedElement>
+    <packagedElement xsi:type="uml:Class" xmi:id="_wmEBuZUkEeqqGZh46IEtXQ" name="Contact">
+      <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+        <eAnnotations xmi:id="_wmEBupUkEeqqGZh46IEtXQ" source="genmymodel">
+          <details xmi:id="_wmEBu5UkEeqqGZh46IEtXQ" key="uuid" value="_TqSO4GawEDaSK8ZoE6vloQ"/>
+          <details xmi:id="_wmEBvJUkEeqqGZh46IEtXQ" key="gmm-documentation" value="&lt;p&gt;An individual that is invovled with a Booking a Room in a Hotel.&lt;/p&gt;&#xA;"/>
+        </eAnnotations>
+      </xmi:Extension>
+      <ownedAttribute xmi:id="_wmEBvZUkEeqqGZh46IEtXQ" name="name" type="_wmDar5UkEeqqGZh46IEtXQ">
+        <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+          <eAnnotations xmi:id="_wmEBvpUkEeqqGZh46IEtXQ" source="genmymodel">
+            <details xmi:id="_wmEBv5UkEeqqGZh46IEtXQ" key="uuid" value="_TqTdAGawEDaSK8ZoE6vloQ"/>
+            <details xmi:id="_wmEBwJUkEeqqGZh46IEtXQ" key="gmm-documentation" value="&lt;p&gt;Name of the the contact.&lt;/p&gt;&#xA;"/>
+          </eAnnotations>
+        </xmi:Extension>
+      </ownedAttribute>
+      <ownedAttribute xmi:id="_wmEBwZUkEeqqGZh46IEtXQ" name="address" type="_wmDas5UkEeqqGZh46IEtXQ">
+        <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+          <eAnnotations xmi:id="_wmEBwpUkEeqqGZh46IEtXQ" source="genmymodel">
+            <details xmi:id="_wmEBw5UkEeqqGZh46IEtXQ" key="uuid" value="_TqTdAWawEDaSK8ZoE6vloQ"/>
+            <details xmi:id="_wmEBxJUkEeqqGZh46IEtXQ" key="gmm-documentation" value="&lt;p&gt;Address related to the contact.&lt;/p&gt;&#xA;"/>
+          </eAnnotations>
+        </xmi:Extension>
+      </ownedAttribute>
+      <ownedAttribute xmi:id="_wmEBxZUkEeqqGZh46IEtXQ" name="email">
+        <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+          <eAnnotations xmi:id="_wmEBxpUkEeqqGZh46IEtXQ" source="genmymodel">
+            <details xmi:id="_wmEBx5UkEeqqGZh46IEtXQ" key="uuid" value="_TqTdAmawEDaSK8ZoE6vloQ"/>
+            <details xmi:id="_wmEByJUkEeqqGZh46IEtXQ" key="gmm-documentation" value="&lt;p&gt;Contact email address of the contact.&lt;/p&gt;&#xA;"/>
+          </eAnnotations>
+        </xmi:Extension>
+        <type xsi:type="uml:PrimitiveType" href="http://www.omg.org/spec/UML/20131001/PrimitiveTypes.xmi#//String"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:id="_wmEByZUkEeqqGZh46IEtXQ" name="phone">
+        <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+          <eAnnotations xmi:id="_wmEBypUkEeqqGZh46IEtXQ" source="genmymodel">
+            <details xmi:id="_wmEBy5UkEeqqGZh46IEtXQ" key="uuid" value="_TqUEEGawEDaSK8ZoE6vloQ"/>
+            <details xmi:id="_wmEBzJUkEeqqGZh46IEtXQ" key="gmm-documentation" value="&lt;p&gt;Contact phone number of the contact.&lt;/p&gt;&#xA;"/>
+          </eAnnotations>
+        </xmi:Extension>
+        <type xsi:type="uml:PrimitiveType" href="http://www.omg.org/spec/UML/20131001/PrimitiveTypes.xmi#//String"/>
+      </ownedAttribute>
+    </packagedElement>
+    <packagedElement xsi:type="uml:Association" xmi:id="_wmEBzZUkEeqqGZh46IEtXQ" name="Booking_Contact" memberEnd="_wmEB0JUkEeqqGZh46IEtXQ _wmEB2ZUkEeqqGZh46IEtXQ" navigableOwnedEnd="_wmEB0JUkEeqqGZh46IEtXQ _wmEB2ZUkEeqqGZh46IEtXQ">
+      <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+        <eAnnotations xmi:id="_wmEBzpUkEeqqGZh46IEtXQ" source="genmymodel">
+          <details xmi:id="_wmEBz5UkEeqqGZh46IEtXQ" key="uuid" value="_KKR1BWdwEDad2YyRFLIqjA"/>
+        </eAnnotations>
+      </xmi:Extension>
+      <ownedEnd xmi:id="_wmEB0JUkEeqqGZh46IEtXQ" name="bookedBy" type="_wmEBuZUkEeqqGZh46IEtXQ" owningAssociation="_wmEBzZUkEeqqGZh46IEtXQ" association="_wmEBzZUkEeqqGZh46IEtXQ">
+        <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+          <eAnnotations xmi:id="_wmEB0ZUkEeqqGZh46IEtXQ" source="genmymodel">
+            <details xmi:id="_wmEB0pUkEeqqGZh46IEtXQ" key="uuid" value="_KKR1AmdwEDad2YyRFLIqjA"/>
+          </eAnnotations>
+        </xmi:Extension>
+        <lowerValue xsi:type="uml:LiteralInteger" xmi:id="_wmEB05UkEeqqGZh46IEtXQ">
+          <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+            <eAnnotations xmi:id="_wmEB1JUkEeqqGZh46IEtXQ" source="genmymodel">
+              <details xmi:id="_wmEB1ZUkEeqqGZh46IEtXQ" key="uuid" value="_KKR1A2dwEDad2YyRFLIqjA"/>
+            </eAnnotations>
+          </xmi:Extension>
+        </lowerValue>
+        <upperValue xsi:type="uml:LiteralInteger" xmi:id="_wmEB1pUkEeqqGZh46IEtXQ" value="1">
+          <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+            <eAnnotations xmi:id="_wmEB15UkEeqqGZh46IEtXQ" source="genmymodel">
+              <details xmi:id="_wmEB2JUkEeqqGZh46IEtXQ" key="uuid" value="_KKR1BGdwEDad2YyRFLIqjA"/>
+            </eAnnotations>
+          </xmi:Extension>
+        </upperValue>
+      </ownedEnd>
+      <ownedEnd xmi:id="_wmEB2ZUkEeqqGZh46IEtXQ" name="booking" type="_wmDam5UkEeqqGZh46IEtXQ" owningAssociation="_wmEBzZUkEeqqGZh46IEtXQ" association="_wmEBzZUkEeqqGZh46IEtXQ">
+        <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+          <eAnnotations xmi:id="_wmEB2pUkEeqqGZh46IEtXQ" source="genmymodel">
+            <details xmi:id="_wmEB25UkEeqqGZh46IEtXQ" key="uuid" value="_KKQm4mdwEDad2YyRFLIqjA"/>
+          </eAnnotations>
+        </xmi:Extension>
+        <lowerValue xsi:type="uml:LiteralInteger" xmi:id="_wmEB3JUkEeqqGZh46IEtXQ">
+          <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+            <eAnnotations xmi:id="_wmEB3ZUkEeqqGZh46IEtXQ" source="genmymodel">
+              <details xmi:id="_wmEB3pUkEeqqGZh46IEtXQ" key="uuid" value="_KKR1AGdwEDad2YyRFLIqjA"/>
+            </eAnnotations>
+          </xmi:Extension>
+        </lowerValue>
+        <upperValue xsi:type="uml:LiteralInteger" xmi:id="_wmEB35UkEeqqGZh46IEtXQ" value="1">
+          <xmi:Extension extender="http://www.eclipse.org/emf/2002/Ecore">
+            <eAnnotations xmi:id="_wmEB4JUkEeqqGZh46IEtXQ" source="genmymodel">
+              <details xmi:id="_wmEB4ZUkEeqqGZh46IEtXQ" key="uuid" value="_KKR1AWdwEDad2YyRFLIqjA"/>
+            </eAnnotations>
+          </xmi:Extension>
+        </upperValue>
+      </ownedEnd>
+    </packagedElement>
+  </uml:Model>
+</xmi:XMI>

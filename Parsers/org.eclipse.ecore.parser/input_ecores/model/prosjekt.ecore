@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="prosjekt" nsURI="platform:/plugin/prosjekt/prosjekt.ecore" nsPrefix="prosjekt">
+  <eClassifiers xsi:type="ecore:EClass" name="Institute">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="shortName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="course" eType="#//Course"
+        eOpposite="#//Course/institute"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="courseCoordinator" upperBound="-1"
+        eType="#//CourseCoordinator" eOpposite="#//CourseCoordinator/institute"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Course">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EShort"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="code" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="avgGrade" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="studyPoints" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDouble"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="institute" eType="#//Institute"
+        containment="true" eOpposite="#//Institute/course"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="semester" eType="#//Semester"
+        containment="true" eOpposite="#//Semester/course"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="courseCoordinator" upperBound="-1"
+        eType="#//CourseCoordinator" containment="true" eOpposite="#//CourseCoordinator/course"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Semester">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="course" eType="#//Course"
+        eOpposite="#//Course/semester"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="CourseCoordinator">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="course" eType="#//Course"
+        eOpposite="#//Course/courseCoordinator"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="institute" eType="#//Institute"
+        eOpposite="#//Institute/courseCoordinator"/>
+  </eClassifiers>
+</ecore:EPackage>

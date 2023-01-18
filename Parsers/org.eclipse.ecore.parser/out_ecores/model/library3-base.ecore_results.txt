@@ -1,0 +1,5 @@
+model	BookType (pages,Int,attribute) (author,NameType,attribute) (isbn,IsbnType,attribute) (name,ID,attribute) (title,String,attribute) (bookInfo,BookInfoType,ref) 
+model	DocumentRoot (mixed,EFeatureMapEntry,attribute) (library,LibraryType,ref) (xSISchemaLocation,EStringToStringMapEntry,ref) (xMLNSPrefixMap,EStringToStringMapEntry,ref) 
+model	LibraryType (book,BookType,ref) (customer,CustomerType,ref) 
+model	CustomerType (firstName,String,attribute) (lastName,String,attribute) (borrowedBookId,IDREF,attribute) 
+model	BookInfoType (any,EFeatureMapEntry,attribute) 

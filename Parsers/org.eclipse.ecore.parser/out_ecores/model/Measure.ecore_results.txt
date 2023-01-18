@@ -1,0 +1,8 @@
+model	RootMeasureSet (modelType,ModelKind,attribute) (measureSets,MeasureSet,ref) (categories,Category,ref) 
+model	Category (name,EString,attribute) (desc,EString,attribute) (root,RootMeasureSet,ref) (metrics,Metric,ref) 
+model	MeasureSet (elementType,ElementKind,attribute) (elementName,EString,attribute) (parent,MeasureSet,ref) (measures,Measure,ref) (root,RootMeasureSet,ref) (subsets,MeasureSet,ref) 
+model	Measure (owner,MeasureSet,ref) (metric,Metric,ref) 
+model	PercentageMeasure (value,EDoubleObject,attribute) 
+model	Metric (preferredValue,EString,attribute) (name,EString,attribute) (desc,EString,attribute) (category,Category,ref) 
+model	IntegerMeasure (value,EIntegerObject,attribute) 
+model	DoubleMeasure (value,EDoubleObject,attribute) 

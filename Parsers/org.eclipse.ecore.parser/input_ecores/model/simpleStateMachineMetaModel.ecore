@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="simpleStateMachineMetaModel" nsURI="simpleStateMachineMetaModel"
+    nsPrefix="">
+  <eClassifiers xsi:type="ecore:EClass" name="SimpleStateMachine">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="Name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="States" upperBound="-1"
+        eType="#//State" containment="true" eOpposite="#//State/SimpleStateMachine"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="Transitions" upperBound="-1"
+        eType="#//Transition" containment="true" eOpposite="#//Transition/SimpleStateMachine"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="InitialState" eType="#//State"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Transition">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="Name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="SimpleStateMachine" lowerBound="1"
+        eType="#//SimpleStateMachine" eOpposite="#//SimpleStateMachine/Transitions"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="Source" lowerBound="1"
+        eType="#//State" eOpposite="#//State/Outgoing"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="Target" lowerBound="1"
+        eType="#//State" eOpposite="#//State/Incoming"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="State">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="Name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="SimpleStateMachine" lowerBound="1"
+        eType="#//SimpleStateMachine" eOpposite="#//SimpleStateMachine/States"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="Outgoing" upperBound="-1"
+        eType="#//Transition" eOpposite="#//Transition/Source"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="Incoming" upperBound="-1"
+        eType="#//Transition" eOpposite="#//Transition/Target"/>
+  </eClassifiers>
+</ecore:EPackage>

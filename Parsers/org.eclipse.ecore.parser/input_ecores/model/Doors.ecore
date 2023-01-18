@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="model" nsURI="de.jpwinkler.daf.model" nsPrefix="Doors">
+    
+    <eClassifiers xsi:type="ecore:EDataType" name="DoorsTreeNodeVisitor" instanceClassName="de.jpwinkler.daf.model.DoorsTreeNodeVisitor"/>
+    <eClassifiers xsi:type="ecore:EDataType" name="DoorsLinkStatus" instanceClassName="de.jpwinkler.daf.model.DoorsLinkStatus"/>
+    <eClassifiers xsi:type="ecore:EDataType" name="DoorsLinkResolveException" instanceClassName="de.jpwinkler.daf.model.DoorsLinkResolveException"/>
+    <eClassifiers xsi:type="ecore:EDataType" name="Pattern" instanceClassName="java.util.regex.Pattern"/>
+    <eClassifiers xsi:type="ecore:EDataType" name="Collection" instanceClassName="java.util.Collection"/>
+    <eClassifiers xsi:type="ecore:EDataType" name="NodeFilter" instanceTypeName="java.util.function.Predicate&lt;de.jpwinkler.daf.model.DoorsTreeNode&gt;"/>
+    
+    <eClassifiers xsi:type="ecore:EClass" name="DoorsFolder" eSuperTypes="#//DoorsTreeNode">
+        <eStructuralFeatures xsi:type="ecore:EAttribute" name="project" unique="false"
+                             eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    </eClassifiers>
+      
+    <eClassifiers xsi:type="ecore:EClass" name="DoorsModule" eSuperTypes="#//DoorsTreeNode">
+        <eOperations name="getObjectAttributes" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString" upperBound="-1"/>
+        <eOperations name="setObjectAttributes">
+            <eParameters name="attrs" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString" upperBound="-1"/>
+        </eOperations>
+        <eOperations name="getView" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eClassifiers>
+  
+    <eClassifiers xsi:type="ecore:EClass" name="DoorsObject" eSuperTypes="#//DoorsTreeNode">
+        <eOperations name="isHeading" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
+            <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+                <details key="body" value="return getObjectHeading() != null &amp;&amp; !getObjectHeading().isEmpty();"/>
+            </eAnnotations>
+        </eOperations>
+        <eOperations name="getObjectLevel" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+        <eStructuralFeatures xsi:type="ecore:EAttribute" name="objectIdentifier" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
+                             volatile="true" transient="true" defaultValueLiteral="" derived="true"/>
+        <eStructuralFeatures xsi:type="ecore:EAttribute" name="objectNumber" unique="false"
+                             eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString" volatile="true"
+                             transient="true" derived="true"/>
+        <eStructuralFeatures xsi:type="ecore:EAttribute" name="absoluteNumber" unique="false"
+                             eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt" volatile="true"
+                             transient="true" derived="true"/>
+        <eStructuralFeatures xsi:type="ecore:EAttribute" name="objectText" unique="false"
+                             eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString" volatile="true"
+                             transient="true" derived="true"/>
+        <eStructuralFeatures xsi:type="ecore:EAttribute" name="objectShortText" unique="false"
+                             eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString" volatile="true"
+                             transient="true" derived="true"/>
+        <eStructuralFeatures xsi:type="ecore:EAttribute" name="objectHeading" unique="false"
+                             eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString" volatile="true"
+                             transient="true" derived="true"/>
+        <eStructuralFeatures xsi:type="ecore:EAttribute" name="text" unique="false" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
+                             volatile="true" transient="true" defaultValueLiteral="" derived="true"/>
+        
+        <eStructuralFeatures xsi:type="ecore:EReference" name="outgoingLinks" upperBound="-1" containment="true"
+                             eType="#//DoorsLink" eOpposite="#//DoorsLink/source"/>
+    </eClassifiers>
+    
+    <eClassifiers xsi:type="ecore:EClass" name="DoorsTableRow" eSuperTypes="#//DoorsObject"></eClassifiers>
+  
+    <eClassifiers xsi:type="ecore:EClass" name="AttributeMap" instanceClassName="java.util.Map$Entry">
+        <eStructuralFeatures xsi:type="ecore:EAttribute" name="key" unique="false" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+        <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" unique="false" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eClassifiers>
+    
+    <eClassifiers xsi:type="ecore:EClass" name="DoorsLink">
+        <eOperations name="getLinkStatus" eType="#//DoorsLinkStatus"/>
+        <eOperations name="resolve" eType="#//DoorsObject" eExceptions="#//DoorsLinkResolveException"/>
+        <eOperations name="resolve" eType="#//DoorsObject" eExceptions="#//DoorsLinkResolveException">
+            <eParameters name="sourceOverride" eType="#//DoorsTreeNode"/>
+        </eOperations>
+        
+        <eStructuralFeatures xsi:type="ecore:EAttribute" name="targetModule" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+        <eStructuralFeatures xsi:type="ecore:EAttribute" name="targetObject" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+        
+        <eStructuralFeatures xsi:type="ecore:EReference" name="source" eType="#//DoorsObject"
+                             eOpposite="#//DoorsObject/outgoingLinks"/>        
+    </eClassifiers>
+  
+    <eClassifiers xsi:type="ecore:EClass" name="DoorsTreeNode" abstract="true">
+        <eStructuralFeatures xsi:type="ecore:EReference" name="children" upperBound="-1"
+                             eType="#//DoorsTreeNode" containment="true" resolveProxies="false" eOpposite="#//DoorsTreeNode/parent"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="parent" eType="#//DoorsTreeNode"
+                             eOpposite="#//DoorsTreeNode/children"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="attributes" ordered="false"
+                             upperBound="-1" eType="#//AttributeMap" containment="true" resolveProxies="false"/>
+        <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+        <eStructuralFeatures xsi:type="ecore:EAttribute" name="fullName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
+                             changeable="false" volatile="true" transient="true" derived="true"/>
+        <eStructuralFeatures xsi:type="ecore:EAttribute" name="fullNameSegments" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
+                             changeable="false" volatile="true" transient="true" derived="true" upperBound="-1"/>
+        
+        <eOperations name="getChild" eType="#//DoorsTreeNode">
+            <eParameters name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+        </eOperations>
+        
+        <eOperations name="hasTag" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
+            <eParameters name="tag" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+        </eOperations>
+        
+        <eOperations name="hasTag" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
+            <eParameters name="pattern" eType="#//Pattern"/>
+        </eOperations>
+        
+        <eOperations name="getTags" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString" upperBound="-1"/>
+        
+        <eOperations name="setTag">
+            <eParameters name="tag" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+        </eOperations>
+        
+        <eOperations name="removeTag">
+            <eParameters name="tag" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+        </eOperations>
+        
+        <eOperations name="removeTag">
+            <eParameters name="pattern" eType="#//Pattern"/>
+        </eOperations>
+        
+        <eOperations name="canCopyFrom" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
+            <eParameters name="node" eType="#//DoorsTreeNode"/>
+        </eOperations>
+        
+        <eOperations name="toString" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eClassifiers>
+</ecore:EPackage>

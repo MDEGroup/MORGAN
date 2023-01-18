@@ -1,0 +1,398 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="trnetvisual" nsURI="http://trnetvisual/1.0" nsPrefix="trnetvisual">
+  <eAnnotations source="gmf">
+    <details key="foo" value="bar"/>
+  </eAnnotations>
+  <eClassifiers xsi:type="ecore:EClass" name="TrNetModel">
+    <eAnnotations source="gmf.diagram">
+      <details key="foo" value="bar"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="patterns" upperBound="-1"
+        eType="#//Pattern" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="operators" upperBound="-1"
+        eType="#//Operator" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="id" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="restrictions" upperBound="-1"
+        eType="#//Restriction" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="operands" upperBound="-1"
+        eType="#//Operand" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="results" upperBound="-1"
+        eType="#//Result" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="flowRules" upperBound="-1"
+        eType="#//FlowRule" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="calculations" upperBound="-1"
+        eType="#//Calculation" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="NodePattern" abstract="true" eSuperTypes="#//Parameter">
+    <eAnnotations source="gmf.node">
+      <details key="label" value="name"/>
+      <details key="figure" value="rectangle"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="incoming" upperBound="-1"
+        eType="#//EdgePattern" eOpposite="#//EdgePattern/target"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="outgoing" upperBound="-1"
+        eType="#//EdgePattern" eOpposite="#//EdgePattern/source"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="sameOut" upperBound="-1"
+        eType="#//Same" eOpposite="#//Same/source"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="sameIn" upperBound="-1"
+        eType="#//Same" eOpposite="#//Same/target"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="pattern" lowerBound="1"
+        eType="#//Pattern" eOpposite="#//Pattern/nodes"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="attributes" upperBound="-1"
+        eType="#//AttributePattern" containment="true" eOpposite="#//AttributePattern/ownerNode">
+      <eAnnotations source="gmf.compartment">
+        <details key="collapsible" value="true"/>
+        <details key="layout" value="list"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="keepIn" upperBound="-1"
+        eType="#//Keep" eOpposite="#//Keep/target"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="keepOut" upperBound="-1"
+        eType="#//Keep" eOpposite="#//Keep/source"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="differentIn" upperBound="-1"
+        eType="#//Different" eOpposite="#//Different/target"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="differentOut" upperBound="-1"
+        eType="#//Different" eOpposite="#//Different/source"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="id" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="expectedNumberOfDistinctValues"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDouble"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="EdgePattern">
+    <eAnnotations source="gmf.link">
+      <details key="label" value="name"/>
+      <details key="source" value="source"/>
+      <details key="target" value="target"/>
+      <details key="target.decoration" value="arrow"/>
+      <details key="width" value="1"/>
+      <details key="tool.name" value="Edge"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="source" lowerBound="1"
+        eType="#//NodePattern" eOpposite="#//NodePattern/outgoing"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="target" lowerBound="1"
+        eType="#//NodePattern" eOpposite="#//NodePattern/incoming"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="pattern" lowerBound="1"
+        eType="#//Pattern" eOpposite="#//Pattern/edges"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Pattern">
+    <eAnnotations source="gmf.node">
+      <details key="label.placement" value="none"/>
+      <details key="figure" value="rounded"/>
+      <details key="tool.name" value="Pattern"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="nodes" lowerBound="1" upperBound="-1"
+        eType="#//NodePattern" containment="true" eOpposite="#//NodePattern/pattern">
+      <eAnnotations source="gmf.compartment">
+        <details key="collapsible" value="false"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="edges" upperBound="-1"
+        eType="#//EdgePattern" containment="true" eOpposite="#//EdgePattern/pattern"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="incomingResults" upperBound="-1"
+        eType="#//Result" eOpposite="#//Result/pattern"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="outgoingOperands" upperBound="-1"
+        eType="#//Operand" eOpposite="#//Operand/pattern"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="id" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="expected_size" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDouble"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Same" eSuperTypes="#//Restriction">
+    <eAnnotations source="gmf.link">
+      <details key="source" value="source"/>
+      <details key="target" value="target"/>
+      <details key="color" value="0,214,32"/>
+      <details key="tool.name" value="Same Node"/>
+      <details key="width" value="2"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="source" lowerBound="1"
+        eType="#//NodePattern" eOpposite="#//NodePattern/sameOut"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="target" lowerBound="1"
+        eType="#//NodePattern" eOpposite="#//NodePattern/sameIn"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Different" eSuperTypes="#//Restriction">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="source" lowerBound="1"
+        eType="#//NodePattern" eOpposite="#//NodePattern/differentOut"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="target" lowerBound="1"
+        eType="#//NodePattern" eOpposite="#//NodePattern/differentIn"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="AttributePattern" eSuperTypes="#//Parameter">
+    <eAnnotations source="gmf.node">
+      <details key="label" value="name"/>
+      <details key="figure" value="rectangle"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="attributeExternalCalculationCall"
+        eType="#//ExternalAttributeCalculationCall" eOpposite="#//ExternalAttributeCalculationCall/result"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="ownerNode" lowerBound="1"
+        eType="#//NodePattern" eOpposite="#//NodePattern/attributes"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="expectedNumberOfDistinctValues"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDouble"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Keep" eSuperTypes="#//Restriction">
+    <eAnnotations source="gmf.link">
+      <details key="source" value="source"/>
+      <details key="target" value="target"/>
+      <details key="color" value="51,153,255"/>
+      <details key="target.decoration" value="arrow"/>
+      <details key="tool.name" value="Keep Node"/>
+      <details key="width" value="2"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="source" lowerBound="1"
+        eType="#//NodePattern" eOpposite="#//NodePattern/keepOut"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="target" lowerBound="1"
+        eType="#//NodePattern" eOpposite="#//NodePattern/keepIn"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Restriction" abstract="true"/>
+  <eClassifiers xsi:type="ecore:EClass" name="MandatoryNode" eSuperTypes="#//NodePattern">
+    <eAnnotations source="gmf.node">
+      <details key="tool.name" value="Node"/>
+      <details key="border.style" value="solid"/>
+    </eAnnotations>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="OptionalNode" eSuperTypes="#//NodePattern"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Combinator" eSuperTypes="#//Operator">
+    <eAnnotations source="gmf.node">
+      <details key="label.placement" value="none"/>
+      <details key="figure" value="rectangle"/>
+      <details key="color" value="145,145,145"/>
+      <details key="tool.name" value="Combine Operator"/>
+    </eAnnotations>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="External" eSuperTypes="#//Operator">
+    <eAnnotations source="gmf.node">
+      <details key="label.placement" value="none"/>
+      <details key="figure" value="rectangle"/>
+      <details key="color" value="255,255,255"/>
+      <details key="tool.name" value="External"/>
+    </eAnnotations>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Operator" abstract="true">
+    <eAnnotations source="gmf.node">
+      <details key="foo" value="bar"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="operands" upperBound="-1"
+        eType="#//Operand" eOpposite="#//Operand/operator"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="results" upperBound="-1"
+        eType="#//Result" eOpposite="#//Result/operator"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="id" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="flowOut" upperBound="-1"
+        eType="#//FlowRule" eOpposite="#//FlowRule/source"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="flowIn" upperBound="-1"
+        eType="#//FlowRule" eOpposite="#//FlowRule/target"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="conditions" upperBound="-1"
+        eType="#//ApplicationCondition" containment="true">
+      <eAnnotations source="gmf.compartment">
+        <details key="collapsible" value="true"/>
+        <details key="layout" value="list"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="actions" upperBound="-1"
+        eType="#//Action" containment="true">
+      <eAnnotations source="gmf.compartment">
+        <details key="collapsible" value="true"/>
+        <details key="layout" value="list"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Result" abstract="true">
+    <eAnnotations source="gmf.link">
+      <details key="source" value="operator"/>
+      <details key="target" value="pattern"/>
+      <details key="target.decoration" value="arrow"/>
+      <details key="width" value="3"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="pattern" lowerBound="1"
+        eType="#//Pattern" eOpposite="#//Pattern/incomingResults"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="operator" lowerBound="1"
+        eType="#//Operator" eOpposite="#//Operator/results"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="AnyResult" eSuperTypes="#//Result">
+    <eAnnotations source="gmf.link">
+      <details key="tool.name" value="All Result"/>
+    </eAnnotations>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="SomeResult" eSuperTypes="#//Result">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="count" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Operand" abstract="true">
+    <eAnnotations source="gmf.link">
+      <details key="source" value="pattern"/>
+      <details key="target" value="operator"/>
+      <details key="target.decoration" value="arrow"/>
+      <details key="width" value="3"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="operator" lowerBound="1"
+        eType="#//Operator" eOpposite="#//Operator/operands"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="pattern" lowerBound="1"
+        eType="#//Pattern" eOpposite="#//Pattern/outgoingOperands"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="index" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="AnyOperand" eSuperTypes="#//Operand">
+    <eAnnotations source="gmf.link">
+      <details key="tool.name" value="All Operand"/>
+    </eAnnotations>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="SomeOperand" eSuperTypes="#//Operand">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="count" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="AntiOperand" eSuperTypes="#//Operand"/>
+  <eClassifiers xsi:type="ecore:EClass" name="OptionalOperand" eSuperTypes="#//Operand"/>
+  <eClassifiers xsi:type="ecore:EClass" name="FlowRule" abstract="true">
+    <eAnnotations source="gmf.link">
+      <details key="source" value="source"/>
+      <details key="target" value="target"/>
+      <details key="target.decoration" value="arrow"/>
+      <details key="width" value="3"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="source" lowerBound="1"
+        eType="#//Operator" eOpposite="#//Operator/flowOut"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="target" lowerBound="1"
+        eType="#//Operator" eOpposite="#//Operator/flowIn"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Next" eSuperTypes="#//FlowRule"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Eventually" eSuperTypes="#//FlowRule"/>
+  <eClassifiers xsi:type="ecore:EClass" name="NextDerived" eSuperTypes="#//FlowRule">
+    <eAnnotations source="gmf.link">
+      <details key="color" value="255,207,254"/>
+    </eAnnotations>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="AttributeCalculation" abstract="true"
+      eSuperTypes="#//Restriction"/>
+  <eClassifiers xsi:type="ecore:EClass" name="ExternalAttributeCalculationCall" eSuperTypes="#//AttributeCalculation">
+    <eAnnotations source="gmf.node">
+      <details key="label" value="id"/>
+      <details key="figure" value="rectangle"/>
+      <details key="size" value="120,30"/>
+      <details key="color" value="100,226,255"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="id" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="qualifiedName" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="result" lowerBound="1"
+        eType="#//AttributePattern" eOpposite="#//AttributePattern/attributeExternalCalculationCall">
+      <eAnnotations source="gmf.link">
+        <details key="target.decoration" value="arrow"/>
+        <details key="width" value="3"/>
+        <details key="color" value="90,90,90"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="parameters" upperBound="-1"
+        eType="#//ExternalAttributeCalculationCallParameter" containment="true" eOpposite="#//ExternalAttributeCalculationCallParameter/owner"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Parameter" abstract="true">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="externalAttributeCalculationCallRef"
+        upperBound="-1" eType="#//ExternalAttributeCalculationCallParameter" eOpposite="#//ExternalAttributeCalculationCallParameter/parameter"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="externalConditionCallRef"
+        upperBound="-1" eType="#//ExternalConditionCallParameter" eOpposite="#//ExternalConditionCallParameter/parameter"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="externalActionCallRef"
+        upperBound="-1" eType="#//ExternalActionCallParameter" eOpposite="#//ExternalActionCallParameter/parameter"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="externalCalculationCallRef"
+        upperBound="-1" eType="#//ExternalCalculationCallParameter" eOpposite="#//ExternalCalculationCallParameter/parameter"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ApplicationCondition" abstract="true"/>
+  <eClassifiers xsi:type="ecore:EClass" name="ExternalConditionCall" eSuperTypes="#//ApplicationCondition">
+    <eAnnotations source="gmf.node">
+      <details key="label" value="id"/>
+      <details key="figure" value="rectangle"/>
+      <details key="size" value="120,30"/>
+      <details key="color" value="252,186,255"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="id" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="qualifiedName" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="parameters" upperBound="-1"
+        eType="#//ExternalConditionCallParameter" containment="true" eOpposite="#//ExternalConditionCallParameter/owner"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Action" abstract="true"/>
+  <eClassifiers xsi:type="ecore:EClass" name="ExternalActionCall" eSuperTypes="#//Action">
+    <eAnnotations source="gmf.node">
+      <details key="label" value="id"/>
+      <details key="figure" value="rectangle"/>
+      <details key="size" value="120,30"/>
+      <details key="color" value="176,255,161"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="id" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="qualifiedName" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="parameters" upperBound="-1"
+        eType="#//ExternalActionCallParameter" containment="true" eOpposite="#//ExternalActionCallParameter/owner"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ExternalAttributeCalculationCallParameter"
+      eSuperTypes="#//ParameterRef">
+    <eAnnotations source="gmf.link">
+      <details key="source" value="owner"/>
+      <details key="target" value="parameter"/>
+      <details key="label" value="index"/>
+      <details key="target.decoration" value="arrow"/>
+      <details key="width" value="3"/>
+      <details key="color" value="90,90,90"/>
+      <details key="style" value="dash"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="owner" lowerBound="1" eType="#//ExternalAttributeCalculationCall"
+        eOpposite="#//ExternalAttributeCalculationCall/parameters"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="parameter" lowerBound="1"
+        eType="#//Parameter" eOpposite="#//Parameter/externalAttributeCalculationCallRef"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ExternalConditionCallParameter" eSuperTypes="#//ParameterRef">
+    <eAnnotations source="gmf.link">
+      <details key="source" value="owner"/>
+      <details key="target" value="parameter"/>
+      <details key="label" value="index"/>
+      <details key="target.decoration" value="arrow"/>
+      <details key="width" value="3"/>
+      <details key="color" value="90,90,90"/>
+      <details key="style" value="dash"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="owner" lowerBound="1" eType="#//ExternalConditionCall"
+        eOpposite="#//ExternalConditionCall/parameters"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="parameter" lowerBound="1"
+        eType="#//Parameter" eOpposite="#//Parameter/externalConditionCallRef"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ExternalActionCallParameter" eSuperTypes="#//ParameterRef">
+    <eAnnotations source="gmf.link">
+      <details key="source" value="owner"/>
+      <details key="target" value="parameter"/>
+      <details key="label" value="index"/>
+      <details key="target.decoration" value="arrow"/>
+      <details key="width" value="3"/>
+      <details key="color" value="90,90,90"/>
+      <details key="style" value="dash"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="owner" lowerBound="1" eType="#//ExternalActionCall"
+        eOpposite="#//ExternalActionCall/parameters"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="parameter" lowerBound="1"
+        eType="#//Parameter" eOpposite="#//Parameter/externalActionCallRef"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ParameterRef">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="index" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Calculation" abstract="true" eSuperTypes="#//Parameter"/>
+  <eClassifiers xsi:type="ecore:EClass" name="ExternalCalculationCall" eSuperTypes="#//Calculation">
+    <eAnnotations source="gmf.node">
+      <details key="label" value="id"/>
+      <details key="figure" value="rectangle"/>
+      <details key="size" value="120,30"/>
+      <details key="color" value="100,226,255"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="id" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="qualifiedName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="parameters" upperBound="-1"
+        eType="#//ExternalCalculationCallParameter" containment="true" eOpposite="#//ExternalCalculationCallParameter/owner"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ExternalCalculationCallParameter" eSuperTypes="#//ParameterRef">
+    <eAnnotations source="gmf.link">
+      <details key="source" value="owner"/>
+      <details key="target" value="parameter"/>
+      <details key="label" value="index"/>
+      <details key="target.decoration" value="arrow"/>
+      <details key="width" value="3"/>
+      <details key="color" value="90,90,90"/>
+      <details key="style" value="dash"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="owner" lowerBound="1" eType="#//ExternalCalculationCall"
+        eOpposite="#//ExternalCalculationCall/parameters"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="parameter" lowerBound="1"
+        eType="#//Parameter" eOpposite="#//Parameter/externalCalculationCallRef"/>
+  </eClassifiers>
+</ecore:EPackage>

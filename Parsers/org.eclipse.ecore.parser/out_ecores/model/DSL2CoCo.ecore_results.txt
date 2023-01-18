@@ -1,0 +1,8 @@
+model	FeatureAttribute (minValue,EInt,attribute) (attributeType,EString,attribute) (maxValue,EInt,attribute) (defaultValue,EInt,attribute) (nullValue,EInt,attribute) (feature,Feature,ref) 
+model	OrAlternativeTreeConstraint (min,EInt,attribute) (max,EInt,attribute) (features,Feature,ref) 
+model	FM (features,Feature,ref) (relationships,ParentChildConstraint,ref) (crossTreeConstraints,CrossTreeConstraint,ref) (attributes,FeatureAttribute,ref) 
+model	ParentChildConstraint (parent,Feature,ref) (treeConstraints,TreeConstraint,ref) 
+model	Feature (name,EString,attribute) 
+model	CrossTreeConstraint (type,EString,attribute) (feature2,Feature,ref) (feature1,Feature,ref) 
+model	MandatoryTreeConstraint (feature,Feature,ref) 
+model	OptionalTreeConstraint (feature,Feature,ref) 

@@ -1,0 +1,329 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="se" nsURI="http:///se.ecore" nsPrefix="se">
+  <eSubpackages name="chalmers" nsURI="http:///se/chalmers.ecore" nsPrefix="se.chalmers">
+    <eSubpackages name="cse" nsURI="http:///se/chalmers/cse.ecore" nsPrefix="se.chalmers.cse">
+      <eSubpackages name="mdsd1617" nsURI="http:///se/chalmers/cse/mdsd1617.ecore"
+          nsPrefix="se.chalmers.cse.mdsd1617">
+        <eSubpackages name="group18" nsURI="http:///se/chalmers/cse/mdsd1617/group18.ecore"
+            nsPrefix="se.chalmers.cse.mdsd1617.group18">
+          <eSubpackages name="bookingSystem" nsURI="http:///se/chalmers/cse/mdsd1617/group18/bookingSystem.ecore"
+              nsPrefix="se.chalmers.cse.mdsd1617.group18.bookingSystem">
+            <eClassifiers xsi:type="ecore:EClass" name="CheckInEvent" eSuperTypes="#//chalmers/cse/mdsd1617/group18/bookingSystem/AbstractEvent"/>
+            <eClassifiers xsi:type="ecore:EClass" name="AbstractEvent" abstract="true"
+                eSuperTypes="#//chalmers/cse/mdsd1617/group18/bookingSystem/IEvent">
+              <eStructuralFeatures xsi:type="ecore:EAttribute" name="timestamp" ordered="false"
+                  lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//ELong"/>
+              <eStructuralFeatures xsi:type="ecore:EAttribute" name="eventType" ordered="false"
+                  lowerBound="1" eType="#//chalmers/cse/mdsd1617/group18/bookingSystem/EventType"/>
+              <eStructuralFeatures xsi:type="ecore:EAttribute" name="bookingID" ordered="false"
+                  lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+            </eClassifiers>
+            <eClassifiers xsi:type="ecore:EEnum" name="EventType">
+              <eLiterals name="CHECK_IN"/>
+              <eLiterals name="CHECK_OUT" value="1"/>
+            </eClassifiers>
+            <eClassifiers xsi:type="ecore:EClass" name="IEvent" abstract="true" interface="true">
+              <eOperations name="getTimestamp" ordered="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//ELong"/>
+              <eOperations name="getType" ordered="false" lowerBound="1" eType="#//chalmers/cse/mdsd1617/group18/bookingSystem/EventType"/>
+              <eOperations name="getBookingId" ordered="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+            </eClassifiers>
+            <eClassifiers xsi:type="ecore:EClass" name="CheckOutEvent" eSuperTypes="#//chalmers/cse/mdsd1617/group18/bookingSystem/AbstractEvent"/>
+            <eClassifiers xsi:type="ecore:EClass" name="BookingSystem" eSuperTypes="#//chalmers/cse/mdsd1617/group18/bookingSystem/IHotelBookingManager #//chalmers/cse/mdsd1617/group18/bookingSystem/IHotelCustomerProvides">
+              <eStructuralFeatures xsi:type="ecore:EReference" name="events" ordered="false"
+                  upperBound="-1" eType="#//chalmers/cse/mdsd1617/group18/bookingSystem/IEvent"/>
+              <eStructuralFeatures xsi:type="ecore:EReference" name="bookings" ordered="false"
+                  upperBound="-1" eType="#//chalmers/cse/mdsd1617/group18/bookingSystem/IBooking"/>
+              <eStructuralFeatures xsi:type="ecore:EReference" name="roomProvider"
+                  ordered="false" lowerBound="1" eType="#//chalmers/cse/mdsd1617/group18/roomManager/IHotelRoomProvider"/>
+              <eStructuralFeatures xsi:type="ecore:EReference" name="rooms" ordered="false"
+                  upperBound="-1" eType="#//chalmers/cse/mdsd1617/group18/roomManager/IRoom"/>
+              <eStructuralFeatures xsi:type="ecore:EAttribute" name="bookingId" ordered="false"
+                  lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"
+                  defaultValueLiteral="0"/>
+            </eClassifiers>
+            <eClassifiers xsi:type="ecore:EClass" name="IBooking" abstract="true"
+                interface="true">
+              <eOperations name="getRooms" ordered="false" upperBound="-1" eType="#//chalmers/cse/mdsd1617/group18/roomManager/IRoom"/>
+              <eOperations name="getFirstName" ordered="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+              <eOperations name="getLastName" ordered="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+              <eOperations name="getID" ordered="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+              <eOperations name="getStartDate" ordered="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+              <eOperations name="getEndDate" ordered="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+              <eOperations name="setRooms" ordered="false" lowerBound="1">
+                <eParameters name="rooms" ordered="false" upperBound="-1" eType="#//chalmers/cse/mdsd1617/group18/roomManager/IRoom"/>
+              </eOperations>
+              <eOperations name="setStartDate" ordered="false" lowerBound="1">
+                <eParameters name="startDate" ordered="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+              </eOperations>
+              <eOperations name="setEndDate" ordered="false" lowerBound="1">
+                <eParameters name="endDate" ordered="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+              </eOperations>
+              <eOperations name="addRoom" ordered="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
+                <eParameters name="room" ordered="false" lowerBound="1" eType="#//chalmers/cse/mdsd1617/group18/roomManager/IRoom"/>
+              </eOperations>
+              <eOperations name="checkInRoom" ordered="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
+                <eParameters name="roomToCheckIn" ordered="false" lowerBound="1" eType="#//chalmers/cse/mdsd1617/group18/roomManager/IRoom"/>
+              </eOperations>
+              <eOperations name="getCheckedInRooms" ordered="false" upperBound="-1"
+                  eType="#//chalmers/cse/mdsd1617/group18/roomManager/IRoom"/>
+              <eOperations name="checkOutRoom" ordered="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
+                <eParameters name="roomToCheckOut" ordered="false" lowerBound="1"
+                    eType="#//chalmers/cse/mdsd1617/group18/roomManager/IRoom"/>
+              </eOperations>
+            </eClassifiers>
+            <eClassifiers xsi:type="ecore:EClass" name="IHotelBookingManager" abstract="true"
+                interface="true" eSuperTypes="#//chalmers/cse/mdsd1617/group18/bookingSystem/IHotelCustomerProvides">
+              <eOperations name="initiateCheckin" ordered="false" upperBound="-1"
+                  eType="#//chalmers/cse/mdsd1617/group18/roomManager/IRoom">
+                <eParameters name="bookingId" ordered="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+              </eOperations>
+              <eOperations name="editBookingPeriod" ordered="false" lowerBound="1"
+                  eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
+                <eParameters name="bookingId" ordered="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+                <eParameters name="startDate" ordered="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+                <eParameters name="endDate" ordered="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+              </eOperations>
+              <eOperations name="cancelBooking" ordered="false" lowerBound="1">
+                <eParameters name="bookingId" ordered="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+              </eOperations>
+              <eOperations name="listBooking" ordered="false" upperBound="-1" eType="#//chalmers/cse/mdsd1617/group18/bookingSystem/IBooking"/>
+              <eOperations name="listOccupiedRooms" ordered="false" upperBound="-1"
+                  eType="#//chalmers/cse/mdsd1617/group18/roomManager/IRoom">
+                <eParameters name="date" ordered="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+              </eOperations>
+              <eOperations name="listCheckins" ordered="false" upperBound="-1" eType="#//chalmers/cse/mdsd1617/group18/bookingSystem/IEvent">
+                <eParameters name="startTime" ordered="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+                <eParameters name="endTime" ordered="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+              </eOperations>
+              <eOperations name="listCheckouts" ordered="false" upperBound="-1" eType="#//chalmers/cse/mdsd1617/group18/bookingSystem/IEvent">
+                <eParameters name="startTime" ordered="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+                <eParameters name="endTime" ordered="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+              </eOperations>
+              <eOperations name="addExtraCostToRoom" ordered="false" lowerBound="1">
+                <eParameters name="bookingId" ordered="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+                <eParameters name="roomNumber" ordered="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+                <eParameters name="descriptionOfCost" ordered="false" lowerBound="1"
+                    eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+                <eParameters name="priceOfCost" ordered="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDouble"/>
+              </eOperations>
+              <eOperations name="editBookingRooms" ordered="false" lowerBound="1">
+                <eParameters name="bookingID" ordered="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+                <eParameters name="numOfRooms" ordered="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+                <eParameters name="roomType" ordered="false" lowerBound="1" eType="#//chalmers/cse/mdsd1617/group18/roomManager/IRoomType"/>
+              </eOperations>
+            </eClassifiers>
+            <eClassifiers xsi:type="ecore:EClass" name="IHotelCustomerProvides" abstract="true"
+                interface="true">
+              <eOperations name="getFreeRooms" ordered="false" upperBound="-1" eType="#//chalmers/cse/mdsd1617/group18/bookingSystem/FreeRoomTypesDTO">
+                <eParameters name="numBeds" ordered="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+                <eParameters name="startDate" ordered="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+                <eParameters name="endDate" ordered="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+              </eOperations>
+              <eOperations name="initiateBooking" ordered="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt">
+                <eParameters name="firstName" ordered="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+                <eParameters name="startDate" ordered="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+                <eParameters name="endDate" ordered="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+                <eParameters name="lastName" ordered="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+              </eOperations>
+              <eOperations name="addRoomToBooking" ordered="false" lowerBound="1"
+                  eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
+                <eParameters name="roomTypeDescription" ordered="false" lowerBound="1"
+                    eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+                <eParameters name="bookingID" ordered="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+              </eOperations>
+              <eOperations name="confirmBooking" ordered="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
+                <eParameters name="bookingID" ordered="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+              </eOperations>
+              <eOperations name="initiateCheckout" ordered="false" lowerBound="1"
+                  eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDouble">
+                <eParameters name="bookingID" ordered="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+              </eOperations>
+              <eOperations name="payDuringCheckout" ordered="false" lowerBound="1"
+                  eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
+                <eParameters name="ccNumber" ordered="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+                <eParameters name="ccv" ordered="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+                <eParameters name="expiryMonth" ordered="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+                <eParameters name="expiryYear" ordered="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+                <eParameters name="firstName" ordered="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+                <eParameters name="lastName" ordered="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+              </eOperations>
+              <eOperations name="initiateRoomCheckout" ordered="false" lowerBound="1"
+                  eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDouble">
+                <eParameters name="roomNumber" ordered="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+                <eParameters name="bookingId" ordered="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+              </eOperations>
+              <eOperations name="payRoomDuringCheckout" ordered="false" lowerBound="1"
+                  eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
+                <eParameters name="roomNumber" ordered="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+                <eParameters name="ccNumber" ordered="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+                <eParameters name="ccv" ordered="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+                <eParameters name="expiryMonth" ordered="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+                <eParameters name="expiryYear" ordered="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+                <eParameters name="firstName" ordered="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+                <eParameters name="lastName" ordered="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+              </eOperations>
+              <eOperations name="checkInRoom" ordered="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt">
+                <eParameters name="roomTypeDescription" ordered="false" lowerBound="1"
+                    eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+                <eParameters name="bookingId" ordered="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+              </eOperations>
+            </eClassifiers>
+            <eClassifiers xsi:type="ecore:EClass" name="FreeRoomTypesDTO">
+              <eStructuralFeatures xsi:type="ecore:EAttribute" name="roomTypeDescription"
+                  ordered="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+              <eStructuralFeatures xsi:type="ecore:EAttribute" name="numBeds" ordered="false"
+                  lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+              <eStructuralFeatures xsi:type="ecore:EAttribute" name="pricePerNight"
+                  ordered="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDouble"/>
+              <eStructuralFeatures xsi:type="ecore:EAttribute" name="numFreeRooms"
+                  ordered="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+            </eClassifiers>
+            <eClassifiers xsi:type="ecore:EClass" name="Booking" eSuperTypes="#//chalmers/cse/mdsd1617/group18/bookingSystem/IBooking">
+              <eStructuralFeatures xsi:type="ecore:EAttribute" name="id" ordered="false"
+                  lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+              <eStructuralFeatures xsi:type="ecore:EAttribute" name="firstName" ordered="false"
+                  lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+              <eStructuralFeatures xsi:type="ecore:EAttribute" name="lastName" ordered="false"
+                  lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+              <eStructuralFeatures xsi:type="ecore:EAttribute" name="startDate" ordered="false"
+                  lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+              <eStructuralFeatures xsi:type="ecore:EAttribute" name="endDate" ordered="false"
+                  lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+              <eStructuralFeatures xsi:type="ecore:EReference" name="roomList" ordered="false"
+                  upperBound="-1" eType="#//chalmers/cse/mdsd1617/group18/roomManager/IRoom"/>
+              <eStructuralFeatures xsi:type="ecore:EReference" name="checkedInRooms"
+                  ordered="false" upperBound="-1" eType="#//chalmers/cse/mdsd1617/group18/roomManager/IRoom"/>
+            </eClassifiers>
+          </eSubpackages>
+          <eSubpackages name="roomManager" nsURI="http:///se/chalmers/cse/mdsd1617/group18/roomManager.ecore"
+              nsPrefix="se.chalmers.cse.mdsd1617.group18.roomManager">
+            <eClassifiers xsi:type="ecore:EClass" name="IRoomType" abstract="true"
+                interface="true">
+              <eOperations name="getName" ordered="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+              <eOperations name="getPrice" ordered="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDouble"/>
+              <eOperations name="getNumberOfBeds" ordered="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+              <eOperations name="getDescription" ordered="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+              <eOperations name="setName" ordered="false" lowerBound="1">
+                <eParameters name="name" ordered="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+              </eOperations>
+              <eOperations name="setPrice" ordered="false" lowerBound="1">
+                <eParameters name="price" ordered="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDouble"/>
+              </eOperations>
+              <eOperations name="setNumberOfBeds" ordered="false" lowerBound="1">
+                <eParameters name="beds" ordered="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+              </eOperations>
+              <eOperations name="setDescription" ordered="false" lowerBound="1">
+                <eParameters name="description" ordered="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+              </eOperations>
+            </eClassifiers>
+            <eClassifiers xsi:type="ecore:EClass" name="RoomType" eSuperTypes="#//chalmers/cse/mdsd1617/group18/roomManager/IRoomType">
+              <eStructuralFeatures xsi:type="ecore:EAttribute" name="price" ordered="false"
+                  lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDouble"/>
+              <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" ordered="false"
+                  lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+              <eStructuralFeatures xsi:type="ecore:EAttribute" name="numberOfBeds"
+                  ordered="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+              <eStructuralFeatures xsi:type="ecore:EAttribute" name="description"
+                  ordered="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+            </eClassifiers>
+            <eClassifiers xsi:type="ecore:EClass" name="RoomManager" eSuperTypes="#//chalmers/cse/mdsd1617/group18/roomManager/IHotelStartupProvies #//chalmers/cse/mdsd1617/group18/roomManager/IHotelRoomProvider #//chalmers/cse/mdsd1617/group18/roomManager/IHotelRoomManager">
+              <eStructuralFeatures xsi:type="ecore:EReference" name="roomTypes" ordered="false"
+                  upperBound="-1" eType="#//chalmers/cse/mdsd1617/group18/roomManager/IRoomType"/>
+              <eStructuralFeatures xsi:type="ecore:EReference" name="rooms" ordered="false"
+                  upperBound="-1" eType="#//chalmers/cse/mdsd1617/group18/roomManager/IRoom"/>
+            </eClassifiers>
+            <eClassifiers xsi:type="ecore:EClass" name="IHotelStartupProvies" abstract="true"
+                interface="true">
+              <eOperations name="startup" ordered="false" lowerBound="1">
+                <eParameters name="numRoom" ordered="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+              </eOperations>
+            </eClassifiers>
+            <eClassifiers xsi:type="ecore:EClass" name="IHotelRoomProvider" abstract="true"
+                interface="true">
+              <eOperations name="getRooms" ordered="false" upperBound="-1" eType="#//chalmers/cse/mdsd1617/group18/roomManager/IRoom"/>
+            </eClassifiers>
+            <eClassifiers xsi:type="ecore:EClass" name="IHotelRoomManager" abstract="true"
+                interface="true" eSuperTypes="#//chalmers/cse/mdsd1617/group18/roomManager/IHotelRoomProvider">
+              <eOperations name="addRoomType" ordered="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
+                <eParameters name="name" ordered="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+                <eParameters name="price" ordered="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDouble"/>
+                <eParameters name="numberOfBeds" ordered="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+                <eParameters name="description" ordered="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+              </eOperations>
+              <eOperations name="updateRoomType" ordered="false" lowerBound="1">
+                <eParameters name="roomType" ordered="false" lowerBound="1" eType="#//chalmers/cse/mdsd1617/group18/roomManager/IRoomType"/>
+                <eParameters name="name" ordered="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+                <eParameters name="price" ordered="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDouble"/>
+                <eParameters name="numberOfBeds" ordered="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+                <eParameters name="description" ordered="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+              </eOperations>
+              <eOperations name="getRoomTypes" ordered="false" upperBound="-1" eType="#//chalmers/cse/mdsd1617/group18/roomManager/IRoomType"/>
+              <eOperations name="removeRoomType" ordered="false" lowerBound="1" eType="#//chalmers/cse/mdsd1617/group18/roomManager/IRoomType">
+                <eParameters name="roomType" ordered="false" lowerBound="1" eType="#//chalmers/cse/mdsd1617/group18/roomManager/IRoomType"/>
+              </eOperations>
+              <eOperations name="addRoom" ordered="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
+                <eParameters name="roomNumber" ordered="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+                <eParameters name="roomType" ordered="false" lowerBound="1" eType="#//chalmers/cse/mdsd1617/group18/roomManager/IRoomType"/>
+              </eOperations>
+              <eOperations name="changeRoomType" ordered="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
+                <eParameters name="roomNumber" ordered="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+                <eParameters name="roomType" ordered="false" lowerBound="1" eType="#//chalmers/cse/mdsd1617/group18/roomManager/IRoomType"/>
+              </eOperations>
+              <eOperations name="removeRoom" ordered="false" lowerBound="1" eType="#//chalmers/cse/mdsd1617/group18/roomManager/IRoom">
+                <eParameters name="roomNumber" ordered="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+              </eOperations>
+              <eOperations name="blockRoom" ordered="false" lowerBound="1">
+                <eParameters name="roomNumber" ordered="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+              </eOperations>
+              <eOperations name="unblockRoom" ordered="false" lowerBound="1">
+                <eParameters name="roomNumber" ordered="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+              </eOperations>
+            </eClassifiers>
+            <eClassifiers xsi:type="ecore:EClass" name="Room" eSuperTypes="#//chalmers/cse/mdsd1617/group18/roomManager/IRoom">
+              <eStructuralFeatures xsi:type="ecore:EReference" name="roomType" ordered="false"
+                  lowerBound="1" eType="#//chalmers/cse/mdsd1617/group18/roomManager/IRoomType"/>
+              <eStructuralFeatures xsi:type="ecore:EAttribute" name="roomNumber" ordered="false"
+                  lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+              <eStructuralFeatures xsi:type="ecore:EAttribute" name="blocked" ordered="false"
+                  lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+              <eStructuralFeatures xsi:type="ecore:EAttribute" name="extraCostDescriptions"
+                  ordered="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+              <eStructuralFeatures xsi:type="ecore:EAttribute" name="extraCostPrice"
+                  ordered="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDouble"/>
+              <eStructuralFeatures xsi:type="ecore:EAttribute" name="occupied" ordered="false"
+                  lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+            </eClassifiers>
+            <eClassifiers xsi:type="ecore:EClass" name="IRoom" abstract="true" interface="true">
+              <eOperations name="getRoomType" ordered="false" lowerBound="1" eType="#//chalmers/cse/mdsd1617/group18/roomManager/IRoomType"/>
+              <eOperations name="getRoomNumber" ordered="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+              <eOperations name="setRoomType" ordered="false" lowerBound="1">
+                <eParameters name="roomType" ordered="false" lowerBound="1" eType="#//chalmers/cse/mdsd1617/group18/roomManager/IRoomType"/>
+              </eOperations>
+              <eOperations name="setIsBlocked" ordered="false" lowerBound="1">
+                <eParameters name="blocked" ordered="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+              </eOperations>
+              <eOperations name="isBlocked" ordered="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+              <eOperations name="getExtraCostDescription" ordered="false" lowerBound="1"
+                  eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+              <eOperations name="setExtraCostDescription" ordered="false" lowerBound="1">
+                <eParameters name="extraCostDescription" ordered="false" lowerBound="1"
+                    eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+              </eOperations>
+              <eOperations name="getExtraCostPrice" ordered="false" lowerBound="1"
+                  eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDouble"/>
+              <eOperations name="addExtraCost" ordered="false" lowerBound="1">
+                <eParameters name="extraCostPrice" ordered="false" lowerBound="1"
+                    eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDouble"/>
+              </eOperations>
+              <eOperations name="isOccupied" ordered="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+              <eOperations name="setOccupied" ordered="false" lowerBound="1">
+                <eParameters name="status" ordered="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+              </eOperations>
+            </eClassifiers>
+          </eSubpackages>
+        </eSubpackages>
+      </eSubpackages>
+    </eSubpackages>
+  </eSubpackages>
+</ecore:EPackage>

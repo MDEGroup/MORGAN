@@ -1,0 +1,7 @@
+model	Program_course (Fall_or_spring,Fall_or_spring,attribute) (Mandatory,EBoolean,attribute) (course,Course,ref) 
+model	Specialization (Name,EString,attribute) (specialization,Specialization,ref) (semester,Semester,ref) 
+model	Department (Name,EString,attribute) (course,Course,ref) (program,Program,ref) 
+model	Program (Credits,Program_credits,attribute) (Name,EString,attribute) (program_course,Program_course,ref) (specialization,Specialization,ref) (semester,Semester,ref) 
+model	Semester (Credits,Semester_credits,attribute) (Number,EInt,attribute) (semester_course,Semester_Course,ref) 
+model	Semester_Course (Fall_or_spring,Fall_or_spring,attribute) (Mandatory,EBoolean,attribute) (course,Course,ref) 
+model	Course (StartDate,Calendar,attribute) (Credits,EDouble,attribute) (Code,course_code,attribute) (ExamDate,Calendar,attribute) (Name,EString,attribute) 

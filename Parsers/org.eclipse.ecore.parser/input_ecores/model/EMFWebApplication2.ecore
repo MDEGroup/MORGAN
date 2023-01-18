@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="webApplication" nsURI="http://org.disim/WebApplication/homework2"
+    nsPrefix="webApplication">
+  <eAnnotations source="http://www.eclipse.org/OCL/Import">
+    <details key="ecore" value="http://www.eclipse.org/emf/2002/Ecore"/>
+  </eAnnotations>
+  <eClassifiers xsi:type="ecore:EClass" name="Named">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="WebApplicationModel" eSuperTypes="#//Named">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="entities" upperBound="-1"
+        eType="#//data/Entity" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="dataSources" upperBound="-1"
+        eType="#//data/DataSource" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="pages" upperBound="-1"
+        eType="#//content/Page" containment="true"/>
+  </eClassifiers>
+  <eSubpackages name="data" nsURI="http://org.disim/WebApplication/homework2/data"
+      nsPrefix="data">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore">
+      <details key="invocationDelegates" value="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot"/>
+      <details key="settingDelegates" value="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot"/>
+      <details key="validationDelegates" value="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot"/>
+    </eAnnotations>
+    <eClassifiers xsi:type="ecore:EClass" name="DataSource" eSuperTypes="#//Named">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="entity" lowerBound="1"
+          eType="#//data/Entity"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="Entity" eSuperTypes="#//Named">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore">
+        <details key="constraints" value="SufficientColumns PKNeeded"/>
+      </eAnnotations>
+      <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
+        <details key="SufficientColumns" value="&#xA;&#x9;&#x9;&#x9;&#x9;self.columns->size() > 0"/>
+        <details key="PKNeeded" value="&#xA;&#x9;&#x9;&#x9;&#x9;self.columns->select(c | c.PK)->size() > 0"/>
+      </eAnnotations>
+      <eOperations name="getPK" ordered="false" upperBound="-1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
+          <details key="body" value="self.columns->select(PK = true)->collect(name)"/>
+        </eAnnotations>
+        <eAnnotations source="http://www.eclipse.org/OCL/Collection">
+          <details key="nullFree" value="false"/>
+        </eAnnotations>
+      </eOperations>
+      <eOperations name="getPKRelated" ordered="false" upperBound="-1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
+          <details key="body" value="self.relates.relatesTo.columns->select(c|c.PK = true)->collect(name)"/>
+        </eAnnotations>
+        <eAnnotations source="http://www.eclipse.org/OCL/Collection">
+          <details key="nullFree" value="false"/>
+        </eAnnotations>
+      </eOperations>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="columns" lowerBound="1"
+          upperBound="-1" eType="#//data/Column" containment="true"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="relates" upperBound="-1"
+          eType="#//data/RelatedEntity" containment="true"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="numberOfColumns" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBigInteger"
+          volatile="true" derived="true">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
+          <details key="derivation" value="self.columns->size()"/>
+        </eAnnotations>
+      </eStructuralFeatures>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="relatedEntities" ordered="false"
+          upperBound="-1" eType="#//data/Entity" volatile="true" derived="true">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
+          <details key="derivation" value="self.relates.relatesTo"/>
+        </eAnnotations>
+      </eStructuralFeatures>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="Column" eSuperTypes="#//Named">
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="type" lowerBound="1"
+          eType="#//data/ColumnType"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="lenght" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="PK" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EEnum" name="ColumnType">
+      <eLiterals name="String"/>
+      <eLiterals name="Boolean" value="1"/>
+      <eLiterals name="Integer" value="2"/>
+      <eLiterals name="Float" value="3"/>
+      <eLiterals name="Text" value="4"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="RelatedEntity" eSuperTypes="#//Named">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="relatesTo" lowerBound="1"
+          eType="#//data/Entity"/>
+    </eClassifiers>
+  </eSubpackages>
+  <eSubpackages name="content" nsURI="http://org.disim/WebApplication/homework2/content"
+      nsPrefix="content">
+    <eClassifiers xsi:type="ecore:EClass" name="Page" eSuperTypes="#//Named">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="contents" upperBound="-1"
+          eType="#//content/Content" containment="true"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="links" upperBound="-1"
+          eType="#//content/Link" containment="true"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="forms" upperBound="-1"
+          eType="#//content/Form" containment="true"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="Content" abstract="true" eSuperTypes="#//Named">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="dataSource" lowerBound="1"
+          eType="#//data/DataSource"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="Form" eSuperTypes="#//Named"/>
+    <eClassifiers xsi:type="ecore:EClass" name="Link" eSuperTypes="#//Named">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="from" lowerBound="1"
+          eType="#//content/Page"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="to" lowerBound="1" eType="#//content/Page"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="Menu" eSuperTypes="#//content/Content">
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="itemName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="url" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="order" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="SingleContent" eSuperTypes="#//content/Content"/>
+    <eClassifiers xsi:type="ecore:EClass" name="MultipleContent" eSuperTypes="#//content/Content">
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="paginated" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="size" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="CRUDForm" eSuperTypes="#//content/Form">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="fields" upperBound="-1"
+          eType="#//content/Field" containment="true"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="Field" eSuperTypes="#//Named">
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="type" eType="#//content/FieldType"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EEnum" name="FieldType">
+      <eLiterals name="TextBox"/>
+      <eLiterals name="CheckBox" value="1"/>
+      <eLiterals name="RadioButton" value="3"/>
+      <eLiterals name="SubmitButton" value="4"/>
+    </eClassifiers>
+  </eSubpackages>
+</ecore:EPackage>

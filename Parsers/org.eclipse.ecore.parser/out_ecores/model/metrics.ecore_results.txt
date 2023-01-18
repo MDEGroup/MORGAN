@@ -1,0 +1,8 @@
+model	MetricRetentionRules (metricRetentionRules,MetricRetentionRule,ref) 
+model	Addon (metricSources,MetricSource,ref) (metrics,Metric,ref) (metricAggregationRuleSets,MetricAggregationRules,ref) (metricRetentionRuleSets,MetricRetentionRules,ref) 
+model	MetricAggregationRule (period,Int,attribute) (intervalHint,Int,attribute) (aggregationExpression,EObject,ref) 
+model	MetricAggregationRules (metricAggregationRules,MetricAggregationRule,ref) 
+model	MetricSource (name,null,attribute) (metricRetentionRuleSet,MetricRetentionRules,ref) (metricAggregationRuleSet,MetricAggregationRules,ref) 
+model	Metric (name,null,attribute) (metricRetentionRuleSet,MetricRetentionRules,ref) (metricAggregationRuleSet,MetricAggregationRules,ref) 
+model	MetricRetentionPeriods (metricRetentionPeriods,MetricRetentionPeriod,attribute) 
+model	MetricRetentionRule (period,MetricRetentionPeriod,attribute) (intervalHint,Int,attribute) 

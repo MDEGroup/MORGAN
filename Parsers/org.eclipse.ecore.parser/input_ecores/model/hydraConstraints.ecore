@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="hydraconstraints"
+    nsURI="http://www.unican.es/personales/sanchezbp/spl/hydra/constraints" nsPrefix="es.hydracan.constraintHydra">
+  <eClassifiers xsi:type="ecore:EClass" name="Model">
+    <eOperations name="featureModelExists" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
+      <eParameters name="diagnostics" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDiagnosticChain"/>
+      <eParameters name="context" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EMap"/>
+    </eOperations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="featureList" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="constraints" upperBound="-1"
+        eType="#//Constraint" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Constraint">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="operators" lowerBound="1"
+        eType="#//BoolOperand" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Operand" abstract="true">
+    <eOperations name="evaluate" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt">
+      <eParameters name="modelDirection" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+      <eParameters name="featureContext" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EObject"/>
+    </eOperations>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="BoolOperand" abstract="true" eSuperTypes="#//Operand"/>
+  <eClassifiers xsi:type="ecore:EClass" name="BoolPriorityOperand1">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="boolPriorityOp1" lowerBound="1"
+        eType="#//BoolOperand" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="BoolPriorityOperand2">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="boolPriorityOp2" lowerBound="1"
+        eType="#//BoolOperand" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="LogicalOperator" abstract="true" eSuperTypes="#//BoolOperand"/>
+  <eClassifiers xsi:type="ecore:EClass" name="UnaryOp" abstract="true" eSuperTypes="#//LogicalOperator">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="unaryOp" lowerBound="1"
+        eType="#//BoolPriorityOperand2" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Neg" eSuperTypes="#//UnaryOp"/>
+  <eClassifiers xsi:type="ecore:EClass" name="BinaryOp" abstract="true" eSuperTypes="#//LogicalOperator">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="binaryOp1" lowerBound="1"
+        eType="#//BoolPriorityOperand1" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="binaryOp2" lowerBound="1"
+        eType="#//BoolPriorityOperand2" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="And" eSuperTypes="#//BinaryOp"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Or" eSuperTypes="#//BinaryOp"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Implies" eSuperTypes="#//BinaryOp"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Xor" eSuperTypes="#//BinaryOp"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Comparison" abstract="true" eSuperTypes="#//LogicalOperator">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="compOp1" lowerBound="1"
+        eType="#//NumPriorityOperand2" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="compOp2" lowerBound="1"
+        eType="#//NumPriorityOperand2" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="More" eSuperTypes="#//Comparison"/>
+  <eClassifiers xsi:type="ecore:EClass" name="MoreOrEqual" eSuperTypes="#//Comparison"/>
+  <eClassifiers xsi:type="ecore:EClass" name="NotEqual" eSuperTypes="#//Comparison"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Less" eSuperTypes="#//Comparison"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Equal" eSuperTypes="#//Comparison"/>
+  <eClassifiers xsi:type="ecore:EClass" name="LessOrEqual" eSuperTypes="#//Comparison"/>
+  <eClassifiers xsi:type="ecore:EClass" name="NumOperand" abstract="true" eSuperTypes="#//Operand"/>
+  <eClassifiers xsi:type="ecore:EClass" name="NumPriorityOperand2">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="numPriorityOp2" lowerBound="1"
+        eType="#//NumOperand" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="NumPriorityOperand1">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="numPriorityOp1" lowerBound="1"
+        eType="#//NumOperand" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="NumOperator" abstract="true" eSuperTypes="#//NumOperand">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="numOp1" lowerBound="1"
+        eType="#//NumPriorityOperand1" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="numOp2" lowerBound="1"
+        eType="#//NumPriorityOperand2" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Plus" eSuperTypes="#//NumOperator"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Mul" eSuperTypes="#//NumOperator"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Minus" eSuperTypes="#//NumOperator"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Div" eSuperTypes="#//NumOperator"/>
+  <eClassifiers xsi:type="ecore:EClass" name="NumOperandChoices" abstract="true" eSuperTypes="#//NumOperand"/>
+  <eClassifiers xsi:type="ecore:EClass" name="MultipleFeature" eSuperTypes="#//NumOperandChoices">
+    <eOperations name="isMultipleFeature" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
+      <eParameters name="diagnostics" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDiagnosticChain"/>
+      <eParameters name="context" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EMap"/>
+    </eOperations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="featureName" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="SimpleFeature" eSuperTypes="#//BoolOperandChoices">
+    <eOperations name="isSimpleFeature" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
+      <eParameters name="diagnostics" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDiagnosticChain"/>
+      <eParameters name="context" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EMap"/>
+    </eOperations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="featureName" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="BoolOperandChoices" abstract="true"
+      eSuperTypes="#//BoolOperand"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Context" eSuperTypes="#//BoolOperandChoices #//NumOperandChoices">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="contextOp2" lowerBound="1"
+        eType="#//Constraint" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="contextOp1" lowerBound="1"
+        eType="#//MultipleFeature" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Selection" abstract="true" eSuperTypes="#//BoolOperandChoices">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="selectionOp" lowerBound="1"
+        eType="#//Context" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Any" eSuperTypes="#//Selection"/>
+  <eClassifiers xsi:type="ecore:EClass" name="All" eSuperTypes="#//Selection"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Number" eSuperTypes="#//NumOperandChoices">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="numValue" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+  </eClassifiers>
+</ecore:EPackage>

@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="Train5" nsURI="hu.bme.mit.mdsd.train5" nsPrefix="hu.bme.mit.mdsd.train5">
+  <eClassifiers xsi:type="ecore:EClass" name="NamedElement" abstract="true">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="id" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
+        iD="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="TrackElement" abstract="true" eSuperTypes="#//NamedElement">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="State" eType="#//Signal"
+        defaultValueLiteral="Go"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="train" eType="#//Route"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="length" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBigInteger"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Route" eSuperTypes="#//NamedElement">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="currentIndex" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBigInteger"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="route" lowerBound="1" upperBound="-1"
+        eType="#//RoutePart" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="speed" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBigInteger"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="leftOver" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBigInteger"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Switch" eSuperTypes="#//TrackElement">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="neighbour" lowerBound="2"
+        upperBound="-1" eType="#//Segment"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Segment" eSuperTypes="#//TrackElement"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Station" eSuperTypes="#//TrackElement"/>
+  <eClassifiers xsi:type="ecore:EEnum" name="Signal">
+    <eLiterals name="Failure"/>
+    <eLiterals name="STOP"/>
+    <eLiterals name="Go"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="SensorNetwork" eSuperTypes="#//NamedElement">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="sensors" upperBound="-1"
+        eType="#//Switch"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="RailwayDiagram">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="trackelements" upperBound="-1"
+        eType="#//TrackElement" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="sensors" upperBound="-1"
+        eType="#//SensorNetwork" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="routes" upperBound="-1"
+        eType="#//Route" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="RoutePart" eSuperTypes="#//NamedElement">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="next" eType="#//RoutePart"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="element" lowerBound="1"
+        eType="#//TrackElement"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="previous" eType="#//RoutePart"/>
+  </eClassifiers>
+</ecore:EPackage>

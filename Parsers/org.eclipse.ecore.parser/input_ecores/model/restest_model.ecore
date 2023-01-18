@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="model" nsURI="http://at.fhv.ecss2016.restest/model" nsPrefix="restestModel">
+  <eClassifiers xsi:type="ecore:EClass" name="Config">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="requestURL" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="httpVerb" eType="#//HttpVerb"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="contentType" eType="#//ContentType"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="requestBody" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="response" eType="#//Response"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Scenario">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="scenarioFilePath" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="configExpectedResultPairList"
+        upperBound="-1" eType="#//ConfigExpectedResultPair"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Response">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="statusCode" eType="#//StatusCode"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="contentType" eType="#//ContentType"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="responseTime" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="responseBody" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ExpectedResult">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="statusCode" eType="#//StatusCode"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="contentType" eType="#//ContentType"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="responseBody" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ConfigExpectedResultPair">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="config" eType="#//Config"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="expectedResult" eType="#//ExpectedResult"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="ContentType">
+    <eLiterals name="TEXT" literal="text"/>
+    <eLiterals name="TEXT_PLAIN" value="1" literal="text/plain"/>
+    <eLiterals name="JSON" value="2" literal="application/json"/>
+    <eLiterals name="JAVASCRIPT" value="3" literal="application/javascript"/>
+    <eLiterals name="XML_TEXT" value="4" literal="text/xml"/>
+    <eLiterals name="XML_APPLICATION" value="5" literal="application/xml"/>
+    <eLiterals name="HTML" value="6" literal="text/html"/>
+    <eLiterals name="JAVA_LANG_EXCEPTION" value="7" literal="java.lang.Exception"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="HttpVerb">
+    <eLiterals name="GET"/>
+    <eLiterals name="POST" value="1"/>
+    <eLiterals name="PUT" value="2"/>
+    <eLiterals name="DELETE" value="3"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="StatusCode">
+    <eLiterals name="CONTINUE" value="100"/>
+    <eLiterals name="SWITCHING_PROTOCOLS" value="101" literal="SWITCHING PROTOCOLS"/>
+    <eLiterals name="PROCESSING" value="102"/>
+    <eLiterals name="OK" value="200"/>
+    <eLiterals name="CREATED" value="201"/>
+    <eLiterals name="ACCEPTED" value="202"/>
+    <eLiterals name="NON_AUTHORITATIVE_INFORMATION" value="203" literal="NON AUTHORITATIVE INFORMATION"/>
+    <eLiterals name="NO_CONTENT" value="204" literal="NO CONTENT"/>
+    <eLiterals name="RESET_CONTENT" value="205" literal="RESET CONTENT"/>
+    <eLiterals name="PARTIAL_CONTENT" value="206" literal="PARTIAL CONTENT"/>
+    <eLiterals name="MULTI_STATUS" value="207" literal="MULTI STATUS"/>
+    <eLiterals name="MULTIPLE_CHOICES" value="300" literal="MULTIPLE CHOICES"/>
+    <eLiterals name="MOVED_PERMANENTLY" value="301" literal="MOVED PERMANENTLY"/>
+    <eLiterals name="MOVED_TEMPORARILY" value="302" literal="MOVED TEMPORARILY"/>
+    <eLiterals name="SEE_OTHER" value="303" literal="SEE OTHER"/>
+    <eLiterals name="NOT_MODIFIED" value="304" literal="NOT MODIFIED"/>
+    <eLiterals name="USE_PROXY" value="305" literal="USE PROXY"/>
+    <eLiterals name="TEMPORARY_REDIRECT" value="307" literal="TEMPORARY REDIRECT"/>
+    <eLiterals name="BAD_REQUEST" value="400" literal="BAD REQUEST"/>
+    <eLiterals name="UNAUTHORIZED" value="401"/>
+    <eLiterals name="PAYMENT_REQUIRED" value="402" literal="PAYMENT REQUIRED"/>
+    <eLiterals name="FORBIDDEN" value="403"/>
+    <eLiterals name="NOT_FOUND" value="404" literal="NOT FOUND"/>
+    <eLiterals name="METHOD_NOT_ALLOWED" value="405" literal="METHOD NOT ALLOWED"/>
+    <eLiterals name="NOT_ACCEPTABLE" value="406" literal="NOT ACCEPTABLE"/>
+    <eLiterals name="PROXY_AUTHENTICATION_REQUIRED" value="407" literal="PROXY AUTHENTICATION REQUIRED"/>
+    <eLiterals name="REQUEST_TIMEOUT" value="408" literal="REQUEST TIMEOUT"/>
+    <eLiterals name="CONFLICT" value="409"/>
+    <eLiterals name="GONE" value="410"/>
+    <eLiterals name="LENGTH_REQUIRED" value="411" literal="LENGTH REQUIRED"/>
+    <eLiterals name="PRECONDITION_FAILED" value="412" literal="PRECONDITION FAILED"/>
+    <eLiterals name="REQUEST_TOO_LONG" value="413" literal="REQUEST TOO LONG"/>
+    <eLiterals name="REQUEST_URI_TOO_LONG" value="414" literal="REQUEST URI TOO LONG"/>
+    <eLiterals name="UNSUPPORTED_MEDIA_TYPE" value="415" literal="UNSUPPORTED MEDIA TYPE"/>
+    <eLiterals name="REQUESTED_RANGE_NOT_SATISFIABLE" value="416" literal="REQUESTED RANGE NOT SATISFIABLE"/>
+    <eLiterals name="EXPECTATION_FAILED" value="417" literal="EXPECTATION FAILED"/>
+    <eLiterals name="INSUFFICIENT_SPACE_ON_RESOURCE" value="419" literal="INSUFFICIENT SPACE ON RESOURCE"/>
+    <eLiterals name="METHOD_FAILURE" value="420" literal="METHOD FAILURE"/>
+    <eLiterals name="UNPROCESSABLE_ENTITY" value="422" literal="UNPROCESSABLE ENTITY"/>
+    <eLiterals name="LOCKED" value="423"/>
+    <eLiterals name="FAILED_DEPENDENCY" value="424" literal="FAILED DEPENDENCY"/>
+    <eLiterals name="INTERNAL_SERVER_ERROR" value="500" literal="INTERNAL SERVER ERROR"/>
+    <eLiterals name="NOT_IMPLEMENTED" value="501" literal="NOT IMPLEMENTED"/>
+    <eLiterals name="BAD_GATEWAY" value="502" literal="BAD GATEWAY"/>
+    <eLiterals name="SERVICE_UNAVAILABLE" value="503" literal="SERVICE UNAVAILABLE"/>
+    <eLiterals name="GATEWAY_TIMEOUT" value="504" literal="GATEWAY TIMEOUT"/>
+    <eLiterals name="HTTP_VERSION_NOT_SUPPORTED" value="505" literal="HTTP VERSION NOT SUPPORTED"/>
+    <eLiterals name="INSUFFICIENT_STORAGE" value="507" literal="INSUFFICIENT STORAGE"/>
+    <eLiterals name="CONNECTION_EXCEPTION" literal="CONNECTION EXCEPTION"/>
+  </eClassifiers>
+</ecore:EPackage>

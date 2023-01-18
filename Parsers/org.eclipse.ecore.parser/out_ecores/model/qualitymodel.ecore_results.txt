@@ -1,0 +1,7 @@
+model	CompositeAttribute (operator,AttributeAggregationOperator,attribute) (children,Attribute,ref) 
+model	Attribute (name,EString,attribute) 
+model	Preference (weight,EDouble,attribute) (threshold,EDouble,attribute) (attribute,Attribute,ref) 
+model	Metric (probeName,EString,attribute) (data,Data,attribute) (descriptionName,EString,attribute) (resourceName,EString,attribute) (attribute,LeafAttribute,ref) 
+model	ConfigurationProfile (ID,EInt,attribute) (metric,Metric,ref) (preference,Preference,ref) 
+model	LeafAttribute (normalizationMax,EDouble,attribute) (normalizationMin,EDouble,attribute) (normalizationKind,MetricNormalizationKind,attribute) (numSamples,EInt,attribute) (operator,MetricAggregationOperator,attribute) 
+model	HistoricalData (value,EDouble,attribute) (instant,Timestamp,attribute) (attribute,Attribute,ref) 

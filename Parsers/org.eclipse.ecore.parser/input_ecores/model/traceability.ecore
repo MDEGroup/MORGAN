@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="traceability" nsURI="http://org.eclipse.incquery/model/cps-traceability"
+    nsPrefix="cpstraceability">
+  <eClassifiers xsi:type="ecore:EClass" name="CPSToDeployment">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="cps" eType="ecore:EClass ../../org.eclipse.incquery.examples.cps.model/model/model.ecore#//CyberPhysicalSystem"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="deployment" eType="ecore:EClass ../../org.eclipse.incquery.examples.cps.deployment/model/deployment.ecore#//Deployment"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="traces" upperBound="-1"
+        eType="#//CPS2DeplyomentTrace" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="CPS2DeplyomentTrace">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="cpsElements" upperBound="-1"
+        eType="ecore:EClass ../../org.eclipse.incquery.examples.cps.model/model/model.ecore#//Identifiable"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="deploymentElements" upperBound="-1"
+        eType="ecore:EClass ../../org.eclipse.incquery.examples.cps.deployment/model/deployment.ecore#//DeploymentElement"/>
+  </eClassifiers>
+</ecore:EPackage>

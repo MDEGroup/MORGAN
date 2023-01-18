@@ -1,0 +1,241 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="preprocess" nsURI="http://www.servicifi.org/gelato/language/cobol/preprocess"
+    nsPrefix="preprocess">
+  <eClassifiers xsi:type="ecore:EDataType" name="Pattern" instanceClassName="java.util.regex.Pattern"
+      serializable="false"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Dummy"/>
+  <eSubpackages name="containers" nsURI="http://www.servicifi.org/gelato/language/cobol/preprocess/containers"
+      nsPrefix="containers">
+    <eClassifiers xsi:type="ecore:EClass" name="PreprocessingUnit" eSuperTypes="#//commons/NamedElement #//water/IncompleteElement">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="nestedPreprocessingUnits"
+          upperBound="-1" eType="#//containers/PreprocessingUnit" containment="true"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="ending" eType="#//operands/CobolWord"
+          containment="true"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="dataSegment" lowerBound="1"
+          eType="#//containers/DataSegment" containment="true"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="procedureSegment" lowerBound="1"
+          eType="#//containers/ProcedureSegment" containment="true"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="id" lowerBound="1" eType="#//containers/identifications"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="PreprocessingGroup" eSuperTypes="#//containers/CobolRoot">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="preprocessingUnits" upperBound="-1"
+          eType="#//containers/PreprocessingUnit" containment="true"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="CobolRoot" abstract="true">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="lines" eType="#//layouts/CobolLine"
+          containment="true"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="CopyUnit" abstract="true" eSuperTypes="#//water/IncompleteElement">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="sentence" lowerBound="1"
+          eType="#//sentences/PreprocessingSentence" containment="true"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="Copybook" eSuperTypes="#//containers/CobolRoot #//water/IncompleteElement #//commons/NamedElement">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="copyUnits" upperBound="-1"
+          eType="#//containers/CopyUnit" containment="true"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="DataSegment" eSuperTypes="#//containers/Segment"/>
+    <eClassifiers xsi:type="ecore:EClass" name="ProcedureSegment" eSuperTypes="#//containers/Segment"/>
+    <eClassifiers xsi:type="ecore:EClass" name="Segment" abstract="true" eSuperTypes="#//water/IncompleteElement">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="copyUnits" upperBound="-1"
+          eType="#//containers/CopyUnit" containment="true"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="DataCopyUnit" eSuperTypes="#//containers/CopyUnit"/>
+    <eClassifiers xsi:type="ecore:EClass" name="ProcedureCopyUnit" eSuperTypes="#//containers/CopyUnit"/>
+    <eClassifiers xsi:type="ecore:EEnum" name="identifications">
+      <eLiterals name="id" literal="ID"/>
+      <eLiterals name="identification" value="1" literal="IDENTIFICATION"/>
+    </eClassifiers>
+  </eSubpackages>
+  <eSubpackages name="water" nsURI="http://www.servicifi.org/gelato/language/cobol/preprocess/water"
+      nsPrefix="water">
+    <eClassifiers xsi:type="ecore:EClass" name="PreprocessingUnitWater" abstract="true"
+        eSuperTypes="#//water/DataSegmentWater"/>
+    <eClassifiers xsi:type="ecore:EEnum" name="PreprocessingUnitTokens">
+      <eLiterals name="by" literal="BY"/>
+      <eLiterals name="in" value="1" literal="IN"/>
+      <eLiterals name="of" value="2" literal="OF"/>
+      <eLiterals name="replacing" value="3" literal="REPLACING"/>
+      <eLiterals name="suppress" value="4" literal="SUPPRESS"/>
+      <eLiterals name="replace" value="5" literal="REPLACE"/>
+      <eLiterals name="program" value="6" literal="PROGRAM"/>
+      <eLiterals name="division" value="7" literal="DIVISION"/>
+      <eLiterals name="all" value="8" literal="ALL"/>
+      <eLiterals name="end" value="9" literal="END"/>
+      <eLiterals name="off" value="10" literal="OFF"/>
+      <eLiterals name="on" value="11" literal="ON"/>
+      <eLiterals name="procedure" value="12" literal="PROCEDURE"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="Dot" eSuperTypes="#//water/PreprocessingUnitWater"/>
+    <eClassifiers xsi:type="ecore:EClass" name="Water" abstract="true"/>
+    <eClassifiers xsi:type="ecore:EClass" name="IncompleteElement" abstract="true">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="water" upperBound="-1"
+          eType="#//water/Water" containment="true"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="DataSegmentWater" abstract="true"
+        eSuperTypes="#//water/Water #//water/ProcedureSegmentWater"/>
+    <eClassifiers xsi:type="ecore:EClass" name="ProcedureSegmentWater" abstract="true"
+        eSuperTypes="#//water/Water"/>
+    <eClassifiers xsi:type="ecore:EClass" name="By" eSuperTypes="#//water/DataSegmentToken"/>
+    <eClassifiers xsi:type="ecore:EClass" name="In" eSuperTypes="#//water/DataSegmentToken"/>
+    <eClassifiers xsi:type="ecore:EClass" name="Of" eSuperTypes="#//water/DataSegmentToken"/>
+    <eClassifiers xsi:type="ecore:EClass" name="Replacing" eSuperTypes="#//water/DataSegmentToken"/>
+    <eClassifiers xsi:type="ecore:EClass" name="Suppress" eSuperTypes="#//water/DataSegmentToken"/>
+    <eClassifiers xsi:type="ecore:EClass" name="Replace" eSuperTypes="#//water/DataSegmentToken"/>
+    <eClassifiers xsi:type="ecore:EClass" name="Program" eSuperTypes="#//water/DataSegmentToken"/>
+    <eClassifiers xsi:type="ecore:EClass" name="Division" eSuperTypes="#//water/DataSegmentToken"/>
+    <eClassifiers xsi:type="ecore:EClass" name="All" eSuperTypes="#//water/DataSegmentToken"/>
+    <eClassifiers xsi:type="ecore:EClass" name="End" eSuperTypes="#//water/DataSegmentToken"/>
+    <eClassifiers xsi:type="ecore:EClass" name="Off" eSuperTypes="#//water/DataSegmentToken"/>
+    <eClassifiers xsi:type="ecore:EClass" name="On" eSuperTypes="#//water/DataSegmentToken"/>
+    <eClassifiers xsi:type="ecore:EClass" name="Procedure" eSuperTypes="#//water/ProcedureSegmentWater"/>
+    <eClassifiers xsi:type="ecore:EClass" name="DataSegmentToken" abstract="true"
+        eSuperTypes="#//water/DataSegmentWater"/>
+  </eSubpackages>
+  <eSubpackages name="sentences" nsURI="http://www.servicifi.org/gelato/language/cobol/preprocess/sentences"
+      nsPrefix="sentences">
+    <eClassifiers xsi:type="ecore:EClass" name="CopySentence" eSuperTypes="#//commons/LibraryElement #//sentences/PreprocessingSentence #//commons/NamedElement">
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="suppress" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="Replacing">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="source" lowerBound="1"
+          eType="#//operands/Operand" containment="true"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="target" lowerBound="1"
+          eType="#//operands/Operand" containment="true"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="PreprocessingSentence" abstract="true">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="replacings" upperBound="-1"
+          eType="#//sentences/Replacing" containment="true"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="ReplaceSentence" eSuperTypes="#//sentences/PreprocessingSentence">
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="switch" lowerBound="1"
+          eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    </eClassifiers>
+  </eSubpackages>
+  <eSubpackages name="commons" nsURI="http://www.servicifi.org/gelato/language/cobol/preprocess/commons"
+      nsPrefix="commons">
+    <eClassifiers xsi:type="ecore:EClass" name="LibraryElement" abstract="true" eSuperTypes="#//commons/Element">
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="libraryName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="NamedElement" abstract="true" eSuperTypes="#//commons/Element">
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="Element" abstract="true">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="location" upperBound="-1"
+          eType="#//layouts/CobolLine"/>
+    </eClassifiers>
+  </eSubpackages>
+  <eSubpackages name="literals" nsURI="http://www.servicifi.org/gelato/language/cobol/preprocess/literals"
+      nsPrefix="literals">
+    <eClassifiers xsi:type="ecore:EClass" name="Literal" abstract="true" eSuperTypes="#//operands/Operand #//water/PreprocessingUnitWater"/>
+    <eClassifiers xsi:type="ecore:EClass" name="AlphanumericLiteral" eSuperTypes="#//literals/Literal">
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" lowerBound="1"
+          eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="AlphanumericHexaDecimalLiteral" eSuperTypes="#//literals/AlphanumericLiteral"/>
+    <eClassifiers xsi:type="ecore:EClass" name="PseudoLiteral" eSuperTypes="#//literals/Literal">
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" lowerBound="1"
+          eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="NumericLiteral" eSuperTypes="#//literals/Literal">
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" lowerBound="1"
+          eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="FigurativeConstantLiteral" abstract="true"
+        eSuperTypes="#//literals/Literal"/>
+    <eClassifiers xsi:type="ecore:EClass" name="AllLiteral" eSuperTypes="#//literals/FigurativeConstantLiteral">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="constant" lowerBound="1"
+          eType="#//literals/Literal" containment="true"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="ConstantLiteral" abstract="true" eSuperTypes="#//literals/FigurativeConstantLiteral"/>
+    <eClassifiers xsi:type="ecore:EClass" name="SpaceConstant" abstract="true" eSuperTypes="#//literals/ConstantLiteral"/>
+    <eClassifiers xsi:type="ecore:EClass" name="HighValueConstant" abstract="true"
+        eSuperTypes="#//literals/ConstantLiteral"/>
+    <eClassifiers xsi:type="ecore:EClass" name="LowValueConstant" abstract="true"
+        eSuperTypes="#//literals/ConstantLiteral"/>
+    <eClassifiers xsi:type="ecore:EClass" name="ZeroConstant" abstract="true" eSuperTypes="#//literals/ConstantLiteral"/>
+    <eClassifiers xsi:type="ecore:EClass" name="QuoteConstant" abstract="true" eSuperTypes="#//literals/ConstantLiteral"/>
+    <eClassifiers xsi:type="ecore:EClass" name="NullConstant" abstract="true" eSuperTypes="#//literals/ConstantLiteral"/>
+    <eClassifiers xsi:type="ecore:EEnum" name="SpaceConstants">
+      <eLiterals name="space" literal="SPACE"/>
+      <eLiterals name="spaces" value="1" literal="SPACES"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EEnum" name="HighValueConstants">
+      <eLiterals name="highValue" literal="HIGH-VALUE"/>
+      <eLiterals name="highValues" value="1" literal="HIGH-VALUES"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EEnum" name="LowValueConstants">
+      <eLiterals name="lowValue" literal="LOW-VALUE"/>
+      <eLiterals name="lowValues" value="1" literal="LOW-VALUES"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EEnum" name="ZeroConstants">
+      <eLiterals name="zero" literal="ZERO"/>
+      <eLiterals name="zeros" value="1" literal="ZEROS"/>
+      <eLiterals name="zeroes" value="2" literal="ZEROES"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EEnum" name="QuoteConstants">
+      <eLiterals name="quote" literal="QUOTE"/>
+      <eLiterals name="quotes" value="1" literal="QUOTES"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EEnum" name="NullConstants">
+      <eLiterals name="null" literal="NULL"/>
+      <eLiterals name="nulls" value="1" literal="NULLS"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="Space" eSuperTypes="#//literals/SpaceConstant"/>
+    <eClassifiers xsi:type="ecore:EClass" name="Spaces" eSuperTypes="#//literals/SpaceConstant"/>
+    <eClassifiers xsi:type="ecore:EClass" name="HighValue" eSuperTypes="#//literals/HighValueConstant"/>
+    <eClassifiers xsi:type="ecore:EClass" name="HighValues" eSuperTypes="#//literals/HighValueConstant"/>
+    <eClassifiers xsi:type="ecore:EClass" name="LowValue" eSuperTypes="#//literals/LowValueConstant"/>
+    <eClassifiers xsi:type="ecore:EClass" name="LowValues" eSuperTypes="#//literals/LowValueConstant"/>
+    <eClassifiers xsi:type="ecore:EClass" name="Zero" eSuperTypes="#//literals/ZeroConstant"/>
+    <eClassifiers xsi:type="ecore:EClass" name="Zeroes" eSuperTypes="#//literals/ZeroConstant"/>
+    <eClassifiers xsi:type="ecore:EClass" name="Zeros" eSuperTypes="#//literals/ZeroConstant"/>
+    <eClassifiers xsi:type="ecore:EClass" name="Quote" eSuperTypes="#//literals/QuoteConstant"/>
+    <eClassifiers xsi:type="ecore:EClass" name="Quotes" eSuperTypes="#//literals/QuoteConstant"/>
+    <eClassifiers xsi:type="ecore:EClass" name="Null" eSuperTypes="#//literals/NullConstant"/>
+    <eClassifiers xsi:type="ecore:EClass" name="Nulls" eSuperTypes="#//literals/NullConstant"/>
+  </eSubpackages>
+  <eSubpackages name="operands" nsURI="http://www.servicifi.org/gelato/language/cobol/preprocess/operands"
+      nsPrefix="operands">
+    <eClassifiers xsi:type="ecore:EClass" name="Operand" abstract="true"/>
+    <eClassifiers xsi:type="ecore:EClass" name="CobolWord" eSuperTypes="#//operands/Operand #//water/PreprocessingUnitWater">
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" lowerBound="1"
+          eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eClassifiers>
+  </eSubpackages>
+  <eSubpackages name="statements" nsURI="http://www.servicifi.org/gelato/language/cobol/preprocess/statements"
+      nsPrefix="statements">
+    <eClassifiers xsi:type="ecore:EClass" name="Statement" abstract="true"/>
+    <eClassifiers xsi:type="ecore:EClass" name="Execute" eSuperTypes="#//statements/Statement #//water/PreprocessingUnitWater">
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="water" lowerBound="1"
+          eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eClassifiers>
+  </eSubpackages>
+  <eSubpackages name="layouts" nsURI="http://www.servicifi.org/gelato/language/cobol/preprocess/layouts"
+      nsPrefix="layouts">
+    <eClassifiers xsi:type="ecore:EEnum" name="CobolSourceFormatTypeEnum">
+      <eLiterals name="ANSI85" literal="ANSI85"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="CobolLine">
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="comment" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="contentAreaA" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="contentAreaB" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="indicatorArea" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EChar"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="sequenceArea" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="lineFormat" lowerBound="1"
+          eType="#//layouts/CobolSourceFormat" containment="true"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="CobolSourceFormat" abstract="true">
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="type" eType="#//layouts/CobolSourceFormatTypeEnum"
+          changeable="false"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="commentEntryMultiLine"
+          eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"
+          changeable="false"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="regex" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
+          changeable="false" defaultValueLiteral=""/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="pattern" eType="#//Pattern"
+          changeable="false" transient="true" defaultValueLiteral="" derived="true"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="ANSI85CobolSourceFormat" eSuperTypes="#//layouts/CobolSourceFormat"/>
+  </eSubpackages>
+</ecore:EPackage>

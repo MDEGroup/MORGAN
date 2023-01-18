@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Copyright (c) 2010-2017 Thales Global Services S.A.S.
+  All rights reserved. This program and the accompanying materials
+   are made available under the terms of the Eclipse Public License v1.0
+  which accompanies this distribution, and is available at
+  http://www.eclipse.org/legal/epl-v10.html
+  
+   Contributors:
+  Thales Global Services S.A.S - initial API and implementation
+-->
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="Elements" nsURI="http://www.eclipse.org/emf/diffmerge/tests/elements/1.0.0"
+    nsPrefix="org.eclipse.emf.diffmerge.tests.elements">
+  <eClassifiers xsi:type="ecore:EClass" name="IdentifiedElement" abstract="true">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="id" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
+        iD="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="NamedElement" abstract="true" eSuperTypes="#//IdentifiedElement">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Root" eSuperTypes="#//IdentifiedElement">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="content" upperBound="-1"
+        eType="#//NamedElement" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Element" eSuperTypes="#//NamedElement">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="values" upperBound="-1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="manyContent" upperBound="-1"
+        eType="#//Element" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="singleContent" eType="#//Element"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="manyContentWithUp" upperBound="-1"
+        eType="#//Element" containment="true" eOpposite="#//Element/upFromManyContent"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="upFromManyContent" eType="#//Element"
+        eOpposite="#//Element/manyContentWithUp"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="singleContentWithUp" eType="#//Element"
+        containment="true" eOpposite="#//Element/upFromSingleContent"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="upFromSingleContent" eType="#//Element"
+        eOpposite="#//Element/singleContentWithUp"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="manyRef" upperBound="-1"
+        eType="#//Element"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="singleRef" eType="#//Element"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="singleFromSingleRef1" eType="#//Element"
+        eOpposite="#//Element/singleFromSingleRef2"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="singleFromSingleRef2" eType="#//Element"
+        eOpposite="#//Element/singleFromSingleRef1"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="manyFromSingleRef" upperBound="-1"
+        eType="#//Element" eOpposite="#//Element/singleFromManyRef"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="singleFromManyRef" eType="#//Element"
+        eOpposite="#//Element/manyFromSingleRef"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="manyFromManyRef1" upperBound="-1"
+        eType="#//Element" eOpposite="#//Element/manyFromManyRef2"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="manyFromManyRef2" upperBound="-1"
+        eType="#//Element" eOpposite="#//Element/manyFromManyRef1"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="StrictElement" eSuperTypes="#//Element">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="sValue" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="sValues" lowerBound="1"
+        upperBound="-1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="sManyContent" lowerBound="1"
+        upperBound="-1" eType="#//Element" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="sSingleContent" lowerBound="1"
+        eType="#//Element" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="sManyRef" lowerBound="1"
+        upperBound="-1" eType="#//Element"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="sSingleRef" lowerBound="1"
+        eType="#//Element"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="sManyFromSingleRef" lowerBound="1"
+        upperBound="-1" eType="#//StrictElement" eOpposite="#//StrictElement/sSingleFromManyRef"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="sSingleFromManyRef" lowerBound="1"
+        eType="#//StrictElement" eOpposite="#//StrictElement/sManyFromSingleRef"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="sManyFromManyRef1" lowerBound="1"
+        upperBound="-1" eType="#//StrictElement" eOpposite="#//StrictElement/sManyFromManyRef2"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="sManyFromManyRef2" lowerBound="1"
+        upperBound="-1" eType="#//StrictElement" eOpposite="#//StrictElement/sManyFromManyRef1"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Node" eSuperTypes="#//NamedElement">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="incoming" upperBound="-1"
+        eType="#//Edge" eOpposite="#//Edge/target"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="outgoing" upperBound="-1"
+        eType="#//Edge" eOpposite="#//Edge/source"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="subNodes" upperBound="-1"
+        eType="#//NamedElement" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Edge" eSuperTypes="#//NamedElement">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="target" lowerBound="1"
+        eType="#//Node" eOpposite="#//Node/incoming"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="source" lowerBound="1"
+        eType="#//Node" eOpposite="#//Node/outgoing"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ReferencingNode" eSuperTypes="#//Node">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="referenced" lowerBound="1"
+        eType="#//Node"/>
+  </eClassifiers>
+</ecore:EPackage>

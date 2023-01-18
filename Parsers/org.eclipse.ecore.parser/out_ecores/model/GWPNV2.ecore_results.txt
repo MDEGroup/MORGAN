@@ -1,0 +1,5 @@
+model	PTArc (dst,Transition,ref) (src,Place,ref) (net,Net,ref) 
+model	TPArc (dst,Place,ref) (src,Transition,ref) (net,Net,ref) 
+model	Transition (net,Net,ref) (in2,PTArc,ref) (out,TPArc,ref) 
+model	Net (tpArc,TPArc,ref) (place,Place,ref) (transition,Transition,ref) (ptArc,PTArc,ref) 
+model	Place (net,Net,ref) (in2,TPArc,ref) (out,PTArc,ref) 

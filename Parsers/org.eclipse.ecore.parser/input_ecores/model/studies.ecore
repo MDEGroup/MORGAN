@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="studies" nsURI="platform:/plugin/no.ntnu.tdt4250.oving1.model/model/studies.ecore"
+    nsPrefix="studies">
+  <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore">
+    <details key="validationDelegates" value="http://www.eclipse.org/acceleo/query/1.0"/>
+    <details key="settingDelegates" value="http://www.eclipse.org/acceleo/query/1.0"/>
+    <details key="invocationDelegates" value="http://www.eclipse.org/acceleo/query/1.0"/>
+  </eAnnotations>
+  <eClassifiers xsi:type="ecore:EClass" name="University">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="courses" upperBound="-1"
+        eType="#//Course" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="studies" upperBound="-1"
+        eType="#//Study" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Course">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore">
+      <details key="constraints" value="shouldStartWith2Or3Letters shouldEndWithNumbers"/>
+    </eAnnotations>
+    <eAnnotations source="http://www.eclipse.org/acceleo/query/1.0">
+      <details key="shouldStartWith2Or3Letters" value="self.code.matches('^[A-Z]{2,3}.*')"/>
+      <details key="shouldEndWithNumbers" value="self.code.matches('.*[0-9]{4}$')"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="code" eType="#//CourseCode"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="studyPoints" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EFloat"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="courseInstances" upperBound="-1"
+        eType="#//CourseInstance" containment="true" eOpposite="#//CourseInstance/course"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="CourseInstance">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="course" lowerBound="1"
+        eType="#//Course" eOpposite="#//Course/courseInstances"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="year" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="semester" lowerBound="1"
+        eType="#//SemesterCode"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="instanceName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
+        changeable="false" volatile="true" transient="true" derived="true">
+      <eAnnotations source="http://www.eclipse.org/acceleo/query/1.0">
+        <details key="derivation" value="self.course.name + ' - ' + self.semester.toString() + ' ' + self.year"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Study">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="studyInstances" upperBound="-1"
+        eType="#//StudyInstance" containment="true" eOpposite="#//StudyInstance/study"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="code" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="SemesterCode">
+    <eLiterals name="Spring"/>
+    <eLiterals name="Autumn" value="1"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EDataType" name="CourseCode" instanceClassName="java.lang.String"/>
+  <eClassifiers xsi:type="ecore:EClass" name="StudyInstance">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="study" lowerBound="1" eType="#//Study"
+        eOpposite="#//Study/studyInstances"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="startYear" lowerBound="1"
+        eType="#//StudyYear" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="year" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="StudyYear">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore">
+      <details key="constraints" value="springContainsOnlySpringClasses fallContainsOnlyFallClasses"/>
+    </eAnnotations>
+    <eAnnotations source="http://www.eclipse.org/acceleo/query/1.0">
+      <details key="springContainsOnlySpringClasses" value="if self.springSemester &lt;> null then not self.springSemester.courses.semester.toString()->exists(name | name &lt;> 'Spring') else true endif"/>
+      <details key="fallContainsOnlySpringClasses" value="if self.fallSemester &lt;> null then not self.fallSemester.courses.semester.toString()->exists(name | name &lt;> 'Autumn') else true endif"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="nextYear" upperBound="-1"
+        eType="#//StudyYear" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="programName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="springSemester" eType="#//Semester"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="autumnSemester" eType="#//Semester"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="StudyCourse">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="courseInstance" lowerBound="1"
+        eType="#//CourseInstance"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="mandatory" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Semester">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore">
+      <details key="constraints" value="shouldHave30StudyPoints"/>
+    </eAnnotations>
+    <eAnnotations source="http://www.eclipse.org/acceleo/query/1.0">
+      <details key="shouldHave30StudyPoints" value="self.courses.course.studyPoints->sum() = 30.0"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="courses" lowerBound="1"
+        upperBound="-1" eType="#//CourseInstance"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="studyYearSemester" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
+        changeable="false" volatile="true" transient="true" derived="true">
+      <eAnnotations source="http://www.eclipse.org/acceleo/query/1.0">
+        <details key="derivation" value="if self.eContainmentFeature() &lt;> null and self.eContainmentFeature().name = 'autumnSemester' then 'Autumn' else 'Spring' endif"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+  </eClassifiers>
+</ecore:EPackage>

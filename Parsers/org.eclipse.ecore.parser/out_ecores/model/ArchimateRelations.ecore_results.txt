@@ -1,0 +1,6 @@
+model	Group (groupName,EString,attribute) (groupElements,ArchimateElement,ref) 
+model	ArchimateModel (elements,ArchimateElement,ref) (groups,Group,ref) (relations,ArchimateRelation,ref) 
+model	ArchimateElement (description,EString,attribute) (elementName,EString,attribute) (composedOf,ArchimateElement,ref) (composes,ArchimateElement,ref) 
+model	ArchimateRelation (connectorName,EString,attribute) (sourceC,ArchimateElement,ref) (targetC,ArchimateElement,ref) 
+model	BusinessProcess (processFullName,EString,attribute) (processID,EString,attribute) (importance,EInt,attribute) (missionary,EBoolean,attribute) (processType,EString,attribute) (processDesign,EString,attribute) 
+model	Location (address,EString,attribute) 

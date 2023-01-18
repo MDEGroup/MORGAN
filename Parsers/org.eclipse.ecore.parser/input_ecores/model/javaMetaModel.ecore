@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="javaMetaModel" nsURI="http://www.example.org/javaMetaModel"
+    nsPrefix="javaMetaModel">
+  <eClassifiers xsi:type="ecore:EClass" name="JElement">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="JMethod" eSuperTypes="#//JFeature">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="jparameter" upperBound="-1"
+        eType="#//JParameter" containment="true" eOpposite="#//JParameter/owner"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="Vis">
+    <eLiterals name="public"/>
+    <eLiterals name="private" value="1"/>
+    <eLiterals name="protected" value="2"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="PrimitiveType">
+    <eLiterals name="JByte"/>
+    <eLiterals name="JShort" value="1"/>
+    <eLiterals name="JInt" value="2"/>
+    <eLiterals name="JLong" value="3"/>
+    <eLiterals name="JChar" value="4"/>
+    <eLiterals name="JFloat" value="5"/>
+    <eLiterals name="JDouble" value="6"/>
+    <eLiterals name="JBoolean" value="7"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="ReferenceType">
+    <eLiterals name="JClassType"/>
+    <eLiterals name="JInterfaceType" value="1"/>
+    <eLiterals name="JArrayType" value="2"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="Direction">
+    <eLiterals name="input"/>
+    <eLiterals name="return" value="1"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="JClass" eSuperTypes="#//JElement">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="isAbstract" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="isFinal" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="jfeature" upperBound="-1"
+        eType="#//JFeature" containment="true" eOpposite="#//JFeature/owner"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="owner" eType="#//JPackage"
+        eOpposite="#//JPackage/jclass"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="jsubClass" upperBound="-1"
+        eType="#//JClass" eOpposite="#//JClass/jsuperClass"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="jsuperClass" eType="#//JClass"
+        eOpposite="#//JClass/jsubClass"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="JPackage" eSuperTypes="#//JElement">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="jclass" upperBound="-1"
+        eType="#//JClass" containment="true" eOpposite="#//JClass/owner"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="JField" abstract="true" eSuperTypes="#//JFeature"/>
+  <eClassifiers xsi:type="ecore:EClass" name="JAttribute" eSuperTypes="#//JField">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="primitiveType" eType="#//PrimitiveType"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="JReference" eSuperTypes="#//JField">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="refType" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="JParameter" abstract="true" eSuperTypes="#//JElement">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="direction" eType="#//Direction"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="owner" eType="#//JMethod"
+        eOpposite="#//JMethod/jparameter"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="JPrimitiveTypePar" eSuperTypes="#//JParameter">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="primitiveType" eType="#//PrimitiveType"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="JReferenceTypePar" eSuperTypes="#//JParameter">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="refType" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="JFeature" abstract="true" eSuperTypes="#//JElement">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="visibility" eType="#//Vis"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="isStatic" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="owner" eType="#//JClass"
+        eOpposite="#//JClass/jfeature"/>
+  </eClassifiers>
+</ecore:EPackage>

@@ -1,0 +1,5 @@
+model	StudyProgram (name,StudyProgramName,attribute) (number_of_semesters,EInt,attribute) (students,Student,ref) (obligatory_courses,Course,ref) (specialisations,Specialisation,ref) 
+model	Specialisation (name,EString,attribute) (students,Student,ref) (course_group,CourseGroup,ref) (further_specialisation,Specialisation,ref) 
+model	CourseGroup (specialisation,Specialisation,ref) (mandatory_courses,Course,ref) (elective_courses,Course,ref) 
+model	Course (code,EString,attribute) (level,EString,attribute) (name,EString,attribute) (semester,Semester,attribute) (study_points,EFloat,attribute) 
+model	Student (studentID,EInt,attribute) (current_semester,EInt,attribute) (courses,Course,ref) 

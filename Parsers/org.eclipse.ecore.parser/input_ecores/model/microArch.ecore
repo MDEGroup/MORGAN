@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="micro" nsURI="http://it.univa.disim.micro" nsPrefix="micro">
+  <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore">
+    <details key="invocationDelegates" value="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot"/>
+    <details key="settingDelegates" value="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot"/>
+    <details key="validationDelegates" value="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot"/>
+  </eAnnotations>
+  <eClassifiers xsi:type="ecore:EClass" name="MicroserviceArchitecture" eSuperTypes="#//NamedElement">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="services" upperBound="-1"
+        eType="#//Service" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Service" abstract="true" eSuperTypes="#//NamedElement">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore">
+      <details key="constraints" value="ServiceNameMustBeUnique ServiceFullnameMustBeUnique ServiceShortNameMustBeUnique ServicePortMustBeUnique ServiceReservedPortNumbers MustHaveFullname FullnameMustNotContainWhiteSpace MustHaveShortname ShortnameMustNotContainWhiteSpace"/>
+    </eAnnotations>
+    <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
+      <details key="ServiceNameMustBeUnique" value="MicroserviceArchitecture.allInstances().services->select(s : Service | s.name = self.name)->size() = 1"/>
+      <details key="ServiceFullnameMustBeUnique" value="MicroserviceArchitecture.allInstances().services->select(s : Service | s.fullname = self.fullname)->size() = 1"/>
+      <details key="ServiceShortNameMustBeUnique" value="MicroserviceArchitecture.allInstances().services->select(s : Service | s.shortname = self.shortname)->size() = 1"/>
+      <details key="ServicePortMustBeUnique" value="MicroserviceArchitecture.allInstances().services->select(s : Service | s.port = self.port)->size() = 1"/>
+      <details key="ServiceReservedPortNumbers" value="MicroserviceArchitecture.allInstances().services->select(s : Service | (s = self and (s.port.toString() = '27017' or s.port.toString() = '8099' or s.port.toString() = '3306' or s.port.toString() = '9092' or s.port.toString() = '2888' or s.port.toString() = '3888' or s.port.toString() = '5020')))->size() = 0"/>
+      <details key="MustHaveFullname" value="fullname &lt;> ''"/>
+      <details key="FullnameMustNotContainWhiteSpace" value="fullname.toString().characters()->select(c : String | c = ' ')->size() = 0"/>
+      <details key="MustHaveShortname" value="shortname &lt;> ''"/>
+      <details key="ShortnameMustNotContainWhiteSpace" value="shortname.toString().characters()->select(c : String | c = ' ')->size() = 0"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="fullname" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
+        defaultValueLiteral=""/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="description" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="shortname" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="port" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"
+        defaultValueLiteral="8888"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Model" eSuperTypes="#//NamedElement">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore">
+      <details key="constraints" value="ModelNameMustBeUnique ModelMustBeContainedInOneAggService"/>
+    </eAnnotations>
+    <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
+      <details key="ModelNameMustBeUnique" value="MicroserviceArchitecture.allInstances().models->select(s : Model | s.name = self.name)->size() = 1"/>
+      <details key="ModelMustBeContainedInOneAggService" value="MicroserviceArchitecture.allInstances().services->select(s : Service | s.oclIsTypeOf(AggregateService)).oclAsType(AggregateService).models->select(m : Model | m = self)->size() = 1"/>
+      <details key="ModelMustBelongToCurrentAggregateService" value="MicroserviceArchitecture.allInstances().services->select(s : Service | s.name = aggregateService.name).oclAsType(AggregateService).models->select(m : Model | m = self.model)->size() = 1"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="attributes" lowerBound="1"
+        upperBound="-1" eType="#//Attribute" containment="true" eOpposite="#//Attribute/model"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="aggregateService" ordered="false"
+        eType="#//AggregateService" eOpposite="#//AggregateService/models"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="CRUDOperation">
+    <eLiterals name="create"/>
+    <eLiterals name="update" value="1"/>
+    <eLiterals name="delete" value="2"/>
+    <eLiterals name="retrieve" value="3"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="AggregateService" eSuperTypes="#//Service">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore">
+      <details key="constraints" value="AggregateServiceMustIncludeAllItsReferencedModels"/>
+    </eAnnotations>
+    <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
+      <details key="AggregateServiceMustIncludeAllItsReferencedModels" value="ReferenceModelsIncluded()"/>
+    </eAnnotations>
+    <eOperations name="ReferenceModelsIncluded" ordered="false" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
+        <details key="body" value="self.models->includesAll(self.models.attributes->select(a : Attribute | a.oclIsTypeOf(ReferenceAttribute)).oclAsType(ReferenceAttribute).type)"/>
+      </eAnnotations>
+    </eOperations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="operation" lowerBound="1"
+        upperBound="-1" eType="#//Operation" containment="true" eOpposite="#//Operation/aggregateService"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="api" lowerBound="1" eType="#//API"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="models" lowerBound="1"
+        upperBound="-1" eType="#//Model" containment="true" eOpposite="#//Model/aggregateService"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ViewService" eSuperTypes="#//Service">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="replicateServices" upperBound="-1"
+        eType="#//AggregateService"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Operation" eSuperTypes="#//NamedElement">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore">
+      <details key="constraints" value="SagaNameMustBeUnique OperationNameMustBeUnique OperationModelMustBelongToSameAggregateService OperationMustPublishEvent OperationEventPublishedMustBelongToCurrentAggregateService"/>
+    </eAnnotations>
+    <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
+      <details key="SagaNameMustBeUnique" value="aggregateService.operation->select(o : Operation | (o.Saga.oclIsUndefined() = false and self.Saga.oclIsUndefined() = false))->select(s : Operation | (s.Saga.name = self.Saga.name))->size() &lt;= 1"/>
+      <details key="OperationNameMustBeUnique" value="aggregateService.operation->select(o : Operation | (o.name = self.name and o.operationType.toString() = self.operationType.toString()))->size() = 1"/>
+      <details key="OperationModelMustBelongToSameAggregateService" value="aggregateService.models->select(m : Model | m.name = self.model.name)->size() = 1"/>
+      <details key="OperationMustPublishEvent" value="self.operationType.toString() &lt;> CRUDOperation::retrieve.toString() and self.publish &lt;> null or self.operationType.toString() = CRUDOperation::retrieve.toString() or self.operationType.toString() = CRUDOperation::update.toString() and self.Saga.oclIsUndefined() = false"/>
+      <details key="OperationEventPublishedMustBelongToCurrentAggregateService" value="aggregateService.api.events->select(e : Event | (self.publish &lt;> null and self.publish.name = e.name))->size() = 1 or self.operationType.toString() = CRUDOperation::retrieve.toString() or self.operationType.toString() = CRUDOperation::update.toString() and self.Saga.oclIsUndefined() = false"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="operationType" eType="#//CRUDOperation"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="publish" eType="#//Event"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="Saga" eType="#//Saga" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="model" lowerBound="1" eType="#//Model"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="isMethodController" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="aggregateService" ordered="false"
+        eType="#//AggregateService" eOpposite="#//AggregateService/operation"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="NamedElement">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore">
+      <details key="constraints" value="NameMustNotContainWhiteSpace NameMustNotBeEmpty"/>
+    </eAnnotations>
+    <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
+      <details key="NameMustNotContainWhiteSpace" value="name.toString().characters()->select(c : String | c = ' ')->size() = 0"/>
+      <details key="NameMustNotBeEmpty" value="name &lt;> ''"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="API" eSuperTypes="#//NamedElement">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="events" lowerBound="1"
+        upperBound="-1" eType="#//Event" containment="true" eOpposite="#//Event/api"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="commands" lowerBound="1"
+        upperBound="-1" eType="#//Command" containment="true" eOpposite="#//Command/api"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="infos" lowerBound="1" upperBound="-1"
+        eType="#//Info" containment="true" eOpposite="#//Info/api"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Command" eSuperTypes="#//NamedElement">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore">
+      <details key="constraints" value="CommandNameMustBeUnique CommandReplyMustHaveReplyInfo CommandReplyInfoMustBelongToCurrentAggregateService"/>
+    </eAnnotations>
+    <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
+      <details key="CommandNameMustBeUnique" value="api.commands->select(c : Command | c.name = self.name)->size() = 1"/>
+      <details key="CommandReplyMustHaveReplyInfo" value="commandType.toString() = CommandType::reply.toString() and replyInfo &lt;> null or commandType.toString() &lt;> CommandType::reply.toString()"/>
+      <details key="CommandReplyInfoMustBelongToCurrentAggregateService" value="api.infos->select(i : Info | i.name = replyInfo.name)->size() = 1 or commandType.toString() &lt;> CommandType::reply.toString()"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="commandType" eType="#//CommandType"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="replyInfo" eType="#//Info"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="isReplyInfoMany" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="api" ordered="false" eType="#//API"
+        eOpposite="#//API/commands"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Event" eSuperTypes="#//NamedElement">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore">
+      <details key="constraints" value="EventNameMustBeUnique"/>
+    </eAnnotations>
+    <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
+      <details key="EventNameMustBeUnique" value="api.events->select(e : Event | e.name = self.name)->size() = 1"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="api" ordered="false" eType="#//API"
+        eOpposite="#//API/events"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Info" eSuperTypes="#//NamedElement">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore">
+      <details key="constraints" value="InfoNameMustBeUnique"/>
+    </eAnnotations>
+    <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
+      <details key="InfoNameMustBeUnique" value="api.infos->select(i : Info | i.name = self.name)->size() = 1"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="dto" eType="#//Model"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="api" ordered="false" eType="#//API"
+        eOpposite="#//API/infos"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="CommandType">
+    <eLiterals name="compensate"/>
+    <eLiterals name="invoke" value="1"/>
+    <eLiterals name="reply" value="2"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Step" eSuperTypes="#//NamedElement">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="commands" lowerBound="1"
+        upperBound="-1" eType="#//Command"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Saga" eSuperTypes="#//NamedElement">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="Steps" lowerBound="1" upperBound="-1"
+        eType="#//Step" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="Data" lowerBound="1" eType="#//Data"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Data" eSuperTypes="#//NamedElement"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Attribute" abstract="true">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore">
+      <details key="constraints" value="ModelAttributeNameMustBeUnique ModelAttributeIdMustBeUnique ModelAttributeIdMustBeNoList ModelAttributeIsGeneratedOnlyWithId"/>
+    </eAnnotations>
+    <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
+      <details key="ModelAttributeNameMustBeUnique" value="model.attributes->select(a : Attribute | a.name = self.name)->size() = 1"/>
+      <details key="ModelAttributeIdMustBeUnique" value="model.attributes->select(a : Attribute | a.isId = true)->size() = 1"/>
+      <details key="ModelAttributeIdMustBeNoList" value="model.attributes->select(a : Attribute | (a.isId = true and a.isMany = false))->size() = 1"/>
+      <details key="ModelAttributeIsGeneratedOnlyWithId" value="model.attributes->select(a : Attribute | (a.isId = false and a.isGenerated = true))->size() = 0"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="isMany" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="isId" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="isGenerated" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="model" ordered="false"
+        eType="#//Model" eOpposite="#//Model/attributes"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ReferenceAttribute" eSuperTypes="#//Attribute">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="type" lowerBound="1" eType="#//Model"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="PrimitiveTypeAttribute" eSuperTypes="#//Attribute">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="type" lowerBound="1" eType="#//AttributePrimitiveValue"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="ModelToView" eType="#//Model"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="AttributePrimitiveValue">
+    <eLiterals name="String"/>
+    <eLiterals name="int" value="1"/>
+    <eLiterals name="boolean" value="2"/>
+    <eLiterals name="char" value="3"/>
+    <eLiterals name="float" value="4"/>
+    <eLiterals name="long" value="5"/>
+    <eLiterals name="short" value="6"/>
+  </eClassifiers>
+</ecore:EPackage>

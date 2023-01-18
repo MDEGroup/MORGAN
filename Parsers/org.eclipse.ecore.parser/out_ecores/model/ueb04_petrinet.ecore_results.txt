@@ -1,0 +1,6 @@
+model	PTArc (src,Place,ref) (trg,Transition,ref) 
+model	Arc (weight,EInt,attribute) 
+model	TPArc (src,Transition,ref) (trg,Place,ref) 
+model	Transition (name,EString,attribute) (in,PTArc,ref) (out,TPArc,ref) 
+model	Petrinet (name,EString,attribute) (places,Place,ref) (transitions,Transition,ref) (arcs,Arc,ref) 
+model	Place (name,EString,attribute) (in,TPArc,ref) (tokens,Token,ref) (out,PTArc,ref) 

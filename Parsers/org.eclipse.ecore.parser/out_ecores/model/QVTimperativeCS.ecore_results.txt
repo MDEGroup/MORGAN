@@ -1,0 +1,8 @@
+model	ImperativePredicateOrAssignmentCS (isAccumulate,EBoolean,attribute) 
+model	MappingSequenceCS (ownedMappingStatements,MappingStatementCS,ref) 
+model	MappingCS (ownedUsesPathNames,null,ref) (ownedMappingSequence,MappingSequenceCS,ref) 
+model	TopLevelCS (ownedMappings,MappingCS,ref) (ownedTransformations,null,ref) (ownedQueries,null,ref) 
+model	MappingCallCS (isInfinite,EBoolean,attribute) (ownedBindings,MappingCallBindingCS,ref) (referredMapping,null,ref) (ownedPathName,null,ref) 
+model	ImperativeDomainCS (checkedProperties,null,ref) (enforcedProperties,null,ref) 
+model	MappingCallBindingCS (isPolled,EBoolean,attribute) (ownedValue,null,ref) (referredVariable,null,ref) (owningMappingCall,MappingCallCS,ref) 
+model	MappingLoopCS (ownedIterator,null,ref) (ownedInExpression,null,ref) (ownedMappingSequence,MappingSequenceCS,ref) 

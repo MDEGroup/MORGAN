@@ -1,0 +1,6 @@
+model	Specialization (name,EString,attribute) (specializationCourse,Course,ref) (specializations,Specialization,ref) (semesters,Semester,ref) 
+model	Department (code,EString,attribute) (name,EString,attribute) (programmes,Programme,ref) (course,Course,ref) 
+model	Semester (number,EInt,attribute) (totalCredits,EFloat,attribute) (creditConstraint,credits,attribute) (season,EString,attribute) (courseList,Course,ref) (courseGroups,CourseGroup,ref) 
+model	CourseGroup (status,EString,attribute) (coursesInGroup,Course,ref) 
+model	Course (code,EString,attribute) (credits,EFloat,attribute) (level,EString,attribute) (name,EString,attribute) 
+model	Programme (duration,EInt,attribute) (code,EString,attribute) (name,EString,attribute) (programmeSemester,Semester,ref) (programmeSpecializaton,Specialization,ref) 

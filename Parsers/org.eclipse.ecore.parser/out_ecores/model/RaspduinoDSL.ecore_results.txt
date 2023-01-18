@@ -1,0 +1,6 @@
+model	ChangeActuator (ActuatorState,EString,attribute) (actuator,Actuator,ref) 
+model	Timer (hours,EInt,attribute) (minutes,EInt,attribute) (secs,EInt,attribute) (repeattype,EString,attribute) (eventHandler,EventHandler,ref) 
+model	Model (name,EString,attribute) (hardware,EString,attribute) (sensorListeners,SensorListener,ref) (timers,Timer,ref) (devices,AbstractDevice,ref) (eventHandlers,EventHandler,ref) 
+model	AbstractDevice (pin,EString,attribute) (name,EString,attribute) 
+model	EventHandler (name,EString,attribute) (changeActuators,ChangeActuator,ref) 
+model	SensorListener (h,EInt,attribute) (type,EString,attribute) (l,EInt,attribute) (sensor,Sensor,ref) (eventHandler,EventHandler,ref) 

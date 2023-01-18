@@ -1,0 +1,8 @@
+model	Signal (enabled,EBoolean,attribute) (nextRail,Rail,ref) 
+model	Rail (allowedFrom,Signal,ref) (allowedTo,Signal,ref) (from,TrackElement,ref) (to,TrackElement,ref) 
+model	Switch (connectedRails,Rail,ref) (activeConnection,SwitchConnection,ref) (connections,SwitchConnection,ref) 
+model	TrackElement (train,Train,ref) 
+model	World (trains,Train,ref) (tracks,Track,ref) 
+model	Train (onTracks,TrackElement,ref) (nextElement,TrackElement,ref) 
+model	NamedElement (name,EString,attribute) 
+model	Track (rails,Rail,ref) (switches,Switch,ref) 

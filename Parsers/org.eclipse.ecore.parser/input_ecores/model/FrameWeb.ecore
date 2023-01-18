@@ -1,0 +1,1016 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="frameweb" nsURI="http://nemo.inf.ufes.br/projects/frameweb/FW-2015"
+    nsPrefix="frameweb">
+  <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore">
+    <details key="invocationDelegates" value="http://www.eclipse.org/emf/2002/Ecore/OCL"/>
+    <details key="settingDelegates" value="http://www.eclipse.org/emf/2002/Ecore/OCL"/>
+    <details key="validationDelegates" value="http://www.eclipse.org/emf/2002/Ecore/OCL"/>
+  </eAnnotations>
+  <eClassifiers xsi:type="ecore:EClass" name="FramewebProject">
+    <eAnnotations source="Ecore">
+      <details key="constraints" value="FramewebProjectContent"/>
+    </eAnnotations>
+    <eAnnotations source="OCL" references="#//FramewebProject/%Ecore%/@details.0">
+      <details key="FramewebProjectContent" value="((self.compose->size()>=1) and (self.configures->size()=0)) or ((self.configures->size()>=1) and (self.compose->size()=0))"/>
+    </eAnnotations>
+    <eAnnotations source="Comments" references="#//FramewebProject/%Ecore%/@details.0">
+      <details key="FramewebProjectContent" value="The FramewebProject need obligatorily have a FrameworkProfile or a FramewebModel and may not both simultaneously."/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="compose" upperBound="-1"
+        eType="#//FramewebModel" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="configures" upperBound="-1"
+        eType="#//FrameworkProfile" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="FramewebModel" abstract="true" eSuperTypes="platform:/plugin/org.eclipse.uml2.uml/model/UML.ecore#//Model">
+    <eAnnotations source="Ecore">
+      <details key="constraints" value="FramewebModelContent"/>
+    </eAnnotations>
+    <eAnnotations source="OCL" references="#//FramewebModel/%Ecore%/@details.0">
+      <details key="FramewebModelContent" value="self.packagedElement.oclIsTypeOf(EntityModel) or self.packagedElement.oclIsTypeOf(NavigationModel) or self.packagedElement.oclIsTypeOf(PersistenceModel) or self.packagedElement.oclIsTypeOf(ApplicationModel)"/>
+    </eAnnotations>
+    <eAnnotations source="Comments" references="#//FramewebModel/%Ecore%/@details.0">
+      <details key="FramewebModelContent" value="none"/>
+    </eAnnotations>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="FrameworkProfile" eSuperTypes="platform:/plugin/org.eclipse.uml2.uml/model/UML.ecore#//Profile">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="category" eType="#//FrameworkCategoryList"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="kind" eType="#//FrameworkKindList"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="EntityModel" eSuperTypes="#//FramewebModel">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore">
+      <details key="constraints" value="EntityModelContent EntityModelMinimum"/>
+    </eAnnotations>
+    <eAnnotations source="comments" references="#//EntityModel/%http:%2F%2Fwww.eclipse.org%2Femf%2F2002%2FEcore%/@details.0">
+      <details key="EntityModelContent" value="A EntityModel must have only DomainPackage."/>
+      <details key="EntityModelMinimum" value="A EntityModel must have at least one DomainPackage"/>
+    </eAnnotations>
+    <eAnnotations source="OCL" references="#//EntityModel/%http:%2F%2Fwww.eclipse.org%2Femf%2F2002%2FEcore%/@details.0">
+      <details key="EntityModelContent" value="self.packagedElement.oclIsTypeOf(DomainPackage)"/>
+      <details key="EntityModelMinimum" value="self.packagedElement->size()>=1"/>
+    </eAnnotations>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="NavigationModel" eSuperTypes="#//FramewebModel"/>
+  <eClassifiers xsi:type="ecore:EClass" name="ApplicationModel" eSuperTypes="#//FramewebModel"/>
+  <eClassifiers xsi:type="ecore:EClass" name="PersistenceModel" eSuperTypes="#//FramewebModel"/>
+  <eClassifiers xsi:type="ecore:EClass" name="DomainAssociation" eSuperTypes="platform:/plugin/org.eclipse.uml2.uml/model/UML.ecore#//Association">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="collection" eType="#//Collection"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="cascade" eType="#//Cascade"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="fetch" eType="#//Fetch"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="order" eType="#//Order"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="DomainAttribute" eSuperTypes="platform:/plugin/org.eclipse.uml2.uml/model/UML.ecore#//Property">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="size" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//ELong"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="isNull" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="isPersistent" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="VersionAttribute" eSuperTypes="#//DomainAttribute"/>
+  <eClassifiers xsi:type="ecore:EClass" name="IdAttribute" eSuperTypes="#//DomainAttribute">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="generation" eType="#//Generation"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="LOBAttribute" eSuperTypes="#//DomainAttribute"/>
+  <eClassifiers xsi:type="ecore:EClass" name="EmbeddedAttribute" eSuperTypes="#//DomainAttribute"/>
+  <eClassifiers xsi:type="ecore:EEnum" name="DateTimePrecision">
+    <eLiterals name="timestamp"/>
+    <eLiterals name="time" value="1"/>
+    <eLiterals name="date" value="2"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="Generation">
+    <eLiterals name="auto"/>
+    <eLiterals name="identity" value="1"/>
+    <eLiterals name="sequence" value="2"/>
+    <eLiterals name="none" value="3"/>
+    <eLiterals name="table" value="4"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="DecimalAttribute" eSuperTypes="#//DomainAttribute">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="decimalPrecision" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//ELong"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="decimalScale" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//ELong"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="DateTimeAttribute" eSuperTypes="#//DomainAttribute">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="dateTimePrecision" eType="#//DateTimePrecision"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="Collection">
+    <eLiterals name="set"/>
+    <eLiterals name="bag" value="1"/>
+    <eLiterals name="list" value="2"/>
+    <eLiterals name="map" value="3"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="Order">
+    <eLiterals name="natural"/>
+    <eLiterals name="columnNameAsc" value="1"/>
+    <eLiterals name="columnNameDesc" value="2"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="Cascade">
+    <eLiterals name="remove"/>
+    <eLiterals name="merge" value="1"/>
+    <eLiterals name="refresh" value="2"/>
+    <eLiterals name="persist" value="3"/>
+    <eLiterals name="none" value="4"/>
+    <eLiterals name="all" value="5"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="Fetch">
+    <eLiterals name="eager"/>
+    <eLiterals name="lazy" value="1"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Page" eSuperTypes="#//NavigationClass">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="pageTagLib" upperBound="-1"
+        eType="#//TagLib"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Template" eSuperTypes="#//NavigationClass">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="templateTagLib" upperBound="-1"
+        eType="#//TagLib"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="DAOInterface" eSuperTypes="platform:/plugin/org.eclipse.uml2.uml/model/UML.ecore#//Interface">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="infix" lowerBound="1" eType="ecore:EDataType platform:/plugin/org.eclipse.uml2.types/model/Types.ecore#//String"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="sufix" lowerBound="1" eType="ecore:EDataType platform:/plugin/org.eclipse.uml2.types/model/Types.ecore#//String"
+        changeable="false" defaultValueLiteral="DAO"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="DAOClass" eSuperTypes="platform:/plugin/org.eclipse.uml2.uml/model/UML.ecore#//Class">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="sufix" lowerBound="1" eType="ecore:EDataType platform:/plugin/org.eclipse.uml2.types/model/Types.ecore#//String"
+        changeable="false" defaultValueLiteral="" derived="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="infix" lowerBound="1" eType="ecore:EDataType platform:/plugin/org.eclipse.uml2.types/model/Types.ecore#//String"
+        changeable="false" defaultValueLiteral="DAO"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="prefix" lowerBound="1"
+        eType="ecore:EDataType platform:/plugin/org.eclipse.uml2.types/model/Types.ecore#//String"
+        changeable="false" derived="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="DAORealization" eSuperTypes="platform:/plugin/org.eclipse.uml2.uml/model/UML.ecore#//InterfaceRealization"/>
+  <eClassifiers xsi:type="ecore:EClass" name="FrontControllerClass" eSuperTypes="platform:/plugin/org.eclipse.uml2.uml/model/UML.ecore#//Class"/>
+  <eClassifiers xsi:type="ecore:EClass" name="IOParameter" eSuperTypes="#//NavigationAttribute">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="display" upperBound="-1"
+        eType="#//UIComponentField" derived="true" eOpposite="#//UIComponentField/inject"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="FrameworkCategoryList">
+    <eLiterals name="FrontController" literal="FrontController"/>
+    <eLiterals name="DependencyInjection" value="1" literal="DependencyInjection"/>
+    <eLiterals name="ObjetoRelacional" value="2" literal="ObjetoRelacional"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ResultDependency" eSuperTypes="#//NavigationDependency">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore">
+      <details key="constraints" value="ResultDependencyConstraint&#xD;&#xA;"/>
+    </eAnnotations>
+    <eAnnotations source="Comments" references="#//ResultDependency/%http:%2F%2Fwww.eclipse.org%2Femf%2F2002%2FEcore%/@details.0">
+      <details key="ResultDependencyConstraint" value="A ResultDependency must have a FrontControllerClass as client and a NavigationClass as supplier."/>
+    </eAnnotations>
+    <eAnnotations source="OCL" references="#//ResultDependency/%http:%2F%2Fwww.eclipse.org%2Femf%2F2002%2FEcore%/@details.0">
+      <details key="ResultDependencyConstraint" value="(self.client.oclIsTypeOf(FrontControllerClass)) and (self.supplier.oclIsTypeOf(NavigationClass))"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="resultResult" upperBound="-1"
+        eType="#//Result"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="resultMethod" eType="#//FrontControllerMethod"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="resultDependendencyCosntraint"
+        ordered="false" lowerBound="1" eType="#//ResultConstraint" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="render" eType="ecore:EDataType platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EString"
+        defaultValueLiteral="@none"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="execute" eType="ecore:EDataType platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EString"
+        defaultValueLiteral="@this"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="ajax" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"
+        defaultValueLiteral="false"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="NavigationAssociation" eSuperTypes="platform:/plugin/org.eclipse.uml2.uml/model/UML.ecore#//Association"/>
+  <eClassifiers xsi:type="ecore:EClass" name="FrontControllerMethod" eSuperTypes="platform:/plugin/org.eclipse.uml2.uml/model/UML.ecore#//Operation">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="isDefault" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ServiceClass" eSuperTypes="platform:/plugin/org.eclipse.uml2.uml/model/UML.ecore#//Class"/>
+  <eClassifiers xsi:type="ecore:EClass" name="ServiceInterface" eSuperTypes="platform:/plugin/org.eclipse.uml2.uml/model/UML.ecore#//Interface"/>
+  <eClassifiers xsi:type="ecore:EClass" name="ServiceGeneralization" eSuperTypes="platform:/plugin/org.eclipse.uml2.uml/model/UML.ecore#//Generalization"/>
+  <eClassifiers xsi:type="ecore:EClass" name="ServiceControllerAssociation" eSuperTypes="#//ServiceAssociation"/>
+  <eClassifiers xsi:type="ecore:EClass" name="DomainClass" eSuperTypes="platform:/plugin/org.eclipse.uml2.uml/model/UML.ecore#//Class">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="table" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="ConstantNameList">
+    <eLiterals name="DAO"/>
+    <eLiterals name="interface" value="1"/>
+    <eLiterals name="base" value="2"/>
+    <eLiterals name="class" value="3"/>
+    <eLiterals name="impl" value="4"/>
+    <eLiterals name="Controller" literal="Controller"/>
+    <eLiterals name="Domain"/>
+    <eLiterals name="Persistence" literal="Persistence"/>
+    <eLiterals name="Application"/>
+    <eLiterals name="View"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Result" eSuperTypes="platform:/plugin/org.eclipse.uml2.uml/model/UML.ecore#//Class">
+    <eAnnotations source="EAnnotation0"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="FrontControllerDependency" eSuperTypes="#//NavigationDependency">
+    <eAnnotations source="Ecore">
+      <details key="constraints" value="FrontControllerDependencyContent"/>
+    </eAnnotations>
+    <eAnnotations source="Comments" references="#//FrontControllerDependency/%Ecore%/@details.0">
+      <details key="FrontControllerDependencyContent" value="A FrontControllerDependencyConstraint must have a NavigationClass as client and a FrontControllerClass as supplier."/>
+    </eAnnotations>
+    <eAnnotations source="OCL" references="#//FrontControllerDependency/%Ecore%/@details.0">
+      <details key="FrontControllerDependencyContent" value="(self.supplier.oclIsTypeOf(FrontControllerClass)) and (self.client.oclIsTypeOf(NavigationClass)) "/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="method" eType="#//FrontControllerMethod"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="methodDependendencyConstraint"
+        ordered="false" lowerBound="1" eType="#//MethodCosntraint" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="PageDependency" eSuperTypes="#//NavigationDependency">
+    <eAnnotations source="Ecore">
+      <details key="constraints" value="PageDepencencyContent"/>
+    </eAnnotations>
+    <eAnnotations source="Comments" references="#//PageDependency/%Ecore%/@details.0">
+      <details key="PageDepencencyContent" value="A PageDependencyConstraint must have a Page as client and a Page or a Template as supplier."/>
+    </eAnnotations>
+    <eAnnotations source="OCL" references="#//PageDependency/%Ecore%/@details.0">
+      <details key="PageDepencencyContent" value="(self.client.oclIsTypeOf(Page)) and ((self.supplier.oclIsTypeOf(Page)) or (self.supplier.oclIsTypeOf(Template)))"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="pageDependencyCosntraint"
+        ordered="false" lowerBound="1" eType="#//PageConstraint" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ChainingDependency" eSuperTypes="#//NavigationDependency">
+    <eAnnotations source="Ecore">
+      <details key="constraints" value="ChainingDependencyContent"/>
+    </eAnnotations>
+    <eAnnotations source="Comments" references="#//ChainingDependency/%Ecore%/@details.0">
+      <details key="ChainingDependencyContent" value="A ChainingDependencyConstraint must have a FrontControllerClass as client and a FrontControllerClass as supplier and these client and supplier can not be the same."/>
+    </eAnnotations>
+    <eAnnotations source="OCL" references="#//ChainingDependency/%Ecore%/@details.0">
+      <details key=" ChainingDependencyContent" value="(self.supplier.oclIsTypeOf(FrontControllerClass)) and (self.client.oclIsTypef(FrontControllerClass)) and (self.supplier &lt;> self.client) "/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="outMethod" eType="#//FrontControllerMethod"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="inMethod" eType="#//FrontControllerMethod"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="chainingDependendencyConstraint"
+        ordered="false" lowerBound="1" eType="#//ChainingConstraint" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="DAOServiceAssociation" eSuperTypes="#//ServiceAssociation"/>
+  <eClassifiers xsi:type="ecore:EClass" name="NavigationAttribute" abstract="true"
+      eSuperTypes="platform:/plugin/org.eclipse.uml2.uml/model/UML.ecore#//Property"/>
+  <eClassifiers xsi:type="ecore:EEnum" name="InheritanceMapping">
+    <eLiterals name="singletable"/>
+    <eLiterals name="union" value="1"/>
+    <eLiterals name="join" value="2"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="NavigationClass" abstract="true" eSuperTypes="platform:/plugin/org.eclipse.uml2.uml/model/UML.ecore#//Class"/>
+  <eClassifiers xsi:type="ecore:EClass" name="DomainMethod" eSuperTypes="platform:/plugin/org.eclipse.uml2.uml/model/UML.ecore#//Operation"/>
+  <eClassifiers xsi:type="ecore:EClass" name="DAOAttribute" eSuperTypes="platform:/plugin/org.eclipse.uml2.uml/model/UML.ecore#//Property"/>
+  <eClassifiers xsi:type="ecore:EClass" name="ServiceMethod" eSuperTypes="platform:/plugin/org.eclipse.uml2.uml/model/UML.ecore#//Operation"/>
+  <eClassifiers xsi:type="ecore:EClass" name="ServiceAttribute" eSuperTypes="platform:/plugin/org.eclipse.uml2.uml/model/UML.ecore#//Property"/>
+  <eClassifiers xsi:type="ecore:EClass" name="ServiceAssociation" abstract="true"
+      interface="true" eSuperTypes="platform:/plugin/org.eclipse.uml2.uml/model/UML.ecore#//Association"/>
+  <eClassifiers xsi:type="ecore:EClass" name="NavigationDependency" abstract="true"
+      eSuperTypes="platform:/plugin/org.eclipse.uml2.uml/model/UML.ecore#//Dependency"/>
+  <eClassifiers xsi:type="ecore:EClass" name="DAOMethod" eSuperTypes="platform:/plugin/org.eclipse.uml2.uml/model/UML.ecore#//Operation"/>
+  <eClassifiers xsi:type="ecore:EClass" name="DomainPackage" eSuperTypes="platform:/plugin/org.eclipse.uml2.uml/model/UML.ecore#//Package">
+    <eAnnotations source="http:///org/eclipse/emf/ecore/util/ExtendedMetaData"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ViewPackage" eSuperTypes="#//NavigationPackage"/>
+  <eClassifiers xsi:type="ecore:EClass" name="ControllerPackage" eSuperTypes="#//NavigationPackage"/>
+  <eClassifiers xsi:type="ecore:EClass" name="PersistencePackage" eSuperTypes="platform:/plugin/org.eclipse.uml2.uml/model/UML.ecore#//Package"/>
+  <eClassifiers xsi:type="ecore:EClass" name="ApplicationPackage" eSuperTypes="platform:/plugin/org.eclipse.uml2.uml/model/UML.ecore#//Package"/>
+  <eClassifiers xsi:type="ecore:EClass" name="UIComponent" eSuperTypes="#//NavigationClass"/>
+  <eClassifiers xsi:type="ecore:EClass" name="ResultType" eSuperTypes="platform:/plugin/org.eclipse.uml2.uml/model/UML.ecore#//Stereotype"/>
+  <eClassifiers xsi:type="ecore:EClass" name="NavigationPackage" abstract="true" eSuperTypes="platform:/plugin/org.eclipse.uml2.uml/model/UML.ecore#//Package"/>
+  <eClassifiers xsi:type="ecore:EClass" name="DomainGeneralization" eSuperTypes="platform:/plugin/org.eclipse.uml2.uml/model/UML.ecore#//Generalization"/>
+  <eClassifiers xsi:type="ecore:EClass" name="UIComponentField" instanceTypeName="UIComponent"
+      eSuperTypes="#//NavigationAttribute">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="inject" eType="#//IOParameter"
+        eOpposite="#//IOParameter/display"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="TagLib" eSuperTypes="platform:/plugin/org.eclipse.uml2.uml/model/UML.ecore#//Package">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="prefix" lowerBound="1"
+        eType="ecore:EDataType platform:/plugin/org.eclipse.uml2.types/model/Types.ecore#//String"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Tag" eSuperTypes="platform:/plugin/org.eclipse.uml2.uml/model/UML.ecore#//Stereotype"/>
+  <eClassifiers xsi:type="ecore:EClass" name="NavigationCompositionPart" eSuperTypes="#//NavigationProperty"/>
+  <eClassifiers xsi:type="ecore:EClass" name="NavigationCompositionWhole" eSuperTypes="#//NavigationProperty"/>
+  <eClassifiers xsi:type="ecore:EClass" name="NavigationProperty" abstract="true"
+      eSuperTypes="platform:/plugin/org.eclipse.uml2.uml/model/UML.ecore#//Property"/>
+  <eClassifiers xsi:type="ecore:EClass" name="ResultSet" eSuperTypes="platform:/plugin/org.eclipse.uml2.uml/model/UML.ecore#//Package"/>
+  <eClassifiers xsi:type="ecore:EClass" name="NavigationConstraint" abstract="true"
+      eSuperTypes="platform:/plugin/org.eclipse.uml2.uml/model/UML.ecore#//Constraint"/>
+  <eClassifiers xsi:type="ecore:EClass" name="PageConstraint" eSuperTypes="#//NavigationConstraint"/>
+  <eClassifiers xsi:type="ecore:EClass" name="ResultConstraint" eSuperTypes="#//NavigationConstraint"/>
+  <eClassifiers xsi:type="ecore:EClass" name="MethodCosntraint" eSuperTypes="#//NavigationConstraint"/>
+  <eClassifiers xsi:type="ecore:EClass" name="ChainingConstraint" eSuperTypes="#//NavigationConstraint"/>
+  <eClassifiers xsi:type="ecore:EClass" name="NavigationGeneralization" eSuperTypes="platform:/plugin/org.eclipse.uml2.uml/model/UML.ecore#//Generalization"/>
+  <eClassifiers xsi:type="ecore:EClass" name="DomainConstraints" eSuperTypes="platform:/plugin/org.eclipse.uml2.uml/model/UML.ecore#//Constraint"/>
+  <eClassifiers xsi:type="ecore:EClass" name="DomainProperty" eSuperTypes="platform:/plugin/org.eclipse.uml2.uml/model/UML.ecore#//Property"/>
+  <eClassifiers xsi:type="ecore:EClass" name="DAOGeneralization" eSuperTypes="platform:/plugin/org.eclipse.uml2.uml/model/UML.ecore#//Generalization"/>
+  <eClassifiers xsi:type="ecore:EClass" name="MappingLib" eSuperTypes="platform:/plugin/org.eclipse.uml2.uml/model/UML.ecore#//Package"/>
+  <eClassifiers xsi:type="ecore:EClass" name="ClassMapping" eSuperTypes="platform:/plugin/org.eclipse.uml2.uml/model/UML.ecore#//Stereotype"/>
+  <eClassifiers xsi:type="ecore:EClass" name="AttributeMapping" eSuperTypes="platform:/plugin/org.eclipse.uml2.uml/model/UML.ecore#//Stereotype"/>
+  <eClassifiers xsi:type="ecore:EClass" name="DomainGeneralizationSet" eSuperTypes="platform:/plugin/org.eclipse.uml2.uml/model/UML.ecore#//GeneralizationSet">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="mapping" eType="#//InheritanceMapping"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="FrameworkExtension" abstract="true"
+      eSuperTypes="platform:/plugin/org.eclipse.uml2.uml/model/UML.ecore#//Extension"/>
+  <eClassifiers xsi:type="ecore:EClass" name="TagExtension" eSuperTypes="#//NavigationExtension"/>
+  <eClassifiers xsi:type="ecore:EClass" name="FrameworkApplication" eSuperTypes="platform:/plugin/org.eclipse.uml2.uml/model/UML.ecore#//ProfileApplication"/>
+  <eClassifiers xsi:type="ecore:EEnum" name="FrameworkKindList">
+    <eLiterals name="StandardSpecification" literal="StandardSpecification"/>
+    <eLiterals name="FrameworkSpecification" value="1"/>
+    <eLiterals name="FrameworkImplementation" value="2"/>
+    <eLiterals name="Custom" value="3"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ControllerExtension" eSuperTypes="#//NavigationExtension"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Controller" eSuperTypes="platform:/plugin/org.eclipse.uml2.uml/model/UML.ecore#//Stereotype"/>
+  <eClassifiers xsi:type="ecore:EClass" name="ControllerSet" eSuperTypes="platform:/plugin/org.eclipse.uml2.uml/model/UML.ecore#//Package"/>
+  <eClassifiers xsi:type="ecore:EClass" name="ResultExtension" eSuperTypes="#//NavigationExtension"/>
+  <eClassifiers xsi:type="ecore:EClass" name="ClassMappingExtension" eSuperTypes="#//DomainExtension"/>
+  <eClassifiers xsi:type="ecore:EClass" name="AttributeMappingExtension" eSuperTypes="#//DomainExtension"/>
+  <eClassifiers xsi:type="ecore:EClass" name="ControllerExtensionEnd" eSuperTypes="platform:/plugin/org.eclipse.uml2.uml/model/UML.ecore#//ExtensionEnd"/>
+  <eClassifiers xsi:type="ecore:EClass" name="TagExtensionEnd" eSuperTypes="platform:/plugin/org.eclipse.uml2.uml/model/UML.ecore#//ExtensionEnd"/>
+  <eClassifiers xsi:type="ecore:EClass" name="ResultExtensionEnd" eSuperTypes="platform:/plugin/org.eclipse.uml2.uml/model/UML.ecore#//ExtensionEnd"/>
+  <eClassifiers xsi:type="ecore:EClass" name="ClassMappingExtensionEnd" eSuperTypes="platform:/plugin/org.eclipse.uml2.uml/model/UML.ecore#//ExtensionEnd"/>
+  <eClassifiers xsi:type="ecore:EClass" name="AttributeMappingExtensionEnd" eSuperTypes="platform:/plugin/org.eclipse.uml2.uml/model/UML.ecore#//ExtensionEnd"/>
+  <eClassifiers xsi:type="ecore:EClass" name="ControllerProperty" eSuperTypes="platform:/plugin/org.eclipse.uml2.uml/model/UML.ecore#//Property"/>
+  <eClassifiers xsi:type="ecore:EClass" name="TagProperty" eSuperTypes="platform:/plugin/org.eclipse.uml2.uml/model/UML.ecore#//Property"/>
+  <eClassifiers xsi:type="ecore:EClass" name="ResultProperty" eSuperTypes="platform:/plugin/org.eclipse.uml2.uml/model/UML.ecore#//Property"/>
+  <eClassifiers xsi:type="ecore:EClass" name="ClassMappingPropery" eSuperTypes="platform:/plugin/org.eclipse.uml2.uml/model/UML.ecore#//Property"/>
+  <eClassifiers xsi:type="ecore:EClass" name="AttributeMappingProperty" eSuperTypes="platform:/plugin/org.eclipse.uml2.uml/model/UML.ecore#//Property"/>
+  <eClassifiers xsi:type="ecore:EClass" name="SeviceRealization" eSuperTypes="platform:/plugin/org.eclipse.uml2.uml/model/UML.ecore#//InterfaceRealization"/>
+  <eClassifiers xsi:type="ecore:EClass" name="NavigationExtension" abstract="true"
+      eSuperTypes="#//FrameworkExtension"/>
+  <eClassifiers xsi:type="ecore:EClass" name="DomainExtension" abstract="true" eSuperTypes="#//FrameworkExtension"/>
+  <eClassifiers xsi:type="ecore:EClass" name="NavigationGeneralizationSet" eSuperTypes="platform:/plugin/org.eclipse.uml2.uml/model/UML.ecore#//GeneralizationSet"/>
+  <eClassifiers xsi:type="ecore:EClass" name="DAOGeneralizationSet" eSuperTypes="platform:/plugin/org.eclipse.uml2.uml/model/UML.ecore#//GeneralizationSet"/>
+  <eClassifiers xsi:type="ecore:EClass" name="ServiceGeneralizationSet" eSuperTypes="platform:/plugin/org.eclipse.uml2.uml/model/UML.ecore#//GeneralizationSet"/>
+  <eClassifiers xsi:type="ecore:EClass" name="SemanticPackage" eSuperTypes="platform:/plugin/org.eclipse.uml2.uml/model/UML.ecore#//Package"/>
+  <eClassifiers xsi:type="ecore:EClass" name="IRI" eSuperTypes="#//Property">
+    <eAnnotations source="http:///org/eclipse/emf/ecore/util/ExtendedMetaData">
+      <details key="name" value="IRI"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="iri" lowerBound="1" eType="ecore:EDataType platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="iriVersion" eType="ecore:EDataType platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="VocabularyModel" eSuperTypes="#//FramewebModel"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Vocabulary" eSuperTypes="platform:/plugin/org.eclipse.uml2.uml/model/UML.ecore#//Package">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="directlyImportsDocuments"
+        upperBound="-1" eType="#//IRI" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="vocabularyIRI" lowerBound="1"
+        eType="#//IRI"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="axioms" upperBound="-1"
+        eType="#//Axiom" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="annotations" upperBound="-1"
+        eType="#//Annotation" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="vocabularyDocument" eType="ecore:EDataType platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Axiom" eSuperTypes="platform:/plugin/org.eclipse.uml2.uml/model/UML.ecore#//Class"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Annotation" eSuperTypes="platform:/plugin/org.eclipse.uml2.uml/model/UML.ecore#//Class"/>
+  <eClassifiers xsi:type="ecore:EDataType" name="Rational" instanceClassName="double"/>
+  <eClassifiers xsi:type="ecore:EDataType" name="Decimal" instanceClassName="double"/>
+  <eClassifiers xsi:type="ecore:EClass" name="VocabularyConstraints" eSuperTypes="platform:/plugin/org.eclipse.uml2.uml/model/UML.ecore#//Constraint"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Property" eSuperTypes="platform:/plugin/org.eclipse.uml2.uml/model/UML.ecore#//StructuralFeature platform:/plugin/org.eclipse.uml2.uml/model/UML.ecore#//ConnectableElement platform:/plugin/org.eclipse.uml2.uml/model/UML.ecore#//DeploymentTarget">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="A Property is a StructuralFeature. A Property related by ownedAttribute to a Classifier (other than an association) represents an attribute and might also represent an association end. It relates an instance of the Classifier to a value or set of values of the type of the attribute. A Property related by memberEnd to an Association represents an end of the Association. The type of the Property is the type of the end of the Association. A Property has the capability of being a DeploymentTarget in a Deployment relationship. This enables modeling the deployment to hierarchical nodes that have Properties functioning as internal parts.  Property specializes ParameterableElement to specify that a Property can be exposed as a formal template parameter, and provided as an actual parameter in a binding of a template.&#xA;&lt;p>From package UML::Classification.&lt;/p>"/>
+    </eAnnotations>
+    <eAnnotations source="duplicates">
+      <contents xsi:type="ecore:EOperation" name="isCompatibleWith" ordered="false"
+          lowerBound="1" eType="ecore:EDataType platform:/plugin/org.eclipse.uml2.types/model/Types.ecore#//Boolean">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="The query isCompatibleWith() determines if this Property is compatible with the specified ParameterableElement. This Property is compatible with ParameterableElement p if the kind of this Property is thesame as or a subtype of the kind of p. Further, if p is a TypedElement, then the type of this Property must be conformant with the type of p.&#xA;result = (self.oclIsKindOf(p.oclType()) and (p.oclIsKindOf(TypedElement) implies&#xD;&#xA;self.type.conformsTo(p.oclAsType(TypedElement).type)))&#xA;&lt;p>From package UML::Classification.&lt;/p>"/>
+        </eAnnotations>
+        <eAnnotations source="redefines" references="platform:/plugin/org.eclipse.uml2.uml/model/UML.ecore#//ParameterableElement/isCompatibleWith"/>
+        <eParameters name="p" ordered="false" lowerBound="1" eType="ecore:EClass platform:/plugin/org.eclipse.uml2.uml/model/UML.ecore#//ParameterableElement"/>
+      </contents>
+      <contents xsi:type="ecore:EOperation" name="isConsistentWith" ordered="false"
+          lowerBound="1" eType="ecore:EDataType platform:/plugin/org.eclipse.uml2.types/model/Types.ecore#//Boolean">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="The query isConsistentWith() specifies, for any two Properties in a context in which redefinition is possible, whether redefinition would be logically consistent. A redefining Property is consistent with a redefined Property if the type of the redefining Property conforms to the type of the redefined Property, and the multiplicity of the redefining Property (if specified) is contained in the multiplicity of the redefined Property.&#xA;redefiningElement.isRedefinitionContextValid(self)&#xA;result = (redefiningElement.oclIsKindOf(Property) and &#xA;  let prop : Property = redefiningElement.oclAsType(Property) in &#xA;  (prop.type.conformsTo(self.type) and &#xA;  ((prop.lowerBound()->notEmpty() and self.lowerBound()->notEmpty()) implies prop.lowerBound() >= self.lowerBound()) and &#xA;  ((prop.upperBound()->notEmpty() and self.upperBound()->notEmpty()) implies prop.lowerBound() &lt;= self.lowerBound()) and &#xA;  (self.isComposite implies prop.isComposite)))&#xA;&lt;p>From package UML::Classification.&lt;/p>"/>
+        </eAnnotations>
+        <eAnnotations source="redefines" references="platform:/plugin/org.eclipse.uml2.uml/model/UML.ecore#//RedefinableElement/isConsistentWith"/>
+        <eParameters name="redefiningElement" ordered="false" lowerBound="1" eType="ecore:EClass platform:/plugin/org.eclipse.uml2.uml/model/UML.ecore#//RedefinableElement"/>
+      </contents>
+    </eAnnotations>
+    <eOperations name="subsetting_context_conforms" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Subsetting may only occur when the context of the subsetting property conforms to the context of the subsetted property.&#xA;subsettedProperty->notEmpty() implies&#xA;  (subsettingContext()->notEmpty() and subsettingContext()->forAll (sc |&#xA;    subsettedProperty->forAll(sp |&#xA;      sp.subsettingContext()->exists(c | sc.conformsTo(c)))))"/>
+      </eAnnotations>
+      <eParameters name="diagnostics" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDiagnosticChain">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="The chain of diagnostics to which problems are to be appended."/>
+        </eAnnotations>
+      </eParameters>
+      <eParameters name="context">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="The cache of context-specific information."/>
+        </eAnnotations>
+        <eGenericType eClassifier="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EMap">
+          <eTypeArguments eClassifier="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
+          <eTypeArguments eClassifier="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
+        </eGenericType>
+      </eParameters>
+    </eOperations>
+    <eOperations name="derived_union_is_read_only" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="A derived union is read only.&#xA;isDerivedUnion implies isReadOnly"/>
+      </eAnnotations>
+      <eParameters name="diagnostics" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDiagnosticChain">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="The chain of diagnostics to which problems are to be appended."/>
+        </eAnnotations>
+      </eParameters>
+      <eParameters name="context">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="The cache of context-specific information."/>
+        </eAnnotations>
+        <eGenericType eClassifier="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EMap">
+          <eTypeArguments eClassifier="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
+          <eTypeArguments eClassifier="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
+        </eGenericType>
+      </eParameters>
+    </eOperations>
+    <eOperations name="multiplicity_of_composite" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="A multiplicity on the composing end of a composite aggregation must not have an upper bound greater than 1.&#xA;isComposite and association &lt;> null implies opposite.upperBound() &lt;= 1"/>
+      </eAnnotations>
+      <eParameters name="diagnostics" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDiagnosticChain">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="The chain of diagnostics to which problems are to be appended."/>
+        </eAnnotations>
+      </eParameters>
+      <eParameters name="context">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="The cache of context-specific information."/>
+        </eAnnotations>
+        <eGenericType eClassifier="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EMap">
+          <eTypeArguments eClassifier="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
+          <eTypeArguments eClassifier="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
+        </eGenericType>
+      </eParameters>
+    </eOperations>
+    <eOperations name="redefined_property_inherited" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="A redefined Property must be inherited from a more general Classifier.&#xA;(redefinedProperty->notEmpty()) implies&#xD;&#xA;  (redefinitionContext->notEmpty() and&#xD;&#xA;      redefinedProperty->forAll(rp|&#xD;&#xA;        ((redefinitionContext->collect(fc|&#xD;&#xA;          fc.allParents()))->asSet())->collect(c| c.allFeatures())->asSet()->includes(rp)))"/>
+      </eAnnotations>
+      <eParameters name="diagnostics" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDiagnosticChain">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="The chain of diagnostics to which problems are to be appended."/>
+        </eAnnotations>
+      </eParameters>
+      <eParameters name="context">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="The cache of context-specific information."/>
+        </eAnnotations>
+        <eGenericType eClassifier="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EMap">
+          <eTypeArguments eClassifier="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
+          <eTypeArguments eClassifier="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
+        </eGenericType>
+      </eParameters>
+    </eOperations>
+    <eOperations name="subsetting_rules" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="A subsetting Property may strengthen the type of the subsetted Property, and its upper bound may be less.&#xA;subsettedProperty->forAll(sp |&#xA;  self.type.conformsTo(sp.type) and&#xA;    ((self.upperBound()->notEmpty() and sp.upperBound()->notEmpty()) implies&#xA;      self.upperBound() &lt;= sp.upperBound() ))"/>
+      </eAnnotations>
+      <eParameters name="diagnostics" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDiagnosticChain">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="The chain of diagnostics to which problems are to be appended."/>
+        </eAnnotations>
+      </eParameters>
+      <eParameters name="context">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="The cache of context-specific information."/>
+        </eAnnotations>
+        <eGenericType eClassifier="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EMap">
+          <eTypeArguments eClassifier="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
+          <eTypeArguments eClassifier="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
+        </eGenericType>
+      </eParameters>
+    </eOperations>
+    <eOperations name="binding_to_attribute" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="A binding of a PropertyTemplateParameter representing an attribute must be to an attribute.&#xA;(self.isAttribute()&#xD;&#xA;and (templateParameterSubstitution->notEmpty())&#xD;&#xA;implies (templateParameterSubstitution->forAll(ts |&#xD;&#xA;    ts.formal.oclIsKindOf(Property)&#xD;&#xA;    and ts.formal.oclAsType(Property).isAttribute())))"/>
+      </eAnnotations>
+      <eParameters name="diagnostics" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDiagnosticChain">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="The chain of diagnostics to which problems are to be appended."/>
+        </eAnnotations>
+      </eParameters>
+      <eParameters name="context">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="The cache of context-specific information."/>
+        </eAnnotations>
+        <eGenericType eClassifier="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EMap">
+          <eTypeArguments eClassifier="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
+          <eTypeArguments eClassifier="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
+        </eGenericType>
+      </eParameters>
+    </eOperations>
+    <eOperations name="derived_union_is_derived" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="A derived union is derived.&#xA;isDerivedUnion implies isDerived"/>
+      </eAnnotations>
+      <eParameters name="diagnostics" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDiagnosticChain">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="The chain of diagnostics to which problems are to be appended."/>
+        </eAnnotations>
+      </eParameters>
+      <eParameters name="context">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="The cache of context-specific information."/>
+        </eAnnotations>
+        <eGenericType eClassifier="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EMap">
+          <eTypeArguments eClassifier="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
+          <eTypeArguments eClassifier="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
+        </eGenericType>
+      </eParameters>
+    </eOperations>
+    <eOperations name="deployment_target" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="A Property can be a DeploymentTarget if it is a kind of Node and functions as a part in the internal structure of an encompassing Node.&#xA;deployment->notEmpty() implies owner.oclIsKindOf(Node) and Node.allInstances()->exists(n | n.part->exists(p | p = self))"/>
+      </eAnnotations>
+      <eParameters name="diagnostics" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDiagnosticChain">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="The chain of diagnostics to which problems are to be appended."/>
+        </eAnnotations>
+      </eParameters>
+      <eParameters name="context">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="The cache of context-specific information."/>
+        </eAnnotations>
+        <eGenericType eClassifier="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EMap">
+          <eTypeArguments eClassifier="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
+          <eTypeArguments eClassifier="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
+        </eGenericType>
+      </eParameters>
+    </eOperations>
+    <eOperations name="subsetted_property_names" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="A Property may not subset a Property with the same name.&#xA;subsettedProperty->forAll(sp | sp.name &lt;> name)"/>
+      </eAnnotations>
+      <eParameters name="diagnostics" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDiagnosticChain">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="The chain of diagnostics to which problems are to be appended."/>
+        </eAnnotations>
+      </eParameters>
+      <eParameters name="context">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="The cache of context-specific information."/>
+        </eAnnotations>
+        <eGenericType eClassifier="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EMap">
+          <eTypeArguments eClassifier="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
+          <eTypeArguments eClassifier="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
+        </eGenericType>
+      </eParameters>
+    </eOperations>
+    <eOperations name="type_of_opposite_end" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="If a Property is a classifier-owned end of a binary Association, its owner must be the type of the opposite end.&#xA;(opposite->notEmpty() and owningAssociation->isEmpty()) implies classifier = opposite.type"/>
+      </eAnnotations>
+      <eParameters name="diagnostics" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDiagnosticChain">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="The chain of diagnostics to which problems are to be appended."/>
+        </eAnnotations>
+      </eParameters>
+      <eParameters name="context">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="The cache of context-specific information."/>
+        </eAnnotations>
+        <eGenericType eClassifier="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EMap">
+          <eTypeArguments eClassifier="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
+          <eTypeArguments eClassifier="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
+        </eGenericType>
+      </eParameters>
+    </eOperations>
+    <eOperations name="qualified_is_association_end" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="All qualified Properties must be Association ends&#xA;qualifier->notEmpty() implies association->notEmpty()"/>
+      </eAnnotations>
+      <eParameters name="diagnostics" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDiagnosticChain">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="The chain of diagnostics to which problems are to be appended."/>
+        </eAnnotations>
+      </eParameters>
+      <eParameters name="context">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="The cache of context-specific information."/>
+        </eAnnotations>
+        <eGenericType eClassifier="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EMap">
+          <eTypeArguments eClassifier="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
+          <eTypeArguments eClassifier="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
+        </eGenericType>
+      </eParameters>
+    </eOperations>
+    <eOperations name="getDefault" ordered="false" eType="ecore:EDataType platform:/plugin/org.eclipse.uml2.types/model/Types.ecore#//String">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Retrieves a string representation of the default value for this property."/>
+      </eAnnotations>
+    </eOperations>
+    <eOperations name="getOtherEnd" ordered="false" eType="#//Property">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Retrieves the other end of the (binary) association in which this property is a member end."/>
+      </eAnnotations>
+    </eOperations>
+    <eOperations name="isSetDefault" ordered="false" lowerBound="1" eType="ecore:EDataType platform:/plugin/org.eclipse.uml2.types/model/Types.ecore#//Boolean">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="suppressedVisibility" value="true"/>
+      </eAnnotations>
+    </eOperations>
+    <eOperations name="setBooleanDefaultValue" ordered="false" lowerBound="1">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Sets the default value for this property to the specified Boolean value."/>
+      </eAnnotations>
+      <eParameters name="value" ordered="false" lowerBound="1" eType="ecore:EDataType platform:/plugin/org.eclipse.uml2.types/model/Types.ecore#//Boolean">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="The new default value."/>
+        </eAnnotations>
+      </eParameters>
+    </eOperations>
+    <eOperations name="setDefault" ordered="false" lowerBound="1">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Sets the default value for this property based on the specified string representation."/>
+      </eAnnotations>
+      <eParameters name="newDefault" ordered="false" lowerBound="1" eType="ecore:EDataType platform:/plugin/org.eclipse.uml2.types/model/Types.ecore#//String">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="A string repesentation of the new default value."/>
+        </eAnnotations>
+      </eParameters>
+    </eOperations>
+    <eOperations name="setIntegerDefaultValue" ordered="false" lowerBound="1">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Sets the default value for this property to the specified integer value."/>
+      </eAnnotations>
+      <eParameters name="value" ordered="false" lowerBound="1" eType="ecore:EDataType platform:/plugin/org.eclipse.uml2.types/model/Types.ecore#//Integer">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="The new default value."/>
+        </eAnnotations>
+      </eParameters>
+    </eOperations>
+    <eOperations name="setIsComposite" ordered="false" lowerBound="1">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="suppressedVisibility" value="true"/>
+      </eAnnotations>
+      <eParameters name="newIsComposite" ordered="false" lowerBound="1" eType="ecore:EDataType platform:/plugin/org.eclipse.uml2.types/model/Types.ecore#//Boolean"/>
+    </eOperations>
+    <eOperations name="setIsNavigable" ordered="false" lowerBound="1">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Sets the navigability of this property as indicated."/>
+      </eAnnotations>
+      <eParameters name="isNavigable" ordered="false" lowerBound="1" eType="ecore:EDataType platform:/plugin/org.eclipse.uml2.types/model/Types.ecore#//Boolean">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="The new navigability."/>
+        </eAnnotations>
+      </eParameters>
+    </eOperations>
+    <eOperations name="setNullDefaultValue" ordered="false" lowerBound="1">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Sets the default value for this property to the null value."/>
+      </eAnnotations>
+    </eOperations>
+    <eOperations name="setOpposite" ordered="false" lowerBound="1">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="suppressedVisibility" value="true"/>
+      </eAnnotations>
+      <eParameters name="newOpposite" ordered="false" lowerBound="1" eType="#//Property"/>
+    </eOperations>
+    <eOperations name="setRealDefaultValue" ordered="false" lowerBound="1">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Sets the default value for this property to the specified real value."/>
+      </eAnnotations>
+      <eParameters name="value" ordered="false" lowerBound="1" eType="ecore:EDataType platform:/plugin/org.eclipse.uml2.types/model/Types.ecore#//Real">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="The new default value."/>
+        </eAnnotations>
+      </eParameters>
+    </eOperations>
+    <eOperations name="setStringDefaultValue" ordered="false" lowerBound="1">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Sets the default value for this property to the specified string value."/>
+      </eAnnotations>
+      <eParameters name="value" ordered="false" lowerBound="1" eType="ecore:EDataType platform:/plugin/org.eclipse.uml2.types/model/Types.ecore#//String">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="The new default value."/>
+        </eAnnotations>
+      </eParameters>
+    </eOperations>
+    <eOperations name="setUnlimitedNaturalDefaultValue" ordered="false" lowerBound="1">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Sets the default value for this property to the specified unlimited natural value."/>
+      </eAnnotations>
+      <eParameters name="value" ordered="false" lowerBound="1" eType="ecore:EDataType platform:/plugin/org.eclipse.uml2.types/model/Types.ecore#//UnlimitedNatural">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="The new default value."/>
+        </eAnnotations>
+      </eParameters>
+    </eOperations>
+    <eOperations name="unsetDefault" ordered="false" lowerBound="1">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="suppressedVisibility" value="true"/>
+      </eAnnotations>
+    </eOperations>
+    <eOperations name="isAttribute" ordered="false" lowerBound="1" eType="ecore:EDataType platform:/plugin/org.eclipse.uml2.types/model/Types.ecore#//Boolean">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="The query isAttribute() is true if the Property is defined as an attribute of some Classifier.&#xA;result = (not classifier->isEmpty())&#xA;&lt;p>From package UML::Classification.&lt;/p>"/>
+      </eAnnotations>
+    </eOperations>
+    <eOperations name="isComposite" ordered="false" lowerBound="1" eType="ecore:EDataType platform:/plugin/org.eclipse.uml2.types/model/Types.ecore#//Boolean">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="The value of isComposite is true only if aggregation is composite.&#xA;result = (aggregation = AggregationKind::composite)&#xA;&lt;p>From package UML::Classification.&lt;/p>"/>
+      </eAnnotations>
+    </eOperations>
+    <eOperations name="isNavigable" ordered="false" lowerBound="1" eType="ecore:EDataType platform:/plugin/org.eclipse.uml2.types/model/Types.ecore#//Boolean">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="The query isNavigable() indicates whether it is possible to navigate across the property.&#xA;result = (not classifier->isEmpty() or association.navigableOwnedEnd->includes(self))&#xA;&lt;p>From package UML::Classification.&lt;/p>"/>
+      </eAnnotations>
+    </eOperations>
+    <eOperations name="getOpposite" ordered="false" eType="#//Property">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="If this property is a memberEnd of a binary association, then opposite gives the other end.&#xA;result = (if association &lt;> null and association.memberEnd->size() = 2&#xA;then&#xA;    association.memberEnd->any(e | e &lt;> self)&#xA;else&#xA;    null&#xA;endif)&#xA;&lt;p>From package UML::Classification.&lt;/p>"/>
+        <details key="suppressedVisibility" value="true"/>
+      </eAnnotations>
+      <eAnnotations source="http://www.eclipse.org/uml2/2.0.0/UML">
+        <details key="originalName" value="opposite"/>
+      </eAnnotations>
+    </eOperations>
+    <eOperations name="subsettingContext" ordered="false" upperBound="-1" eType="ecore:EClass platform:/plugin/org.eclipse.uml2.uml/model/UML.ecore#//Type">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="The query subsettingContext() gives the context for subsetting a Property. It consists, in the case of an attribute, of the corresponding Classifier, and in the case of an association end, all of the Classifiers at the other ends.&#xA;result = (if association &lt;> null&#xA;then association.memberEnd->excluding(self)->collect(type)->asSet()&#xA;else &#xA;  if classifier&lt;>null&#xA;  then classifier->asSet()&#xA;  else Set{} &#xA;  endif&#xA;endif)&#xA;&lt;p>From package UML::Classification.&lt;/p>"/>
+      </eAnnotations>
+    </eOperations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="datatype" ordered="false"
+        eType="ecore:EClass platform:/plugin/org.eclipse.uml2.uml/model/UML.ecore#//DataType">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="The DataType that owns this Property, if any.&#xA;&lt;p>From package UML::Classification.&lt;/p>"/>
+      </eAnnotations>
+      <eAnnotations source="subsets" references="platform:/plugin/org.eclipse.uml2.uml/model/UML.ecore#//NamedElement/namespace platform:/plugin/org.eclipse.uml2.uml/model/UML.ecore#//Feature/featuringClassifier platform:/plugin/org.eclipse.uml2.uml/model/UML.ecore#//RedefinableElement/redefinitionContext"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="interface" ordered="false"
+        eType="ecore:EClass platform:/plugin/org.eclipse.uml2.uml/model/UML.ecore#//Interface">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="The Interface that owns this Property, if any.&#xA;&lt;p>From package UML::Classification.&lt;/p>"/>
+      </eAnnotations>
+      <eAnnotations source="subsets" references="platform:/plugin/org.eclipse.uml2.uml/model/UML.ecore#//NamedElement/namespace platform:/plugin/org.eclipse.uml2.uml/model/UML.ecore#//Feature/featuringClassifier platform:/plugin/org.eclipse.uml2.uml/model/UML.ecore#//RedefinableElement/redefinitionContext"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="default" ordered="false"
+        eType="ecore:EDataType platform:/plugin/org.eclipse.uml2.types/model/Types.ecore#//String"
+        volatile="true" transient="true" unsettable="true" derived="true">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="suppressedGetVisibility" value="true"/>
+        <details key="suppressedSetVisibility" value="true"/>
+        <details key="suppressedIsSetVisibility" value="true"/>
+        <details key="suppressedUnsetVisibility" value="true"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="aggregation" ordered="false"
+        lowerBound="1" eType="ecore:EEnum platform:/plugin/org.eclipse.uml2.uml/model/UML.ecore#//AggregationKind"
+        defaultValueLiteral="none">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Specifies the kind of aggregation that applies to the Property.&#xA;&lt;p>From package UML::Classification.&lt;/p>"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="associationEnd" ordered="false"
+        eType="#//Property" eOpposite="#//Property/qualifier">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Designates the optional association end that owns a qualifier attribute.&#xA;&lt;p>From package UML::Classification.&lt;/p>"/>
+      </eAnnotations>
+      <eAnnotations source="subsets" references="platform:/plugin/org.eclipse.uml2.uml/model/UML.ecore#//Element/owner"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="qualifier" upperBound="-1"
+        eType="#//Property" containment="true" eOpposite="#//Property/associationEnd">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="An optional list of ordered qualifier attributes for the end.&#xA;&lt;p>From package UML::Classification.&lt;/p>"/>
+      </eAnnotations>
+      <eAnnotations source="subsets" references="platform:/plugin/org.eclipse.uml2.uml/model/UML.ecore#//Element/ownedElement"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="class" ordered="false"
+        eType="ecore:EClass platform:/plugin/org.eclipse.uml2.uml/model/UML.ecore#//Class"
+        changeable="false" volatile="true" transient="true">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="The Class that owns this Property, if any.&#xA;&lt;p>From package UML::Classification.&lt;/p>"/>
+      </eAnnotations>
+      <eAnnotations source="subsets" references="platform:/plugin/org.eclipse.uml2.uml/model/UML.ecore#//NamedElement/namespace platform:/plugin/org.eclipse.uml2.uml/model/UML.ecore#//Feature/featuringClassifier platform:/plugin/org.eclipse.uml2.uml/model/UML.ecore#//RedefinableElement/redefinitionContext"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="defaultValue" ordered="false"
+        eType="ecore:EClass platform:/plugin/org.eclipse.uml2.uml/model/UML.ecore#//ValueSpecification"
+        containment="true">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="A ValueSpecification that is evaluated to give a default value for the Property when an instance of the owning Classifier is instantiated.&#xA;&lt;p>From package UML::Classification.&lt;/p>"/>
+      </eAnnotations>
+      <eAnnotations source="subsets" references="platform:/plugin/org.eclipse.uml2.uml/model/UML.ecore#//Element/ownedElement"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="isComposite" ordered="false"
+        lowerBound="1" eType="ecore:EDataType platform:/plugin/org.eclipse.uml2.types/model/Types.ecore#//Boolean"
+        volatile="true" transient="true" defaultValueLiteral="false" derived="true">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="If isComposite is true, the object containing the attribute is a container for the object or value contained in the attribute. This is a derived value, indicating whether the aggregation of the Property is composite or not.&#xA;&lt;p>From package UML::Classification.&lt;/p>"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="isDerived" ordered="false"
+        lowerBound="1" eType="ecore:EDataType platform:/plugin/org.eclipse.uml2.types/model/Types.ecore#//Boolean"
+        defaultValueLiteral="false">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Specifies whether the Property is derived, i.e., whether its value or values can be computed from other information.&#xA;&lt;p>From package UML::Classification.&lt;/p>"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="isDerivedUnion" ordered="false"
+        lowerBound="1" eType="ecore:EDataType platform:/plugin/org.eclipse.uml2.types/model/Types.ecore#//Boolean"
+        defaultValueLiteral="false">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Specifies whether the property is derived as the union of all of the Properties that are constrained to subset it.&#xA;&lt;p>From package UML::Classification.&lt;/p>"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="isID" ordered="false" lowerBound="1"
+        eType="ecore:EDataType platform:/plugin/org.eclipse.uml2.types/model/Types.ecore#//Boolean"
+        defaultValueLiteral="false">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="True indicates this property can be used to uniquely identify an instance of the containing Class.&#xA;&lt;p>From package UML::Classification.&lt;/p>"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="opposite" ordered="false"
+        eType="#//Property" volatile="true" transient="true" derived="true">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="In the case where the Property is one end of a binary association this gives the other end.&#xA;&lt;p>From package UML::Classification.&lt;/p>"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="owningAssociation" ordered="false"
+        eType="#//Association" eOpposite="#//Association/ownedEnd">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="The owning association of this property, if any.&#xA;&lt;p>From package UML::Classification.&lt;/p>"/>
+      </eAnnotations>
+      <eAnnotations source="subsets" references="platform:/plugin/org.eclipse.uml2.uml/model/UML.ecore#//Feature/featuringClassifier platform:/plugin/org.eclipse.uml2.uml/model/UML.ecore#//NamedElement/namespace #//Property/association platform:/plugin/org.eclipse.uml2.uml/model/UML.ecore#//RedefinableElement/redefinitionContext"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="redefinedProperty" ordered="false"
+        upperBound="-1" eType="#//Property">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="The properties that are redefined by this property, if any.&#xA;&lt;p>From package UML::Classification.&lt;/p>"/>
+      </eAnnotations>
+      <eAnnotations source="subsets" references="platform:/plugin/org.eclipse.uml2.uml/model/UML.ecore#//RedefinableElement/redefinedElement"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="subsettedProperty" ordered="false"
+        upperBound="-1" eType="#//Property">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="The properties of which this Property is constrained to be a subset, if any.&#xA;&lt;p>From package UML::Classification.&lt;/p>"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="association" ordered="false"
+        eType="#//Association" eOpposite="#//Association/memberEnd">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="The Association of which this Property is a member, if any.&#xA;&lt;p>From package UML::Classification.&lt;/p>"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Association" eSuperTypes="platform:/plugin/org.eclipse.uml2.uml/model/UML.ecore#//Classifier platform:/plugin/org.eclipse.uml2.uml/model/UML.ecore#//Relationship">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="A link is a tuple of values that refer to typed objects.  An Association classifies a set of links, each of which is an instance of the Association.  Each value in the link refers to an instance of the type of the corresponding end of the Association.&#xA;&lt;p>From package UML::StructuredClassifiers.&lt;/p>"/>
+    </eAnnotations>
+    <eOperations name="specialized_end_number" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="An Association specializing another Association has the same number of ends as the other Association.&#xA;parents()->select(oclIsKindOf(Association)).oclAsType(Association)->forAll(p | p.memberEnd->size() = self.memberEnd->size())"/>
+      </eAnnotations>
+      <eParameters name="diagnostics" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDiagnosticChain">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="The chain of diagnostics to which problems are to be appended."/>
+        </eAnnotations>
+      </eParameters>
+      <eParameters name="context">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="The cache of context-specific information."/>
+        </eAnnotations>
+        <eGenericType eClassifier="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EMap">
+          <eTypeArguments eClassifier="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
+          <eTypeArguments eClassifier="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
+        </eGenericType>
+      </eParameters>
+    </eOperations>
+    <eOperations name="specialized_end_types" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="When an Association specializes another Association, every end of the specific Association corresponds to an end of the general Association, and the specific end reaches the same type or a subtype of the corresponding general end.&#xA;Sequence{1..memberEnd->size()}->&#xD;&#xA;&#x9;forAll(i | general->select(oclIsKindOf(Association)).oclAsType(Association)->&#xD;&#xA;&#x9;&#x9;forAll(ga | self.memberEnd->at(i).type.conformsTo(ga.memberEnd->at(i).type)))"/>
+      </eAnnotations>
+      <eParameters name="diagnostics" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDiagnosticChain">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="The chain of diagnostics to which problems are to be appended."/>
+        </eAnnotations>
+      </eParameters>
+      <eParameters name="context">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="The cache of context-specific information."/>
+        </eAnnotations>
+        <eGenericType eClassifier="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EMap">
+          <eTypeArguments eClassifier="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
+          <eTypeArguments eClassifier="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
+        </eGenericType>
+      </eParameters>
+    </eOperations>
+    <eOperations name="binary_associations" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Only binary Associations can be aggregations.&#xA;memberEnd->exists(aggregation &lt;> AggregationKind::none) implies (memberEnd->size() = 2 and memberEnd->exists(aggregation = AggregationKind::none))"/>
+      </eAnnotations>
+      <eParameters name="diagnostics" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDiagnosticChain">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="The chain of diagnostics to which problems are to be appended."/>
+        </eAnnotations>
+      </eParameters>
+      <eParameters name="context">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="The cache of context-specific information."/>
+        </eAnnotations>
+        <eGenericType eClassifier="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EMap">
+          <eTypeArguments eClassifier="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
+          <eTypeArguments eClassifier="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
+        </eGenericType>
+      </eParameters>
+    </eOperations>
+    <eOperations name="association_ends" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Ends of Associations with more than two ends must be owned by the Association itself.&#xA;memberEnd->size() > 2 implies ownedEnd->includesAll(memberEnd)"/>
+      </eAnnotations>
+      <eParameters name="diagnostics" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDiagnosticChain">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="The chain of diagnostics to which problems are to be appended."/>
+        </eAnnotations>
+      </eParameters>
+      <eParameters name="context">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="The cache of context-specific information."/>
+        </eAnnotations>
+        <eGenericType eClassifier="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EMap">
+          <eTypeArguments eClassifier="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
+          <eTypeArguments eClassifier="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
+        </eGenericType>
+      </eParameters>
+    </eOperations>
+    <eOperations name="ends_must_be_typed" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="memberEnd->forAll(type->notEmpty())"/>
+      </eAnnotations>
+      <eParameters name="diagnostics" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDiagnosticChain">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="The chain of diagnostics to which problems are to be appended."/>
+        </eAnnotations>
+      </eParameters>
+      <eParameters name="context">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="The cache of context-specific information."/>
+        </eAnnotations>
+        <eGenericType eClassifier="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EMap">
+          <eTypeArguments eClassifier="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
+          <eTypeArguments eClassifier="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
+        </eGenericType>
+      </eParameters>
+    </eOperations>
+    <eOperations name="isBinary" ordered="false" lowerBound="1" eType="ecore:EDataType platform:/plugin/org.eclipse.uml2.types/model/Types.ecore#//Boolean">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Determines whether this association is a binary association, i.e. whether it has exactly two member ends."/>
+      </eAnnotations>
+    </eOperations>
+    <eOperations name="getEndTypes" ordered="false" lowerBound="1" upperBound="-1"
+        eType="ecore:EClass platform:/plugin/org.eclipse.uml2.uml/model/UML.ecore#//Type">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="endType is derived from the types of the member ends.&#xA;result = (memberEnd->collect(type)->asSet())&#xA;&lt;p>From package UML::StructuredClassifiers.&lt;/p>"/>
+        <details key="suppressedVisibility" value="true"/>
+      </eAnnotations>
+      <eAnnotations source="http://www.eclipse.org/uml2/2.0.0/UML">
+        <details key="originalName" value="endType"/>
+      </eAnnotations>
+    </eOperations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="endType" ordered="false"
+        lowerBound="1" upperBound="-1" eType="ecore:EClass platform:/plugin/org.eclipse.uml2.uml/model/UML.ecore#//Type"
+        changeable="false" volatile="true" transient="true" derived="true">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="The Classifiers that are used as types of the ends of the Association.&#xA;&lt;p>From package UML::StructuredClassifiers.&lt;/p>"/>
+      </eAnnotations>
+      <eAnnotations source="subsets" references="platform:/plugin/org.eclipse.uml2.uml/model/UML.ecore#//Relationship/relatedElement"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="isDerived" ordered="false"
+        lowerBound="1" eType="ecore:EDataType platform:/plugin/org.eclipse.uml2.types/model/Types.ecore#//Boolean"
+        defaultValueLiteral="false">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Specifies whether the Association is derived from other model elements such as other Associations.&#xA;&lt;p>From package UML::StructuredClassifiers.&lt;/p>"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="memberEnd" lowerBound="2"
+        upperBound="-1" eType="#//Property" eOpposite="#//Property/association">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Each end represents participation of instances of the Classifier connected to the end in links of the Association.&#xA;&lt;p>From package UML::StructuredClassifiers.&lt;/p>"/>
+      </eAnnotations>
+      <eAnnotations source="subsets" references="platform:/plugin/org.eclipse.uml2.uml/model/UML.ecore#//Namespace/member"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="ownedEnd" upperBound="-1"
+        eType="#//Property" containment="true" eOpposite="#//Property/owningAssociation">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="The ends that are owned by the Association itself.&#xA;&lt;p>From package UML::StructuredClassifiers.&lt;/p>"/>
+      </eAnnotations>
+      <eAnnotations source="subsets" references="#//Association/memberEnd platform:/plugin/org.eclipse.uml2.uml/model/UML.ecore#//Classifier/feature platform:/plugin/org.eclipse.uml2.uml/model/UML.ecore#//Namespace/ownedMember"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="navigableOwnedEnd" ordered="false"
+        upperBound="-1" eType="#//Property">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="The navigable ends that are owned by the Association itself.&#xA;&lt;p>From package UML::StructuredClassifiers.&lt;/p>"/>
+      </eAnnotations>
+      <eAnnotations source="subsets" references="#//Association/ownedEnd"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="VocabularyAssociation" eSuperTypes="#//Association"/>
+  <eClassifiers xsi:type="ecore:EClass" name="VocabularyProperty" eSuperTypes="#//Property"/>
+  <eClassifiers xsi:type="ecore:EClass" name="VocabularyEntity" abstract="true" eSuperTypes="platform:/plugin/org.eclipse.uml2.uml/model/UML.ecore#//Classifier">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="entityIRI" lowerBound="1"
+        eType="#//IRI"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ObjectProperty" eSuperTypes="#//VocabularyEntity #//VocabularyAssociation"/>
+  <eClassifiers xsi:type="ecore:EClass" name="DataProperty" eSuperTypes="#//VocabularyEntity #//VocabularyAssociation"/>
+  <eClassifiers xsi:type="ecore:EClass" name="AnnotationProperty" eSuperTypes="#//VocabularyEntity #//VocabularyAssociation"/>
+  <eClassifiers xsi:type="ecore:EClass" name="VocabularyDataType" eSuperTypes="#//VocabularyEntity platform:/plugin/org.eclipse.uml2.uml/model/UML.ecore#//DataType"/>
+  <eClassifiers xsi:type="ecore:EClass" name="NamedIndividual" eSuperTypes="#//VocabularyEntity #//Individual"/>
+  <eClassifiers xsi:type="ecore:EClass" name="VocabularyClassExpression" abstract="true"
+      eSuperTypes="platform:/plugin/org.eclipse.uml2.uml/model/UML.ecore#//Class"/>
+  <eClassifiers xsi:type="ecore:EClass" name="VocabularyClass" eSuperTypes="#//VocabularyEntity #//VocabularyClassExpression">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="vocabularyproperty" upperBound="-1"
+        eType="#//VocabularyProperty" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="AnonymousIndividual" eSuperTypes="#//Individual"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Individual" abstract="true" eSuperTypes="#//Property"/>
+  <eClassifiers xsi:type="ecore:EClass" name="VocabularyLiteral" eSuperTypes="platform:/plugin/org.eclipse.uml2.uml/model/UML.ecore#//LiteralString"/>
+</ecore:EPackage>

@@ -1,0 +1,8 @@
+model	Trace (objectstates,ObjectState,ref) (values,Value,ref) (tracedobject,TracedObject,ref) (modelstate,ModelState,ref) (steps,Step,ref) 
+model	ObjectState (tracedobject,TracedObject,ref) (value,Value,ref) 
+model	RefValue (objectstate,TracedObject,ref) 
+model	ParameterValue (DirectionKind,ParamterKindEnum,attribute) (value,Value,ref) 
+model	TracedObject (objectstates,ObjectState,ref) 
+model	BigStep (children,Step,ref) 
+model	ModelState (objectstates,ObjectState,ref) 
+model	Step (parametervalue,ParameterValue,ref) (parent,BigStep,ref) (state,ModelState,ref) 

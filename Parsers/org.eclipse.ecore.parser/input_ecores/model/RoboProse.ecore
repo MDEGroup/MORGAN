@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="model" nsURI="http://www.itu.dk/dsl/roboprose" nsPrefix="roboprose">
+  <eClassifiers xsi:type="ecore:EClass" name="Root">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="robot" lowerBound="1" eType="#//RoboProse"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="RoboProse">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="main" eType="#//Main" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="listeners" upperBound="-1"
+        eType="#//EventListener" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Main" eSuperTypes="#//ActionsList"/>
+  <eClassifiers xsi:type="ecore:EClass" name="EventListener" eSuperTypes="#//ActionsList">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="sublisteners" upperBound="-1"
+        eType="#//EventListener" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="event" lowerBound="1" eType="#//Event"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ActionsList" abstract="true">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="actions" lowerBound="1"
+        upperBound="-1" eType="#//Action" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="ending" eType="#//Ending"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Action" abstract="true"/>
+  <eClassifiers xsi:type="ecore:EClass" name="RotorAction" abstract="true" eSuperTypes="#//Action"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Move" eSuperTypes="#//RotorAction #//ContinuosAction #//RandomAction">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="direction" eType="#//MOVE_DIRECTION"
+        defaultValueLiteral="forwards"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Turn" eSuperTypes="#//RotorAction #//ContinuosAction #//RandomAction">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="degrees" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EFloat"
+        defaultValueLiteral="90.0"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="direction" eType="#//TURN_DIRECTION"
+        defaultValueLiteral="left"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Stop" eSuperTypes="#//ContinuosAction"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Ending" abstract="true"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Repeat" eSuperTypes="#//Ending"/>
+  <eClassifiers xsi:type="ecore:EClass" name="StartOver" eSuperTypes="#//Ending"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Wait" eSuperTypes="#//Ending"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Event" abstract="true"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Obstacle" eSuperTypes="#//Event"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Tapped" eSuperTypes="#//Event"/>
+  <eClassifiers xsi:type="ecore:EClass" name="ContinuosAction" abstract="true" eSuperTypes="#//Action">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="duration" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EFloat"
+        defaultValueLiteral="1.0"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="RandomAction" abstract="true" eSuperTypes="#//Action">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="isRandom" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"
+        defaultValueLiteral="false"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="MOVE_DIRECTION">
+    <eLiterals name="FORWARDS" value="1" literal="forwards"/>
+    <eLiterals name="BACKWARDS" literal="backwards"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="TURN_DIRECTION">
+    <eLiterals name="LEFT" value="1" literal="left"/>
+    <eLiterals name="RIGHT" literal="right"/>
+  </eClassifiers>
+</ecore:EPackage>

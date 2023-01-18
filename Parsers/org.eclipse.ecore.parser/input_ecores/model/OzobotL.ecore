@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="ASCII"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="model" nsURI="http://ozobot.xdsml.ozobotl/model/" nsPrefix="model">
+  <eClassifiers xsi:type="ecore:EClass" name="NamedElement" abstract="true">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="OzobotProgram" eSuperTypes="//NamedElement">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="block" lowerBound="1" eType="//Block" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="current" lowerBound="1" eType="//Command"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="currentCommand" eType="//Command">
+      <eAnnotations source="aspect"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Command" abstract="true" eSuperTypes="//NamedElement">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="outgoing" eType="//Transition" eOpposite="//Transition/source"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="incoming" eType="//Transition" eOpposite="//Transition/target"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="message" defaultValueLiteral="">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Move" eSuperTypes="//Command">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="distance" defaultValueLiteral="0">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="velocity" eType="//Velocity"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Light" eSuperTypes="//Command">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="color" eType="//Color"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Rotate" eSuperTypes="//Command">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="direction" eType="//Direction"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="velocity" eType="//Velocity"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="angle" defaultValueLiteral="0">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EFloat"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Wait" eSuperTypes="//Command">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="time" defaultValueLiteral="0">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Repeat" eSuperTypes="//Command">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="count" defaultValueLiteral="0">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="block" lowerBound="1" eType="//Block" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="Color">
+    <eLiterals name="none"/>
+    <eLiterals name="red" value="1"/>
+    <eLiterals name="green" value="2"/>
+    <eLiterals name="blue" value="3"/>
+    <eLiterals name="yellow" value="4"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="Direction">
+    <eLiterals name="left" literal="Left"/>
+    <eLiterals name="right" value="1" literal="Right"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="Velocity">
+    <eLiterals name="very_slow"/>
+    <eLiterals name="slow" value="1"/>
+    <eLiterals name="medium" value="2"/>
+    <eLiterals name="fast" value="3"/>
+    <eLiterals name="very_fast" value="4"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Ozobot" eSuperTypes="//NamedElement">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="programs" upperBound="-1" eType="//OzobotProgram" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="xposition" defaultValueLiteral="0">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EDouble"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="yposition" defaultValueLiteral="0">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EDouble"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="orientation" defaultValueLiteral="0">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EDouble"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Block" eSuperTypes="//NamedElement">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="commands" upperBound="-1" eType="//Command" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="transitions" upperBound="-1" eType="//Transition" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Transition" eSuperTypes="//NamedElement">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="source" lowerBound="1" eType="//Command" eOpposite="//Command/outgoing"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="target" lowerBound="1" eType="//Command" eOpposite="//Command/incoming"/>
+  </eClassifiers>
+</ecore:EPackage>

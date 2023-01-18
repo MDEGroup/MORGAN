@@ -1,0 +1,5 @@
+model	Trigger (transition,Transition,ref) 
+model	StateMachine (state,state,ref) (transition,Transition,ref) 
+model	Transition (guard,Guard,ref) (statemachine,StateMachine,ref) (source,state,ref) (trigger,Trigger,ref) (target,state,ref) 
+model	Guard (transition,Transition,ref) 
+model	state (statemachine,StateMachine,ref) (transition,Transition,ref) 

@@ -1,0 +1,22 @@
+model	Users UserID,property UserName,property UserLevel,property UserBday,property getUserList,operation addUser,operation deleteUser,operation refreshUserList,operation 
+model	Table TableNo,property Occupied,property setOccupied,operation setEmpty,operation 
+model	Order OrderID,property UserID,property Date,property Completed,property addOrder,operation udpateOrder,operation cancelOrder,operation submitOrder,operation 
+model	Order_Bill order,property 
+model	Order_Bill2 order,property 
+model	ViewOrder getOrderList,property getOrderList,operation completeOrder,operation extendOrderTime,operation extendAll,operation 
+model	OrderList OrderItemID,property OrderID,property ItemName,property RemaningTime,property addMenuItemsToOrder,operation deleteMenuItemsToOrder,operation modifyMenuItemsToOrder,operation 
+model	Menu MenuItem,property Category,property Price,property Availability,property getOrderLIst,operation addMenuItem,operation updateMenuItem,operation deleteMenuItem,operation 
+model	Bookings BookingID,property CustomerName,property Phone,property People,property Date,property Time,property setBooking,operation modifyBooking,operation cancelBooking,operation viewBooking,operation 
+model	Order_Table table,property order,property 
+model	Table_Bookings bookings,property table,property 
+model	Order_Menu menu,property orderItem,property 
+model	ViewOrder_OrderItem orderItem,property viewOrder,property 
+model	OrderItem_Order order,property orderItem,property 
+model	Order_Users users,property order,property 
+model	BookedTables TableNo,property BookingID,property reserveTable,operation cancelReserve,operation 
+model	BookedTables_Table table,property bookedTables,property 
+model	DateTime 
+model	Checkout checkoutID,property checkoutAmount,property calculateOrderTotal,operation getLoyaltyDiscount,operation setPayment,operation 
+model	Membership loyaltyID,property discount,property addMember,operation editMember,operation setPayment,operation 
+model	Order_Checkout checkout,property order,property 
+model	Membership_Checkout checkout,property membership,property 

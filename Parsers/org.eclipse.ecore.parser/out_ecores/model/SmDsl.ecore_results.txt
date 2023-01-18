@@ -1,0 +1,7 @@
+model	EventsSection (events,Event,ref) 
+model	Command (name,EString,attribute) 
+model	State (initial,EBoolean,attribute) (name,EString,attribute) (exitCommands,Command,ref) (eventHandlingDescriptions,EventHandlingDescription,ref) (entryCommands,Command,ref) 
+model	Model (name,EString,attribute) (eventsSection,EventsSection,ref) (commandsSection,CommandsSection,ref) (states,State,ref) 
+model	CommandsSection (commands,Command,ref) 
+model	Event (name,EString,attribute) 
+model	EventHandlingDescription (targetState,State,ref) (event,Event,ref) (commands,Command,ref) 

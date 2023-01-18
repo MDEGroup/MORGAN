@@ -1,0 +1,5 @@
+model	Response (responseBody,EString,attribute) (responseTime,EString,attribute) (contentType,ContentType,attribute) (statusCode,StatusCode,attribute) 
+model	ExpectedResult (responseBody,EString,attribute) (contentType,ContentType,attribute) (statusCode,StatusCode,attribute) 
+model	Config (httpVerb,HttpVerb,attribute) (requestBody,EString,attribute) (requestURL,EString,attribute) (name,EString,attribute) (contentType,ContentType,attribute) (response,Response,ref) 
+model	Scenario (scenarioFilePath,EString,attribute) (configExpectedResultPairList,ConfigExpectedResultPair,ref) 
+model	ConfigExpectedResultPair (expectedResult,ExpectedResult,ref) (config,Config,ref) 

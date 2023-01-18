@@ -1,0 +1,8 @@
+model	Input (name,EString,attribute) (variables,Variable,ref) 
+model	Variable (name,String,attribute) (type,EString,attribute) (class,EString,attribute) 
+model	ContextVariable (name,EString,attribute) (type,EString,attribute) 
+model	Transition (output,EString,attribute) (guard,EString,attribute) (name,EString,attribute) (action,EString,attribute) (input,Input,ref) (source,AbstractState,ref) (event,Event,ref) (target,AbstractState,ref) 
+model	AbstractState (name,EString,attribute) 
+model	Param (argName,String,attribute) (argType,String,attribute) 
+model	Event (name,String,attribute) (class,String,attribute) (return,String,attribute) (args,Param,ref) 
+model	EFSM (name,EString,attribute) (contextVariables,ContextVariable,ref) (transitions,Transition,ref) (initialstate,InitialState,ref) (states,State,ref) 

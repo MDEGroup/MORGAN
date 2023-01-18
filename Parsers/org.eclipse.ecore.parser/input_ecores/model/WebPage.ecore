@@ -1,0 +1,285 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="WebApp" nsURI="http://www.unex.es/dmss/webapp" nsPrefix="WA">
+  <eAnnotations source="MyDSLDoc">
+    <details key="Author" value="Sergio Fernandez Rincon"/>
+    <details key="Last Updated" value="06/26/2018"/>
+  </eAnnotations>
+  <eAnnotations source="http://www.eclipse.org/OCL/Import">
+    <details key="ecore" value="http://www.eclipse.org/emf/2002/Ecore"/>
+  </eAnnotations>
+  <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore">
+    <details key="invocationDelegates" value="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot"/>
+    <details key="settingDelegates" value="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot"/>
+    <details key="validationDelegates" value="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot"/>
+  </eAnnotations>
+  <eClassifiers xsi:type="ecore:EClass" name="WebApp">
+    <eAnnotations source="MyDSLDoc">
+      <details key="Description" value="This is the Root element where all starts"/>
+    </eAnnotations>
+    <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore">
+      <details key="constraints" value="only_one_home no_isolated_web_pages_from_HOME if_CRUD_no_more_for_entity if_Index_must_be_one_Details if_Details_must_be_one_Index all_pages_will_have_access_external_social_network one_questionnary_and_one_survey_is_needed questions_for_questionary_will_have_associated_correct_answer surveys_only_have_only_multiplequestionforsurvey_or_truefalseforsurvey_or_openend"/>
+    </eAnnotations>
+    <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
+      <details key="only_one_home" value="&#xA;&#x9;&#x9;self.webpages->select(w: WebPage | w.oclIsTypeOf(Home))->size()=1"/>
+      <details key="no_isolated_web_pages_from_HOME" value="&#xA;&#x9;&#x9;self.webpages->select(w: WebPage | w.oclIsTypeOf(Home)).internallink->includesAll(self.webpages->select(w: WebPage | not w.oclIsTypeOf(Home)))"/>
+      <details key="if_CRUD_no_more_for_entity" value="&#xA;&#x9;&#x9;self.webpages->select(w: WebPage | w.oclIsKindOf(EntityWebPage) and not w.oclIsTypeOf(CRUD)).oclAsType(EntityWebPage).entity->excludesAll(self.webpages->select(w: WebPage | w.oclIsTypeOf(CRUD)).oclAsType(CRUD).entity)"/>
+      <details key="if_Index_must_be_one_Details" value="&#xA;&#x9;&#x9;self.webpages->select(w: WebPage | w.oclIsTypeOf(Index)).oclAsType(Index)->forAll(i: Index | self.webpages->select(wd: WebPage| wd.oclIsTypeOf(Details) and wd.oclAsType(Details).entity=i.entity)->size()=1)"/>
+      <details key="if_Details_must_be_one_Index" value="&#xA;&#x9;&#x9;self.webpages->select(w: WebPage | w.oclIsTypeOf(Details)).oclAsType(Details)->forAll(d: Details | self.webpages->select(wi: WebPage| wi.oclIsTypeOf(Index) and wi.oclAsType(Index).entity=d.entity)->size()=1)"/>
+      <details key="all_pages_will_have_access_external_social_network" value="&#xA;&#x9;&#x9;self.webpages->forAll(w: WebPage | w.socialnetwork->size()>0)"/>
+      <details key="one_questionnary_and_one_survey_is_needed" value="&#xA;&#x9;&#x9;self.webpages->select(ws: WebPage | ws.oclIsTypeOf(Survey))->size()>0 and self.webpages->select(wq: WebPage | wq.oclIsTypeOf(Questionnary))->size()>0"/>
+      <details key="questions_for_questionary_will_have_associated_correct_answer"
+          value="&#xA;&#x9;&#x9;self.webpages->select(wq: WebPage | wq.oclIsTypeOf(Questionnary)).oclAsType(Questionnary).question->select(tf: Question | tf.oclIsTypeOf(TrueFalseForSurvey))->size()=0&#xA;&#x9;&#x9;and&#xA;&#x9;&#x9;self.webpages->select(wq: WebPage | wq.oclIsTypeOf(Questionnary)).oclAsType(Questionnary).question->select(m : Question | m.oclIsTypeOf(MultipleForSurvey))->size()=0&#xA;&#x9;&#x9;and&#xA;&#x9;&#x9;self.webpages->select(wq: WebPage | wq.oclIsTypeOf(Questionnary)).oclAsType(Questionnary).question->select(g: Question | g.oclIsTypeOf(GroupOfQuestions)).oclAsType(GroupOfQuestions).questions->select(tf: Question | tf.oclIsTypeOf(TrueFalseForSurvey))->size()=0&#xA;&#x9;&#x9;and&#xA;&#x9;&#x9;self.webpages->select(wq: WebPage | wq.oclIsTypeOf(Questionnary)).oclAsType(Questionnary).question->select(g: Question | g.oclIsTypeOf(GroupOfQuestions)).oclAsType(GroupOfQuestions).questions->select(m: Question | m.oclIsTypeOf(MultipleForSurvey))->size()=0"/>
+      <details key="surveys_only_have_only_multiplequestionforsurvey_or_truefalseforsurvey_or_openend"
+          value="&#xA;&#x9;&#x9;self.webpages->select(wq: WebPage | wq.oclIsTypeOf(Survey)).oclAsType(Survey).question->select(tf: Question | tf.oclIsTypeOf(TrueFalseForQuestionnary))->size()=0&#xA;&#x9;&#x9;and&#xA;&#x9;&#x9;self.webpages->select(wq: WebPage | wq.oclIsTypeOf(Survey)).oclAsType(Survey).question->select(m : Question | m.oclIsTypeOf(MultipleForQuestionnary))->size()=0&#xA;&#x9;&#x9;and&#xA;&#x9;&#x9;self.webpages->select(wq: WebPage | wq.oclIsTypeOf(Survey)).oclAsType(Survey).question->select(g: Question | g.oclIsTypeOf(GroupOfQuestions)).oclAsType(GroupOfQuestions).questions->select(tf: Question | tf.oclIsTypeOf(TrueFalseForQuestionnary))->size()=0&#xA;&#x9;&#x9;and&#xA;&#x9;&#x9;self.webpages->select(wq: WebPage | wq.oclIsTypeOf(Survey)).oclAsType(Survey).question->select(g: Question | g.oclIsTypeOf(GroupOfQuestions)).oclAsType(GroupOfQuestions).questions->select(m: Question | m.oclIsTypeOf(MultipleForQuestionnary))->size()=0"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="User" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="Password" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="webpages" lowerBound="1"
+        upperBound="-1" eType="#//WebPage" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="database" lowerBound="1"
+        eType="#//DataBase" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="questionbank" lowerBound="1"
+        eType="#//QuestionBank" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Attribute">
+    <eAnnotations source="MyDSLDoc">
+      <details key="Description" value="This is an attribute of an Entity"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="type" lowerBound="1" eType="#//MySqlType"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Entity">
+    <eAnnotations source="MyDSLDoc">
+      <details key="Description" value="Entity of the DataBase"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="attributes" lowerBound="1"
+        upperBound="-1" eType="#//Attribute" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="entityReference" upperBound="-1"
+        eType="#//Entity"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Opened" eSuperTypes="#//SimpleQuestion">
+    <eAnnotations source="MyDSLDoc">
+      <details key="Description" value="This represent the kind of question where the ansewer is opened"/>
+    </eAnnotations>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="PageS_Q" abstract="true" eSuperTypes="#//WebPage">
+    <eAnnotations source="MyDSLDoc">
+      <details key="Description" value="This an abstract Class that represents Pages for Questionnaries and Surveys"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="question" lowerBound="1"
+        upperBound="-1" eType="#//Question"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Survey" eSuperTypes="#//PageS_Q">
+    <eAnnotations source="MyDSLDoc">
+      <details key="Description" value="This is the class used to represent Survey pages"/>
+    </eAnnotations>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="VisualRepresentation">
+    <eLiterals name="BAR_CHART" value="2"/>
+    <eLiterals name="LINEAL_CHART" value="3"/>
+    <eLiterals name="PIE_CHART" value="4"/>
+    <eLiterals name="TEXTUAL" value="5"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Questionnary" eSuperTypes="#//PageS_Q">
+    <eAnnotations source="MyDSLDoc">
+      <details key="Description" value="This is the class used to represent Questionnary pages"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="feedback" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="WebPage" abstract="true">
+    <eAnnotations source="MyDSLDoc">
+      <details key="Description" value="This is an abstract class that represents all kinds of webpages"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="socialnetwork" lowerBound="1"
+        upperBound="-1" eType="#//ExternalSource" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="internallink" upperBound="-1"
+        eType="#//WebPage"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="externallinks" upperBound="-1"
+        eType="#//ExternalLink" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Home" eSuperTypes="#//WebPage">
+    <eAnnotations source="MyDSLDoc">
+      <details key="Description" value="This is the class to create the HomePage"/>
+    </eAnnotations>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Index" eSuperTypes="#//EntityWebPage">
+    <eAnnotations source="MyDSLDoc">
+      <details key="Description" value="This is the class to create the Index page of an entity"/>
+    </eAnnotations>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Details" eSuperTypes="#//EntityWebPage">
+    <eAnnotations source="MyDSLDoc">
+      <details key="Description" value="This is the class to create the Details page of an entity"/>
+    </eAnnotations>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Create" eSuperTypes="#//EntityWebPage">
+    <eAnnotations source="MyDSLDoc">
+      <details key="Description" value="This is the class to create the Creation page of an entity"/>
+    </eAnnotations>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Delete" eSuperTypes="#//EntityWebPage">
+    <eAnnotations source="MyDSLDoc">
+      <details key="Description" value="This is the class to create the Delete page of an entity"/>
+    </eAnnotations>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="CRUD" eSuperTypes="#//EntityWebPage">
+    <eAnnotations source="http://www.obeo.fr/dsl/dnc/archetype">
+      <details key="archetype" value="Role"/>
+    </eAnnotations>
+    <eAnnotations source="MyDSLDoc">
+      <details key="Description" value="This is the class to create Creating, Read, Update and Delete Pages"/>
+    </eAnnotations>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ExternalLink">
+    <eAnnotations source="MyDSLDoc">
+      <details key="Description" value="This is the class to represent external links on a webpage"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="url" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ExternalSource" abstract="true">
+    <eAnnotations source="MyDSLDoc">
+      <details key="Description" value="This is the class to represent external source from websites on a webpage"/>
+    </eAnnotations>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="MySqlType">
+    <eAnnotations source="MyDSLDoc">
+      <details key="Description" value="This is an Enumeration of the posibles types from MySql "/>
+    </eAnnotations>
+    <eLiterals name="INT"/>
+    <eLiterals name="REAL" value="1"/>
+    <eLiterals name="BOOLEAN" value="2"/>
+    <eLiterals name="DATE" value="3"/>
+    <eLiterals name="VARCHAR" value="4" literal="VARCHAR(50)"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Option">
+    <eAnnotations source="MyDSLDoc">
+      <details key="Description" value="This class represents an option for a question"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="text" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="fraction" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Question" abstract="true">
+    <eAnnotations source="MyDSLDoc">
+      <details key="Description" value="This class represents a question that could be used in a questionnary or in a survey"/>
+    </eAnnotations>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="GroupOfQuestions" eSuperTypes="#//Question">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore">
+      <details key="constraints" value="only_one_level_of_group_by"/>
+    </eAnnotations>
+    <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
+      <details key="only_one_level_of_group_by" value="&#xA;&#x9;&#x9;self.questions->select(g: Question | g.oclIsTypeOf(GroupOfQuestions))->size()=0"/>
+    </eAnnotations>
+    <eAnnotations source="MyDSLDoc">
+      <details key="Description" value="This class represents the posibility of group questions"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="questions" lowerBound="1"
+        upperBound="-1" eType="#//Question" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Multiple" abstract="true" eSuperTypes="#//SimpleQuestion">
+    <eAnnotations source="MyDSLDoc">
+      <details key="Description" value="This is an abstract class to get questions with multiple options"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="option" lowerBound="2"
+        upperBound="-1" eType="#//Option" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="TrueFalse" abstract="true" eSuperTypes="#//SimpleQuestion">
+    <eAnnotations source="MyDSLDoc">
+      <details key="Description" value="This is an abstract class to get questions with true and false options"/>
+    </eAnnotations>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="CorrectAnwser">
+    <eAnnotations source="MyDSLDoc">
+      <details key="Description" value="This enumeration represents the posible values for a true/false question"/>
+    </eAnnotations>
+    <eLiterals name="True"/>
+    <eLiterals name="False" value="1"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="SimpleQuestion" abstract="true" eSuperTypes="#//Question">
+    <eAnnotations source="MyDSLDoc">
+      <details key="Description" value="This is the class that represents a single question"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="QuestionText" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="visualRep" eType="#//VisualRepresentation"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="EntityWebPage" abstract="true" eSuperTypes="#//WebPage">
+    <eAnnotations source="MyDSLDoc">
+      <details key="Description" value="This is an abstract class to gruop entity webpages"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="entity" lowerBound="1"
+        eType="#//Entity"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="DataBase">
+    <eAnnotations source="MyDSLDoc">
+      <details key="Description" value="This is the class to represents the database for the WebApp"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="entities" upperBound="-1"
+        eType="#//Entity" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="QuestionBank">
+    <eAnnotations source="MyDSLDoc">
+      <details key="Description" value="This is the class that represents all the questions for the surveys and questionnaries of the webapp"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="quiestions" lowerBound="1"
+        upperBound="-1" eType="#//Question" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="TrueFalseForSurvey" eSuperTypes="#//TrueFalse">
+    <eAnnotations source="MyDSLDoc">
+      <details key="Description" value="This is the class to represent a question of true false type for survey"/>
+    </eAnnotations>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="MultipleForSurvey" eSuperTypes="#//Multiple">
+    <eAnnotations source="MyDSLDoc">
+      <details key="Description" value="This is the class to represent a question of multiple type for survey"/>
+    </eAnnotations>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="TrueFalseForQuestionnary" eSuperTypes="#//TrueFalse">
+    <eAnnotations source="MyDSLDoc">
+      <details key="Description" value="This is the class to represent a question of true false type for questionnary"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="correct" lowerBound="1"
+        eType="#//CorrectAnwser"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="MultipleForQuestionnary" eSuperTypes="#//Multiple">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore">
+      <details key="constraints" value="correct_from_own_options"/>
+    </eAnnotations>
+    <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
+      <details key="correct_from_own_options" value="&#xA;&#x9;&#x9;self.option->includes(self.correctOption)"/>
+    </eAnnotations>
+    <eAnnotations source="MyDSLDoc">
+      <details key="Description" value="This is the class to represent a question of multiple type for questionnary"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="correctOption" lowerBound="1"
+        eType="#//Option"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Twitter" eSuperTypes="#//ExternalSource">
+    <eAnnotations source="MyDSLDoc">
+      <details key="Description" value="This is the class to represent an external source of information from Twitter"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="username" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="RSSFeed" eSuperTypes="#//ExternalSource">
+    <eAnnotations source="MyDSLDoc">
+      <details key="Description" value="This is the class to represent an external source of information from a RSS Feed"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="url" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="items_to_display" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt" defaultValueLiteral="0"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="show_date" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBooleanObject"
+        defaultValueLiteral="false"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="feedname" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+</ecore:EPackage>

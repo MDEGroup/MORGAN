@@ -1,0 +1,8 @@
+model	Vertex (container,Region,ref) 
+model	Pseudostate (kind,PseudostateKind,attribute) 
+model	Trigger (event,Event,ref) 
+model	StateMachine (region,Region,ref) 
+model	State (entry,Behavior,ref) (exit,Behavior,ref) (doActivity,Behavior,ref) (region,Region,ref) 
+model	Transition (guard,Constraint,ref) (effect,Behavior,ref) (source,Vertex,ref) (trigger,Trigger,ref) (target,Vertex,ref) 
+model	Region (stateMachine,StateMachine,ref) (subvertex,Vertex,ref) (transition,Transition,ref) 
+model	NamedElement (name,EString,attribute) 

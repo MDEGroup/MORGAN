@@ -1,0 +1,6 @@
+model	Statemachine (name,EString,attribute) (actions,Action,ref) 
+model	Action (name,EString,attribute) 
+model	State (name,EString,attribute) (outgoings,LabeledTransition,ref) 
+model	Region (history,EBooleanObject,attribute) (initial,State,ref) (defaultHistory,State,ref) (states,State,ref) 
+model	LabeledTransition (id,EBigInteger,attribute) (action,Action,ref) (target,State,ref) 
+model	ComplexState (region,Region,ref) 

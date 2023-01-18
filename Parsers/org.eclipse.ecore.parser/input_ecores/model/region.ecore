@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="region" nsURI="http://www.eltesoft.hu/modelexecution/m2m/metamodel/region"
+    nsPrefix="hu.eltesoft.modelexecution.m2m.metamodel.region">
+  <eClassifiers xsi:type="ecore:EClass" name="RgRegion" eSuperTypes="base.ecore#//ModelRoot">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="containerClass" lowerBound="1"
+        eType="ecore:EDataType base.ecore#//NamedReference"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="initialPseudostate" lowerBound="1"
+        eType="#//RgInitialPseudostate"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="states" ordered="false"
+        lowerBound="1" upperBound="-1" eType="#//RgState"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="RgInitialPseudostate" eSuperTypes="base.ecore#//Named">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="initialTransition" lowerBound="1"
+        eType="#//RgTransition"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="RgState" eSuperTypes="base.ecore#//Named">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="entry" eType="ecore:EDataType base.ecore#//NamedReference"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="exit" eType="ecore:EDataType base.ecore#//NamedReference"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="transitions" ordered="false"
+        upperBound="-1" eType="#//RgTransition"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="isFinal" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean" defaultValueLiteral="false"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="RgTransition" eSuperTypes="base.ecore#//Referenced">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="message" lowerBound="1"
+        eType="ecore:EDataType base.ecore#//NamedReference"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="effect" eType="ecore:EDataType base.ecore#//NamedReference"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="target" lowerBound="1"
+        eType="#//RgState"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="event" eType="ecore:EDataType base.ecore#//NamedReference"/>
+  </eClassifiers>
+</ecore:EPackage>

@@ -1,0 +1,121 @@
+model	User userId,property password,property loginStatus,property verifyLogin,operation 
+model	SessionManager userid,property departmentName,property getUser,operation getDepartments,operation 
+model	SessionManager_User user,property sessionManager,property 
+model	Customer customerName,property address,property email,property phoneno,property creditcardinfo,property shippinginfo,property newsLettersub,property surveys,property register,operation login,operation updateProfile,operation search,operation addpromotion,operation 
+model	Administrator adminName,property email,property createDepartment,operation createProduct,operation deleteDepartment,operation deleteProduct,operation editCatalogDetails,operation 
+model	Department departmentID,property departmentName,property description,property getCategoryInDepartment,operation 
+model	searchFacade getbyproductName,operation getbykeyword,operation 
+model	productSet 
+model	Order OrderId,property Item,property dateCreated,property dateShipped,property customerName,property status,property customerId,property ShippingAddress,property BillingAddress,property OrderStatus,property Payment,property operation4,operation operation5,operation GetOrderSubTotal,operation GetDiscountedOrderSubTotal,operation GetOrderTotal,operation GetDiscountedTotal,operation 
+model	Shipping shippingId,property shippingType,property shippingAddress,property ,property ShippingType,property updateShippinginfo,operation 
+model	OrderDetail orderId,property productId,property productName,property quantity,property unitCost,property subTotal,property operation,operation ship,operation 
+model	Float 
+model	Product productId,property Name,property SKU,property description,property attribute5,property attribute6,property attribute7,property Price,property reviews,property getActualPrice,operation getDiscountedPrice,operation getProductDetails,operation operation,operation 
+model	keywordSet keyword,property findkeyword(in keyword),operation 
+model	cartItem name,property productId,property quantity,property unitCost,property subtotal,property new(in cartid: int),operation 
+model	Cart_Cart cart,property cart,property 
+model	Genre_Genre genre,property genre,property 
+model	Genre_Product product,property genre,property 
+model	SessionManager_Genre genre,property sessionManager,property 
+model	Order_Shippinginfo ,property ,property 
+model	Order_OrderDetail orderDetail,property order,property 
+model	Customer_Order order,property customer,property 
+model	Administrator_Order order,property administrator,property 
+model	Product_OrderDetail orderDetail,property product,property 
+model	Product_cartItem cartItem,property product,property 
+model	searchFacade_keywordSet keywordSet,property searchFacade,property 
+model	keywordSet_Product product,property keywordSet,property 
+model	notify sendnotification,operation mobile,operation 
+model	mobile 
+model	notify_email email2,property notify,property 
+model	notify_mobile mobile2,property notify,property 
+model	null 
+model	null 
+model	null 
+model	null 
+model	shiporder sendshipment,operation 
+model	pickuppoint 
+model	customeraddress 
+model	shiporder_pickuppoint pickuppoint,property shiporder,property 
+model	shiporder_customeraddress customeraddress,property shiporder,property 
+model	null 
+model	null 
+model	promotions promotionCode,property startDate,property endDate,property new(in promoid:int),operation 
+model	Customer_promotions promotions,property customer,property 
+model	payment pay,operation 
+model	billdesk 
+model	gpay 
+model	paylater 
+model	billdesk_payment payment,property billdesk,property 
+model	payment_gpay gpay,property payment,property 
+model	payment_paylater paylater,property payment,property 
+model	null 
+model	null 
+model	null 
+model	null 
+model	null 
+model	null 
+model	EmailNotification sendEmailnotification,operation 
+model	PushNotification sendPushnotification,operation 
+model	EmailNotification_notify notify,property emailNotification,property 
+model	PushNotification_notify notify,property pushNotification,property 
+model	Credit/DebitCard makepayment,operation 
+model	Gpay makepayment,operation 
+model	PayLater makepayment,operation 
+model	Credit/DebitCard_payment payment,property credit/DebitCard,property 
+model	Gpay_payment payment,property gpay,property 
+model	PayLater_payment payment,property payLater,property 
+model	null 
+model	Category categoryID,property categoryName,property departmentId,property description,property getProducts,operation 
+model	Department_Department department,property department,property 
+model	Department_Category category,property department,property 
+model	Class 
+model	Class2 
+model	Offer CalculateOfferPrice,operation 
+model	DataType 
+model	ProductDiscount ApplyDiscountPrice,operation 
+model	TimeBasedDiscount ApplyDiscountPrice,operation 
+model	null 
+model	null 
+model	null 
+model	null 
+model	null 
+model	null 
+model	null 
+model	null 
+model	Price ActualPrice,property GetProducts,operation 
+model	Price_Price price,property price,property 
+model	Product_Offer offer,property product,property 
+model	Product_Price price,property product,property 
+model	Item Name,property Quantity,property attribute,property GetItemPrice,operation 
+model	Item_Product product,property item,property 
+model	items 
+model	OrderService attribute,property AddOrder,operation UpdateOrder,operation CancelOrder,operation operation3,operation 
+model	OrderService_Order order,property orderService,property 
+model	Payment 
+model	Order_Payment payment,property order,property 
+model	Payment OrderId,property attribute2,property 
+model	CreditCardPayment CardType,property CardNumber,property ProcessPayment,operation 
+model	PayLater UserID,property ProcessPayment,operation 
+model	null 
+model	null 
+model	Order_Payment2 payment,property order,property 
+model	ShippingType Name,property DeliveryDate,property Cost,property Ship,operation GetShipmentStatus,operation 
+model	Date 
+model	Vendor attribute,property attribute2,property operation,operation 
+model	null 
+model	ShippingType_ShippingType shippingType,property shippingType,property 
+model	Shipping_ShippingType shippingType2,property shipping,property 
+model	Order_Shipping shipping,property order,property 
+model	Item_Order order,property item,property 
+model	ShoppingCart Item,property GetTotalPrice,property quantity,property dateAdded,property addCartitem,operation deleteCartitem,operation updatequantity,operation viewCartDetails,operation checkout,operation calcUnitPrice,operation calcTotalPrice,operation 
+model	Items 
+model	ShoppingCart_Item item,property shoppingCart,property 
+model	Address Street,property City,property State,property ZipCode,property Country,property Type,property operation,operation operation2,operation 
+model	Order_Address address,property order,property 
+model	Notify SendNotification,operation 
+model	OrderService_Notify notify,property orderService,property 
+model	SMS MobileNo,property SendNotification,operation 
+model	email EmailAddress,property SendNotification,operation 
+model	null 
+model	null 

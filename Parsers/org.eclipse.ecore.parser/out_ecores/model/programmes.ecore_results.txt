@@ -1,0 +1,6 @@
+model	Department (name,EString,attribute) (courses,Course,ref) (programmes,Programme,ref) 
+model	Specialization (name,EString,attribute) (lengthInSemesters,EInt,attribute) (startSemester,EInt,attribute) (semesters,Semester,ref) 
+model	Semester (code,EString,attribute) (year,EInt,attribute) (semesterSeason,SemesterSeason,attribute) (courseAccesses,CourseAccess,ref) 
+model	CourseAccess (access,Access,attribute) (course,Course,ref) 
+model	Course (code,EString,attribute) (credits,EFloat,attribute) (availableSemesters,SemesterSeason,attribute) (name,EString,attribute) 
+model	Programme (code,EString,attribute) (semestersBeforeSpecialization,EInt,attribute) (name,EString,attribute) (startYear,EInt,attribute) (totalNumberOfSemesters,EInt,attribute) (specializations,Specialization,ref) (semesters,Semester,ref) 

@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="diastyle"
+    nsURI="http://isoe-2012-diastyle-dsml" nsPrefix="diastyle">
+  <eClassifiers xsi:type="ecore:EEnum" name="DColor">
+    <eLiterals name="white"/>
+    <eLiterals name="black" value="1"/>
+    <eLiterals name="lightGray" value="2"/>
+    <eLiterals name="gray" value="3"/>
+    <eLiterals name="darkGray" value="4"/>
+    <eLiterals name="red" value="5"/>
+    <eLiterals name="orange" value="6"/>
+    <eLiterals name="yellow" value="7"/>
+    <eLiterals name="green" value="8"/>
+    <eLiterals name="lightGreen" value="9"/>
+    <eLiterals name="darkGreen" value="10"/>
+    <eLiterals name="cyan" value="11"/>
+    <eLiterals name="lightBlue" value="12"/>
+    <eLiterals name="blue" value="13"/>
+    <eLiterals name="darkBlue" value="14"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="DLayout">
+    <eLiterals name="none"/>
+    <eLiterals name="free" value="1"/>
+    <eLiterals name="horizontal" value="2"/>
+    <eLiterals name="vertical" value="3"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="DNodeEdgeStyle" abstract="true" eSuperTypes="http://www.eclipse.org/emf/2002/Ecore#//EModelElement #//DBaseStyle">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="line" eType="#//DLine"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="lineWidth" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="fontName" eType="#//DFontName"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="fontStyle" eType="#//DFontStyle"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="fontSize" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="fontColor" eType="#//DColor"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="textAlignment" eType="#//DAlignment"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="icon" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="DStyle" eSuperTypes="http://www.eclipse.org/emf/2002/Ecore#//EModelElement">
+    <eOperations name="getBackgroundColor" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
+      <eParameters name="element" eType="ecore:EClass ../../org.isoe.diagraph.diagraph/model/diagraph.ecore#//DGraphElement"/>
+    </eOperations>
+    <eOperations name="getFigure" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
+      <eParameters name="element" eType="ecore:EClass ../../org.isoe.diagraph.diagraph/model/diagraph.ecore#//DGraphElement"/>
+    </eOperations>
+    <eOperations name="getIcon" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
+      <eParameters name="element" eType="ecore:EClass ../../org.isoe.diagraph.diagraph/model/diagraph.ecore#//DGraphElement"/>
+    </eOperations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="styles" upperBound="-1"
+        eType="#//DBaseStyle" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="styleHandler" eType="#//DStyleHandler"
+        transient="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="dGraph" eType="ecore:EClass ../../org.isoe.diagraph.diagraph/model/diagraph.ecore#//DGraph"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="DStyleBridge">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="dGraphElement" eType="ecore:EClass ../../org.isoe.diagraph.diagraph/model/diagraph.ecore#//DGraphElement"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="DLine">
+    <eLiterals name="solid" value="1"/>
+    <eLiterals name="dash" value="2"/>
+    <eLiterals name="dot" value="3"/>
+    <eLiterals name="dashdot" value="4"/>
+    <eLiterals name="dashdotdot" value="5"/>
+    <eLiterals name="custom" value="6"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="DDirection">
+    <eLiterals name="none"/>
+    <eLiterals name="left" value="1"/>
+    <eLiterals name="right" value="2"/>
+    <eLiterals name="bidirectional" value="3"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="DNodeStyle" eSuperTypes="#//DNodeEdgeStyle">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="sizeX" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="radius" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="shape" eType="#//DShape"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="sizeY" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="figure" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="shapeData" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="layout" eType="#//DLayout"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="DEdgeStyle" eSuperTypes="#//DNodeEdgeStyle">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="arrowDirection" eType="#//DDirection"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="arrowSize" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="shape" eType="#//DShape"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="DShape">
+    <eLiterals name="rectangle"/>
+    <eLiterals name="roundedRectangle" value="1"/>
+    <eLiterals name="ellipse" value="2"/>
+    <eLiterals name="dot" value="6"/>
+    <eLiterals name="custom" value="3"/>
+    <eLiterals name="arrow" value="4"/>
+    <eLiterals name="triangle" value="5"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="DFontStyle">
+    <eLiterals name="normal"/>
+    <eLiterals name="bold" value="1"/>
+    <eLiterals name="italic" value="2"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="DFontName">
+    <eLiterals name="arial"/>
+    <eLiterals name="courier" value="1"/>
+    <eLiterals name="times" value="2"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="DAlignment">
+    <eLiterals name="beginning"/>
+    <eLiterals name="center" value="1"/>
+    <eLiterals name="end" value="2"/>
+    <eLiterals name="fill" value="3"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EDataType" name="DStyleHandler" instanceClassName="org.isoe.diagraph.diastyle.helpers.IStyleHandler"/>
+  <eClassifiers xsi:type="ecore:EClass" name="DNestingEdgeStyle" eSuperTypes="#//DBaseStyle"/>
+  <eClassifiers xsi:type="ecore:EClass" name="DBaseStyle" abstract="true">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="color" eType="#//DColor"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="styleBridges" upperBound="-1"
+        eType="#//DStyleBridge" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="parent" eType="#//DBaseStyle"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="parentName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+</ecore:EPackage>

@@ -1,0 +1,4 @@
+model	Table (name,EString,attribute) (database,Database,ref) (columns,Column,ref) (primary_key,Column,ref) 
+model	Column (name,EString,attribute) (type,Type,attribute) (foreign_key,ForeignKey,ref) (table,Table,ref) 
+model	Database (name,EString,attribute) (tables,Table,ref) 
+model	ForeignKey (name,EString,attribute) (column,Column,ref) (target,Table,ref) 

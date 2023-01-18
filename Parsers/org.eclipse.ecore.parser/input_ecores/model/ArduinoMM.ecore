@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="ArduinoMetamodel" nsURI="http://ArduinoMetamodel" nsPrefix="ArduinoMetamodel">
+  <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore">
+    <details key="invocationDelegates" value="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot"/>
+    <details key="settingDelegates" value="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot"/>
+    <details key="validationDelegates" value="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot"/>
+  </eAnnotations>
+  <eClassifiers xsi:type="ecore:EClass" name="Project">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="boards" lowerBound="1"
+        upperBound="-1" eType="#//ArduinoBoardUNO" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="metodos" lowerBound="1"
+        upperBound="-1" eType="#//Metodo" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="fsm" eType="#//FiniteStateMachine"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ArduinoBoardUNO">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="digitalpins" upperBound="6"
+        eType="#//Digital" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="analogpins" upperBound="6"
+        eType="#//Analog" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Pin" abstract="true">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="label" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="pinMode" eType="#//PinMode"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Digital" eSuperTypes="#//Pin">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore">
+      <details key="constraints" value="uniqueNames"/>
+    </eAnnotations>
+    <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
+      <details key="uniqueNames" value="Digital.allInstances()->forAll(d1, d2 | d1 &lt;> d2 implies d1.label &lt;> d2.label )"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="ID" eType="#//DigitalID"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Analog" eSuperTypes="#//Pin">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="ID" eType="#//AnalogID"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="PWM" eSuperTypes="#//Analog"/>
+  <eClassifiers xsi:type="ecore:EEnum" name="AnalogID">
+    <eLiterals name="A0"/>
+    <eLiterals name="A1"/>
+    <eLiterals name="A2"/>
+    <eLiterals name="A3"/>
+    <eLiterals name="A4"/>
+    <eLiterals name="A5"/>
+    <eLiterals name="A6"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="DigitalID">
+    <eLiterals name="D2"/>
+    <eLiterals name="D4"/>
+    <eLiterals name="D7"/>
+    <eLiterals name="D8"/>
+    <eLiterals name="D12"/>
+    <eLiterals name="D13"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="PinMode">
+    <eLiterals name="INPUT"/>
+    <eLiterals name="OUTPUT"/>
+    <eLiterals name="INPUT_PULLUP"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Metodo">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="nombre" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="instrucciones" lowerBound="1"
+        upperBound="-1" eType="#//Instruccion" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Instruccion">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="codigo" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="delay" eSuperTypes="#//Instruccion"/>
+  <eClassifiers xsi:type="ecore:EClass" name="State">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="incoming" upperBound="-1"
+        eType="#//Transition" eOpposite="#//Transition/target"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="outgoing" upperBound="-1"
+        eType="#//Transition" eOpposite="#//Transition/source"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="isInitial" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Transition">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="actions" upperBound="-1"
+        eType="#//Action" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="source" lowerBound="1"
+        eType="#//State" eOpposite="#//State/outgoing"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="target" lowerBound="1"
+        eType="#//State" eOpposite="#//State/incoming"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="FiniteStateMachine">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="states" upperBound="-1"
+        eType="#//State" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Action"/>
+</ecore:EPackage>

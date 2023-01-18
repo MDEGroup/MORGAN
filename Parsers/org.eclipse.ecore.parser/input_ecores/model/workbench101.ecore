@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="workbench101"
+    nsURI="http://workbench101" nsPrefix="_workbench101">
+  <eAnnotations source="diagen">
+    <details key="knownas=simple world"/>
+    <details key="origin=http://org.isoe.fr"/>
+    <details key="leftparent=nil" value=""/>
+    <details key="rightparent=nil" value=""/>
+    <details key="requires=nil" value=""/>
+    <details key="context=startup"/>
+  </eAnnotations>
+  <eClassifiers xsi:type="ecore:EClass" name="Workbench">
+    <eAnnotations source="diagraph">
+      <details key="node"/>
+      <details key="pov"/>
+      <details key="cref=thoughts"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="things" upperBound="-1"
+        eType="#//Thing" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="thoughts" upperBound="-1"
+        eType="#//Thoughts" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="aprop" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Thing" eSuperTypes="#//NamedElement">
+    <eAnnotations source="diagraph">
+      <details key="node"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="id" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="relations" upperBound="-1"
+        eType="#//RelatedTo" containment="true" eOpposite="#//RelatedTo/fromThing"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="NamedElement" abstract="true">
+    <eAnnotations source="diagraph">
+      <details key="label=name"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="RelatedTo" eSuperTypes="#//NamedElement">
+    <eAnnotations source="diagraph">
+      <details key="link"/>
+      <details key="cont=Thing.relations"/>
+      <details key="lsrc=fromThing"/>
+      <details key="ltrg=toThing"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="fromThing" eType="#//Thing"
+        eOpposite="#//Thing/relations"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="toThing" eType="#//Thing"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="since" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Thoughts" eSuperTypes="#//NamedElement">
+    <eAnnotations source="diagraph">
+      <details key="node"/>
+      <details key="ref=relatedTo"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="relatedTo" upperBound="-1"
+        eType="#//Thing"/>
+  </eClassifiers>
+</ecore:EPackage>

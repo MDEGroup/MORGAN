@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="ASCII"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="gemoc" nsURI="http://org.company.fsm.xdsml.fsmlanguagemt/gemoc/" nsPrefix="gemoc">
+  <eClassifiers xsi:type="ecore:EClass" name="FSM">
+    <eOperations name="print"/>
+    <eOperations name="initialize">
+      <eAnnotations source="aspect"/>
+    </eOperations>
+    <eOperations name="main">
+      <eAnnotations source="aspect"/>
+    </eOperations>
+    <eOperations name="setCurrentState">
+      <eAnnotations source="aspect"/>
+      <eParameters name="state" eType="//State"/>
+    </eOperations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="state" upperBound="-1" eType="//State" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="transition" upperBound="-1" eType="//Transition" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="State">
+    <eOperations name="step">
+      <eAnnotations source="aspect"/>
+      <eParameters name="inputString">
+        <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+      </eParameters>
+    </eOperations>
+    <eOperations name="isValidTrigger">
+      <eAnnotations source="aspect"/>
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+      <eParameters name="trigger">
+        <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+      </eParameters>
+    </eOperations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="incoming" eType="//Transition" eOpposite="//Transition/state"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="outcoming" eType="//Transition" eOpposite="//Transition/src"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="fSM" unique="false" eType="//FSM">
+      <eAnnotations source="aspect"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Transition">
+    <eOperations name="fire">
+      <eAnnotations source="aspect"/>
+    </eOperations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="trigger">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="state" eType="//State" eOpposite="//State/incoming"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="src" eType="//State" eOpposite="//State/outcoming"/>
+  </eClassifiers>
+</ecore:EPackage>

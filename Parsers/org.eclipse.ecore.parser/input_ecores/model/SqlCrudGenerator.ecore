@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="sqlCrudGenerator" nsURI="http://www.uniandes.edu/automatizacion/sql_crud_generator/SqlCrudGenerator"
+    nsPrefix="sqlCrudGenerator">
+  <eClassifiers xsi:type="ecore:EClass" name="Schema">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="tables" upperBound="-1"
+        eType="#//Table" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Table">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="columns" upperBound="-1"
+        eType="#//Column" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="primaryKey" eType="#//PrimaryKey"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="foreignsKeys" upperBound="-1"
+        eType="#//ForeignKey" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Column">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="dataType" eType="#//DataType"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="PrimaryKey">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="ids" unique="false" upperBound="-1"
+        eType="#//Column"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ForeignKey">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="refsTo" eType="#//Column"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="reference" eType="#//Table"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="refsFrom" eType="#//Column"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="DataType">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="dataType" eType="#//ENUM_DATA_TYPE"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="precision" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="ENUM_DATA_TYPE">
+    <eLiterals name="CHARACTER" literal="CHARACTER"/>
+    <eLiterals name="VARCHAR" value="1" literal="VARCHAR"/>
+    <eLiterals name="VARYING" value="2" literal="VARYING"/>
+    <eLiterals name="BOOLEAN" value="3" literal="BOOLEAN"/>
+    <eLiterals name="VARBINARY" value="4" literal="VARBINARY"/>
+    <eLiterals name="BINARY" value="5" literal="BINARY"/>
+    <eLiterals name="INTEGER" value="6" literal="INTEGER"/>
+    <eLiterals name="SMALLINT" value="7" literal="SMALLINT"/>
+    <eLiterals name="INT" value="8" literal="INT"/>
+    <eLiterals name="BIGINT" value="9" literal="BIGINT"/>
+    <eLiterals name="DECIMAL" value="10" literal="DECIMAL"/>
+    <eLiterals name="NUMERIC" value="11" literal="NUMERIC"/>
+    <eLiterals name="FLOAT" value="12" literal="FLOAT"/>
+    <eLiterals name="REAL" value="13" literal="REAL"/>
+    <eLiterals name="DATE" value="14" literal="DATE"/>
+    <eLiterals name="TIME" value="15" literal="TIME"/>
+    <eLiterals name="TIMESTAMP" value="16" literal="TIMESTAMP"/>
+    <eLiterals name="INTERVAL" value="17" literal="INTERVAL"/>
+    <eLiterals name="ARRAY" value="18" literal="ARRAY"/>
+    <eLiterals name="MULTISET" value="19" literal="MULTISET"/>
+    <eLiterals name="XML" value="20" literal="XML"/>
+    <eLiterals name="CHARACTER_M" value="21" literal="character"/>
+    <eLiterals name="VARCHAR_M" value="22" literal="varchar"/>
+    <eLiterals name="VARYING_M" value="23" literal="varying"/>
+    <eLiterals name="BOOLEAN_M" value="24" literal="boolean"/>
+    <eLiterals name="VARBINARY_M" value="25" literal="varbinary"/>
+    <eLiterals name="BINARY_M" value="26" literal="binary"/>
+    <eLiterals name="INTEGER_M" value="27" literal="integer"/>
+    <eLiterals name="SMALLINT_M" value="28" literal="smallint"/>
+    <eLiterals name="INT_M" value="29" literal="int"/>
+    <eLiterals name="BIGINT_M" value="30" literal="bigint"/>
+    <eLiterals name="DECIMAL_M" value="31" literal="decimal"/>
+    <eLiterals name="NUMERIC_M" value="32" literal="numeric"/>
+    <eLiterals name="FLOAT_M" value="33" literal="float"/>
+    <eLiterals name="REAL_M" value="34" literal="real"/>
+    <eLiterals name="DATE_M" value="35" literal="date"/>
+    <eLiterals name="TIME_M" value="36" literal="time"/>
+    <eLiterals name="TIMESTAMP_M" value="37" literal="timestamp"/>
+    <eLiterals name="INTERVAL_M" value="38" literal="interval"/>
+    <eLiterals name="ARRAY_M" value="39" literal="array"/>
+    <eLiterals name="MULTISET_M" value="40" literal="multiset"/>
+    <eLiterals name="XML_M" value="41" literal="xml"/>
+  </eClassifiers>
+</ecore:EPackage>

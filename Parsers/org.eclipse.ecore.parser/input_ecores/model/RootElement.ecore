@@ -1,0 +1,363 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="RootElement" nsURI="http:///RootElement.ecore" nsPrefix="RootElement">
+  <eClassifiers xsi:type="ecore:EClass" name="Guest" eSuperTypes="#//SupportTicketWriter #//FeedbackWriter #//MakeBooking">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="phoneNumber" ordered="false"
+        lowerBound="1" eType="ecore:EDataType types.ecore#//String"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="nextDestination" ordered="false"
+        eType="ecore:EDataType types.ecore#//String"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="nationality" ordered="false"
+        lowerBound="1" eType="ecore:EDataType types.ecore#//String"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" ordered="false" lowerBound="1"
+        eType="ecore:EDataType types.ecore#//String"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="mail" ordered="false" eType="ecore:EDataType types.ecore#//String"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="socialSecurityNumber" ordered="false"
+        eType="ecore:EDataType types.ecore#//String"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="supportTicketWriter" ordered="false"
+        lowerBound="1" eType="#//SupportTicketWriter"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="makeBooking" ordered="false"
+        lowerBound="1" eType="#//MakeBooking"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="feedbackWriter" ordered="false"
+        lowerBound="1" eType="#//FeedbackWriter"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="SupportTicketWriter" abstract="true"
+      interface="true">
+    <eOperations name="newSupportTicket" ordered="false" lowerBound="1">
+      <eParameters name="roomName" ordered="false" lowerBound="1" eType="ecore:EDataType types.ecore#//String"/>
+      <eParameters name="description" ordered="false" lowerBound="1" eType="ecore:EDataType types.ecore#//String"/>
+    </eOperations>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="MakeBooking" abstract="true" interface="true">
+    <eOperations name="createBooking" ordered="false" lowerBound="1" eType="#//Booking"/>
+    <eOperations name="getAvailableRooms" ordered="false" upperBound="-1" eType="#//RoomType">
+      <eParameters name="startDate" ordered="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDate"/>
+      <eParameters name="endDate" ordered="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDate"/>
+      <eParameters name="nbrOfAdults" ordered="false" lowerBound="1" eType="ecore:EDataType types.ecore#//Integer"/>
+      <eParameters name="nbrOfChildren" ordered="false" lowerBound="1" eType="ecore:EDataType types.ecore#//Integer"/>
+    </eOperations>
+    <eOperations name="addRoom" ordered="false" lowerBound="1" eType="ecore:EDataType types.ecore#//Boolean">
+      <eParameters name="booking" ordered="false" lowerBound="1" eType="#//Booking"/>
+      <eParameters name="room" ordered="false" lowerBound="1" eType="#//RoomType"/>
+      <eParameters name="nbrOfAdults" ordered="false" lowerBound="1" eType="ecore:EDataType types.ecore#//Integer"/>
+      <eParameters name="nbrOfChildren" ordered="false" lowerBound="1" eType="ecore:EDataType types.ecore#//Integer"/>
+      <eParameters name="startDate" ordered="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDate"/>
+      <eParameters name="endDate" ordered="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDate"/>
+    </eOperations>
+    <eOperations name="confirmBooking" ordered="false" lowerBound="1" eType="ecore:EDataType types.ecore#//Boolean">
+      <eParameters name="booking" ordered="false" lowerBound="1" eType="#//Booking"/>
+      <eParameters name="name" ordered="false" lowerBound="1" eType="ecore:EDataType types.ecore#//String"/>
+      <eParameters name="phone" ordered="false" lowerBound="1" eType="ecore:EDataType types.ecore#//String"/>
+      <eParameters name="mail" ordered="false" lowerBound="1" eType="ecore:EDataType types.ecore#//String"/>
+      <eParameters name="nationality" ordered="false" lowerBound="1" eType="ecore:EDataType types.ecore#//String"/>
+      <eParameters name="passportNr" ordered="false" lowerBound="1" eType="ecore:EDataType types.ecore#//Integer"/>
+      <eParameters name="nextDestination" ordered="false" lowerBound="1" eType="ecore:EDataType types.ecore#//String"/>
+    </eOperations>
+    <eOperations name="cancelBooking" ordered="false" lowerBound="1" eType="ecore:EDataType types.ecore#//Boolean">
+      <eParameters name="booking" ordered="false" lowerBound="1" eType="#//Booking"/>
+    </eOperations>
+    <eOperations name="lookupBooking" ordered="false" upperBound="-1" eType="#//Booking">
+      <eParameters name="name" ordered="false" lowerBound="1" eType="ecore:EDataType types.ecore#//String"/>
+      <eParameters name="phoneNumber" ordered="false" lowerBound="1" eType="ecore:EDataType types.ecore#//String"/>
+    </eOperations>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Booking">
+    <eOperations name="calculateCost" ordered="false" lowerBound="1" eType="ecore:EDataType types.ecore#//Integer"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="bookingID" ordered="false"
+        lowerBound="1" eType="ecore:EDataType types.ecore#//String" changeable="false"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="roombooking" ordered="false"
+        upperBound="-1" eType="#//RoomBooking"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="guest" ordered="false"
+        lowerBound="1" eType="#//Guest"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="serviceitem" ordered="false"
+        upperBound="-1" eType="#//ServiceItem"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="RoomBooking" abstract="true">
+    <eOperations name="calculateCost" ordered="false" lowerBound="1" eType="ecore:EDataType types.ecore#//Integer"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="startDate" ordered="false"
+        lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDate"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="endDate" ordered="false"
+        lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDate"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="bookingStatus" ordered="false"
+        lowerBound="1" eType="#//BookingStatus" defaultValueLiteral="NONE"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="room" ordered="false" lowerBound="1"
+        eType="#//Room"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="BookingStatus">
+    <eLiterals name="NONE"/>
+    <eLiterals name="BOOKED" value="1"/>
+    <eLiterals name="CHECKED_IN" value="2"/>
+    <eLiterals name="CHECKED_OUT" value="3"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Room">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="isOccupied" ordered="false"
+        lowerBound="1" eType="ecore:EDataType types.ecore#//Boolean"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" ordered="false" lowerBound="1"
+        eType="ecore:EDataType types.ecore#//String"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="needCleaning" ordered="false"
+        lowerBound="1" eType="ecore:EDataType types.ecore#//Boolean"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="roomType" ordered="false"
+        lowerBound="1" eType="#//RoomType"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="RoomType">
+    <eOperations name="addRoomAttribute" ordered="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
+      <eParameters name="roomAttribute" ordered="false" lowerBound="1" eType="#//RoomAttribute"/>
+    </eOperations>
+    <eOperations name="removeRoomAttribute" ordered="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
+      <eParameters name="roomAttribute" ordered="false" lowerBound="1" eType="#//RoomAttribute"/>
+    </eOperations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" ordered="false" lowerBound="1"
+        eType="ecore:EDataType types.ecore#//String"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="price" ordered="false"
+        lowerBound="1" eType="ecore:EDataType types.ecore#//Integer" changeable="false"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="roomAttributes" ordered="false"
+        upperBound="-1" eType="#//RoomAttribute" changeable="false"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="capacity" ordered="false"
+        lowerBound="1" eType="ecore:EDataType types.ecore#//Integer"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="RoomAttribute">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="id" ordered="false" lowerBound="1"
+        eType="ecore:EDataType types.ecore#//Integer" changeable="false"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" ordered="false" lowerBound="1"
+        eType="ecore:EDataType types.ecore#//String"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="description" ordered="false"
+        lowerBound="1" eType="ecore:EDataType types.ecore#//String"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ServiceItem">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" ordered="false" lowerBound="1"
+        eType="ecore:EDataType types.ecore#//String"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="description" ordered="false"
+        lowerBound="1" eType="ecore:EDataType types.ecore#//String"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="price" ordered="false"
+        lowerBound="1" eType="ecore:EDataType types.ecore#//Integer"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="FeedbackWriter" abstract="true" interface="true">
+    <eOperations name="giveFeedback" ordered="false" lowerBound="1">
+      <eParameters name="feedback" ordered="false" lowerBound="1" eType="ecore:EDataType types.ecore#//String"/>
+      <eParameters name="rating" ordered="false" lowerBound="1" eType="ecore:EDataType types.ecore#//Integer"/>
+    </eOperations>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Feedback">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="feedbackDescription" ordered="false"
+        lowerBound="1" eType="ecore:EDataType types.ecore#//String"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="rating" ordered="false"
+        lowerBound="1" eType="ecore:EDataType types.ecore#//Integer"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="read" ordered="false" lowerBound="1"
+        eType="ecore:EDataType types.ecore#//Boolean" defaultValueLiteral="false"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Staff" eSuperTypes="#//Cleaning #//SupportTicketWriter #//SupportTicketReader">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="staffID" ordered="false"
+        lowerBound="1" eType="ecore:EDataType types.ecore#//String"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" ordered="false" lowerBound="1"
+        eType="ecore:EDataType types.ecore#//String"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="cleaning" ordered="false"
+        lowerBound="1" eType="#//Cleaning"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="supportTicketReader" ordered="false"
+        lowerBound="1" eType="#//SupportTicketReader"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="supportTicketWriter" ordered="false"
+        lowerBound="1" eType="#//SupportTicketWriter"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Cleaning" abstract="true" interface="true">
+    <eOperations name="checkIfRoomCleaned" ordered="false" lowerBound="1" eType="ecore:EDataType types.ecore#//Boolean">
+      <eParameters name="roomName" ordered="false" lowerBound="1" eType="ecore:EDataType types.ecore#//String"/>
+    </eOperations>
+    <eOperations name="getListOfUncleanRooms" ordered="false" upperBound="-1" eType="#//Room"/>
+    <eOperations name="markRoomAsCleaned" ordered="false" lowerBound="1">
+      <eParameters name="room" ordered="false" lowerBound="1" eType="#//Room"/>
+    </eOperations>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="SupportTicketReader" abstract="true"
+      interface="true">
+    <eOperations name="getUnfixedTickets" ordered="false" upperBound="-1" eType="#//SupportTicket"/>
+    <eOperations name="getSupportTicketsForRoom" ordered="false" upperBound="-1" eType="#//SupportTicket">
+      <eParameters name="roomName" ordered="false" lowerBound="1" eType="ecore:EDataType types.ecore#//String"/>
+    </eOperations>
+    <eOperations name="markAsCompleted" ordered="false" lowerBound="1">
+      <eParameters name="supportTicket" ordered="false" lowerBound="1" eType="#//SupportTicket"/>
+    </eOperations>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="SupportTicket">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="problemDescription" ordered="false"
+        lowerBound="1" eType="ecore:EDataType types.ecore#//String"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="roomName" ordered="false"
+        lowerBound="1" eType="ecore:EDataType types.ecore#//String"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="fixed" ordered="false"
+        lowerBound="1" eType="ecore:EDataType types.ecore#//Boolean" defaultValueLiteral="false"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Clerk" eSuperTypes="#//Staff #//ReceptionHandling #//ServiceItemHandling #//MakeBooking #//Payment">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="receptionHandling" ordered="false"
+        lowerBound="1" eType="#//ReceptionHandling"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="serviceItemHandling" ordered="false"
+        lowerBound="1" eType="#//ServiceItemHandling"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="makeBooking" ordered="false"
+        lowerBound="1" eType="#//MakeBooking"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="payment" ordered="false"
+        lowerBound="1" eType="#//Payment"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ReceptionHandling" abstract="true" interface="true">
+    <eOperations name="checkIn" ordered="false" lowerBound="1" eType="#//Room">
+      <eParameters name="booking" ordered="false" lowerBound="1" eType="#//RoomBooking"/>
+    </eOperations>
+    <eOperations name="checkOut" ordered="false" lowerBound="1" eType="ecore:EDataType types.ecore#//Boolean">
+      <eParameters name="booking" ordered="false" lowerBound="1" eType="#//RoomBooking"/>
+    </eOperations>
+    <eOperations name="findBookings" ordered="false" upperBound="-1" eType="#//Booking">
+      <eParameters name="name" ordered="false" lowerBound="1" eType="ecore:EDataType types.ecore#//String"/>
+    </eOperations>
+    <eOperations name="findActiveBooking" ordered="false" lowerBound="1" eType="#//Booking">
+      <eParameters name="roomName" ordered="false" lowerBound="1" eType="ecore:EDataType types.ecore#//String"/>
+    </eOperations>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ServiceItemHandling" abstract="true"
+      interface="true">
+    <eOperations name="addServiceItem" ordered="false" lowerBound="1">
+      <eParameters name="booking" ordered="false" lowerBound="1" eType="#//Booking"/>
+      <eParameters name="name" ordered="false" lowerBound="1" eType="ecore:EDataType types.ecore#//String"/>
+      <eParameters name="description" ordered="false" lowerBound="1" eType="ecore:EDataType types.ecore#//String"/>
+      <eParameters name="price" ordered="false" lowerBound="1" eType="ecore:EDataType types.ecore#//Integer"/>
+    </eOperations>
+    <eOperations name="removeServiceItem" ordered="false" lowerBound="1">
+      <eParameters name="booking" ordered="false" lowerBound="1" eType="#//Booking"/>
+      <eParameters name="serviceItem" ordered="false" lowerBound="1" eType="#//ServiceItem"/>
+    </eOperations>
+    <eOperations name="findAllServiceItems" ordered="false" upperBound="-1" eType="#//ServiceItem">
+      <eParameters name="booking" ordered="false" lowerBound="1" eType="#//Booking"/>
+    </eOperations>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Payment" abstract="true" interface="true">
+    <eOperations name="verifyCreditCard" ordered="false" lowerBound="1" eType="ecore:EDataType types.ecore#//Boolean">
+      <eParameters name="creditCard" ordered="false" lowerBound="1" eType="ecore:EDataType types.ecore#//String"/>
+    </eOperations>
+    <eOperations name="debitCard" ordered="false" lowerBound="1" eType="ecore:EDataType types.ecore#//Boolean">
+      <eParameters name="creditCard" ordered="false" lowerBound="1" eType="ecore:EDataType types.ecore#//String"/>
+      <eParameters name="amount" ordered="false" lowerBound="1" eType="ecore:EDataType types.ecore#//Integer"/>
+    </eOperations>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Manager" eSuperTypes="#//Clerk #//SysAdmin #//FeedbackReader">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="feedbackReader" ordered="false"
+        lowerBound="1" eType="#//FeedbackReader"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="SysAdmin" eSuperTypes="#//RoomAttributeHandling #//RoomHandling #//RoomTypeHandling"/>
+  <eClassifiers xsi:type="ecore:EClass" name="RoomAttributeHandling" abstract="true"
+      interface="true">
+    <eOperations name="addRoomAttribute" ordered="false" lowerBound="1" eType="#//RoomAttribute">
+      <eParameters name="name" ordered="false" lowerBound="1" eType="ecore:EDataType types.ecore#//String"/>
+      <eParameters name="description" ordered="false" lowerBound="1" eType="ecore:EDataType types.ecore#//String"/>
+    </eOperations>
+    <eOperations name="editRoomAttribute" ordered="false" lowerBound="1" eType="ecore:EDataType types.ecore#//Boolean">
+      <eParameters name="roomAttribute" ordered="false" lowerBound="1" eType="#//RoomAttribute"/>
+      <eParameters name="newName" ordered="false" lowerBound="1" eType="ecore:EDataType types.ecore#//String"/>
+      <eParameters name="newDescription" ordered="false" lowerBound="1" eType="ecore:EDataType types.ecore#//String"/>
+    </eOperations>
+    <eOperations name="removeRoomAttribute" ordered="false" lowerBound="1" eType="ecore:EDataType types.ecore#//Boolean">
+      <eParameters name="roomAttribute" ordered="false" lowerBound="1" eType="#//RoomAttribute"/>
+    </eOperations>
+    <eOperations name="getAllRoomAttributes" ordered="false" upperBound="-1" eType="#//RoomAttribute"/>
+    <eOperations name="findRoomAttribute" ordered="false" upperBound="-1" eType="#//RoomAttribute">
+      <eParameters name="name" ordered="false" lowerBound="1" eType="ecore:EDataType types.ecore#//String"/>
+    </eOperations>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="RoomHandling" abstract="true" interface="true">
+    <eOperations name="addRoom" ordered="false" lowerBound="1" eType="#//Room">
+      <eParameters name="roomType" ordered="false" lowerBound="1" eType="#//RoomType"/>
+      <eParameters name="roomName" ordered="false" lowerBound="1" eType="ecore:EDataType types.ecore#//String"/>
+    </eOperations>
+    <eOperations name="removeRoom" ordered="false" lowerBound="1" eType="ecore:EDataType types.ecore#//Boolean">
+      <eParameters name="room" ordered="false" lowerBound="1" eType="#//Room"/>
+    </eOperations>
+    <eOperations name="editRoom" ordered="false" lowerBound="1" eType="ecore:EDataType types.ecore#//Boolean">
+      <eParameters name="room" ordered="false" lowerBound="1" eType="#//Room"/>
+      <eParameters name="newRoomType" ordered="false" lowerBound="1" eType="#//RoomType"/>
+      <eParameters name="newRoomName" ordered="false" lowerBound="1" eType="ecore:EDataType types.ecore#//String"/>
+    </eOperations>
+    <eOperations name="findRoom" ordered="false" upperBound="-1" eType="#//Room">
+      <eParameters name="roomName" ordered="false" lowerBound="1" eType="ecore:EDataType types.ecore#//String"/>
+    </eOperations>
+    <eOperations name="getAllRooms" ordered="false" upperBound="-1" eType="#//Room"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="RoomTypeHandling" abstract="true" interface="true">
+    <eOperations name="addRoomType" ordered="false" lowerBound="1" eType="#//RoomType">
+      <eParameters name="name" ordered="false" lowerBound="1" eType="ecore:EDataType types.ecore#//String"/>
+      <eParameters name="capacity" ordered="false" lowerBound="1" eType="ecore:EDataType types.ecore#//Integer"/>
+      <eParameters name="cost" ordered="false" lowerBound="1" eType="ecore:EDataType types.ecore#//Integer"/>
+    </eOperations>
+    <eOperations name="editRoomType" ordered="false" lowerBound="1" eType="ecore:EDataType types.ecore#//Boolean">
+      <eParameters name="roomType" ordered="false" lowerBound="1" eType="#//RoomType"/>
+      <eParameters name="newName" ordered="false" lowerBound="1" eType="ecore:EDataType types.ecore#//String"/>
+      <eParameters name="newCapacity" ordered="false" lowerBound="1" eType="ecore:EDataType types.ecore#//Integer"/>
+      <eParameters name="newCost" ordered="false" lowerBound="1" eType="ecore:EDataType types.ecore#//Integer"/>
+    </eOperations>
+    <eOperations name="removeRoomType" ordered="false" lowerBound="1" eType="ecore:EDataType types.ecore#//Boolean">
+      <eParameters name="roomType" ordered="false" lowerBound="1" eType="#//RoomType"/>
+    </eOperations>
+    <eOperations name="getAllRoomTypes" ordered="false" upperBound="-1" eType="#//RoomType"/>
+    <eOperations name="addAttributeToRoomType" ordered="false" lowerBound="1" eType="ecore:EDataType types.ecore#//Boolean">
+      <eParameters name="roomType" ordered="false" lowerBound="1" eType="#//RoomType"/>
+      <eParameters name="roomAttribute" ordered="false" lowerBound="1" eType="#//RoomAttribute"/>
+    </eOperations>
+    <eOperations name="removeAttributeFromRoomType" ordered="false" lowerBound="1"
+        eType="ecore:EDataType types.ecore#//Boolean">
+      <eParameters name="roomType" ordered="false" lowerBound="1" eType="#//RoomType"/>
+      <eParameters name="roomAttribute" ordered="false" lowerBound="1" eType="#//RoomAttribute"/>
+    </eOperations>
+    <eOperations name="findRoomType" ordered="false" upperBound="-1" eType="#//RoomType">
+      <eParameters name="name" ordered="false" lowerBound="1" eType="ecore:EDataType types.ecore#//String"/>
+    </eOperations>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="FeedbackReader" abstract="true" interface="true">
+    <eOperations name="getAllFeedback" ordered="false" upperBound="-1" eType="#//Feedback"/>
+    <eOperations name="getUnreadFeedback" ordered="false" upperBound="-1" eType="#//Feedback"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="BookingHandler" eSuperTypes="#//ReceptionHandling #//MakeBooking #//ServiceItemHandling">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="booking" ordered="false"
+        upperBound="-1" eType="#//Booking"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="roomFetcher" ordered="false"
+        lowerBound="1" eType="#//RoomFetcher"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="RoomFetcher" abstract="true" interface="true">
+    <eOperations name="getBookableRooms" ordered="false" upperBound="-1" eType="#//Room"/>
+    <eOperations name="getAllCleanableRooms" ordered="false" upperBound="-1" eType="#//Room"/>
+    <eOperations name="getAvailableRooms" ordered="false" upperBound="-1" eType="#//Room"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="RoomStructure" eSuperTypes="#//RoomHandling #//RoomTypeHandling #//RoomAttributeHandling #//RoomFetcher">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="rooms" ordered="false"
+        upperBound="-1" eType="#//Room"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="roomTypes" ordered="false"
+        upperBound="-1" eType="#//RoomType"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="roomAttributes" ordered="false"
+        upperBound="-1" eType="#//RoomAttribute"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="FeedbackHandler" eSuperTypes="#//FeedbackReader #//FeedbackWriter">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="feedback" ordered="false"
+        upperBound="-1" eType="#//Feedback"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="SupportTicketHandler" eSuperTypes="#//SupportTicketReader #//SupportTicketWriter">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="supportticket" ordered="false"
+        upperBound="-1" eType="#//SupportTicket"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="CleaningHandler" eSuperTypes="#//Cleaning">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="roomFetcher" ordered="false"
+        lowerBound="1" eType="#//RoomFetcher"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="PaymentHandler" eSuperTypes="#//Payment"/>
+  <eClassifiers xsi:type="ecore:EClass" name="DailyRoomBooking" eSuperTypes="#//RoomBooking">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="nbrOfGuests" ordered="false"
+        lowerBound="1" eType="ecore:EDataType types.ecore#//Integer"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="HourlyRoomBooking" eSuperTypes="#//RoomBooking"/>
+  <eClassifiers xsi:type="ecore:EClass" name="HotelSystem" abstract="true" interface="true">
+    <eOperations name="getStaff" ordered="false" lowerBound="1" eType="#//Staff">
+      <eParameters name="staffID" ordered="false" lowerBound="1" eType="ecore:EDataType types.ecore#//String"/>
+    </eOperations>
+    <eOperations name="getClerk" ordered="false" lowerBound="1" eType="#//Clerk">
+      <eParameters name="staffID" ordered="false" lowerBound="1" eType="ecore:EDataType types.ecore#//String"/>
+    </eOperations>
+    <eOperations name="getManager" ordered="false" lowerBound="1" eType="#//Manager">
+      <eParameters name="staffID" ordered="false" lowerBound="1" eType="ecore:EDataType types.ecore#//String"/>
+    </eOperations>
+    <eOperations name="getSystemAdministrator" ordered="false" lowerBound="1" eType="#//SysAdmin"/>
+    <eOperations name="getGuest" ordered="false" lowerBound="1" eType="#//Guest"/>
+    <eOperations name="getName" ordered="false" lowerBound="1" eType="ecore:EDataType types.ecore#//String"/>
+    <eOperations name="getNationality" ordered="false" lowerBound="1" eType="ecore:EDataType types.ecore#//String"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Hotel" eSuperTypes="#//HotelSystem"/>
+</ecore:EPackage>

@@ -1,0 +1,6 @@
+model	DNodeStyle (layout,DLayout,attribute) (sizeX,EInt,attribute) (figure,EString,attribute) (shape,DShape,attribute) (shapeData,EString,attribute) (radius,EInt,attribute) (sizeY,EInt,attribute) 
+model	DStyleBridge (name,EString,attribute) (dGraphElement,null,ref) 
+model	DNodeEdgeStyle (fontName,DFontName,attribute) (line,DLine,attribute) (textAlignment,DAlignment,attribute) (icon,EString,attribute) (fontSize,EInt,attribute) (fontStyle,DFontStyle,attribute) (lineWidth,EInt,attribute) (fontColor,DColor,attribute) 
+model	DBaseStyle (parentName,EString,attribute) (color,DColor,attribute) (name,EString,attribute) (parent,DBaseStyle,ref) (styleBridges,DStyleBridge,ref) 
+model	DStyle (styleHandler,DStyleHandler,attribute) (dGraph,null,ref) (styles,DBaseStyle,ref) 
+model	DEdgeStyle (arrowSize,EInt,attribute) (shape,DShape,attribute) (arrowDirection,DDirection,attribute) 

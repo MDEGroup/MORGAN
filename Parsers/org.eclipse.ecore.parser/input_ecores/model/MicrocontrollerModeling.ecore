@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="MicrocontrollerModeling" nsURI="http://www.example.org/microcontrollermodeling"
+    nsPrefix="MicrocontrollerModeling">
+  <eAnnotations source="http://www.eclipse.org/OCL/Import">
+    <details key="ecore" value="http://www.eclipse.org/emf/2002/Ecore"/>
+  </eAnnotations>
+  <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore">
+    <details key="invocationDelegates" value="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot"/>
+    <details key="settingDelegates" value="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot"/>
+    <details key="validationDelegates" value="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot"/>
+  </eAnnotations>
+  <eClassifiers xsi:type="ecore:EClass" name="Microcontroller">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore">
+      <details key="constraints" value="uniqueName_PerPin uniquePinNumber_PerPin asLeast_OneRomOrFlashMemory"/>
+    </eAnnotations>
+    <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
+      <details key="uniqueName_PerPin" value="&#xA;&#x9;&#x9;self.pins->forAll(p1, p2|p1&lt;>p1 implies p1.name&lt;>p2.name)"/>
+      <details key="uniquePinNumber_PerPin" value="&#xA;&#x9;&#x9;self.pins->forAll(p1, p2|p1&lt;>p1 implies p1.number&lt;>p2.number)"/>
+      <details key="asLeast_OneRomOrFlashMemory" value="&#xA;&#x9;&#x9;not(self.flash = null and self.rom->isEmpty())"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="pins" lowerBound="1" upperBound="-1"
+        eType="#//Pin" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="clanguage" lowerBound="1"
+        eType="#//CLanguage" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="processor" lowerBound="1"
+        upperBound="-1" eType="#//Processor" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="family" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="manufacturer" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="rom" eType="#//ROM" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="flash" eType="#//Flash"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="ram" lowerBound="1" eType="#//RAM"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="wordMemory" eType="#//WordSize"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="registers" upperBound="-1"
+        eType="#//Register" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Pin">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="nature" eType="#//PinNature"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="number" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="PinNature">
+    <eLiterals name="Digital"/>
+    <eLiterals name="Analog" value="1"/>
+    <eLiterals name="Mixed" value="2"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="CLanguage">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="libraries" upperBound="-1"
+        eType="#//Library" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="timerconfig" eType="#//TimerConfig"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="pinmodes" lowerBound="1"
+        upperBound="2" eType="#//PinMode" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="hasMain" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="filesExtension" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="pinoperation" lowerBound="1"
+        upperBound="5" eType="#//PinOperation" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Library">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Function">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="type" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="parameters" lowerBound="1"
+        upperBound="-1" eType="#//Parameter" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="instructions" lowerBound="1"
+        upperBound="-1" eType="#//Instruction" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="TimerConfig" eSuperTypes="#//Function">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="#//TimerOp"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="period" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Memory" abstract="true">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="unit" eType="#//MemoryUnit"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="size" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Processor">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="unit" eType="#//SpeedUnit"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="speed" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="SpeedUnit">
+    <eLiterals name="Hz"/>
+    <eLiterals name="Mhz" value="1"/>
+    <eLiterals name="GHz" value="2"/>
+    <eLiterals name="MIPS" value="3"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="MemoryUnit">
+    <eLiterals name="Mo"/>
+    <eLiterals name="Go" value="1"/>
+    <eLiterals name="Ko" value="2"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ROM" eSuperTypes="#//Memory"/>
+  <eClassifiers xsi:type="ecore:EClass" name="EEPROM" eSuperTypes="#//ROM"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Flash" eSuperTypes="#//EEPROM"/>
+  <eClassifiers xsi:type="ecore:EEnum" name="WordSize">
+    <eLiterals name="wd_8bits"/>
+    <eLiterals name="wd_16bits" value="1"/>
+    <eLiterals name="wd_24bits" value="2"/>
+    <eLiterals name="wd_32bits" value="3"/>
+    <eLiterals name="wd_48bits" value="4"/>
+    <eLiterals name="wd_64bits" value="5"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="RAM" eSuperTypes="#//Memory"/>
+  <eClassifiers xsi:type="ecore:EClass" name="PinMode">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="#//PinModes"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="OperationName">
+    <eLiterals name="digitalPinRead"/>
+    <eLiterals name="digitalPinWrite" value="1"/>
+    <eLiterals name="analogPinRead" value="2"/>
+    <eLiterals name="analogPinWrite" value="3"/>
+    <eLiterals name="pinConfigMode" value="4"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Parameter">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="type" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Instruction">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Register">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="type" eType="#//RegType"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="PinOperation" eSuperTypes="#//Function">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="#//OperationName"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="TimerOp">
+    <eLiterals name="initializeTimer"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="RegType">
+    <eLiterals name="accumulator"/>
+    <eLiterals name="general" value="1"/>
+    <eLiterals name="PCounter" value="2"/>
+    <eLiterals name="Stack" value="3"/>
+    <eLiterals name="CCR" value="4"/>
+    <eLiterals name="ICR" value="5"/>
+    <eLiterals name="IR" value="6"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="PinModes">
+    <eLiterals name="Input"/>
+    <eLiterals name="Output" value="1"/>
+  </eClassifiers>
+</ecore:EPackage>

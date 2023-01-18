@@ -1,0 +1,410 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="robot"
+    nsURI="http://www.roboidstudio.org/model/robot" nsPrefix="org.roboid.robot">
+  <eClassifiers xsi:type="ecore:EClass" name="NamedElement" abstract="true">
+    <eOperations name="getParent" eType="#//NamedElement"/>
+    <eOperations name="getChildren" upperBound="-1" eType="#//NamedElement"/>
+    <eOperations name="equalsContents" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
+      <eParameters name="obj" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
+    </eOperations>
+    <eOperations name="getFullName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="literal" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="comment" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Storable" abstract="true" interface="true">
+    <eOperations name="createDeviceMemory"/>
+    <eOperations name="clearDeviceMemory"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Findable" abstract="true" interface="true">
+    <eOperations name="findDevice" eType="#//Device">
+      <eParameters name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eOperations>
+    <eOperations name="findRoboid" eType="#//Roboid">
+      <eParameters name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eOperations>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Simulacra" abstract="true" interface="true">
+    <eOperations name="setDeviceMap" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt">
+      <eParameters name="index" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+      <eParameters name="deviceMap" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EByteArray"/>
+      <eParameters name="isMaster" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    </eOperations>
+    <eOperations name="setPayload">
+      <eParameters name="simulacrum" eType="#//ByteArrayInputStream"/>
+      <eParameters name="isMaster" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    </eOperations>
+    <eOperations name="getSimulacrum">
+      <eParameters name="deviceMap" eType="#//ByteArrayOutputStream"/>
+      <eParameters name="payload" eType="#//ByteArrayOutputStream"/>
+    </eOperations>
+    <eOperations name="isReceived" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    <eOperations name="canSend" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    <eOperations name="updateDeviceState"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="DeviceListener" abstract="true" interface="true">
+    <eOperations name="effectPerformed">
+      <eParameters name="device" eType="#//Device"/>
+    </eOperations>
+    <eOperations name="commandPerformed">
+      <eParameters name="device" eType="#//Device"/>
+    </eOperations>
+    <eOperations name="stateChanged">
+      <eParameters name="device" eType="#//Device"/>
+    </eOperations>
+    <eOperations name="handleEvent">
+      <eParameters name="device" eType="#//Device"/>
+    </eOperations>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Robot" eSuperTypes="#//NamedElement #//Storable #//Findable">
+    <eOperations name="getProtocol" eType="#//Protocol"/>
+    <eOperations name="collectAllDevices" upperBound="-1" eType="#//Device">
+      <eParameters name="devices" upperBound="-1" eType="#//Device"/>
+    </eOperations>
+    <eOperations name="collectAllDeviceNames" upperBound="-1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
+      <eParameters name="names" upperBound="-1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eOperations>
+    <eOperations name="collectAllActiveDeviceNames" upperBound="-1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
+      <eParameters name="names" upperBound="-1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eOperations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="provider" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="version" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
+        defaultValueLiteral="1.0.0"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="roboids" lowerBound="1"
+        upperBound="-1" eType="#//Roboid" containment="true" resolveProxies="false"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="controls" upperBound="-1"
+        eType="#//Control" containment="true" resolveProxies="false"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="standard" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
+        defaultValueLiteral="RUPI 2.0"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Roboid" eSuperTypes="#//NamedElement #//Storable #//Simulacra #//Findable">
+    <eOperations name="collectAllDevices" upperBound="-1" eType="#//Device">
+      <eParameters name="devices" upperBound="-1" eType="#//Device"/>
+    </eOperations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="id" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="uid" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="roboids" upperBound="-1"
+        eType="#//Roboid" containment="true" resolveProxies="false"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="protocol" eType="#//Protocol"
+        containment="true" resolveProxies="false"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="devices" upperBound="-1"
+        eType="#//Device" containment="true" resolveProxies="false"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="version" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
+        defaultValueLiteral="1.0.0"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="provider" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="hostRoboid" eType="#//Roboid"
+        changeable="false" volatile="true" transient="true" derived="true" resolveProxies="false"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="address" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Control" eSuperTypes="#//NamedElement">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="channels" upperBound="-1"
+        eType="#//Channel" containment="true" resolveProxies="false"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="version" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
+        defaultValueLiteral="1.0.0"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="frameLimit" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"
+        defaultValueLiteral="9999"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Protocol" eSuperTypes="#//NamedElement">
+    <eOperations name="getSimulacrum" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EByteArray"/>
+    <eOperations name="setSimulacrum">
+      <eParameters name="simulacrum" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EByteArray"/>
+      <eParameters name="isMaster" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    </eOperations>
+    <eOperations name="clearBuffer"/>
+    <eOperations name="setEvents"/>
+    <eOperations name="getBufferId" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="version" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
+        defaultValueLiteral="1.0.0"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="bufferSize" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"
+        defaultValueLiteral="8"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="remainingBuffer" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"
+        transient="true" defaultValueLiteral="20"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Device" abstract="true" eSuperTypes="#//NamedElement #//Storable #//Simulacra">
+    <eOperations name="write" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    <eOperations name="write" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
+      <eParameters name="data" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eOperations>
+    <eOperations name="write" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
+      <eParameters name="index" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+      <eParameters name="data" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eOperations>
+    <eOperations name="write" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
+      <eParameters name="data" eType="#//IntArray"/>
+    </eOperations>
+    <eOperations name="write" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
+      <eParameters name="data" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EFloat"/>
+    </eOperations>
+    <eOperations name="write" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
+      <eParameters name="index" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+      <eParameters name="data" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EFloat"/>
+    </eOperations>
+    <eOperations name="write" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
+      <eParameters name="data" eType="#//FloatArray"/>
+    </eOperations>
+    <eOperations name="write" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
+      <eParameters name="text" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eOperations>
+    <eOperations name="write" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
+      <eParameters name="index" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+      <eParameters name="text" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eOperations>
+    <eOperations name="write" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
+      <eParameters name="text" eType="#//StringArray"/>
+    </eOperations>
+    <eOperations name="write" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
+      <eParameters name="imageData" eType="#//ImageData"/>
+    </eOperations>
+    <eOperations name="write" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
+      <eParameters name="index" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+      <eParameters name="imageData" eType="#//ImageData"/>
+    </eOperations>
+    <eOperations name="write" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
+      <eParameters name="imageData" eType="#//ImageDataArray"/>
+    </eOperations>
+    <eOperations name="writeInt" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
+      <eParameters name="data" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eOperations>
+    <eOperations name="writeInt" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
+      <eParameters name="index" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+      <eParameters name="data" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eOperations>
+    <eOperations name="writeInt" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
+      <eParameters name="data" eType="#//IntArray"/>
+    </eOperations>
+    <eOperations name="writeFloat" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
+      <eParameters name="data" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EFloat"/>
+    </eOperations>
+    <eOperations name="writeFloat" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
+      <eParameters name="index" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+      <eParameters name="data" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EFloat"/>
+    </eOperations>
+    <eOperations name="writeFloat" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
+      <eParameters name="data" eType="#//FloatArray"/>
+    </eOperations>
+    <eOperations name="writeString" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
+      <eParameters name="text" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eOperations>
+    <eOperations name="writeString" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
+      <eParameters name="index" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+      <eParameters name="text" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eOperations>
+    <eOperations name="writeString" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
+      <eParameters name="text" eType="#//StringArray"/>
+    </eOperations>
+    <eOperations name="writeImageData" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
+      <eParameters name="imageData" eType="#//ImageData"/>
+    </eOperations>
+    <eOperations name="writeImageData" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
+      <eParameters name="index" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+      <eParameters name="imageData" eType="#//ImageData"/>
+    </eOperations>
+    <eOperations name="writeImageData" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
+      <eParameters name="imageData" eType="#//ImageDataArray"/>
+    </eOperations>
+    <eOperations name="read" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    <eOperations name="read" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt">
+      <eParameters name="index" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eOperations>
+    <eOperations name="read" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt">
+      <eParameters name="data" eType="#//IntArray"/>
+    </eOperations>
+    <eOperations name="read" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt">
+      <eParameters name="data" eType="#//FloatArray"/>
+    </eOperations>
+    <eOperations name="read" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt">
+      <eParameters name="data" eType="#//StringArray"/>
+    </eOperations>
+    <eOperations name="read" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt">
+      <eParameters name="data" eType="#//ImageDataArray"/>
+    </eOperations>
+    <eOperations name="readInt" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EFloat"/>
+    <eOperations name="readInt" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EFloat">
+      <eParameters name="index" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eOperations>
+    <eOperations name="readInt" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt">
+      <eParameters name="data" eType="#//IntArray"/>
+    </eOperations>
+    <eOperations name="readFloat" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EFloat"/>
+    <eOperations name="readFloat" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EFloat">
+      <eParameters name="index" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eOperations>
+    <eOperations name="readFloat" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt">
+      <eParameters name="data" eType="#//FloatArray"/>
+    </eOperations>
+    <eOperations name="readString" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eOperations name="readString" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
+      <eParameters name="index" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eOperations>
+    <eOperations name="readString" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt">
+      <eParameters name="text" eType="#//StringArray"/>
+    </eOperations>
+    <eOperations name="readImageData" eType="#//ImageData"/>
+    <eOperations name="readImageData" eType="#//ImageData">
+      <eParameters name="index" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eOperations>
+    <eOperations name="readImageData" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt">
+      <eParameters name="imageData" eType="#//ImageDataArray"/>
+    </eOperations>
+    <eOperations name="e" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    <eOperations name="setEvent"/>
+    <eOperations name="setFired"/>
+    <eOperations name="addDeviceListener">
+      <eParameters name="listener" eType="#//DeviceListener"/>
+    </eOperations>
+    <eOperations name="removeDeviceListener">
+      <eParameters name="listener" eType="#//DeviceListener"/>
+    </eOperations>
+    <eOperations name="getDeviceListeners" upperBound="-1" eType="#//DeviceListener"/>
+    <eOperations name="getMin" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    <eOperations name="getMinFloat" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EFloat"/>
+    <eOperations name="getMinString" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eOperations name="getMax" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    <eOperations name="getMaxFloat" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EFloat"/>
+    <eOperations name="getMaxString" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eOperations name="getDefault" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    <eOperations name="getDefaultFloat" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EFloat"/>
+    <eOperations name="getDefaultString" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eOperations name="getDefaultImageData" eType="#//ImageData"/>
+    <eOperations name="getRootRoboid" eType="#//Roboid"/>
+    <eOperations name="isDataTypeOf" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
+      <eParameters name="device" eType="#//Device"/>
+    </eOperations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="dataSize" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt" defaultValueLiteral="1"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="dataType" lowerBound="1"
+        eType="#//DataType" defaultValueLiteral=""/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="max" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
+        defaultValueLiteral="0">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="suppressedGetVisibility" value="true"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="min" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
+        defaultValueLiteral="0">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="suppressedGetVisibility" value="true"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="default" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="suppressedGetVisibility" value="true"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="proxy" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="access" eType="#//AccessType"
+        transient="true" defaultValueLiteral=""/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ChannelDevice" abstract="true" eSuperTypes="#//Device"/>
+  <eClassifiers xsi:type="ecore:EClass" name="SensoryDevice" abstract="true" eSuperTypes="#//Device">
+    <eOperations name="addReceptor">
+      <eParameters name="receptor" eType="#//Device"/>
+    </eOperations>
+    <eOperations name="removeReceptor">
+      <eParameters name="receptor" eType="#//Device"/>
+    </eOperations>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="MotoringDevice" abstract="true" eSuperTypes="#//ChannelDevice"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Sensor" eSuperTypes="#//SensoryDevice">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="proxyFor" eType="#//Sensor"
+        resolveProxies="false"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="receptors" upperBound="-1"
+        eType="#//Effector" resolveProxies="false"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="throttle" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"
+        defaultValueLiteral="1"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Effector" eSuperTypes="#//MotoringDevice">
+    <eOperations name="hasNext" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="proxyFor" eType="#//Effector"
+        resolveProxies="false"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="sustain" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"
+        defaultValueLiteral="5"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="throttle" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"
+        defaultValueLiteral="1"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Command" eSuperTypes="#//MotoringDevice">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="proxyFor" eType="#//Command"
+        resolveProxies="false"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="id" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"
+        changeable="false" transient="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Event" eSuperTypes="#//SensoryDevice">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="proxyFor" eType="#//Event"
+        resolveProxies="false"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="receptors" upperBound="-1"
+        eType="#//Command" resolveProxies="false"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="id" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"
+        changeable="false" transient="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Port" eSuperTypes="#//ChannelDevice">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="mode" eType="#//IoMode"
+        defaultValueLiteral="IoMode.NONE"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="proxyFor" eType="#//Port"
+        resolveProxies="false"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Channel" abstract="true" eSuperTypes="#//NamedElement">
+    <eOperations name="isEnabled" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="devices" lowerBound="1"
+        upperBound="-1" eType="#//ChannelDevice" resolveProxies="false"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="LinearChannel" eSuperTypes="#//Channel">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="mode" eType="#//LinearMode"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="CommandChannel" eSuperTypes="#//Channel"/>
+  <eClassifiers xsi:type="ecore:EClass" name="AudioChannel" eSuperTypes="#//Channel"/>
+  <eClassifiers xsi:type="ecore:EClass" name="VoiceChannel" eSuperTypes="#//Channel"/>
+  <eClassifiers xsi:type="ecore:EClass" name="ColorChannel" eSuperTypes="#//Channel">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="mode" eType="#//ColorMode"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="TextChannel" eSuperTypes="#//Channel"/>
+  <eClassifiers xsi:type="ecore:EClass" name="MatrixChannel" eSuperTypes="#//LinearChannel"/>
+  <eClassifiers xsi:type="ecore:EClass" name="FileChannel" eSuperTypes="#//Channel"/>
+  <eClassifiers xsi:type="ecore:EEnum" name="DataType">
+    <eLiterals name="BYTE" value="8"/>
+    <eLiterals name="UNSIGNED_BYTE" value="9" literal="UNSIGNED BYTE"/>
+    <eLiterals name="SHORT" value="16"/>
+    <eLiterals name="UNSIGNED_SHORT" value="17" literal="UNSIGNED SHORT"/>
+    <eLiterals name="INTEGER" value="32"/>
+    <eLiterals name="FLOAT" value="128"/>
+    <eLiterals name="STRING" value="1000"/>
+    <eLiterals name="IMAGE" value="1001"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="AccessType">
+    <eLiterals name="PUBLIC"/>
+    <eLiterals name="PRIVATE" value="1"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="LinearMode">
+    <eLiterals name="LINEAR"/>
+    <eLiterals name="SUSTAIN" value="1"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="AudioMode">
+    <eLiterals name="MONO"/>
+    <eLiterals name="STEREO" value="1"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="ColorMode">
+    <eLiterals name="RGB"/>
+    <eLiterals name="RED_GREEN" value="1"/>
+    <eLiterals name="RED" value="10"/>
+    <eLiterals name="GREEN" value="11"/>
+    <eLiterals name="BLUE" value="12"/>
+    <eLiterals name="GRAY" value="20"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="IoMode">
+    <eLiterals name="NONE" value="-1"/>
+    <eLiterals name="ANALOG_INPUT"/>
+    <eLiterals name="DIGITAL_INPUT" value="1"/>
+    <eLiterals name="SERVO_OUTPUT" value="8"/>
+    <eLiterals name="PWM_OUTPUT" value="9"/>
+    <eLiterals name="DIGITAL_OUTPUT" value="10"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EDataType" name="IntArray" instanceClassName="int[]"/>
+  <eClassifiers xsi:type="ecore:EDataType" name="FloatArray" instanceClassName="float[]"/>
+  <eClassifiers xsi:type="ecore:EDataType" name="StringArray" instanceClassName="java.lang.String[]"/>
+  <eClassifiers xsi:type="ecore:EDataType" name="ImageDataArray" instanceClassName="org.eclipse.swt.graphics.ImageData[]"/>
+  <eClassifiers xsi:type="ecore:EDataType" name="ImageData" instanceClassName="org.eclipse.swt.graphics.ImageData"/>
+  <eClassifiers xsi:type="ecore:EDataType" name="ByteArrayInputStream" instanceClassName="java.io.ByteArrayInputStream"/>
+  <eClassifiers xsi:type="ecore:EDataType" name="ByteArrayOutputStream" instanceClassName="java.io.ByteArrayOutputStream"/>
+</ecore:EPackage>

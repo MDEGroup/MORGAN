@@ -1,0 +1,6 @@
+model	PlaceToTransitionArc (from,Place,ref) (to,Transition,ref) 
+model	TransitionToPlaceArc (from,Transition,ref) (to,Place,ref) 
+model	Transition (outgoingArcs,TransitionToPlaceArc,ref) (incomingArcs,PlaceToTransitionArc,ref) 
+model	Identification (name,EString,attribute) (ID,EString,attribute) 
+model	PetriNet (Transitions,Transition,ref) (Arcs,Arc,ref) (Places,Place,ref) 
+model	Place (outgoingArcs,PlaceToTransitionArc,ref) (incomingArcs,TransitionToPlaceArc,ref) 

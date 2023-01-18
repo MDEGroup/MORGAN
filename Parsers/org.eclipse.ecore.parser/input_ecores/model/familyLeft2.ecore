@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="familyleft2" nsURI="http://familyleft2/1.0" nsPrefix="familyleft2">
+  <eClassifiers xsi:type="ecore:EClass" name="Father" eSuperTypes="#//Person">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="address" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="family" eType="#//Family"
+        eOpposite="#//Family/father"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Mother" eSuperTypes="#//Person">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="address" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="family" eType="#//Family"
+        eOpposite="#//Family/mother"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Son" eSuperTypes="#//Person">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="family" eType="#//Family"
+        eOpposite="#//Family/sons"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Daughter" eSuperTypes="#//Person">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="family" eType="#//Family"
+        eOpposite="#//Family/daughters"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Family">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="father" eType="#//Father"
+        containment="true" eOpposite="#//Father/family"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="mother" eType="#//Mother"
+        containment="true" eOpposite="#//Mother/family"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="sons" upperBound="-1" eType="#//Son"
+        containment="true" eOpposite="#//Son/family"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="daughters" upperBound="-1"
+        eType="#//Daughter" containment="true" eOpposite="#//Daughter/family"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Person" abstract="true">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="age" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="isMale" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+  </eClassifiers>
+</ecore:EPackage>

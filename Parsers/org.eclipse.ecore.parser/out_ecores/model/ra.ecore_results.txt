@@ -1,0 +1,7 @@
+model	Role (name,EString,attribute) (factor,Factor,attribute) 
+model	Department (name,EString,attribute) (courses,Course,ref) (roles,Role,ref) (semesters,Semester,ref) (employees,Person,ref) 
+model	CourseInstance (allocations,CourseAllocation,ref) (course,Course,ref) (semester,Semester,ref) 
+model	Semester (year,SemesterYear,attribute) (kind,SemesterKind,attribute) (courses,CourseInstance,ref) 
+model	CourseAllocation (factor,Factor,attribute) (explicitFactor,Factor,attribute) (role,Role,ref) (person,Person,ref) (course,CourseInstance,ref) 
+model	Course (name,CourseCode,attribute) (fullName,EString,attribute) (requiredRoles,Role,ref) 
+model	Person (faceUrl,URI,attribute) (employmentFactor,Factor,attribute) (name,EString,attribute) (userName,EString,attribute) (email,EString,attribute) (allocations,CourseAllocation,ref) 

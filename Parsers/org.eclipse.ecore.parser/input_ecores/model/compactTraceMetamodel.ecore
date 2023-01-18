@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="trace" nsURI="trace" nsPrefix="trace">
+  <eClassifiers xsi:type="ecore:EClass" name="Value" abstract="true"/>
+  <eClassifiers xsi:type="ecore:EClass" name="TransientObject" abstract="true"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Trace">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="state" upperBound="-1"
+        eType="#//State" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="transientobject" upperBound="-1"
+        eType="#//TransientObject" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="steptype" upperBound="-1"
+        eType="#//StepType" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="steppattern" upperBound="-1"
+        eType="#//StepPattern" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="value" upperBound="-1"
+        eType="#//Value" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="objectstate" upperBound="-1"
+        eType="#//ObjectState" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="repeatingstep" upperBound="-1"
+        eType="#//RepeatingStep" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="step" upperBound="-1" eType="#//Step"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="parameterValues" upperBound="-1"
+        eType="#//ParameterValue" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="parameterlist" upperBound="-1"
+        eType="#//ParameterList" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="LiteralValue" abstract="true" eSuperTypes="#//Value"/>
+  <eClassifiers xsi:type="ecore:EClass" name="ObjectState" abstract="true">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="value" upperBound="-1"
+        eType="#//Value"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="RefValue" eSuperTypes="#//Value">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="originalobject" upperBound="-1"
+        eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EObject"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="State">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="newobjects" upperBound="-1"
+        eType="#//TransientObject"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="deletedobjects" upperBound="-1"
+        eType="#//TransientObject"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="basestate" eType="#//State"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="transientObjectsStates"
+        upperBound="-1" eType="#//TransientObjectState" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="NormalStep" eSuperTypes="#//Step #//StepSpec">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="this class represent bigstep in trace data."/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="children" upperBound="-1"
+        eType="#//Step" containment="true" eOpposite="#//Step/parent"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Step" abstract="true">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="state" eType="#//State"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="parent" eType="#//NormalStep"
+        eOpposite="#//NormalStep/children"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="parameterlist" eType="#//ParameterList"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="StepType">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="stepName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="PatternOcurrence" eSuperTypes="#//Step">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="pattern" lowerBound="1"
+        eType="#//StepPattern"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="repet" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="stepdata" upperBound="-1"
+        eType="#//PatternOccurrenceStepData" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="StepPattern">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="repeatingstep" upperBound="-1"
+        eType="#//RepeatingStep"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="PatternOccurrenceStepData">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="states" unique="false"
+        upperBound="-1" eType="#//State"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="step" eType="#//RepeatingStep"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="parameterlists" upperBound="-1"
+        eType="#//ParameterList"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="StepSpec" abstract="true">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="steptype" lowerBound="1"
+        eType="#//StepType"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="LiteralString" eSuperTypes="#//LiteralValue">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="stringvalue" upperBound="-1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString" iD="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="LiteralBoolean" eSuperTypes="#//LiteralValue">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="boolvalue" upperBound="-1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean" iD="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="LiteralInteger" eSuperTypes="#//LiteralValue">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="intvalue" upperBound="-1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt" defaultValueLiteral="0"
+        iD="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="LiteralFloat" eSuperTypes="#//LiteralValue">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="floatvalue" upperBound="-1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EFloat" iD="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="RepeatingStep" eSuperTypes="#//StepSpec">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="children" upperBound="-1"
+        eType="#//RepeatingStep" containment="true" eOpposite="#//RepeatingStep/parent"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="parent" eType="#//RepeatingStep"
+        eOpposite="#//RepeatingStep/children"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="ParamterKindEnum">
+    <eLiterals name="IN" value="1"/>
+    <eLiterals name="INOUT" value="2" literal="INOUT"/>
+    <eLiterals name="OUT" value="3"/>
+    <eLiterals name="RETURN" value="4" literal="RETURN"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ParameterValue">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="DirectionKind" eType="#//ParamterKindEnum"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="values" upperBound="-1"
+        eType="#//Value"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="TransientObjectState">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="transientobject" lowerBound="1"
+        eType="#//TransientObject"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="objectstate" lowerBound="1"
+        eType="#//ObjectState"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="estructuralfeature" upperBound="-1"
+        eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EStructuralFeature"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="LeafObjectState" eSuperTypes="#//ObjectState"/>
+  <eClassifiers xsi:type="ecore:EClass" name="CompositeObjectState" eSuperTypes="#//ObjectState">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="objectstates" upperBound="-1"
+        eType="#//ObjectState"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="objectstatesOrder" upperBound="-1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="StaticTransientObject" eSuperTypes="#//TransientObject">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="originalObject" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EObject"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="DynamicTransientObject" eSuperTypes="#//TransientObject">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="type" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EClass"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="CompositParameterList" eSuperTypes="#//ParameterList">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="parameterlist" upperBound="-1"
+        eType="#//ParameterList"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="paramtervaluesOrder" upperBound="-1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="LeafParameterList" eSuperTypes="#//ParameterList"/>
+  <eClassifiers xsi:type="ecore:EClass" name="ParameterList" abstract="true">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="parametervalue" upperBound="-1"
+        eType="#//ParameterValue"/>
+  </eClassifiers>
+</ecore:EPackage>

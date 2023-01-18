@@ -1,0 +1,5 @@
+model	StringToWriterMapEntry (key,String,attribute) (value,Writer,ref) 
+model	Book (title,String,attribute) (cityByWriter,WriterToCityMapEntry,ref) (writersByName,StringToWriterMapEntry,ref) 
+model	WriterToCityMapEntry (value,City,ref) (key,Writer,ref) 
+model	City (name,String,attribute) (cityWriter,Writer,ref) 
+model	Writer (name,String,attribute) 

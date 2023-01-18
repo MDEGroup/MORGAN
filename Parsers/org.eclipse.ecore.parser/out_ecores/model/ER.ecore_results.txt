@@ -1,0 +1,5 @@
+model	Table (name,EString,attribute) (schema,Schema,ref) (hasKey,Key,ref) (column,Column,ref) (hasForeignKey,ForeignKey,ref) 
+model	Column (name,EString,attribute) (type,EString,attribute) (owner,Table,ref) (hasKey,Key,ref) (hasForeignKey,ForeignKey,ref) 
+model	Schema (name,EString,attribute) (foreignKey,ForeignKey,ref) (table,Table,ref) 
+model	ForeignKey (name,EString,attribute) (schema,Schema,ref) (owner,Table,ref) (refersTo,Key,ref) (column,Column,ref) 
+model	Key (name,EString,attribute) (owner,Table,ref) (column,Column,ref) (referedBy,ForeignKey,ref) 

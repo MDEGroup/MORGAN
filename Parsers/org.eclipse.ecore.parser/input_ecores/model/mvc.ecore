@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="mvc" nsURI="http://co.edu.uniandes.csw.mvc/1.0" nsPrefix="mvc">
+  <eClassifiers xsi:type="ecore:EClass" name="Model" eSuperTypes="Annotateit.ecore#//Annotable">
+    <eAnnotations source="doc">
+      <details key="Descripci&amp;oacute;n" value="Es la representaci&amp;oacute;n de la informaci&amp;oacute;n con la cual el sistema opera, por lo tanto gestiona todos los accesos a dicha informaci&amp;oacute;n, tanto consultas como actualizaciones, implementando tambi&amp;eacute;n los privilegios de acceso que se hayan descrito en las especificaciones de la aplicaci&amp;oacute;n (l&amp;oacute;gica de negocio). Env&amp;iacute;a a la 'vista' aquella parte de la informaci&amp;oacute;n que en cada momento se le solicita para que sea mostrada (t&amp;iacute;picamente a un usuario). Las peticiones de acceso o manipulaci&amp;oacute;n de informaci&amp;oacute;n llegan al 'modelo' a trav&amp;eacute;s del 'controlador'. Tomado de &lt;a href=&quot;http://es.wikipedia.org/wiki/Modelo%E2%80%93vista%E2%80%93controlador&quot;>MVC&lt;/a>"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="rootEntity" eType="#//Entity"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
+      <eAnnotations source="doc">
+        <details key="Descripci&amp;oacute;n" value="Nombre del modelo a utilizar"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="associations" upperBound="-1"
+        eType="#//Association" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Entity" eSuperTypes="Annotateit.ecore#//Annotable">
+    <eAnnotations source="doc">
+      <details key="Descripci&amp;oacute;n" value="Representa la Entidad de datos de la aplicaci&amp;oacute;n"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="attributes" upperBound="-1"
+        eType="#//Attribute" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="extends" upperBound="-1"
+        eType="#//Entity"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Attribute" eSuperTypes="Annotateit.ecore#//Annotable">
+    <eAnnotations source="doc">
+      <details key="Descripci&amp;oacute;n" value="Representa los atributos que contiene la entidad de datos"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="type" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Association" eSuperTypes="Annotateit.ecore#//Annotable">
+    <eAnnotations source="doc">
+      <details key="Descripci&amp;oacute;n" value="Representa las relaciones que existen entre entidades de datos."/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="source" lowerBound="1"
+        eType="#//Entity"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="containment" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="lowerBound" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="upperBound" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="type" eType="#//AssociationType"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="target" lowerBound="1"
+        eType="#//Entity"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="AssociationType">
+    <eAnnotations source="doc">
+      <details key="Descripci&amp;oacute;n" value="Define los tipos de asociaci&amp;oacute;n entre entidades."/>
+    </eAnnotations>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="View" eSuperTypes="Annotateit.ecore#//Annotable">
+    <eAnnotations source="doc">
+      <details key="Descripci&amp;oacute;n" value="Presenta el 'modelo' (informaci&amp;oacute;n y l&amp;oacute;gica de negocio) en un formato adecuado para interactuar (usualmente la interfaz de usuario) por tanto requiere de dicho 'modelo' la informaci&amp;oacute;n que debe representar como salida. Tomado de &lt;a href=&quot;http://es.wikipedia.org/wiki/Modelo%E2%80%93vista%E2%80%93controlador&quot;>MVC&lt;/a>"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="rootComponent" eType="#//UILayout"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="UIComponent" abstract="true" eSuperTypes="Annotateit.ecore#//Annotable">
+    <eAnnotations source="doc">
+      <details key="Descripci&amp;oacute;n" value="Supertipo de los posibles tipos de componentes que se visualizan dentro de una vista"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="type" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="MVCModel" eSuperTypes="Annotateit.ecore#//Annotable">
+    <eAnnotations source="doc">
+      <details key="Descripci&amp;oacute;n" value="Define la raiz del modelo a generar"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
+      <eAnnotations source="doc">
+        <details key="Descripci&amp;oacute;n" value="Nombre de la aplicacion a generar"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="models" upperBound="-1"
+        eType="#//Model" containment="true">
+      <eAnnotations source="doc">
+        <details key="Descripci&amp;oacute;n" value="Contiene los modelos que representan los datos que van a ser utilizados en la aplicaci&amp;oacute;n"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="views" upperBound="-1"
+        eType="#//View" containment="true">
+      <eAnnotations source="doc">
+        <details key="Descripci&amp;oacute;n" value="Contiene la definici&amp;oacute;n de las vistas que van a ser utilizadas en la aplicaci&amp;oacute;n"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="events" upperBound="-1"
+        eType="#//Event" containment="true">
+      <eAnnotations source="doc">
+        <details key="Descripci&amp;oacute;n" value="Contiene el listado de eventos a ser utilizados por la aplicaci&amp;oacute;n "/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="version" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
+      <eAnnotations source="doc">
+        <details key="Descripci&amp;oacute;n" value="Version de la aplicacion a generar"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="controllers" upperBound="-1"
+        eType="#//Controller" containment="true">
+      <eAnnotations source="doc">
+        <details key="Descripci&amp;oacute;n" value="Contiene el listado de controladores a ser utilizados por la aplicaci&amp;oacute;n "/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="components" lowerBound="1"
+        upperBound="-1" eType="#//Component" containment="true">
+      <eAnnotations source="doc">
+        <details key="Descripci&amp;oacute;n" value="Contiene el listado de componentes a ser utilizados por la aplicaci&amp;oacute;n "/>
+      </eAnnotations>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Controller" eSuperTypes="Annotateit.ecore#//Annotable">
+    <eAnnotations source="doc">
+      <details key="Descripci&amp;oacute;n" value="Responde a eventos (usualmente acciones del usuario) e invoca peticiones al 'modelo' cuando se hace alguna solicitud sobre la informaci&amp;oacute;n (por ejemplo, editar un documento o un registro en una base de datos). Tambi&amp;eacute;n puede enviar comandos a su 'vista' asociada si se solicita un cambio en la forma en que se presenta de 'modelo' (por ejemplo, desplazamiento o scroll por un documento o por los diferentes registros de una base de datos), por tanto se podr&amp;iacute;a decir que el 'controlador' hace de intermediario entre la 'vista' y el 'modelo'. Tomado de &lt;a href=&quot;http://es.wikipedia.org/wiki/Modelo%E2%80%93vista%E2%80%93controlador&quot;>MVC&lt;/a>"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="actions" upperBound="-1"
+        eType="#//Action" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="views" upperBound="-1"
+        eType="#//ControllerView" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="eventActions" upperBound="-1"
+        eType="#//EventAction" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Event" eSuperTypes="Annotateit.ecore#//Annotable">
+    <eAnnotations source="doc">
+      <details key="Descripci&amp;oacute;n" value="Define los eventos que utiliza la aplicaci&amp;oacute;n para comunicar los diferentes componentes "/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Action" eSuperTypes="Annotateit.ecore#//Annotable">
+    <eAnnotations source="doc">
+      <details key="Descripci&amp;oacute;n" value="Define las acciones que posee un controlador, bien sea sobre la vista o sobre el modelo."/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="preExecutionEvent" eType="#//Event"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="postExecutionEvent" eType="#//Event"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="triggerEvents" upperBound="-1"
+        eType="#//Event"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ControllerView" eSuperTypes="Annotateit.ecore#//Annotable">
+    <eAnnotations source="doc">
+      <details key="Descripci&amp;oacute;n" value="Relaciona el controlador con las vistas y los modelos."/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="view" lowerBound="1" eType="#//View"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="models" upperBound="-1"
+        eType="#//Model"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Component" eSuperTypes="Annotateit.ecore#//Annotable">
+    <eAnnotations source="doc">
+      <details key="Descripci&amp;oacute;n" value="Es la agrupacion logica de los proyectos que forman parte de la aplicaci&amp;oacute;n"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="controllers" lowerBound="1"
+        upperBound="-1" eType="#//Controller"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="EventAction" eSuperTypes="Annotateit.ecore#//Annotable">
+    <eAnnotations source="doc">
+      <details key="Descripci&amp;oacute;n" value="Relaciona los eventos de los controladores con sus acciones"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="action" lowerBound="1"
+        eType="#//Action"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="events" upperBound="-1"
+        eType="#//Event"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="UILayout" eSuperTypes="#//UIComponent">
+    <eAnnotations source="doc">
+      <details key="Descripci&amp;oacute;n" value="Representa componentes de agrupaci&amp;oacute;n y distribuci&amp;oacute;n de elementos de tipo de interfaz de usuario."/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="orientation" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="columns" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="components" upperBound="-1"
+        eType="#//UIComponent" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="importView" upperBound="-1"
+        eType="#//View"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="UIInput" eSuperTypes="#//UIComponent">
+    <eAnnotations source="doc">
+      <details key="Descripci&amp;oacute;n" value="Representa los elementos de interfaz de usuario que se utilizar&amp;aacute;n para recibir la informaci&amp;oacute;n de entrada en las vistas."/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="value" eType="#//Attribute"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="UIActions" eSuperTypes="#//UIComponent">
+    <eAnnotations source="doc">
+      <details key="Descripci&amp;oacute;n" value="Representa los botones en la interfaz de usuario."/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="triggerEvent" eType="#//Event"/>
+  </eClassifiers>
+</ecore:EPackage>

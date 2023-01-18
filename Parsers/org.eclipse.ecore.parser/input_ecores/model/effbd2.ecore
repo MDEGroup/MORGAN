@@ -1,0 +1,229 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="effbd2"
+    nsURI="http://org.isoe.effbd.2013.v2" nsPrefix="effbd2">
+  <eAnnotations source="diastyle.node.vertical">
+    <details key="layout=vertical"/>
+  </eAnnotations>
+  <eClassifiers xsi:type="ecore:EClass" name="Function" eSuperTypes="#//FunctionSpecification">
+    <eAnnotations source="diagraph">
+      <details key="node"/>
+      <details key="pov"/>
+      <details key="cont=Function.decompositions"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="dataEdges" upperBound="-1"
+        eType="#//DataFlowEdge" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="effbdNodes" upperBound="-1"
+        eType="#//EffbdNode" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="controlEdges" upperBound="-1"
+        eType="#//ControlFlowEdge" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="decompositions" upperBound="-1"
+        eType="#//Function" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="DataFlowEdge" eSuperTypes="#//EffbdElement">
+    <eAnnotations source="diagraph"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="EffbdNode" abstract="true" eSuperTypes="#//EffbdElement">
+    <eAnnotations source="diagraph">
+      <details key="node"/>
+    </eAnnotations>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="SequenceNode" abstract="true" eSuperTypes="#//Transformer">
+    <eAnnotations source="diagraph">
+      <details key="node"/>
+    </eAnnotations>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="FunctionSpecification" abstract="true"
+      eSuperTypes="#//Transformer">
+    <eAnnotations source="diagraph">
+      <details key="node"/>
+      <details key="pref=inputPorts"/>
+      <details key="pref=controlPorts"/>
+      <details key="pref=resourcePorts"/>
+      <details key="pref=outputPort"/>
+      <details key="cref=definitions"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="inputPorts" upperBound="-1"
+        eType="#//Input" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="controlPorts" upperBound="-1"
+        eType="#//Control" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="resourcePorts" upperBound="-1"
+        eType="#//Resource" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="outputPort" eType="#//Out"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="minDuration" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="maxDuration" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="definitions" upperBound="-1"
+        eType="#//FunctionDefinition" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="domain" eType="#//FunctionDomain"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="EffbdElement" abstract="true">
+    <eAnnotations source="diagraph">
+      <details key="label=name"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Fork" eSuperTypes="#//SequenceNode">
+    <eAnnotations source="diagraph">
+      <details key="node"/>
+    </eAnnotations>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Decision" eSuperTypes="#//SequenceNode">
+    <eAnnotations source="diagraph">
+      <details key="node"/>
+    </eAnnotations>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Transformed" abstract="true" eSuperTypes="#//EffbdNode">
+    <eAnnotations source="diagraph">
+      <details key="node"/>
+      <details key="kref=content"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="content" upperBound="-1"
+        eType="#//ItemContent" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ContinuousFlowItem" eSuperTypes="#//Transformed">
+    <eAnnotations source="diagraph">
+      <details key="node"/>
+    </eAnnotations>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="TriggerItem" eSuperTypes="#//Transformed">
+    <eAnnotations source="diagraph">
+      <details key="node"/>
+    </eAnnotations>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="In" abstract="true" eSuperTypes="#//DataPort">
+    <eAnnotations source="diagraph">
+      <details key="node"/>
+    </eAnnotations>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Out" eSuperTypes="#//DataPort">
+    <eAnnotations source="diagraph">
+      <details key="node"/>
+      <details key="style=vertical"/>
+    </eAnnotations>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="DataPort" abstract="true">
+    <eAnnotations source="diagraph">
+      <details key="label=id"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="id" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Resource" eSuperTypes="#//In">
+    <eAnnotations source="diagraph">
+      <details key="node"/>
+      <details key="style=vertical"/>
+    </eAnnotations>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Control" eSuperTypes="#//In">
+    <eAnnotations source="diagraph">
+      <details key="node"/>
+      <details key="style=vertical"/>
+    </eAnnotations>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Input" eSuperTypes="#//In">
+    <eAnnotations source="diagraph">
+      <details key="node"/>
+      <details key="style=vertical"/>
+    </eAnnotations>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ControlFlowEdge" eSuperTypes="#//EffbdElement">
+    <eAnnotations source="diagraph">
+      <details key="link"/>
+      <details key="lsrc=from"/>
+      <details key="ltrg=to"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="from" eType="#//Transformer"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="to" eType="#//Transformer"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Transformer" abstract="true" eSuperTypes="#//EffbdNode">
+    <eAnnotations source="diagraph">
+      <details key="node"/>
+    </eAnnotations>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="DataFlowInputEdge" eSuperTypes="#//DataFlowEdge">
+    <eAnnotations source="diagraph">
+      <details key="link"/>
+      <details key="lsrc=inputFrom"/>
+      <details key="ltrg=inputTo"/>
+      <details key="cont=Function.dataEdges"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="inputFrom" eType="#//Transformed"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="inputTo" eType="#//In"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="DataFlowOutputEdge" eSuperTypes="#//DataFlowEdge">
+    <eAnnotations source="diagraph">
+      <details key="link"/>
+      <details key="lsrc=outputFrom"/>
+      <details key="ltrg=outputTo"/>
+      <details key="cont=Function.dataEdges"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="outputFrom" eType="#//Out"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="ouputTo" eType="#//Transformed"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ItemContent">
+    <eAnnotations source="diagraph">
+      <details key="node"/>
+      <details key="label=id"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="id" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="FunctionDefinition">
+    <eAnnotations source="diagraph">
+      <details key="node"/>
+      <details key="label=transformationDefinition"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="transformationDefinition"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="FunctionDomain">
+    <eLiterals name="time"/>
+    <eLiterals name="space" value="1"/>
+    <eLiterals name="form" value="2"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="IterationStart" eSuperTypes="#//SequenceNode">
+    <eAnnotations source="diagraph">
+      <details key="node"/>
+    </eAnnotations>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="LoopExit" eSuperTypes="#//SequenceNode">
+    <eAnnotations source="diagraph">
+      <details key="node"/>
+    </eAnnotations>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Join" eSuperTypes="#//SequenceNode">
+    <eAnnotations source="diagraph">
+      <details key="node"/>
+    </eAnnotations>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Merge" eSuperTypes="#//SequenceNode">
+    <eAnnotations source="diagraph">
+      <details key="node"/>
+    </eAnnotations>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Start" eSuperTypes="#//SequenceNode">
+    <eAnnotations source="diagraph">
+      <details key="node"/>
+    </eAnnotations>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Final" eSuperTypes="#//SequenceNode">
+    <eAnnotations source="diagraph">
+      <details key="node"/>
+    </eAnnotations>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="LoopStart" eSuperTypes="#//SequenceNode">
+    <eAnnotations source="diagraph">
+      <details key="node"/>
+    </eAnnotations>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="LoopEnd" eSuperTypes="#//SequenceNode">
+    <eAnnotations source="diagraph">
+      <details key="node"/>
+    </eAnnotations>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="IterationEnd" eSuperTypes="#//SequenceNode">
+    <eAnnotations source="diagraph">
+      <details key="node"/>
+    </eAnnotations>
+  </eClassifiers>
+</ecore:EPackage>

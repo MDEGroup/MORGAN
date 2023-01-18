@@ -1,0 +1,505 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="cppmodel" nsURI="http://www.ericsson.com/xtumlrt/oopl/cpp" nsPrefix="cpp">
+  <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore">
+    <details key="settingDelegates" value="org.eclipse.incquery.querybasedfeature"/>
+  </eAnnotations>
+  <eClassifiers xsi:type="ecore:EClass" name="CPPNamedElement" abstract="true">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="Superclass for all named elements in the C++ domain that contains the syntactically valid C++-style name of the element. The original name is taken from {@link com.ericsson.xtumlrt.oopl.OOPLNameProvider}."/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="cppName" ordered="false"
+        unique="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
+        changeable="false" volatile="true" transient="true" derived="true">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="{&#xD;&#xA;&#x9;CPPNamedElement.ooplNameProvider(cppNamedElement, provider);&#xD;&#xA;&#x9;OOPLExistingNameProvider(provider);&#xD;&#xA;&#x9;OOPLExistingNameProvider.commonNamedElement(provider, element);&#xD;&#xA;&#x9;cppName == eval(toCPPName(element.name));&#xD;&#xA;} or {&#xD;&#xA;&#x9;CPPNamedElement.ooplNameProvider(cppNamedElement, provider);&#xD;&#xA;&#x9;OOPLDerivedName(provider);&#xD;&#xA;&#x9;cppName == eval(toCPPName(provider.name));&#xD;&#xA;}&#xD;&#xA;"/>
+      </eAnnotations>
+      <eAnnotations source="org.eclipse.incquery.querybasedfeature">
+        <details key="patternFQN" value="com.ericsson.xtumlrt.oopl.cppmodel.derived.cppNamedElementCppName"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="ooplNameProvider" lowerBound="1"
+        eType="ecore:EClass ../../com.ericsson.xtumlrt.oopl.model/model/oopl.ecore#//OOPLNameProvider"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="CPPQualifiedNamedElement" abstract="true"
+      eSuperTypes="#//CPPNamedElement">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="Superclass for all elements in the C++ domain that have fully qualified names. The qualified name of the element is composed of a prefix and its C++ name. The prefix is the qualified name of the container element extended with two colons."/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="cppPrefix" ordered="false"
+        unique="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
+        changeable="false" volatile="true" transient="true" derived="true">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="{&#xD;&#xA;&#x9;CPPQualifiedNamedElement(parent);&#xD;&#xA;&#x9;parent.subElements == cppQualifiedNamedElement;"/>
+      </eAnnotations>
+      <eAnnotations source="org.eclipse.incquery.querybasedfeature">
+        <details key="patternFQN" value="com.ericsson.xtumlrt.oopl.cppmodel.derived.cppQualifiedNamedElementCppPrefix"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="cppQualifiedName" ordered="false"
+        unique="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
+        changeable="false" volatile="true" transient="true" derived="true">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="{&#xD;&#xA;&#x9;cppQualifiedName == eval(cppPrefix+cppName);&#xD;&#xA;}&#xD;&#xA;"/>
+      </eAnnotations>
+      <eAnnotations source="org.eclipse.incquery.querybasedfeature">
+        <details key="patternFQN" value="com.ericsson.xtumlrt.oopl.cppmodel.derived.cppQualifiedNamedElementCppQualifiedName"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="subElements" upperBound="-1"
+        eType="#//CPPQualifiedNamedElement" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="CPPModel" eSuperTypes="#//CPPQualifiedNamedElement">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="Representation of a model ({@link org.eclipse.papyrusrt.xtumlrt.common.Model}) in the C++ domain."/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="commonModel" lowerBound="1"
+        eType="ecore:EClass ../../org.eclipse.papyrusrt.xtumlrt.common.model/model/common.ecore#//Model"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="bodyFile" eType="#//CPPBodyFile"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="declarationHeaderFile"
+        lowerBound="1" eType="#//CPPHeaderFile"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="definitionHeaderFile" lowerBound="1"
+        eType="#//CPPHeaderFile"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="apiHeaderFile" eType="#//CPPHeaderFile"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="headerDir" eType="#//CPPDirectory"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="bodyDir" eType="#//CPPDirectory"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="externalHeaderDir" eType="#//CPPDirectory"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="externalBodySkeletonDir"
+        eType="#//CPPDirectory"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="CPPPackage" eSuperTypes="#//CPPQualifiedNamedElement">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="Representation of XTUML package ({@link org.eclipse.papyrusrt.xtumlrt.xtuml.XTPackage}) in the C++ domain."/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="commonPackage" lowerBound="1"
+        eType="ecore:EClass ../../org.eclipse.papyrusrt.xtumlrt.common.model/model/common.ecore#//Package"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="bodyFile" eType="#//CPPBodyFile"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="headerFile" eType="#//CPPHeaderFile"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="headerDir" eType="#//CPPDirectory"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="bodyDir" eType="#//CPPDirectory"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="CPPClass" eSuperTypes="#//CPPQualifiedNamedElement ../../com.ericsson.xtumlrt.oopl.model/model/oopl.ecore#//OOPLClass">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="Representation of XTUML class ({@link org.eclipse.papyrusrt.xtumlrt.xtuml.XTClass}) In the C++ domain."/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="headerFile" lowerBound="1"
+        eType="#//CPPHeaderFile"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="bodyFile" lowerBound="1"
+        eType="#//CPPBodyFile"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="CPPProtocol" eSuperTypes="#//CPPQualifiedNamedElement">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="Representation of XTUML protocol ({@link org.eclipse.papyrusrt.xtumlrt.xtuml.XTProtocol}) in the C++ domain."/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="xtProtocol" lowerBound="1"
+        eType="ecore:EClass ../../org.eclipse.papyrusrt.xtumlrt.xtuml.model/model/xtuml.ecore#//XTProtocol"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="headerFile" lowerBound="1"
+        eType="#//CPPHeaderFile"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="CPPSourceFile" abstract="true">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="Representation of C++ source file (header and body)."/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="generationName" ordered="false"
+        unique="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
+        changeable="false" volatile="true" transient="true" derived="true">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="{&#xD;&#xA;&#x9;CPPClass(class);&#xD;&#xA;&#x9;CPPClass.headerFile(class, cppSourceFile);&#xD;&#xA;&#x9;generationName == eval(class.cppName+&quot;.&quot;+GlobalSettings.cppHeaderFileExtension);&#xD;&#xA;} or {&#xD;&#xA;&#x9;CPPClass(class);&#xD;&#xA;&#x9;CPPClass.bodyFile(class, cppSourceFile);&#xD;&#xA;&#x9;generationName == eval(class.cppName+&quot;.&quot;+GlobalSettings.cppBodyFileExtension);&#xD;&#xA;} or {&#xD;&#xA;&#x9;CPPComponent(component);&#xD;&#xA;&#x9;CPPComponent.mainHeaderFile(component, cppSourceFile);&#xD;&#xA;&#x9;generationName == eval(component.cppName+&quot;_main.&quot;+GlobalSettings.cppHeaderFileExtension);&#xD;&#xA;} or {&#xD;&#xA;&#x9;CPPComponent(component);&#xD;&#xA;&#x9;CPPComponent.declarationHeaderFile(component, cppSourceFile);&#xD;&#xA;&#x9;generationName == eval(component.cppName+&quot;_decl.&quot;+GlobalSettings.cppHeaderFileExtension);&#xD;&#xA;} or {&#xD;&#xA;&#x9;CPPComponent(component);&#xD;&#xA;&#x9;CPPComponent.definitionHeaderFile(component, cppSourceFile);&#xD;&#xA;&#x9;generationName == eval(component.cppName+&quot;_def.&quot;+GlobalSettings.cppHeaderFileExtension);&#xD;&#xA;} or {&#xD;&#xA;&#x9;CPPComponent(component);&#xD;&#xA;&#x9;CPPComponent.mainBodyFile(component, cppSourceFile);&#xD;&#xA;&#x9;generationName == eval(component.cppName+&quot;_main.&quot;+GlobalSettings.cppBodyFileExtension);&#xD;&#xA;} or {&#xD;&#xA;&#x9;CPPModel(model);&#xD;&#xA;&#x9;CPPModel.declarationHeaderFile(model, cppSourceFile);&#xD;&#xA;&#x9;generationName == eval(model.cppName+&quot;_decl.&quot;+GlobalSettings.cppHeaderFileExtension);&#xD;&#xA;} or {&#xD;&#xA;&#x9;CPPModel(model);&#xD;&#xA;&#x9;CPPModel.definitionHeaderFile(model, cppSourceFile);&#xD;&#xA;&#x9;generationName == eval(model.cppName+&quot;_def.&quot;+GlobalSettings.cppHeaderFileExtension);&#xD;&#xA;} or {&#xD;&#xA;&#x9;CPPModel(model);&#xD;&#xA;&#x9;CPPModel.apiHeaderFile(model, cppSourceFile);&#xD;&#xA;&#x9;generationName == eval(model.cppName+&quot;_api.&quot;+GlobalSettings.cppHeaderFileExtension);&#xD;&#xA;} or {&#xD;&#xA;&#x9;CPPPackage(package);&#xD;&#xA;&#x9;CPPPackage.headerFile(package, cppSourceFile);&#xD;&#xA;&#x9;generationName == eval(package.cppName+&quot;.&quot;+GlobalSettings.cppHeaderFileExtension);&#xD;&#xA;} or {&#xD;&#xA;&#x9;CPPPackage(package);&#xD;&#xA;&#x9;CPPPackage.bodyFile(package, cppSourceFile);&#xD;&#xA;&#x9;generationName == eval(package.cppName+&quot;.&quot;+GlobalSettings.cppBodyFileExtension);&#xD;&#xA;} or {&#xD;&#xA;&#x9;CPPPort(port);&#xD;&#xA;&#x9;CPPPort.headerFile(port, cppSourceFile);&#xD;&#xA;&#x9;generationName == eval(port.cppName+&quot;.&quot;+GlobalSettings.cppHeaderFileExtension);&#xD;&#xA;} or {&#xD;&#xA;&#x9;CPPPort(port);&#xD;&#xA;&#x9;CPPPort.externalHeaderFile(port, cppSourceFile);&#xD;&#xA;&#x9;generationName == eval(port.cppName+&quot;_impl.&quot;+GlobalSettings.cppHeaderFileExtension);&#xD;&#xA;} or {&#xD;&#xA;&#x9;CPPPort(port);&#xD;&#xA;&#x9;CPPPort.bodyFile(port, cppSourceFile);&#xD;&#xA;&#x9;generationName == eval(port.cppName+&quot;.&quot;+GlobalSettings.cppBodyFileExtension);&#xD;&#xA;} or {&#xD;&#xA;&#x9;CPPPort(port);&#xD;&#xA;&#x9;CPPPort.externalBodySkeletonFile(port, cppSourceFile);&#xD;&#xA;&#x9;generationName == eval(port.cppName+&quot;_impl.&quot;+GlobalSettings.cppBodyFileExtension+&quot;_skel&quot;);&#xD;&#xA;} or {&#xD;&#xA;&#x9;CPPProtocol(protocol);&#xD;&#xA;&#x9;CPPProtocol.headerFile(protocol, cppSourceFile);&#xD;&#xA;&#x9;generationName == eval(protocol.cppName+&quot;.&quot;+GlobalSettings.cppHeaderFileExtension);&#xD;&#xA;}"/>
+      </eAnnotations>
+      <eAnnotations source="org.eclipse.incquery.querybasedfeature">
+        <details key="patternFQN" value="com.ericsson.xtumlrt.oopl.cppmodel.derived.cppSourceFileGenerationName"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="generationDirectory" ordered="false"
+        unique="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
+        changeable="false" volatile="true" transient="true" derived="true">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="{&#xD;&#xA;&#x9;CPPDirectory.files(directory, cppSourceFile);&#xD;&#xA;&#x9;generationDirectory == directory.path;&#xD;&#xA;}"/>
+      </eAnnotations>
+      <eAnnotations source="org.eclipse.incquery.querybasedfeature">
+        <details key="patternFQN" value="com.ericsson.xtumlrt.oopl.cppmodel.derived.cppSourceFileGenerationDirectory"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="generationPath" ordered="false"
+        unique="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
+        changeable="false" volatile="true" transient="true" derived="true">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="{&#xD;&#xA;&#x9;generationPath == eval(cppFile.generationDirectory+GlobalSettings.pathSeparator+cppFile.generationName);&#xD;&#xA;}"/>
+      </eAnnotations>
+      <eAnnotations source="org.eclipse.incquery.querybasedfeature">
+        <details key="patternFQN" value="com.ericsson.xtumlrt.oopl.cppmodel.derived.cppSourceFileGenerationPath"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="includedHeaders" upperBound="-1"
+        eType="#//CPPHeaderFile"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="externalHeaderInclusion"
+        upperBound="-1" eType="#//CPPExternalHeaderInclusion" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="CPPHeaderFile" eSuperTypes="#//CPPSourceFile">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="C++ header file that contains the path that must appear in the #include directive."/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="includeName" ordered="false"
+        unique="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
+        changeable="false" volatile="true" transient="true" derived="true">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="{&#xD;&#xA;&#x9;CPPClass(class);&#xD;&#xA;&#x9;CPPClass.headerFile(class, cppSourceFile);&#xD;&#xA;&#x9;includeName == eval(class.cppName+&quot;.&quot;+GlobalSettings.cppHeaderFileExtension);&#xD;&#xA;} or {&#xD;&#xA;&#x9;CPPClass(class);&#xD;&#xA;&#x9;CPPClass.bodyFile(class, cppSourceFile);&#xD;&#xA;&#x9;includeName == eval(class.cppName+&quot;.&quot;+GlobalSettings.cppBodyFileExtension);&#xD;&#xA;} or {&#xD;&#xA;&#x9;CPPComponent(component);&#xD;&#xA;&#x9;CPPComponent.mainHeaderFile(component, cppSourceFile);&#xD;&#xA;&#x9;includeName == eval(component.cppName+&quot;_main.&quot;+GlobalSettings.cppHeaderFileExtension);&#xD;&#xA;} or {&#xD;&#xA;&#x9;CPPComponent(component);&#xD;&#xA;&#x9;CPPComponent.declarationHeaderFile(component, cppSourceFile);&#xD;&#xA;&#x9;includeName == eval(component.cppName+&quot;_decl.&quot;+GlobalSettings.cppHeaderFileExtension);&#xD;&#xA;} or {&#xD;&#xA;&#x9;CPPComponent(component);&#xD;&#xA;&#x9;CPPComponent.definitionHeaderFile(component, cppSourceFile);&#xD;&#xA;&#x9;includeName == eval(component.cppName+&quot;_def.&quot;+GlobalSettings.cppHeaderFileExtension);&#xD;&#xA;} or {&#xD;&#xA;&#x9;CPPComponent(component);&#xD;&#xA;&#x9;CPPComponent.mainBodyFile(component, cppSourceFile);&#xD;&#xA;&#x9;includeName == eval(component.cppName+&quot;_main.&quot;+GlobalSettings.cppBodyFileExtension);&#xD;&#xA;} or {&#xD;&#xA;&#x9;CPPModel(model);&#xD;&#xA;&#x9;CPPModel.declarationHeaderFile(model, cppSourceFile);&#xD;&#xA;&#x9;includeName == eval(model.cppName+&quot;_decl.&quot;+GlobalSettings.cppHeaderFileExtension);&#xD;&#xA;} or {&#xD;&#xA;&#x9;CPPModel(model);&#xD;&#xA;&#x9;CPPModel.definitionHeaderFile(model, cppSourceFile);&#xD;&#xA;&#x9;includeName == eval(model.cppName+&quot;_def.&quot;+GlobalSettings.cppHeaderFileExtension);&#xD;&#xA;} or {&#xD;&#xA;&#x9;CPPModel(model);&#xD;&#xA;&#x9;CPPModel.apiHeaderFile(model, cppSourceFile);&#xD;&#xA;&#x9;includeName == eval(model.cppName+&quot;_api.&quot;+GlobalSettings.cppHeaderFileExtension);&#xD;&#xA;} or {&#xD;&#xA;&#x9;CPPPackage(package);&#xD;&#xA;&#x9;CPPPackage.headerFile(package, cppSourceFile);&#xD;&#xA;&#x9;includeName == eval(package.cppName+&quot;.&quot;+GlobalSettings.cppHeaderFileExtension);&#xD;&#xA;} or {&#xD;&#xA;&#x9;CPPPackage(package);&#xD;&#xA;&#x9;CPPPackage.bodyFile(package, cppSourceFile);&#xD;&#xA;&#x9;includeName == eval(package.cppName+&quot;.&quot;+GlobalSettings.cppBodyFileExtension);&#xD;&#xA;} or {&#xD;&#xA;&#x9;CPPPort(port);&#xD;&#xA;&#x9;CPPPort.headerFile(port, cppSourceFile);&#xD;&#xA;&#x9;includeName == eval(port.cppName+&quot;.&quot;+GlobalSettings.cppHeaderFileExtension);&#xD;&#xA;} or {&#xD;&#xA;&#x9;CPPPort(port);&#xD;&#xA;&#x9;CPPPort.externalHeaderFile(port, cppSourceFile);&#xD;&#xA;&#x9;includeName == eval(port.cppName+&quot;_impl.&quot;+GlobalSettings.cppHeaderFileExtension);&#xD;&#xA;} or {&#xD;&#xA;&#x9;CPPPort(port);&#xD;&#xA;&#x9;CPPPort.bodyFile(port, cppSourceFile);&#xD;&#xA;&#x9;includeName == eval(port.cppName+&quot;.&quot;+GlobalSettings.cppBodyFileExtension);&#xD;&#xA;} or {&#xD;&#xA;&#x9;CPPPort(port);&#xD;&#xA;&#x9;CPPPort.externalBodySkeletonFile(port, cppSourceFile);&#xD;&#xA;&#x9;includeName == eval(port.cppName+&quot;_impl.&quot;+GlobalSettings.cppBodyFileExtension+&quot;_skel&quot;);&#xD;&#xA;} or {&#xD;&#xA;&#x9;CPPProtocol(protocol);&#xD;&#xA;&#x9;CPPProtocol.headerFile(protocol, cppSourceFile);&#xD;&#xA;&#x9;includeName == eval(protocol.cppName+&quot;.&quot;+GlobalSettings.cppHeaderFileExtension);&#xD;&#xA;}"/>
+      </eAnnotations>
+      <eAnnotations source="org.eclipse.incquery.querybasedfeature">
+        <details key="patternFQN" value="com.ericsson.xtumlrt.oopl.cppmodel.derived.cppHeaderFileIncludeName"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="includeDirectory" ordered="false"
+        unique="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
+        changeable="false" volatile="true" transient="true" derived="true">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="{&#xD;&#xA;&#x9;CPPDirectory.files(directory, cppHeaderFile);&#xD;&#xA;&#x9;includeDirectory==eval(CPPDirectory.path);&#xD;&#xA;}"/>
+      </eAnnotations>
+      <eAnnotations source="org.eclipse.incquery.querybasedfeature">
+        <details key="patternFQN" value="com.ericsson.xtumlrt.oopl.cppmodel.derived.cppHeaderFileIncludeDirectory"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="includePath" ordered="false"
+        unique="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
+        changeable="false" volatile="true" transient="true" derived="true">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="{&#xD;&#xA;&#x9;includePath==eval(cppHeaderFile.includeDirectory+GlobalSettings.pathSeparator+cppHeaderFile.includeName);&#xD;&#xA;}&#xD;&#xA;"/>
+      </eAnnotations>
+      <eAnnotations source="org.eclipse.incquery.querybasedfeature">
+        <details key="patternFQN" value="com.ericsson.xtumlrt.oopl.cppmodel.derived.cppHeaderFileIncludePath"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="CPPBodyFile" eSuperTypes="#//CPPSourceFile">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="C++ body file."/>
+    </eAnnotations>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="CPPDirectory">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="Representation of a file system directory in the C++ domain. Directories contain each other and they have a single root: the target directory for code generation."/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="subDirectories" upperBound="-1"
+        eType="#//CPPDirectory" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="files" upperBound="-1"
+        eType="#//CPPSourceFile" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" ordered="false" unique="false"
+        lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
+        changeable="false" volatile="true" transient="true" derived="true">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="{&#xD;&#xA;&#x9;CPPComponent(component);&#xD;&#xA;&#x9;CPPComponent.headerDirectory(component, cppDirectory);&#xD;&#xA;&#x9;generationName == component.cppName;&#xD;&#xA;} or {&#xD;&#xA;&#x9;CPPComponent(component);&#xD;&#xA;&#x9;CPPComponent.bodyDirectory(component, cppDirectory);&#xD;&#xA;&#x9;generationName == component.cppName;&#xD;&#xA;} or {&#xD;&#xA;&#x9;CPPComponent(component);&#xD;&#xA;&#x9;CPPComponent.externalHeaderDirectory(component, cppDirectory);&#xD;&#xA;&#x9;generationName == component.cppName;&#xD;&#xA;} or {&#xD;&#xA;&#x9;CPPComponent(component);&#xD;&#xA;&#x9;CPPComponent.externalBodySkeletonDirectory(component, cppDirectory);&#xD;&#xA;&#x9;generationName == component.cppName;&#xD;&#xA;} or {&#xD;&#xA;&#x9;CPPModel(model);&#xD;&#xA;&#x9;CPPModel.headerDirectory(model, cppDirectory);&#xD;&#xA;&#x9;generationName == eval(GlobalSettings.headerGenerationDirectory+GlobalSettings.pathSeparator+model.cppName);&#xD;&#xA;} or {&#xD;&#xA;&#x9;CPPModel(model);&#xD;&#xA;&#x9;CPPModel.bodyDirectory(model, cppDirectory);&#xD;&#xA;&#x9;generationName == eval(GlobalSettings.bodyGenerationDirectory+GlobalSettings.pathSeparator+model.cppName);&#xD;&#xA;} or {&#xD;&#xA;&#x9;CPPModel(model);&#xD;&#xA;&#x9;CPPModel.externalHeaderDirectory(model, cppDirectory);&#xD;&#xA;&#x9;generationName == eval(GlobalSettings.headerGenerationDirectory+GlobalSettings.pathSeparator+model.cppName);&#xD;&#xA;} or {&#xD;&#xA;&#x9;CPPModel(model);&#xD;&#xA;&#x9;CPPModel.externalBodySkeletonDirectory(model, cppDirectory);&#xD;&#xA;&#x9;generationName == eval(GlobalSettings.bodyGenerationDirectory+GlobalSettings.pathSeparator+model.cppName);&#xD;&#xA;} or {&#xD;&#xA;&#x9;CPPPackage(package);&#xD;&#xA;&#x9;CPPPackage.headerDirectory(package, cppDirectory);&#xD;&#xA;&#x9;generationName == package.cppName;&#xD;&#xA;} or {&#xD;&#xA;&#x9;CPPPackagel(package);&#xD;&#xA;&#x9;CPPPackage.bodyDirectory(package, cppDirectory);&#xD;&#xA;&#x9;generationName == package.cppName;&#xD;&#xA;}"/>
+      </eAnnotations>
+      <eAnnotations source="org.eclipse.incquery.querybasedfeature">
+        <details key="patternFQN" value="com.ericsson.xtumlrt.oopl.cppmodel.derived.cppDirectoryName"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="parentDirectory" ordered="false"
+        unique="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
+        changeable="false" volatile="true" transient="true" derived="true">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="{&#xD;&#xA;&#x9;CPPDirectory.subDirectories(parent, cppDirectory);&#xD;&#xA;&#x9;parentDirectory==parent.name;&#xD;&#xA;}&#xD;&#xA;"/>
+      </eAnnotations>
+      <eAnnotations source="org.eclipse.incquery.querybasedfeature">
+        <details key="patternFQN" value="com.ericsson.xtumlrt.oopl.cppmodel.derived.cppDirectoryParentDirectory"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="path" ordered="false" unique="false"
+        lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
+        changeable="false" volatile="true" transient="true" derived="true">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="{&#xD;&#xA;&#x9;cppDirectory.path==eval(cppDirectory.parentDirectory+GlobalSettings.pathSeparator+cppDirectory.name);&#xD;&#xA;}"/>
+      </eAnnotations>
+      <eAnnotations source="org.eclipse.incquery.querybasedfeature">
+        <details key="patternFQN" value="com.ericsson.xtumlrt.oopl.cppmodel.derived.cppDirectoryPath"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="makeRulesFile" eType="#//CPPMakeFile"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="CPPComponent" eSuperTypes="#//CPPQualifiedNamedElement">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="Representation of XTUML Component ({@link org.eclipse.papyrusrt.xtumlrt.xtuml.XTComponent}) In the C++ domain."/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="xtComponent" lowerBound="1"
+        eType="ecore:EClass ../../org.eclipse.papyrusrt.xtumlrt.xtuml.model/model/xtuml.ecore#//XTComponent"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="mainHeaderFile" lowerBound="1"
+        eType="#//CPPHeaderFile"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="mainBodyFile" lowerBound="1"
+        eType="#//CPPBodyFile"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="declarationHeaderFile"
+        lowerBound="1" eType="#//CPPHeaderFile"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="definitionHeaderFile" lowerBound="1"
+        eType="#//CPPHeaderFile"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="headerDirectory" eType="#//CPPDirectory"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="bodyDirectory" eType="#//CPPDirectory"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="externalHeaderDirectory"
+        eType="#//CPPDirectory"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="externalBodySkeletonDirectory"
+        eType="#//CPPDirectory"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="CPPExternalHeader">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="External C++ header file that must be included into another C++ source file. Such headerfiles contain type and functions that are defined in the handwritten code but are used by the model."/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" ordered="false" unique="false"
+        lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="CPPExternalHeaderInclusion">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="Entity describing a connection between a C++ source file ({@link com.ericsson.xtumlrt.cppmodel.CPPSourceFile}) and an external header ({@link com.ericsson.xtumlrt.cppmodel.CPPExternalHeader}) file. It also contains a comment that should contain the reason for the inclusion (the fully qualified name of the external elements that are declared or defined in the external header file."/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="externalHeader" lowerBound="1"
+        eType="#//CPPExternalHeader"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="comment" ordered="false"
+        unique="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="CPPRelation" eSuperTypes="#//CPPQualifiedNamedElement ../../com.ericsson.xtumlrt.oopl.model/model/oopl.ecore#//OOPLRelation">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="Representation of an XTUML class relation ({@link org.eclipse.papyrusrt.xtumlrt.xtuml.XTRelation}) in the C++ domain."/>
+    </eAnnotations>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="CPPOperation" eSuperTypes="#//CPPQualifiedNamedElement">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="Representation of a class operation ({@link org.eclipse.papyrusrt.xtumlrt.common.Attribute}) in the C++ domain."/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="commonOperation" lowerBound="1"
+        eType="ecore:EClass ../../org.eclipse.papyrusrt.xtumlrt.common.model/model/common.ecore#//Operation"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="compiledBody" eType="ecore:EClass ../../com.incquerylabs.emdw.snippet.model/model/snippettemplate.ecore#//Snippet"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="CPPPort" eSuperTypes="#//CPPQualifiedNamedElement">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="Representation of XTUML port ({@link org.eclipse.papyrusrt.xtumlrt.xtuml.XTPort}) In the C++ domain."/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="xtPort" lowerBound="1"
+        eType="ecore:EClass ../../org.eclipse.papyrusrt.xtumlrt.xtuml.model/model/xtuml.ecore#//XTPort"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="headerFile" lowerBound="1"
+        eType="#//CPPHeaderFile"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="externalHeaderFile" eType="#//CPPHeaderFile"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="bodyFile" lowerBound="1"
+        eType="#//CPPBodyFile"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="externalBodySkeletonFile"
+        eType="#//CPPBodyFile"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="CPPProtocolOperationDefinition" eSuperTypes="#//CPPQualifiedNamedElement">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="Representation of XTUML protocol operation definition ({@link org.eclipse.papyrusrt.xtumlrt.xtuml.XTProtocolOperationDefinition}) in the C++ domain."/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="xtProtocolOperationDefinition"
+        lowerBound="1" eType="ecore:EClass ../../org.eclipse.papyrusrt.xtumlrt.xtuml.model/model/xtuml.ecore#//XTProtocolOperationDefinition"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="CPPSignal" eSuperTypes="#//CPPQualifiedNamedElement">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="Representation of a signal ({@link org.eclipse.papyrusrt.xtumlrt.common.Signal}) in the C++ domain."/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="commonSignal" lowerBound="1"
+        eType="ecore:EClass ../../org.eclipse.papyrusrt.xtumlrt.common.model/model/common.ecore#//Signal"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="CPPProtocolOperationImplementation"
+      eSuperTypes="#//CPPQualifiedNamedElement">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="Representation of XTUML Protocol Operation Implementation ({@link org.eclipse.papyrusrt.xtumlrt.xtuml.XTProtocolOperationImplementation}) In the C++ domain."/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="xtProtocolOperationImplementation"
+        lowerBound="1" eType="ecore:EClass ../../org.eclipse.papyrusrt.xtumlrt.xtuml.model/model/xtuml.ecore#//XTProtocolOperationImplementation"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="CPPClassReference" eSuperTypes="../../com.ericsson.xtumlrt.oopl.model/model/oopl.ecore#//OOPLClassReference #//CPPQualifiedNamedElement">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="Pointer type in C++ to store reference to the C++ representation of a model class ({@link com.ericsson.xtumlrt.cppmodel.CPPClass})."/>
+    </eAnnotations>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="CPPClassReferenceStorage" eSuperTypes="#//CPPQualifiedNamedElement ../../com.ericsson.xtumlrt.oopl.model/model/oopl.ecore#//OOPLClassReferenceStorage">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="C++ specialization of the OOPL class reference storage ({@link com.ericsson.xtumlrt.OOPLClassReferenceStorage})."/>
+    </eAnnotations>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="CPPClassRefSimpleCollection" eSuperTypes="#//CPPQualifiedNamedElement ../../com.ericsson.xtumlrt.oopl.model/model/oopl.ecore#//OOPLClassRefSimpleCollection">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="Simple (non-associative) collection C++ type to store pointers to the C++ representation of model classes ({@link com.ericsson.xtumlrt.cppmodel.CPPClass})."/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="cppContainer" ordered="false"
+        unique="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
+        changeable="false" volatile="true" transient="true" derived="true">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="{&#xD;&#xA;&#x9;cppClassRefSimpleCollection.kind== ::INDEXED_ARRAY;&#xD;&#xA;&#x9;cppClassRefSimpleCollection.cppContainer==&quot;std::array&quot;;&#xD;&#xA;} or {&#xD;&#xA;&#x9;!CPPFeatures.forwardList;&#xD;&#xA;&#x9;cppClassRefSimpleCollection.kind== ::SIMPLY_LINKED_LIST;&#xD;&#xA;&#x9;cppClassRefSimpleCollection.cppContainer==&quot;std::list&quot;;&#xD;&#xA;} or {&#xD;&#xA;&#x9;CPPFeatures.forwardList;&#xD;&#xA;&#x9;cppClassRefSimpleCollection.kind== ::SIMPLY_LINKED_LIST;&#xD;&#xA;&#x9;cppClassRefSimpleCollection.cppContainer==&quot;std::forward_list&quot;;&#xD;&#xA;} or {&#xD;&#xA;&#x9;cppClassRefSimpleCollection.kind== ::DOUBLY_LINKED_LIST;&#xD;&#xA;&#x9;cppClassRefSimpleCollection.cppContainer==&quot;std::list&quot;;&#xD;&#xA;} or {&#xD;&#xA;&#x9;cppClassRefSimpleCollection.kind== ::DOUBLE_ENDED_QUEUE;&#xD;&#xA;&#x9;cppClassRefSimpleCollection.cppContainer==&quot;std::deque&quot;;&#xD;&#xA;}"/>
+      </eAnnotations>
+      <eAnnotations source="org.eclipse.incquery.querybasedfeature">
+        <details key="patternFQN" value="com.ericsson.xtumlrt.oopl.cppmodel.derived.cppClassRefSimpleCollectionCppContainer"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="CPPClassRefAssocCollection" eSuperTypes="#//CPPQualifiedNamedElement ../../com.ericsson.xtumlrt.oopl.model/model/oopl.ecore#//OOPLClassRefAssocCollection">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="Associative collection C++ type to store pointers to the C++ representation of model classes ({@link com.ericsson.xtumlrt.cppmodel.CPPClass}) indexed by one of the attributes ({@link com.ericsson.xtumlrt.cppmodel.CPPAttribute}) of the class."/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="cppContainer" ordered="false"
+        unique="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
+        derived="true">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="{&#xD;&#xA;&#x9;!CPPFeatures.unorderedAssociativeContainers;&#xD;&#xA;&#x9;cppClassRefAssocCollection.kind== ::UNORDERED_SET;&#xD;&#xA;&#x9;cppClassRefAssocCollection.cppContainer==&quot;std::set&quot;;&#xD;&#xA;} or {&#xD;&#xA;&#x9;CPPFeatures.unorderedAssociativeContainers;&#xD;&#xA;&#x9;cppClassRefAssocCollection.kind== ::UNORDERED_SET;&#xD;&#xA;&#x9;cppClassRefAssocCollection.cppContainer==&quot;std::unordered_set&quot;;&#xD;&#xA;} or {&#xD;&#xA;&#x9;cppClassRefAssocCollection.kind== ::ORDERED_SET;&#xD;&#xA;&#x9;cppClassRefAssocCollection.cppContainer==&quot;std::set&quot;;&#xD;&#xA;} or {&#xD;&#xA;&#x9;!CPPFeatures.unorderedAssociativeContainers;&#xD;&#xA;&#x9;cppClassRefAssocCollection.kind== ::UNORDERED_MULTISET;&#xD;&#xA;&#x9;cppClassRefAssocCollection.cppContainer==&quot;std::multiset&quot;;&#xD;&#xA;} or {&#xD;&#xA;&#x9;CPPFeatures.unorderedAssociativeContainers;&#xD;&#xA;&#x9;cppClassRefAssocCollection.kind== ::UNORDERED_MULTISET;&#xD;&#xA;&#x9;cppClassRefAssocCollection.cppContainer==&quot;std::unordered_multiset&quot;;&#xD;&#xA;} or {&#xD;&#xA;&#x9;cppClassRefAssocCollection.kind== ::ORDERED_MULTISET;&#xD;&#xA;&#x9;cppClassRefAssocCollection.cppContainer==&quot;std::multiset&quot;;&#xD;&#xA;} or {&#xD;&#xA;&#x9;!CPPFeatures.unorderedAssociativeContainers;&#xD;&#xA;&#x9;cppClassRefAssocCollection.kind== ::UNORDERED_MAP;&#xD;&#xA;&#x9;cppClassRefAssocCollection.cppContainer==&quot;std::map&quot;;&#xD;&#xA;} or {&#xD;&#xA;&#x9;CPPFeatures.unorderedAssociativeContainers;&#xD;&#xA;&#x9;cppClassRefAssocCollection.kind== ::UNORDERED_MAP;&#xD;&#xA;&#x9;cppClassRefAssocCollection.cppContainer==&quot;std::unordered_map&quot;;&#xD;&#xA;} or {&#xD;&#xA;&#x9;cppClassRefAssocCollection.kind== ::ORDERED_MAP;&#xD;&#xA;&#x9;cppClassRefAssocCollection.cppContainer==&quot;std::map&quot;;&#xD;&#xA;} or {&#xD;&#xA;&#x9;!CPPFeatures.unorderedAssociativeContainers;&#xD;&#xA;&#x9;cppClassRefAssocCollection.kind== ::UNORDERED_MULTIMAP;&#xD;&#xA;&#x9;cppClassRefAssocCollection.cppContainer==&quot;std::multimap&quot;;&#xD;&#xA;} or {&#xD;&#xA;&#x9;CPPFeatures.unorderedAssociativeContainers;&#xD;&#xA;&#x9;cppClassRefAssocCollection.kind== ::UNORDERED_MULTIMAP;&#xD;&#xA;&#x9;cppClassRefAssocCollection.cppContainer==&quot;std::unordered_multimap&quot;;&#xD;&#xA;} or {&#xD;&#xA;&#x9;cppClassRefAssocCollection.kind== ::ORDERED_MULTIMAP;&#xD;&#xA;&#x9;cppClassRefAssocCollection.cppContainer==&quot;std::multimap&quot;;&#xD;&#xA;}"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="cppAttribute" lowerBound="1"
+        eType="#//CPPAttribute" changeable="false" derived="true">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="{&#xD;&#xA;&#x9;CPPClassRefAssocCollection.cppAttribute.commonAttribute(cppClassRefAssocCollection, attribute);&#xD;&#xA;&#x9;CPPClassRefAssocCollection.key(cppClassRefAssocCollection, attribute);&#xD;&#xA;}"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="CPPAttribute" eSuperTypes="#//CPPQualifiedNamedElement">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="Representation of a class attribute ({@link org.eclipse.papyrusrt.xtumlrt.common.Attribute}) in the C++ domain."/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="commonAttribute" lowerBound="1"
+        eType="ecore:EClass ../../org.eclipse.papyrusrt.xtumlrt.common.model/model/common.ecore#//Attribute"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="unnamedSequenceType" eType="#//CPPSequence"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="type" lowerBound="1" eType="ecore:EClass ../../com.ericsson.xtumlrt.oopl.model/model/oopl.ecore#//OOPLDataType"
+        changeable="false" volatile="true" transient="true" derived="true">
+      <eAnnotations source="org.eclipse.incquery.querybasedfeature">
+        <details key="patternFQN" value="com.ericsson.xtumlrt.oopl.cppmodel.derived.cppAttributeType"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="CPPState" eSuperTypes="#//CPPQualifiedNamedElement">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="Representation of a state machine state ({@link org.eclipse.papyrusrt.xtumlrt.common.State}) In the C++ domain."/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="commonState" lowerBound="1"
+        eType="ecore:EClass ../../org.eclipse.papyrusrt.xtumlrt.common.model/model/common.ecore#//State"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="compiledEntryBody" eType="ecore:EClass ../../com.incquerylabs.emdw.snippet.model/model/snippettemplate.ecore#//Snippet"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="compiledExitBody" eType="ecore:EClass ../../com.incquerylabs.emdw.snippet.model/model/snippettemplate.ecore#//Snippet"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="CPPTransition" eSuperTypes="#//CPPQualifiedNamedElement">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="Representation of a state machine transition ({@link org.eclipse.papyrusrt.xtumlrt.common.Transition}) in the C++ domain."/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="commonTransition" lowerBound="1"
+        eType="ecore:EClass ../../org.eclipse.papyrusrt.xtumlrt.common.model/model/common.ecore#//Transition"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="compiledEffectBody" eType="ecore:EClass ../../com.incquerylabs.emdw.snippet.model/model/snippettemplate.ecore#//Snippet"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="compiledGuardBody" eType="ecore:EClass ../../com.incquerylabs.emdw.snippet.model/model/snippettemplate.ecore#//Snippet"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="CPPEvent" eSuperTypes="#//CPPQualifiedNamedElement">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="Representation of XTUML state machine event ({@link org.eclipse.papyrusrt.xtumlrt.xtuml.XTEvent}) in the C++ domain."/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="xtEvent" lowerBound="1"
+        eType="ecore:EClass ../../org.eclipse.papyrusrt.xtumlrt.xtuml.model/model/xtuml.ecore#//XTEvent"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="CPPFormalParameter" eSuperTypes="#//CPPQualifiedNamedElement">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="Representation of a formal parameter ({@link org.eclipse.papyrusrt.xtumlrt.common.Parameter}) in the C++ domain. Passing mode is derived from the direction: for IN parameters the mode is BY_VALUE for simple and BY_CONSTANT_REFERENCE for complex types. For OUT and IN_OUT parameters the mode is BY_REFERENCE."/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="commonParameter" lowerBound="1"
+        eType="ecore:EClass ../../org.eclipse.papyrusrt.xtumlrt.common.model/model/common.ecore#//Parameter"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="passingMode" ordered="false"
+        unique="false" lowerBound="1" eType="#//CPPParameterPassingKind" defaultValueLiteral="BY_VALUE"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="unnamedSequenceType" eType="#//CPPSequence"
+        containment="true">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="This reference shall be used only for containing a CPPSequence."/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="type" lowerBound="1" eType="ecore:EClass ../../com.ericsson.xtumlrt.oopl.model/model/oopl.ecore#//OOPLDataType"
+        changeable="false" volatile="true" transient="true" derived="true">
+      <eAnnotations source="org.eclipse.incquery.querybasedfeature">
+        <details key="patternFQN" value="com.ericsson.xtumlrt.oopl.cppmodel.derived.cppFormalParameterType"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="CPPParameterPassingKind">
+    <eLiterals name="BY_VALUE"/>
+    <eLiterals name="BY_REFERENCE" value="1"/>
+    <eLiterals name="BY_CONSTANT_REFERENCE" value="2"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="CPPReturnValue" eSuperTypes="#//CPPQualifiedNamedElement">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="type" lowerBound="1" eType="ecore:EClass ../../com.ericsson.xtumlrt.oopl.model/model/oopl.ecore#//OOPLDataType"
+        changeable="false" volatile="true" transient="true" derived="true">
+      <eAnnotations source="org.eclipse.incquery.querybasedfeature">
+        <details key="patternFQN" value="com.ericsson.xtumlrt.oopl.cppmodel.derived.cppReturnValueType"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="unnamedSequenceType" eType="#//CPPSequence"
+        containment="true">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="This reference shall be used only for containing a CPPSequence."/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="commonTypedMultiplicityElement"
+        lowerBound="1" eType="ecore:EClass ../../org.eclipse.papyrusrt.xtumlrt.common.model/model/common.ecore#//TypedMultiplicityElement"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="CPPExternalLibrary">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="Artificial root for all {@link com.ericsson.xtumlrt.cppmodel.CPPExternalHeader} elements."/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="externalHeader" upperBound="-1"
+        eType="#//CPPExternalHeader" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="CPPBasicType" eSuperTypes="../../com.ericsson.xtumlrt.oopl.model/model/oopl.ecore#//OOPLBasicType #//CPPQualifiedNamedElement">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="C++ type corresponding to UML primitive types. Not necessarily primitive type in C++ as well (see strings)."/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="cppSpecifier" ordered="false"
+        unique="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="CPPSequence" eSuperTypes="../../com.ericsson.xtumlrt.oopl.model/model/oopl.ecore#//OOPLSequence">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="Sequence type in C++ depending on the orderedness and uniqueness of the sequence: vector, set or multiset."/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="cppContainer" ordered="false"
+        unique="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
+        changeable="false" volatile="true" transient="true" derived="true">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="// without unordered collections, sorted and unordered sequences are mapped to the same type&#xD;&#xA;{&#xD;&#xA;&#x9;!CPPFeatures.unorderedAssociativeContainers;&#xD;&#xA;&#x9;cppSequence.orderedness== ::SORTED or ::UNORDERED;;&#xD;&#xA;&#x9;cppSequence.uniqueness== ::NON_UNIQUE;&#xD;&#xA;&#x9;cppClassRefSimpleCollection.cppContainer==&quot;std::multiset&quot;;&#xD;&#xA;} or {&#xD;&#xA;&#x9;!CPPFeatures.unorderedAssociativeContainers;&#xD;&#xA;&#x9;cppSequence.orderedness== ::SORTED or ::UNORDERED;;&#xD;&#xA;&#x9;cppSequence.uniqueness== ::UNIQUE;&#xD;&#xA;&#x9;cppClassRefSimpleCollection.cppContainer==&quot;std::set&quot;;&#xD;&#xA;} or&#xD;&#xA;// with unordered collections, sorted and unordered sequences are mapped to differen types&#xD;&#xA; {&#xD;&#xA;&#x9;CPPFeatures.unorderedAssociativeContainers;&#xD;&#xA;&#x9;cppSequence.orderedness== ::SORTED;&#xD;&#xA;&#x9;cppSequence.uniqueness== ::NON_UNIQUE;&#xD;&#xA;&#x9;cppClassRefSimpleCollection.cppContainer==&quot;std::multiset&quot;;&#xD;&#xA;} or {&#xD;&#xA;&#x9;CPPFeatures.unorderedAssociativeContainers;&#xD;&#xA;&#x9;cppSequence.orderedness== ::SORTED;&#xD;&#xA;&#x9;cppSequence.uniqueness== ::UNIQUE;&#xD;&#xA;&#x9;cppClassRefSimpleCollection.cppContainer==&quot;std::set&quot;;&#xD;&#xA;} or {&#xD;&#xA;&#x9;CPPFeatures.unorderedAssociativeContainers;&#xD;&#xA;&#x9;cppSequence.orderedness== ::UNORDERED;&#xD;&#xA;&#x9;cppSequence.uniqueness== ::NON_UNIQUE;&#xD;&#xA;&#x9;cppClassRefSimpleCollection.cppContainer==&quot;std::unordered_multiset&quot;;&#xD;&#xA;} or {&#xD;&#xA;&#x9;CPPFeatures.unorderedAssociativeContainers;&#xD;&#xA;&#x9;cppSequence.orderedness== ::UNORDERED;&#xD;&#xA;&#x9;cppSequence.uniqueness== ::UNIQUE;&#xD;&#xA;&#x9;cppClassRefSimpleCollection.cppContainer==&quot;std::unordered_set&quot;;&#xD;&#xA;} or {&#xD;&#xA;&#x9;cppSequence.orderedness== ::ORDERED;&#xD;&#xA;&#x9;cppClassRefSimpleCollection.cppContainer==&quot;std::vector&quot;;&#xD;&#xA;}&#xD;&#xA;"/>
+      </eAnnotations>
+      <eAnnotations source="org.eclipse.incquery.querybasedfeature">
+        <details key="patternFQN" value="com.ericsson.xtumlrt.oopl.cppmodel.derived.cppSequenceCppContainer"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="CPPEnumType" eSuperTypes="../../com.ericsson.xtumlrt.oopl.model/model/oopl.ecore#//OOPLEnumType #//CPPQualifiedNamedElement">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="Enumeration type in C++."/>
+    </eAnnotations>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="CPPEnumerator" eSuperTypes="../../com.ericsson.xtumlrt.oopl.model/model/oopl.ecore#//OOPLEnumerator #//CPPQualifiedNamedElement">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="Enumerator (enumeration literal) in C++."/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="cppValue" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
+        derived="true">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="!Source missing in common metamodel."/>
+      </eAnnotations>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="CPPStructType" eSuperTypes="../../com.ericsson.xtumlrt.oopl.model/model/oopl.ecore#//OOPLStructType #//CPPQualifiedNamedElement">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="Structure type (C-style) in C++."/>
+    </eAnnotations>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="CPPStructMember" eSuperTypes="../../com.ericsson.xtumlrt.oopl.model/model/oopl.ecore#//OOPLStructMember #//CPPQualifiedNamedElement">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="Structure member in C++."/>
+    </eAnnotations>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="CPPUserDefinedType" eSuperTypes="../../com.ericsson.xtumlrt.oopl.model/model/oopl.ecore#//OOPLUserDefinedType #//CPPQualifiedNamedElement">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="User defined type (typedef type) in C++."/>
+    </eAnnotations>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="CPPMakeFile" eSuperTypes="#//CPPSourceFile"/>
+  <eClassifiers xsi:type="ecore:EClass" name="CPPExternalBridge" eSuperTypes="#//CPPQualifiedNamedElement">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="headerFile" lowerBound="1"
+        eType="#//CPPHeaderFile"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="bodyFile" lowerBound="1"
+        eType="#//CPPBodyFile"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="cppExternalNamespace" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="xtClass" lowerBound="1"
+        eType="ecore:EClass ../../org.eclipse.papyrusrt.xtumlrt.xtuml.model/model/xtuml.ecore#//XTClass"/>
+  </eClassifiers>
+</ecore:EPackage>

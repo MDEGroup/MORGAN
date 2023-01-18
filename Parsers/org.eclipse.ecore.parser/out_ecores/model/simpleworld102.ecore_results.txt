@@ -1,0 +1,7 @@
+model	Named (name,EString,attribute) 
+model	Part (id,EInt,attribute) (content,EString,attribute) 
+model	Element (description,EString,attribute) 
+model	Relations (since,EInt,attribute) (parts,Part,ref) 
+model	World (persons,Person,ref) (things,Thing,ref) 
+model	Person (name,EString,attribute) (foreName,EString,attribute) (elements,Element,ref) (things,Thing,ref) (relations,Relations,ref) (thing,Thing,ref) 
+model	Thing (persons,Person,ref) (parent,Thing,ref) (components,Part,ref) 

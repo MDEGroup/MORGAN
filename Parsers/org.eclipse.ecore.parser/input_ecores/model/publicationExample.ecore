@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="publicationExample" nsURI="http://publicationExample/1.0" nsPrefix="publicationExample">
+  <eClassifiers xsi:type="ecore:EClass" name="Researcher" eSuperTypes="#//Human">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="contributedTo" upperBound="-1"
+        eType="#//Publication"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Humanity">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="humans" upperBound="-1"
+        eType="#//Human" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="publications" upperBound="-1"
+        eType="#//Publication" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Human"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Publication" abstract="true"/>
+  <eClassifiers xsi:type="ecore:EClass" name="JournalArticle" eSuperTypes="#//Publication"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Paper" eSuperTypes="#//Publication"/>
+  <eClassifiers xsi:type="ecore:EClass" name="WorkshopPaper" eSuperTypes="#//Paper"/>
+  <eClassifiers xsi:type="ecore:EClass" name="ConferencePaper" eSuperTypes="#//Paper"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Books" eSuperTypes="#//Publication"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Thesis" eSuperTypes="#//Publication"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Other" eSuperTypes="#//Publication"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Editorship" eSuperTypes="#//Publication"/>
+</ecore:EPackage>

@@ -1,0 +1,8 @@
+model	Field (size,EInt,attribute) (notNull,EBoolean,attribute) (defaultValue,EString,attribute) (unique,EBoolean,attribute) (specificType,EString,attribute) (autoIcrement,EBoolean,attribute) (type,Type,attribute) (table,Table,ref) 
+model	Table (foreignKeys,ForeignKey,ref) (database,DataBase,ref) (fields,Field,ref) (constraints,Constraint,ref) (primaryKey,PrimaryKey,ref) 
+model	Constraint (constrainedFields,Field,ref) 
+model	Check (expression,EString,attribute) 
+model	PrimaryKey (primaryFields,Field,ref) (table,Table,ref) 
+model	ForeignKey (refersTo,PrimaryKey,ref) (foreignFields,Field,ref) (table,Table,ref) 
+model	NamedElement (name,EString,attribute) (comment,EString,attribute) 
+model	DataBase (tables,Table,ref) 

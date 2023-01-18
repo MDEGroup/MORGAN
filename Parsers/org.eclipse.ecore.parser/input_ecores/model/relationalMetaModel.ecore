@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="relationalMetaModel" nsURI="relationalMetaModel" nsPrefix="">
+  <eAnnotations source="gmf"/>
+  <eClassifiers xsi:type="ecore:EClass" name="RelationalSchema">
+    <eAnnotations source="gmf.diagram"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="Name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="Tables" upperBound="-1"
+        eType="#//RelationalTable" containment="true" eOpposite="#//RelationalTable/Schema"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="RelationalTable">
+    <eAnnotations source="gmf.node">
+      <details key="label" value="Name"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="Schema" lowerBound="1"
+        eType="#//RelationalSchema" eOpposite="#//RelationalSchema/Tables"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="Name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="ForeignKeys" upperBound="-1"
+        eType="#//RelationalForeignKey" containment="true" eOpposite="#//RelationalForeignKey/OwnedByTable">
+      <eAnnotations source="gmf.compartment"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="ReferencedBy" upperBound="-1"
+        eType="#//RelationalForeignKey" eOpposite="#//RelationalForeignKey/ReferencedTable"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="RelationalForeignKey">
+    <eAnnotations source="gmf.node">
+      <details key="label" value="Name"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="Name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="OwnedByTable" lowerBound="1"
+        eType="#//RelationalTable" eOpposite="#//RelationalTable/ForeignKeys"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="ReferencedTable" lowerBound="1"
+        eType="#//RelationalTable" eOpposite="#//RelationalTable/ReferencedBy">
+      <eAnnotations source="gmf.link">
+        <details key="target.decoration" value="arrow"/>
+        <details key="style" value="dash"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+  </eClassifiers>
+</ecore:EPackage>

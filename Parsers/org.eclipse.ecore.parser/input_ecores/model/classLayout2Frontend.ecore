@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="classLayout2Frontend" nsURI="http://www.classlayout2frontend.com/classLayout2Frontend"
+    nsPrefix="classLayout2Frontend">
+  <eClassifiers xsi:type="ecore:EClass" name="Project">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="entitiesmodel" eType="#//Entities/EntitiesModel"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="siteViews" upperBound="-1"
+        eType="#//Views/SiteView" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="pageViews" upperBound="-1"
+        eType="#//Views/PageView" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="containerViews" upperBound="-1"
+        eType="#//Views/ContainerView" containment="true"/>
+  </eClassifiers>
+  <eSubpackages name="Entities" nsURI="http://www.classlayout2frontend.com/entities"
+      nsPrefix="entities">
+    <eClassifiers xsi:type="ecore:EClass" name="EntitiesModel">
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" lowerBound="1"
+          eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="modelElements" upperBound="-1"
+          eType="#//Entities/EntityModelElement" containment="true"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="EntityModelElement" abstract="true">
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" lowerBound="1"
+          eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
+          iD="true"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="description" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="displayName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="Association" abstract="true" eSuperTypes="#//Entities/StructuralFeature">
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="many" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="target" lowerBound="1"
+          eType="#//Entities/Entity"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="Composition" eSuperTypes="#//Entities/Association"/>
+    <eClassifiers xsi:type="ecore:EClass" name="Reference" eSuperTypes="#//Entities/Association"/>
+    <eClassifiers xsi:type="ecore:EClass" name="Entity" eSuperTypes="#//Entities/EntityModelElement">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="superclass" eType="#//Entities/Entity"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="isAbstract" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="structuralFeatures" upperBound="-1"
+          eType="#//Entities/StructuralFeature" containment="true"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="Property" eSuperTypes="#//Entities/StructuralFeature">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="type" lowerBound="1"
+          eType="#//Entities/PropertyType"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="defaultValue" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="Enumeration" eSuperTypes="#//Entities/PropertyType">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="literals" upperBound="-1"
+          eType="#//Entities/Literal" containment="true"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="PropertyType" abstract="true" eSuperTypes="#//Entities/EntityModelElement"/>
+    <eClassifiers xsi:type="ecore:EClass" name="Literal" eSuperTypes="#//Entities/EntityModelElement">
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" lowerBound="1"
+          eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="PrimitiveType" eSuperTypes="#//Entities/PropertyType"/>
+    <eClassifiers xsi:type="ecore:EClass" name="StructuralFeature" abstract="true"
+        eSuperTypes="#//Entities/EntityModelElement">
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="required" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    </eClassifiers>
+  </eSubpackages>
+  <eSubpackages name="Views" nsURI="http://www.classlayout2frontend.com/views" nsPrefix="views">
+    <eClassifiers xsi:type="ecore:EClass" name="SiteView">
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="templateName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="templateColor" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="displayName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="pageViews" upperBound="-1"
+          eType="#//Views/PageView"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="ContainerView" abstract="true" eSuperTypes="#//Views/ElementView">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="elements" upperBound="-1"
+          eType="#//Views/ElementView" containment="true"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="entity" eType="#//Entities/Entity"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="AtomicView" abstract="true" eSuperTypes="#//Views/ElementView">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="property" eType="#//Entities/StructuralFeature"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="ElementView" abstract="true">
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="dsisplayName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="description" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="IterationContainer" eSuperTypes="#//Views/ContainerView">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="iterationFilters" upperBound="-1"
+          eType="#//Views/IterationFilter" containment="true"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="InputForm" eSuperTypes="#//Views/ContainerView"/>
+    <eClassifiers xsi:type="ecore:EClass" name="StaticContainer" eSuperTypes="#//Views/ContainerView"/>
+    <eClassifiers xsi:type="ecore:EClass" name="Input" abstract="true" eSuperTypes="#//Views/AtomicView">
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="label" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="InputText" eSuperTypes="#//Views/Input">
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="multiline" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="Selection" abstract="true" eSuperTypes="#//Views/Input"/>
+    <eClassifiers xsi:type="ecore:EClass" name="Output" abstract="true" eSuperTypes="#//Views/AtomicView"/>
+    <eClassifiers xsi:type="ecore:EClass" name="TextArea" eSuperTypes="#//Views/Output">
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="Image" eSuperTypes="#//Views/Output">
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="width" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDouble"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="height" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDouble"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="PageView">
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="elementViews" upperBound="-1"
+          eType="#//Views/ElementView"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="layoutType" eType="#//Views/LayoutType"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EEnum" name="LayoutType">
+      <eLiterals name="SINGLE_COLUMN"/>
+      <eLiterals name="TWO_COLUMNS" value="1"/>
+      <eLiterals name="LEFT_BAR" value="2"/>
+      <eLiterals name="RIGHT_BAR" value="3"/>
+      <eLiterals name="THREE_COLUMNS" value="4"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="IterationFilter">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="input" eType="#//Views/Input"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="Dropdownlist" eSuperTypes="#//Views/Selection"/>
+    <eClassifiers xsi:type="ecore:EClass" name="RadioButtonGroup" eSuperTypes="#//Views/Selection"/>
+    <eClassifiers xsi:type="ecore:EClass" name="CheckList" eSuperTypes="#//Views/Selection"/>
+    <eClassifiers xsi:type="ecore:EClass" name="Autocomplete" eSuperTypes="#//Views/Selection">
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="multiple" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="FileUpload" eSuperTypes="#//Views/Input"/>
+    <eClassifiers xsi:type="ecore:EClass" name="List" eSuperTypes="#//Views/Selection">
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="multiple" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    </eClassifiers>
+  </eSubpackages>
+</ecore:EPackage>

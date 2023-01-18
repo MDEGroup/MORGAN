@@ -1,0 +1,7 @@
+model	Project (metaMetaModel,Feature,ref) (metaModel,Feature,ref) (model,Feature,ref) 
+model	Constraint (text,EString,attribute) 
+model	Reference (feature,Feature,ref) 
+model	Node (min,EInt,attribute) (max,EInt,attribute) (id,EString,attribute) (children,Node,ref) (origin,Node,ref) (confs,Node,ref) (properties,Feature,ref) 
+model	Clonable (state,ConfigState,attribute) (clones,Clonable,ref) (prototype,Clonable,ref) 
+model	Feature (valueType,ValueType,attribute) (name,EString,attribute) (typedValue,TypedValue,ref) (references,Reference,ref) (describedNode,Node,ref) (configurations,Feature,ref) (constraints,Constraint,ref) 
+model	TypedValue (stringValue,EString,attribute) (floatValue,EFloatObject,attribute) (integerValue,EIntegerObject,attribute) (featureValue,Feature,ref) 

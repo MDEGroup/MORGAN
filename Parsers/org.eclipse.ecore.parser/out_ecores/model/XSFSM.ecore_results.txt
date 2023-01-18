@@ -1,0 +1,6 @@
+model	Buffer (initialValue,EString,attribute) (currentValues,EString,attribute) (outputs,StateMachine,ref) (inputs,StateMachine,ref) 
+model	StateMachine (producedString,EString,attribute) (consummedString,EString,attribute) (unprocessedString,EString,attribute) (initialState,State,ref) (ownedTransitions,Transition,ref) (ownedStates,State,ref) (currentState,State,ref) 
+model	State (outgoingTransitions,Transition,ref) (owningFSM,StateMachine,ref) (incomingTransitions,Transition,ref) 
+model	FSMSystem (ownedStateMachines,StateMachine,ref) (ownedBuffer,Buffer,ref) 
+model	Transition (output,EString,attribute) (input,EString,attribute) (source,State,ref) (target,State,ref) 
+model	NamedElement (name,EString,attribute) 

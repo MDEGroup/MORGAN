@@ -1,0 +1,5 @@
+model	Training (trained,Qualification,ref) 
+model	Project (size,ProjectSize,attribute) (name,EString,attribute) (status,ProjectStatus,attribute) (requirements,Qualification,ref) (predecessors,Project,ref) (members,Worker,ref) (successors,Project,ref) (company,Company,ref) 
+model	Company (name,EString,attribute) (projects,Project,ref) (employees,Worker,ref) 
+model	Qualification (description,EString,attribute) (projects,Project,ref) (trainings,Training,ref) (workers,Worker,ref) 
+model	Worker (nickname,EString,attribute) (salary,EInt,attribute) (qualifications,Qualification,ref) (projects,Project,ref) (employer,Company,ref) 

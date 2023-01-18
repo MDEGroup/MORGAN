@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="error3"
+    nsURI="http://error3" nsPrefix="_error3">
+  <eClassifiers xsi:type="ecore:EClass" name="World">
+    <eAnnotations source="diagraph">
+      <details key="node"/>
+      <details key="pov"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="things" upperBound="-1"
+        eType="#//Thing" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Thing" eSuperTypes="#//NamedElement">
+    <eAnnotations source="diagraph">
+      <details key="node"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="id" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="relations" upperBound="-1"
+        eType="#//RelatedTo" containment="true" eOpposite="#//RelatedTo/fromThing"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="NamedElement" abstract="true">
+    <eAnnotations source="diagraph">
+      <details key="label=name"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="RelatedTo" eSuperTypes="#//NamedElement">
+    <eAnnotations source="diagraph">
+      <details key="link"/>
+      <details key="cont=Thing.relations"/>
+      <details key="lsrc=fromThing"/>
+      <details key="ltrg=toThing"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="fromThing" eType="#//Thing"
+        eOpposite="#//Thing/relations"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="toThing" eType="#//Thing"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="since" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Required">
+    <eAnnotations source="diagraph">
+      <details key="node" value=""/>
+      <details key="label=ir" value=""/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="ir" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="bindings" upperBound="-1"
+        eType="#//Binding" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Binding">
+    <eAnnotations source="diagraph">
+      <details key="link" value=""/>
+      <details key="lsrc=src" value=""/>
+      <details key="ltrg=trg" value=""/>
+      <details key="cont=Required.bindings" value=""/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="type" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="src" eType="#//Required"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="trg" eType="#//Provided"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Provided">
+    <eAnnotations source="diagraph">
+      <details key="node" value=""/>
+      <details key="label=ip" value=""/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="ip" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="AbstractComponent">
+    <eAnnotations source="diagraph">
+      <details key="node" value=""/>
+      <details key="pref=requiredInterfaces" value=""/>
+      <details key="pref=providedInterfaces" value=""/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="requiredInterfaces" upperBound="-1"
+        eType="#//Required" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="providedInterfaces" upperBound="-1"
+        eType="#//Provided" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Level2" eSuperTypes="#//AbstractComponent">
+    <eAnnotations source="diagraph">
+      <details key="node" value=""/>
+    </eAnnotations>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="NestedComponent" eSuperTypes="#//AbstractComponent">
+    <eAnnotations source="diagraph">
+      <details key="node" value=""/>
+      <details key="kref=levels2" value=""/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="levels2" upperBound="-1"
+        eType="#//Level2" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="RecursiveComponen" eSuperTypes="#//AbstractComponent">
+    <eAnnotations source="diagraph">
+      <details key="node" value=""/>
+      <details key="pov" value=""/>
+      <details key="cont=RecursiveComponen.components" value=""/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="levels1" upperBound="-1"
+        eType="#//NestedComponent" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="bazbars" upperBound="-1"
+        eType="#//Bazbar" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="components" upperBound="-1"
+        eType="#//RecursiveComponen" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Bazbar">
+    <eAnnotations source="diagraph">
+      <details key="node" value=""/>
+      <details key="label=b" value=""/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="b" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+</ecore:EPackage>

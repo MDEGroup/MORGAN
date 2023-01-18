@@ -1,0 +1,363 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="graphgrammar" nsURI="org.wbsilva.bence.graphgrammar" nsPrefix="org.wbsilva.bence.graphgrammar">
+  <eClassifiers xsi:type="ecore:EClass" name="Grammar">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="An eNCE graph grammar"/>
+    </eAnnotations>
+    <eOperations name="derives" eType="#//DerivationStep">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Return a derivation step for the current graph prev, &#xA;when applied a rule with right hand side rhs and left hand side vertex,&#xA;resulting in the next graph next, if such derivation is possible,&#xA;Otherwise return null."/>
+      </eAnnotations>
+      <eParameters name="prev" eType="#//Graph"/>
+      <eParameters name="next" eType="#//Graph"/>
+      <eParameters name="vertex" eType="#//Vertex"/>
+      <eParameters name="rhs" eType="#//Graph"/>
+    </eOperations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="alphabet" ordered="false"
+        upperBound="-1" eType="#//Symbol" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="terminals" ordered="false"
+        upperBound="-1" eType="#//Symbol"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="nonterminals" ordered="false"
+        upperBound="-1" eType="#//Symbol"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="rules" ordered="false"
+        upperBound="-1" eType="#//Rule" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="initial" eType="#//Symbol"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Rule">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="Rule of a graph grammar"/>
+    </eAnnotations>
+    <eOperations name="embed" ordered="false" upperBound="-1" eType="#//Edge">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Given the graph and a list of edges (possibly not belonging to it),&#xA;and a vertex (possibly not belonging to it), return a list of edges&#xA;that should be added to it for the embedding of the application of this rule&#xA;on the vertex.&#xA;This method can be used after adding the RHS of this rule to the graph to&#xA;connect it with the rest of the graph. The unifier maps between the rule's &#xA;and the graph's vertices."/>
+      </eAnnotations>
+      <eParameters name="graph" eType="#//Graph"/>
+      <eParameters name="vertex" eType="#//Vertex"/>
+      <eParameters name="edges" ordered="false" upperBound="-1" eType="#//Edge"/>
+      <eParameters name="unifier" upperBound="-1" eType="#//VertexToVertexMap"/>
+      <eParameters name="pacs" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    </eOperations>
+    <eOperations name="apply" ordered="false" upperBound="-1" eType="#//VertexToVertexMap">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Apply this rule to the graph, substituting vertex by the RHS of this rule and&#xA;embedding it to the rest of the graph. The flag pacs signalizez whether to &#xA;include the pacs vertices in the resulting graph or not."/>
+      </eAnnotations>
+      <eParameters name="graph" eType="#//Graph"/>
+      <eParameters name="vertex" eType="#//Vertex"/>
+      <eParameters name="pacs" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    </eOperations>
+    <eOperations name="derive" ordered="false" upperBound="-1" eType="#//VertexToVertexMap">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Apply this rule to the graph, substituting vertex by the RHS of this rule and&#xA;embedding it to the rest of the graph including PACs in the resulting graph"/>
+      </eAnnotations>
+      <eParameters name="graph" eType="#//Graph"/>
+      <eParameters name="vertex" eType="#//Vertex"/>
+    </eOperations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="id" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
+        iD="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="lhs" eType="#//Symbol"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="rhs" eType="#//Graph" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="embedding" upperBound="-1"
+        eType="#//VertexToSymbolSymbolsPairMap" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="pac" ordered="false" upperBound="-1"
+        eType="#//Vertex"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="SymbolSymbolsPair">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documenation" value="A pair of an edge label and a vertex labels"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="edgeLabel" eType="#//Symbol"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="vertexLabels" ordered="false"
+        upperBound="-1" eType="#//Symbol" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="VertexToSymbolSymbolsPairMap" instanceClassName="java.util.Map$Entry">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="An entry to map between a vertex and a pair (Symbol, Symbols), used in the embedding rules"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="key" eType="#//Vertex"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="value" ordered="false"
+        upperBound="-1" eType="#//SymbolSymbolsPair" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Symbol">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="Symbol of a grammar"/>
+    </eAnnotations>
+    <eOperations name="equivalates" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Return true iff this symbol is equivalent to the other"/>
+      </eAnnotations>
+      <eParameters name="other" eType="#//Symbol"/>
+    </eOperations>
+    <eOperations name="compareTo" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Compare this symbol to other, creating a total order.&#xA;If this &lt; other then return -1&#xA;if this > other then return 1&#xA;else return 0"/>
+      </eAnnotations>
+      <eParameters name="other" eType="#//Symbol"/>
+    </eOperations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="subscript" unique="false"
+        upperBound="-1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="superscript" unique="false"
+        upperBound="-1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="DerivationStep">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="Derivation step of the application of a rule on a vertex of the graph previous, &#xA;resulting in the graph next. The unifier propery maps the vertex of the &#xA;applied rule to the vertices of the next graph."/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="rule" eType="#//Rule" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="vertex" eType="#//Vertex"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="previous" eType="#//Graph"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="next" eType="#//Graph"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="unifier" ordered="false"
+        upperBound="-1" eType="#//VertexToVertexMap" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Derivation">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="Derivation as a list of derivation steps"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="steps" upperBound="-1"
+        eType="#//DerivationStep" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ParsingTree">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="The parsing tree of a graph parsed by a graph grammar"/>
+    </eAnnotations>
+    <eOperations name="derivation" eType="#//Derivation">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Return a derivation corresponding to this parsing tree"/>
+      </eAnnotations>
+    </eOperations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="zoneVertex" eType="#//ZoneVertex"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="derivationStep" eType="#//DerivationStep"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="children" ordered="false"
+        upperBound="-1" eType="#//ParsingTree" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ResolutionStep">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="Resolution step for the pac vertices in the mapping pac. This map takes&#xA;from a pac vertex to a reference id, that can be resolved by another mapping&#xA;in the complete resolution."/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="pac" ordered="false" upperBound="-1"
+        eType="#//VertexToStringMap" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Resolution">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="A complete resolution composed of a sequence of steps and a mapping&#xA;from reference ids to actual vertices that are to be used as substitutions&#xA;for the pac vertices of each resolution step."/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="referenceIds" ordered="false"
+        upperBound="-1" eType="#//StringToVertexMap" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="steps" upperBound="-1"
+        eType="#//ResolutionStep" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Graph">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="A directed edge and node labeled graph"/>
+    </eAnnotations>
+    <eOperations name="neighborhood" ordered="false" upperBound="-1" eType="#//Vertex">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Return the set of vertices that are neighbors of any vertex from the set &#xA;vertices, except for vertices that are already in vertices"/>
+      </eAnnotations>
+      <eParameters name="vertices" ordered="false" upperBound="-1" eType="#//Vertex"/>
+    </eOperations>
+    <eOperations name="neighborhood" ordered="false" upperBound="-1" eType="#//Vertex">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Return the set of vertices that are neighbors of the vertex"/>
+      </eAnnotations>
+      <eParameters name="vertex" eType="#//Vertex"/>
+    </eOperations>
+    <eOperations name="isomorphicTo" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Return true iff this graph is isomorphic to other"/>
+      </eAnnotations>
+      <eParameters name="other" eType="#//Graph"/>
+    </eOperations>
+    <eOperations name="isomorphism" ordered="false" upperBound="-1" eType="#//VertexToVertexMap">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Return an isomorphism between this and other iff this graph is isomorphic to other"/>
+      </eAnnotations>
+      <eParameters name="other" eType="#//Graph"/>
+    </eOperations>
+    <eOperations name="inEdges" ordered="false" upperBound="-1" eType="#//Edge">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="The incoming edges of vertex"/>
+      </eAnnotations>
+      <eParameters name="vertex" eType="#//Vertex"/>
+    </eOperations>
+    <eOperations name="outEdges" ordered="false" upperBound="-1" eType="#//Edge">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="The outgoing edges of vertex"/>
+      </eAnnotations>
+      <eParameters name="vertex" eType="#//Vertex"/>
+    </eOperations>
+    <eOperations name="edges" ordered="false" upperBound="-1" eType="#//Edge">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="The adjacent edges of vertex"/>
+      </eAnnotations>
+      <eParameters name="vertex" eType="#//Vertex"/>
+    </eOperations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="vertices" ordered="false"
+        upperBound="-1" eType="#//Vertex" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="edges" ordered="false"
+        upperBound="-1" eType="#//Edge" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Vertex">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="A labeled vertex of a graph"/>
+    </eAnnotations>
+    <eOperations name="equivalates" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Return true iff this vertex is equivalent to other"/>
+      </eAnnotations>
+      <eParameters name="other" eType="#//Vertex"/>
+    </eOperations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="id" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
+        iD="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="label" eType="#//Symbol"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ZoneVertex" eSuperTypes="#//Vertex">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="Zone vertex of a zone graph, containing zero or more vetices"/>
+    </eAnnotations>
+    <eOperations name="equivalates" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Return true iff this zone vertex is equivalent to other"/>
+      </eAnnotations>
+      <eParameters name="other" eType="#//ZoneVertex"/>
+    </eOperations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="vertices" upperBound="-1"
+        eType="#//Vertex" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="pac" ordered="false" upperBound="-1"
+        eType="#//Vertex" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Edge">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="A labeled edge of a graph"/>
+    </eAnnotations>
+    <eOperations name="compareTo" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Compare this edge to other, creating a total order.&#xA;If this &lt; other then return -1&#xA;if this > other then return 1&#xA;else return 0"/>
+      </eAnnotations>
+      <eParameters name="other" eType="#//Edge"/>
+    </eOperations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="from" eType="#//Vertex"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="to" eType="#//Vertex"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="label" eType="#//Symbol"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="TripleGrammar">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="An eNCE triple graph grammar"/>
+    </eAnnotations>
+    <eOperations name="produce" eType="#//ResolutionStep">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Produce the target part of the triple graph tripleGraph if forward is true,&#xA;otherwise the source part. Produce moreover, the correspondence part,&#xA;according to the derivation step derivationStep from the parsing process&#xA;of the input graph, if this is compatible with this triple grammar.&#xA;Additionally, return a resolution step for this derivation step and contributes&#xA;to the creation of the resolution sent by parameter."/>
+      </eAnnotations>
+      <eParameters name="tripleGraph" eType="#//TripleGraph"/>
+      <eParameters name="derivationStep" eType="#//DerivationStep"/>
+      <eParameters name="forward" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+      <eParameters name="resolution" eType="#//Resolution"/>
+    </eOperations>
+    <eOperations name="resolve">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Resolve the occurences of the pac vertices of the resolution step in the&#xA;triple graph adding edges between them and other vertices of the triple &#xA;graph. The flag forward signalizes which part of the triple graph the &#xA;resolution step refers."/>
+      </eAnnotations>
+      <eParameters name="tripleGraph" eType="#//TripleGraph"/>
+      <eParameters name="resolution" eType="#//Resolution"/>
+      <eParameters name="resolutionStep" eType="#//ResolutionStep"/>
+      <eParameters name="forward" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    </eOperations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="alphabet" ordered="false"
+        upperBound="-1" eType="#//Symbol" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="terminals" ordered="false"
+        upperBound="-1" eType="#//Symbol"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="nonterminals" ordered="false"
+        upperBound="-1" eType="#//Symbol"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="tripleRules" ordered="false"
+        upperBound="-1" eType="#//TripleRule" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="initial" eType="#//Symbol"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="TripleRule">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="A triple rule of a triple graph grammar"/>
+    </eAnnotations>
+    <eOperations name="invMs" eType="#//Vertex">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="The image of inverse function of the morphism ms applied to sourceVertex. &#xA;As ms is bijective, this inverse exists, is unique and also bijective."/>
+      </eAnnotations>
+      <eParameters name="sourceVertex" eType="#//Vertex"/>
+    </eOperations>
+    <eOperations name="invMt" eType="#//Vertex">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="The image of the inverse function of the morphism mt applied to targetVertex.&#xA;As mt is bijective, this inverse exists, is unique and bijective."/>
+      </eAnnotations>
+      <eParameters name="targetVertex" eType="#//Vertex"/>
+    </eOperations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="source" eType="#//Rule"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="corr" eType="#//Rule" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="target" eType="#//Rule"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="ms" ordered="false" upperBound="-1"
+        eType="#//VertexToVertexMap" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="mt" ordered="false" upperBound="-1"
+        eType="#//VertexToVertexMap" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="TripleGraph">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="A triple edge and node labeled graph"/>
+    </eAnnotations>
+    <eOperations name="invMs" ordered="false" upperBound="-1" eType="#//Vertex">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="The image of inverse function of the morphism ms applied to sourceVertex. &#xA;As ms is bijective, this inverse exists, is unique and also bijective."/>
+      </eAnnotations>
+      <eParameters name="sourceVertex" eType="#//Vertex"/>
+    </eOperations>
+    <eOperations name="invMt" ordered="false" upperBound="-1" eType="#//Vertex">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="The image of the inverse function of the morphism mt applied to targetVertex.&#xA;As mt is bijective, this inverse exists, is unique and bijective."/>
+      </eAnnotations>
+      <eParameters name="targetVertex" eType="#//Vertex"/>
+    </eOperations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="source" eType="#//Graph"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="corr" eType="#//Graph"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="target" eType="#//Graph"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="ms" upperBound="-1" eType="#//VertexToVertexMap"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="mt" upperBound="-1" eType="#//VertexToVertexMap"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="VertexToVertexMap" instanceClassName="java.util.Map$Entry">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="An entry to map between two vertices. Used in the morphism of the &#xA;triple rules and triple graphs"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="key" eType="#//Vertex"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="value" eType="#//Vertex"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="VertexToStringMap" instanceClassName="java.util.Map$Entry">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="An entry to map between a vertex and a string. Used in the resolution steps&#xA;to map between pacs and its reference ids."/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="key" eType="#//Vertex"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="StringToVertexMap" instanceClassName="java.util.Map$Entry">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="An entry to map between a string and a vertex. Used in the resolution&#xA;to map from a reference id to a vertex."/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="key" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="value" eType="#//Vertex"/>
+  </eClassifiers>
+</ecore:EPackage>

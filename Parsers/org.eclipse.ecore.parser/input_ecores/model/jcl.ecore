@@ -1,0 +1,298 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="jcl" nsURI="http://www.servicifi.org/gelato/language/jcl" nsPrefix="jcl">
+  <eClassifiers xsi:type="ecore:EDataType" name="Dummy" instanceTypeName="Dummy"/>
+  <eSubpackages name="commons" nsURI="http://www.servicifi.org/gelato/language/jcl/commons"
+      nsPrefix="commons">
+    <eClassifiers xsi:type="ecore:EClass" name="NamedElement">
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" lowerBound="1"
+          eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="PhraseableElement">
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="isPhrase" lowerBound="1"
+          eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="CommentableElement" abstract="true">
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="comment" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="ProcedureStepElement" abstract="true">
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="procStepName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="IncompleteElement" abstract="true">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="waters" upperBound="-1"
+          eType="#//waters/Water" containment="true"/>
+    </eClassifiers>
+  </eSubpackages>
+  <eSubpackages name="parameters" nsURI="http://www.servicifi.org/gelato/language/jcl/parameters"
+      nsPrefix="parameters">
+    <eClassifiers xsi:type="ecore:EClass" name="Parameter" abstract="true"/>
+    <eClassifiers xsi:type="ecore:EClass" name="Display" eSuperTypes="#//parameters/Parameter">
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" lowerBound="1"
+          eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="JobClass" eSuperTypes="#//parameters/Parameter">
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" lowerBound="1"
+          eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="MessageClass" eSuperTypes="#//parameters/Parameter">
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" lowerBound="1"
+          eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="Password" eSuperTypes="#//parameters/Parameter">
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="old" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="new" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="Priority" eSuperTypes="#//parameters/Parameter">
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" lowerBound="1"
+          eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="UserID" eSuperTypes="#//parameters/Parameter">
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" lowerBound="1"
+          eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="MessageLevel" eSuperTypes="#//parameters/Parameter">
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="statements" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="messages" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EEnum" name="AdressSpaceEnum">
+      <eLiterals name="real" literal="REAL"/>
+      <eLiterals name="virtual" value="1" literal="VIRT"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EEnum" name="TypeRunEnum">
+      <eLiterals name="copy" literal="COPY"/>
+      <eLiterals name="hold" value="1" literal="HOLD"/>
+      <eLiterals name="jclhold" literal="JCLHOLD"/>
+      <eLiterals name="scan" literal="SCAN"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="TypeRun" eSuperTypes="#//parameters/Parameter">
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" lowerBound="1"
+          eType="#//parameters/TypeRunEnum"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="AddressSpace" eSuperTypes="#//parameters/Parameter #//commons/ProcedureStepElement">
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" lowerBound="1"
+          eType="#//parameters/AdressSpaceEnum"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="Bytes" eSuperTypes="#//parameters/Parameter">
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" lowerBound="1"
+          eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="AccountInfo" eSuperTypes="#//parameters/Parameter #//commons/ProcedureStepElement">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="values" lowerBound="1"
+          upperBound="-1" eType="#//literals/Literal" containment="true"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="Argument" eSuperTypes="#//parameters/Parameter #//commons/ProcedureStepElement">
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" lowerBound="1"
+          eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="Condition" eSuperTypes="#//parameters/Parameter #//commons/ProcedureStepElement">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="condition" lowerBound="1"
+          eType="#//conditions/Condition" containment="true"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="DatasetName" eSuperTypes="#//parameters/Parameter">
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" lowerBound="1"
+          eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="Other" eSuperTypes="#//parameters/Parameter #//commons/NamedElement #//commons/ProcedureStepElement">
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" lowerBound="1"
+          eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eClassifiers>
+  </eSubpackages>
+  <eSubpackages name="statements" nsURI="http://www.servicifi.org/gelato/language/jcl/statements"
+      nsPrefix="statements">
+    <eClassifiers xsi:type="ecore:EClass" name="Statement" abstract="true" eSuperTypes="#//commons/NamedElement #//members/Member">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="parameters" upperBound="-1"
+          eType="#//parameters/Parameter" containment="true"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="Execute" abstract="true" eSuperTypes="#//statements/Statement"/>
+    <eClassifiers xsi:type="ecore:EClass" name="StatementContainer" abstract="true">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="statements" lowerBound="1"
+          upperBound="-1" eType="#//statements/Statement" containment="true"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="Condition" eSuperTypes="#//statements/StatementContainer #//statements/Statement">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="elseStatements" lowerBound="1"
+          upperBound="-1" eType="#//statements/Statement" containment="true"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="elseName" lowerBound="1"
+          eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
+          defaultValueLiteral=""/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="endName" lowerBound="1"
+          eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="condition" lowerBound="1"
+          eType="#//expressions/Expression" containment="true"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="DataDefinition" eSuperTypes="#//statements/Statement #//commons/ProcedureStepElement"/>
+    <eClassifiers xsi:type="ecore:EClass" name="Set" eSuperTypes="#//statements/Statement"/>
+    <eClassifiers xsi:type="ecore:EClass" name="Input" eSuperTypes="#//statements/Statement"/>
+    <eClassifiers xsi:type="ecore:EClass" name="Output" eSuperTypes="#//statements/Statement"/>
+    <eClassifiers xsi:type="ecore:EClass" name="JCLLibrary" eSuperTypes="#//statements/Statement"/>
+    <eClassifiers xsi:type="ecore:EClass" name="Control" eSuperTypes="#//statements/Statement">
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="endName" lowerBound="1"
+          eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="endControl" lowerBound="1"
+          eType="#//statements/EndControl" containment="true"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="Include" eSuperTypes="#//statements/Statement"/>
+    <eClassifiers xsi:type="ecore:EClass" name="Command" eSuperTypes="#//statements/Statement">
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" lowerBound="1"
+          eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="ExecuteProgram" eSuperTypes="#//statements/Execute">
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="programName" lowerBound="1"
+          eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="ExecuteProcedure" eSuperTypes="#//statements/Execute">
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="procedureName" lowerBound="1"
+          eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="EndControl" eSuperTypes="#//statements/Statement"/>
+  </eSubpackages>
+  <eSubpackages name="containers" nsURI="http://www.servicifi.org/gelato/language/jcl/containers"
+      nsPrefix="containers">
+    <eClassifiers xsi:type="ecore:EClass" name="JCLRoot">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="members" upperBound="-1"
+          eType="#//members/Member" containment="true"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="JobUnit" eSuperTypes="#//commons/NamedElement #//containers/JCLRoot #//commons/IncompleteElement">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="parameters" lowerBound="1"
+          upperBound="-1" eType="#//parameters/Parameter" containment="true"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="accountInfos" eType="#//literals/Literal"
+          containment="true"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="executes" upperBound="-1"
+          eType="#//statements/ExecuteProgram" containment="true"/>
+    </eClassifiers>
+  </eSubpackages>
+  <eSubpackages name="expressions" nsURI="http://www.servicifi.org/gelato/language/jcl/expressions"
+      nsPrefix="expressions">
+    <eClassifiers xsi:type="ecore:EClass" name="Expression" abstract="true"/>
+    <eClassifiers xsi:type="ecore:EClass" name="RelationalExpression" eSuperTypes="#//expressions/ConditionalAndExpressionChild">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="children" lowerBound="1"
+          upperBound="-1" eType="#//expressions/RelationalExpressionChild" containment="true"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="relationOperators" upperBound="-1"
+          eType="#//operators/RelationOperator" containment="true"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="ConditionalExpression" abstract="true"
+        eSuperTypes="#//expressions/Expression"/>
+    <eClassifiers xsi:type="ecore:EClass" name="ConditionalOrExpression" eSuperTypes="#//expressions/ConditionalExpression">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="children" lowerBound="1"
+          upperBound="-1" eType="#//expressions/ConditionalOrExpressionChild" containment="true"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="orOperators" upperBound="-1"
+          eType="#//operators/Or" containment="true"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="ConditionalOrExpressionChild" abstract="true"
+        eSuperTypes="#//expressions/ConditionalExpression"/>
+    <eClassifiers xsi:type="ecore:EClass" name="ConditionalAndExpression" eSuperTypes="#//expressions/ConditionalOrExpressionChild">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="children" lowerBound="1"
+          upperBound="-1" eType="#//expressions/ConditionalAndExpressionChild" containment="true"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="andOperators" upperBound="-1"
+          eType="#//operators/And" containment="true"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="ConditionalAndExpressionChild" abstract="true"
+        eSuperTypes="#//expressions/ConditionalOrExpressionChild"/>
+    <eClassifiers xsi:type="ecore:EClass" name="RelationalExpressionChild" abstract="true"
+        eSuperTypes="#//expressions/ConditionalAndExpressionChild"/>
+    <eClassifiers xsi:type="ecore:EClass" name="UnaryExpressionChild" abstract="true"
+        eSuperTypes="#//expressions/RelationalExpressionChild"/>
+    <eClassifiers xsi:type="ecore:EClass" name="UnaryExpression" eSuperTypes="#//expressions/RelationalExpressionChild">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="child" lowerBound="1"
+          eType="#//expressions/UnaryExpressionChild" containment="true"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="operator" eType="#//operators/UnaryOperator"
+          containment="true"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="NestedExpression" eSuperTypes="#//expressions/PrimaryExpression">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="expression" lowerBound="1"
+          eType="#//expressions/Expression" containment="true"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="PrimaryExpression" abstract="true"
+        eSuperTypes="#//expressions/UnaryExpressionChild"/>
+    <eClassifiers xsi:type="ecore:EClass" name="Abend" eSuperTypes="#//expressions/PrimaryExpression #//commons/ProcedureStepElement">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="step" lowerBound="1"
+          eType="#//references/IdentifierReference" containment="true"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="Run" eSuperTypes="#//expressions/PrimaryExpression #//commons/ProcedureStepElement">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="step" lowerBound="1"
+          eType="#//references/IdentifierReference" containment="true"/>
+    </eClassifiers>
+  </eSubpackages>
+  <eSubpackages name="operators" nsURI="http://www.servicifi.org/gelato/language/jcl/operators"
+      nsPrefix="operators">
+    <eClassifiers xsi:type="ecore:EClass" name="Operator" abstract="true" eSuperTypes="#//commons/PhraseableElement"/>
+    <eClassifiers xsi:type="ecore:EClass" name="GreaterThan" eSuperTypes="#//operators/RelationOperator"/>
+    <eClassifiers xsi:type="ecore:EClass" name="GreaterEqual" eSuperTypes="#//operators/RelationOperator"/>
+    <eClassifiers xsi:type="ecore:EClass" name="Equal" eSuperTypes="#//operators/RelationOperator"/>
+    <eClassifiers xsi:type="ecore:EClass" name="LessThan" eSuperTypes="#//operators/RelationOperator"/>
+    <eClassifiers xsi:type="ecore:EClass" name="LessEqual" eSuperTypes="#//operators/RelationOperator"/>
+    <eClassifiers xsi:type="ecore:EClass" name="NotEqual" eSuperTypes="#//operators/RelationOperator"/>
+    <eClassifiers xsi:type="ecore:EClass" name="UnaryOperator" abstract="true" eSuperTypes="#//operators/Operator"/>
+    <eClassifiers xsi:type="ecore:EClass" name="RelationOperator" abstract="true"
+        eSuperTypes="#//operators/Operator"/>
+    <eClassifiers xsi:type="ecore:EClass" name="Negate" eSuperTypes="#//operators/UnaryOperator"/>
+    <eClassifiers xsi:type="ecore:EClass" name="LogicOperator" eSuperTypes="#//operators/Operator"/>
+    <eClassifiers xsi:type="ecore:EClass" name="And" eSuperTypes="#//operators/LogicOperator"/>
+    <eClassifiers xsi:type="ecore:EClass" name="Or" eSuperTypes="#//operators/LogicOperator"/>
+  </eSubpackages>
+  <eSubpackages name="literals" nsURI="http://www.servicifi.org/gelato/language/jcl/literals"
+      nsPrefix="literals">
+    <eClassifiers xsi:type="ecore:EClass" name="Literal" abstract="true"/>
+    <eClassifiers xsi:type="ecore:EClass" name="IntegerLiteral" eSuperTypes="#//literals/Literal #//expressions/PrimaryExpression #//conditions/ReturnCode">
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" lowerBound="1"
+          eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="StringLiteral" eSuperTypes="#//literals/Literal">
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" lowerBound="1"
+          eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="SpecialLiteral" eSuperTypes="#//literals/Literal">
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" lowerBound="1"
+          eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eClassifiers>
+  </eSubpackages>
+  <eSubpackages name="references" nsURI="http://www.servicifi.org/gelato/language/jcl/references"
+      nsPrefix="references">
+    <eClassifiers xsi:type="ecore:EClass" name="Reference" abstract="true">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="next" eType="#//references/Reference"
+          containment="true"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="ElementReference" abstract="true"
+        eSuperTypes="#//references/Reference">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="target" lowerBound="1"
+          eType="#//references/ReferenceableElement"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="IdentifierReference" eSuperTypes="#//references/ElementReference #//expressions/PrimaryExpression #//conditions/ReturnCode"/>
+    <eClassifiers xsi:type="ecore:EClass" name="ReferenceableElement" abstract="true"/>
+  </eSubpackages>
+  <eSubpackages name="conditions" nsURI="http://www.servicifi.org/gelato/language/jcl/conditions"
+      nsPrefix="conditions">
+    <eClassifiers xsi:type="ecore:EClass" name="Condition" abstract="true"/>
+    <eClassifiers xsi:type="ecore:EClass" name="Even" eSuperTypes="#//conditions/PrimaryCondition"/>
+    <eClassifiers xsi:type="ecore:EClass" name="Only" eSuperTypes="#//conditions/PrimaryCondition"/>
+    <eClassifiers xsi:type="ecore:EClass" name="PrimaryCondition" abstract="true"
+        eSuperTypes="#//conditions/Condition"/>
+    <eClassifiers xsi:type="ecore:EClass" name="NestedCondition" eSuperTypes="#//conditions/PrimaryCondition">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="conditions" lowerBound="1"
+          upperBound="-1" eType="#//conditions/Condition" containment="true"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="RelationalCondition" eSuperTypes="#//conditions/PrimaryCondition #//references/ElementReference">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="relationOperator" lowerBound="1"
+          eType="#//operators/RelationOperator" containment="true"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="returnCode" lowerBound="1"
+          eType="#//conditions/ReturnCode" containment="true"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="ReturnCode" abstract="true"/>
+  </eSubpackages>
+  <eSubpackages name="procedures" nsURI="http://www.servicifi.org/gelato/language/jcl/procedures"
+      nsPrefix="procedures">
+    <eClassifiers xsi:type="ecore:EClass" name="Procedure" eSuperTypes="#//containers/JCLRoot #//commons/NamedElement #//members/Member">
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="endName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eClassifiers>
+  </eSubpackages>
+  <eSubpackages name="members" nsURI="http://www.servicifi.org/gelato/language/jcl/members"
+      nsPrefix="members">
+    <eClassifiers xsi:type="ecore:EClass" name="Member" abstract="true"/>
+  </eSubpackages>
+  <eSubpackages name="waters" nsURI="http://www.servicifi.org/gelato/language/jcl/waters"
+      nsPrefix="waters">
+    <eClassifiers xsi:type="ecore:EClass" name="Water">
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" lowerBound="1"
+          eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eClassifiers>
+  </eSubpackages>
+</ecore:EPackage>

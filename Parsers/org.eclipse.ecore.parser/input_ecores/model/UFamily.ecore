@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="Families" nsURI="http://it.univaq.disim/uncertainty.ufamily"
+    nsPrefix="Families">
+  <eClassifiers xsi:type="ecore:EClass" name="Family" eSuperTypes="#//uncertainty/ModelElement #//uncertainty/aFamily">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="lastName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="sons" upperBound="-1" eType="#//uncertainty/aMember"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="daughters" upperBound="-1"
+        eType="#//uncertainty/aMember" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="mother" eType="#//uncertainty/aMember"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="father" eType="#//uncertainty/aMember"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="address" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="links" upperBound="-1"
+        eType="ecore:EClass Families2.ecore#//Family"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Member" eSuperTypes="#//uncertainty/ModelElement #//uncertainty/aMember">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="firstName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="age" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="relatives" eType="#//uncertainty/aMember"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="FamilyRegistry" eSuperTypes="#//uncertainty/ModelElement #//uncertainty/aFamilyRegistry">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="families" upperBound="-1"
+        eType="#//uncertainty/aFamily" containment="true"/>
+  </eClassifiers>
+  <eSubpackages name="uncertainty" nsURI="uncertainty" nsPrefix="uncertainty">
+    <eClassifiers xsi:type="ecore:EClass" name="ModelElement" abstract="true">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="include" upperBound="-1"
+          eType="#//uncertainty/ModelElement"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="exclude" upperBound="-1"
+          eType="#//uncertainty/ModelElement"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="UData" abstract="true">
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="utype" eType="#//uncertainty/OperatorType"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EEnum" name="OperatorType">
+      <eLiterals name="XOR" literal="XOR"/>
+      <eLiterals name="AND" value="1" literal="AND"/>
+      <eLiterals name="OR" value="2" literal="OR"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="uFamily" eSuperTypes="#//uncertainty/aFamily #//uncertainty/UData">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="uleft" upperBound="-1"
+          eType="#//Family" containment="true"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="uright" upperBound="-1"
+          eType="#//Family" containment="true"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="upoint" upperBound="-1"
+          eType="#//uncertainty/uFamily" containment="true"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="aFamily" abstract="true"/>
+    <eClassifiers xsi:type="ecore:EClass" name="uMember" eSuperTypes="#//uncertainty/aMember #//uncertainty/UData">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="uleft" upperBound="-1"
+          eType="#//Member" containment="true"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="uright" upperBound="-1"
+          eType="#//Member" containment="true"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="upoint" upperBound="-1"
+          eType="#//uncertainty/uMember" containment="true"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="aMember" abstract="true"/>
+    <eClassifiers xsi:type="ecore:EClass" name="uFamilyRegistry" eSuperTypes="#//uncertainty/aFamilyRegistry #//uncertainty/UData">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="uleft" upperBound="-1"
+          eType="#//FamilyRegistry" containment="true"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="uright" upperBound="-1"
+          eType="#//FamilyRegistry" containment="true"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="upoint" upperBound="-1"
+          eType="#//uncertainty/uFamilyRegistry" containment="true"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="aFamilyRegistry" abstract="true"/>
+  </eSubpackages>
+</ecore:EPackage>

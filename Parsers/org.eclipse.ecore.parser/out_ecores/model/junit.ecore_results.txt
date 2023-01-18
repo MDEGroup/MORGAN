@@ -1,0 +1,5 @@
+model	Book (data,EChar,attribute) (title,EString,attribute) (tags,EString,attribute) (authors,Person,ref) 
+model	MappedLibrary (books,EFeatureMapEntry,attribute) (rareBooks,Book,ref) (location,Location,ref) (regularBooks,Book,ref) 
+model	Library (books,Book,ref) (latestBook,Book,ref) (location,Location,ref) 
+model	Person (name,EString,attribute) (books,Book,ref) 
+model	Location (address,EString,attribute) (id,EJavaObject,attribute) (featuredBook,Book,ref) 

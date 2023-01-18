@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="scholar"
+    nsURI="http:///scholar.v0" nsPrefix="scholar">
+  <eClassifiers xsi:type="ecore:EClass" name="Student" eSuperTypes="#//Named">
+    <eAnnotations source="diagraph">
+      <details key="node" value=""/>
+      <details key="kref=exams"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="forname" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="exams" upperBound="-1"
+        eType="#//Exam" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Lecture" eSuperTypes="#//Named">
+    <eAnnotations source="diagraph">
+      <details key="node" value=""/>
+      <details key="ref=lecture_teacher"/>
+      <details key="ref=discipline"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="lecture_teacher" eType="#//Teacher"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="discipline" eType="#//Discipline"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Exam" eSuperTypes="#//Named">
+    <eAnnotations source="diagraph">
+      <details key="node" value=""/>
+      <details key="ref=lecture"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="score" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDouble"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="lecture" eType="#//Lecture"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Discipline" eSuperTypes="#//Named">
+    <eAnnotations source="diagraph">
+      <details key="node" value=""/>
+    </eAnnotations>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Named" abstract="true">
+    <eAnnotations source="diagraph">
+      <details key="label=name" value=""/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ScholarManagement">
+    <eAnnotations source="diagraph">
+      <details key="node" value=""/>
+      <details key="pov" value=""/>
+      <details key="cref=students" value=""/>
+      <details key="cref=lectures"/>
+      <details key="cref=teachers"/>
+      <details key="cref=disciplines"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="students" upperBound="-1"
+        eType="#//Student" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="disciplines" upperBound="-1"
+        eType="#//Discipline" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="lectures" upperBound="-1"
+        eType="#//Lecture" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="teachers" upperBound="-1"
+        eType="#//Teacher" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Teacher" eSuperTypes="#//Named">
+    <eAnnotations source="diagraph">
+      <details key="node" value=""/>
+    </eAnnotations>
+  </eClassifiers>
+</ecore:EPackage>

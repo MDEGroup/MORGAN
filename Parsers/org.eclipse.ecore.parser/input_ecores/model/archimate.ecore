@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="archimate" nsURI="http://www.example.org/archimate" nsPrefix="archimate">
+  <eClassifiers xsi:type="ecore:EClass" name="ArchimateDiagram">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="activestructureelement"
+        upperBound="-1" eType="#//ActiveStructureElement" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="motivationelement" upperBound="-1"
+        eType="#//MotivationElement" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="bussinesselement" upperBound="-1"
+        eType="#//BusinessElement" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="strategyelement" upperBound="-1"
+        eType="#//StrategyElement" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ActiveStructureElement" abstract="true">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="influences" upperBound="-1"
+        eType="#//ActiveStructureElement"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="target" upperBound="-1"
+        eType="#//MotivationElement"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Stakeholder" eSuperTypes="#//ActiveStructureElement">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="meaning" upperBound="-1"
+        eType="#//Meaning" eOpposite="#//Meaning/stakeholder"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="value" upperBound="-1"
+        eType="#//Value" eOpposite="#//Value/stakeholder"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="MotivationElement" abstract="true">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="influences" upperBound="-1"
+        eType="#//MotivationElement"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="children" upperBound="-1"
+        eType="#//MotivationElement" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="refinementType" eType="#//refinement"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="relationType" lowerBound="1"
+        eType="#//relationType" defaultValueLiteral="association"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="negativeInfluence" upperBound="-1"
+        eType="#//MotivationElement"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Meaning" eSuperTypes="#//MotivationElement">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="stakeholder" upperBound="-1"
+        eType="#//Stakeholder" eOpposite="#//Stakeholder/meaning"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Value" eSuperTypes="#//MotivationElement">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="stakeholder" upperBound="-1"
+        eType="#//Stakeholder" eOpposite="#//Stakeholder/value"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="outcome" upperBound="-1"
+        eType="#//Outcome" eOpposite="#//Outcome/value"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Driver" eSuperTypes="#//MotivationElement">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="goal" upperBound="-1" eType="#//Goal"
+        eOpposite="#//Goal/driver"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="assessment" upperBound="-1"
+        eType="#//Assessment" eOpposite="#//Assessment/driver"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Assessment" eSuperTypes="#//MotivationElement">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="goal" upperBound="-1" eType="#//Goal"
+        eOpposite="#//Goal/assessment"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="driver" upperBound="-1"
+        eType="#//Driver" eOpposite="#//Driver/assessment"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Goal" eSuperTypes="#//MotivationElement">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="driver" upperBound="-1"
+        eType="#//Driver" eOpposite="#//Driver/goal"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="assessment" upperBound="-1"
+        eType="#//Assessment" eOpposite="#//Assessment/goal"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Outcome" eSuperTypes="#//MotivationElement">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="outcome" upperBound="-1"
+        eType="#//Goal"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="value" upperBound="-1"
+        eType="#//Value" eOpposite="#//Value/outcome"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Principle" eSuperTypes="#//MotivationElement">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="outcome" upperBound="-1"
+        eType="#//Outcome"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Requirement" eSuperTypes="#//MotivationElement">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="outcome" upperBound="-1"
+        eType="#//Outcome"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="goal" upperBound="-1" eType="#//Goal"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Constraint" eSuperTypes="#//Requirement"/>
+  <eClassifiers xsi:type="ecore:EClass" name="StrategyElement" abstract="true">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="refinementType" eType="#//refinement"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="children" upperBound="-1"
+        eType="#//StrategyElement" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="relationType" lowerBound="1"
+        eType="#//relationType" defaultValueLiteral="association"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="influences" upperBound="-1"
+        eType="#//MotivationElement"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Resource" eSuperTypes="#//StrategyElement"/>
+  <eClassifiers xsi:type="ecore:EClass" name="BusinessElement" abstract="true">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="refinementType" eType="#//refinement"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="children" upperBound="-1"
+        eType="#//BusinessElement" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="relationType" lowerBound="1"
+        eType="#//relationType" defaultValueLiteral="association"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="realizes" upperBound="-1"
+        eType="#//MotivationElement"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="influences" upperBound="-1"
+        eType="#//MotivationElement"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="triggers" eType="#//BusinessElement"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="negativeInfluence" upperBound="-1"
+        eType="#//MotivationElement"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="BusinessProcess" eSuperTypes="#//BusinessElement"/>
+  <eClassifiers xsi:type="ecore:EEnum" name="refinement">
+    <eLiterals name="AND"/>
+    <eLiterals name="OR"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="relationType">
+    <eLiterals name="association"/>
+    <eLiterals name="realization" value="1" literal="realization"/>
+    <eLiterals name="trigger" value="2"/>
+    <eLiterals name="composition" value="3"/>
+    <eLiterals name="influences" value="4"/>
+  </eClassifiers>
+</ecore:EPackage>

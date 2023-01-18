@@ -1,0 +1,8 @@
+model	Study (code,EString,attribute) (name,EString,attribute) (studyInstances,StudyInstance,ref) 
+model	CourseInstance (year,EInt,attribute) (instanceName,EString,attribute) (semester,SemesterCode,attribute) (course,Course,ref) 
+model	University (name,EString,attribute) (courses,Course,ref) (studies,Study,ref) 
+model	Semester (studyYearSemester,EString,attribute) (courses,CourseInstance,ref) 
+model	StudyInstance (year,EInt,attribute) (study,Study,ref) (startYear,StudyYear,ref) 
+model	StudyCourse (mandatory,EBoolean,attribute) (courseInstance,CourseInstance,ref) 
+model	Course (code,CourseCode,attribute) (name,EString,attribute) (studyPoints,EFloat,attribute) (courseInstances,CourseInstance,ref) 
+model	StudyYear (programName,EString,attribute) (springSemester,Semester,ref) (autumnSemester,Semester,ref) (nextYear,StudyYear,ref) 

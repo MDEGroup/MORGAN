@@ -1,0 +1,6 @@
+model	Condition (sensor,Sensor,attribute) (relation,Relation,attribute) (ifConditionTrue,Action,ref) (value,Value,ref) 
+model	Action (duration,EInt,attribute) (action,EV3_ACTION,attribute) (value,EInt,attribute) 
+model	NewMissions (missions,Mission,ref) 
+model	Value (color,Color,attribute) (bool,EString,attribute) (integer,EInt,attribute) 
+model	Mission (name,EString,attribute) (priority,EInt,attribute) (type,MissionType,attribute) (cond,Condition,ref) (actionsAfterSetOfConditions,Action,ref) (newMission,NewMissions,ref) 
+model	Robot (slowSpeed,EInt,attribute) (slaveAddress,EString,attribute) (defaultSpeed,EInt,attribute) (refreshRate,EInt,attribute) (maxAngle,EInt,attribute) (minAngle,EInt,attribute) (startMissions,Mission,ref) (availableMissions,Mission,ref) 

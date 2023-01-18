@@ -1,0 +1,8 @@
+model	StructuralFeature (visibility,EString,attribute) (name,EString,attribute) (owner,Class,ref) 
+model	Attribute (multivalued,EBoolean,attribute) 
+model	TypedElement (type,Classifier,ref) 
+model	Model (classifiers,Classifier,ref) 
+model	Parameter (name,EString,attribute) (paramOf,Operation,ref) 
+model	Class (features,StructuralFeature,ref) (children,Class,ref) (parents,Class,ref) 
+model	Classifier (name,EString,attribute) (typeOf,TypedElement,ref) 
+model	Operation (params,Parameter,ref) 

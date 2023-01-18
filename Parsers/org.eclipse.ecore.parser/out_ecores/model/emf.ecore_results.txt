@@ -1,0 +1,5 @@
+model	Action (event,EString,attribute) 
+model	State (name,EString,attribute) (type,StateType,attribute) (outgoingTransitions,Transition,ref) (nestedStateMachines,StateMachine,ref) 
+model	StateMachine (transitions,Transition,ref) (transitionToSourceState,TransitionToStateMapEntry,ref) (states,State,ref) 
+model	Transition (action,EJavaObject,attribute) (targetState,State,ref) 
+model	TransitionToStateMapEntry (value,State,ref) (key,Transition,ref) 

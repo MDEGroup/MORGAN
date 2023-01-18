@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="fopramodel" nsURI="http://fopramodel/1.0" nsPrefix="fopramodel">
+  <eClassifiers xsi:type="ecore:EClass" name="FoPra">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="title" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="description" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="status" eType="#//Status"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="maxNumberOfStudents" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"
+        defaultValueLiteral="1"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="start" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDate"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="end" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDate"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="students" lowerBound="1"
+        upperBound="-1" eType="#//Student" eOpposite="#//Student/fopras"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="rg" lowerBound="1" eType="#//ResearchGroup"
+        eOpposite="#//ResearchGroup/fopras"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="supervisor" eType="#//Associate"
+        eOpposite="#//Associate/fopras"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="advisor" upperBound="-1"
+        eType="#//ExternalAdvisor" eOpposite="#//ExternalAdvisor/fopras"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="auxiliaries" lowerBound="1"
+        upperBound="-1" eType="#//Auxiliary" eOpposite="#//Auxiliary/fopras"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="Status">
+    <eLiterals name="pending"/>
+    <eLiterals name="inprocess"/>
+    <eLiterals name="completed"/>
+    <eLiterals name="cancelled"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="FoPraManagementSystem">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="fopras" upperBound="-1"
+        eType="#//FoPra" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="persons" upperBound="-1"
+        eType="#//Person" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="auxiliaries" upperBound="-1"
+        eType="#//Auxiliary" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Student" eSuperTypes="#//Person">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="matrikel" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="course" eType="#//Course"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="fopras" upperBound="-1"
+        eType="#//FoPra" eOpposite="#//FoPra/students"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Person" abstract="true">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="forename" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="lastname" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="Course">
+    <eLiterals name="InfoBSc"/>
+    <eLiterals name="InfoMSc"/>
+    <eLiterals name="InfoDiplom"/>
+    <eLiterals name="InfoMinorSubject"/>
+    <eLiterals name="InfoPostGraduate"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Professor" eSuperTypes="#//Person">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="rg" lowerBound="1" eType="#//ResearchGroup"
+        containment="true" eOpposite="#//ResearchGroup/professor"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ResearchGroup">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="fopras" upperBound="-1"
+        eType="#//FoPra" eOpposite="#//FoPra/rg"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="professor" lowerBound="1"
+        eType="#//Professor" eOpposite="#//Professor/rg"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="associate" upperBound="-1"
+        eType="#//Associate" eOpposite="#//Associate/rg"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Associate" eSuperTypes="#//Person">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="rg" lowerBound="1" eType="#//ResearchGroup"
+        eOpposite="#//ResearchGroup/associate"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="fopras" upperBound="-1"
+        eType="#//FoPra" eOpposite="#//FoPra/supervisor"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ExternalAdvisor" eSuperTypes="#//Person">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="information" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="fopras" upperBound="-1"
+        eType="#//FoPra" eOpposite="#//FoPra/advisor"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Auxiliary">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="description" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="kind" eType="#//AuxiliaryKind"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="fopras" upperBound="-1"
+        eType="#//FoPra" eOpposite="#//FoPra/auxiliaries"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="AuxiliaryKind">
+    <eLiterals name="ProgrammingLanguage"/>
+    <eLiterals name="Tool"/>
+    <eLiterals name="Method"/>
+  </eClassifiers>
+</ecore:EPackage>

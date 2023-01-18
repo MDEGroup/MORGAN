@@ -1,0 +1,6 @@
+model	Specialization (name,EString,attribute) (additionalSpecializations,Specialization,ref) (specializationSemesters,Semester,ref) 
+model	Department (name,EString,attribute) (courses,Course,ref) (programs,Program,ref) 
+model	Program (name,EString,attribute) (specializations,Specialization,ref) (baseSemesters,Semester,ref) 
+model	Semester (year,EInt,attribute) (season,Season,attribute) (slots,Slot,ref) 
+model	Slot (selectedCourse,Course,ref) (availableCourses,Course,ref) 
+model	Course (credits,EDouble,attribute) (name,EString,attribute) 

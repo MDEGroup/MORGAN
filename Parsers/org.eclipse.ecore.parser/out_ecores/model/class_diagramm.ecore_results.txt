@@ -1,0 +1,7 @@
+model	Association (minCardinality,EInt,attribute) (isAggregation,EBoolean,attribute) (name,EString,attribute) (maxCardinality,EInt,attribute) (source,RefClass,ref) (target,RefClass,ref) 
+model	Attribute (modifier,ModifierType,attribute) (name,EString,attribute) (primitive_type,RefDataType,ref) (type,RefClass,ref) 
+model	DataType (name,EString,attribute) 
+model	Parameter (name,EString,attribute) (primitive_type,RefDataType,ref) (type,RefClass,ref) 
+model	Class (modifier,ModifierType,attribute) (name,EString,attribute) (parent,RefClass,ref) (methods,RefMethod,ref) (attributes,RefAttribute,ref) 
+model	Package (name,EString,attribute) (associations,RefAssociation,ref) (classes,RefClass,ref) 
+model	Method (modifier,ModifierType,attribute) (name,EString,attribute) (parameters,RefParameter,ref) (primitive_return,RefDataType,ref) (return,RefClass,ref) 

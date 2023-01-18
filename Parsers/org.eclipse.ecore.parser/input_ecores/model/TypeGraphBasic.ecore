@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="ASCII"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="TypeGraphBasic" nsURI="platform:/plugin/TypeGraphBasic/model/TypeGraphBasic.ecore" nsPrefix="TypeGraphBasic">
+  <eClassifiers xsi:type="ecore:EClass" name="TClass">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="parentClass" eType="//TClass" eOpposite="//TClass/childClasses"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="childClasses" upperBound="-1" eType="//TClass" eOpposite="//TClass/parentClass"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="signature" upperBound="-1" eType="//TSignature"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="package" lowerBound="1" eType="//TPackage" eOpposite="//TPackage/containedClasses"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="defines" upperBound="-1" eType="//TMember" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="tName" ordered="false" lowerBound="1">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="TField">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="signatures" upperBound="-1" eType="//TFieldSignature" containment="true" eOpposite="//TFieldSignature/field"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="tName" ordered="false" lowerBound="1">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="TFieldDefinition" eSuperTypes="//TMember">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="hiding" eType="//TFieldDefinition" eOpposite="//TFieldDefinition/hiddenBy"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="hiddenBy" upperBound="-1" eType="//TFieldDefinition" eOpposite="//TFieldDefinition/hiding"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="signature" lowerBound="1" eType="//TFieldSignature" eOpposite="//TFieldSignature/definitions"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="TFieldSignature" eSuperTypes="//TSignature">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="definitions" upperBound="-1" eType="//TFieldDefinition" eOpposite="//TFieldDefinition/signature"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="field" lowerBound="1" eType="//TField" eOpposite="//TField/signatures"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="type" lowerBound="1" eType="//TClass"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="TMember" abstract="true">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="access" upperBound="-1" eType="//TMember"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="TMethod">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="signatures" upperBound="-1" eType="//TMethodSignature" containment="true" eOpposite="//TMethodSignature/method"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="tName" ordered="false" lowerBound="1">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="TMethodDefinition" eSuperTypes="//TMember">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="signature" lowerBound="1" eType="//TMethodSignature" eOpposite="//TMethodSignature/definitions"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="overriding" eType="//TMethodDefinition" eOpposite="//TMethodDefinition/overriddenBy"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="overriddenBy" upperBound="-1" eType="//TMethodDefinition" eOpposite="//TMethodDefinition/overriding"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="overloading" upperBound="-1" eType="//TMethodDefinition" eOpposite="//TMethodDefinition/overloadedBy"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="overloadedBy" upperBound="-1" eType="//TMethodDefinition" eOpposite="//TMethodDefinition/overloading"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="returnType" eType="//TClass"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="TMethodSignature" eSuperTypes="//TSignature">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="method" lowerBound="1" eType="//TMethod" eOpposite="//TMethod/signatures"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="definitions" upperBound="-1" eType="//TMethodDefinition" eOpposite="//TMethodDefinition/signature"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="paramList" upperBound="-1" eType="//TClass"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="TPackage">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="containedClasses" upperBound="-1" eType="//TClass" eOpposite="//TClass/package"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="subpackage" upperBound="-1" eType="//TPackage" containment="true" eOpposite="//TPackage/parent"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="parent" eType="//TPackage" eOpposite="//TPackage/subpackage"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="tName" ordered="false" lowerBound="1">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="TypeGraph">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="packages" upperBound="-1" eType="//TPackage" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="methods" upperBound="-1" eType="//TMethod" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="fields" upperBound="-1" eType="//TField" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="classes" upperBound="-1" eType="//TClass" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="tName" ordered="false" lowerBound="1">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="TSignature" abstract="true"/>
+</ecore:EPackage>

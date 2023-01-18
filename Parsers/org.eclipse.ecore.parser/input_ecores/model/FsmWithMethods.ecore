@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="fsmWithMethods" nsURI="http://www.mleduc.fr/fsmwithmethods/FsmWithMethods"
+    nsPrefix="fsmWithMethods">
+  <eClassifiers xsi:type="ecore:EClass" name="Fsm">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="state" eType="#//State"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="expressions" upperBound="-1"
+        eType="#//FExpression" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="FExpression" eSuperTypes="#//Referentiable">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Referentiable"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Method" eSuperTypes="#//FExpression">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="params" upperBound="-1"
+        eType="#//FExpression" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="expressions" upperBound="-1"
+        eType="#//FExpression" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="MethodCall" eSuperTypes="#//FExpression">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="method" eType="#//Method"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="params" upperBound="-1"
+        eType="#//Referentiable" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="State" eSuperTypes="#//FExpression"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Transition" eSuperTypes="#//FExpression">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="event" eType="#//FExpression"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="from" eType="#//FExpression"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="to" eType="#//FExpression"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Event" eSuperTypes="#//FExpression"/>
+</ecore:EPackage>

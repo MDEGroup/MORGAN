@@ -1,0 +1,375 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="foundation"
+    nsURI="http:///uml14.foundation.ecore" nsPrefix="foundation">
+  <eSubpackages name="data_types" nsURI="http:///uml14.foundation/data_types.ecore"
+      nsPrefix="foundation.data_types">
+    <eClassifiers xsi:type="ecore:EDataType" name="Integer" instanceClassName="long"/>
+    <eClassifiers xsi:type="ecore:EDataType" name="UnlimitedInteger" instanceClassName="long"/>
+    <eClassifiers xsi:type="ecore:EDataType" name="String" instanceClassName="java.lang.String"/>
+    <eClassifiers xsi:type="ecore:EEnum" name="AggregationKind">
+      <eLiterals name="none"/>
+      <eLiterals name="aggregate" value="1"/>
+      <eLiterals name="composite" value="2"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EDataType" name="Boolean" instanceClassName="boolean"/>
+    <eClassifiers xsi:type="ecore:EEnum" name="CallConcurrencyKind">
+      <eLiterals name="sequential"/>
+      <eLiterals name="guarded" value="1"/>
+      <eLiterals name="concurrent" value="2"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EEnum" name="ChangeableKind">
+      <eLiterals name="changeable"/>
+      <eLiterals name="frozen" value="1"/>
+      <eLiterals name="addOnly" value="2"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EEnum" name="OrderingKind">
+      <eLiterals name="unordered"/>
+      <eLiterals name="ordered" value="1"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EEnum" name="ParameterDirectionKind">
+      <eLiterals name="in"/>
+      <eLiterals name="inout" value="1"/>
+      <eLiterals name="out" value="2"/>
+      <eLiterals name="return" value="3"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EEnum" name="ScopeKind">
+      <eLiterals name="instance"/>
+      <eLiterals name="classifier" value="1"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EEnum" name="VisibilityKind">
+      <eLiterals name="public"/>
+      <eLiterals name="protected" value="1"/>
+      <eLiterals name="private" value="2"/>
+      <eLiterals name="package" value="3"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EDataType" name="Name" instanceClassName="java.lang.String"/>
+    <eClassifiers xsi:type="ecore:EClass" name="Multiplicity">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="range" lowerBound="1"
+          upperBound="-1" eType="#//data_types/MultiplicityRange" containment="true"
+          eOpposite="#//data_types/MultiplicityRange/multiplicity"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="MultiplicityRange">
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="lower" eType="#//data_types/String"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="upper" eType="#//data_types/String"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="multiplicity" lowerBound="1"
+          eType="#//data_types/Multiplicity" transient="true" eOpposite="#//data_types/Multiplicity/range"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="Expression">
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="language" eType="#//data_types/Name"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="body" eType="#//data_types/String"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="BooleanExpression" eSuperTypes="#//data_types/Expression"/>
+    <eClassifiers xsi:type="ecore:EClass" name="TypeExpression" eSuperTypes="#//data_types/Expression"/>
+    <eClassifiers xsi:type="ecore:EClass" name="MappingExpression" eSuperTypes="#//data_types/Expression"/>
+    <eClassifiers xsi:type="ecore:EClass" name="ProcedureExpression" eSuperTypes="#//data_types/Expression"/>
+    <eClassifiers xsi:type="ecore:EClass" name="ObjectSetExpression" eSuperTypes="#//data_types/Expression"/>
+    <eClassifiers xsi:type="ecore:EClass" name="ActionExpression" eSuperTypes="#//data_types/Expression"/>
+    <eClassifiers xsi:type="ecore:EClass" name="IterationExpression" eSuperTypes="#//data_types/Expression"/>
+    <eClassifiers xsi:type="ecore:EClass" name="TimeExpression" eSuperTypes="#//data_types/Expression"/>
+    <eClassifiers xsi:type="ecore:EClass" name="ArgListsExpression" eSuperTypes="#//data_types/Expression"/>
+    <eClassifiers xsi:type="ecore:EDataType" name="LocationReference" instanceClassName="java.lang.String"/>
+    <eClassifiers xsi:type="ecore:EEnum" name="PseudostateKind">
+      <eLiterals name="choice"/>
+      <eLiterals name="deepHistory" value="1"/>
+      <eLiterals name="fork" value="2"/>
+      <eLiterals name="initial" value="3"/>
+      <eLiterals name="join" value="4"/>
+      <eLiterals name="junction" value="5"/>
+      <eLiterals name="shallowHistory" value="6"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EDataType" name="Geometry" instanceClassName="java.lang.String"/>
+  </eSubpackages>
+  <eSubpackages name="core" nsURI="http:///uml14.foundation/core.ecore" nsPrefix="foundation.core">
+    <eClassifiers xsi:type="ecore:EClass" name="Element" abstract="true"/>
+    <eClassifiers xsi:type="ecore:EClass" name="ModelElement" abstract="true" eSuperTypes="#//core/Element">
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="#//data_types/Name"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="visibility" eType="#//data_types/VisibilityKind"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="isSpecification" eType="#//data_types/Boolean"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="namespace" eType="#//core/Namespace"
+          transient="true" eOpposite="#//core/Namespace/ownedElement"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="clientDependency" upperBound="-1"
+          eType="#//core/Dependency" eOpposite="#//core/Dependency/client"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="constraint" upperBound="-1"
+          eType="#//core/Constraint" eOpposite="#//core/Constraint/constrainedElement"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="supplierDependency" upperBound="-1"
+          eType="#//core/Dependency" eOpposite="#//core/Dependency/supplier"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="presentation" upperBound="-1"
+          eType="#//core/PresentationElement" eOpposite="#//core/PresentationElement/subject"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="targetFlow" upperBound="-1"
+          eType="#//core/Flow" eOpposite="#//core/Flow/target"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="sourceFlow" upperBound="-1"
+          eType="#//core/Flow" eOpposite="#//core/Flow/source"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="comment" upperBound="-1"
+          eType="#//core/Comment" eOpposite="#//core/Comment/annotatedElement"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="elementResidence" upperBound="-1"
+          eType="#//core/ElementResidence" eOpposite="#//core/ElementResidence/resident"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="templateParameter" upperBound="-1"
+          eType="#//core/TemplateParameter" containment="true" eOpposite="#//core/TemplateParameter/template"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="stereotype" upperBound="-1"
+          eType="#//core/Stereotype" eOpposite="#//core/Stereotype/extendedElement"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="taggedValue" upperBound="-1"
+          eType="#//core/TaggedValue" containment="true" eOpposite="#//core/TaggedValue/modelElement"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="referenceTag" upperBound="-1"
+          eType="#//core/TaggedValue" eOpposite="#//core/TaggedValue/referenceValue"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="behavior" upperBound="-1"
+          eType="ecore:EClass behavioral_elements.ecore#//state_machines/StateMachine"
+          eOpposite="behavioral_elements.ecore#//state_machines/StateMachine/context"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="GeneralizableElement" abstract="true"
+        eSuperTypes="#//core/ModelElement">
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="isRoot" eType="#//data_types/Boolean"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="isLeaf" eType="#//data_types/Boolean"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="isAbstract" eType="#//data_types/Boolean"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="generalization" upperBound="-1"
+          eType="#//core/Generalization" eOpposite="#//core/Generalization/child"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="specialization" upperBound="-1"
+          eType="#//core/Generalization" eOpposite="#//core/Generalization/parent"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="Namespace" abstract="true" eSuperTypes="#//core/ModelElement">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="ownedElement" upperBound="-1"
+          eType="#//core/ModelElement" containment="true" eOpposite="#//core/ModelElement/namespace"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="Classifier" abstract="true" eSuperTypes="#//core/GeneralizableElement #//core/Namespace">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="feature" upperBound="-1"
+          eType="#//core/Feature" containment="true" eOpposite="#//core/Feature/owner"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="typedFeature" upperBound="-1"
+          eType="#//core/StructuralFeature" eOpposite="#//core/StructuralFeature/type"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="typedParameter" upperBound="-1"
+          eType="#//core/Parameter" eOpposite="#//core/Parameter/type"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="association" upperBound="-1"
+          eType="#//core/AssociationEnd" eOpposite="#//core/AssociationEnd/participant"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="specifiedEnd" upperBound="-1"
+          eType="#//core/AssociationEnd" eOpposite="#//core/AssociationEnd/specification"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="powertypeRange" upperBound="-1"
+          eType="#//core/Generalization" eOpposite="#//core/Generalization/powertype"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="createAction" upperBound="-1"
+          eType="ecore:EClass behavioral_elements.ecore#//common_behavior/CreateAction"
+          eOpposite="behavioral_elements.ecore#//common_behavior/CreateAction/instantiation"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="collaboration" upperBound="-1"
+          eType="ecore:EClass behavioral_elements.ecore#//collaborations/Collaboration"
+          eOpposite="behavioral_elements.ecore#//collaborations/Collaboration/representedClassifier"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="Class" eSuperTypes="#//core/Classifier">
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="isActive" eType="#//data_types/Boolean"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="DataType" eSuperTypes="#//core/Classifier"/>
+    <eClassifiers xsi:type="ecore:EClass" name="Feature" abstract="true" eSuperTypes="#//core/ModelElement">
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="ownerScope" eType="#//data_types/ScopeKind"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="owner" eType="#//core/Classifier"
+          transient="true" eOpposite="#//core/Classifier/feature"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="StructuralFeature" abstract="true"
+        eSuperTypes="#//core/Feature">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="multiplicity" eType="#//data_types/Multiplicity"
+          containment="true" resolveProxies="false"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="changeability" eType="#//data_types/ChangeableKind"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="targetScope" eType="#//data_types/ScopeKind"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="ordering" eType="#//data_types/OrderingKind"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="type" lowerBound="1"
+          eType="#//core/Classifier" eOpposite="#//core/Classifier/typedFeature"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="AssociationEnd" eSuperTypes="#//core/ModelElement">
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="isNavigable" eType="#//data_types/Boolean"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="ordering" eType="#//data_types/OrderingKind"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="aggregation" eType="#//data_types/AggregationKind"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="targetScope" eType="#//data_types/ScopeKind"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="multiplicity" eType="#//data_types/Multiplicity"
+          containment="true" resolveProxies="false"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="changeability" eType="#//data_types/ChangeableKind"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="association" lowerBound="1"
+          eType="#//core/Association" transient="true" eOpposite="#//core/Association/connection"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="qualifier" upperBound="-1"
+          eType="#//core/Attribute" containment="true" eOpposite="#//core/Attribute/associationEnd"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="participant" lowerBound="1"
+          eType="#//core/Classifier" eOpposite="#//core/Classifier/association"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="specification" upperBound="-1"
+          eType="#//core/Classifier" eOpposite="#//core/Classifier/specifiedEnd"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="Interface" eSuperTypes="#//core/Classifier"/>
+    <eClassifiers xsi:type="ecore:EClass" name="Constraint" eSuperTypes="#//core/ModelElement">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="body" eType="#//data_types/BooleanExpression"
+          containment="true" resolveProxies="false"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="constrainedElement" upperBound="-1"
+          eType="#//core/ModelElement" eOpposite="#//core/ModelElement/constraint"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="constrainedStereotype"
+          eType="#//core/Stereotype" transient="true" eOpposite="#//core/Stereotype/stereotypeConstraint"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="Relationship" abstract="true" eSuperTypes="#//core/ModelElement"/>
+    <eClassifiers xsi:type="ecore:EClass" name="Association" eSuperTypes="#//core/GeneralizableElement #//core/Relationship">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="connection" lowerBound="2"
+          upperBound="-1" eType="#//core/AssociationEnd" containment="true" eOpposite="#//core/AssociationEnd/association"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="Attribute" eSuperTypes="#//core/StructuralFeature">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="initialValue" eType="#//data_types/Expression"
+          containment="true" resolveProxies="false"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="associationEnd" eType="#//core/AssociationEnd"
+          transient="true" eOpposite="#//core/AssociationEnd/qualifier"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="associationEndRole" upperBound="-1"
+          eType="ecore:EClass behavioral_elements.ecore#//collaborations/AssociationEndRole"
+          eOpposite="behavioral_elements.ecore#//collaborations/AssociationEndRole/availableQualifier"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="BehavioralFeature" abstract="true"
+        eSuperTypes="#//core/Feature">
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="isQuery" eType="#//data_types/Boolean"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="parameter" upperBound="-1"
+          eType="#//core/Parameter" containment="true" eOpposite="#//core/Parameter/behavioralFeature"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="raisedSignal" upperBound="-1"
+          eType="ecore:EClass behavioral_elements.ecore#//common_behavior/Signal"
+          eOpposite="behavioral_elements.ecore#//common_behavior/Signal/context"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="Operation" eSuperTypes="#//core/BehavioralFeature">
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="concurrency" eType="#//data_types/CallConcurrencyKind"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="isRoot" eType="#//data_types/Boolean"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="isLeaf" eType="#//data_types/Boolean"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="isAbstract" eType="#//data_types/Boolean"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="specification" eType="#//data_types/String"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="method" upperBound="-1"
+          eType="#//core/Method" eOpposite="#//core/Method/specification"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="callAction" upperBound="-1"
+          eType="ecore:EClass behavioral_elements.ecore#//common_behavior/CallAction"
+          eOpposite="behavioral_elements.ecore#//common_behavior/CallAction/operation"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="occurrence" upperBound="-1"
+          eType="ecore:EClass behavioral_elements.ecore#//state_machines/CallEvent"
+          eOpposite="behavioral_elements.ecore#//state_machines/CallEvent/operation"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="collaboration" upperBound="-1"
+          eType="ecore:EClass behavioral_elements.ecore#//collaborations/Collaboration"
+          eOpposite="behavioral_elements.ecore#//collaborations/Collaboration/representedOperation"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="Parameter" eSuperTypes="#//core/ModelElement">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="defaultValue" eType="#//data_types/Expression"
+          containment="true" resolveProxies="false"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="kind" eType="#//data_types/ParameterDirectionKind"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="behavioralFeature" eType="#//core/BehavioralFeature"
+          transient="true" eOpposite="#//core/BehavioralFeature/parameter"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="type" lowerBound="1"
+          eType="#//core/Classifier" eOpposite="#//core/Classifier/typedParameter"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="Method" eSuperTypes="#//core/BehavioralFeature">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="body" eType="#//data_types/ProcedureExpression"
+          containment="true" resolveProxies="false"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="specification" lowerBound="1"
+          eType="#//core/Operation" eOpposite="#//core/Operation/method"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="Generalization" eSuperTypes="#//core/Relationship">
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="discriminator" eType="#//data_types/Name"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="child" lowerBound="1"
+          eType="#//core/GeneralizableElement" eOpposite="#//core/GeneralizableElement/generalization"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="parent" lowerBound="1"
+          eType="#//core/GeneralizableElement" eOpposite="#//core/GeneralizableElement/specialization"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="powertype" eType="#//core/Classifier"
+          eOpposite="#//core/Classifier/powertypeRange"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="AssociationClass" eSuperTypes="#//core/Class #//core/Association"/>
+    <eClassifiers xsi:type="ecore:EClass" name="Dependency" eSuperTypes="#//core/Relationship">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="client" lowerBound="1"
+          upperBound="-1" eType="#//core/ModelElement" eOpposite="#//core/ModelElement/clientDependency"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="supplier" lowerBound="1"
+          upperBound="-1" eType="#//core/ModelElement" eOpposite="#//core/ModelElement/supplierDependency"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="Abstraction" eSuperTypes="#//core/Dependency">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="mapping" eType="#//data_types/MappingExpression"
+          containment="true" resolveProxies="false"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="PresentationElement" abstract="true"
+        eSuperTypes="#//core/Element">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="subject" upperBound="-1"
+          eType="#//core/ModelElement" eOpposite="#//core/ModelElement/presentation"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="Usage" eSuperTypes="#//core/Dependency"/>
+    <eClassifiers xsi:type="ecore:EClass" name="Binding" eSuperTypes="#//core/Dependency">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="argument" lowerBound="1"
+          upperBound="-1" eType="#//core/TemplateArgument" containment="true" eOpposite="#//core/TemplateArgument/binding"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="Component" eSuperTypes="#//core/Classifier">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="deploymentLocation" upperBound="-1"
+          eType="#//core/Node" eOpposite="#//core/Node/deployedComponent"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="residentElement" upperBound="-1"
+          eType="#//core/ElementResidence" containment="true" eOpposite="#//core/ElementResidence/container"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="implementation" upperBound="-1"
+          eType="#//core/Artifact" eOpposite="#//core/Artifact/implementationLocation"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="Node" eSuperTypes="#//core/Classifier">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="deployedComponent" upperBound="-1"
+          eType="#//core/Component" eOpposite="#//core/Component/deploymentLocation"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="Permission" eSuperTypes="#//core/Dependency"/>
+    <eClassifiers xsi:type="ecore:EClass" name="Comment" eSuperTypes="#//core/ModelElement">
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="body" eType="#//data_types/String"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="annotatedElement" upperBound="-1"
+          eType="#//core/ModelElement" eOpposite="#//core/ModelElement/comment"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="Flow" eSuperTypes="#//core/Relationship">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="target" upperBound="-1"
+          eType="#//core/ModelElement" eOpposite="#//core/ModelElement/targetFlow"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="source" upperBound="-1"
+          eType="#//core/ModelElement" eOpposite="#//core/ModelElement/sourceFlow"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="ElementResidence">
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="visibility" eType="#//data_types/VisibilityKind"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="resident" lowerBound="1"
+          eType="#//core/ModelElement" eOpposite="#//core/ModelElement/elementResidence"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="container" lowerBound="1"
+          eType="#//core/Component" transient="true" eOpposite="#//core/Component/residentElement"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="TemplateParameter">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="defaultElement" eType="#//core/ModelElement"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="template" lowerBound="1"
+          eType="#//core/ModelElement" transient="true" eOpposite="#//core/ModelElement/templateParameter"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="parameter" lowerBound="1"
+          eType="#//core/ModelElement" containment="true"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="Primitive" eSuperTypes="#//core/DataType"/>
+    <eClassifiers xsi:type="ecore:EClass" name="Enumeration" eSuperTypes="#//core/DataType">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="literal" lowerBound="1"
+          upperBound="-1" eType="#//core/EnumerationLiteral" containment="true" eOpposite="#//core/EnumerationLiteral/enumeration"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="EnumerationLiteral" eSuperTypes="#//core/ModelElement">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="enumeration" lowerBound="1"
+          eType="#//core/Enumeration" transient="true" eOpposite="#//core/Enumeration/literal"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="Stereotype" eSuperTypes="#//core/GeneralizableElement">
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="icon" eType="#//data_types/Geometry"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="baseClass" eType="#//data_types/Name"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="definedTag" upperBound="-1"
+          eType="#//core/TagDefinition" containment="true" eOpposite="#//core/TagDefinition/owner"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="extendedElement" upperBound="-1"
+          eType="#//core/ModelElement" eOpposite="#//core/ModelElement/stereotype"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="stereotypeConstraint"
+          upperBound="-1" eType="#//core/Constraint" containment="true" eOpposite="#//core/Constraint/constrainedStereotype"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="TagDefinition" eSuperTypes="#//core/ModelElement">
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="tagType" eType="#//data_types/Name"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="multiplicity" eType="#//data_types/Multiplicity"
+          containment="true" resolveProxies="false"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="owner" eType="#//core/Stereotype"
+          transient="true" eOpposite="#//core/Stereotype/definedTag"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="typedValue" upperBound="-1"
+          eType="#//core/TaggedValue" eOpposite="#//core/TaggedValue/type"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="TaggedValue" eSuperTypes="#//core/ModelElement">
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="dataValue" eType="#//data_types/String"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="modelElement" lowerBound="1"
+          eType="#//core/ModelElement" transient="true" eOpposite="#//core/ModelElement/taggedValue"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="type" lowerBound="1"
+          eType="#//core/TagDefinition" eOpposite="#//core/TagDefinition/typedValue"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="referenceValue" upperBound="-1"
+          eType="#//core/ModelElement" eOpposite="#//core/ModelElement/referenceTag"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="ProgrammingLanguageDataType" eSuperTypes="#//core/DataType">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="expression" eType="#//data_types/TypeExpression"
+          containment="true" resolveProxies="false"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="Artifact" eSuperTypes="#//core/Classifier">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="implementationLocation"
+          upperBound="-1" eType="#//core/Component" eOpposite="#//core/Component/implementation"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="TemplateArgument">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="binding" lowerBound="1"
+          eType="#//core/Binding" transient="true" eOpposite="#//core/Binding/argument"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="modelElement" lowerBound="1"
+          eType="#//core/ModelElement"/>
+    </eClassifiers>
+  </eSubpackages>
+</ecore:EPackage>

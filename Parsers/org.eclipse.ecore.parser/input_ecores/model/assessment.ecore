@@ -1,0 +1,230 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="assessment" nsURI="http://io/opensemantics/semiotics/model/assessment"
+    nsPrefix="io.opensemantics.semiotics.model.assessment">
+  <eClassifiers xsi:type="ecore:EClass" name="Http" eSuperTypes="#//GraphNode">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="request" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="response" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Node" abstract="true" eSuperTypes="#//Label #//Notes">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="children" upperBound="-1"
+        eType="#//GraphNode" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="parent" eType="#//Node"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="refersTo" upperBound="-1"
+        eType="#//Node" eOpposite="#//Node/referredBy"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="referredBy" upperBound="-1"
+        eType="#//Node" eOpposite="#//Node/refersTo"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="tasks" upperBound="-1"
+        eType="#//Task" eOpposite="#//Task/affects"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="findings" upperBound="-1"
+        eType="#//Finding" eOpposite="#//Finding/affects"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Assessment" eSuperTypes="#//Label #//Notes">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="applications" eType="#//Applications"
+        containment="true" eOpposite="#//Applications/assessment"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="findings" eType="#//Findings"
+        containment="true" eOpposite="#//Findings/assessment"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="tasks" eType="#//Tasks"
+        containment="true" eOpposite="#//Tasks/assessment"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Application" eSuperTypes="#//Label #//Notes">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="accounts" eType="#//Accounts"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="entitlements" eType="#//Entitlements"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="controllers" eType="#//Controllers"
+        containment="true" eOpposite="#//Controllers/application"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="models" eType="#//Models"
+        containment="true" eOpposite="#//Models/application"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="scm" eType="#//Scm" containment="true"
+        eOpposite="#//Scm/application"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="views" eType="#//Views"
+        containment="true" eOpposite="#//Views/application"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="sinks" eType="#//Sinks"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="resources" eType="#//Resources"
+        containment="true" eOpposite="#//Resources/application"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="applications" eType="#//Applications"
+        eOpposite="#//Applications/applications"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="internalURL" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="externalURL" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Sink" eSuperTypes="#//Node">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="cwes" upperBound="-1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="sinks" eType="#//Sinks"
+        eOpposite="#//Sinks/sinks"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Controller" eSuperTypes="#//Node">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="controllers" eType="#//Controllers"
+        eOpposite="#//Controllers/controllers"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="View" eSuperTypes="#//Node">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="views" eType="#//Views"
+        eOpposite="#//Views/views"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Model" eSuperTypes="#//Node">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="models" eType="#//Models"
+        eOpposite="#//Models/models"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Finding" eSuperTypes="#//Label #//Notes">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="findings" eType="#//Findings"
+        eOpposite="#//Findings/findings"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="reproducer" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="remediation" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="references" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="affects" upperBound="-1"
+        eType="#//Node" eOpposite="#//Node/findings"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Account" eSuperTypes="#//Node">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="accounts" eType="#//Accounts"
+        eOpposite="#//Accounts/accounts"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="entitlements" upperBound="-1"
+        eType="#//Entitlement" eOpposite="#//Entitlement/accounts"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="email" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="password" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Entitlement" eSuperTypes="#//Node">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="accounts" upperBound="-1"
+        eType="#//Account" eOpposite="#//Account/entitlements"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="entitlements" eType="#//Entitlements"
+        eOpposite="#//Entitlements/entitlements"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Task" eSuperTypes="#//Label #//Notes">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="tasks" eType="#//Tasks"
+        eOpposite="#//Tasks/tasks"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="affects" upperBound="-1"
+        eType="#//Node" eOpposite="#//Node/tasks"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="status" eType="#//TaskStatus"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Scm">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="repository" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="branchTag" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="application" eType="#//Application"
+        eOpposite="#//Application/scm"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Snippet" eSuperTypes="#//GraphNode #//Contents">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="lineEnd" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="columnStart" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="columnEnd" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="lineStart" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="resource" eType="#//Resource"
+        eOpposite="#//Resource/snippets"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Url">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="pattern" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="patternType" eType="#//UrlPattern"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="HttpMethod">
+    <eLiterals name="GET"/>
+    <eLiterals name="HEAD"/>
+    <eLiterals name="POST"/>
+    <eLiterals name="PUT"/>
+    <eLiterals name="DELETE"/>
+    <eLiterals name="OPTIONS"/>
+    <eLiterals name="TRACE"/>
+    <eLiterals name="CONNECT"/>
+    <eLiterals name="PATCH"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="UrlPattern">
+    <eLiterals name="ANT"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Graph" abstract="true">
+    <eTypeParameters name="T">
+      <eBounds eClassifier="#//Node"/>
+    </eTypeParameters>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="root" containment="true">
+      <eGenericType eTypeParameter="#//Graph/T"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="Language">
+    <eLiterals name="Java"/>
+    <eLiterals name="Python"/>
+    <eLiterals name="C_Sharp"/>
+    <eLiterals name="Scala"/>
+    <eLiterals name="PHP"/>
+    <eLiterals name="C_Cpp"/>
+    <eLiterals name="Ruby"/>
+    <eLiterals name="Other"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Generic" eSuperTypes="#//GraphNode"/>
+  <eClassifiers xsi:type="ecore:EClass" name="GraphNode" abstract="true" eSuperTypes="#//Node"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Control" eSuperTypes="#//GraphNode"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Resource" eSuperTypes="#//Label #//Notes #//Contents">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="resources" eType="#//Resources"
+        eOpposite="#//Resources/resources"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="snippets" upperBound="-1"
+        eType="#//Snippet" eOpposite="#//Snippet/resource"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Label" abstract="true" interface="true">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="label" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Contents" abstract="true" interface="true">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="contents" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Notes" abstract="true" interface="true">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="notes" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Applications">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="applications" upperBound="-1"
+        eType="#//Application" containment="true" eOpposite="#//Application/applications"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="assessment" eType="#//Assessment"
+        eOpposite="#//Assessment/applications"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Findings">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="findings" upperBound="-1"
+        eType="#//Finding" containment="true" eOpposite="#//Finding/findings"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="assessment" eType="#//Assessment"
+        eOpposite="#//Assessment/findings"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Accounts">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="application" eType="#//Application"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="accounts" upperBound="-1"
+        eType="#//Account" containment="true" eOpposite="#//Account/accounts"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Controllers">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="application" eType="#//Application"
+        eOpposite="#//Application/controllers"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="controllers" upperBound="-1"
+        eType="#//Controller" containment="true" eOpposite="#//Controller/controllers"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Entitlements">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="application" eType="#//Application"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="entitlements" upperBound="-1"
+        eType="#//Entitlement" containment="true" eOpposite="#//Entitlement/entitlements"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Models">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="application" eType="#//Application"
+        eOpposite="#//Application/models"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="models" upperBound="-1"
+        eType="#//Model" containment="true" eOpposite="#//Model/models"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Views">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="application" eType="#//Application"
+        eOpposite="#//Application/views"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="views" upperBound="-1"
+        eType="#//View" containment="true" eOpposite="#//View/views"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Sinks">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="application" eType="#//Application"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="sinks" upperBound="-1"
+        eType="#//Sink" containment="true" eOpposite="#//Sink/sinks"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Resources">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="application" eType="#//Application"
+        eOpposite="#//Application/resources"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="resources" upperBound="-1"
+        eType="#//Resource" containment="true" eOpposite="#//Resource/resources"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Tasks">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="assessment" eType="#//Assessment"
+        eOpposite="#//Assessment/tasks"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="tasks" upperBound="-1"
+        eType="#//Task" containment="true" eOpposite="#//Task/tasks"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="TaskStatus">
+    <eLiterals name="todo"/>
+    <eLiterals name="in_progress"/>
+    <eLiterals name="skipped"/>
+    <eLiterals name="done"/>
+  </eClassifiers>
+</ecore:EPackage>

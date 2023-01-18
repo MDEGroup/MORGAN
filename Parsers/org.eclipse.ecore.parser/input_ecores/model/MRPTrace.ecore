@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="MRPTrace" nsURI="hu.bme.mit.inf.gomrp.simulation.trace" nsPrefix="hu.bme.mit.inf.gomrp.simulation.trace">
+  <eClassifiers xsi:type="ecore:EClass" name="TraceModel">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="trace" lowerBound="1" eType="#//Trace"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Trace" eSuperTypes="#//NamedElement">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="granularity" lowerBound="1"
+        eType="#//TimeUnit" defaultValueLiteral="SECONDS"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="consistsOf" upperBound="-1"
+        eType="#//TraceEntry" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="TimeUnit">
+    <eLiterals name="NANOSECONDS" literal="NANOSECONDS"/>
+    <eLiterals name="MICROSECONDS" value="1" literal="MICROSECONDS"/>
+    <eLiterals name="MILLISECONDS" value="2" literal="MILLISECONDS"/>
+    <eLiterals name="SECONDS" value="3" literal="SECONDS"/>
+    <eLiterals name="MINUTES" value="4" literal="MINUTES"/>
+    <eLiterals name="HOURS" value="5" literal="HOURS"/>
+    <eLiterals name="DAYS" value="6" literal="DAYS"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="TraceEntry">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="nextEntry" eType="#//TraceEntry"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="description" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="affectedRDMElements" upperBound="-1"
+        eType="ecore:EClass ../../hu.bme.mit.inf.gomrp.railway/model/Railway.ecore#//RDMElement"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="cause" lowerBound="1" eType="#//Event"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Event" eSuperTypes="#//NamedElement">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="time" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//ELong"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="NamedElement" abstract="true">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+</ecore:EPackage>

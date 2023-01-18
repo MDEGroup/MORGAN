@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="tfsm" nsURI="http://diverse.inria.fr/tfsm" nsPrefix="tfsm">
+  <eClassifiers xsi:type="ecore:EClass" name="FSM">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="clocks" upperBound="-1"
+        eType="#//Clock" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="states" upperBound="-1"
+        eType="#//State" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="transitions" upperBound="-1"
+        eType="#//Transition" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="initialstate" lowerBound="1"
+        eType="#//InitialState"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
+        defaultValueLiteral=""/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="currentState" eType="#//State"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="State">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="stateguard" eType="#//ClockConstraintOperation"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="fsm" lowerBound="1" eType="#//FSM"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="outgoingtransitions" upperBound="-1"
+        eType="#//Transition" eOpposite="#//Transition/from"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="incommingtransitions" upperBound="-1"
+        eType="#//Transition" eOpposite="#//Transition/to"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Transition">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="clockresets" upperBound="-1"
+        eType="#//ClockReset" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="transitionguard" eType="#//ClockConstraintOperation"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="event" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="from" lowerBound="1" eType="#//State"
+        eOpposite="#//State/outgoingtransitions"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="to" lowerBound="1" eType="#//State"
+        eOpposite="#//State/incommingtransitions"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Clock">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="tick" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"
+        defaultValueLiteral="0"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ClockConstraint" abstract="true" eSuperTypes="#//ClockConstraintOperation">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="threshold" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="clock" lowerBound="1" eType="#//Clock"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ClockReset">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="clock" lowerBound="1" eType="#//Clock"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="LowerClockConstraint" eSuperTypes="#//ClockConstraint"/>
+  <eClassifiers xsi:type="ecore:EClass" name="LowerEqualClockConstraint" eSuperTypes="#//ClockConstraint"/>
+  <eClassifiers xsi:type="ecore:EClass" name="UpperClockConstraint" eSuperTypes="#//ClockConstraint"/>
+  <eClassifiers xsi:type="ecore:EClass" name="UpperEqualClockConstraint" eSuperTypes="#//ClockConstraint"/>
+  <eClassifiers xsi:type="ecore:EClass" name="ClockConstraintOperation" abstract="true"/>
+  <eClassifiers xsi:type="ecore:EClass" name="AndClockConstraint" eSuperTypes="#//BinaryClockConstraint"/>
+  <eClassifiers xsi:type="ecore:EClass" name="OrClockConstraint" eSuperTypes="#//BinaryClockConstraint"/>
+  <eClassifiers xsi:type="ecore:EClass" name="BinaryClockConstraint" abstract="true"
+      eSuperTypes="#//ClockConstraintOperation">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="left" lowerBound="1" eType="#//ClockConstraintOperation"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="right" lowerBound="1" eType="#//ClockConstraintOperation"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="FinalState" eSuperTypes="#//State"/>
+  <eClassifiers xsi:type="ecore:EClass" name="InitialState" eSuperTypes="#//State"/>
+</ecore:EPackage>

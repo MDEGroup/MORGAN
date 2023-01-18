@@ -1,0 +1,8 @@
+model	ContainmentEdge (model,Model,attribute) 
+model	ClassNode (superTypes,EString,attribute) (model,Model,attribute) 
+model	DataTypeNode (attribute,EObject,ref) (type,EObject,ref) 
+model	Graph (name,EString,attribute) (elements,Element,ref) 
+model	Element (graph,Graph,ref) 
+model	Node (label,EString,attribute) (incoming,Edge,ref) (outgoing,Edge,ref) (qvtAstNode,EObject,ref) 
+model	DependencyEdge (multiple,EBoolean,attribute) (derived,EBoolean,attribute) (direction,DependencyDirection,attribute) 
+model	Edge (referredProperty,EObject,ref) (source,Node,ref) (target,Node,ref) 

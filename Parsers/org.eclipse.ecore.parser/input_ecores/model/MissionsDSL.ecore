@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="missionsDSL" nsURI="http://www.rover.mars/MissionsDSL" nsPrefix="missionsDSL">
+  <eClassifiers xsi:type="ecore:EClass" name="Robot">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="slaveAddress" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="refreshRate" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="defaultSpeed" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="slowSpeed" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="minAngle" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="maxAngle" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="startMissions" unique="false"
+        upperBound="-1" eType="#//Mission"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="availableMissions" upperBound="-1"
+        eType="#//Mission" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Mission">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="priority" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="type" eType="#//MissionType"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="cond" upperBound="-1" eType="#//Condition"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="actionsAfterSetOfConditions"
+        upperBound="-1" eType="#//Action" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="newMission" eType="#//NewMissions"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="MissionType">
+    <eLiterals name="AVOID" literal="avoid"/>
+    <eLiterals name="FIND" value="1" literal="find"/>
+    <eLiterals name="FINDINORDER" value="2" literal="findInOrder"/>
+    <eLiterals name="FINDSIMULTANEOUS" value="3" literal="findSimultaneous"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Condition">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="sensor" eType="#//Sensor"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="relation" eType="#//Relation"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="value" eType="#//Value"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="ifConditionTrue" eType="#//Action"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="Sensor">
+    <eLiterals name="color" literal="color"/>
+    <eLiterals name="proximity" value="1" literal="proximity"/>
+    <eLiterals name="touch" value="2" literal="touch"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="Relation">
+    <eLiterals name="EQ" literal="EQ"/>
+    <eLiterals name="LT" value="1" literal="LT"/>
+    <eLiterals name="LE" value="2" literal="LE"/>
+    <eLiterals name="GT" value="3" literal="GT"/>
+    <eLiterals name="GE" value="4" literal="GE"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Value">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="color" eType="#//Color"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="integer" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="bool" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Action">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="action" eType="#//EV3_ACTION"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="duration" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="EV3_ACTION">
+    <eLiterals name="STOP" literal="stop"/>
+    <eLiterals name="REVERSE" value="1" literal="reverse"/>
+    <eLiterals name="PLAY" value="2" literal="play"/>
+    <eLiterals name="ROTATE" value="3" literal="rotate"/>
+    <eLiterals name="HALT" value="4" literal="halt"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="NewMissions">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="missions" unique="false"
+        upperBound="-1" eType="#//Mission"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="Color">
+    <eLiterals name="BLACK" literal="black"/>
+    <eLiterals name="BLUE" value="1" literal="blue"/>
+    <eLiterals name="GREEN" value="2" literal="green"/>
+    <eLiterals name="YELLOW" value="3" literal="yellow"/>
+    <eLiterals name="RED" value="4" literal="red"/>
+    <eLiterals name="WHITE" value="5" literal="white"/>
+    <eLiterals name="BROWN" value="6" literal="brown"/>
+  </eClassifiers>
+</ecore:EPackage>

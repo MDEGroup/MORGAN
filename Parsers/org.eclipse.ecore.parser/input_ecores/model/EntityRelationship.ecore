@@ -1,0 +1,209 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="entityrelationship" nsURI="http://entityrelationship/1.0" nsPrefix="entityrelationship">
+  <eClassifiers xsi:type="ecore:EClass" name="Entity_Relationship_Model">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="ERM_Has_E" lowerBound="1"
+        upperBound="-1" eType="#//Elements_with_Attributes" containment="true" eOpposite="#//Elements_with_Attributes/inEntityRelationshipModel"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="ERM_Has_Rt" upperBound="-1"
+        eType="#//Relationships_Restriction" containment="true" eOpposite="#//Relationships_Restriction/inEntityRelationshipModel"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="ERM_Has_ConnectionEntity2Relationship"
+        upperBound="-1" eType="#//Connection_Entity2Relationship" containment="true"
+        eOpposite="#//Connection_Entity2Relationship/inEntityRelationshipModel"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="ERM_Has_ConnectionRelationship2Entity"
+        upperBound="-1" eType="#//Connection_Relationship2Entity" containment="true"
+        eOpposite="#//Connection_Relationship2Entity/inEntityRelationshipModel"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="ERM_HasConnectionEntityRelationship2Attribute"
+        upperBound="-1" eType="#//Connection_ConnectionEntityRelationship2Attribute"
+        containment="true" eOpposite="#//Connection_ConnectionEntityRelationship2Attribute/inEntityRelationshipModel"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="ERM_Has_Gen" lowerBound="2"
+        upperBound="-1" eType="#//Connection_Generalization_Entity" containment="true"
+        eOpposite="#//Connection_Generalization_Entity/inEntityRelationshipModel"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="ERM_Has_Rt2" upperBound="-1"
+        eType="#//Connection_E_R_Restriction" containment="true" eOpposite="#//Connection_E_R_Restriction/inEntityRelationshipModel"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="ERM_Has_CEA" lowerBound="1"
+        upperBound="-1" eType="#//Connection_With_Attribute" containment="true" eOpposite="#//Connection_With_Attribute/inEntityRelationshipModel"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="ERM_Has_At" lowerBound="1"
+        upperBound="-1" eType="#//Attribute" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="ERM_Has_G" upperBound="-1"
+        eType="#//Generalization" containment="true" eOpposite="#//Generalization/inEntityRelationshipModel"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Elements_with_Attributes">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="connected_with_attribute"
+        upperBound="-1" eType="#//Connection_With_Attribute" eOpposite="#//Connection_With_Attribute/element"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="inEntityRelationshipModel"
+        eType="#//Entity_Relationship_Model" eOpposite="#//Entity_Relationship_Model/ERM_Has_E"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Entity" eSuperTypes="#//Elements_with_Attributes">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name_entity" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="type_entity" eType="#//TypeEntity"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="entity_connected_to_entity2relationship"
+        upperBound="-1" eType="#//Connection_Entity2Relationship" resolveProxies="false"
+        eOpposite="#//Connection_Entity2Relationship/source_entity"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="entity_connected_to_relationship2entity"
+        upperBound="-1" eType="#//Connection_Relationship2Entity" resolveProxies="false"
+        eOpposite="#//Connection_Relationship2Entity/target_entity"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="subclass_generalizations"
+        upperBound="-1" eType="#//Generalization" eOpposite="#//Generalization/subclasses"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Relationship" eSuperTypes="#//Elements_with_Attributes">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name_relationship" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="order" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="cardinality" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="type_relationship" eType="#//TypeRelationship"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="source_restrictions" eType="#//Relationships_Restriction"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="target_restrictions" upperBound="-1"
+        eType="#//Relationships_Restriction" eOpposite="#//Relationships_Restriction/target_relationship"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="relationship_connected_to_entity2relationship"
+        upperBound="-1" eType="#//Connection_Entity2Relationship" resolveProxies="false"
+        eOpposite="#//Connection_Entity2Relationship/target_relationship"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="relationship_connected_to_relationship2entity"
+        upperBound="-1" eType="#//Connection_Relationship2Entity" resolveProxies="false"
+        eOpposite="#//Connection_Relationship2Entity/source_relationship"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Attribute">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name_attribute" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="identifier" eType="#//TypeIdentifier"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="attributes_composites"
+        upperBound="-1" eType="#//Attribute_Composite" containment="true" eOpposite="#//Attribute_Composite/inAttribute"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="attributes_identification"
+        upperBound="-1" eType="#//Attribute" eOpposite="#//Attribute/inAttribute"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="connected" lowerBound="1"
+        eType="#//Connection_With_Attribute" eOpposite="#//Connection_With_Attribute/connection_attribute"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="inAttribute" eType="#//Attribute"
+        eOpposite="#//Attribute/attributes_identification"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="inEntityRelationshipModel"
+        eType="#//Entity_Relationship_Model"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="attribute_connected_to_conection_entityrelationship_to_attribute"
+        eType="#//Connection_ConnectionEntityRelationship2Attribute" eOpposite="#//Connection_ConnectionEntityRelationship2Attribute/target_attribute"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Attribute_Composite">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name_at_composite" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="identifier_at_composite"
+        eType="#//TypeIdentifier"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="attributes" lowerBound="1"
+        eType="#//Attribute"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="inAttribute" eType="#//Attribute"
+        eOpposite="#//Attribute/attributes_composites"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Relationships_Restriction">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="type_restriction" eType="#//TypeRestriction"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="source_relationship" lowerBound="1"
+        eType="#//Relationship"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="target_relationship" lowerBound="1"
+        eType="#//Relationship" eOpposite="#//Relationship/target_restrictions"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="inEntityRelationshipModel"
+        eType="#//Entity_Relationship_Model" eOpposite="#//Entity_Relationship_Model/ERM_Has_Rt"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Connection_E_R_Restriction">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="connection_source_entity_relationship"
+        lowerBound="1" eType="#//Connection_EntityRelationship"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="type_restriction" eType="#//TypeRestriction2"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="connection_target_entity_relationship"
+        lowerBound="1" eType="#//Connection_EntityRelationship"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="inEntityRelationshipModel"
+        eType="#//Entity_Relationship_Model" eOpposite="#//Entity_Relationship_Model/ERM_Has_Rt2"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Generalization">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="restriction_inheritance_1"
+        eType="#//TypeRestrictionInheritance1"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="restriction_inheritance_2"
+        eType="#//TypeRestrictionInheritance2"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="subclasses" lowerBound="2"
+        upperBound="-1" eType="#//Entity" eOpposite="#//Entity/subclass_generalizations"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="superclass" lowerBound="1"
+        eType="#//Entity"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="inEntityRelationshipModel"
+        eType="#//Entity_Relationship_Model" eOpposite="#//Entity_Relationship_Model/ERM_Has_G"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Connection_With_Attribute">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="type_attribute" eType="#//TypeAttribute"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="connection_attribute" lowerBound="1"
+        eType="#//Attribute" eOpposite="#//Attribute/connected"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="element" lowerBound="1"
+        eType="#//Elements_with_Attributes" eOpposite="#//Elements_with_Attributes/connected_with_attribute"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="inEntityRelationshipModel"
+        eType="#//Entity_Relationship_Model" eOpposite="#//Entity_Relationship_Model/ERM_Has_CEA"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Connection_Generalization_Entity">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="minimum_cardinality" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
+        defaultValueLiteral="1"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="maximum_cardinality" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
+        defaultValueLiteral="1"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="Connection_Generalization"
+        lowerBound="1" eType="#//Generalization"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="Connection_Entity" lowerBound="1"
+        eType="#//Entity"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="inEntityRelationshipModel"
+        eType="#//Entity_Relationship_Model" eOpposite="#//Entity_Relationship_Model/ERM_Has_Gen"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Connection_EntityRelationship" abstract="true">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="role" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="minimum_cardinality" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
+        defaultValueLiteral="1"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="maximum_cardinality" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
+        defaultValueLiteral="1"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Connection_Entity2Relationship" eSuperTypes="#//Connection_EntityRelationship">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="source_entity" eType="#//Entity"
+        eOpposite="#//Entity/entity_connected_to_entity2relationship"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="target_relationship" eType="#//Relationship"
+        eOpposite="#//Relationship/relationship_connected_to_entity2relationship"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="inEntityRelationshipModel"
+        eType="#//Entity_Relationship_Model" eOpposite="#//Entity_Relationship_Model/ERM_Has_ConnectionEntity2Relationship"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Connection_Relationship2Entity" eSuperTypes="#//Connection_EntityRelationship">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="source_relationship" eType="#//Relationship"
+        eOpposite="#//Relationship/relationship_connected_to_relationship2entity"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="target_entity" eType="#//Entity"
+        eOpposite="#//Entity/entity_connected_to_relationship2entity"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="inEntityRelationshipModel"
+        eType="#//Entity_Relationship_Model" eOpposite="#//Entity_Relationship_Model/ERM_Has_ConnectionRelationship2Entity"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Connection_ConnectionEntityRelationship2Attribute">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="source_connection" lowerBound="1"
+        eType="#//Connection_EntityRelationship"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="target_attribute" lowerBound="1"
+        eType="#//Attribute" eOpposite="#//Attribute/attribute_connected_to_conection_entityrelationship_to_attribute"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="inEntityRelationshipModel"
+        eType="#//Entity_Relationship_Model" eOpposite="#//Entity_Relationship_Model/ERM_HasConnectionEntityRelationship2Attribute"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="TypeEntity">
+    <eLiterals name="Weak" value="1"/>
+    <eLiterals name="Regular"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="TypeAttribute">
+    <eLiterals name="Normal"/>
+    <eLiterals name="Composite" value="1"/>
+    <eLiterals name="Multivalued" value="2"/>
+    <eLiterals name="Optional" value="3"/>
+    <eLiterals name="Derived" value="4"/>
+    <eLiterals name="Dependence_in_identification" value="5"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="TypeIdentifier">
+    <eLiterals name="NoIdentifier"/>
+    <eLiterals name="PrimaryIdentifier" value="1"/>
+    <eLiterals name="AlternativeIdentifier" value="2"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="TypeRelationship">
+    <eLiterals name="Regular"/>
+    <eLiterals name="Weak_dependence_in_existence" value="1"/>
+    <eLiterals name="Weak_dependence_in_identification" value="2"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="TypeRestriction">
+    <eLiterals name="Exclusion" value="2"/>
+    <eLiterals name="Inclusion" value="3"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="TypeRestriction2">
+    <eLiterals name="Exclusiveness"/>
+    <eLiterals name="Inclusiveness" value="1"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="TypeRestrictionInheritance1">
+    <eLiterals name="Total"/>
+    <eLiterals name="Partial" value="1"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="TypeRestrictionInheritance2">
+    <eLiterals name="Exclusive"/>
+    <eLiterals name="Overlapped" value="1"/>
+  </eClassifiers>
+</ecore:EPackage>

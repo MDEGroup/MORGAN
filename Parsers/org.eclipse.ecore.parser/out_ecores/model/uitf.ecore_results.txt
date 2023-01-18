@@ -1,0 +1,8 @@
+model	Variable (id,EString,attribute) 
+model	TestSuite (id,EString,attribute) (itsTestCase,TestCase,ref) 
+model	TestCase (id,EString,attribute) (itsStatement,Statement,ref) (itsUISUT,UISUT,ref) 
+model	Statement (kind,UserInstructionEnum,attribute) (description,EString,attribute) (itsVariable,Variable,ref) 
+model	UIControl (id,EString,attribute) (itsVariable,Variable,ref) 
+model	TriggeredTransition (scriptStr,EString,attribute) (transitionId,EString,attribute) 
+model	AssertInState (stateId,EString,attribute) 
+model	UISUT (objectURI,EString,attribute) (itsUICtrl,UIControl,ref) (itsVariable,Variable,ref) 

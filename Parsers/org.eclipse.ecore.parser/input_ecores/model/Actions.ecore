@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="actions" nsURI="http://st.inf.tud.org/mbt/actions" nsPrefix="actions">
+  <eClassifiers xsi:type="ecore:EClass" name="Action" abstract="true" interface="true"/>
+  <eClassifiers xsi:type="ecore:EClass" name="ActionReference" eSuperTypes="#//PreGenerationAction">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="action" lowerBound="1"
+        eType="#//StandAloneAction"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="parameters" upperBound="-1"
+        eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EObject" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="StandAloneAction" eSuperTypes="mbt.ecore#//core/AbstractModelElement mbt.ecore#//core/ITopLevelElement">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="action" lowerBound="1"
+        eType="#//PreGenerationAction" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="parameters" upperBound="-1"
+        eType="ecore:EClass mbt.ecore#//core/IContextVariable" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="TimedConditionAction" eSuperTypes="mbt.ecore#//core/AbstractModelElement mbt.ecore#//core/ITopLevelElement mbt.ecore#//rules/IRealTimeConsumer">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="action" lowerBound="1"
+        eType="#//PreGenerationAction" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="frequency" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="condition" lowerBound="1"
+        eType="ecore:EClass mbt.ecore#//functions/ILogicFunction" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="PreGenerationAction" abstract="true"
+      interface="true" eSuperTypes="#//Action"/>
+  <eClassifiers xsi:type="ecore:EClass" name="PostGenerationAction" abstract="true"
+      interface="true" eSuperTypes="#//Action"/>
+  <eClassifiers xsi:type="ecore:EClass" name="PreGenerationSequence" eSuperTypes="#//PreGenerationAction">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="actions" upperBound="-1"
+        eType="#//PreGenerationAction" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="PostGenerationSequence" eSuperTypes="#//PostGenerationAction">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="actions" upperBound="-1"
+        eType="#//PostGenerationAction" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ThrowAction" eSuperTypes="#//PreGenerationAction">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="eventID" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="TermAction" eSuperTypes="#//PostGenerationAction #//PreGenerationAction">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="term" lowerBound="1" eType="ecore:EClass terms.ecore#//Term"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ReconfigurationAction" abstract="true"
+      eSuperTypes="#//PreGenerationAction"/>
+  <eClassifiers xsi:type="ecore:EClass" name="SetDataAction" eSuperTypes="#//ReconfigurationAction">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="values" lowerBound="1"
+        eType="ecore:EClass mbt.ecore#//functions/IValueFunction" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="node" lowerBound="1" eType="ecore:EClass mbt.ecore#//functions/IDataNodeFunction"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="GetDataAction" eSuperTypes="#//PreGenerationAction">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="node" lowerBound="1" eType="ecore:EClass mbt.ecore#//functions/IDataNodeFunction"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="RemoveBagAction" eSuperTypes="#//ReconfigurationAction">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="bag" lowerBound="1" eType="ecore:EClass mbt.ecore#//data/DataBag"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="index" lowerBound="1" eType="ecore:EClass mbt.ecore#//functions/IArithmetricFunction"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ActivateFeatureAction" eSuperTypes="#//PostGenerationAction #//ReconfigurationAction">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="feature" lowerBound="1"
+        eType="ecore:EClass mbt.ecore#//features/IFeature"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="version" eType="ecore:EClass mbt.ecore#//features/FeatureVersion"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="DeactivateFeatureAction" eSuperTypes="#//PostGenerationAction #//ReconfigurationAction">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="feature" lowerBound="1"
+        eType="ecore:EClass mbt.ecore#//features/IFeature"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="SetPropertyAction" eSuperTypes="#//PostGenerationAction">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="property" lowerBound="1"
+        eType="ecore:EClass mbt.ecore#//data/DataLeaf"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="value" lowerBound="1" eType="ecore:EClass mbt.ecore#//data/DataElement"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="FailAction" eSuperTypes="#//PostGenerationAction #//PreGenerationAction"/>
+  <eClassifiers xsi:type="ecore:EClass" name="TimeAction" eSuperTypes="#//PreGenerationAction">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="time" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="consumer" eType="ecore:EClass mbt.ecore#//rules/ITimeConsumer"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="DependentAction" abstract="true" interface="true"
+      eSuperTypes="#//PostGenerationAction"/>
+  <eClassifiers xsi:type="ecore:EClass" name="GetPropertyAction" eSuperTypes="#//DependentAction">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="property" lowerBound="1"
+        eType="ecore:EClass mbt.ecore#//data/DataLeaf"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="GetRealTimeAction" eSuperTypes="#//DependentAction #//PreGenerationAction">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="timeHint" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//ELong" defaultValueLiteral="0"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="GetFeatureStateAction" eSuperTypes="#//DependentAction #//PreGenerationAction">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="feature" lowerBound="1"
+        eType="ecore:EClass mbt.ecore#//features/IFeature"/>
+  </eClassifiers>
+</ecore:EPackage>

@@ -1,0 +1,4 @@
+model	StateMachine (name,String,attribute) (nodes,State,ref) (initial,State,ref) (final,State,ref) (edges,Transition,ref) (marks,Observation,ref) 
+model	State (name,String,attribute) (subMachines,StateMachine,ref) (mark,Observation,ref) (graph,StateMachine,ref) 
+model	Transition (name,String,attribute) (source,State,ref) (graph,StateMachine,ref) (target,State,ref) 
+model	Observation (time,Integer,attribute) (node,State,ref) (graph,StateMachine,ref) 

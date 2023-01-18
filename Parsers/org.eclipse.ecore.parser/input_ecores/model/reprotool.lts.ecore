@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="lts2"
+    nsURI="http://d3s.mff.cuni.cz/reprotool/model/lts2" nsPrefix="lts2">
+  <eClassifiers xsi:type="ecore:EClass" name="StateMachine">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="initialState" lowerBound="1"
+        eType="#//InitialState" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="transitionalStates" upperBound="-1"
+        eType="#//TransitionalState" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="finalState" lowerBound="1"
+        eType="#//FinalState" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="abortState" eType="#//AbortState"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="InitialState" eSuperTypes="#//TransitionalState"/>
+  <eClassifiers xsi:type="ecore:EClass" name="FinalState" eSuperTypes="#//State"/>
+  <eClassifiers xsi:type="ecore:EClass" name="State" abstract="true" interface="true"/>
+  <eClassifiers xsi:type="ecore:EClass" name="TransitionalState" eSuperTypes="#//State">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="transitions" lowerBound="1"
+        upperBound="-1" eType="#//Transition" containment="true" eOpposite="#//Transition/sourceState"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Transition">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="targetState" lowerBound="1"
+        eType="#//State"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="relatedStep" lowerBound="1"
+        eType="ecore:EClass ../../reprotool.model/model/reprotool.model.ecore#//usecase/UseCaseStep"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="sourceState" lowerBound="1"
+        eType="#//TransitionalState" eOpposite="#//TransitionalState/transitions"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="AbortState" eSuperTypes="#//State"/>
+  <eClassifiers xsi:type="ecore:EClass" name="LTSGenerator" abstract="true" interface="true">
+    <eOperations name="processUseCase">
+      <eParameters name="useCase" eType="ecore:EClass ../../reprotool.model/model/reprotool.model.ecore#//usecase/UseCase"/>
+    </eOperations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="labelTransitionSystem"
+        lowerBound="1" eType="#//StateMachine" changeable="false" containment="true"/>
+  </eClassifiers>
+</ecore:EPackage>

@@ -1,0 +1,245 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="sensinact" nsURI="http://www.eclipse.org/sensinact/studio/language/Sensinact"
+    nsPrefix="sensinact">
+  <eClassifiers xsi:type="ecore:EClass" name="Sensinact">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="eca" eType="#//DSL_SENSINACT"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="DSL_SENSINACT">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="autostart" eType="#//DSL_FLAG_AUTOSTART"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="resources" upperBound="-1"
+        eType="#//DSL_Resource" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="cep" upperBound="-1" eType="#//DSL_CEP_STATEMENT"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="on" eType="#//DSL_On" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="eca" eType="#//DSL_ECA_STATEMENT"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="DSL_FLAG_AUTOSTART">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="activated" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="DSL_Resource" eSuperTypes="#//DSL_REF">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="gatewayID" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="deviceID" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="serviceID" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="resourceID" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="DSL_On">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="triggers" upperBound="-1"
+        eType="#//DSL_REF_CONDITION" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="DSL_ECA_STATEMENT">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="ifdo" eType="#//DSL_IfDo"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="elseIfdo" upperBound="-1"
+        eType="#//DSL_ElseIfDo" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="elsedo" eType="#//DSL_ElseDo"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="DSL_IfDo">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="condition" eType="#//DSL_Expression"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="actions" eType="#//DSL_ListActions"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="DSL_ElseIfDo">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="condition" eType="#//DSL_Expression"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="actions" eType="#//DSL_ListActions"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="DSL_ElseDo">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="actions" eType="#//DSL_ListActions"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="DSL_REF">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="DSL_REF_CONDITION">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="ref" eType="#//DSL_REF"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="DSL_CEP_STATEMENT" eSuperTypes="#//DSL_REF">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="operation" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EObject"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="DSL_CEP_AFTER">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="ref1" eType="#//DSL_REF_CONDITION"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="ref2" eType="#//DSL_REF_CONDITION"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="start" eType="#//DSL_CEP_DURATION"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="end" eType="#//DSL_CEP_DURATION"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="DSL_CEP_BEFORE">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="ref1" eType="#//DSL_REF_CONDITION"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="ref2" eType="#//DSL_REF_CONDITION"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="start" eType="#//DSL_CEP_DURATION"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="end" eType="#//DSL_CEP_DURATION"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="DSL_CEP_COINCIDE">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="ref1" eType="#//DSL_REF_CONDITION"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="ref2" eType="#//DSL_REF_CONDITION"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="window" eType="#//DSL_CEP_DURATION"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="DSL_CEP_MIN">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="ref" eType="#//DSL_REF_CONDITION"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="window" eType="#//DSL_CEP_DURATION"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="DSL_CEP_MAX">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="ref" eType="#//DSL_REF_CONDITION"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="window" eType="#//DSL_CEP_DURATION"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="DSL_CEP_AVG">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="ref" eType="#//DSL_REF_CONDITION"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="window" eType="#//DSL_CEP_DURATION"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="DSL_CEP_SUM">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="ref" eType="#//DSL_REF_CONDITION"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="window" eType="#//DSL_CEP_DURATION"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="DSL_CEP_COUNT">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="ref" eType="#//DSL_REF_CONDITION"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="window" eType="#//DSL_CEP_DURATION"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="DSL_CEP_DURATION">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="units" upperBound="-1"
+        eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EObject" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="DSL_CEP_DURATION_MIN">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="min" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBigDecimal"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="DSL_CEP_DURATION_SEC">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="sec" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBigDecimal"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="DSL_ListActions">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="actionList" upperBound="-1"
+        eType="#//DSL_ResourceAction" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="DSL_ResourceAction">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="variable" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="ref" eType="#//DSL_REF"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="actiontype" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="listParam" eType="#//DSL_ListParam"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="DSL_ListParam">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="param" upperBound="-1"
+        eType="#//DSL_Expression" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="DSL_Expression"/>
+  <eClassifiers xsi:type="ecore:EClass" name="DSL_Expression_Or" eSuperTypes="#//DSL_Expression">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="left" eType="#//DSL_Expression"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="right" eType="#//DSL_Expression"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="DSL_Expression_And" eSuperTypes="#//DSL_Expression">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="left" eType="#//DSL_Expression"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="right" eType="#//DSL_Expression"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="DSL_Expression_Diff" eSuperTypes="#//DSL_Expression">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="left" eType="#//DSL_Expression"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="right" eType="#//DSL_Expression"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="DSL_Expression_Equal" eSuperTypes="#//DSL_Expression">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="left" eType="#//DSL_Expression"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="right" eType="#//DSL_Expression"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="DSL_Expression_Larger" eSuperTypes="#//DSL_Expression">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="left" eType="#//DSL_Expression"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="right" eType="#//DSL_Expression"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="DSL_Expression_Larger_Equal" eSuperTypes="#//DSL_Expression">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="left" eType="#//DSL_Expression"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="right" eType="#//DSL_Expression"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="DSL_Expression_Smaller" eSuperTypes="#//DSL_Expression">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="left" eType="#//DSL_Expression"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="right" eType="#//DSL_Expression"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="DSL_Expression_Smaller_Equal" eSuperTypes="#//DSL_Expression">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="left" eType="#//DSL_Expression"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="right" eType="#//DSL_Expression"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="DSL_Expression_Plus" eSuperTypes="#//DSL_Expression">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="left" eType="#//DSL_Expression"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="right" eType="#//DSL_Expression"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="DSL_Expression_Minus" eSuperTypes="#//DSL_Expression">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="left" eType="#//DSL_Expression"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="right" eType="#//DSL_Expression"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="DSL_Expression_Multiplication" eSuperTypes="#//DSL_Expression">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="left" eType="#//DSL_Expression"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="right" eType="#//DSL_Expression"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="DSL_Expression_Division" eSuperTypes="#//DSL_Expression">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="left" eType="#//DSL_Expression"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="right" eType="#//DSL_Expression"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="DSL_Expression_Modulo" eSuperTypes="#//DSL_Expression">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="left" eType="#//DSL_Expression"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="right" eType="#//DSL_Expression"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="DSL_Object_Number" eSuperTypes="#//DSL_Expression">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBigDecimal"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="DSL_Object_String" eSuperTypes="#//DSL_Expression">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="DSL_Object_Boolean" eSuperTypes="#//DSL_Expression">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="DSL_Object_Ref" eSuperTypes="#//DSL_Expression">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="value" eType="#//DSL_REF"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="DSL_Expression_Negate" eSuperTypes="#//DSL_Expression">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="exp" eType="#//DSL_Expression"
+        containment="true"/>
+  </eClassifiers>
+</ecore:EPackage>

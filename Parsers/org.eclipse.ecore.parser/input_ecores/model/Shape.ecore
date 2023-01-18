@@ -1,0 +1,271 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="shape" nsURI="http://www.eclipselabs.org/spray/shapes/Shape"
+    nsPrefix="shape">
+  <eClassifiers xsi:type="ecore:EClass" name="ShapeContainer">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="shapeContainerElement"
+        upperBound="-1" eType="#//ShapeContainerElement" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ShapeContainerElement">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="style" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ConnectionDefinition" eSuperTypes="#//ShapeContainerElement">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="connectionStyle" eType="#//ConnectionStyle"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="layout" eType="#//ShapestyleLayout"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="placing" upperBound="-1"
+        eType="#//PlacingDefinition" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ShapeDefinition" eSuperTypes="#//ShapeContainerElement">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="shapeLayout" eType="#//ShapeLayout"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="shape" upperBound="-1"
+        eType="#//Shape" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="description" eType="#//Description"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="anchor" eType="#//Anchor"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="PlacingDefinition">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="offset" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="distance" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="angle" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="shapeCon" eType="#//ShapeConnection"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Anchor">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="type" eType="#//AnchorType"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="AnchorType"/>
+  <eClassifiers xsi:type="ecore:EClass" name="AnchorPredefinied" eSuperTypes="#//AnchorType">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" eType="#//AnchorPredefiniedEnum"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="AnchorManual" eSuperTypes="#//AnchorType">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="position" upperBound="-1"
+        eType="#//AnchorPosition" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="AnchorPosition">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="pos" eType="#//AnchorPositionPos"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="AnchorPositionPos"/>
+  <eClassifiers xsi:type="ecore:EClass" name="AnchorRelativePosition" eSuperTypes="#//AnchorPositionPos">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="xoffset" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="yoffset" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="AnchorFixPointPosition" eSuperTypes="#//AnchorPositionPos">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="xcor" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="ycor" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Shape">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="style" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ShapeConnection">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="style" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="CDLine" eSuperTypes="#//ShapeConnection">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="layout" eType="#//LineLayout"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="CDPolyline" eSuperTypes="#//ShapeConnection">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="layout" eType="#//PolyLineLayout"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="CDRectangle" eSuperTypes="#//ShapeConnection">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="layout" eType="#//RectangleEllipseLayout"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="CDRoundedRectangle" eSuperTypes="#//ShapeConnection">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="layout" eType="#//RoundedRectangleLayout"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="CDPolygon" eSuperTypes="#//ShapeConnection">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="layout" eType="#//PolyLineLayout"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="CDEllipse" eSuperTypes="#//ShapeConnection">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="layout" eType="#//RectangleEllipseLayout"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="CDText" eSuperTypes="#//ShapeConnection">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="texttype" eType="#//TextType"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="layout" eType="#//TextLayout"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="body" eType="#//TextBody"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Line" eSuperTypes="#//Shape">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="layout" eType="#//LineLayout"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Polyline" eSuperTypes="#//Shape">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="layout" eType="#//PolyLineLayout"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Rectangle" eSuperTypes="#//Shape">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="compartmentInfo" eType="#//CompartmentInfo"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="layout" eType="#//RectangleEllipseLayout"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="shape" upperBound="-1"
+        eType="#//Shape" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="RoundedRectangle" eSuperTypes="#//Shape">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="layout" eType="#//RoundedRectangleLayout"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="shape" upperBound="-1"
+        eType="#//Shape" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Polygon" eSuperTypes="#//Shape">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="layout" eType="#//PolyLineLayout"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="shape" upperBound="-1"
+        eType="#//Shape" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Ellipse" eSuperTypes="#//Shape">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="compartmentInfo" eType="#//CompartmentInfo"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="layout" eType="#//RectangleEllipseLayout"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="shape" upperBound="-1"
+        eType="#//Shape" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Text" eSuperTypes="#//Shape">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="texttype" eType="#//TextType"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="layout" eType="#//TextLayout"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="body" eType="#//TextBody"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="CompartmentInfo">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="compartmentLayout" eType="#//CompartmentLayout"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="stretchH" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="stretchV" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="spacing" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="margin" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="invisible" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="id" eType="#//TextBody"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="CompartmentLayout">
+    <eLiterals name="FIXED" literal="fixed"/>
+    <eLiterals name="VERTICAL" value="1" literal="vertical"/>
+    <eLiterals name="HORIZONTAL" value="2" literal="horizontal"/>
+    <eLiterals name="FIT" value="3" literal="fit"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Compartment">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="compartmentLayout" eType="#//CompartmentLayout"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="shape" eType="#//CompartmentShape"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="CompartmentShape">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="layout" eType="#//RectangleEllipseLayout"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="id" eType="#//TextBody"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="CompartmentRectangle" eSuperTypes="#//CompartmentShape"/>
+  <eClassifiers xsi:type="ecore:EClass" name="CompartmentRoundedRectangle">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="layout" eType="#//RoundedRectangleLayout"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="id" eType="#//TextBody"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="CompartmentPolygon">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="layout" eType="#//PolyLineLayout"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="id" eType="#//TextBody"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="CompartmentEllipse" eSuperTypes="#//CompartmentShape"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Description">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="style" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="hAlign" eType="#//HAlign"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="vAlign" eType="#//VAlign"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="body" eType="#//TextBody"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ShapeLayout">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="minwidth" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="minheight" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="maxwidth" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="maxheight" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="stretchH" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="stretchV" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="proportional" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="RectangleEllipseLayout">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="common" eType="#//CommonLayout"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="layout" eType="#//ShapestyleLayout"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="LineLayout">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="point" upperBound="-1"
+        eType="#//Point" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="layout" eType="#//ShapestyleLayout"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="PolyLineLayout">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="point" upperBound="-1"
+        eType="#//Point" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="layout" eType="#//ShapestyleLayout"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="RoundedRectangleLayout">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="common" eType="#//CommonLayout"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="curveWidth" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="curveHeight" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="layout" eType="#//ShapestyleLayout"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="TextLayout">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="common" eType="#//CommonLayout"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="hAlign" eType="#//HAlign"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="vAlign" eType="#//VAlign"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="layout" eType="#//ShapestyleLayout"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ShapestyleLayout"/>
+  <eClassifiers xsi:type="ecore:EClass" name="CommonLayout">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="xcor" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="ycor" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="width" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="heigth" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="TextBody">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Point">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="xcor" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="ycor" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="curveBefore" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="curveAfter" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="HAlign">
+    <eLiterals name="LEFT" literal="left"/>
+    <eLiterals name="CENTER" value="1" literal="center"/>
+    <eLiterals name="RIGHT" value="2" literal="right"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="VAlign">
+    <eLiterals name="TOP" literal="top"/>
+    <eLiterals name="MIDDLE" value="1" literal="middle"/>
+    <eLiterals name="BOTTOM" value="2" literal="bottom"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="ConnectionStyle">
+    <eLiterals name="freeform" literal="freeform"/>
+    <eLiterals name="manhatten" value="1" literal="manhatten"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="AnchorPredefiniedEnum">
+    <eLiterals name="center" literal="center"/>
+    <eLiterals name="corners" value="1" literal="corners"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="TextType">
+    <eLiterals name="default" literal="text"/>
+    <eLiterals name="multiline" value="1" literal="wrapped-text"/>
+  </eClassifiers>
+</ecore:EPackage>

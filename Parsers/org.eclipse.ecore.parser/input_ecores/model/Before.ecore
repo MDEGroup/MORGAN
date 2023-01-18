@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="uml_15_to_20_associationEndToProperty"
+    nsURI="uml_15_to_20_associationEndToProperty" nsPrefix="uml_15_to_20_associationEndToProperty">
+  <eClassifiers xsi:type="ecore:EClass" name="Model">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="classes" upperBound="-1"
+        eType="#//Class" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="associations" upperBound="-1"
+        eType="#//Association" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Class">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="features" upperBound="-1"
+        eType="#//StructuralFeature" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="associations" upperBound="-1"
+        eType="#//AssociationEnd" eOpposite="#//AssociationEnd/participant"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Association">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="connections" lowerBound="2"
+        upperBound="-1" eType="#//AssociationEnd" containment="true" eOpposite="#//AssociationEnd/association"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="AssociationEnd">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="isNavigable" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="participant" lowerBound="1"
+        eType="#//Class" eOpposite="#//Class/associations"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="association" lowerBound="1"
+        eType="#//Association" eOpposite="#//Association/connections"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="StructuralFeature" abstract="true">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="ownerScope" eType="#//ScopeKind"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="targetScope" eType="#//ScopeKind"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Attribute" eSuperTypes="#//StructuralFeature"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Operation" eSuperTypes="#//StructuralFeature"/>
+  <eClassifiers xsi:type="ecore:EEnum" name="ScopeKind">
+    <eLiterals name="instance"/>
+    <eLiterals name="classifier" value="1"/>
+  </eClassifiers>
+</ecore:EPackage>

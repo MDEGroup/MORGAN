@@ -1,0 +1,598 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="ric"
+    nsURI="platform:/resource/br.ufscar.dc.richinterface.metamodel/model/rich_interface_components.ecore"
+    nsPrefix="br.ufscar.dc.richinterface.metamodel">
+  <eClassifiers xsi:type="ecore:EClass" name="IdentifiableComponent" abstract="true">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="id" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
+        defaultValueLiteral=""/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ClassifiableComponent" abstract="true">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="class" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
+        defaultValueLiteral=""/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="EventComponent" abstract="true">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="events" upperBound="-1"
+        eType="#//Event" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="FormControl" abstract="true" eSuperTypes="#//IdentifiableComponent #//ClassifiableComponent #//EventComponent">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
+        defaultValueLiteral=""/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
+        defaultValueLiteral=""/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="label" lowerBound="1" eType="#//Label"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="accompanyingPhrase" upperBound="-1"
+        eType="#//PhraseElement" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="valueConstraints" upperBound="-1"
+        eType="#//ValueConstraint" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="numberConstraint" eType="#//NumberValueConstraint"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="requiredFieldConstraint"
+        eType="#//RequiredFieldConstraint" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="validDateConstraint" eType="#//ValidDateConstraint"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Button" eSuperTypes="#//FormControl">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="type" lowerBound="1" eType="#//ButtonType"
+        defaultValueLiteral=""/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="disabled" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean" defaultValueLiteral="false"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="image" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
+        defaultValueLiteral="file:///"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="ButtonType">
+    <eLiterals name="Submit"/>
+    <eLiterals name="Reset" value="1"/>
+    <eLiterals name="Push" value="2"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Event">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="type" lowerBound="1" eType="#//EventType"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="triggerScript" eType="#//Script"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="EventType">
+    <eLiterals name="onload"/>
+    <eLiterals name="onunload" value="1"/>
+    <eLiterals name="onclick" value="2"/>
+    <eLiterals name="ondblclick" value="3"/>
+    <eLiterals name="onmousedown" value="4"/>
+    <eLiterals name="onmouseup" value="5"/>
+    <eLiterals name="onmouseover" value="6"/>
+    <eLiterals name="onmousemove" value="7"/>
+    <eLiterals name="onmouseout" value="8"/>
+    <eLiterals name="onfocus" value="9"/>
+    <eLiterals name="onblur" value="10"/>
+    <eLiterals name="onkeypress" value="11"/>
+    <eLiterals name="onkeydown" value="12"/>
+    <eLiterals name="onkeyup" value="13"/>
+    <eLiterals name="onsubmit" value="14"/>
+    <eLiterals name="onreset" value="15"/>
+    <eLiterals name="onselect" value="16"/>
+    <eLiterals name="onchange" value="17"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Script">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
+        defaultValueLiteral=""/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="type" lowerBound="1" eType="#//ScriptType"
+        defaultValueLiteral="textJavaScript"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="implementation" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
+        defaultValueLiteral=""/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="ScriptType">
+    <eLiterals name="textJavaScript"/>
+    <eLiterals name="textTcl" value="1"/>
+    <eLiterals name="textVBScript" value="2"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Form" eSuperTypes="#//IdentifiableComponent #//ClassifiableComponent #//EventComponent">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
+        defaultValueLiteral=""/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="action" lowerBound="1"
+        eType="#//Document"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="method" lowerBound="1"
+        eType="#//SubmitFormMethod" defaultValueLiteral="post"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="fieldsets" lowerBound="1"
+        upperBound="-1" eType="#//Fieldset" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="blockLevelComponents" upperBound="-1"
+        eType="#//BlockLevelComponent" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="inlineComponents" upperBound="-1"
+        eType="#//InlineComponent" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="SubmitFormMethod">
+    <eLiterals name="post"/>
+    <eLiterals name="get" value="1"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="TextField" eSuperTypes="#//FormControl">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="charWidth" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt" defaultValueLiteral="0"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="maxChars" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"
+        defaultValueLiteral="0"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="readonly" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean" defaultValueLiteral="false"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="password" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean" defaultValueLiteral="false"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="InputFile" eSuperTypes="#//FormControl">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="charWidth" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt" defaultValueLiteral="0"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="maxChars" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"
+        defaultValueLiteral="0"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="readonly" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean" defaultValueLiteral="false"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="TextArea" eSuperTypes="#//FormControl">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="cols" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"
+        defaultValueLiteral="45"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="rols" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"
+        defaultValueLiteral="5"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="readonly" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean" defaultValueLiteral="false"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Checkbox" eSuperTypes="#//FormControl">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="checked" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean" defaultValueLiteral="false"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Radio" eSuperTypes="#//FormControl">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="checked" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean" defaultValueLiteral="false"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Select" eSuperTypes="#//FormControl">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="items" lowerBound="1" upperBound="-1"
+        eType="#//SelectItem" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="size" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"
+        defaultValueLiteral="1"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="multiple" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean" defaultValueLiteral="false"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="SelectItem">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="itemLabel" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString" defaultValueLiteral=""/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
+        defaultValueLiteral=""/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="selected" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean" defaultValueLiteral="false"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Label" eSuperTypes="#//IdentifiableComponent #//ClassifiableComponent">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="text" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
+        defaultValueLiteral=""/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="format" lowerBound="1"
+        eType="#//PhraseElementType" defaultValueLiteral="None"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="events" upperBound="-1"
+        eType="#//Event" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Fieldset" eSuperTypes="#//EventComponent #//IdentifiableComponent #//ClassifiableComponent">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="legend" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString" defaultValueLiteral=""/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="legendAlign" lowerBound="1"
+        eType="#//FieldSetLegendAlign" defaultValueLiteral="left"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="legendFormat" lowerBound="1"
+        eType="#//PhraseElementType" defaultValueLiteral="None"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="controls" lowerBound="1"
+        upperBound="-1" eType="#//FormControl" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="radioGroups" upperBound="-1"
+        eType="#//RadioGroup" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="checkGroups" upperBound="-1"
+        eType="#//CheckGroup" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Div" eSuperTypes="#//ClassifiableComponent #//IdentifiableComponent #//EventComponent #//BlockLevelComponent">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="align" lowerBound="1" eType="#//Align"
+        defaultValueLiteral="left"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="objectComponents" upperBound="-1"
+        eType="#//ObjectComponent" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="lineBreaks" upperBound="-1"
+        eType="#//LineBreak" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="richWidgets" upperBound="-1"
+        eType="#//RichWidget" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="lists" upperBound="-1"
+        eType="#//List" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="forms" upperBound="-1"
+        eType="#//Form" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="fieldsets" upperBound="-1"
+        eType="#//Fieldset" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="Align">
+    <eLiterals name="left"/>
+    <eLiterals name="right" value="1"/>
+    <eLiterals name="center" value="2"/>
+    <eLiterals name="justify" value="3"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Span" eSuperTypes="#//ClassifiableComponent #//IdentifiableComponent #//EventComponent #//InlineComponent">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="align" lowerBound="1" eType="#//Align"
+        defaultValueLiteral="left"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Heading" eSuperTypes="#//ClassifiableComponent #//IdentifiableComponent #//EventComponent #//InlineComponent">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="level" lowerBound="1" eType="#//HeadingLevel"
+        defaultValueLiteral="h1"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="HeadingLevel">
+    <eLiterals name="h1"/>
+    <eLiterals name="h2" value="1"/>
+    <eLiterals name="h3" value="2"/>
+    <eLiterals name="h4" value="3"/>
+    <eLiterals name="h5" value="4"/>
+    <eLiterals name="h6" value="5"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="BlockLevelComponent" abstract="true">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="blockLevelComponents" upperBound="-1"
+        eType="#//BlockLevelComponent" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="inlineComponents" upperBound="-1"
+        eType="#//InlineComponent" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="InlineComponent" abstract="true">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="inlineComponents" upperBound="-1"
+        eType="#//InlineComponent" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="text" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
+        defaultValueLiteral=""/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="PhraseElement" eSuperTypes="#//IdentifiableComponent #//ClassifiableComponent #//EventComponent #//InlineComponent">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="phraseType" lowerBound="1"
+        eType="#//PhraseElementType"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="title" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
+        defaultValueLiteral=""/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="PhraseElementType">
+    <eLiterals name="Emphasis"/>
+    <eLiterals name="StrongerEmphasis" value="1"/>
+    <eLiterals name="Citation" value="2"/>
+    <eLiterals name="Definition" value="3"/>
+    <eLiterals name="ComputerCode" value="4"/>
+    <eLiterals name="SampleProgramOutput" value="5"/>
+    <eLiterals name="EntryFromUser" value="6"/>
+    <eLiterals name="VariableInstance" value="7"/>
+    <eLiterals name="Abbreviation" value="8"/>
+    <eLiterals name="Acronym" value="9"/>
+    <eLiterals name="None" value="10"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Paragraph" eSuperTypes="#//ClassifiableComponent #//IdentifiableComponent #//InlineComponent #//EventComponent">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="align" lowerBound="1" eType="#//Align"
+        defaultValueLiteral="left"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="LineBreak" eSuperTypes="#//ClassifiableComponent #//IdentifiableComponent"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Link" eSuperTypes="#//ClassifiableComponent #//EventComponent #//IdentifiableComponent #//InlineComponent">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="title" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
+        defaultValueLiteral=""/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="target" lowerBound="1"
+        eType="#//Document"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Image" eSuperTypes="#//ClassifiableComponent #//EventComponent #//IdentifiableComponent #//ObjectComponent">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="src" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
+        defaultValueLiteral="file:///"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="alt" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
+        defaultValueLiteral=""/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ObjectComponent" abstract="true">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="align" lowerBound="1" eType="#//ObjectAlign"
+        defaultValueLiteral="default"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="width" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"
+        defaultValueLiteral="0"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="height" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"
+        defaultValueLiteral="0"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="border" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"
+        defaultValueLiteral="0"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="hspace" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"
+        defaultValueLiteral="0"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="vspace" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"
+        defaultValueLiteral="0"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="ObjectAlign">
+    <eLiterals name="default"/>
+    <eLiterals name="baseline" value="1"/>
+    <eLiterals name="top" value="2"/>
+    <eLiterals name="middle" value="3"/>
+    <eLiterals name="bottom" value="4"/>
+    <eLiterals name="textTop" value="5"/>
+    <eLiterals name="absoluteMiddle" value="6"/>
+    <eLiterals name="absoluteBottom" value="7"/>
+    <eLiterals name="left" value="8"/>
+    <eLiterals name="right" value="9"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="RichWidget" abstract="true" eSuperTypes="#//ClassifiableComponent #//IdentifiableComponent"/>
+  <eClassifiers xsi:type="ecore:EClass" name="TabbedPanel" eSuperTypes="#//RichWidget">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="tabs" lowerBound="1" upperBound="-1"
+        eType="#//Tab" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Tab">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="title" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
+        defaultValueLiteral=""/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="inlineComponents" upperBound="-1"
+        eType="#//InlineComponent" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="blockLevelComponents" upperBound="-1"
+        eType="#//BlockLevelComponent" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="objectComponents" upperBound="-1"
+        eType="#//ObjectComponent" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="lineBreaks" upperBound="-1"
+        eType="#//LineBreak" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="richWidgets" upperBound="-1"
+        eType="#//RichWidget" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="lists" upperBound="-1"
+        eType="#//List" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="forms" upperBound="-1"
+        eType="#//Form" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="AccordionPanel" eSuperTypes="#//RichWidget">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="sections" lowerBound="1"
+        upperBound="-1" eType="#//Section" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Section">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="title" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
+        defaultValueLiteral=""/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="inlineComponents" upperBound="-1"
+        eType="#//InlineComponent" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="blockLevelComponents" upperBound="-1"
+        eType="#//BlockLevelComponent" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="objectComponents" upperBound="-1"
+        eType="#//ObjectComponent" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="lineBreaks" upperBound="-1"
+        eType="#//LineBreak" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="richWidgets" upperBound="-1"
+        eType="#//RichWidget" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="lists" upperBound="-1"
+        eType="#//List" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="forms" upperBound="-1"
+        eType="#//Form" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="MessageDialog" eSuperTypes="#//RichWidget">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="title" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
+        defaultValueLiteral=""/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="message" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString" defaultValueLiteral=""/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="modal" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"
+        defaultValueLiteral="false"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="autoOpen" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean" defaultValueLiteral="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="resizable" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean" defaultValueLiteral="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="height" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt" defaultValueLiteral="200"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="minHeightResize" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt" defaultValueLiteral="200"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="maxHeightResize" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt" defaultValueLiteral="300"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="width" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"
+        defaultValueLiteral="300"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="minWidthResize" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt" defaultValueLiteral="300"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="maxWidthResize" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt" defaultValueLiteral="400"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="buttons" upperBound="-1"
+        eType="#//MessageDialogButton" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Datepicker" eSuperTypes="#//RichWidget #//TextField">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="showButtonImage" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"
+        defaultValueLiteral="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="dateFormat" lowerBound="1"
+        eType="#//DateFormat" defaultValueLiteral="dd/mm/yy"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="locale" lowerBound="1"
+        eType="#//Locale" defaultValueLiteral="pt-BR"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="numberMonthsToShow" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt" defaultValueLiteral="1"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="showMonthMenu" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean" defaultValueLiteral="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="showYearMenu" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean" defaultValueLiteral="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="showWeekOfYear" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean" defaultValueLiteral="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="showButtonClosePanel" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean" defaultValueLiteral="false"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="DateFormat">
+    <eLiterals name="Default" literal="dd/mm/yy"/>
+    <eLiterals name="ISO8601" value="1" literal="yy-mm-dd"/>
+    <eLiterals name="Short" value="2" literal="d M, y"/>
+    <eLiterals name="Medium" value="3" literal="d MM, y"/>
+    <eLiterals name="Full" value="4" literal="DD, d MM, yy"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="Locale">
+    <eLiterals name="English_UK" literal="en-GB"/>
+    <eLiterals name="Spanish" value="1" literal="es"/>
+    <eLiterals name="German" value="2" literal="de"/>
+    <eLiterals name="Portuguese_Brazilian" value="3" literal="pt-BR"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="MatchingOperator">
+    <eLiterals name="Equals" literal="=="/>
+    <eLiterals name="GreaterThan" value="1" literal=">"/>
+    <eLiterals name="LessThan" value="2" literal="&lt;"/>
+    <eLiterals name="GreaterOrEqualsThan" value="3" literal=">="/>
+    <eLiterals name="LessOrEqualsThan" value="4" literal="&lt;="/>
+    <eLiterals name="Different" value="5" literal="!="/>
+    <eLiterals name="Contains" value="6" literal="contains"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="LogicalOperator">
+    <eLiterals name="AND" literal="and"/>
+    <eLiterals name="OR" value="1" literal="or"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="FormControlConstraint" abstract="true"/>
+  <eClassifiers xsi:type="ecore:EClass" name="ValueConstraint" eSuperTypes="#//FormControlConstraint">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="matchingOperator" lowerBound="1"
+        eType="#//MatchingOperator" defaultValueLiteral="eq"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="matchingValue" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString" defaultValueLiteral=""/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="logicalOperator" lowerBound="1"
+        eType="#//LogicalOperator" defaultValueLiteral="and"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="NumberValueConstraint" eSuperTypes="#//FormControlConstraint"/>
+  <eClassifiers xsi:type="ecore:EClass" name="RequiredFieldConstraint" eSuperTypes="#//FormControlConstraint"/>
+  <eClassifiers xsi:type="ecore:EClass" name="ValidDateConstraint" eSuperTypes="#//FormControlConstraint">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="dateFormat" lowerBound="1"
+        eType="#//DateFormat" defaultValueLiteral="dd/mm/yy"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Portal">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
+        defaultValueLiteral=""/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="documentsExtension" lowerBound="1"
+        eType="#//Extension" defaultValueLiteral="html"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="headerRegion" lowerBound="1"
+        eType="#//HeaderRegion" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="navigationRegion" lowerBound="1"
+        eType="#//NavigationRegion" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="contextualNavigationRegion"
+        eType="#//ContextualNavigationRegion" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="searchRegion" eType="#//SearchRegion"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="contentRegion" lowerBound="1"
+        eType="#//ContentRegion" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="footerRegion" lowerBound="1"
+        eType="#//FooterRegion" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="HeaderRegion">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="logo" eType="#//Logo" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="subsiteNavigation" eType="#//NavigationRegion"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="inlineComponents" upperBound="-1"
+        eType="#//InlineComponent" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="lineBreaks" upperBound="-1"
+        eType="#//LineBreak" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Logo">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="image" lowerBound="1" eType="#//Image"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="NavigationRegion">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="orientation" lowerBound="1"
+        eType="#//Orientation" defaultValueLiteral="Vertical"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="linkGroups" lowerBound="1"
+        upperBound="-1" eType="#//LinkGroup" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="Orientation">
+    <eLiterals name="Vertical"/>
+    <eLiterals name="Horizontal" value="1"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ContextualNavigationRegion">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="inlineComponents" upperBound="-1"
+        eType="#//InlineComponent" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="blockLevelComponents" upperBound="-1"
+        eType="#//BlockLevelComponent" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="objectComponents" upperBound="-1"
+        eType="#//ObjectComponent" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="lineBreaks" upperBound="-1"
+        eType="#//LineBreak" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="richWidgets" upperBound="-1"
+        eType="#//RichWidget" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="lists" upperBound="-1"
+        eType="#//List" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="forms" upperBound="-1"
+        eType="#//Form" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="SearchRegion">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="forms" lowerBound="1" upperBound="-1"
+        eType="#//Form" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ContentRegion">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="documents" lowerBound="1"
+        upperBound="-1" eType="#//Document" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Document" eSuperTypes="#//EventComponent">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="title" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
+        defaultValueLiteral=""/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="index" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"
+        defaultValueLiteral="false"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="fileName" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString" defaultValueLiteral=""/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="inlineComponents" upperBound="-1"
+        eType="#//InlineComponent" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="blockLevelComponents" upperBound="-1"
+        eType="#//BlockLevelComponent" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="objectComponents" upperBound="-1"
+        eType="#//ObjectComponent" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="lineBreaks" upperBound="-1"
+        eType="#//LineBreak" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="richWidgets" upperBound="-1"
+        eType="#//RichWidget" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="lists" upperBound="-1"
+        eType="#//List" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="forms" upperBound="-1"
+        eType="#//Form" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="FooterRegion">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="inlineComponents" upperBound="-1"
+        eType="#//InlineComponent" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="blockLevelComponents" upperBound="-1"
+        eType="#//BlockLevelComponent" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="objectComponents" upperBound="-1"
+        eType="#//ObjectComponent" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="lineBreaks" upperBound="-1"
+        eType="#//LineBreak" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="richWidgets" upperBound="-1"
+        eType="#//RichWidget" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="List" abstract="true" eSuperTypes="#//ClassifiableComponent #//EventComponent #//IdentifiableComponent"/>
+  <eClassifiers xsi:type="ecore:EClass" name="OrderedList" eSuperTypes="#//List">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="listItemns" lowerBound="1"
+        upperBound="-1" eType="#//ListItem" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="type" eType="#//OrderedListType"
+        defaultValueLiteral="ArabicNumber"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="OrderedListType">
+    <eLiterals name="ArabicNumber"/>
+    <eLiterals name="LowerAlpha" value="1"/>
+    <eLiterals name="UpperAlpha" value="2"/>
+    <eLiterals name="LowerRoman" value="3"/>
+    <eLiterals name="UpperRoman" value="4"/>
+    <eLiterals name="none" value="5"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="UnorderedListType">
+    <eLiterals name="disc"/>
+    <eLiterals name="circle" value="1"/>
+    <eLiterals name="square" value="2"/>
+    <eLiterals name="none" value="3"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ListItem">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="text" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
+        defaultValueLiteral=""/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="format" lowerBound="1"
+        eType="#//PhraseElementType" defaultValueLiteral="None"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="UnorderedList" eSuperTypes="#//List">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="listItemns" lowerBound="1"
+        upperBound="-1" eType="#//ListItem" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="type" eType="#//UnorderedListType"
+        defaultValueLiteral="disc"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="RadioGroup">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="radios" lowerBound="1"
+        upperBound="-1" eType="#//Radio" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="label" lowerBound="1" eType="#//Label"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="orientation" lowerBound="1"
+        eType="#//Orientation" defaultValueLiteral="Horizontal"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="CheckGroup">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="checks" lowerBound="1"
+        upperBound="-1" eType="#//Checkbox" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="label" lowerBound="1" eType="#//Label"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="orientation" lowerBound="1"
+        eType="#//Orientation" defaultValueLiteral="Horizontal"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="LinkGroup">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="title" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
+        defaultValueLiteral=""/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="links" lowerBound="1" upperBound="-1"
+        eType="#//Link" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="linkGroups" upperBound="-1"
+        eType="#//LinkGroup" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="Extension">
+    <eLiterals name="html"/>
+    <eLiterals name="xhtml" value="1"/>
+    <eLiterals name="jsp" value="2"/>
+    <eLiterals name="php" value="3"/>
+    <eLiterals name="asp" value="4"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="FieldSetLegendAlign">
+    <eLiterals name="left"/>
+    <eLiterals name="right" value="1"/>
+    <eLiterals name="center" value="2"/>
+    <eLiterals name="bottom" value="3"/>
+    <eLiterals name="top" value="4"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="MessageDialogButton">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="label" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="event" lowerBound="1" eType="#//MessageDialogEvent"
+        defaultValueLiteral="closeDialog"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="MessageDialogEvent">
+    <eLiterals name="closeDialog"/>
+  </eClassifiers>
+</ecore:EPackage>

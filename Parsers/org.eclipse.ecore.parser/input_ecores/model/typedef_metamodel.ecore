@@ -1,0 +1,263 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="typedef" nsURI="http://www.csi.it/mddtools/typedef" nsPrefix="typedef">
+  <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+    <details key="documentation" value="Questo package contiene le metaclassi necessarie per modellare i tipi&#xD;&#xA;(di base e definiti da utente) utilizzati nelle interfacce dei servizi."/>
+  </eAnnotations>
+  <eClassifiers xsi:type="ecore:EClass" name="DocumentRoot">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="[[ TODO - add documentation here ]]"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="types" upperBound="-1"
+        eType="#//Type" containment="true">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="[[ TODO - add documentation here ]]"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Type" abstract="true">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="Classe astratta: rappresenta il generico tipo, sia esso un tipo base, array o complesso"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Nome mnemonico del tipo.&#xD;&#xA;Non prevede indicazioni di namespace."/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="annotations" upperBound="-1"
+        eType="#//TypeAnnotation" containment="true">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Annotazioni associate al tipo. Le informaziopni contenute in questo campo&#xD;&#xA;sono utilizzate per ottenere particolari comportamenti in fase di &#xD;&#xA;generazione.&#xD;&#xA;Vedere la documentazione della metaclasse &lt;b>TypeAnnotation&lt;/b> per&#xD;&#xA;i dettagli sulle possibili valorizzazioni."/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="documentation" eType="#//TDDocumentation"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="CSIDatatype" eSuperTypes="#//Type">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="Tipo base previsto dall'infrastruttura di cooperazione CSI.&#xD;&#xA;Normalmente un insieme di tipi predefiniti è incluso come risorsa nei vari&#xD;&#xA;modelli (definizione servizi, orchestrazioni, ...) e dunque in ogni insieme&#xD;&#xA;di risorse (modelli) interconnesse è opportuno che vi sia una sola istanza&#xD;&#xA;di &lt;b>CSIDatatype&lt;/b> per ogni tipo semplice previsto."/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="code" eType="#//CSIDatatypeCodes">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Codice che determina il reale tipo. Vedere la documentazione della &#xD;&#xA;enumeration &lt;b>CSIDatatypeCodes&lt;/b> perl'elenco dei tipi supportati.&#xD;&#xA;&#xD;&#xA;"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="nillable" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Qualificatore di tipo che defiisce se il tipo è un tipo che può assumere valore&#xD;&#xA;nullo oppure no.&#xD;&#xA;Es: &#xD;&#xA;&lt;ul>&#xD;&#xA;&lt;li> code==CSIInteger &amp; nillable == false: tipo intero non annullabile (es. java int)&#xD;&#xA;&lt;li> code==CSIInteger &amp; nillable == true: tipo intero annullabile (es. java Integer)&#xD;&#xA;&lt;/ul>"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Entity" eSuperTypes="#//Type">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="Tipo complesso costituito da 1 o più &lt;b>feature&lt;/b> (campi).&#xD;&#xA;Non è prevista la possibilità di definire gerarchie.&#xD;&#xA;"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="features" upperBound="-1"
+        eType="#//Feature" containment="true">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Campi che costituiscono il tipo complesso. &#xD;&#xA;Ciascuna feature può essere definita con un tipo semplice, array o complesso.&#xD;&#xA;"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="versionuid" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"
+        defaultValueLiteral="1">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="campo opzionale che serve come marcatore di discontinuità dal punto&#xD;&#xA;di vista della retrocompatibilità.&#xD;&#xA;Tra due versioni differenti di uno stesso complex type la variazione&#xD;&#xA;del versionuid indica una non retrocompatibilità tra i due tipi."/>
+      </eAnnotations>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Feature">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="Il singolo campo di un tipo complesso."/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="nome menmonico del tipo. Dovrebbe seguire le specifiche di naming delle&#xD;&#xA;proprietà javabean"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="type" eType="#//Type">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Tipo del campo. Può essere valorizzato con:&#xD;&#xA;&lt;ul>&#xD;&#xA;&lt;li>un tipo semplice&#xD;&#xA;&lt;li>un tipo complesso&#xD;&#xA;&lt;li>un tipo array&#xD;&#xA;&lt;/ul>"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="documentation" eType="#//TDDocumentation"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="CSIDatatypeCodes">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="[[ TODO - add documentation here ]]"/>
+    </eAnnotations>
+    <eLiterals name="CSIInteger">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="mappato su int o java.lang.Integer (se nillable==true)"/>
+      </eAnnotations>
+    </eLiterals>
+    <eLiterals name="CSIString">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="mappato su java.lang.String"/>
+      </eAnnotations>
+    </eLiterals>
+    <eLiterals name="CSIFloat">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="mappato su float o java.lang.Float (se nillable==true)"/>
+      </eAnnotations>
+    </eLiterals>
+    <eLiterals name="CSIDouble">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="mappato su double o java.lang.Double (se nillable==true)"/>
+      </eAnnotations>
+    </eLiterals>
+    <eLiterals name="CSIBoolean">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="mappato su boolean o java.lang.Boolean (se nillable==true)"/>
+      </eAnnotations>
+    </eLiterals>
+    <eLiterals name="CSIDate">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="mappato su java.util.Date. Consigliato l'uso per gestire timestamp; non &#xD;&#xA;consigliato per gestire date prive di informazioni sull'ora. Usare stringhe&#xD;&#xA;formattate."/>
+      </eAnnotations>
+    </eLiterals>
+    <eLiterals name="CSIByte">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="mappato su byte o java.lang.Byte (se nillable==true). E' sconsigliata la versione nillable."/>
+      </eAnnotations>
+    </eLiterals>
+    <eLiterals name="CSILong">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="mappato su long o java.lang.Long (se nillable==true)"/>
+      </eAnnotations>
+    </eLiterals>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="TypedArray" eSuperTypes="#//Type">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="Array tipato. Può essere un array di tipi semplici (CSIDatatype) o di tipi &#xD;&#xA;user defined (Entity). Normalmente gli array di tipi semplici sono forniti in&#xD;&#xA;un file da includere come risorsa e referenziare negli altri modelli che&#xD;&#xA;ne hanno bisogno, mentre gli array di tipi user defined devono essere&#xD;&#xA;definiti localmente alla definizione del singolo servizio."/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="componentType" eType="#//Type">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="indica il tipo degli elementi dell'array"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Exception" eSuperTypes="#//Type">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="Tipo eccezione. E' utilizzato nelle interfacce di servizio per la&#xD;&#xA;dichiarazioen delle eccezioni previste dai vari metodi."/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="exceptionType" eType="#//CSIExceptionTypes">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Tipo di eccezioni (tra le tipologie previste dall'infrastruttura di cooperazione CSI)"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="CSIExceptionTypes">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="Tipi di eccezione previsti dall'infrastruttura di cooperazione CSI"/>
+    </eAnnotations>
+    <eLiterals name="USER">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="L'eccezione di questo tipo sono definite come sottoclassi di&#xD;&#xA;UserException"/>
+      </eAnnotations>
+    </eLiterals>
+    <eLiterals name="SYSTEM">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="L'eccezione di questo tipo sono definite come sottoclassi di&#xD;&#xA;SystemException"/>
+      </eAnnotations>
+    </eLiterals>
+    <eLiterals name="UNRECOVERABLE">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="L'eccezione di questo tipo sono definite come sottoclassi di&#xD;&#xA;UnrecoverableException"/>
+      </eAnnotations>
+    </eLiterals>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="TypeAnnotation">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="Annotazione di tipo. E'utilizzata dai generatori per customizzare particolari&#xD;&#xA;comportamenti (es. packaging non standard)."/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="source" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Serve per discriminare la fonte dell'annotazione.&#xD;&#xA;Attualmente è prevista la source &quot;typedef&quot;."/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="details" upperBound="-1"
+        eType="#//TDAnnotationDetail" containment="true">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Dettaglio di una annotazione. contiene il vero contenuto informativo dell'annotazione"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="TDAnnotationDetail">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="Dettaglio dell'annotazione.&#xD;&#xA;Al momento le annotazioni previste sono:&#xD;&#xA;&lt;ul>&#xD;&#xA;&lt;li>source=typedef&#xD;&#xA;&#x9;&lt;ul>&#xD;&#xA;&#x9;&lt;li>key=java-fqn: value=full qualified name della classe java corrispondente.&#xD;&#xA;&#x9;&#x9;Necessaria per gestire situazioni legacy o che non rispettano lo standard di naming&lt;/li>&#xD;&#xA;&#x9;&lt;/ul>&#xD;&#xA;&lt;/li>&#xD;&#xA;&lt;/ul>"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="key" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="chiave dell'annotazione"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="valore dell'annotazione"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="PrimitiveType" eSuperTypes="#//Type">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="Tipo base customizzabile. Permette di definire differenti &lt;i>Typeset&lt;/i>.&#xD;&#xA;In particolare &amp;egrave; possibile definire anche un insieme di &lt;i>language binding&lt;/i>&#xD;&#xA;che permettono di indicare il tipo &lt;i>language specific&lt;/i> a cui deve essere associato&#xD;&#xA;il tipo modellato."/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="typesetName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Nome del typeset, es.: &lt;i>xsd&lt;/i>, &lt;i>CSI&lt;/i>.&#xD;&#xA;Ha scopo tipicamente mnemonico, a meno che non sia referenziato &#xD;&#xA;esplicitamente da qualche cartuccia di generazione. "/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="nillable" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Se impostato a &lt;i>true&lt;/i> indica che il tipo prevede tra i valori possibili&#xD;&#xA;il valore nullo."/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="languageBindings" upperBound="-1"
+        eType="#//TypeLanguageBinding" containment="true">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Binding del tipo nei vari linguaggi. Ciascun binding permette di definire come&#xD;&#xA;deve essere trattato il tipo nel linguaggio specifico, ovvero a quale tipo effettivo&#xD;&#xA;dovr&amp;agrave; essere associato e con che caratteristiche di dettaglio."/>
+      </eAnnotations>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="TypeLanguageBinding">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="lang" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="codice del linguaggio.&#xD;&#xA;&#xD;&#xA;E' un codice mnemonico eventualmente utilizzato dalle cartucce di generazione, pertanto&#xD;&#xA;non vi sono vincoli a priori sulla codifica da utilizzare."/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="langSpecificType" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Indica il nome del tipo del linguaggio target, privo dell'eventuale namespace.&#xD;&#xA;L'unione di &lt;i>langSpecificNS&lt;/i> e &lt;i>langSpecificType&lt;/i> rappresenta il&#xD;&#xA;&lt;i>full qualified name&lt;/i> del tipo.&#xD;&#xA;&#xD;&#xA;Es, per java:&#xD;&#xA;&lt;ul>&#xD;&#xA;&lt;li>int (namespace: nessuno)&lt;/li>&#xD;&#xA;&lt;li>String (namespace: java.lang.&lt;/li>&#xD;&#xA;&lt;/ul>"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="langSpecificNS" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Indica il nome del namespace (pacakge) che contiene il tipo del linguaggio &#xD;&#xA;target. N.B: comprende anche un eventuale carattere separatore da anteporre al nome del tipo.&#xD;&#xA;L'unione di &lt;i>langSpecificNS&lt;/i> e &lt;i>langSpecificType&lt;/i> rappresenta il&#xD;&#xA;&lt;i>full qualified name&lt;/i> del tipo.&#xD;&#xA;&#xD;&#xA;Es, per java:&#xD;&#xA;&lt;ul>&#xD;&#xA;&lt;li>int (namespace: nessuno)&lt;/li>&#xD;&#xA;&lt;li>String (namespace: java.lang.&lt;/li>&#xD;&#xA;&lt;/ul>"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="defaultInitValue" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Indica il valore iniziale che deve essere impostato nel codice rleativo al&#xD;&#xA;linguaggio in oggetto, nelle dichiarazioni di variabili&#xD;&#xA;che coinvolgono il &lt;b>PrimitiveType&lt;/b>."/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="nullValueLiteral" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Utilizzato in congiunzione con &lt;i>nillable==true&lt;/i> sull'elemento&#xD;&#xA;padre &lt;b>PrimitiveType&lt;/p>. &#xD;&#xA;Permette di impostare il valore nullo da utilizzare per il linguaggio in oggetto.&#xD;&#xA;Es. per java: &lt;code>nullValueLiteral=null&lt;/code> "/>
+      </eAnnotations>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="EnumVal" eSuperTypes="#//Type">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="valueType" eType="#//Type"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="literals" upperBound="-1"
+        eType="#//EnumLiteral" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="EnumLiteral">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="documentation" eType="#//TDDocumentation"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="TDDocumentation">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="doc" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+</ecore:EPackage>

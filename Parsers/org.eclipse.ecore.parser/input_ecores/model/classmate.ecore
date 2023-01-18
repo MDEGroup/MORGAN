@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="classmate"
+    nsURI="http:///classmate.sample" nsPrefix="classmate">
+  <eClassifiers xsi:type="ecore:EClass" name="Classroom">
+    <eAnnotations source="diagraph">
+      <details key="node" value=""/>
+      <details key="kref=students" value=""/>
+      <details key="label=name" value=""/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="students" upperBound="-1"
+        eType="#//Student" containment="true" resolveProxies="false"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ClassmateSystem">
+    <eAnnotations source="diagraph">
+      <details key="node" value=""/>
+      <details key="pov" value=""/>
+      <details key="cref=school"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="school" eType="#//School"
+        containment="true" resolveProxies="false"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="friends" upperBound="-1"
+        eType="#//Friend" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="School">
+    <eAnnotations source="diagraph">
+      <details key="node" value=""/>
+      <details key="kref=classrooms" value=""/>
+      <details key="label=name" value=""/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="classrooms" upperBound="-1"
+        eType="#//Classroom" containment="true" resolveProxies="false"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Student">
+    <eAnnotations source="diagraph">
+      <details key="node" value=""/>
+      <details key="label=name"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Friend">
+    <eAnnotations source="diagraph">
+      <details key="link"/>
+      <details key="label=fromDate"/>
+      <details key="label=toDate"/>
+      <details key="cont=ClassmateSystem.friends"/>
+      <details key="lsrc=fromStudent"/>
+      <details key="ltrg=toStudent"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="fromDate" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="toDate" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="fromStudent" eType="#//Student"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="toStudent" eType="#//Student"/>
+  </eClassifiers>
+</ecore:EPackage>

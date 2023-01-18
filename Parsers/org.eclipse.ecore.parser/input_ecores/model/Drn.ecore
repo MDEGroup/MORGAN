@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="drn" nsURI="http://www.drone.sar/Drn" nsPrefix="drn">
+  <eClassifiers xsi:type="ecore:EClass" name="Model">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="context" eType="#//Context"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="assignement" upperBound="-1"
+        eType="#//Assignement" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="main" eType="#//RefPart"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Context">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="limit" upperBound="-1"
+        eType="#//Limit" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Limit">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Vmax" eSuperTypes="#//Limit"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Hmax" eSuperTypes="#//Limit"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Assignement">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="parametre" upperBound="-1"
+        eType="#//Parametre" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="operandes" upperBound="-1"
+        eType="#//Expression" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Parametre">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Expression">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="repeatCST" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="repeatVAR" eType="#//Parametre"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="with" upperBound="-1" eType="#//With"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="then" upperBound="-1" eType="#//Expression"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="RefPart" eSuperTypes="#//Expression">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="variable_partie" eType="#//Assignement"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="params" unique="false"
+        upperBound="-1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="And" eSuperTypes="#//Expression">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="rotate" upperBound="-1"
+        eType="#//Rotate" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="depx" upperBound="-1" eType="#//DepX_Impl"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="depy" upperBound="-1" eType="#//DepY_Impl"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="depxz" upperBound="-1"
+        eType="#//DepXZ_IMPL" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="depxy" upperBound="-1"
+        eType="#//DepXY_IMPL" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="depz" upperBound="-1" eType="#//DepZ_Impl"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="DepY_Impl" eSuperTypes="#//Expression">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="distanceVar" eType="#//Parametre"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="distanceCST" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="tempsCST" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="tempsVAR" eType="#//Parametre"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="FORWARD" eSuperTypes="#//DepY_Impl"/>
+  <eClassifiers xsi:type="ecore:EClass" name="BACKWARD" eSuperTypes="#//DepY_Impl"/>
+  <eClassifiers xsi:type="ecore:EClass" name="DepX_Impl" eSuperTypes="#//Expression">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="distanceCST" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="distanceVar" eType="#//Parametre"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="tempsCST" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="tempsVAR" eType="#//Parametre"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="LEFT" eSuperTypes="#//DepX_Impl"/>
+  <eClassifiers xsi:type="ecore:EClass" name="RIGHT" eSuperTypes="#//DepX_Impl"/>
+  <eClassifiers xsi:type="ecore:EClass" name="DepZ_Impl" eSuperTypes="#//Expression">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="distanceCST" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="distanceVar" eType="#//Parametre"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="tempsCST" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="tempsVAR" eType="#//Parametre"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="UP" eSuperTypes="#//DepZ_Impl"/>
+  <eClassifiers xsi:type="ecore:EClass" name="DOWN" eSuperTypes="#//DepZ_Impl"/>
+  <eClassifiers xsi:type="ecore:EClass" name="DepXY_IMPL" eSuperTypes="#//Expression">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="tempsCST" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="tempsVAR" eType="#//Parametre"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="DepXY" eSuperTypes="#//DepXY_IMPL">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="distanceCST" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="distanceVar" eType="#//Parametre"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="CERCLEXY" eSuperTypes="#//DepXY_IMPL">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="rayonCST" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="rayonVar" eType="#//Parametre"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="CARREXY" eSuperTypes="#//DepXY_IMPL">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="coteCST" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="coteVAR" eType="#//Parametre"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="DepYZ_IMPL" eSuperTypes="#//Expression">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="tempsCST" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="tempsVAR" eType="#//Parametre"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="DepYZ" eSuperTypes="#//DepYZ_IMPL">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="distanceCST" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="distanceVar" eType="#//Parametre"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="CERCLEYZ" eSuperTypes="#//DepYZ_IMPL">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="rayonCST" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="rayonVar" eType="#//Parametre"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="CARREYZ" eSuperTypes="#//DepYZ_IMPL">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="coteCST" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="coteVAR" eType="#//Parametre"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="DepXZ_IMPL" eSuperTypes="#//Expression"/>
+  <eClassifiers xsi:type="ecore:EClass" name="DepXZ" eSuperTypes="#//DepXZ_IMPL">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="distanceCST" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="distanceVar" eType="#//Parametre"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="tempsCST" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="tempsVAR" eType="#//Parametre"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="DepXYZ_IMPL" eSuperTypes="#//Expression">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="DepXYZ" eSuperTypes="#//DepXYZ_IMPL">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="distanceCST" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="distanceVar" eType="#//Parametre"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="tempsCST" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="tempsVAR" eType="#//Parametre"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Flip" eSuperTypes="#//DepXYZ_IMPL"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Rotate" eSuperTypes="#//Expression">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="angleCST" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="angleVAR" eType="#//Parametre"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="tempsCST" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="tempsVAR" eType="#//Parametre"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Wait" eSuperTypes="#//Expression">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="tempsCST" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="tempsVAR" eType="#//Parametre"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="TakeOff" eSuperTypes="#//Expression">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Land" eSuperTypes="#//Expression">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="With">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="option" upperBound="-1"
+        eType="#//Option" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Option">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Led_Impl" eSuperTypes="#//Option">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="color" eType="#//ColorLed"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="LedBlink" eSuperTypes="#//Option">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="color" eType="#//ColorLed"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="blink_per_secCST" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="blink_per_secVAR" eType="#//Parametre"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="CameraFront" eSuperTypes="#//Option">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="mode" eType="#//Mode"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="CameraBottom" eSuperTypes="#//Option">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="mode" eType="#//Mode"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="ColorLed">
+    <eLiterals name="BLUE" literal="BLUE"/>
+    <eLiterals name="RED" value="1" literal="RED"/>
+    <eLiterals name="YELLOW" value="2" literal="YELLOW"/>
+    <eLiterals name="GREEN" value="3" literal="GREEN"/>
+    <eLiterals name="WHITE" value="4" literal="WHITE"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="Mode">
+    <eLiterals name="OFF" literal="OFF"/>
+    <eLiterals name="ON" value="1" literal="ON"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="EBool">
+    <eLiterals name="TRUE" literal="TRUE"/>
+    <eLiterals name="FALSE" value="1" literal="FALSE"/>
+  </eClassifiers>
+</ecore:EPackage>

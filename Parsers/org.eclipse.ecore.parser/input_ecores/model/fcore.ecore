@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="FCORE" nsURI="http://www.cloudwave-fp7.eu/ude/fcore" nsPrefix="fcore">
+  <eClassifiers xsi:type="ecore:EClass" name="FeatureModel">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="rootFeature" lowerBound="1"
+        eType="#//RootFeature" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="groupFeatures" upperBound="-1"
+        eType="#//GroupFeature" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="solitaryFeatures" upperBound="-1"
+        eType="#//SolitaryFeature" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="featureGroups" upperBound="-1"
+        eType="#//FeatureGroup" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="attributes" upperBound="-1"
+        eType="#//Attribute" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="attributeConstraints" upperBound="-1"
+        eType="#//AttributeConstraint" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="requiresFeatureConstraints"
+        upperBound="-1" eType="#//RequiresFeatureConstraint" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="excludesFeatureConstraints"
+        upperBound="-1" eType="#//ExcludesFeatureConstraint" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="softgoals" upperBound="-1"
+        eType="#//Softgoal" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="featureInfluences" upperBound="-1"
+        eType="#//InfluenceFeature" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="attributeInfluences" upperBound="-1"
+        eType="#//InfluenceAttribute" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="mandatoryConnections" upperBound="-1"
+        eType="#//MandatoryConnection" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="optionalConnections" upperBound="-1"
+        eType="#//OptionalConnection" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="featureToGroupConnections"
+        upperBound="-1" eType="#//FeatureToGroupConnection" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="groupToFeatureConnections"
+        upperBound="-1" eType="#//GroupToFeatureConnection" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="AttributeConstraintConnections"
+        upperBound="-1" eType="#//AttributeConstraintConnection" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Feature" abstract="true">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="selected" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="attributeConstraints" upperBound="-1"
+        eType="#//AttributeConstraintConnection" eOpposite="#//AttributeConstraintConnection/source"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="attributes" upperBound="-1"
+        eType="#//Attribute" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="featureConstraintsStarts"
+        upperBound="-1" eType="#//FeatureConstraint" eOpposite="#//FeatureConstraint/featureStart"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="featureConstraintsEnds"
+        upperBound="-1" eType="#//FeatureConstraint" eOpposite="#//FeatureConstraint/featureEnd"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="influences" upperBound="-1"
+        eType="#//InfluenceFeature" eOpposite="#//InfluenceFeature/feature"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="outgoingSingleFeatureConnections"
+        upperBound="-1" eType="#//SingleFeatureConnection" eOpposite="#//SingleFeatureConnection/source"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="featureToGroupConnections"
+        upperBound="-1" eType="#//FeatureToGroupConnection" eOpposite="#//FeatureToGroupConnection/source"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="RootFeature" eSuperTypes="#//Feature"/>
+  <eClassifiers xsi:type="ecore:EClass" name="SolitaryFeature" eSuperTypes="#//Feature">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="min" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="max" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="incomingSingleFeatureConnection"
+        lowerBound="1" eType="#//SingleFeatureConnection" eOpposite="#//SingleFeatureConnection/target"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="GroupFeature" eSuperTypes="#//Feature">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="groupToFeatureConnection"
+        lowerBound="1" eType="#//GroupToFeatureConnection" eOpposite="#//GroupToFeatureConnection/target"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="FeatureGroup">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="min" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="max" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="featureToGroupConnection"
+        lowerBound="1" eType="#//FeatureToGroupConnection" eOpposite="#//FeatureToGroupConnection/target"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="groupToFeatureConnections"
+        lowerBound="2" upperBound="-1" eType="#//GroupToFeatureConnection" eOpposite="#//GroupToFeatureConnection/source"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Attribute">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="influences" upperBound="-1"
+        eType="#//InfluenceAttribute" eOpposite="#//InfluenceAttribute/attribute"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"
+        defaultValueLiteral="1"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="min" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"
+        defaultValueLiteral="1"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="max" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"
+        defaultValueLiteral="1"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="AttributeConstraint">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="equation" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="attributeConstraintConnection"
+        eType="#//AttributeConstraintConnection" eOpposite="#//AttributeConstraintConnection/target"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Softgoal">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="influence" upperBound="-1"
+        eType="#//Influence" eOpposite="#//Influence/softgoal"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="weighting" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Conncection" abstract="true"/>
+  <eClassifiers xsi:type="ecore:EClass" name="FeatureConstraint" abstract="true" eSuperTypes="#//Conncection">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="featureStart" lowerBound="1"
+        eType="#//Feature" eOpposite="#//Feature/featureConstraintsStarts"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="featureEnd" lowerBound="1"
+        eType="#//Feature" eOpposite="#//Feature/featureConstraintsEnds"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="RequiresFeatureConstraint" eSuperTypes="#//FeatureConstraint"/>
+  <eClassifiers xsi:type="ecore:EClass" name="ExcludesFeatureConstraint" eSuperTypes="#//FeatureConstraint"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Influence" abstract="true" eSuperTypes="#//Conncection">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="contribution" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EFloat"
+        defaultValueLiteral="1.0"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="softgoal" lowerBound="1"
+        eType="#//Softgoal" eOpposite="#//Softgoal/influence"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="InfluenceFeature" eSuperTypes="#//Influence">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="feature" lowerBound="1"
+        eType="#//Feature" eOpposite="#//Feature/influences"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="InfluenceAttribute" eSuperTypes="#//Influence">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="attribute" lowerBound="1"
+        eType="#//Attribute" eOpposite="#//Attribute/influences"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="SingleFeatureConnection" abstract="true"
+      eSuperTypes="#//Conncection">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="source" lowerBound="1"
+        eType="#//Feature" eOpposite="#//Feature/outgoingSingleFeatureConnections"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="target" lowerBound="1"
+        eType="#//SolitaryFeature" eOpposite="#//SolitaryFeature/incomingSingleFeatureConnection"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="CardinalityConnection" eSuperTypes="#//SingleFeatureConnection">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="min" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"
+        defaultValueLiteral="1"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="max" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"
+        defaultValueLiteral="2"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="MandatoryConnection" eSuperTypes="#//SingleFeatureConnection"/>
+  <eClassifiers xsi:type="ecore:EClass" name="OptionalConnection" eSuperTypes="#//SingleFeatureConnection"/>
+  <eClassifiers xsi:type="ecore:EClass" name="FeatureToGroupConnection" eSuperTypes="#//Conncection">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="source" lowerBound="1"
+        eType="#//Feature" eOpposite="#//Feature/featureToGroupConnections"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="target" lowerBound="1"
+        eType="#//FeatureGroup" eOpposite="#//FeatureGroup/featureToGroupConnection"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="GroupToFeatureConnection" eSuperTypes="#//Conncection">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="source" lowerBound="1"
+        eType="#//FeatureGroup" eOpposite="#//FeatureGroup/groupToFeatureConnections"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="target" lowerBound="1"
+        eType="#//GroupFeature" eOpposite="#//GroupFeature/groupToFeatureConnection"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="AttributeConstraintConnection" eSuperTypes="#//Conncection">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="source" lowerBound="1"
+        eType="#//Feature" eOpposite="#//Feature/attributeConstraints"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="target" lowerBound="1"
+        eType="#//AttributeConstraint" eOpposite="#//AttributeConstraint/attributeConstraintConnection"/>
+  </eClassifiers>
+</ecore:EPackage>

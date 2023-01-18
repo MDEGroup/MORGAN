@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="ocldriven"
+    nsURI="http://ocldriven" nsPrefix="_ocldriven">
+  <eAnnotations source="diagen">
+    <details key="knownas=ocl driven"/>
+    <details key="origin=http://org.isoe.fr"/>
+    <details key="leftparent=nil" value=""/>
+    <details key="rightparent=nil" value=""/>
+    <details key="requires=nil" value=""/>
+    <details key="context=ocl test"/>
+  </eAnnotations>
+  <eAnnotations source="diarule">
+    <details key="Media.copies.init=1"/>
+    <details key="Loans.date.init=now"/>
+    <details key="Media.rule.warning[unsufficient media]=library.loans->select((book = self))->size() &lt;= copies"/>
+    <details key="Library.rule.error[cyclic dependancy]=self.dependancies->forAll(r1, r2 |  r1.after = r2.before  implies r2.after &lt;> r1.before)"/>
+  </eAnnotations>
+  <eClassifiers xsi:type="ecore:EClass" name="Library">
+    <eAnnotations source="diagraph">
+      <details key="node"/>
+      <details key="pov"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="medias" upperBound="-1"
+        eType="#//Media" containment="true" eOpposite="#//Media/library"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="members" upperBound="-1"
+        eType="#//Member" containment="true" eOpposite="#//Member/library"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="loans" upperBound="-1"
+        eType="#//Loans" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="dependancies" upperBound="-1"
+        eType="#//Dependancy" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Media">
+    <eAnnotations source="diagraph">
+      <details key="node"/>
+      <details key="label=name"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="library" eType="#//Library"
+        eOpposite="#//Library/medias"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="copies" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBigInteger"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Loans">
+    <eAnnotations source="diagraph">
+      <details key="link"/>
+      <details key="cont=Library.loans"/>
+      <details key="lsrc=member"/>
+      <details key="ltrg=media"/>
+      <details key="label=date"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="member" lowerBound="1"
+        eType="#//Member"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="media" lowerBound="1" eType="#//Media"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="date" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDate"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Member">
+    <eAnnotations source="diagraph">
+      <details key="node"/>
+      <details key="label=name"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="library" eType="#//Library"
+        eOpposite="#//Library/members"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Dependancy">
+    <eAnnotations source="diagraph">
+      <details key="link"/>
+      <details key="lsrc=before"/>
+      <details key="ltrg=after"/>
+      <details key="cont=Library.dependancies"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="before" eType="#//Media"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="after" eType="#//Media"/>
+  </eClassifiers>
+</ecore:EPackage>

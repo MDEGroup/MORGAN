@@ -1,0 +1,6 @@
+model	QualificationPhase (pools,Pool,ref) 
+model	FinalPhase (qualificationphase,QualificationPhase,ref) (finalists,Gamer,ref) 
+model	Game (name,EString,attribute) (type,GameType,attribute) 
+model	Gamer (firstName,EString,attribute) (lastName,EString,attribute) (victories,EInt,attribute) (pseudo,EString,attribute) (matches,EInt,attribute) 
+model	Pool (classment,Gamer,ref) (participants,Gamer,ref) 
+model	Tournament (endDate,EDate,attribute) (name,EString,attribute) (location,EString,attribute) (prize,EInt,attribute) (startDate,EDate,attribute) (finalPhase,FinalPhase,ref) (game,Game,ref) (qualificationPhase,QualificationPhase,ref) (gamers,Gamer,ref) 

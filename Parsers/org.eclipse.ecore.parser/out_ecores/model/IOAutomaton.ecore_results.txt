@@ -1,0 +1,8 @@
+model	Return (value,EString,attribute) 
+model	Automaton (sender,EString,attribute) (state,State,ref) (initialstate,State,ref) (transition,Transition,ref) 
+model	OutMessage (_return,Return,ref) (operation,Operation,ref) (_object,Object,ref) 
+model	AutomatonContainer (automaton,Automaton,ref) 
+model	State (name,EString,attribute) (outgoingtransition,Transition,ref) (incomingtransition,Transition,ref) 
+model	Transition (prestate,State,ref) (_return,Return,ref) (outmessage,OutMessage,ref) (operation,Operation,ref) (poststate,State,ref) 
+model	Object (name,EString,attribute) 
+model	Operation (name,EString,attribute) 

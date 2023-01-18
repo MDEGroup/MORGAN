@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="cbpmni" nsURI="http://cbpmni/1.0" nsPrefix="cbpmni">
+  <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore">
+    <details key="invocationDelegates" value="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot"/>
+    <details key="settingDelegates" value="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot"/>
+    <details key="validationDelegates" value="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot"/>
+  </eAnnotations>
+  <eClassifiers xsi:type="ecore:EClass" name="ProcessInst">
+    <eOperations name="setupProcessInstance"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="processDef" eType="ecore:EClass cbpmn.ecore#//ProcessModel"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="tokens" upperBound="-1"
+        eType="#//FlowNodeInst"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="flowNodes" upperBound="-1"
+        eType="#//FlowNodeInst" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="FlowNodeInst" abstract="true">
+    <eOperations name="EOperation0"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="nodeDef" eType="ecore:EClass cbpmn.ecore#//FlowNode"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="status" eType="#//FlowNodeStatusType"
+        defaultValueLiteral="INACTIVE"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="next" eType="#//FlowNodeInst"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="FlowNodeStatusType">
+    <eLiterals name="INACTIVE"/>
+    <eLiterals name="READY" value="1"/>
+    <eLiterals name="RUNNING" value="2"/>
+    <eLiterals name="COMPLETED" value="3"/>
+    <eLiterals name="ABORTED" value="4"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ActivityInst" eSuperTypes="#//FlowNodeInst">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore">
+      <details key="constraints" value="correctArguments correctNodeDef"/>
+    </eAnnotations>
+    <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
+      <details key="correctArguments" value="true"/>
+      <details key="correctNodeDef" value="nodeDef.oclIsTypeOf(cbpmn::Activity)"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="preconditions" upperBound="-1"
+        eType="#//ConstraintInst" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="postconditions" upperBound="-1"
+        eType="#//ConstraintInst" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="inputs" upperBound="-1"
+        eType="ecore:EClass platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EObject"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="outputs" upperBound="-1"
+        eType="ecore:EClass platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EObject"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="EventInst" eSuperTypes="#//FlowNodeInst"/>
+  <eClassifiers xsi:type="ecore:EClass" name="SplitInst" eSuperTypes="#//FlowNodeInst">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="branches" upperBound="-1"
+        eType="#//BranchInst" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="BranchInst">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="branchDef" eType="ecore:EClass cbpmn.ecore#//Branch"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ConstraintInst">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="extension" upperBound="-1"
+        eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EObject"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="constraintDef" lowerBound="1"
+        eType="ecore:EClass cbpmn.ecore#//OCLConstraint"/>
+  </eClassifiers>
+</ecore:EPackage>

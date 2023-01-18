@@ -1,0 +1,8 @@
+model	ScxmlSendType (event,ScxmlSendEventType,attribute) (param,ScxmlParamType,ref) 
+model	ScxmlOnexecuteType (anyAttribute,EFeatureMapEntry,attribute) (scxmlExecutablecontent,EFeatureMapEntry,attribute) (any,EFeatureMapEntry,attribute) (send,ScxmlSendType,ref) (script,ScxmlScriptType,ref) 
+model	ScxmlScxmlType (initial,ScxmlIdType,attribute) (id,ScxmlIdType,attribute) (version,Decimal,attribute) (state,ScxmlStateType,ref) (script,ScxmlScriptType,ref) 
+model	DocumentRoot (mixed,EFeatureMapEntry,attribute) (scxml,ScxmlScxmlType,ref) (xSISchemaLocation,EStringToStringMapEntry,ref) (xMLNSPrefixMap,EStringToStringMapEntry,ref) 
+model	ScxmlStateType (initial,ScxmlIdType,attribute) (id,ScxmlIdType,attribute) (onentry,ScxmlOnexecuteType,ref) (onexit,ScxmlOnexecuteType,ref) (state,ScxmlStateType,ref) (transition,ScxmlTransitionType,ref) 
+model	ScxmlTransitionType (scxmlExecutablecontent,EFeatureMapEntry,attribute) (cond,ScxmlTransitionCondType,attribute) (event,ScxmlTransitionEventType,attribute) (any,EFeatureMapEntry,attribute) (target,ScxmlIdType,attribute) (send,ScxmlSendType,ref) (script,ScxmlScriptType,ref) 
+model	ScxmlScriptType (src,ScxmlScriptSourceType,attribute) (mixed,EFeatureMapEntry,attribute) (any,EFeatureMapEntry,attribute) (scxmlExtraContent,EFeatureMapEntry,attribute) (content,EString,attribute) 
+model	ScxmlParamType (anyAttribute,EFeatureMapEntry,attribute) (name,ScxmlParamNameType,attribute) (expr,ScxmlExprType,attribute) (any,EFeatureMapEntry,attribute) (scxmlExtraContent,EFeatureMapEntry,attribute) 

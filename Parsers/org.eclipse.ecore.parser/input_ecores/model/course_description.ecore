@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="course_desc" nsURI="platform:/plugin/basic_ecore_modeling/course_description.ecore"
+    nsPrefix="course_desc">
+  <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore">
+    <details key="validationDelegate" value="http://www.eclipse.org/emf/2002/Ecore/OCL"/>
+    <details key="settingDelegates" value="http://www.eclipse.org/emf/2002/Ecore/OCL"/>
+  </eAnnotations>
+  <eClassifiers xsi:type="ecore:EClass" name="Course">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="Code" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="Content" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="Credits" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDoubleObject"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="hasInstance" upperBound="-1"
+        eType="#//CourseInstance" eOpposite="#//CourseInstance/instanceOfCourse"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="hasPrecondition" upperBound="-1"
+        eType="#//CoursePreconditions"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="CourseInstance">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="hasTimetable" lowerBound="1"
+        upperBound="-1" eType="#//Timetable" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="instanceOfCourse" lowerBound="1"
+        eType="#//Course" eOpposite="#//Course/hasInstance"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="hasEvaluations" lowerBound="1"
+        upperBound="-1" eType="#//Evaluation" containment="true" eOpposite="#//Evaluation/belongsTo"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="Year" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="LectureHours" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDouble"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="LabHours" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDouble"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="isInstanceOf" lowerBound="1"
+        eType="#//Department" eOpposite="#//Department/responsible"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="hasLecturers" upperBound="-1"
+        eType="#//Lecturer" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="hasCourseCoordinator" upperBound="-1"
+        eType="#//CourseCoordinator" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Department">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="responsible" upperBound="-1"
+        eType="#//CourseInstance" containment="true" eOpposite="#//CourseInstance/isInstanceOf"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="manages" lowerBound="1"
+        upperBound="-1" eType="#//StudyProgram" containment="true" eOpposite="#//StudyProgram/belongs"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Evaluation" abstract="true">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="Percentage" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDouble"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="belongsTo" eType="#//CourseInstance"
+        eOpposite="#//CourseInstance/hasEvaluations"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Exam" eSuperTypes="#//Evaluation">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="date" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDate"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="place" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="duration" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDouble"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="hasRegisteredStudents"
+        upperBound="-1" eType="#//Student" eOpposite="#//Student/hasExams"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Timetable">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="hasCourseWork" upperBound="-1"
+        eType="#//CourseWork" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="programs" upperBound="-1"
+        eType="#//StudyProgram"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="CoursePreconditions">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="isRequired" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"
+        defaultValueLiteral="false"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="reductionPoints" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDouble"
+        defaultValueLiteral="0"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="isRecommended" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"
+        defaultValueLiteral="false"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="belongsTo" lowerBound="1"
+        eType="#//Course"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="CourseWork">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="Duration" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="Room" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="isMandatory" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="isRestricted" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="Type" eType="#//CourseWorkType"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="CourseWorkType">
+    <eLiterals name="LABHOUR"/>
+    <eLiterals name="LECTURE" value="1" literal="LECTURE"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="StudyProgram">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="studyCode" eType="#//StudyProgramCode"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="offers" upperBound="-1"
+        eType="#//Course"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="belongs" lowerBound="1"
+        eType="#//Department" eOpposite="#//Department/manages"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="StudyProgramCode">
+    <eLiterals name="MTDT" literal="MTDT"/>
+    <eLiterals name="BIT" value="1" literal="BIT"/>
+    <eLiterals name="MIT" value="2"/>
+    <eLiterals name="MTIØT" value="3" literal="MTIØT"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Person">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore">
+      <details key="constraints" value="onlyLetters onlyElevenNumbers personNRnotEmpty"/>
+    </eAnnotations>
+    <eAnnotations source="xhttp://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
+      <details key="onlyElevenNumbers" value="self.personNr.toString().size() = 11"/>
+    </eAnnotations>
+    <eAnnotations source="xhttp://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
+      <details key="personNRnotEmpty" value="self.personNr -> isEmpty()"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="personNr" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBigInteger"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="hasRole" upperBound="-1"
+        eType="#//PersonRole" eOpposite="#//PersonRole/linkedTo"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="fullName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
+        volatile="true" transient="true" derived="true">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL">
+        <details key="derivation" value="self.name.concat(' ').concat(self.lastName)&#xD;&#xA;"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="lastName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="PersonRole" abstract="true">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="linkedTo" eType="#//Person"
+        eOpposite="#//Person/hasRole"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Student" eSuperTypes="#//PersonRole">
+    <eOperations name="signUpForExam" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
+      <eParameters name="exam" eType="#//Exam"/>
+    </eOperations>
+    <eOperations name="cancelExam" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
+      <eParameters name="exam" eType="#//Exam"/>
+    </eOperations>
+    <eOperations name="takeExam" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
+      <eParameters name="exam" eType="#//Exam"/>
+    </eOperations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="hasExams" upperBound="-1"
+        eType="#//Exam" eOpposite="#//Exam/hasRegisteredStudents"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="finishedExams" upperBound="-1"
+        eType="#//Exam"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="totalStudyPoints" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDouble" changeable="false"
+        volatile="true" transient="true" defaultValueLiteral="0" derived="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Lecturer" eSuperTypes="#//PersonRole">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="belongsTo" eType="#//CourseInstance"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="CourseCoordinator" eSuperTypes="#//PersonRole">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="belongsTo" eType="#//CourseInstance"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="DeadlineEvaluation">
+    <eLiterals name="ASSIGNMENT"/>
+    <eLiterals name="PROJECT" value="1"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Univ">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="hasDepartment" upperBound="-1"
+        eType="#//Department" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="hasCourses" upperBound="-1"
+        eType="#//Course" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="hasPersons" upperBound="-1"
+        eType="#//Person" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="hasPrecond" upperBound="-1"
+        eType="#//CoursePreconditions" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="hasStudents" upperBound="-1"
+        eType="#//Student" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="EvaluationWithDeadline" eSuperTypes="#//Evaluation">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="deadlineEvaluation" eType="#//DeadlineEvaluation"/>
+  </eClassifiers>
+</ecore:EPackage>

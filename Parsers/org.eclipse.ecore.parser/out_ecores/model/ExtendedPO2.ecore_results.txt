@@ -1,0 +1,8 @@
+model	Item (quantity,EInt,attribute) (comment,EString,attribute) (USPrice,EInt,attribute) (shipDate,Date,attribute) (productName,EString,attribute) (partNum,SKU,attribute) (order,PurchaseOrder,ref) 
+model	GlobalLocation (countryCode,EInt,attribute) 
+model	Address (country,EString,attribute) (name,EString,attribute) 
+model	Customer (customerID,EInt,attribute) (orders,PurchaseOrder,ref) 
+model	PurchaseOrder (totalAmount,EInt,attribute) (comment,EString,attribute) (orderDate,Date,attribute) (status,OrderStatus,attribute) (billTo,Address,ref) (previousOrder,PurchaseOrder,ref) (items,Item,ref) (shipTo,Address,ref) (customer,Customer,ref) 
+model	Supplier (name,EString,attribute) (shippedOrders,PurchaseOrder,ref) (orders,PurchaseOrder,ref) (customers,Customer,ref) (pendingOrders,PurchaseOrder,ref) 
+model	USAddress (zip,EInt,attribute) (city,EString,attribute) (street,EString,attribute) (state,EString,attribute) 
+model	GlobalAddress (location,EString,attribute) 

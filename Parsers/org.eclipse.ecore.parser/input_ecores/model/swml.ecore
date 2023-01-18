@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="swml"
+    nsURI="http://swml/1.0" nsPrefix="swml">
+  <eClassifiers xsi:type="ecore:EClass" name="WebModel">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="hypertextmodels" lowerBound="1"
+        upperBound="-1" eType="#//HypertextModel" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="contentmodels" lowerBound="1"
+        upperBound="-1" eType="#//ContentModel" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ContentModel">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="Enumerations" upperBound="-1"
+        eType="#//Enumeration" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="Entities" lowerBound="1"
+        upperBound="-1" eType="#//Entity" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Entity">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="EnumAttribute" upperBound="-1"
+        eType="#//EnumTyp" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="Attributes" lowerBound="1"
+        upperBound="-1" eType="#//Attribute" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="References" upperBound="-1"
+        eType="#//Reference" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="Child" upperBound="-1"
+        eType="#//Entity" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="EnumTyp">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="Enums" lowerBound="1" eType="#//Enumeration"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Reference">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="Opposite" eType="#//Reference"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="RefTo" lowerBound="1" eType="#//Entity"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="rolename" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="lowerBound" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="upperBound" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Attribute">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="Typ" lowerBound="1" eType="#//Datentyp"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Literals">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Enumeration">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="ownedLiteral" upperBound="-1"
+        eType="#//Literals" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="Datentyp">
+    <eLiterals name="Integer" value="1"/>
+    <eLiterals name="String"/>
+    <eLiterals name="Float" value="2"/>
+    <eLiterals name="Boolean" value="3"/>
+    <eLiterals name="Email" value="4"/>
+    <eLiterals name="Date" value="5"/>
+    <eLiterals name="Time" value="6"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="HypertextModel">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="WebPages" lowerBound="1"
+        upperBound="-1" eType="#//WebPage" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="homepage" lowerBound="1"
+        eType="#//staticPage"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="WebPage" abstract="true">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="Link" upperBound="-1" eType="#//LinkKat2"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="LinkJoinNode" eSuperTypes="#//WebPage">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="Links" upperBound="-1"
+        eType="#//LinkKat1" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="staticPage" eSuperTypes="#//WebPage"/>
+  <eClassifiers xsi:type="ecore:EClass" name="dynamicPage" abstract="true" eSuperTypes="#//WebPage">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="EntityType" lowerBound="1"
+        eType="#//Entity"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="EntityPages" eSuperTypes="#//dynamicPage">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="InnerPage" upperBound="-1"
+        eType="#//dynamicPage"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="IndexPages" eSuperTypes="#//dynamicPage"/>
+  <eClassifiers xsi:type="ecore:EClass" name="UpdatePage" eSuperTypes="#//EntityPages">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="OKLink" lowerBound="1"
+        eType="#//OK" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="KOLink" lowerBound="1"
+        eType="#//KO" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="DeletePage" eSuperTypes="#//EntityPages">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="OKLink" lowerBound="1"
+        eType="#//OK" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="KOLink" lowerBound="1"
+        eType="#//KO" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="CreatePage" eSuperTypes="#//EntityPages">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="OKLink" lowerBound="1"
+        eType="#//OK" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="KOLink" lowerBound="1"
+        eType="#//KO" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Links" abstract="true">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="Link" lowerBound="1" eType="#//LinkParamater"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="TargetPage" lowerBound="1"
+        eType="#//WebPage"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="Name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="NonContextualLinks" eSuperTypes="#//LinkKat2"/>
+  <eClassifiers xsi:type="ecore:EClass" name="ContextualLinks" eSuperTypes="#//LinkKat2"/>
+  <eClassifiers xsi:type="ecore:EClass" name="OK" eSuperTypes="#//LinkKat1"/>
+  <eClassifiers xsi:type="ecore:EClass" name="KO" eSuperTypes="#//LinkKat1"/>
+  <eClassifiers xsi:type="ecore:EClass" name="LinkParamater">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="Parameter" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="LinkKat1" abstract="true" eSuperTypes="#//Links"/>
+  <eClassifiers xsi:type="ecore:EClass" name="LinkKat2" abstract="true" eSuperTypes="#//Links"/>
+</ecore:EPackage>

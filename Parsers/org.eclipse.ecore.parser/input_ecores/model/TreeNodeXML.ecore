@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="TreeNodeXML" nsURI="http://www.example.org/TreeNodeXML" nsPrefix="TreeNodeXML">
+  <eClassifiers xsi:type="ecore:EClass" name="XMLTreeNode">
+    <eOperations name="addTreeNodeAtom">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="body" value="getValues().add(nodeAtom);"/>
+      </eAnnotations>
+      <eParameters name="nodeAtom" eType="#//TreeNodeAtom"/>
+    </eOperations>
+    <eOperations name="addChild">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="body" value="getChildren().add(newChild);"/>
+      </eAnnotations>
+      <eParameters name="newChild" eType="#//XMLTreeNode"/>
+    </eOperations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="LocalName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="ElementText" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="children" upperBound="-1"
+        eType="#//XMLTreeNode" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="values" upperBound="-1"
+        eType="#//TreeNodeAtom" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="TreeNodeAtom">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="AttributeLocalName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="AttributeValue" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+</ecore:EPackage>

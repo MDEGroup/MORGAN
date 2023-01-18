@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="study" nsURI="http://no/ntnu/tdt4250/study" nsPrefix="no.ntnu.tdt4250.study">
+  <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore">
+    <details key="validationDelegates" value="http://www.eclipse.org/acceleo/query/1.0"/>
+  </eAnnotations>
+  <eClassifiers xsi:type="ecore:EClass" name="University">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="studyProgrammes" upperBound="-1"
+        eType="#//StudyProgramme" containment="true" eOpposite="#//StudyProgramme/university"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="courses" upperBound="-1"
+        eType="#//Course" containment="true" eOpposite="#//Course/university"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="students" upperBound="-1"
+        eType="#//Student" containment="true" eOpposite="#//Student/university"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="StudyProgramme">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore">
+      <details key="constraints" value="allSpecializationsShouldAddUpToNumYears"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="code" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="university" lowerBound="1"
+        eType="#//University" eOpposite="#//University/studyProgrammes"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="numYears" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="allSpecializations" lowerBound="1"
+        upperBound="-1" eType="#//Specialization" containment="true" eOpposite="#//Specialization/studyProgramme"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="baseSpecializations" lowerBound="1"
+        upperBound="-1" eType="#//Specialization"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Specialization">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore">
+      <details key="constraints" value="semesterCountShouldAddUpToNumYears"/>
+    </eAnnotations>
+    <eAnnotations source="http://www.eclipse.org/acceleo/query/1.0">
+      <details key="semesterCountShouldAddUpToNumYears" value="self.semesters -> size() = 2*self.numYears"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="studyProgramme" lowerBound="1"
+        eType="#//StudyProgramme" eOpposite="#//StudyProgramme/allSpecializations"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="numYears" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="semesters" lowerBound="2"
+        upperBound="-1" eType="#//Semester" containment="true" eOpposite="#//Semester/specialization"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="furtherSpecializations"
+        upperBound="-1" eType="#//Specialization"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Semester">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="specialization" lowerBound="1"
+        eType="#//Specialization" eOpposite="#//Specialization/semesters"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="ordinal" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="mandatoryCourses" upperBound="-1"
+        eType="#//Course"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="electiveCourses" eType="#//ElectiveCourseList"
+        containment="true" eOpposite="#//ElectiveCourseList/semester"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Course">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="code" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="university" lowerBound="1"
+        eType="#//University" eOpposite="#//University/courses"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="credits" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EFloat"
+        defaultValueLiteral="7.5"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="level" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ElectiveCourseList">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="semester" lowerBound="1"
+        eType="#//Semester" eOpposite="#//Semester/electiveCourses"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="courses" lowerBound="1"
+        upperBound="-1" eType="#//Course"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Student">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="username" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="university" lowerBound="1"
+        eType="#//University" eOpposite="#//University/students"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="studyPlan" lowerBound="1"
+        eType="#//IndividualStudyPlan" containment="true" eOpposite="#//IndividualStudyPlan/student"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="IndividualStudyPlan">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="student" lowerBound="1"
+        eType="#//Student" eOpposite="#//Student/studyPlan"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="currentSemester" lowerBound="1"
+        eType="#//Semester"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="courses" upperBound="-1"
+        eType="#//CourseRelationship" containment="true" eOpposite="#//CourseRelationship/studyPlan"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="CourseRelationship">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="studyPlan" lowerBound="1"
+        eType="#//IndividualStudyPlan" eOpposite="#//IndividualStudyPlan/courses"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="course" lowerBound="1"
+        eType="#//Course"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="grade" eType="#//GradeEnum"
+        defaultValueLiteral="NONE"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="numExamAttempts" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="GradeEnum">
+    <eLiterals name="NONE"/>
+    <eLiterals name="A" value="1"/>
+    <eLiterals name="B" value="2"/>
+    <eLiterals name="C" value="3"/>
+    <eLiterals name="D" value="4"/>
+    <eLiterals name="E" value="5"/>
+    <eLiterals name="F" value="6"/>
+  </eClassifiers>
+</ecore:EPackage>

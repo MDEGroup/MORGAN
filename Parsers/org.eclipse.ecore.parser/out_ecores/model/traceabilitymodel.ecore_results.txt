@@ -1,0 +1,7 @@
+model	Trace (sourceOperationName,EString,attribute) (sourceOperationID,EString,attribute) (specificationName,EString,attribute) (segment,TraceableSegment,ref) (originatinElement,ModelElementRef,ref) 
+model	TraceableSegment (endLine,ELong,attribute) (endColumn,ELong,attribute) (startColumn,ELong,attribute) (startLine,ELong,attribute) (startPos,ELong,attribute) (endPos,ELong,attribute) 
+model	MetaModel (nsUri,EString,attribute) (name,EString,attribute) 
+model	TraceModel (trace,Trace,ref) (metaModels,MetaModel,ref) (files,File,ref) (modelElementRefs,ModelElementRef,ref) 
+model	Block (endLine,ELong,attribute) (endColumn,ELong,attribute) (startColumn,ELong,attribute) (startLine,ELong,attribute) (ID,EString,attribute) (startPos,ELong,attribute) (endPos,ELong,attribute) (protectedBlock,EBoolean,attribute) (traceablesegment,TraceableSegment,ref) 
+model	File (name,EString,attribute) (ID,EString,attribute) (URI,EString,attribute) (blocks,Block,ref) 
+model	ModelElementRef (name,EString,attribute) (featureRef,EString,attribute) (ID,EString,attribute) (uri,EString,attribute) (metaModel,MetaModel,ref) 

@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="trnet" nsURI="http://trnet/1.0" nsPrefix="trnet">
+  <eClassifiers xsi:type="ecore:EClass" name="TrNetModel">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="patterns" upperBound="-1"
+        eType="#//Pattern" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="operators" upperBound="-1"
+        eType="#//Operator" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="id" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="flowRules" upperBound="-1"
+        eType="#//FlowRule" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="NodePattern" abstract="true">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="incoming" upperBound="-1"
+        eType="#//EdgePattern" eOpposite="#//EdgePattern/target"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="outgoing" upperBound="-1"
+        eType="#//EdgePattern" eOpposite="#//EdgePattern/source"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="sameOut" upperBound="-1"
+        eType="#//Same" eOpposite="#//Same/source"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="sameIn" upperBound="-1"
+        eType="#//Same" eOpposite="#//Same/target"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="pattern" lowerBound="1"
+        eType="#//Pattern" eOpposite="#//Pattern/nodes"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="attributes" upperBound="-1"
+        eType="#//AttributePattern" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="id" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="differentIn" upperBound="-1"
+        eType="#//Different" eOpposite="#//Different/target"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="differentOut" upperBound="-1"
+        eType="#//Different" eOpposite="#//Different/source"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="keepIn" upperBound="-1"
+        eType="#//Keep" eOpposite="#//Keep/target"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="keepOut" upperBound="-1"
+        eType="#//Keep" eOpposite="#//Keep/source"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="EdgePattern">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="source" lowerBound="1"
+        eType="#//NodePattern" eOpposite="#//NodePattern/outgoing"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="target" lowerBound="1"
+        eType="#//NodePattern" eOpposite="#//NodePattern/incoming"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="pattern" lowerBound="1"
+        eType="#//Pattern" eOpposite="#//Pattern/edges"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Pattern">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="nodes" lowerBound="1" upperBound="-1"
+        eType="#//NodePattern" containment="true" eOpposite="#//NodePattern/pattern"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="edges" upperBound="-1"
+        eType="#//EdgePattern" containment="true" eOpposite="#//EdgePattern/pattern"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="outgoingOperands" upperBound="-1"
+        eType="#//Operand" eOpposite="#//Operand/pattern"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="incommingResults" upperBound="-1"
+        eType="#//Result" eOpposite="#//Result/pattern"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="id" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="expected_size" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Operator" abstract="true">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="operands" lowerBound="1"
+        upperBound="-1" eType="#//Operand" containment="true" eOpposite="#//Operand/operator"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="results" lowerBound="1"
+        upperBound="-1" eType="#//Result" containment="true" eOpposite="#//Result/operator"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="id" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Combinator" eSuperTypes="#//Operator">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="restrictions" upperBound="-1"
+        eType="#//Restriction" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Restriction" abstract="true"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Same" eSuperTypes="#//Restriction">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="source" lowerBound="1"
+        eType="#//NodePattern" eOpposite="#//NodePattern/sameOut"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="target" lowerBound="1"
+        eType="#//NodePattern" eOpposite="#//NodePattern/sameIn"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="AttributePattern">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="expression" lowerBound="1"
+        eType="#//Expression" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="operator" lowerBound="1"
+        eType="#//ExpressionOperator" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Expression" abstract="true"/>
+  <eClassifiers xsi:type="ecore:EClass" name="StringLiteral" eSuperTypes="#//Expression">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Keep" eSuperTypes="#//Restriction">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="source" lowerBound="1"
+        eType="#//NodePattern" eOpposite="#//NodePattern/keepOut"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="target" lowerBound="1"
+        eType="#//NodePattern" eOpposite="#//NodePattern/keepIn"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Operand" abstract="true">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="pattern" lowerBound="1"
+        eType="#//Pattern" eOpposite="#//Pattern/outgoingOperands"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="operator" lowerBound="1"
+        eType="#//Operator" eOpposite="#//Operator/operands"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="index" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Result" abstract="true">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="pattern" lowerBound="1"
+        eType="#//Pattern" eOpposite="#//Pattern/incommingResults"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="operator" lowerBound="1"
+        eType="#//Operator" eOpposite="#//Operator/results"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="SomeOperand" eSuperTypes="#//Operand">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="count" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="AntiOperand" eSuperTypes="#//Operand"/>
+  <eClassifiers xsi:type="ecore:EClass" name="AnyOperand" eSuperTypes="#//Operand"/>
+  <eClassifiers xsi:type="ecore:EClass" name="SomeResult" eSuperTypes="#//Result">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="count" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="AnyResult" eSuperTypes="#//Result"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Different" eSuperTypes="#//Restriction">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="source" lowerBound="1"
+        eType="#//NodePattern" eOpposite="#//NodePattern/differentOut"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="target" lowerBound="1"
+        eType="#//NodePattern" eOpposite="#//NodePattern/differentIn"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="External" eSuperTypes="#//Operator"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Union" eSuperTypes="#//Operator">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="restrictions" upperBound="-1"
+        eType="#//Restriction" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="MandatoryNode" eSuperTypes="#//NodePattern"/>
+  <eClassifiers xsi:type="ecore:EClass" name="OptionalNode" eSuperTypes="#//NodePattern"/>
+  <eClassifiers xsi:type="ecore:EClass" name="ExpressionOperator" abstract="true"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Equality" eSuperTypes="#//ExpressionOperator"/>
+  <eClassifiers xsi:type="ecore:EClass" name="OptionalOperand" eSuperTypes="#//Operand"/>
+  <eClassifiers xsi:type="ecore:EClass" name="FlowRule" abstract="true">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="source" eType="#//TrNetModel"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="target" lowerBound="1"
+        eType="#//TrNetModel"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Next" eSuperTypes="#//FlowRule"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Eventually" eSuperTypes="#//FlowRule"/>
+  <eClassifiers xsi:type="ecore:EClass" name="NextDerived" eSuperTypes="#//FlowRule"/>
+</ecore:EPackage>

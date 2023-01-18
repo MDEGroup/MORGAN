@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="flinkie2" nsURI="http://www.example.org/flinkie" nsPrefix="flinkie2">
+  <eAnnotations source="http://www.eclipse.org/OCL/Import">
+    <details key="ecore" value="http://www.eclipse.org/emf/2002/Ecore"/>
+  </eAnnotations>
+  <eClassifiers xsi:type="ecore:EClass" name="Node" abstract="true" interface="true"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Init">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="declstats" upperBound="-1"
+        eType="#//DeclStat" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="node" lowerBound="1" eType="#//Node"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="DeclStat">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="variable" lowerBound="1"
+        eType="#//Variable" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="BooleanEvaluation" eSuperTypes="#//Node">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="assignstats" upperBound="-1"
+        eType="#//AssignStat" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="true" eType="#//Node"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="false" eType="#//Node"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="boolexpr" lowerBound="1"
+        eType="#//BoolExpr" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Question" eSuperTypes="#//Node">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="text" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="options" lowerBound="1"
+        upperBound="-1" eType="#//Option" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="assignstats" upperBound="-1"
+        eType="#//AssignStat" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Message" eSuperTypes="#//Node">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="text" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="assignstats" upperBound="-1"
+        eType="#//AssignStat" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="node" eType="#//Node"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Option">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="text" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="assignstats" upperBound="-1"
+        eType="#//AssignStat" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="node" eType="#//Node"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="EIntOneOp">
+    <eLiterals name="MIN"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="EIntTwoOp">
+    <eLiterals name="SUB"/>
+    <eLiterals name="ADD" value="1"/>
+    <eLiterals name="MUL" value="2"/>
+    <eLiterals name="DIV" value="3"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="IntExpr" abstract="true" interface="true"/>
+  <eClassifiers xsi:type="ecore:EClass" name="OneOpInt" eSuperTypes="#//IntExpr">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="operator" lowerBound="1"
+        eType="#//EIntOneOp" defaultValueLiteral="MIN"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="intexpr" lowerBound="1"
+        eType="#//IntExpr" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="TwoOpInt" eSuperTypes="#//IntExpr">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="operator" lowerBound="1"
+        eType="#//EIntTwoOp" defaultValueLiteral="SUB"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="left" lowerBound="1" eType="#//IntExpr"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="right" lowerBound="1" eType="#//IntExpr"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Number" eSuperTypes="#//IntExpr">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Variable">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="AssignStat">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="variableexpr" lowerBound="1"
+        eType="#//VariableExpr" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="intexpr" lowerBound="1"
+        eType="#//IntExpr" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="FlowChart">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="nodes" upperBound="-1"
+        eType="#//Node" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="initialisation" lowerBound="1"
+        eType="#//Init" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="BracExprInt" eSuperTypes="#//IntExpr">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="intexpr" lowerBound="1"
+        eType="#//IntExpr" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="VariableExpr" eSuperTypes="#//IntExpr">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="variable" lowerBound="1"
+        eType="#//Variable"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="OneOpBool" eSuperTypes="#//BoolExpr">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="operator" lowerBound="1"
+        eType="#//EBoolOneOp" defaultValueLiteral="NOT"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="boolexpr" lowerBound="1"
+        eType="#//BoolExpr" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="TwoOpBool" eSuperTypes="#//BoolExpr">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="operator" lowerBound="1"
+        eType="#//EBoolTwoOp" defaultValueLiteral="AND"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="left" lowerBound="1" eType="#//BoolExpr"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="right" lowerBound="1" eType="#//BoolExpr"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="BoolVal" eSuperTypes="#//BoolExpr">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="BoolExpr" abstract="true" interface="true"/>
+  <eClassifiers xsi:type="ecore:EClass" name="BracExprBool" eSuperTypes="#//BoolExpr">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="boolexpr" lowerBound="1"
+        eType="#//BoolExpr" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Comparison" eSuperTypes="#//BoolExpr">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="operator" lowerBound="1"
+        eType="#//ECompOp" defaultValueLiteral="EQ"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="right" lowerBound="1" eType="#//IntExpr"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="left" lowerBound="1" eType="#//IntExpr"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="EBoolVal">
+    <eLiterals name="TRUE"/>
+    <eLiterals name="FALSE" value="1"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="EBoolTwoOp">
+    <eLiterals name="AND"/>
+    <eLiterals name="OR" value="1"/>
+    <eLiterals name="XOR" value="2"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="ECompOp">
+    <eLiterals name="EQ"/>
+    <eLiterals name="LE" value="4"/>
+    <eLiterals name="GT" value="1"/>
+    <eLiterals name="NE" value="5"/>
+    <eLiterals name="GE" value="3"/>
+    <eLiterals name="LT" value="2"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="EBoolOneOp">
+    <eLiterals name="NOT"/>
+  </eClassifiers>
+</ecore:EPackage>

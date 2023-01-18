@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="kfsm" nsURI="http://kfsm" nsPrefix="kfsm">
+  <eClassifiers xsi:type="ecore:EClass" name="FSM">
+    <eAnnotations source="diagraph">
+      <details key="node"/>
+      <details key="pov"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="ownedState" upperBound="-1"
+        eType="#//State" containment="true" eOpposite="#//State/owningFSM"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="initialState" lowerBound="1"
+        eType="#//State"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="finalState" lowerBound="1"
+        upperBound="-1" eType="#//State"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="State">
+    <eAnnotations source="diagraph">
+      <details key="node"/>
+      <details key="label=name"/>
+      <details key="cref=s_action"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="owningFSM" lowerBound="1"
+        eType="#//FSM" eOpposite="#//FSM/ownedState"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="#//String"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="outgoingTransition" upperBound="-1"
+        eType="#//Transition" containment="true" eOpposite="#//Transition/source"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="incomingTransition" upperBound="-1"
+        eType="#//Transition" eOpposite="#//Transition/target"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="s_action" eType="#//Action"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Transition">
+    <eAnnotations source="diagraph">
+      <details key="link"/>
+      <details key="cont=State.outgoingTransition"/>
+      <details key="lsrc=source"/>
+      <details key="ltrg=target"/>
+      <details key="label=input"/>
+      <details key="label=output"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="source" lowerBound="1"
+        eType="#//State" eOpposite="#//State/outgoingTransition"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="target" lowerBound="1"
+        eType="#//State" eOpposite="#//State/incomingTransition"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="input" eType="#//String"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="output" eType="#//String"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EDataType" name="String" instanceClassName="java.lang.String"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Action">
+    <eAnnotations source="diagraph">
+      <details key="node"/>
+      <details key="label=id"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="id" eType="#//String"/>
+  </eClassifiers>
+</ecore:EPackage>

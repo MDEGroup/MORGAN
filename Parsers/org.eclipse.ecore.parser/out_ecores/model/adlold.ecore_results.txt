@@ -1,0 +1,5 @@
+model	Binding (from,Interface,ref) (to,Interface,ref) 
+model	AbstractComponent (name,EString,attribute) (requiredInterfaces,Required,ref) (providedInterfaces,Provided,ref) (content,Content,ref) 
+model	Content (expression,EString,attribute) (language,EString,attribute) (contentParent,AbstractComponent,ref) 
+model	Component (subComponents,Component,ref) 
+model	Interface (signature,EString,attribute) (name,EString,attribute) (bindings,Binding,ref) 

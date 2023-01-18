@@ -1,0 +1,6 @@
+model	BookStore (name,String,attribute) (booksByWriter,WriterToBookMapEntry,ref) (keyWords,EStringToStringMapEntry,ref) (namesByWriter,WriterToNameMapEntry,ref) 
+model	StringToWriterMapEntry (key,String,attribute) (value,Writer,ref) 
+model	Book (title,String,attribute) (writers,StringToWriterMapEntry,ref) 
+model	WriterToNameMapEntry (value,EString,attribute) (key,Writer,ref) 
+model	Writer (name,String,attribute) 
+model	WriterToBookMapEntry (value,Book,ref) (key,Writer,ref) 

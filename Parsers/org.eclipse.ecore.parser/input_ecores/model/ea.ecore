@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="ea" nsURI="http://www.cwi.nl/ea" nsPrefix="org.ect.ea">
+  <eSubpackages name="automata" nsURI="http://www.cwi.nl/ea/automata" nsPrefix="org.ect.ea.automata">
+    <eClassifiers xsi:type="ecore:EClass" name="Automaton" eSuperTypes="#//extensions/ExtendibleElement">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="states" upperBound="-1"
+          eType="#//automata/State" containment="true" eOpposite="#//automata/State/automaton"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="transitions" upperBound="-1"
+          eType="#//automata/Transition" containment="true" eOpposite="#//automata/Transition/automaton"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="usedExtensionIds" upperBound="-1"
+          eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="id" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
+          changeable="false" volatile="true" transient="true" derived="true"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="module" eType="#//automata/Module"
+          eOpposite="#//automata/Module/automata"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="State" eSuperTypes="#//extensions/ExtendibleElement">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="automaton" eType="#//automata/Automaton"
+          eOpposite="#//automata/Automaton/states"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="incoming" upperBound="-1"
+          eType="#//automata/Transition" eOpposite="#//automata/Transition/target"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="outgoing" upperBound="-1"
+          eType="#//automata/Transition" eOpposite="#//automata/Transition/source"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="id" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
+          changeable="false" volatile="true" transient="true" derived="true"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="Transition" eSuperTypes="#//extensions/ExtendibleElement">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="automaton" eType="#//automata/Automaton"
+          eOpposite="#//automata/Automaton/transitions"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="source" eType="#//automata/State"
+          eOpposite="#//automata/State/outgoing"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="target" eType="#//automata/State"
+          eOpposite="#//automata/State/incoming"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="id" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="Module">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="automata" upperBound="-1"
+          eType="#//automata/Automaton" containment="true" eOpposite="#//automata/Automaton/module"/>
+    </eClassifiers>
+  </eSubpackages>
+  <eSubpackages name="extensions" nsURI="http://www.cwi.nl/ea/extensions" nsPrefix="org.ect.ea.extensions">
+    <eClassifiers xsi:type="ecore:EClass" name="IExtendible" abstract="true" interface="true">
+      <eOperations name="findExtension" eType="#//extensions/IExtension">
+        <eParameters name="id" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+      </eOperations>
+      <eOperations name="updateExtension">
+        <eParameters name="extension" eType="#//extensions/IExtension"/>
+      </eOperations>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="extensions" upperBound="-1"
+          eType="#//extensions/IExtension" containment="true" eOpposite="#//extensions/IExtension/owner"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="IExtension" abstract="true" interface="true">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="owner" eType="#//extensions/IExtendible"
+          eOpposite="#//extensions/IExtendible/extensions"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="id" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="ExtendibleElement" abstract="true"
+        eSuperTypes="#//extensions/IExtendible"/>
+    <eClassifiers xsi:type="ecore:EClass" name="ExtensionElement" abstract="true"
+        eSuperTypes="#//extensions/IExtension"/>
+    <eClassifiers xsi:type="ecore:EClass" name="IntegerExtension" eSuperTypes="#//extensions/ExtensionElement">
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="StringExtension" eSuperTypes="#//extensions/ExtensionElement">
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="StringListExtension" eSuperTypes="#//extensions/ExtensionElement">
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="values" unique="false"
+          upperBound="-1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="BooleanExtension" eSuperTypes="#//extensions/ExtensionElement">
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    </eClassifiers>
+  </eSubpackages>
+</ecore:EPackage>

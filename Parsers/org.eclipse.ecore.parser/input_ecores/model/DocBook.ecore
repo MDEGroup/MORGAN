@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="book" nsURI="book" nsPrefix="book">
+  <eClassifiers xsi:type="ecore:EClass" name="DocBook">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="book" upperBound="-1" eType="#//Book"
+        containment="true" eOpposite="#//Book/docBook"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Book">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="docBook" lowerBound="1"
+        eType="#//DocBook" eOpposite="#//DocBook/book"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="editor" upperBound="-1"
+        eType="#//Person" eOpposite="#//Person/edited"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="author" upperBound="-1"
+        eType="#//Person" eOpposite="#//Person/authored"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="articles" upperBound="-1"
+        eType="#//Article" containment="true" eOpposite="#//Article/book"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="title" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Article">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="book" lowerBound="1" eType="#//Book"
+        eOpposite="#//Book/articles"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="author" upperBound="-1"
+        eType="#//Person" eOpposite="#//Person/articles"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="title" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Person">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="edited" upperBound="-1"
+        eType="#//Book" eOpposite="#//Book/editor"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="authored" upperBound="-1"
+        eType="#//Book" eOpposite="#//Book/author"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="articles" upperBound="-1"
+        eType="#//Article" eOpposite="#//Article/author"/>
+  </eClassifiers>
+</ecore:EPackage>

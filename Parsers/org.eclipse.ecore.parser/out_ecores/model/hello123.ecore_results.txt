@@ -1,0 +1,8 @@
+model	Bar (id,EString,attribute) 
+model	Alias (id,EString,attribute) 
+model	Foo (id,EString,attribute) 
+model	World (things,Thing,ref) 
+model	NamedElement (name,EString,attribute) (aliases,Alias,ref) 
+model	RelatedTo (since,EString,attribute) (fromThing,Thing,ref) (toThing,Thing,ref) 
+model	Property (name,EString,attribute) (value,EString,attribute) 
+model	Thing (id,EInt,attribute) (relations,RelatedTo,ref) (foos,Foo,ref) (properties,Property,ref) (bars,Bar,ref) 

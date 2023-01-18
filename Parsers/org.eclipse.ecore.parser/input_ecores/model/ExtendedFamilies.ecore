@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="ExtendedFamilies" nsURI="platform:/resource/FamiliesToPerson/ExtendedFamilies.ecore"
+    nsPrefix="ExtendedFamilies">
+  <eClassifiers xsi:type="ecore:EClass" name="Family">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="lastName" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="isSingleParent" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="members" upperBound="-1"
+        eType="#//Person" containment="true" eOpposite="#//Person/family"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="noOfChildren" upperBound="-1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Person" abstract="true">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="firstName" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="family" eType="#//Family"
+        eOpposite="#//Family/members"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="children" upperBound="-1"
+        eType="#//Person" eOpposite="#//Person/parents"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="parents" upperBound="2"
+        eType="#//Person" eOpposite="#//Person/children"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Male" eSuperTypes="#//Person"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Female" eSuperTypes="#//Person"/>
+</ecore:EPackage>

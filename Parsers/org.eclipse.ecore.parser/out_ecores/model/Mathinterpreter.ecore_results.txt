@@ -1,0 +1,8 @@
+model	Bracket (value,Expression,ref) 
+model	MultiplyOrDivide (operator,EString,attribute) (left,EObject,ref) (right,Primary,ref) 
+model	VariableRef (value,Variable,ref) 
+model	Variable (name,EString,attribute) (value,Expression,ref) 
+model	Expression (exp,PlusOrMinus,ref) 
+model	PlusOrMinus (operator,EString,attribute) (left,EObject,ref) (right,MultiplyOrDivide,ref) 
+model	Num (value,EInt,attribute) 
+model	Solution (variables,Variable,ref) (expression,Expression,ref) 

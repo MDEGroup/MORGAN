@@ -1,0 +1,7 @@
+model	FSM (name,EString,attribute) (clocks,Clock,ref) (transitions,Transition,ref) (initialstate,InitialState,ref) (currentState,State,ref) (states,State,ref) 
+model	State (name,EString,attribute) (fsm,FSM,ref) (stateguard,ClockConstraintOperation,ref) (outgoingtransitions,Transition,ref) (incommingtransitions,Transition,ref) 
+model	Transition (event,EString,attribute) (clockresets,ClockReset,ref) (from,State,ref) (to,State,ref) (transitionguard,ClockConstraintOperation,ref) 
+model	BinaryClockConstraint (left,ClockConstraintOperation,ref) (right,ClockConstraintOperation,ref) 
+model	ClockConstraint (threshold,EInt,attribute) (clock,Clock,ref) 
+model	Clock (name,EString,attribute) (tick,EInt,attribute) 
+model	ClockReset (clock,Clock,ref) 

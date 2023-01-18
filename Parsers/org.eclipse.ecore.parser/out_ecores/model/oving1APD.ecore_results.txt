@@ -1,0 +1,6 @@
+model	StudyProgram (name,EString,attribute) (shortName,EString,attribute) (specialization,Specialization,ref) (semester,Semester,ref) (department,Department,ref) 
+model	Department (name,EString,attribute) (shortName,EString,attribute) (course,Course,ref) (studyProgram,StudyProgram,ref) 
+model	Specialization (name,EString,attribute) (course,Course,ref) (semester,Semester,ref) (studyProgram,StudyProgram,ref) 
+model	Semester (number,EInt,attribute) (hasCourse,Course,ref) (specialization,Specialization,ref) (slot,Slot,ref) (studyProgram,StudyProgram,ref) 
+model	Slot (name,EString,attribute) (course,Course,ref) (semester,Semester,ref) 
+model	Course (code,EString,attribute) (level,EInt,attribute) (name,EString,attribute) (credit,EDouble,attribute) (courseInSemester,Semester,ref) (specialization,Specialization,ref) (slot,Slot,ref) 

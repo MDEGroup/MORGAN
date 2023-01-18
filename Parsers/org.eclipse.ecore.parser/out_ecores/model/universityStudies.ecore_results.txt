@@ -1,0 +1,7 @@
+model	CourseSlot (course,Course,ref) 
+model	Specialization (name,EString,attribute) (furtherSpecializations,Specialization,ref) (semesters,Semester,ref) 
+model	Department (Programmes,Programme,ref) (Courses,Course,ref) 
+model	Semester (name,EString,attribute) (season,Seasons,attribute) (semesterNumber,EInt,attribute) (courseSlots,CourseSlot,ref) 
+model	ElectiveCourseSlot (optionalCourses,Course,ref) 
+model	Course (code,EString,attribute) (credits,Credits,attribute) (level,EInt,attribute) (name,EString,attribute) (programmes,Programme,ref) 
+model	Programme (name,EString,attribute) (programmeType,ProgrammeType,attribute) (numberOfSemesters,EInt,attribute) (Department,Department,ref) (specializations,Specialization,ref) (semesters,Semester,ref) 

@@ -1,0 +1,8 @@
+model	Action (outputs,ArrayList,attribute) (inputs,ArrayList,attribute) 
+model	ObjectNode (upperBound,ELongObject,attribute) (objects,ArrayList,attribute) 
+model	ActivityEdge (objectFlow,EBoolean,attribute) (source,ActivityNode,ref) (target,ActivityNode,ref) 
+model	Element (elementID,EString,attribute) (name,EString,attribute) (properties,HashMap,attribute) 
+model	Activity (nodes,ActivityNode,ref) (edges,ActivityEdge,ref) 
+model	ActivityParameterNode (parameter,EJavaObject,attribute) 
+model	ExpansionRegion (nodes,ActivityNode,ref) (outputCollections,ExpansionNode,ref) (inputCollections,ExpansionNode,ref) (edges,ActivityEdge,ref) 
+model	ActivityNode (incoming,ActivityEdge,ref) (outgoing,ActivityEdge,ref) 

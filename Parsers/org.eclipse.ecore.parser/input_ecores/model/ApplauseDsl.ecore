@@ -1,0 +1,205 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="applauseDsl" nsURI="http://www.applause.org/lang/ApplauseDsl"
+    nsPrefix="applauseDsl">
+  <eClassifiers xsi:type="ecore:EClass" name="Model">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="elements" upperBound="-1"
+        eType="#//NamedElement" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="NamedElement">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Type" eSuperTypes="#//NamedElement"/>
+  <eClassifiers xsi:type="ecore:EClass" name="DataType" eSuperTypes="#//Type #//UIComponentOrDataType"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Entity" eSuperTypes="#//Type">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="abstract" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="superType" eType="#//Entity"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="attributes" upperBound="-1"
+        eType="#//Attribute" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Attribute">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="type" eType="#//Type"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="many" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Platform" eSuperTypes="#//NamedElement">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="mappings" upperBound="-1"
+        eType="#//PlatformMapping" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="PlatformMapping"/>
+  <eClassifiers xsi:type="ecore:EClass" name="TypeMapping" eSuperTypes="#//PlatformMapping">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="type" eType="#//DataType"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="simpleName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="DataSource" eSuperTypes="#//NamedElement">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="baseUrl" eType="#//AbsoluteRESTURL"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="resourceType" eType="#//Entity"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="methods" upperBound="-1"
+        eType="#//DataSourceAccessMethod" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="DataSourceAccessMethod">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="declaredParameters" upperBound="-1"
+        eType="#//Parameter" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="returnsMany" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="restSpecification" eType="#//RESTSpecification"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="RESTSpecification">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="verb" eType="#//RESTVerb"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="path" eType="#//RESTURL"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="body" eType="#//DataSourceBodySpecification"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="DataSourceBodySpecification">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="bodycontents" eType="#//Parameter"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="RESTVerb">
+    <eLiterals name="GET" literal="GET"/>
+    <eLiterals name="POST" value="1" literal="POST"/>
+    <eLiterals name="PUT" value="2" literal="PUT"/>
+    <eLiterals name="DELETE" value="3" literal="DELETE"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Parameter" eSuperTypes="#//ReferrableElement">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="type" eType="#//Type"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="RESTURL">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="fragments" upperBound="-1"
+        eType="#//UrlFragment" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="AbsoluteRESTURL" eSuperTypes="#//RESTURL">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="host" eType="#//UrlFragment"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="port" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="RelativeRESTURL" eSuperTypes="#//RESTURL"/>
+  <eClassifiers xsi:type="ecore:EClass" name="UrlFragment"/>
+  <eClassifiers xsi:type="ecore:EClass" name="UrlPathFragment" eSuperTypes="#//UrlFragment">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Variable" eSuperTypes="#//UrlFragment">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="parameterReference" eType="#//Parameter"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Screen" eSuperTypes="#//NamedElement">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="kind" eType="#//ScreenKind"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="inputParameter" eType="#//Parameter"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="title" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="datasource" eType="#//DataSourceCall"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="sections" upperBound="-1"
+        eType="#//ScreenSection" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="actions" upperBound="-1"
+        eType="#//UIAction" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="ScreenKind">
+    <eLiterals name="DefaultList" literal="DefaultList"/>
+    <eLiterals name="DefaultDetails" value="1" literal="DefaultDetails"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ScreenSection">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="title" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="datasource" eType="#//DataSourceCall"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="items" eType="#//ScreenSectionItems"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ScreenSectionItems">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="items" upperBound="-1"
+        eType="#//ScreenListItemCell" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ScreenListItemCell">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="type" eType="#//ListItemCellDeclaration"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="restMethod" eType="#//RESTMethodCall"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="variable" eType="#//LoopVariable"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="configurations" upperBound="-1"
+        eType="#//UIComponentMemberConfiguration" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="actions" upperBound="-1"
+        eType="#//UIAction" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ReferrableElement">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="LoopVariable" eSuperTypes="#//ReferrableElement"/>
+  <eClassifiers xsi:type="ecore:EClass" name="UIAction">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="title" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="icon" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="action" eType="#//UIActionSpecification"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="gesture" eType="#//GestureKind"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="order" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="GestureKind">
+    <eLiterals name="tap" literal="tap"/>
+    <eLiterals name="swipe" value="1" literal="swipe"/>
+    <eLiterals name="longpress" value="2" literal="longpress"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="UIActionSpecification"/>
+  <eClassifiers xsi:type="ecore:EClass" name="UIActionNavigateAction" eSuperTypes="#//UIActionSpecification">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="targetScreen" eType="#//Screen"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="actionVerb" eType="#//ActionVerb"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="variable" eType="#//ReferrableElement"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="ActionVerb">
+    <eLiterals name="edit" literal="edit"/>
+    <eLiterals name="display" value="1" literal="display"/>
+    <eLiterals name="add" value="2" literal="add"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="UIActionDeleteAction" eSuperTypes="#//UIActionSpecification"/>
+  <eClassifiers xsi:type="ecore:EEnum" name="UIActionKind">
+    <eLiterals name="navigate" literal="navigate"/>
+    <eLiterals name="delete" value="1" literal="delete"/>
+    <eLiterals name="performaction" value="2" literal="performaction"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ListItemCellDeclaration" eSuperTypes="#//NamedElement">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="members" upperBound="-1"
+        eType="#//UIComponentMemberDeclaration" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="UIComponentDeclaration" eSuperTypes="#//NamedElement #//UIComponentOrDataType">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="members" upperBound="-1"
+        eType="#//UIComponentMemberDeclaration" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="UIComponentMemberDeclaration">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="type" eType="#//UIComponentOrDataType"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="UIComponentOrDataType"/>
+  <eClassifiers xsi:type="ecore:EClass" name="RESTMethodCall">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="datasource" eType="#//DataSourceCall"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="restMethod" eType="#//DataSourceAccessMethod"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="DataSourceCall">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="datasource" eType="#//DataSource"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="UIComponentMemberConfiguration">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="type" eType="#//UIComponentMemberCall"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="value" eType="#//Expression"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="UIComponentMemberCall">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="component" eType="#//UIComponentMemberDeclaration"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="member" eType="#//UIComponentMemberDeclaration"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Expression"/>
+  <eClassifiers xsi:type="ecore:EClass" name="EntityMemberCall" eSuperTypes="#//Expression">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="head" eType="#//Attribute"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="tail" eType="#//EntityMemberCallTail"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="EntityMemberCallTail">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="head" eType="#//Attribute"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="tail" eType="#//EntityMemberCallTail"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="AttributeReference">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="value" eType="#//Attribute"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="StringLiteral" eSuperTypes="#//Expression">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+</ecore:EPackage>

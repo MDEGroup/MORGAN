@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="wheel"
+    nsURI="http://wheel/1.0" nsPrefix="wheel">
+  <eClassifiers xsi:type="ecore:EClass" name="WheelSM">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="initialState" eType="#//State"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="finalState" eType="#//State"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="ownedState" upperBound="-1"
+        eType="#//State" containment="true" eOpposite="#//State/owningFSM"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="State">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="incomingTransition" eType="#//Transition"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="outgoingTransition" eType="#//Transition"
+        containment="true" eOpposite="#//Transition/Source"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="owningFSM" lowerBound="1"
+        eType="#//WheelSM" eOpposite="#//WheelSM/ownedState"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Transition">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="speed" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="time" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="target" eType="#//State"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="Source" lowerBound="1"
+        eType="#//State" eOpposite="#//State/outgoingTransition"/>
+  </eClassifiers>
+</ecore:EPackage>

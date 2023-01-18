@@ -1,0 +1,5 @@
+model	Table (name,EString,attribute) (foreignkeys,ForeignKey,ref) (database,Database,ref) (columns,Column,ref) (primary_key,Key,ref) 
+model	Column (notNull,EBoolean,attribute) (name,EString,attribute) (type,DataType,attribute) (table,Table,ref) (key,Key,ref) (foreign,ForeignKey,ref) 
+model	Database (name,EString,attribute) (tables,Table,ref) 
+model	ForeignKey (isMany,EBooleanObject,attribute) (referencedKey,Key,ref) (foreign_column,Column,ref) 
+model	Key (name,EString,attribute) (referenced,ForeignKey,ref) (key_column,Column,ref) 

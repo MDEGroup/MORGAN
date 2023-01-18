@@ -1,0 +1,367 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="sipme"
+    nsURI="http://si_pme_engineering/1.0" nsPrefix="si_pme">
+  <eClassifiers xsi:type="ecore:EClass" name="Activity" eSuperTypes="#//EnterpriseProcessor">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="tasks" upperBound="-1"
+        eType="#//Task" containment="true" eOpposite="#//Task/taskOf"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="activityOf" lowerBound="1"
+        eType="#//BusinessProcess" eOpposite="#//BusinessProcess/activities"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="ActivityDuration" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="endingStatus" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Application" eSuperTypes="#//EnterpriseResource">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="applicationEditor" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="applicationMaintainer"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="BusinessProcess" eSuperTypes="#//EnterpriseProcessor">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="activities" lowerBound="2"
+        upperBound="6" eType="#//Activity" containment="true" eOpposite="#//Activity/activityOf"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="businessProcessOf" eType="#//Domain"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="ProcessPriority" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="BusinessRules" eSuperTypes="#//EnterpriseObject">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="considers" upperBound="-1"
+        eType="#//EnterpriseObject"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="impacts" upperBound="-1"
+        eType="#//EnterpriseObject"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Capability" eSuperTypes="#//EnterpriseObject">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="defines" eType="#//Capacity"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="capabilityType" eType="#//CapabilityType"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Capacity" eSuperTypes="#//EnterpriseObject">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EFloat"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="unit" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="CompanyMember" eSuperTypes="#//EnterpriseResource #//Stakeholder">
+    <eAnnotations source="diagraph">
+      <details key="node"/>
+      <details key="cont=Enterprise.companyMembers"/>
+      <details key="ref=responsibleOf"/>
+      <details key="ref=inChargeOf"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="inChargeOf" upperBound="-1"
+        eType="#//Workstation" eOpposite="#//Workstation/owners"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="responsibleOf" upperBound="-1"
+        eType="#//Workstation" eOpposite="#//Workstation/responsible"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="responsibleOfCell" upperBound="-1"
+        eType="#//OrganisationCell" eOpposite="#//OrganisationCell/cellResponsible"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="responsibleOfFile" upperBound="-1"
+        eType="#//ObjectsFileView" eOpposite="#//ObjectsFileView/fileResponsible"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="fullName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="socialSecurityNumber" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="address" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Device_Machine" eSuperTypes="#//EnterpriseResource">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="manufacturer" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="machineMaintainer" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Domain" eSuperTypes="#//SIPME_object #//EnterpriseProcessor #//OrganisationCell">
+    <eAnnotations source="diagraph">
+      <details key="node"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="businessProcesses" lowerBound="1"
+        upperBound="-1" eType="#//BusinessProcess" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="coveredBy" lowerBound="1"
+        upperBound="-1" eType="#//OrganisationCell" eOpposite="#//OrganisationCell/covers"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="induces" upperBound="-1"
+        eType="#//BusinessRules"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="domainCharacterization"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="performanceIndicators"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EFloat"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Enterprise" eSuperTypes="#//EnterpriseProcessor">
+    <eAnnotations source="diagraph">
+      <details key="node"/>
+      <details key="pov"/>
+      <details key="cref=companyMembers"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="acronym" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="status" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="strategicObjectives" upperBound="-1"
+        eType="#//Objective"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="concerns" lowerBound="1"
+        upperBound="-1" eType="#//Domain" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="refers" upperBound="-1"
+        eType="#//EnterpriseObject" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="proposesServices" upperBound="-1"
+        eType="#//EnterpriseService"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="proposesProducts" upperBound="-1"
+        eType="#//EnterpriseProduct"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="companyMembers" upperBound="-1"
+        eType="#//CompanyMember" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="organizationCells" upperBound="-1"
+        eType="#//OrganisationCell" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="EnterpriseObject" abstract="true" eSuperTypes="#//SIPME_object">
+    <eAnnotations source="diagraph">
+      <details key="node"/>
+      <details key="cont=Enterprise.refers"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="reference" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="partOf" eType="#//EnterpriseObject"
+        eOpposite="#//EnterpriseObject/decomposedIn"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="representedBy" upperBound="-1"
+        eType="#//ObjectView" eOpposite="#//ObjectView/represents"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="decomposedIn" upperBound="-1"
+        eType="#//EnterpriseObject" containment="true" eOpposite="#//EnterpriseObject/partOf"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="properties" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="EnterpriseProcessor" abstract="true"
+      eSuperTypes="#//EnterpriseObject">
+    <eAnnotations source="diagraph">
+      <details key="node"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="processorOrigin" lowerBound="1"
+        eType="#//Origin"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="generates" upperBound="-1"
+        eType="#//Event" eOpposite="#//Event/generatedBy"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="providesOutputs" upperBound="-1"
+        eType="#//ObjectView"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="hasInputs" upperBound="-1"
+        eType="#//ObjectView"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="initiatedBy" upperBound="-1"
+        eType="#//Event" eOpposite="#//Event/initiates"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="hasControlInputs" upperBound="-1"
+        eType="#//ObjectView"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="implements" lowerBound="1"
+        upperBound="-1" eType="#//Role_Function" eOpposite="#//Role_Function/implementedBy"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="hasCapacity" upperBound="-1"
+        eType="#//Capacity"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="requiresCapabilities" upperBound="-1"
+        eType="#//Capability"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="EnterpriseProduct" eSuperTypes="#//EnterpriseObject">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="productState" lowerBound="1"
+        eType="#//ProductState"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="productNarure" eType="#//ProductNature"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="EnterpriseResource" abstract="true"
+      eSuperTypes="#//EnterpriseObject">
+    <eAnnotations source="diagraph">
+      <details key="node"/>
+      <details key="cont=Enterprise.refers"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="resourceOrigin" lowerBound="1"
+        eType="#//Origin"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="executes" eType="#//Task"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="plays" upperBound="-1"
+        eType="#//Role_Function" eOpposite="#//Role_Function/playedBy"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="isAbleToPlay" upperBound="-1"
+        eType="#//Role_Function" eOpposite="#//Role_Function/canBePlayedBy"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="providesCapability" lowerBound="1"
+        upperBound="-1" eType="#//Capability"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="EnterpriseService" eSuperTypes="#//EnterpriseObject">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="serviceState" lowerBound="1"
+        eType="#//ServiceState"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Event" eSuperTypes="#//SIPME_object">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="occurenceProbability" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDoubleObject"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="frequency" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDoubleObject"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="generatedBy" upperBound="-1"
+        eType="#//EnterpriseProcessor" eOpposite="#//EnterpriseProcessor/generates"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="initiates" upperBound="-1"
+        eType="#//EnterpriseProcessor" eOpposite="#//EnterpriseProcessor/initiatedBy"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="priorTo" upperBound="-1"
+        eType="#//Event"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="timeStamp" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDate"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="hasAssociatedEvents" upperBound="-1"
+        eType="#//ObjectView" eOpposite="#//ObjectView/events"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="source" eType="#//Origin"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Objective" eSuperTypes="#//EnterpriseObject">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="objectiveType" lowerBound="1"
+        eType="#//EnterpriseObjectiveType"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="objectiveNature" lowerBound="1"
+        eType="#//ObjectiveNature"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="subObjectives" upperBound="-1"
+        eType="#//Objective" containment="true" eOpposite="#//Objective/refines"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="refines" lowerBound="1"
+        eType="#//Objective" eOpposite="#//Objective/subObjectives"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="takenIntoAccountBy" upperBound="-1"
+        eType="#//Requirement" eOpposite="#//Requirement/associatedObjective"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ObjectView" eSuperTypes="#//SIPME_object">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="represents" lowerBound="1"
+        eType="#//EnterpriseObject" eOpposite="#//EnterpriseObject/representedBy"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="events" upperBound="-1"
+        eType="#//Event" eOpposite="#//Event/hasAssociatedEvents"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="viewPoint" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="OrganisationCell" eSuperTypes="#//EnterpriseProcessor">
+    <eAnnotations source="diagraph">
+      <details key="node"/>
+      <details key="cont=Enterprise.refers"/>
+      <details key="kref=workstations"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="workstations" lowerBound="1"
+        upperBound="-1" eType="#//Workstation" containment="true" eOpposite="#//Workstation/organisationCell"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="covers" lowerBound="1"
+        upperBound="-1" eType="#//Domain" eOpposite="#//Domain/coveredBy"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="cellResponsible" lowerBound="1"
+        eType="#//CompanyMember" eOpposite="#//CompanyMember/responsibleOfCell"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="assignedTo" upperBound="-1"
+        eType="#//OrganisationCell"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="organisationLevel" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ObjectsFileView" eSuperTypes="#//ObjectView">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="objectViews" upperBound="-1"
+        eType="#//ObjectView" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="subFiles" upperBound="-1"
+        eType="#//ObjectsFileView"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="fileResponsible" eType="#//CompanyMember"
+        eOpposite="#//CompanyMember/responsibleOfFile"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="filePriority" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="fileState" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Requirement" eSuperTypes="#//SIPME_object">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="requirementOrigin" lowerBound="1"
+        eType="#//RequirementOrigin"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="requirementNature" lowerBound="1"
+        eType="#//RequirementNature"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="associatedObjective" eType="#//Objective"
+        eOpposite="#//Objective/takenIntoAccountBy"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="expresseCommonlydBy" upperBound="-1"
+        eType="#//Stakeholder"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="refinesRequirement" upperBound="-1"
+        eType="#//Requirement"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="concernsResources" upperBound="-1"
+        eType="#//EnterpriseResource"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="concernsProcessors" eType="#//EnterpriseProcessor"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="requirementVersion" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="requirementDate" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDate"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="requirementStatement" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="requirementPriority" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="requirementMaturity" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="requirementStatus" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="concernsActivity" eType="#//Activity"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Role_Function" eSuperTypes="#//EnterpriseProcessor">
+    <eAnnotations source="diagraph">
+      <details key="node"/>
+      <details key="cont=Enterprise.refers"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="requiresTasks" lowerBound="1"
+        upperBound="-1" eType="#//Task"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="playedBy" lowerBound="1"
+        upperBound="-1" eType="#//EnterpriseResource" eOpposite="#//EnterpriseResource/plays"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="canBePlayedBy" upperBound="-1"
+        eType="#//EnterpriseResource" eOpposite="#//EnterpriseResource/isAbleToPlay"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="implementedBy" upperBound="-1"
+        eType="#//EnterpriseProcessor" eOpposite="#//EnterpriseProcessor/implements"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="respectsRoleRules" upperBound="-1"
+        eType="#//BusinessRules"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="roleType" eType="#//RoleType"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="SIPME_object" abstract="true">
+    <eAnnotations source="diagraph">
+      <details key="label=name"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="description" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="UUID" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Stakeholder" abstract="true" eSuperTypes="#//SIPME_object">
+    <eAnnotations source="diagraph">
+      <details key="node"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="expresses" upperBound="-1"
+        eType="#//Requirement"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="stakeholderType" eType="#//StakeholderType"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="stakeholderOrganism" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Task" eSuperTypes="#//EnterpriseProcessor">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="respectsTaskRules" eType="#//BusinessRules"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="taskOf" lowerBound="1"
+        eType="#//Activity" eOpposite="#//Activity/tasks"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="operations" upperBound="-1"
+        eType="#//Task"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="taskDuration" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Workstation" eSuperTypes="#//EnterpriseProcessor">
+    <eAnnotations source="diagraph">
+      <details key="node"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="organisationCell" eType="#//OrganisationCell"
+        eOpposite="#//OrganisationCell/workstations"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="responsible" lowerBound="1"
+        eType="#//CompanyMember" eOpposite="#//CompanyMember/responsibleOf"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="owners" lowerBound="1"
+        upperBound="-1" eType="#//CompanyMember" eOpposite="#//CompanyMember/inChargeOf"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="ProfileDeescription" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="EnterpriseObjectiveType">
+    <eLiterals name="None"/>
+    <eLiterals name="Strategic" value="1"/>
+    <eLiterals name="Tactic" value="2"/>
+    <eLiterals name="Operational" value="3"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="ObjectiveNature">
+    <eLiterals name="None"/>
+    <eLiterals name="Performance" value="1"/>
+    <eLiterals name="Quality" value="2"/>
+    <eLiterals name="Delay" value="3"/>
+    <eLiterals name="Cost" value="4"/>
+    <eLiterals name="Environmental" value="5"/>
+    <eLiterals name="Legacy" value="6"/>
+    <eLiterals name="Human" value="7"/>
+    <eLiterals name="Economical" value="8"/>
+    <eLiterals name="Other" value="9"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="Origin">
+    <eLiterals name="None" value="2"/>
+    <eLiterals name="Internal_provider"/>
+    <eLiterals name="External_provider" value="1"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="RequirementNature">
+    <eLiterals name="None"/>
+    <eLiterals name="Functional" value="1"/>
+    <eLiterals name="Non_functional" value="2"/>
+    <eLiterals name="Constraint" value="3"/>
+    <eLiterals name="Verification_and_Validation" value="4" literal="V&amp;V"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="RequirementOrigin">
+    <eLiterals name="None"/>
+    <eLiterals name="Stackeholder_requirement" value="1"/>
+    <eLiterals name="System_requirement" value="2"/>
+    <eLiterals name="Expectation" value="3"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="RoleType">
+    <eLiterals name="Composite"/>
+    <eLiterals name="Decision" value="1"/>
+    <eLiterals name="Transformation" value="2"/>
+    <eLiterals name="Controle" value="3"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="ProductState">
+    <eLiterals name="None"/>
+    <eLiterals name="Ready_for_customer" value="1"/>
+    <eLiterals name="Intermediary" value="2"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="ServiceState">
+    <eLiterals name="For_external_customer"/>
+    <eLiterals name="For_internal_usage" value="1"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="ProductNature">
+    <eLiterals name="None" value="2"/>
+    <eLiterals name="Physical"/>
+    <eLiterals name="Information" value="1"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="CapabilityType">
+    <eLiterals name="Functional"/>
+    <eLiterals name="ObjectRelated" value="1"/>
+    <eLiterals name="Performance" value="2"/>
+    <eLiterals name="Operational" value="3"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="StakeholderType">
+    <eLiterals name="EEnumLiteral0"/>
+  </eClassifiers>
+</ecore:EPackage>

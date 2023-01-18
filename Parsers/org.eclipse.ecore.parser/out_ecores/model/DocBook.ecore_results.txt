@@ -1,0 +1,4 @@
+model	DocBook (book,Book,ref) 
+model	Book (title,EString,attribute) (editor,Person,ref) (author,Person,ref) (docBook,DocBook,ref) (articles,Article,ref) 
+model	Article (title,EString,attribute) (author,Person,ref) (book,Book,ref) 
+model	Person (name,EString,attribute) (authored,Book,ref) (edited,Book,ref) (articles,Article,ref) 

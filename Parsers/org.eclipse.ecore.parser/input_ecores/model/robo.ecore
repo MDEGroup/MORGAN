@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="robo" nsURI="http://www.example.org/robo" nsPrefix="robo">
+  <eAnnotations source="http://www.eclipse.org/OCL/Import">
+    <details key="ecore" value="http://www.eclipse.org/emf/2002/Ecore"/>
+  </eAnnotations>
+  <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore">
+    <details key="invocationDelegates" value="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot"/>
+    <details key="settingDelegates" value="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot"/>
+    <details key="validationDelegates" value="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot"/>
+  </eAnnotations>
+  <eClassifiers xsi:type="ecore:EClass" name="Robot">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="programms" upperBound="-1"
+        eType="#//Program" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="setup" lowerBound="1" eType="#//Setup"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Setup">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore">
+      <details key="constraints" value="DifferentMotorPorts"/>
+    </eAnnotations>
+    <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
+      <details key="DifferentMotorPorts" value="leftMotor.port &lt;> rightMotor.port"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="leftMotor" lowerBound="1"
+        eType="#//Motor" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="rightMotor" lowerBound="1"
+        eType="#//Motor" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="sensors" upperBound="-1"
+        eType="#//Sensor" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Motor">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="port" lowerBound="1" eType="#//MotorPort"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="type" lowerBound="1" eType="#//MotorType"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="speed" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDouble"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="reversed" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean" defaultValueLiteral="false"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="MotorPort">
+    <eLiterals name="A"/>
+    <eLiterals name="B" value="1"/>
+    <eLiterals name="C" value="2"/>
+    <eLiterals name="D" value="3"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="MotorType">
+    <eLiterals name="LARGE"/>
+    <eLiterals name="MEDIUM" value="1"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Sensor">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore">
+      <details key="constraints" value="ModeAndTypeMatches"/>
+    </eAnnotations>
+    <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
+      <details key="ModeAndTypeMatches" value="&#xA;&#x9;&#x9;&#x9;(mode = SensorMode::RED implies type = SensorType::COLOR)&#xA;&#x9;&#x9;&#x9;and (mode = SensorMode::AMBIENT implies type = SensorType::COLOR)&#xA;&#x9;&#x9;&#x9;and (mode = SensorMode::COLOR_ID implies type = SensorType::COLOR)&#xA;&#x9;&#x9;"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="port" lowerBound="1" eType="#//SensorPort"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="type" lowerBound="1" eType="#//SensorType"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="mode" lowerBound="1" eType="#//SensorMode"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="SensorPort">
+    <eLiterals name="S1"/>
+    <eLiterals name="S2" value="1"/>
+    <eLiterals name="S3" value="2"/>
+    <eLiterals name="S4" value="3"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="SensorType">
+    <eLiterals name="COLOR"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="SensorMode">
+    <eLiterals name="RED"/>
+    <eLiterals name="AMBIENT" value="1"/>
+    <eLiterals name="COLOR_ID" value="2"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Program">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="commands" upperBound="-1"
+        eType="#//command/Command" containment="true"/>
+  </eClassifiers>
+  <eSubpackages name="command" nsURI="http://www.example.org/robo/command" nsPrefix="command">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore">
+      <details key="invocationDelegates" value="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot"/>
+      <details key="settingDelegates" value="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot"/>
+      <details key="validationDelegates" value="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot"/>
+    </eAnnotations>
+    <eClassifiers xsi:type="ecore:EClass" name="Command" abstract="true"/>
+    <eClassifiers xsi:type="ecore:EClass" name="Drive" eSuperTypes="#//command/Command">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore">
+        <details key="constraints" value="UntilOrDistance UntilOnlyWhenForwardOrBackward"/>
+      </eAnnotations>
+      <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
+        <details key="UntilOrDistance" value="(distance &lt;> null) xor (until &lt;> null)"/>
+        <details key="UntilOnlyWhenForwardOrBackward" value="(until &lt;> null) implies (direction = Direction::FORWARD or direction = Direction::BACKWARD)"/>
+      </eAnnotations>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="distance" eType="#//expression/Expr"
+          containment="true"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="until" eType="#//condition/Condition"
+          containment="true"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="direction" lowerBound="1"
+          eType="#//command/Direction"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="Loop" eSuperTypes="#//command/Command">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="condition" lowerBound="1"
+          eType="#//condition/Condition" containment="true"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="commands" upperBound="-1"
+          eType="#//command/Command" containment="true"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="Branch" eSuperTypes="#//command/Command">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="condition" lowerBound="1"
+          eType="#//condition/Condition" containment="true"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="commands" upperBound="-1"
+          eType="#//command/Command" containment="true"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="Assignment" eSuperTypes="#//command/Command">
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="variable" lowerBound="1"
+          eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="value" lowerBound="1"
+          eType="#//expression/Expr" containment="true"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EEnum" name="Direction">
+      <eLiterals name="FORWARD"/>
+      <eLiterals name="BACKWARD" value="1"/>
+      <eLiterals name="LEFT" value="2"/>
+      <eLiterals name="RIGHT" value="3"/>
+    </eClassifiers>
+  </eSubpackages>
+  <eSubpackages name="expression" nsURI="http://www.example.org/robo/expression" nsPrefix="expression">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore">
+      <details key="invocationDelegates" value="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot"/>
+      <details key="settingDelegates" value="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot"/>
+      <details key="validationDelegates" value="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot"/>
+    </eAnnotations>
+    <eClassifiers xsi:type="ecore:EClass" name="Expr" abstract="true">
+      <eOperations name="evaluate" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDouble"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="Variable" eSuperTypes="#//expression/Expr">
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" lowerBound="1"
+          eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="Operation" eSuperTypes="#//expression/Expr">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore">
+        <details key="constraints" value="LeftCanOnlyBeOmmittedIfUnaryMinus"/>
+      </eAnnotations>
+      <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
+        <details key="LeftCanOnlyBeOmmittedIfUnaryMinus" value="left = null implies operator = ExprOperation::MINUS"/>
+      </eAnnotations>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="left" eType="#//expression/Expr"
+          containment="true"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="right" lowerBound="1"
+          eType="#//expression/Expr" containment="true"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="operator" lowerBound="1"
+          eType="#//expression/ExprOperation"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="Literal" eSuperTypes="#//expression/Expr">
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" lowerBound="1"
+          eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDouble"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EEnum" name="ExprOperation">
+      <eLiterals name="PLUS"/>
+      <eLiterals name="MINUS" value="1"/>
+      <eLiterals name="MULTIPLY" value="2"/>
+      <eLiterals name="DIVIDE" value="3"/>
+    </eClassifiers>
+  </eSubpackages>
+  <eSubpackages name="condition" nsURI="http://www.example.org/robo/condition" nsPrefix="condition">
+    <eClassifiers xsi:type="ecore:EClass" name="Condition" abstract="true">
+      <eOperations name="evaluate" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="Comparison" eSuperTypes="#//condition/Condition">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="left" lowerBound="1"
+          eType="#//expression/Expr" containment="true"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="right" lowerBound="1"
+          eType="#//expression/Expr" containment="true"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="operator" lowerBound="1"
+          eType="#//condition/ComparisonOperator"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EEnum" name="ComparisonOperator">
+      <eLiterals name="LESS"/>
+      <eLiterals name="LESS_OR_EQUAL" value="1"/>
+      <eLiterals name="GREATER_OR_EQUAL" value="2"/>
+      <eLiterals name="GREATER" value="3"/>
+      <eLiterals name="EQUAL" value="4"/>
+      <eLiterals name="UNEQUAL" value="5"/>
+    </eClassifiers>
+  </eSubpackages>
+</ecore:EPackage>

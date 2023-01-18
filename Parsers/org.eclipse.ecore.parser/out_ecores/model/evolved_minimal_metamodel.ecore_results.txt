@@ -1,0 +1,7 @@
+model	OpaqueExpression (language,EString,attribute) (body,EString,attribute) 
+model	ModelElement (name,EString,attribute) (partition,ActivityPartition,ref) 
+model	ActivityEdge (guard,OpaqueExpression,ref) (source,ActivityNode,ref) (target,ActivityNode,ref) 
+model	Activity (node,ActivityNode,ref) (edge,ActivityEdge,ref) (group,ActivityPartition,ref) 
+model	ActivityPartition (nodes,ActivityNode,ref) (edges,ActivityEdge,ref) 
+model	ActivityNode (outgoing,ActivityEdge,ref) (incoming,ActivityEdge,ref) 
+model	ObjectFlow (type,ModelElement,ref) 

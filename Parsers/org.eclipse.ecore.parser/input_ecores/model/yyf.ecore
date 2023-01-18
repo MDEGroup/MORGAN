@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="yyf" nsURI="http://yyf" nsPrefix="_yyf">
+  <eAnnotations source="diagen">
+    <details key="knownas=simple world"/>
+    <details key="origin=http://org.isoe.fr"/>
+    <details key="leftparent=nil" value=""/>
+    <details key="rightparent=nil" value=""/>
+    <details key="requires=nil" value=""/>
+    <details key="context=startup"/>
+  </eAnnotations>
+  <eClassifiers xsi:type="ecore:EClass" name="Base" eSuperTypes="#//NamedElement">
+    <eAnnotations source="diagraph">
+      <details key="node" value="_"/>
+      <details key="pov" value="_"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="id" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="relations" upperBound="-1"
+        eType="#//Relation" containment="true" eOpposite="#//Relation/fromThing"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="foos" upperBound="-1" eType="#//Foo"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="ouputs" upperBound="-1"
+        eType="#//Output" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="NamedElement" abstract="true">
+    <eAnnotations source="diagraph">
+      <details key="node" value="_"/>
+      <details key="kref=aliases" value="_"/>
+      <details key="label=name" value="_"/>
+      <details key="afx=bars" value="_"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="aliases" upperBound="-1"
+        eType="#//Alias" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="bars" upperBound="-1" eType="#//Bar"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Relation" eSuperTypes="#//NamedElement">
+    <eAnnotations source="diagraph">
+      <details key="node" value="_"/>
+      <details key="ref=toThing" value="_"/>
+      <details key="kref=subRelations,2" value="_"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="fromThing" eType="#//Base"
+        eOpposite="#//Base/relations"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="toThing" eType="#//Base"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="since" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="subRelations" upperBound="-1"
+        eType="#//Relation" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Alias">
+    <eAnnotations source="diagraph">
+      <details key="node" value="_"/>
+      <details key="label=id" value="_"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="id" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Foo">
+    <eAnnotations source="diagraph">
+      <details key="node" value="_"/>
+      <details key="label=id" value="_"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="id" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Bar">
+    <eAnnotations source="diagraph">
+      <details key="node" value="_"/>
+      <details key="label=id" value="_"/>
+      <details key="ref=output" value="_"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="id" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="output" eType="#//Output"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Output">
+    <eAnnotations source="diagraph">
+      <details key="node" value="_"/>
+      <details key="label=id" value="_"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="id" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+</ecore:EPackage>

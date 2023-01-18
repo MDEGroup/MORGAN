@@ -1,0 +1,7 @@
+model	Language (symbols,Symbol,ref) 
+model	RegularState (transitions,Transition,ref) 
+model	State (description,EString,attribute) 
+model	Symbol (description,EString,attribute) (literal,EString,attribute) (direction,EString,attribute) 
+model	Transition (targetState,State,ref) (symbols,Symbol,ref) 
+model	NamedElement (name,EString,attribute) 
+model	Dfa (regularStates,RegularState,ref) (initialState,InitialState,ref) (finalStates,FinalState,ref) (language,Language,ref) 

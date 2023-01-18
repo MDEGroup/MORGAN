@@ -1,0 +1,7 @@
+model	Vertex (note,EString,attribute) (name,EString,attribute) (isActive,EBoolean,attribute) 
+model	State (entry,EString,attribute) (exit,EString,attribute) (action,EString,attribute) 
+model	StateMachine (name,EString,attribute) (mainRegion,Region,ref) 
+model	CompositeState (element,Region,ref) 
+model	Region (note,EString,attribute) (name,EString,attribute) (vertex,Vertex,ref) (transient,Transient,ref) 
+model	Transient (guard,EString,attribute) (effect,EString,attribute) (name,EString,attribute) (trigger,EString,attribute) (priority,EInt,attribute) (source,Vertex,ref) (target,Vertex,ref) 
+model	PseudoState (PseudoStateType,PseudoStateType,attribute) 

@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="error4"
+    nsURI="http://error4" nsPrefix="_error4">
+  <eClassifiers xsi:type="ecore:EClass" name="World">
+    <eAnnotations source="diagraph">
+      <details key="node"/>
+      <details key="pov"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="things" upperBound="-1"
+        eType="#//Thing" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Thing" eSuperTypes="#//NamedElement">
+    <eAnnotations source="diagraph">
+      <details key="node"/>
+      <details key="kref=components"/>
+      <details key="kref=relations"/>
+      <details key="nav:v_thing"/>
+    </eAnnotations>
+    <eAnnotations source="diagraph">
+      <details key="node"/>
+      <details key="kref=components"/>
+      <details key="kref=relations"/>
+      <details key="view=v_thing"/>
+      <details key="pov"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="id" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="relations" upperBound="-1"
+        eType="#//RelatedTo" containment="true" eOpposite="#//RelatedTo/fromThing"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="components" upperBound="-1"
+        eType="#//Component" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="NamedElement" abstract="true">
+    <eAnnotations source="diagraph">
+      <details key="label=name"/>
+    </eAnnotations>
+    <eAnnotations source="diagraph">
+      <details key="label=name"/>
+      <details key="view=v_thing"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="RelatedTo" eSuperTypes="#//NamedElement">
+    <eAnnotations source="diagraph">
+      <details key="node"/>
+      <details key="ref=fromThing"/>
+      <details key="ref=toThing"/>
+      <details key="ref=toComponent"/>
+    </eAnnotations>
+    <eAnnotations source="diagraph">
+      <details key="node"/>
+      <details key="ref=fromThing"/>
+      <details key="ref=toThing"/>
+      <details key="ref=toComponent"/>
+      <details key="view=v_thing"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="fromThing" eType="#//Thing"
+        eOpposite="#//Thing/relations"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="toThing" eType="#//Thing"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="since" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="toComponent" eType="#//Component"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Component" eSuperTypes="#//NamedElement">
+    <eAnnotations source="diagraph">
+      <details key="node"/>
+    </eAnnotations>
+    <eAnnotations source="diagraph">
+      <details key="node"/>
+      <details key="view=v_thing"/>
+    </eAnnotations>
+  </eClassifiers>
+</ecore:EPackage>

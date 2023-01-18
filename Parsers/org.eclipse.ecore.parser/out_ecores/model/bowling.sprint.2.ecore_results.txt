@@ -1,0 +1,7 @@
+model	Player (isProfessional,EBoolean,attribute) (name,EString,attribute) (dateOfBirth,EDate,attribute) (height,EDouble,attribute) 
+model	League (name,EString,attribute) (players,Player,ref) 
+model	Game (frames,EInt,attribute) (player,Player,ref) 
+model	Alley (name,EString,attribute) (tournaments,Tournament,ref) (leagues,League,ref) (lanes,Lane,ref) 
+model	Matchup (name,EString,attribute) (games,Game,ref) 
+model	Lane (number,EInt,attribute) 
+model	Tournament (name,EString,attribute) (type,TournamentType,attribute) (matchups,Matchup,ref) 

@@ -1,0 +1,5 @@
+model	Article (localFile,EString,attribute) (title,EString,attribute) (sources,Source,ref) 
+model	Library (generalSources,GeneralSource,ref) (articles,Article,ref) (hyperlinks,Hyperlink,ref) 
+model	GeneralSource (aliases,EString,attribute) (name,EString,attribute) (dontCount,EBoolean,attribute) (sources,Source,ref) 
+model	Source (hyperlink,Hyperlink,ref) (generalSource,GeneralSource,ref) (article,Article,ref) 
+model	Hyperlink (url,EString,attribute) (sources,Source,ref) 

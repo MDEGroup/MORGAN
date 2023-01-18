@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="dscDiagramModel"
+    nsURI="http://dscDiagramModel" nsPrefix="dscDiagramModel">
+  <eClassifiers xsi:type="ecore:EClass" name="DSCDiagram" eSuperTypes="../../genericUMLDiagramModel/model/genericUMLDiagramModel.ecore#//GenericDiagram">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="eventFile" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="guardFile" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="actionFile" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="diagramVariables" upperBound="-1"
+        eType="#//DiagramVariable"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="functionFile" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="AnchorNoteToItem" eSuperTypes="../../genericUMLDiagramModel/model/genericUMLDiagramModel.ecore#//Relationship"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Transition" eSuperTypes="../../genericUMLDiagramModel/model/genericUMLDiagramModel.ecore#//Relationship">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="transitionID" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="eventID" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="guardID" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="actionID" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="showProperties" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="showTransitionID" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="triggeredByEvent" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"
+        defaultValueLiteral="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EDataType" name="Variable" instanceClassName="dscDiagramModel.myDataTypes.TypeVariable"/>
+  <eClassifiers xsi:type="ecore:EClass" name="StartPoint" eSuperTypes="../../genericUMLDiagramModel/model/genericUMLDiagramModel.ecore#//Classifier">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="compositeState" lowerBound="1"
+        eType="#//DSCState" eOpposite="#//DSCState/startPoint"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ShallowHistory" eSuperTypes="../../genericUMLDiagramModel/model/genericUMLDiagramModel.ecore#//Classifier">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="compositeState" lowerBound="1"
+        eType="#//DSCState" eOpposite="#//DSCState/shallowHistory"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="DeepHistory" eSuperTypes="../../genericUMLDiagramModel/model/genericUMLDiagramModel.ecore#//Classifier">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="compositeState" lowerBound="1"
+        eType="#//DSCState" eOpposite="#//DSCState/deepHistory"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="DSCState" eSuperTypes="../../genericUMLDiagramModel/model/genericUMLDiagramModel.ecore#//Container">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="startPoint" lowerBound="1"
+        eType="#//StartPoint" eOpposite="#//StartPoint/compositeState"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="shallowHistory" eType="#//ShallowHistory"
+        eOpposite="#//ShallowHistory/compositeState"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="deepHistory" eType="#//DeepHistory"
+        eOpposite="#//DeepHistory/compositeState"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="Variables" upperBound="-1"
+        eType="#//Variable"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="isSimple" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EDataType" name="DiagramVariable" instanceClassName="dscDiagramModel.myDataTypes.TypeDiagramVariable"/>
+</ecore:EPackage>

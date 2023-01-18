@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="TokenTrace" nsURI="http://www.osate.org/TokenTrace" nsPrefix="TokenTrace">
+  <eClassifiers xsi:type="ecore:EClass" name="TokenTrace">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="message" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="tokenTraceType" eType="#//TokenTraceType"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="root" eType="#//Token"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="instanceRoot" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EObject"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="tokens" upperBound="-1"
+        eType="#//Token" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="inferredRootLiteral" eType="ecore:EClass ../../org.osate.aadlv3/model/Aadlv3.ecore#//Literal"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Token" eSuperTypes="../../org.osate.aadlv3/model/Aadlv3.ecore#//MultiLiteralConstraint">
+    <eOperations name="getProbability" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBigDecimal"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="message" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="tokens" upperBound="-1"
+        eType="#//Token"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="tokenType" eType="#//TokenType"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="relatedEObject" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EObject"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="tokenLiteral" eType="ecore:EClass ../../org.osate.aadlv3/model/Aadlv3.ecore#//Literal"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="literalSink" upperBound="-1"
+        eType="ecore:EClass ../../org.osate.aadlv3/model/Aadlv3.ecore#//Literal" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="referenceCount" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"
+        defaultValueLiteral="0"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="assignedProbability" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBigDecimal"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="computedProbability" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBigDecimal"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="scale" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBigDecimal"
+        defaultValueLiteral="1.0"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="TokenType">
+    <eLiterals name="Basic"/>
+    <eLiterals name="External" value="1"/>
+    <eLiterals name="Undeveloped" value="2"/>
+    <eLiterals name="Intermediate" value="3"/>
+    <eLiterals name="Component" value="4"/>
+    <eLiterals name="System" value="5"/>
+    <eLiterals name="Unhandled" value="6"/>
+    <eLiterals name="Sink" value="7"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="TokenTraceType">
+    <eLiterals name="TokenGraph"/>
+    <eLiterals name="TokenTrace" value="1"/>
+    <eLiterals name="CompositeParts" value="2"/>
+    <eLiterals name="MinimalCutSet" value="3"/>
+  </eClassifiers>
+</ecore:EPackage>

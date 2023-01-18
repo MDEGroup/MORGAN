@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="ASCII"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="petrinet" nsURI="http://fr.inria.diverse.sample.petrinet.xpetrinet/petrinet/" nsPrefix="petrinet">
+  <eClassifiers xsi:type="ecore:EClass" name="Net">
+    <eOperations name="initializeModel">
+      <eAnnotations source="aspect"/>
+      <eParameters name="args" upperBound="-1">
+        <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+      </eParameters>
+    </eOperations>
+    <eOperations name="run">
+      <eAnnotations source="aspect"/>
+    </eOperations>
+    <eOperations name="fireEnabledTransition">
+      <eAnnotations source="aspect"/>
+    </eOperations>
+    <eOperations name="stop">
+      <eAnnotations source="aspect"/>
+    </eOperations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="places" upperBound="-1" eType="//Place" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="transitions" upperBound="-1" eType="//Transition" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Transition">
+    <eOperations name="isEnabled">
+      <eAnnotations source="aspect"/>
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    </eOperations>
+    <eOperations name="fire">
+      <eAnnotations source="aspect"/>
+    </eOperations>
+    <eOperations name="fire_PreCondition">
+      <eAnnotations source="aspect"/>
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    </eOperations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="input" lowerBound="1" upperBound="-1" eType="//Place"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="output" lowerBound="1" upperBound="-1" eType="//Place"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Place">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="initialTokens">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="tokens" upperBound="-1" eType="//Token" containment="true">
+      <eAnnotations source="aspect"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Token">
+    <eAnnotations source="aspect"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="NetStopEvent">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="net" eType="//Net"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="TransitionFireEvent">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="transition" eType="//Transition"/>
+  </eClassifiers>
+</ecore:EPackage>

@@ -1,0 +1,4 @@
+model	RentalAgency (name,EString,attribute) (objectsToRent,RentalObject,ref) (customers,Customer,ref) (rentals,Rental,ref) 
+model	Rental (endDate,EDate,attribute) (startDate,EDate,attribute) (parentAgency,RentalAgency,ref) (rentedObject,RentalObject,ref) (customer,Customer,ref) 
+model	Customer (firstName,EString,attribute) (lastName,EString,attribute) (parentAgency,RentalAgency,ref) 
+model	RentalObject (name,EString,attribute) (ID,ELong,attribute) (picture,Image,attribute) (parentAgency,RentalAgency,ref) 

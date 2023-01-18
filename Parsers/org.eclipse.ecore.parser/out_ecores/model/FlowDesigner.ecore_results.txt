@@ -1,0 +1,7 @@
+model	InitialState (initialize,Action,attribute) 
+model	NamedState (exit,Action,attribute) (entry,Action,attribute) (activity,Action,attribute) (name,EString,attribute) 
+model	Event (guard,Action,attribute) (action,Action,attribute) (event,EString,attribute) (nextState,Target,ref) 
+model	ViewState (view,EString,attribute) 
+model	FinalState (finalize,Action,attribute) 
+model	Source (events,Event,ref) 
+model	Flow (initialState,InitialState,ref) (finalState,FinalState,ref) (states,NamedState,ref) 

@@ -1,0 +1,7 @@
+model	Action (desc,EString,attribute) 
+model	TestSuite (testCase,TestCase,ref) 
+model	TestCase (testSuite,TestSuite,ref) (assertion,Assertion,ref) 
+model	DataValue (value,EString,attribute) 
+model	Assertion (type,EString,attribute) (expectedValue,ExpectedValue,ref) (action,Action,ref) (testCase,TestCase,ref) 
+model	ExpectedValue (assertion,Assertion,ref) 
+model	NamedElement (name,EString,attribute) 

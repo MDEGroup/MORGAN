@@ -1,0 +1,8 @@
+model	IdentifiedElement (id,EString,attribute) 
+model	Root (name,EString,attribute) (content,NamedElement,ref) 
+model	Element (values,EInt,attribute) (value,EInt,attribute) (singleRef,Element,ref) (manyContentWithUp,Element,ref) (manyContent,Element,ref) (manyRef,Element,ref) (manyFromSingleRef,Element,ref) (singleContentWithUp,Element,ref) (upFromSingleContent,Element,ref) (upFromManyContent,Element,ref) (singleFromSingleRef1,Element,ref) (singleFromSingleRef2,Element,ref) (singleFromManyRef,Element,ref) (manyFromManyRef2,Element,ref) (manyFromManyRef1,Element,ref) (singleContent,Element,ref) 
+model	Node (incoming,Edge,ref) (outgoing,Edge,ref) (subNodes,NamedElement,ref) 
+model	NamedElement (name,EString,attribute) 
+model	Edge (source,Node,ref) (target,Node,ref) 
+model	ReferencingNode (referenced,Node,ref) 
+model	StrictElement (sValues,EInt,attribute) (sValue,EInt,attribute) (sManyRef,Element,ref) (sSingleRef,Element,ref) (sManyFromSingleRef,StrictElement,ref) (sManyFromManyRef2,StrictElement,ref) (sManyContent,Element,ref) (sManyFromManyRef1,StrictElement,ref) (sSingleFromManyRef,StrictElement,ref) (sSingleContent,Element,ref) 

@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="platoon" nsURI="platoon" nsPrefix="platoon">
+  <eClassifiers xsi:type="ecore:EClass" name="Root">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="platoon" lowerBound="1"
+        eType="#//Platoon" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="route" lowerBound="1" eType="#//Route"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="constraints" lowerBound="1"
+        eType="#//Constraints" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Route">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
+        iD="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="routeCommands" lowerBound="1"
+        upperBound="-1" eType="#//routeCommand" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Platoon">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="leaderVehicle" lowerBound="1"
+        eType="#//LeaderVehicle" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="followingVehicle" upperBound="-1"
+        eType="#//FollowingVehicle" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="routeCommand" abstract="true"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Forward" eSuperTypes="#//routeCommand">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="distance" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="TurnLeft" eSuperTypes="#//routeCommand"/>
+  <eClassifiers xsi:type="ecore:EClass" name="TurnRight" eSuperTypes="#//routeCommand"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Constraints">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="lbound" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="ubound" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Vehicle" abstract="true">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
+        iD="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="FollowingVehicle" eSuperTypes="#//Vehicle">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="following" lowerBound="1"
+        eType="#//Vehicle" eKeys="#//Vehicle/name"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="LeaderVehicle" eSuperTypes="#//Vehicle">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="route" lowerBound="1" eType="#//Route"/>
+  </eClassifiers>
+</ecore:EPackage>

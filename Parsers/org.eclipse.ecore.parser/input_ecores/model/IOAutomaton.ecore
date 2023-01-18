@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="ioautomaton" nsURI="http://ioautomaton.ecore" nsPrefix="ioautomaton">
+  <eClassifiers xsi:type="ecore:EClass" name="AutomatonContainer">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="automaton" upperBound="-1"
+        eType="#//Automaton" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Automaton">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="sender" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="state" upperBound="-1"
+        eType="#//State" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="transition" upperBound="-1"
+        eType="#//Transition" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="initialstate" lowerBound="1"
+        eType="#//State"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="State">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="outgoingtransition" upperBound="-1"
+        eType="#//Transition" eOpposite="#//Transition/prestate"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="incomingtransition" upperBound="-1"
+        eType="#//Transition" eOpposite="#//Transition/poststate"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Transition">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="operation" lowerBound="1"
+        eType="#//Operation"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="_return" lowerBound="1"
+        eType="#//Return"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="outmessage" upperBound="-1"
+        eType="#//OutMessage" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="prestate" eType="#//State"
+        eOpposite="#//State/outgoingtransition"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="poststate" eType="#//State"
+        eOpposite="#//State/incomingtransition"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="OutMessage">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="_return" eType="#//Return"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="_object" eType="#//Object"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="operation" eType="#//Operation"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Operation">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Return">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Object">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+</ecore:EPackage>

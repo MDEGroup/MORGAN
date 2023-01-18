@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="qualitymodel" nsURI="https://www.atmosphere-eubrazil.eu/analyzer/qualitymodel"
+    nsPrefix="qm">
+  <eClassifiers xsi:type="ecore:EClass" name="Metric">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="probeName" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="descriptionName" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="resourceName" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="attribute" lowerBound="1"
+        eType="#//LeafAttribute"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="data" lowerBound="1" upperBound="-1"
+        eType="#//Data"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Attribute" abstract="true">
+    <eOperations name="calculate" lowerBound="1" eType="#//HistoricalData">
+      <eParameters name="profile" eType="#//ConfigurationProfile"/>
+    </eOperations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
+        iD="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="CompositeAttribute" eSuperTypes="#//Attribute">
+    <eOperations name="calculateNeutrality" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDouble">
+      <eParameters name="profile" eType="#//ConfigurationProfile"/>
+    </eOperations>
+    <eOperations name="calculateSimultaneity" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDouble">
+      <eParameters name="profile" eType="#//ConfigurationProfile"/>
+    </eOperations>
+    <eOperations name="calculateReplaceability" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDouble">
+      <eParameters name="profile" eType="#//ConfigurationProfile"/>
+    </eOperations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="children" lowerBound="1"
+        upperBound="-1" eType="#//Attribute" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="operator" lowerBound="1"
+        eType="#//AttributeAggregationOperator"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="LeafAttribute" eSuperTypes="#//Attribute">
+    <eOperations name="calculateAverage" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDouble">
+      <eParameters name="profile" eType="#//ConfigurationProfile"/>
+    </eOperations>
+    <eOperations name="calculateMinimum" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDouble">
+      <eParameters name="profile" eType="#//ConfigurationProfile"/>
+    </eOperations>
+    <eOperations name="calculateMaximum" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDouble">
+      <eParameters name="profile" eType="#//ConfigurationProfile"/>
+    </eOperations>
+    <eOperations name="calculateSum" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDouble">
+      <eParameters name="profile" eType="#//ConfigurationProfile"/>
+    </eOperations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="normalizationMin" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDouble"
+        unsettable="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="normalizationMax" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDouble"
+        defaultValueLiteral="1.0" unsettable="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="operator" lowerBound="1"
+        eType="#//MetricAggregationOperator"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="numSamples" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt" defaultValueLiteral="1"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="normalizationKind" lowerBound="1"
+        eType="#//MetricNormalizationKind"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="MetricAggregationOperator">
+    <eLiterals name="AVERAGE"/>
+    <eLiterals name="MINIMUM"/>
+    <eLiterals name="MAXIMUM"/>
+    <eLiterals name="SUM"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="AttributeAggregationOperator">
+    <eLiterals name="NEUTRALITY"/>
+    <eLiterals name="SIMULTANEITY"/>
+    <eLiterals name="REPLACEABILITY"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="HistoricalData">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="instant" lowerBound="1"
+        eType="#//Timestamp"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDouble"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="attribute" lowerBound="1"
+        eType="#//Attribute"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EDataType" name="Timestamp" instanceClassName="java.sql.Timestamp"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Preference">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="weight" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDouble" defaultValueLiteral="1.0"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="attribute" lowerBound="1"
+        eType="#//Attribute"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="threshold" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDouble" defaultValueLiteral="1.0"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ConfigurationProfile">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="preference" upperBound="-1"
+        eType="#//Preference" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="ID" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"
+        iD="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="metric" lowerBound="1"
+        upperBound="-1" eType="#//Metric" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="MetricNormalizationKind">
+    <eLiterals name="BENEFIT"/>
+    <eLiterals name="COST"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EDataType" name="Data" instanceClassName="eubrazil.atmosphere.entity.Data"/>
+</ecore:EPackage>

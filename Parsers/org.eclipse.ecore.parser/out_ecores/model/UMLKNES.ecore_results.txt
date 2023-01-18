@@ -1,0 +1,7 @@
+model	Trigger (event,Event,ref) 
+model	AcceptEventAction (isUnMarshall,EBoolean,attribute) (trigger,Trigger,ref) 
+model	ActivityEdge (activity,Activity,ref) (guard,ValueSpecification,ref) (weight,ValueSpecification,ref) (source,ActivityNode,ref) (target,ActivityNode,ref) 
+model	Activity (isSingleExecution,EBoolean,attribute) (isReadOnly,EBoolean,attribute) (node,ActivityNode,ref) (edge,ActivityEdge,ref) 
+model	RedefinableElement (isLeaf,EBoolean,attribute) 
+model	NamedElement (visibility,VisibilityKind,attribute) 
+model	ActivityNode (incoming,ActivityEdge,ref) (outgoing,ActivityEdge,ref) (activity,Activity,ref) (redefinedElement,ActivityNode,ref) 

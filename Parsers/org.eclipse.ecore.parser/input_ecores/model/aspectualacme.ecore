@@ -1,0 +1,343 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="aspectualacme"
+    nsURI="aspectualacmev0.2" nsPrefix="aspectualacme">
+  <eClassifiers xsi:type="ecore:EClass" name="Root">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="imports" upperBound="-1"
+        eType="#//Import" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="elements" lowerBound="1"
+        upperBound="-1" eType="#//BasicElement" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Import">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="fileName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Element">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="property" upperBound="-1"
+        eType="#//Property" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
+        defaultValueLiteral="name"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="representations" upperBound="-1"
+        eType="#//Representation" containment="true" eOpposite="#//Representation/element"
+        eKeys="#//Representation/name"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="attachableElement" abstract="true" eSuperTypes="#//Element"/>
+  <eClassifiers xsi:type="ecore:EClass" name="BasicElement" abstract="true" eSuperTypes="#//Element">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="armani" upperBound="-1"
+        eType="#//Armani" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="parentFamily" upperBound="-1"
+        eType="#//Family"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Family" eSuperTypes="#//BasicElement">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="connectors" upperBound="-1"
+        eType="#//Connector" containment="true" eOpposite="#//Connector/parentFamily"
+        eKeys="#//Element/name"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="components" upperBound="-1"
+        eType="#//Component" containment="true" eOpposite="#//Component/parentFamily"
+        eKeys="#//Element/name"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="attachments" upperBound="-1"
+        eType="#//Attachment" containment="true" eOpposite="#//Attachment/parentFamily"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="wildcard" upperBound="-1"
+        eType="#//WildCard" containment="true" eKeys="#//Element/name"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="ctypes" upperBound="-1"
+        eType="#//ComponentType" containment="true" eOpposite="#//ComponentType/parentFamily"
+        eKeys="#//Element/name"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="ptypes" upperBound="-1"
+        eType="#//PortType" containment="true" eOpposite="#//PortType/parentFamily"
+        eKeys="#//Element/name"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="cntypes" upperBound="-1"
+        eType="#//ConnectorType" containment="true" eOpposite="#//ConnectorType/parentFamily"
+        eKeys="#//Element/name"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="rtypes" upperBound="-1"
+        eType="#//RoleType" containment="true" eOpposite="#//RoleType/parentFamily"
+        eKeys="#//Element/name"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="prtypes" upperBound="-1"
+        eType="#//PropertyType" containment="true" eOpposite="#//PropertyType/parentFamily"
+        eKeys="#//Element/name"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="properties" upperBound="-1"
+        eType="#//Property" containment="true" eOpposite="#//Property/parentFamily"
+        eKeys="#//Property/name"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ComponentType" eSuperTypes="#//TypeDefinition">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="port" upperBound="-1" eType="#//Port"
+        containment="true" eOpposite="#//Port/ComponentT" eKeys="#//Element/name"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="parentType" upperBound="-1"
+        eType="#//ComponentType" eKeys="#//Element/name"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="parentFamily" eType="#//Family"
+        eOpposite="#//Family/ctypes"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="RoleType" eSuperTypes="#//TypeDefinition">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="parentType" upperBound="-1"
+        eType="#//RoleType" eKeys="#//Element/name"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="parentFamily" eType="#//Family"
+        eOpposite="#//Family/rtypes"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="PortType" eSuperTypes="#//TypeDefinition">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="parentType" upperBound="-1"
+        eType="#//PortType" eKeys="#//Element/name"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="parentFamily" eType="#//Family"
+        eOpposite="#//Family/ptypes"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ConnectorType" eSuperTypes="#//TypeDefinition">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="parentType" upperBound="-1"
+        eType="#//ConnectorType" eKeys="#//Element/name"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="role" upperBound="-1" eType="#//Role"
+        containment="true" eOpposite="#//Role/ConnectorT" eKeys="#//Element/name"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="glue" upperBound="-1" eType="#//Glue"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="parentFamily" eType="#//Family"
+        eOpposite="#//Family/cntypes"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="PropertyType" eSuperTypes="#//TypeDefinition">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="type" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="values" upperBound="-1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="parentFamily" eType="#//Family"
+        eOpposite="#//Family/prtypes" eKeys="#//Element/name"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="System" eSuperTypes="#//BasicElement">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="connectors" upperBound="-1"
+        eType="#//Connector" containment="true" eOpposite="#//Connector/parentSystem"
+        eKeys="#//Element/name"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="properties" upperBound="-1"
+        eType="#//Property" containment="true" eOpposite="#//Property/parentSystem"
+        eKeys="#//Property/name"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="attachments" upperBound="-1"
+        eType="#//Attachment" containment="true" eOpposite="#//Attachment/parentSystem"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="wildCard" upperBound="-1"
+        eType="#//WildCard" containment="true" eKeys="#//Element/name"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="components" upperBound="-1"
+        eType="#//Component" containment="true" eOpposite="#//Component/parentSystem"
+        eKeys="#//Element/name"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="parentRepresentation" eType="#//Representation"
+        eOpposite="#//Representation/system"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="effective_type" upperBound="-1"
+        eType="#//Family" eKeys="#//Element/name"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Component" eSuperTypes="#//Element">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="port" upperBound="-1" eType="#//Port"
+        containment="true" eOpposite="#//Port/Component" eKeys="#//Element/name"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="type" upperBound="-1" eType="#//ComponentType"
+        eKeys="#//Element/name"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="parentSystem" eType="#//System"
+        eOpposite="#//System/components"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="parentFamily" eType="#//Family"
+        eOpposite="#//Family/components"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="effective_type" upperBound="-1"
+        eType="#//ComponentType" eKeys="#//Element/name"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Connector" eSuperTypes="#//Element">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="role" upperBound="-1" eType="#//Role"
+        containment="true" eOpposite="#//Role/Connector" eKeys="#//Element/name"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="glue" upperBound="-1" eType="#//Glue"
+        containment="true" eOpposite="#//Glue/connector"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="type" upperBound="-1" eType="#//ConnectorType"
+        eKeys="#//Element/name"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="parentSystem" eType="#//System"
+        eOpposite="#//System/connectors"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="parentFamily" eType="#//Family"
+        eOpposite="#//Family/connectors"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="effective_type" upperBound="-1"
+        eType="#//ConnectorType" eKeys="#//Element/name"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Role" eSuperTypes="#//attachableElement #//BindableElement">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="Connector" eType="#//Connector"
+        eOpposite="#//Connector/role"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="ConnectorT" eType="#//ConnectorType"
+        eOpposite="#//ConnectorType/role"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="roleType" upperBound="-1"
+        eType="#//RoleType"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="effective_type" upperBound="-1"
+        eType="#//RoleType" eKeys="#//Element/name"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="BaseRole" eSuperTypes="#//Role">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="type" upperBound="-1" eType="#//RoleType"
+        eKeys="#//Element/name"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="CrosscuttingRole" eSuperTypes="#//Role">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="type" upperBound="-1" eType="#//RoleType"
+        eKeys="#//Element/name"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Port" eSuperTypes="#//attachableElement #//BindableElement">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="portType" upperBound="-1"
+        eType="#//PortType" eKeys="#//Element/name"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="Component" eType="#//Component"
+        eOpposite="#//Component/port"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="ComponentT" eType="#//ComponentType"
+        eOpposite="#//ComponentType/port"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="effective_type" upperBound="-1"
+        eType="#//PortType" eKeys="#//Element/name"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Property">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
+        defaultValueLiteral=""/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="type" upperBound="-1" eType="#//PropertyType"
+        eKeys="#//Element/name"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="parentSystem" eType="#//System"
+        eOpposite="#//System/properties" eKeys="#//Element/name"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="parentFamily" eType="#//Family"
+        eOpposite="#//Family/properties" eKeys="#//Element/name"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Glue">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="baseAttach" eType="#//BaseRole"
+        derived="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="crosscuttingAttach" eType="#//CrosscuttingRole"
+        derived="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="glueType" eType="#//GlueType"
+        defaultValueLiteral=""/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="connector" eType="#//Connector"
+        eOpposite="#//Connector/glue"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Attachment">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="firstElement" lowerBound="1"
+        eType="#//attachableElement" eKeys="#//Element/name"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="secondElement" lowerBound="1"
+        eType="#//attachableElement" eKeys="#//Element/name"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="parentSystem" eType="#//System"
+        unsettable="true" eOpposite="#//System/attachments"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="parentFamily" eType="#//Family"
+        eOpposite="#//Family/attachments"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Binding">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="property" upperBound="-1"
+        eType="#//Property" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="firstPort" lowerBound="1"
+        eType="#//BindableElement" eKeys="#//Element/name"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="secondPort" lowerBound="1"
+        eType="#//BindableElement" eKeys="#//Element/name"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="representation" eType="#//Representation"
+        eOpposite="#//Representation/bindings"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Representation">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
+        iD="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="system" lowerBound="1"
+        eType="#//System" containment="true" eOpposite="#//System/parentRepresentation"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="bindings" upperBound="-1"
+        eType="#//Binding" containment="true" eOpposite="#//Binding/representation"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="element" lowerBound="1"
+        eType="#//Element" eOpposite="#//Element/representations" eKeys="#//Element/name"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="WildCard" eSuperTypes="#//attachableElement">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="expression" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString" defaultValueLiteral=""/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="GlueType">
+    <eLiterals name="before"/>
+    <eLiterals name="around" value="1"/>
+    <eLiterals name="after" value="2"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="BindableElement" eSuperTypes="#//Element"/>
+  <eClassifiers xsi:type="ecore:EClass" name="TypeDefinition" eSuperTypes="#//Element"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Armani">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="modifiers" lowerBound="1"
+        upperBound="2" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="designRule" lowerBound="1"
+        eType="#//ArmaniDesignRuleExpression" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ArmaniExpression"/>
+  <eClassifiers xsi:type="ecore:EClass" name="ArmaniFunctionCall" eSuperTypes="#//ArmaniPrimitiveExpression">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="functionId" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="parameters" upperBound="-1"
+        eType="#//ArmaniPrimitiveExpression" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ArmaniSetExpression" eSuperTypes="#//ArmaniPrimitiveExpression">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="reference" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="referenceType" eType="#//ArmaniSetTypes"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="setValues" upperBound="-1"
+        eType="#//ArmaniConstant" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ArmaniConstant" eSuperTypes="#//ArmaniPrimitiveExpression"/>
+  <eClassifiers xsi:type="ecore:EClass" name="ArmaniPrimitiveExpression" eSuperTypes="#//ArmaniUnaryExpression">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="designRule" eType="#//ArmaniDesignRuleExpression"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ArmaniUnaryExpression" eSuperTypes="#//ArmaniExpression">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="unaryExpression" eType="#//ArmaniUnaryExpression"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="operator" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="ArmaniSetTypes">
+    <eLiterals name="Components"/>
+    <eLiterals name="Connectors" value="1"/>
+    <eLiterals name="Roles" value="2"/>
+    <eLiterals name="Ports" value="3"/>
+    <eLiterals name="Representations" value="4"/>
+    <eLiterals name="Properties" value="5"/>
+    <eLiterals name="Elements" value="6"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="ArmaniTypes">
+    <eLiterals name="Component"/>
+    <eLiterals name="Connector" value="1"/>
+    <eLiterals name="Role" value="2" literal="Role"/>
+    <eLiterals name="Port" value="3"/>
+    <eLiterals name="Representation" value="4"/>
+    <eLiterals name="Property" value="5"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ArmaniMultiplicativeExpression" eSuperTypes="#//ArmaniExpression">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="expressions" lowerBound="1"
+        upperBound="-1" eType="#//ArmaniUnaryExpression" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="operators" upperBound="-1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ArmaniAdditiveExpression" eSuperTypes="#//ArmaniExpression">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="expressions" lowerBound="1"
+        upperBound="-1" eType="#//ArmaniMultiplicativeExpression" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="operators" upperBound="-1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ArmaniRelationalExpression" eSuperTypes="#//ArmaniExpression">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="expressions" lowerBound="1"
+        upperBound="-1" eType="#//ArmaniAdditiveExpression" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="operators" upperBound="-1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ArmaniEqualityExpression" eSuperTypes="#//ArmaniExpression">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="expressions" lowerBound="1"
+        upperBound="-1" eType="#//ArmaniRelationalExpression" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="operators" upperBound="-1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ArmaniIffExpression" eSuperTypes="#//ArmaniExpression">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="expressions" lowerBound="1"
+        upperBound="-1" eType="#//ArmaniEqualityExpression" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ArmaniImpliesExpression" eSuperTypes="#//ArmaniExpression">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="expressions" lowerBound="1"
+        upperBound="-1" eType="#//ArmaniIffExpression" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ArmaniOrExpression" eSuperTypes="#//ArmaniExpression">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="expressions" lowerBound="1"
+        upperBound="-1" eType="#//ArmaniImpliesExpression" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="operators" upperBound="-1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ArmaniVariable" eSuperTypes="#//ArmaniExpression">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="id" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="userType" eType="#//TypeDefinition"
+        eKeys="#//Element/name"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="basicType" eType="#//ArmaniTypes"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ArmaniBooleanExpression" eSuperTypes="#//ArmaniDesignRuleExpression">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="expressions" lowerBound="1"
+        upperBound="-1" eType="#//ArmaniOrExpression" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ArmaniQuantifiedExpression" eSuperTypes="#//ArmaniDesignRuleExpression">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="variable" lowerBound="1"
+        eType="#//ArmaniVariable" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="setExpression" lowerBound="1"
+        eType="#//ArmaniSetExpression" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="designRule" lowerBound="1"
+        eType="#//ArmaniDesignRuleExpression" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="quantifier" lowerBound="1"
+        eType="#//ArmaniQuantifier"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ArmaniDesignRuleExpression" abstract="true"
+      interface="true" eSuperTypes="#//ArmaniExpression"/>
+  <eClassifiers xsi:type="ecore:EEnum" name="ArmaniQuantifier">
+    <eLiterals name="forall"/>
+    <eLiterals name="exists" value="1"/>
+  </eClassifiers>
+</ecore:EPackage>

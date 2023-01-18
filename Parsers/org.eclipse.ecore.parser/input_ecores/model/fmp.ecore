@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="fmp" nsURI="http:///fmp.ecore" nsPrefix="fmp">
+  <eClassifiers xsi:type="ecore:EClass" name="Feature" eSuperTypes="#//Clonable">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="valueType" eType="#//ValueType"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="configurations" upperBound="-1"
+        eType="#//Feature" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="references" upperBound="-1"
+        eType="#//Reference" eOpposite="#//Reference/feature"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="typedValue" eType="#//TypedValue"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="describedNode" eType="#//Node"
+        eOpposite="#//Node/properties"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="constraints" upperBound="-1"
+        eType="#//Constraint" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="FeatureGroup" eSuperTypes="#//Node"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Node" abstract="true">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="max" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="min" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="confs" upperBound="-1"
+        eType="#//Node" eOpposite="#//Node/origin"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="origin" eType="#//Node"
+        eOpposite="#//Node/confs"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="children" upperBound="-1"
+        eType="#//Node" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="properties" eType="#//Feature"
+        eOpposite="#//Feature/describedNode"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="id" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Reference" eSuperTypes="#//Clonable">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="feature" eType="#//Feature"
+        eOpposite="#//Feature/references"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Project">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="model" eType="#//Feature"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="metaModel" eType="#//Feature"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="metaMetaModel" eType="#//Feature"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="TypedValue">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="integerValue" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EIntegerObject"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="stringValue" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="floatValue" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EFloatObject"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="featureValue" eType="#//Feature"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Clonable" abstract="true" eSuperTypes="#//Node">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="state" eType="#//ConfigState"
+        defaultValueLiteral="UNDECIDED"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="clones" upperBound="-1"
+        eType="#//Clonable" eOpposite="#//Clonable/prototype"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="prototype" eType="#//Clonable"
+        eOpposite="#//Clonable/clones"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Constraint">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="text" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="ValueType">
+    <eLiterals name="FEATURE" value="1"/>
+    <eLiterals name="FLOAT" value="2"/>
+    <eLiterals name="INTEGER" value="3"/>
+    <eLiterals name="NONE" value="4"/>
+    <eLiterals name="STRING" value="5"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="ConfigState">
+    <eLiterals name="USER_SELECTED" value="1"/>
+    <eLiterals name="USER_ELIMINATED" value="2"/>
+    <eLiterals name="MACHINE_SELECTED" value="3"/>
+    <eLiterals name="MACHINE_ELIMINATED" value="4"/>
+    <eLiterals name="UNDECIDED" value="5"/>
+  </eClassifiers>
+</ecore:EPackage>

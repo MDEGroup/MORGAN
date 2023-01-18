@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="dmm" nsURI="/DMM/model/DMM.ecore" nsPrefix="dmm">
+  <eClassifiers xsi:type="ecore:EClass" name="Person" abstract="true">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" lowerBound="1">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="email" lowerBound="1" upperBound="-1">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Student" eSuperTypes="//Person">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="matriculationNumber" lowerBound="1" iD="true">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="attends" upperBound="-1" eType="//Course"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Professor" eSuperTypes="//Person">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="employeeNumber" lowerBound="1" iD="true">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="lectures" upperBound="-1" eType="//Course"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Course">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" lowerBound="1">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="courseNumber" lowerBound="1" iD="true">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="courseType" unique="false" lowerBound="1" eType="//CourseType"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="mandatoryFor" upperBound="-1" eType="//Course"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="exam" upperBound="-1" eType="//Exam" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="CourseType">
+    <eLiterals name="VO"/>
+    <eLiterals name="UE" value="1"/>
+    <eLiterals name="SEM" value="2"/>
+    <eLiterals name="PR" value="3"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="UniversityManagementSystem">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="course" upperBound="-1" eType="//Course" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="person" upperBound="-1" eType="//Person" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Exam">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="examID" lowerBound="1" iD="true">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+</ecore:EPackage>

@@ -1,0 +1,5 @@
+model	Loans (date,EDate,attribute) (member,Member,ref) (media,Media,ref) 
+model	Dependancy (before,Media,ref) (after,Media,ref) 
+model	Media (copies,EBigInteger,attribute) (name,EString,attribute) (library,Library,ref) 
+model	Library (medias,Media,ref) (loans,Loans,ref) (members,Member,ref) (dependancies,Dependancy,ref) 
+model	Member (name,EString,attribute) (library,Library,ref) 

@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="helloworld150" nsURI="http://helloworld150" nsPrefix="_helloworld150">
+  <eAnnotations source="diagen">
+    <details key="knownas=simple world"/>
+    <details key="origin=http://org.isoe.fr"/>
+    <details key="leftparent=nil" value=""/>
+    <details key="rightparent=nil" value=""/>
+    <details key="requires=nil" value=""/>
+    <details key="context=startup"/>
+  </eAnnotations>
+  <eClassifiers xsi:type="ecore:EClass" name="World">
+    <eAnnotations source="diagraph">
+      <details key="node" value="_"/>
+      <details key="pov" value="_"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="things" upperBound="-1"
+        eType="#//Thing" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="persons" upperBound="-1"
+        eType="#//Person" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="professions" upperBound="-1"
+        eType="#//Profession" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Thing" eSuperTypes="#//NamedElement">
+    <eAnnotations source="diagraph">
+      <details key="node" value="_"/>
+      <details key="nav:vwthing" value="_"/>
+    </eAnnotations>
+    <eAnnotations source="diagraph">
+      <details key="node" value="_"/>
+      <details key="pov" value="_"/>
+      <details key="view=vwthing" value="_"/>
+      <details key="cref=ownership" value="_"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="id" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="ownership" eType="#//Own"
+        eOpposite="#//Own/thing"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="ownerships" upperBound="-1"
+        eType="#//Own" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="NamedElement" abstract="true">
+    <eAnnotations source="diagraph">
+      <details key="label=name" value="_"/>
+    </eAnnotations>
+    <eAnnotations source="diagraph">
+      <details key="node" value="_"/>
+      <details key="view=vwthing" value="_"/>
+      <details key="kref=comment" value="_"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="comment" eType="#//Comment"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Own" eSuperTypes="#//NamedElement">
+    <eAnnotations source="diagraph">
+      <details key="link=thing" value="_"/>
+      <details key="lsrc=person" value="_"/>
+      <details key="cont=Thing.ownerships" value="_"/>
+    </eAnnotations>
+    <eAnnotations source="diagraph">
+      <details key="node" value="_"/>
+      <details key="view=vwthing" value="_"/>
+      <details key="label=since" value="_"/>
+      <details key="label=ownerName" value="_"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="thing" eType="#//Thing"
+        eOpposite="#//Thing/ownership"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="since" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="person" eType="#//Person"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="ownerName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Comment">
+    <eAnnotations source="diagraph">
+      <details key="node" value="_"/>
+      <details key="label=content" value="_"/>
+      <details key="view=vwthing" value="_"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="content" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Person" eSuperTypes="#//NamedElement">
+    <eAnnotations source="diagraph">
+      <details key="node" value="_"/>
+      <details key="ref=profession" value="_"/>
+      <details key="label=forName" value="_"/>
+      <details key="label=birthDate" value="_"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="forName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="birthDate" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="profession" eType="#//Profession"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Profession">
+    <eAnnotations source="diagraph">
+      <details key="node" value="_"/>
+      <details key="label=name" value="_"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+</ecore:EPackage>

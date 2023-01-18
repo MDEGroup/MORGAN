@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="Core"
+    nsURI="org.amma.dsl.jdt.core" nsPrefix="core">
+  <eClassifiers xsi:type="ecore:EClass" name="IJavaElement" abstract="true">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="elementName" ordered="false"
+        unique="false" lowerBound="1" eType="ecore:EDataType JDTAST1.ecore#//String"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="PhysicalElement" abstract="true">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="path" ordered="false" unique="false"
+        lowerBound="1" eType="ecore:EDataType JDTAST1.ecore#//String"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="isReadOnly" ordered="false"
+        unique="false" lowerBound="1" eType="ecore:EDataType JDTAST1.ecore#//Boolean"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="IJavaModel" eSuperTypes="#//PhysicalElement">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="javaProjects" upperBound="-1"
+        eType="#//IJavaProject" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="externalPackageFragmentRoots"
+        upperBound="-1" eType="#//IPackageFragmentRoot" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="IJavaProject" eSuperTypes="#//IJavaElement #//PhysicalElement">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="packageFragmentRoots" upperBound="-1"
+        eType="#//IPackageFragmentRoot" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="externalPackageFragmentRoots"
+        ordered="false" upperBound="-1" eType="#//IPackageFragmentRoot"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="requiredProjects" upperBound="-1"
+        eType="#//IJavaProject"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="IPackageFragmentRoot" abstract="true"
+      eSuperTypes="#//IJavaElement #//PhysicalElement">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="packageFragments" ordered="false"
+        upperBound="-1" eType="#//IPackageFragment" containment="true" eOpposite="#//IPackageFragment/packageFragmentRoot"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="BinaryPackageFragmentRoot" eSuperTypes="#//IPackageFragmentRoot"/>
+  <eClassifiers xsi:type="ecore:EClass" name="SourcePackageFragmentRoot" eSuperTypes="#//IPackageFragmentRoot"/>
+  <eClassifiers xsi:type="ecore:EClass" name="IPackageFragment" eSuperTypes="#//IJavaElement #//PhysicalElement">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="isDefaultPackage" ordered="false"
+        unique="false" lowerBound="1" eType="ecore:EDataType JDTAST1.ecore#//Boolean"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="packageFragmentRoot" ordered="false"
+        lowerBound="1" eType="#//IPackageFragmentRoot" eOpposite="#//IPackageFragmentRoot/packageFragments"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="classFiles" upperBound="-1"
+        eType="#//IClassFile" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="compilationUnits" upperBound="-1"
+        eType="#//ICompilationUnit" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ITypeRoot" abstract="true" eSuperTypes="#//IJavaElement #//ISourceReference #//PhysicalElement"/>
+  <eClassifiers xsi:type="ecore:EClass" name="ICompilationUnit" eSuperTypes="#//ITypeRoot">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="allType" ordered="false"
+        upperBound="-1" eType="#//IType"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="imports" ordered="false"
+        upperBound="-1" eType="#//IImportDeclaration" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="types" upperBound="-1"
+        eType="#//IType" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="primary" ordered="false"
+        lowerBound="1" eType="#//ICompilationUnit"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="ast" ordered="false" lowerBound="1"
+        eType="ecore:EClass JDTAST.ecore#//CompilationUnit" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="IClassFile" eSuperTypes="#//ITypeRoot">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="isClass" ordered="false"
+        unique="false" lowerBound="1" eType="ecore:EDataType JDTAST1.ecore#//Boolean"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="isInterface" ordered="false"
+        unique="false" lowerBound="1" eType="ecore:EDataType JDTAST1.ecore#//Boolean"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="type" ordered="false" lowerBound="1"
+        eType="#//IType" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ISourceReference" abstract="true">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="source" ordered="false"
+        unique="false" lowerBound="1" eType="ecore:EDataType JDTAST1.ecore#//String"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="sourceRange" ordered="false"
+        lowerBound="1" eType="#//ISourceRange" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="IImportDeclaration" eSuperTypes="#//IJavaElement #//ISourceReference">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="isOnDemand" ordered="false"
+        unique="false" lowerBound="1" eType="ecore:EDataType JDTAST1.ecore#//Boolean"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="isStatic" ordered="false"
+        unique="false" lowerBound="1" eType="ecore:EDataType JDTAST1.ecore#//Boolean"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ISourceRange">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="length" ordered="false"
+        unique="false" lowerBound="1" eType="ecore:EDataType JDTAST1.ecore#//Integer"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="offset" ordered="false"
+        unique="false" lowerBound="1" eType="ecore:EDataType JDTAST1.ecore#//Integer"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="IMember" abstract="true" eSuperTypes="#//IJavaElement #//ISourceReference">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="javadocRange" ordered="false"
+        eType="#//ISourceRange" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="nameRange" ordered="false"
+        eType="#//ISourceRange" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="IType" eSuperTypes="#//IMember">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="fullyQualifiedName" ordered="false"
+        unique="false" lowerBound="1" eType="ecore:EDataType JDTAST1.ecore#//String"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="fullyQualifiedParametrizedName"
+        ordered="false" unique="false" lowerBound="1" eType="ecore:EDataType JDTAST1.ecore#//String"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="initializers" upperBound="-1"
+        eType="#//IInitializer" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="fields" upperBound="-1"
+        eType="#//IField" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="methods" upperBound="-1"
+        eType="#//IMethod" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="types" upperBound="-1"
+        eType="#//IType" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="typeParameters" ordered="false"
+        upperBound="-1" eType="#//ITypeParameter"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ITypeParameter" eSuperTypes="#//IJavaElement #//ISourceReference">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="bounds" ordered="false"
+        unique="false" upperBound="-1" eType="ecore:EDataType JDTAST1.ecore#//String"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="IInitializer" eSuperTypes="#//IMember"/>
+  <eClassifiers xsi:type="ecore:EClass" name="IField" eSuperTypes="#//IMember">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="constant" ordered="false"
+        unique="false" eType="ecore:EDataType JDTAST1.ecore#//String"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="isEnumConstant" ordered="false"
+        unique="false" lowerBound="1" eType="ecore:EDataType JDTAST1.ecore#//Boolean"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="typeSignature" ordered="false"
+        unique="false" lowerBound="1" eType="ecore:EDataType JDTAST1.ecore#//String"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="isVolatile" ordered="false"
+        unique="false" lowerBound="1" eType="ecore:EDataType JDTAST1.ecore#//Boolean"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="isTransient" ordered="false"
+        unique="false" lowerBound="1" eType="ecore:EDataType JDTAST1.ecore#//Boolean"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="IMethod" eSuperTypes="#//IMember">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="returnType" ordered="false"
+        unique="false" lowerBound="1" eType="ecore:EDataType JDTAST1.ecore#//String"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="isConstructor" ordered="false"
+        unique="false" lowerBound="1" eType="ecore:EDataType JDTAST1.ecore#//Boolean"
+        defaultValueLiteral=""/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="isMainMethod" ordered="false"
+        unique="false" lowerBound="1" eType="ecore:EDataType JDTAST1.ecore#//Boolean"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="parameters" upperBound="-1"
+        eType="#//Parameter" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="exceptionTypes" ordered="false"
+        unique="false" upperBound="-1" eType="ecore:EDataType JDTAST1.ecore#//String"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Parameter">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" ordered="false" unique="false"
+        lowerBound="1" eType="ecore:EDataType JDTAST1.ecore#//String"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="type" ordered="false" unique="false"
+        lowerBound="1" eType="ecore:EDataType JDTAST1.ecore#//String"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="Modifiers">
+    <eLiterals name="abstract" value="1"/>
+    <eLiterals name="annotation" value="2"/>
+    <eLiterals name="bridge" value="3"/>
+    <eLiterals name="default" value="4"/>
+    <eLiterals name="deprecated" value="5"/>
+    <eLiterals name="enum" value="6"/>
+    <eLiterals name="final" value="7"/>
+    <eLiterals name="interface" value="8"/>
+    <eLiterals name="native" value="9"/>
+    <eLiterals name="private" value="10"/>
+    <eLiterals name="protected" value="11"/>
+    <eLiterals name="public" value="12"/>
+    <eLiterals name="static" value="13"/>
+    <eLiterals name="strictfp" value="14"/>
+    <eLiterals name="super" value="15"/>
+    <eLiterals name="synchronized" value="16"/>
+    <eLiterals name="synthetic" value="17"/>
+    <eLiterals name="transient" value="18"/>
+    <eLiterals name="varargs" value="19"/>
+    <eLiterals name="volatile" value="20"/>
+  </eClassifiers>
+</ecore:EPackage>

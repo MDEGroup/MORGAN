@@ -1,0 +1,224 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="expr" nsURI="http://www.smeup.org/asup/il/expr" nsPrefix="il-expr">
+  <eClassifiers xsi:type="ecore:EClass" name="ArithmeticExpression" eSuperTypes="#//Expression">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="leftOperand" lowerBound="1"
+        eType="#//Expression" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="operator" lowerBound="1"
+        eType="#//ArithmeticOperator"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="rightOperand" lowerBound="1"
+        eType="#//Expression" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="ArithmeticOperator">
+    <eLiterals name="Plus" value="1" literal="PLUS"/>
+    <eLiterals name="Minus" value="4" literal="MINUS"/>
+    <eLiterals name="Mult" value="5" literal="MULT"/>
+    <eLiterals name="Divide" value="6" literal="DIV"/>
+    <eLiterals name="Modular" value="7" literal="MOD"/>
+    <eLiterals name="Power" value="8" literal="POW"/>
+    <eLiterals name="SignMinus" value="9" literal="SIGN_MINUS"/>
+    <eLiterals name="SignPlus" value="10" literal="SIGN_PLUS"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ArrayExpression" eSuperTypes="#//Expression">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="expression" lowerBound="1"
+        upperBound="-1" eType="#//Expression" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="AssignmentExpression" eSuperTypes="#//Expression">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="leftOperand" lowerBound="1"
+        eType="#//TermExpression" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="operator" lowerBound="1"
+        eType="#//AssignmentOperator"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="rightOperand" lowerBound="1"
+        eType="#//Expression" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="AssignmentOperator">
+    <eLiterals name="Assign" value="1" literal="ASSIGN"/>
+    <eLiterals name="PlusAssign" value="2" literal="PLUS_ASSIGN"/>
+    <eLiterals name="MinusAssign" value="3" literal="MINUS_ASSIGN"/>
+    <eLiterals name="TimesAssign" value="4" literal="TIMES_ASSIGN"/>
+    <eLiterals name="DivideAssign" value="5" literal="DIVIDE_ASSIGN"/>
+    <eLiterals name="PowerAssign" value="6" literal="POWER_ASSIGN"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="AtomicTermExpression" eSuperTypes="#//TermExpression">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="type" lowerBound="1" eType="#//AtomicType"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="AtomicType">
+    <eLiterals name="Boolean" value="3" literal="BOOLEAN"/>
+    <eLiterals name="Date" value="2" literal="DATE"/>
+    <eLiterals name="Floating" value="1" literal="FLOATING"/>
+    <eLiterals name="Hexadecimal" value="8" literal="HEXADECIMAL"/>
+    <eLiterals name="Indicator" value="6" literal="INDICATOR"/>
+    <eLiterals name="Integer" literal="INTEGER"/>
+    <eLiterals name="Name" value="5" literal="NAME"/>
+    <eLiterals name="Special" value="7" literal="SPECIAL"/>
+    <eLiterals name="String" value="4" literal="STRING"/>
+    <eLiterals name="Time" value="9" literal="TIME"/>
+    <eLiterals name="Timestamp" value="10" literal="TIMESTAMP"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="BooleanExpression" eSuperTypes="#//PredicateExpression">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="operand" lowerBound="1"
+        eType="#//Expression" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="BlockExpression" eSuperTypes="#//Expression">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="expression" lowerBound="1"
+        eType="#//Expression" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="CompoundTermExpression" abstract="true"
+      eSuperTypes="#//TermExpression">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="elements" upperBound="-1"
+        eType="#//Expression" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Expression" abstract="true" eSuperTypes="../../org.smeup.sys.il.core/model/il-core.ecore#//term/Node">
+    <eOperations name="accept">
+      <eParameters name="visitor" lowerBound="1" eType="#//ExpressionVisitor"/>
+    </eOperations>
+    <eOperations name="getExpressionType" lowerBound="1" eType="#//ExpressionType"/>
+    <eOperations name="match" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
+      <eParameters name="pattern" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eOperations>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ExpressionParser" abstract="true" interface="true">
+    <eOperations name="parseExpression" eType="#//Expression">
+      <eParameters name="expression" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eOperations>
+    <eOperations name="parseArithmetic" eType="#//ArithmeticExpression">
+      <eParameters name="expression" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eOperations>
+    <eOperations name="parseAssignment" eType="#//AssignmentExpression">
+      <eParameters name="expression" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eOperations>
+    <eOperations name="parsePredicate" eType="#//PredicateExpression">
+      <eParameters name="expression" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eOperations>
+    <eOperations name="parseTerm" eType="#//TermExpression">
+      <eParameters name="expression" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eOperations>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ExpressionParserRegistry" abstract="true"
+      interface="true">
+    <eGenericSuperTypes eClassifier="ecore:EClass ../../org.smeup.sys.il.core/model/il-core.ecore#//ObjectRegistry">
+      <eTypeArguments eClassifier="#//ExpressionParser"/>
+    </eGenericSuperTypes>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="ExpressionType">
+    <eLiterals name="Arithmetic" value="10" literal="ART"/>
+    <eLiterals name="Assignment" value="20" literal="ASS"/>
+    <eLiterals name="Logical" value="31" literal="LOG"/>
+    <eLiterals name="Relational" value="32" literal="REL"/>
+    <eLiterals name="Boolean" value="33" literal="BOOL"/>
+    <eLiterals name="Atomic" value="41" literal="ATOM"/>
+    <eLiterals name="Qualified" value="42" literal="QUAL"/>
+    <eLiterals name="Function" value="43" literal="FUNC"/>
+    <eLiterals name="Block" value="50" literal="BLC"/>
+    <eLiterals name="Array" value="60" literal="ARR"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ExpressionWriter" abstract="true" interface="true">
+    <eOperations name="writeExpression" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
+      <eParameters name="expression" lowerBound="1" eType="#//Expression"/>
+    </eOperations>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ExpressionWriterRegistry" abstract="true"
+      interface="true">
+    <eGenericSuperTypes eClassifier="ecore:EClass ../../org.smeup.sys.il.core/model/il-core.ecore#//ObjectRegistry">
+      <eTypeArguments eClassifier="#//ExpressionWriter"/>
+    </eGenericSuperTypes>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ExpressionVisitor" abstract="true">
+    <eOperations name="endVisit">
+      <eParameters name="expression" lowerBound="1" eType="#//ArithmeticExpression"/>
+    </eOperations>
+    <eOperations name="endVisit">
+      <eParameters name="expression" lowerBound="1" eType="#//AssignmentExpression"/>
+    </eOperations>
+    <eOperations name="endVisit">
+      <eParameters name="expression" lowerBound="1" eType="#//ArrayExpression"/>
+    </eOperations>
+    <eOperations name="endVisit">
+      <eParameters name="expression" lowerBound="1" eType="#//AtomicTermExpression"/>
+    </eOperations>
+    <eOperations name="endVisit">
+      <eParameters name="expression" lowerBound="1" eType="#//BlockExpression"/>
+    </eOperations>
+    <eOperations name="endVisit">
+      <eParameters name="expression" lowerBound="1" eType="#//BooleanExpression"/>
+    </eOperations>
+    <eOperations name="endVisit">
+      <eParameters name="expression" lowerBound="1" eType="#//FunctionTermExpression"/>
+    </eOperations>
+    <eOperations name="endVisit">
+      <eParameters name="expression" lowerBound="1" eType="#//QualifiedTermExpression"/>
+    </eOperations>
+    <eOperations name="endVisit">
+      <eParameters name="expression" lowerBound="1" eType="#//LogicalExpression"/>
+    </eOperations>
+    <eOperations name="endVisit">
+      <eParameters name="expression" lowerBound="1" eType="#//RelationalExpression"/>
+    </eOperations>
+    <eOperations name="visit" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
+      <eParameters name="expression" lowerBound="1" eType="#//ArithmeticExpression"/>
+    </eOperations>
+    <eOperations name="visit" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
+      <eParameters name="expression" lowerBound="1" eType="#//ArrayExpression"/>
+    </eOperations>
+    <eOperations name="visit" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
+      <eParameters name="expression" lowerBound="1" eType="#//AssignmentExpression"/>
+    </eOperations>
+    <eOperations name="visit" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
+      <eParameters name="expression" lowerBound="1" eType="#//AtomicTermExpression"/>
+    </eOperations>
+    <eOperations name="visit" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
+      <eParameters name="expression" lowerBound="1" eType="#//BlockExpression"/>
+    </eOperations>
+    <eOperations name="visit" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
+      <eParameters name="expression" lowerBound="1" eType="#//BooleanExpression"/>
+    </eOperations>
+    <eOperations name="visit" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
+      <eParameters name="expression" lowerBound="1" eType="#//LogicalExpression"/>
+    </eOperations>
+    <eOperations name="visit" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
+      <eParameters name="expression" lowerBound="1" eType="#//QualifiedTermExpression"/>
+    </eOperations>
+    <eOperations name="visit" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
+      <eParameters name="expression" lowerBound="1" eType="#//FunctionTermExpression"/>
+    </eOperations>
+    <eOperations name="visit" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
+      <eParameters name="expression" lowerBound="1" eType="#//RelationalExpression"/>
+    </eOperations>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="FunctionTermExpression" eSuperTypes="#//CompoundTermExpression"/>
+  <eClassifiers xsi:type="ecore:EClass" name="LogicalExpression" eSuperTypes="#//PredicateExpression">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="leftOperand" lowerBound="1"
+        eType="#//Expression" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="operator" eType="#//LogicalOperator"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="rightOperand" eType="#//Expression"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="LogicalOperator">
+    <eLiterals name="And" value="1" literal="AND"/>
+    <eLiterals name="Or" value="2" literal="OR"/>
+    <eLiterals name="Not" value="3" literal="NOT"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="PredicateExpression" abstract="true"
+      eSuperTypes="#//Expression"/>
+  <eClassifiers xsi:type="ecore:EClass" name="QualifiedTermExpression" eSuperTypes="#//CompoundTermExpression"/>
+  <eClassifiers xsi:type="ecore:EClass" name="RelationalExpression" eSuperTypes="#//PredicateExpression">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="leftOperand" lowerBound="1"
+        eType="#//Expression" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="operator" lowerBound="1"
+        eType="#//RelationalOperator"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="rightOperand" lowerBound="1"
+        eType="#//Expression" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="RelationalOperator">
+    <eLiterals name="Equal" value="200" literal="EQ"/>
+    <eLiterals name="NotEqual" value="201" literal="NE"/>
+    <eLiterals name="LessThan" value="202" literal="LT"/>
+    <eLiterals name="LessThanEqual" value="203" literal="LE"/>
+    <eLiterals name="GreaterThan" value="204" literal="GT"/>
+    <eLiterals name="GreaterThanEqual" value="205" literal="GE"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="TermExpression" abstract="true" eSuperTypes="#//Expression">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
+        defaultValueLiteral=""/>
+  </eClassifiers>
+</ecore:EPackage>

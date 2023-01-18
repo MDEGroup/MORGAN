@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="remes"
+    nsURI="http://www.mdh.se/progresside/remes/1.2.0/remes.ecore" nsPrefix="remes">
+  <eClassifiers xsi:type="ecore:EClass" name="RemesDiagram">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="modes" upperBound="-1"
+        eType="#//Mode" containment="true" resolveProxies="false"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ControlPath" abstract="true">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="entryPoint" lowerBound="1"
+        eType="#//EntryPoint" containment="true" eOpposite="#//EntryPoint/container"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="exitPoint" lowerBound="1"
+        eType="#//ExitPoint" containment="true" eOpposite="#//ExitPoint/container"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Mode" abstract="true" eSuperTypes="#//ControlPath">
+    <eOperations name="findVariableByName" eType="#//Variable">
+      <eParameters name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eOperations>
+    <eOperations name="findResourceByName" eType="#//Resource">
+      <eParameters name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eOperations>
+    <eOperations name="findConstantByName" eType="#//Constant">
+      <eParameters name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eOperations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="initialization" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="variables" upperBound="-1"
+        eType="#//Variable" containment="true" eOpposite="#//Variable/scope"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="resources" upperBound="-1"
+        eType="#//Resource" containment="true" eOpposite="#//Resource/scope"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="constants" upperBound="-1"
+        eType="#//Constant" containment="true" eOpposite="#//Constant/scope"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="CompositeMode" eSuperTypes="#//Mode">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="subModes" lowerBound="1"
+        upperBound="-1" eType="#//SubMode" containment="true" resolveProxies="false"
+        eOpposite="#//SubMode/parent"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="conditionalConnectors"
+        upperBound="-1" eType="#//ConditionalConnector" containment="true" resolveProxies="false"
+        eOpposite="#//ConditionalConnector/parent"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="initPoint" lowerBound="1"
+        eType="#//InitPoint" containment="true" eOpposite="#//InitPoint/container"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="compositeEntryPoint" lowerBound="1"
+        eType="#//CompositeEntryPoint" containment="true" eOpposite="#//CompositeEntryPoint/composite"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="compositeExitPoint" lowerBound="1"
+        eType="#//CompositeExitPoint" containment="true" eOpposite="#//CompositeExitPoint/composite"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="writePoint" lowerBound="1"
+        eType="#//WritePoint" containment="true" eOpposite="#//WritePoint/container"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="SubMode" eSuperTypes="#//Mode">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="invariant" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore">
+        <details key="constraints" value="InvariantsSyntaxCorrect"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="isUrgent" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"
+        defaultValueLiteral="false"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="parent" eType="#//CompositeMode"
+        eOpposite="#//CompositeMode/subModes"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="parsedInvariant" eType="ecore:EClass ../../hr.fer.rasip.remes.grammars.expressions.ast/model/expressions.ecore#//ast/LogicalRoot"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ConditionalConnector" eSuperTypes="#//ControlPath">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="parent" eType="#//CompositeMode"
+        eOpposite="#//CompositeMode/conditionalConnectors"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Point" abstract="true"/>
+  <eClassifiers xsi:type="ecore:EClass" name="InitPoint" eSuperTypes="#//Point">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="initEdge" eType="#//InitEdge"
+        containment="true" resolveProxies="false" eOpposite="#//InitEdge/connectFrom"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="container" lowerBound="1"
+        eType="#//CompositeMode" eOpposite="#//CompositeMode/initPoint"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="EntryPoint" eSuperTypes="#//Point">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="entryEdges" upperBound="-1"
+        eType="#//Edge" eOpposite="#//Edge/connectTo"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="container" eType="#//ControlPath"
+        eOpposite="#//ControlPath/entryPoint"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ExitPoint" eSuperTypes="#//Point">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="exitEdges" upperBound="-1"
+        eType="#//Edge" containment="true" resolveProxies="false" eOpposite="#//Edge/connectFrom"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="container" eType="#//ControlPath"
+        eOpposite="#//ControlPath/exitPoint"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="CompositeEntryPoint" eSuperTypes="#//ExitPoint">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="composite" eType="#//CompositeMode"
+        eOpposite="#//CompositeMode/compositeEntryPoint"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="CompositeExitPoint" eSuperTypes="#//EntryPoint">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="composite" eType="#//CompositeMode"
+        eOpposite="#//CompositeMode/compositeExitPoint"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Edge">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="actionGuard" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore">
+        <details key="constraints" value="InvariantsSyntaxCorrect"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="actionBody" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="parsedActionGuard" eType="ecore:EClass ../../hr.fer.rasip.remes.grammars.expressions.ast/model/expressions.ecore#//ast/LogicalRoot"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="connectFrom" lowerBound="1"
+        eType="#//ExitPoint" transient="true" eOpposite="#//ExitPoint/exitEdges"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="connectTo" lowerBound="1"
+        eType="#//EntryPoint" eOpposite="#//EntryPoint/entryEdges"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="parsedActionBody" eType="ecore:EClass ../../hr.fer.rasip.remes.grammars.expressions.ast/model/expressions.ecore#//ast/ActionRoot"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="InitEdge">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="initialization" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="connectFrom" lowerBound="1"
+        eType="#//InitPoint" eOpposite="#//InitPoint/initEdge"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="connectTo" lowerBound="1"
+        eType="#//EntryPoint"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="parsedInitialization" eType="ecore:EClass ../../hr.fer.rasip.remes.grammars.expressions.ast/model/expressions.ecore#//ast/ActionRoot"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Referable" abstract="true">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Variable" eSuperTypes="#//Referable">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="type" lowerBound="1" eType="#//PrimitiveTypes"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="vectorSize" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="global" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="scope" lowerBound="1" eType="#//Mode"
+        eOpposite="#//Mode/variables"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="readable" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean" defaultValueLiteral="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="writable" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean" defaultValueLiteral="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Resource" eSuperTypes="#//Referable">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="expression" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="type" lowerBound="1" eType="#//ResourceTypes"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="scope" lowerBound="1" eType="#//Mode"
+        eOpposite="#//Mode/resources"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="parsedExpression" eType="ecore:EClass ../../hr.fer.rasip.remes.grammars.expressions.ast/model/expressions.ecore#//ast/ResourceRoot"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Constant" eSuperTypes="#//Referable">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="type" lowerBound="1" eType="#//PrimitiveTypes"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="global" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="scope" lowerBound="1" eType="#//Mode"
+        eOpposite="#//Mode/constants"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="PrimitiveTypes">
+    <eLiterals name="integer"/>
+    <eLiterals name="boolean" value="1"/>
+    <eLiterals name="natural" value="2"/>
+    <eLiterals name="clock" value="3"/>
+    <eLiterals name="float" value="4"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="ResourceTypes">
+    <eLiterals name="cpu"/>
+    <eLiterals name="memory" value="1"/>
+    <eLiterals name="bandwidth" value="2"/>
+    <eLiterals name="power" value="3"/>
+    <eLiterals name="port" value="4"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="WriteEdge">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="connectTo" lowerBound="1"
+        eType="#//WritePoint" eOpposite="#//WritePoint/writeEdges"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="connectFrom" lowerBound="1"
+        eType="#//ExitPoint"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="WritePoint" eSuperTypes="#//Point">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="container" lowerBound="1"
+        eType="#//CompositeMode" eOpposite="#//CompositeMode/writePoint"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="writeEdges" upperBound="-1"
+        eType="#//WriteEdge" containment="true" eOpposite="#//WriteEdge/connectTo"/>
+  </eClassifiers>
+</ecore:EPackage>

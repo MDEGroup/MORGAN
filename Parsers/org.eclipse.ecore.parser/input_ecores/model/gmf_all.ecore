@@ -1,0 +1,1486 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="gmf_all" nsURI="http://www.eclipse.org/gmf/2005-2008/gmf_all"
+    nsPrefix="gmf_all">
+  <eSubpackages name="mappings" nsURI="http://www.eclipse.org/gmf/2008/mappings" nsPrefix="gmfmap">
+    <eAnnotations source="http://www.eclipse.org/emf/2004/EmfaticAnnotationMap">
+      <details key="constraints" value="http://www.eclipse.org/gmf/2005/constraints"/>
+      <details key="constraintsMeta" value="http://www.eclipse.org/gmf/2005/constraints/meta"/>
+    </eAnnotations>
+    <eAnnotations source="http://www.eclipse.org/gmf/2005/constraints">
+      <details key="import" value="http://www.eclipse.org/gmf/runtime/1.0.0/notation"/>
+    </eAnnotations>
+    <eClassifiers xsi:type="ecore:EClass" name="Mapping">
+      <eAnnotations source="http://www.eclipse.org/gmf/2005/constraints">
+        <details key="ocl" value="nodes->forAll(n|n.containmentFeature.oclIsUndefined() and not n.child.domainMetaElement.oclIsUndefined() implies links->exists(let r:ecore::EReference= linkMetaFeature.oclAsType(ecore::EReference) in r.containment and r.eReferenceType.isSuperTypeOf(n.child.domainMetaElement)))"/>
+        <details key="description" value="Phantom nodes that are not targeted by a link mapping representing containment reference present in the model"/>
+      </eAnnotations>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="nodes" upperBound="-1"
+          eType="#//mappings/TopNodeReference" containment="true" resolveProxies="false"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="links" upperBound="-1"
+          eType="#//mappings/LinkMapping" containment="true" resolveProxies="false"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="diagram" lowerBound="1"
+          eType="#//mappings/CanvasMapping" containment="true" resolveProxies="false"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="appearanceStyles" upperBound="-1"
+          eType="#//tooldef/StyleSelector" containment="true"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="audits" eType="#//mappings/AuditContainer"
+          containment="true"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="metrics" eType="#//mappings/MetricContainer"
+          containment="true"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="MappingEntry" abstract="true">
+      <eOperations name="getDomainContext" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EClass">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="This method simplifies OCL expressions (makes it easy to write for both Node and Link)."/>
+        </eAnnotations>
+      </eOperations>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="domainMetaElement" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EClass"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="domainSpecialization"
+          eType="#//mappings/Constraint" containment="true">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="Specializes further the domain meta element EClass associated with this mapping and should be evaluated in this EClass context"/>
+        </eAnnotations>
+        <eAnnotations source="http://www.eclipse.org/gmf/2005/constraints/meta">
+          <details key="def" value="context"/>
+          <details key="ocl" value="self.getDomainContext()"/>
+        </eAnnotations>
+        <eAnnotations source="http://www.eclipse.org/gmf/2005/constraints">
+          <details key="ocl" value="not domainSpecialization.oclIsUndefined() implies not domainMetaElement.oclIsUndefined()"/>
+          <details key="description" value="Using 'Domain Specialization' requires 'Domain Meta Element' to be set"/>
+        </eAnnotations>
+      </eStructuralFeatures>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="domainInitializer" eType="#//mappings/ElementInitializer"
+          containment="true">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="Initializer for the domain model element associated with mapping"/>
+        </eAnnotations>
+        <eAnnotations source="http://www.eclipse.org/gmf/2005/constraints">
+          <details key="ocl" value="not domainInitializer.oclIsUndefined() implies not domainMetaElement.oclIsUndefined()"/>
+          <details key="description" value="'Domain Element' must be set in mapping with 'Element Initializers'"/>
+        </eAnnotations>
+      </eStructuralFeatures>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="labelMappings" upperBound="-1"
+          eType="#//mappings/LabelMapping" containment="true" eOpposite="#//mappings/LabelMapping/mapEntry"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="relatedDiagrams" upperBound="-1"
+          eType="#//mappings/CanvasMapping">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="Diagrams that may be associated with this diagram element. It's up to client application to define what this association means (e.g. open diagram)"/>
+        </eAnnotations>
+      </eStructuralFeatures>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="visualEffects" upperBound="-1"
+          eType="#//mappings/VisualEffectMapping" containment="true" eOpposite="#//mappings/VisualEffectMapping/parentMapEntry"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="NeedsContainment" abstract="true"
+        interface="true">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="containmentFeature" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EReference">
+        <eAnnotations source="http://www.eclipse.org/gmf/2005/constraints">
+          <details key="ocl" value="not containmentFeature.oclIsUndefined() implies containmentFeature.containment"/>
+          <details key="description" value="Containment EReference expected"/>
+        </eAnnotations>
+      </eStructuralFeatures>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="NodeReference" abstract="true" eSuperTypes="#//mappings/NeedsContainment">
+      <eAnnotations source="http://www.eclipse.org/gmf/2005/constraints">
+        <details key="ocl" value="not containmentFeature.oclIsUndefined() implies containmentFeature.eReferenceType.isSuperTypeOf(child.domainMetaElement)"/>
+        <details key="description" value="'Containment Feature' must reference the same class or super type of 'Domain Meta Element' of the referenced node"/>
+      </eAnnotations>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="childrenFeature" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EReference">
+        <eAnnotations source="http://www.eclipse.org/gmf/2005/constraints">
+          <details key="ocl" value="not childrenFeature.oclIsUndefined() implies childrenFeature.eReferenceType.isSuperTypeOf(child.domainMetaElement)"/>
+          <details key="description" value="'Children Feature' must reference the same class or super type of 'Domain Meta Element' of the referenced node"/>
+        </eAnnotations>
+      </eStructuralFeatures>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="child" eType="#//mappings/NodeMapping"
+          changeable="false" volatile="true" transient="true" unsettable="true" derived="true"
+          resolveProxies="false"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="ChildReference" eSuperTypes="#//mappings/NodeReference">
+      <eAnnotations source="http://www.eclipse.org/gmf/2005/constraints">
+        <details key="ocl" value="not (ownedChild.oclIsUndefined() and referencedChild.oclIsUndefined())"/>
+        <details key="description" value="Either 'ownedChild' or 'referencedChild' NodeMapping must be set"/>
+      </eAnnotations>
+      <eAnnotations source="http://www.eclipse.org/gmf/2005/constraints">
+        <details key="ocl" value="not childrenFeature.oclIsUndefined() implies childrenFeature.eContainingClass.isSuperTypeOf(parentNode.domainMetaElement)"/>
+        <details key="description" value="'Children Feature' must be owned by 'Domain Meta Element' or its super type of this reference parent Node Mapping"/>
+      </eAnnotations>
+      <eAnnotations source="http://www.eclipse.org/gmf/2005/constraints">
+        <details key="ocl" value="not containmentFeature.oclIsUndefined() implies containmentFeature.eContainingClass.isSuperTypeOf(parentNode.domainMetaElement)"/>
+        <details key="description" value="'Containment Feature' must be owned by 'Domain Meta Element' or its super type of this reference parent Node Mapping"/>
+      </eAnnotations>
+      <eAnnotations source="http://www.eclipse.org/gmf/2005/constraints">
+        <details key="ocl" value="not child.getDomainContext().oclIsUndefined() implies not containmentFeature.oclIsUndefined()"/>
+        <details key="description" value="ChildReference to NodeMapping with domainElement should define 'containmentFeature'"/>
+      </eAnnotations>
+      <eAnnotations source="http://www.eclipse.org/gmf/2005/constraints">
+        <details key="ocl" value="let child:NodeMapping=(if ownedChild.oclIsUndefined() then referencedChild else ownedChild endif) in (((child.labelMappings->size() = 1) and child.labelMappings->forAll( soleLabel: LabelMapping | soleLabel.diagramLabel = child.diagramNode)) implies (child.diagramNode.affixedParentSide = gmfgraph::Direction::NONE))"/>
+        <details key="description" value="Side-affixed children can not be pure labels"/>
+      </eAnnotations>
+      <eAnnotations source="http://www.eclipse.org/gmf/2005/constraints">
+        <details key="ocl" value="let child:NodeMapping=(if ownedChild.oclIsUndefined() then referencedChild else ownedChild endif) in ((not compartment.oclIsUndefined()) implies (child.diagramNode.affixedParentSide = gmfgraph::Direction::NONE))"/>
+        <details key="description" value="Side-affixed children can not be placed in compartments"/>
+      </eAnnotations>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="parentNode" lowerBound="1"
+          eType="#//mappings/NodeMapping" eOpposite="#//mappings/NodeMapping/children"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="compartment" eType="#//mappings/CompartmentMapping"
+          eOpposite="#//mappings/CompartmentMapping/children"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="ownedChild" eType="#//mappings/NodeMapping"
+          containment="true"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="referencedChild" eType="#//mappings/NodeMapping"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="TopNodeReference" eSuperTypes="#//mappings/NodeReference">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="ownedChild" lowerBound="1"
+          eType="#//mappings/NodeMapping" containment="true"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="NodeMapping" eSuperTypes="#//mappings/MappingEntry #//mappings/MenuOwner #//mappings/ToolOwner #//mappings/AppearanceSteward">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Both top-level diagram node and any inner node"/>
+      </eAnnotations>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="diagramNode" lowerBound="1"
+          eType="#//gmfgraph/Node"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="children" upperBound="-1"
+          eType="#//mappings/ChildReference" containment="true" eOpposite="#//mappings/ChildReference/parentNode"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="compartments" upperBound="-1"
+          eType="#//mappings/CompartmentMapping" containment="true" eOpposite="#//mappings/CompartmentMapping/parentNode"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="CompartmentMapping">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="compartment" lowerBound="1"
+          eType="#//gmfgraph/Compartment"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="parentNode" lowerBound="1"
+          eType="#//mappings/NodeMapping" changeable="false" resolveProxies="false"
+          eOpposite="#//mappings/NodeMapping/compartments"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="children" upperBound="-1"
+          eType="#//mappings/ChildReference" eOpposite="#//mappings/ChildReference/compartment"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="LinkMapping" eSuperTypes="#//mappings/MappingEntry #//mappings/NeedsContainment #//mappings/MenuOwner #//mappings/ToolOwner #//mappings/AppearanceSteward">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Connection element"/>
+      </eAnnotations>
+      <eAnnotations source="http://www.eclipse.org/gmf/2005/constraints">
+        <details key="ocl" value="domainMetaElement.oclIsUndefined() implies containmentFeature.oclIsUndefined() and sourceMetaFeature.oclIsUndefined()"/>
+        <details key="description" value="Link mapping without 'Domain Element' class does not use 'Containment Feature' and 'Source Feature'"/>
+      </eAnnotations>
+      <eAnnotations source="http://www.eclipse.org/gmf/2005/constraints">
+        <details key="ocl" value="not domainMetaElement.oclIsUndefined()  implies containmentFeature.eReferenceType.isSuperTypeOf(domainMetaElement)"/>
+        <details key="description" value="'Containment Feature' must reference the same class or super type of 'Domain Element' EClass"/>
+      </eAnnotations>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="diagramLink" lowerBound="1"
+          eType="#//gmfgraph/Connection"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="sourceMetaFeature" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EStructuralFeature">
+        <eAnnotations source="http://www.eclipse.org/gmf/2005/constraints">
+          <details key="ocl" value="not domainMetaElement.oclIsUndefined() implies sourceMetaFeature.oclIsUndefined() or sourceMetaFeature.eContainingClass.isSuperTypeOf(domainMetaElement)"/>
+          <details key="description" value="'Source Feature' must be owned by the link 'Domain Element' or its super type"/>
+        </eAnnotations>
+      </eStructuralFeatures>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="linkMetaFeature" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EStructuralFeature">
+        <eAnnotations source="http://www.eclipse.org/gmf/2005/constraints">
+          <details key="ocl" value="not(domainMetaElement.oclIsUndefined() or linkMetaFeature.oclIsUndefined()) implies linkMetaFeature.eContainingClass.isSuperTypeOf(domainMetaElement)"/>
+          <details key="description" value="'Target Feature' must be owned by the link 'Domain Element' or its super type"/>
+        </eAnnotations>
+      </eStructuralFeatures>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="creationConstraints"
+          eType="#//mappings/LinkConstraints" containment="true" eOpposite="#//mappings/LinkConstraints/linkMapping">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="Specifies additional restrictions on link creation"/>
+        </eAnnotations>
+      </eStructuralFeatures>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="CanvasMapping">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="diagramCanvas" lowerBound="1"
+          eType="#//gmfgraph/Canvas"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="domainModel" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EPackage"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="domainMetaElement" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EClass">
+        <eAnnotations source="http://www.eclipse.org/gmf/2005/constraints">
+          <details key="ocl" value="not domainMetaElement.oclIsUndefined() implies not(domainMetaElement.abstract or domainMetaElement.interface)"/>
+          <details key="description" value="Top-level diagram container must be concrete"/>
+        </eAnnotations>
+      </eStructuralFeatures>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="palette" eType="#//tooldef/Palette"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="menuContributions" upperBound="-1"
+          eType="#//tooldef/MainMenu"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="toolbarContributions"
+          upperBound="-1" eType="#//tooldef/Toolbar"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="LabelMapping">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Label definition; text is taken from the graph model; no editing support; user may contribute custom parser"/>
+      </eAnnotations>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="diagramLabel" lowerBound="1"
+          eType="#//gmfgraph/DiagramLabel"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="readOnly" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="mapEntry" lowerBound="1"
+          eType="#//mappings/MappingEntry" changeable="false" resolveProxies="false"
+          eOpposite="#//mappings/MappingEntry/labelMappings"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="FeatureLabelMapping" eSuperTypes="#//mappings/LabelMapping">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Label based on feature(s) from domain model"/>
+      </eAnnotations>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="features" lowerBound="1"
+          upperBound="-1" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EAttribute">
+        <eAnnotations source="http://www.eclipse.org/gmf/2005/constraints">
+          <details key="ocl" value="features->forAll(f | f.eContainingClass.isSuperTypeOf(mapEntry.domainMetaElement))"/>
+          <details key="description" value="Label attributes must be available in 'Domain Element' EClass of the labeled mapping entry"/>
+        </eAnnotations>
+      </eStructuralFeatures>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="editableFeatures" upperBound="-1"
+          eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EAttribute">
+        <eAnnotations source="http://www.eclipse.org/gmf/2005/constraints">
+          <details key="ocl" value="editableFeatures->forAll(f | f.eContainingClass.isSuperTypeOf(mapEntry.domainMetaElement))"/>
+          <details key="description" value="Label attributes must be available in 'Domain Element' EClass of the labeled mapping entry"/>
+        </eAnnotations>
+      </eStructuralFeatures>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="viewPattern" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="Pattern to produce label on diagram, depends on view method"/>
+        </eAnnotations>
+      </eStructuralFeatures>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="editorPattern" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="Pattern to produce text for inplace editor, depends on view method; if not specified then viewPattern should be used"/>
+        </eAnnotations>
+      </eStructuralFeatures>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="editPattern" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="Pattern to extract values from input text, depends on edit method; if not specified then viewPattern should be used"/>
+        </eAnnotations>
+      </eStructuralFeatures>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="viewMethod" eType="#//mappings/LabelTextAccessMethod"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="editMethod" eType="#//mappings/LabelTextAccessMethod"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="OclChoiceLabelMapping" eSuperTypes="#//mappings/LabelMapping">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Label based on a feature (reference or attribute) from domain model and list of choices"/>
+      </eAnnotations>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="feature" lowerBound="1"
+          eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EStructuralFeature">
+        <eAnnotations source="http://www.eclipse.org/gmf/2005/constraints">
+          <details key="ocl" value="feature.eContainingClass.isSuperTypeOf(mapEntry.domainMetaElement)"/>
+          <details key="description" value="Label reference must be available in 'Domain Element' EClass of the labeled mapping entry"/>
+        </eAnnotations>
+        <eAnnotations source="http://www.eclipse.org/gmf/2005/constraints">
+          <details key="ocl" value="feature.oclIsKindOf(ecore::EReference) implies (not(feature.oclAsType(ecore::EReference).containment) and (feature.oclAsType(ecore::EReference).upperBound = 1))"/>
+          <details key="description" value="Reference feature should not be containment and don't be multiple"/>
+        </eAnnotations>
+        <eAnnotations source="http://www.eclipse.org/gmf/2005/constraints">
+          <details key="ocl" value="feature.oclIsKindOf(ecore::EAttribute) implies (itemsExpression &lt;> null)"/>
+          <details key="description" value="Items expression should be set if feature is an EAttribute"/>
+        </eAnnotations>
+      </eStructuralFeatures>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="itemsExpression" eType="#//mappings/ValueExpression"
+          containment="true"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="showExpression" eType="#//mappings/ValueExpression"
+          containment="true"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EEnum" name="LabelTextAccessMethod">
+      <eLiterals name="MESSAGE_FORMAT"/>
+      <eLiterals name="NATIVE" value="1"/>
+      <eLiterals name="REGEXP" value="2"/>
+      <eLiterals name="PRINTF" value="3"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="DesignLabelMapping" eSuperTypes="#//mappings/LabelMapping">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Label based on DescriptionStyle from notation model"/>
+      </eAnnotations>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="ExpressionLabelMapping" eSuperTypes="#//mappings/LabelMapping">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Label based on a calculated value"/>
+      </eAnnotations>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="viewExpression" lowerBound="1"
+          eType="#//mappings/ValueExpression" containment="true">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="Expression to produce regular label value. Evaluated in the context of the owning mapEntry.domainMetaElement"/>
+        </eAnnotations>
+      </eStructuralFeatures>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="editExpression" eType="#//mappings/ValueExpression"
+          containment="true">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="Optional expression to produce editable string representation of the label. If not set, viewExpression is used."/>
+        </eAnnotations>
+      </eStructuralFeatures>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="validateExpression" eType="#//mappings/Constraint"
+          containment="true">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="Boolean expression in a string context, which able to tell whether user-entered text is valid."/>
+        </eAnnotations>
+      </eStructuralFeatures>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="Constraint" eSuperTypes="#//mappings/ValueExpression">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Boolean type value expression which is to be evaluated in a context"/>
+      </eAnnotations>
+      <eAnnotations source="http://www.eclipse.org/gmf/2005/constraints/meta">
+        <details key="def" value="Constraint"/>
+      </eAnnotations>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="LinkConstraints">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Groups constraints on the link source and target end"/>
+      </eAnnotations>
+      <eAnnotations source="http://www.eclipse.org/gmf/2005/constraints">
+        <details key="ocl" value="not (sourceEnd.oclIsUndefined() and targetEnd.oclIsUndefined())"/>
+        <details key="description" value="Either 'sourceEnd' or 'targetEnd' constraint must be specified"/>
+      </eAnnotations>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="linkMapping" lowerBound="1"
+          eType="#//mappings/LinkMapping" changeable="false" resolveProxies="false"
+          eOpposite="#//mappings/LinkMapping/creationConstraints">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="References the link mapping restricted by these constraints"/>
+        </eAnnotations>
+      </eStructuralFeatures>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="sourceEnd" eType="#//mappings/Constraint"
+          containment="true">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="Restriction enforced by the the source end, may reference variable 'oppositeEnd' pointing to targetEnd domainMetaElement instance if available."/>
+        </eAnnotations>
+        <eAnnotations source="http://www.eclipse.org/gmf/2005/constraints/meta">
+          <details key="def" value="context"/>
+          <details key="ocl" value="let lm:LinkMapping=linkMapping in if lm.sourceMetaFeature.oclIsUndefined() then (if lm.containmentFeature.oclIsUndefined() then lm.linkMetaFeature.eContainingClass else lm.containmentFeature.eContainingClass endif) else lm.sourceMetaFeature.oclAsType(ecore::EReference).eReferenceType endif"/>
+        </eAnnotations>
+        <eAnnotations source="http://www.eclipse.org/gmf/2005/constraints/meta">
+          <details key="def" value="variable"/>
+          <details key="name" value="oppositeEnd"/>
+          <details key="type.ocl" value="linkMapping.linkMetaFeature.eType"/>
+        </eAnnotations>
+      </eStructuralFeatures>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="targetEnd" eType="#//mappings/Constraint"
+          containment="true">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="Restriction enforced by the the target end, may reference variable 'oppositeEnd' pointing to sourceEnd domainMetaElement instance."/>
+        </eAnnotations>
+        <eAnnotations source="http://www.eclipse.org/gmf/2005/constraints/meta">
+          <details key="def" value="context"/>
+          <details key="ocl" value="linkMapping.linkMetaFeature.eType.oclAsType(ecore::EClass)"/>
+        </eAnnotations>
+        <eAnnotations source="http://www.eclipse.org/gmf/2005/constraints/meta">
+          <details key="def" value="variable"/>
+          <details key="name" value="oppositeEnd"/>
+          <details key="type.ocl" value="let lm:LinkMapping=linkMapping in if lm.sourceMetaFeature.oclIsUndefined() then (if lm.containmentFeature.oclIsUndefined() then lm.linkMetaFeature.eContainingClass else lm.containmentFeature.eContainingClass endif) else lm.sourceMetaFeature.oclAsType(ecore::EReference).eReferenceType endif"/>
+        </eAnnotations>
+      </eStructuralFeatures>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="ValueExpression">
+      <eAnnotations source="http://www.eclipse.org/gmf/2005/constraints/meta">
+        <details key="def" value="ValueSpec"/>
+      </eAnnotations>
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Expression as a textual statement which results in a value when evaluated in a context"/>
+      </eAnnotations>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="body" lowerBound="1"
+          eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="The text of the expression"/>
+        </eAnnotations>
+        <eAnnotations source="http://www.eclipse.org/gmf/2005/constraints/meta">
+          <details key="def" value="body"/>
+        </eAnnotations>
+      </eStructuralFeatures>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="language" lowerBound="1"
+          eType="#//mappings/Language" defaultValueLiteral="ocl">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="Specifies the language in which the expression is stated"/>
+        </eAnnotations>
+      </eStructuralFeatures>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="langName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
+          changeable="false" volatile="true" transient="true" derived="true">
+        <eAnnotations source="http://www.eclipse.org/gmf/2005/constraints/meta">
+          <details key="def" value="lang"/>
+        </eAnnotations>
+      </eStructuralFeatures>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="ElementInitializer" abstract="true"
+        interface="true">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Base class for initializers of domain model elements"/>
+      </eAnnotations>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="mappingEntry" lowerBound="1"
+          eType="#//mappings/MappingEntry" changeable="false" volatile="true" transient="true">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="The 'MappingEntry' whose domain model element is to be intialized by this initializer"/>
+        </eAnnotations>
+      </eStructuralFeatures>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="FeatureSeqInitializer" eSuperTypes="#//mappings/ElementInitializer">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Feature sequence initializer to initialize a sequence of features"/>
+      </eAnnotations>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="initializers" lowerBound="1"
+          upperBound="-1" eType="#//mappings/FeatureInitializer" containment="true"
+          eOpposite="#//mappings/FeatureInitializer/featureSeqInitializer">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="Value specifications as initializers for individual features which should be initialized in the order given by this list"/>
+        </eAnnotations>
+      </eStructuralFeatures>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="elementClass" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EClass">
+        <eAnnotations source="http://www.eclipse.org/gmf/2005/constraints">
+          <details key="ocl" value="not creatingInitializer.feature.oclIsUndefined() implies creatingInitializer.feature.oclAsType(ecore::EReference).eReferenceType.isSuperTypeOf(elementClass)"/>
+          <details key="description" value="'elementClass' must be the same as or sub-type of the containing 'GenReferenceNewElementSpec' reference type"/>
+        </eAnnotations>
+        <eAnnotations source="http://www.eclipse.org/gmf/2005/constraints">
+          <details key="ocl" value="not creatingInitializer.feature.oclIsUndefined() implies not (elementClass.interface or elementClass.abstract)"/>
+          <details key="description" value="'elementClass' must be a concrete EClass which is the same or sub-type of the containing 'GenReferenceNewElementSpec' reference type"/>
+        </eAnnotations>
+      </eStructuralFeatures>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="creatingInitializer"
+          eType="#//mappings/ReferenceNewElementSpec" changeable="false" resolveProxies="false"
+          eOpposite="#//mappings/ReferenceNewElementSpec/newElementInitializers"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="FeatureInitializer" abstract="true">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="feature" lowerBound="1"
+          eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EStructuralFeature">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="The feature for which is to be initialized by this initializer"/>
+        </eAnnotations>
+        <eAnnotations source="http://www.eclipse.org/gmf/2005/constraints">
+          <details key="ocl" value="feature &lt;> null implies not featureSeqInitializer.initializers->exists(i| i &lt;> self and i.feature = self.feature)"/>
+          <details key="description" value="The feature is already initialized by another 'FeatureInitializer' in the sequence"/>
+        </eAnnotations>
+        <eAnnotations source="http://www.eclipse.org/gmf/2005/constraints">
+          <details key="ocl" value="feature &lt;> null implies feature.eContainingClass.isSuperTypeOf(featureSeqInitializer.elementClass)"/>
+          <details key="description" value="The 'feature' of 'FeatureInitializer' must be available in 'Meta Class' of the initialized element"/>
+        </eAnnotations>
+        <eAnnotations source="http://www.eclipse.org/gmf/2005/constraints">
+          <details key="ocl" value="feature &lt;> null implies feature.changeable"/>
+          <details key="description" value="The 'feature' of 'FeatureInitializer' must be changeable"/>
+        </eAnnotations>
+      </eStructuralFeatures>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="featureSeqInitializer"
+          lowerBound="1" eType="#//mappings/FeatureSeqInitializer" changeable="false"
+          resolveProxies="false" eOpposite="#//mappings/FeatureSeqInitializer/initializers"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="FeatureValueSpec" eSuperTypes="#//mappings/FeatureInitializer">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Value specification associated with a specific feature"/>
+      </eAnnotations>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="value" lowerBound="1"
+          eType="#//mappings/ValueExpression" containment="true">
+        <eAnnotations source="http://www.eclipse.org/gmf/2005/constraints/meta">
+          <details key="def" value="context"/>
+          <details key="ocl" value="featureSeqInitializer.elementClass"/>
+        </eAnnotations>
+        <eAnnotations source="http://www.eclipse.org/gmf/2005/constraints/meta">
+          <details key="def" value="type"/>
+          <details key="ocl" value="feature"/>
+        </eAnnotations>
+      </eStructuralFeatures>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="ReferenceNewElementSpec" eSuperTypes="#//mappings/FeatureInitializer">
+      <eAnnotations source="http://www.eclipse.org/gmf/2005/constraints">
+        <details key="ocl" value="feature.many = false implies not (newElementInitializers->size() > 1)"/>
+        <details key="description" value="FeatureInitializer for single element EReference can't contain multiple element initializers"/>
+      </eAnnotations>
+      <eAnnotations source="http://www.eclipse.org/gmf/2005/constraints">
+        <details key="ocl" value="let r: ecore::EReference = feature.oclAsType(ecore::EReference) in feature &lt;> null implies r.containment"/>
+        <details key="description" value="'feature' of 'ReferenceNewElementSpec' must refer to containment ecore::EReference"/>
+      </eAnnotations>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="newElementInitializers"
+          lowerBound="1" upperBound="-1" eType="#//mappings/FeatureSeqInitializer"
+          containment="true" eOpposite="#//mappings/FeatureSeqInitializer/creatingInitializer"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="MenuOwner" abstract="true" interface="true">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="contextMenu" eType="#//tooldef/ContextMenu"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="ToolOwner" abstract="true" interface="true">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="tool" eType="#//tooldef/AbstractTool">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="Way to create this element"/>
+        </eAnnotations>
+      </eStructuralFeatures>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="AppearanceSteward" abstract="true"
+        interface="true">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="appearanceStyle" eType="#//tooldef/StyleSelector"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="AuditContainer">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Container for audit rules representing a hierarchical organization of audits in the constraint category hierarchy of emft.validation framework"/>
+      </eAnnotations>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="id" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="Identifier which is unique within the scope of its parent container."/>
+        </eAnnotations>
+        <eAnnotations source="http://www.eclipse.org/gmf/2005/constraints">
+          <details key="ocl" value="not parentContainer.oclIsUndefined() implies parentContainer.childContainers->one(i | i.id = self.id)"/>
+          <details key="description" value="Audit container with the same ID already exists"/>
+        </eAnnotations>
+      </eStructuralFeatures>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="A human readable name for the category of audits organized in this container"/>
+        </eAnnotations>
+      </eStructuralFeatures>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="description" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="The detailed description of this audit container"/>
+        </eAnnotations>
+      </eStructuralFeatures>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="parentContainer" eType="#//mappings/AuditContainer"
+          eOpposite="#//mappings/AuditContainer/childContainers"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="audits" upperBound="-1"
+          eType="#//mappings/AuditRule" containment="true" eOpposite="#//mappings/AuditRule/container">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="The audit rules organized in this container"/>
+        </eAnnotations>
+      </eStructuralFeatures>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="childContainers" upperBound="-1"
+          eType="#//mappings/AuditContainer" containment="true" eOpposite="#//mappings/AuditContainer/parentContainer"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="RuleBase" abstract="true" interface="true">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Base class for rule like audit, metric rules..."/>
+      </eAnnotations>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="A human readable name of this rule"/>
+        </eAnnotations>
+      </eStructuralFeatures>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="description" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="The detailed description of this rule semantics"/>
+        </eAnnotations>
+      </eStructuralFeatures>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="AuditRule" eSuperTypes="#//mappings/RuleBase">
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="id" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="Unique identifier of this audit rule"/>
+        </eAnnotations>
+        <eAnnotations source="http://www.eclipse.org/gmf/2005/constraints">
+          <details key="ocl" value="not id.oclIsUndefined() implies container.audits->one(i | i.id = self.id)"/>
+          <details key="description" value="Audit rule with the same ID already exists"/>
+        </eAnnotations>
+      </eStructuralFeatures>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="rule" lowerBound="1"
+          eType="#//mappings/Constraint" containment="true">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="A boolean type condition which if not satisfied indicates this audit rule violation. It is evaluated in the context of the target"/>
+        </eAnnotations>
+        <eAnnotations source="http://www.eclipse.org/gmf/2005/constraints/meta">
+          <details key="def" value="context"/>
+          <details key="ref" value="target"/>
+        </eAnnotations>
+      </eStructuralFeatures>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="target" lowerBound="1"
+          eType="#//mappings/Auditable" containment="true">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="The target representing the context this audit is evaluated in"/>
+        </eAnnotations>
+      </eStructuralFeatures>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="severity" eType="#//mappings/Severity"
+          defaultValueLiteral="ERROR">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="Describes the severity of this audit rule violation"/>
+        </eAnnotations>
+      </eStructuralFeatures>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="useInLiveMode" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"
+          defaultValueLiteral="false">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="Indicates if this audit should be evaluated also in Live mode. If 'false', only Batch mode is applicable"/>
+        </eAnnotations>
+      </eStructuralFeatures>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="message" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="The text message to be reported in case of this audit violation"/>
+        </eAnnotations>
+      </eStructuralFeatures>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="container" lowerBound="1"
+          eType="#//mappings/AuditContainer" eOpposite="#//mappings/AuditContainer/audits">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="The containing audit container of this audit rule"/>
+        </eAnnotations>
+      </eStructuralFeatures>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="DomainElementTarget" eSuperTypes="#//mappings/Auditable #//mappings/Measurable">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Target for rules applied on domain model elements"/>
+      </eAnnotations>
+      <eAnnotations source="http://www.eclipse.org/gmf/2005/constraints/meta">
+        <details key="def" value="context"/>
+        <details key="ocl" value="element"/>
+      </eAnnotations>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="element" lowerBound="1"
+          eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EClass">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="Targeted domain model element"/>
+        </eAnnotations>
+      </eStructuralFeatures>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="DomainAttributeTarget" eSuperTypes="#//mappings/Auditable">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Represents value based target, useful for audit rules expression not capable of ecore meta-model access"/>
+      </eAnnotations>
+      <eAnnotations source="http://www.eclipse.org/gmf/2005/constraints/meta">
+        <details key="def" value="context"/>
+        <details key="ocl" value="attribute.eType"/>
+      </eAnnotations>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="attribute" lowerBound="1"
+          eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EAttribute">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="The attribute the value of which is used as context in audit rule defining this target"/>
+        </eAnnotations>
+      </eStructuralFeatures>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="nullAsError" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="Indicates whether null value of the attribute is reported as audit failure or success"/>
+        </eAnnotations>
+      </eStructuralFeatures>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="DiagramElementTarget" eSuperTypes="#//mappings/Auditable #//mappings/Measurable">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Target for rules applied on diagram notation model selectively, for specific visualized element"/>
+      </eAnnotations>
+      <eAnnotations source="http://www.eclipse.org/gmf/2005/constraints/meta">
+        <details key="def" value="context"/>
+        <details key="ocl" value="if element.oclIsKindOf(NodeMapping) then 'notation::Node' else 'notation::Edge' endif"/>
+      </eAnnotations>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="element" lowerBound="1"
+          eType="#//mappings/MappingEntry">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="Targeted visualized element"/>
+        </eAnnotations>
+      </eStructuralFeatures>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="NotationElementTarget" eSuperTypes="#//mappings/Auditable #//mappings/Measurable">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Target for rules applied on diagram notation model elements"/>
+      </eAnnotations>
+      <eAnnotations source="http://www.eclipse.org/gmf/2005/constraints/meta">
+        <details key="def" value="context"/>
+        <details key="ocl" value="element"/>
+      </eAnnotations>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="element" lowerBound="1"
+          eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EClass">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="Targeted diagram notation model element"/>
+        </eAnnotations>
+        <eAnnotations source="http://www.eclipse.org/gmf/2005/constraints">
+          <details key="ocl" value="element.eAllSuperTypes->including(element)->one(ePackage.name = 'notation' and name = 'View')"/>
+          <details key="description" value="'notation::View' or its sub-class must be set to NotationElement target"/>
+        </eAnnotations>
+      </eStructuralFeatures>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="MetricContainer">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="metrics" lowerBound="1"
+          upperBound="-1" eType="#//mappings/MetricRule" containment="true" eOpposite="#//mappings/MetricRule/container"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="MetricRule" eSuperTypes="#//mappings/RuleBase">
+      <eAnnotations source="http://www.eclipse.org/gmf/2005/constraints">
+        <details key="ocl" value="not lowLimit.oclIsUndefined() and not highLimit.oclIsUndefined()  implies lowLimit &lt; highLimit"/>
+        <details key="description" value="Metric value 'lowLimit' must be smaller then 'highLimit'"/>
+      </eAnnotations>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="key" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="Unique key identifying this metric an abbreviation for this metric"/>
+        </eAnnotations>
+        <eAnnotations source="http://www.eclipse.org/gmf/2005/constraints">
+          <details key="ocl" value="not key.oclIsUndefined() implies container.metrics->one(i | i.key = self.key)"/>
+          <details key="description" value="Metric rule with the same 'key' already exists"/>
+        </eAnnotations>
+      </eStructuralFeatures>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="rule" lowerBound="1"
+          eType="#//mappings/ValueExpression" containment="true">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="Expression that calculates the value of this metric which is of EDataType that encapsulates java.lang.Number subclasses or their primitives"/>
+        </eAnnotations>
+        <eAnnotations source="http://www.eclipse.org/gmf/2005/constraints/meta">
+          <details key="def" value="context"/>
+          <details key="ref" value="target"/>
+        </eAnnotations>
+        <eAnnotations source="http://www.eclipse.org/gmf/2005/constraints/meta">
+          <details key="def" value="type"/>
+          <details key="ocl" value="'ecore::EDoubleObject'"/>
+        </eAnnotations>
+      </eStructuralFeatures>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="target" lowerBound="1"
+          eType="#//mappings/Measurable" containment="true">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="The target representing the context this metric is evaluated in"/>
+        </eAnnotations>
+      </eStructuralFeatures>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="lowLimit" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDoubleObject">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="The lowest acceptable value of the rule expression result"/>
+        </eAnnotations>
+      </eStructuralFeatures>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="highLimit" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDoubleObject">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="The highest acceptable value of the rule expression result"/>
+        </eAnnotations>
+      </eStructuralFeatures>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="container" lowerBound="1"
+          eType="#//mappings/MetricContainer" eOpposite="#//mappings/MetricContainer/metrics">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="The containing metric container of this metric rule"/>
+        </eAnnotations>
+      </eStructuralFeatures>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="AuditedMetricTarget" eSuperTypes="#//mappings/Auditable">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Target metric which can be evaluated by audit rule. The target context here is the metric rule resulting type classifier"/>
+      </eAnnotations>
+      <eAnnotations source="http://www.eclipse.org/gmf/2005/constraints/meta">
+        <details key="def" value="context"/>
+        <details key="ocl" value="'ecore::EDoubleObject'"/>
+      </eAnnotations>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="metric" lowerBound="1"
+          eType="#//mappings/MetricRule">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="Metric which can be checked by audit"/>
+        </eAnnotations>
+      </eStructuralFeatures>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="Auditable" abstract="true" interface="true">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Target suitable for auditing"/>
+      </eAnnotations>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="Measurable" abstract="true" interface="true">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Marker interface for anything that can be subject to metrics"/>
+      </eAnnotations>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EEnum" name="Severity">
+      <eLiterals name="INFO"/>
+      <eLiterals name="WARNING" value="1"/>
+      <eLiterals name="ERROR" value="2"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EEnum" name="Language">
+      <eLiterals name="ocl"/>
+      <eLiterals name="java" value="1"/>
+      <eLiterals name="regexp" value="2"/>
+      <eLiterals name="nregexp" value="3"/>
+      <eLiterals name="literal" value="4"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="VisualEffectMapping">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="diagramPin" lowerBound="1"
+          eType="#//gmfgraph/Pin"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="oclExpression" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="parentMapEntry" lowerBound="1"
+          eType="#//mappings/MappingEntry" changeable="false" eOpposite="#//mappings/MappingEntry/visualEffects"/>
+    </eClassifiers>
+  </eSubpackages>
+  <eSubpackages name="tooldef" nsURI="http://www.eclipse.org/gmf/2005/ToolDefinition"
+      nsPrefix="tooldef">
+    <eClassifiers xsi:type="ecore:EClass" name="ToolRegistry">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="sharedActions" upperBound="-1"
+          eType="#//tooldef/MenuAction" containment="true">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="Instead of placing&#x9;common actions somewhere in menu hierarchy and referencing them in (2..n) cases, keep them in this central registry and use ItemRef everywhere (i.e. in 1..n cases)"/>
+        </eAnnotations>
+      </eStructuralFeatures>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="allMenus" upperBound="-1"
+          eType="#//tooldef/Menu" containment="true"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="palette" eType="#//tooldef/Palette"
+          containment="true"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="AbstractTool" abstract="true">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="smallIcon" eType="#//tooldef/Image"
+          containment="true"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="largeIcon" eType="#//tooldef/Image"
+          containment="true"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="title" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="description" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="ToolContainer" abstract="true" eSuperTypes="#//tooldef/AbstractTool">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="tools" upperBound="-1"
+          eType="#//tooldef/AbstractTool" containment="true"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="PaletteSeparator" eSuperTypes="#//tooldef/AbstractTool"/>
+    <eClassifiers xsi:type="ecore:EClass" name="ToolGroup" eSuperTypes="#//tooldef/ToolContainer">
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="collapsible" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="stack" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="active" eType="#//tooldef/AbstractTool"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="Palette" eSuperTypes="#//tooldef/ToolContainer">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="default" eType="#//tooldef/AbstractTool"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="StandardTool" eSuperTypes="#//tooldef/AbstractTool">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="predefined, like zoom or marquee"/>
+      </eAnnotations>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="toolKind" eType="#//tooldef/StandardToolKind"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EEnum" name="StandardToolKind">
+      <eLiterals name="SELECT"/>
+      <eLiterals name="SELECT_PAN" value="1"/>
+      <eLiterals name="MARQUEE" value="2"/>
+      <eLiterals name="ZOOM_PAN" value="3"/>
+      <eLiterals name="ZOOM_IN" value="4"/>
+      <eLiterals name="ZOOM_OUT" value="5"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="CreationTool" eSuperTypes="#//tooldef/AbstractTool"/>
+    <eClassifiers xsi:type="ecore:EClass" name="GenericTool" eSuperTypes="#//tooldef/AbstractTool">
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="toolClass" lowerBound="1"
+          eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="ItemBase" abstract="true" interface="true"/>
+    <eClassifiers xsi:type="ecore:EClass" name="Menu" abstract="true">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="items" upperBound="-1"
+          eType="#//tooldef/ItemBase" containment="true"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="Separator" eSuperTypes="#//tooldef/ItemBase">
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="PredefinedItem" eSuperTypes="#//tooldef/ItemBase">
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="identifier" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="PredefinedMenu" eSuperTypes="#//tooldef/Menu #//tooldef/PredefinedItem"/>
+    <eClassifiers xsi:type="ecore:EClass" name="ContributionItem" abstract="true"
+        interface="true" eSuperTypes="#//tooldef/ItemBase">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="icon" eType="#//tooldef/Image"
+          containment="true"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="title" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="MenuAction" eSuperTypes="#//tooldef/ContributionItem">
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="kind" eType="#//tooldef/ActionKind"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="hotKey" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="ItemRef" eSuperTypes="#//tooldef/ItemBase">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="item" lowerBound="1"
+          eType="#//tooldef/ItemBase"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="ContextMenu" eSuperTypes="#//tooldef/Menu">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="default" eType="#//tooldef/MenuAction"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="PopupMenu" eSuperTypes="#//tooldef/Menu #//tooldef/ContributionItem">
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="iD" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
+          iD="true"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="MainMenu" eSuperTypes="#//tooldef/Menu">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="no default action and no id, just a collection of items"/>
+      </eAnnotations>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="title" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="Toolbar" eSuperTypes="#//tooldef/Menu"/>
+    <eClassifiers xsi:type="ecore:EEnum" name="ActionKind">
+      <eLiterals name="CREATE"/>
+      <eLiterals name="PROPCHANGE" value="1"/>
+      <eLiterals name="MODIFY" value="2"/>
+      <eLiterals name="PROCESS" value="3"/>
+      <eLiterals name="CUSTOM" value="99"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="Image" abstract="true" interface="true"/>
+    <eClassifiers xsi:type="ecore:EClass" name="DefaultImage" eSuperTypes="#//tooldef/Image">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Delegate to EMF.Edit providers"/>
+      </eAnnotations>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="BundleImage" eSuperTypes="#//tooldef/Image">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Image bundled as part of distribution"/>
+      </eAnnotations>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="path" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="Relative path to image"/>
+        </eAnnotations>
+      </eStructuralFeatures>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="bundle" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="Empty value means image path is relative to generated bundle"/>
+        </eAnnotations>
+      </eStructuralFeatures>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="StyleSelector" abstract="true" interface="true">
+      <eOperations name="isOk" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
+        <eParameters name="style" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
+      </eOperations>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="GenericStyleSelector" eSuperTypes="#//tooldef/StyleSelector">
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="values" lowerBound="1"
+          upperBound="-1" eType="#//tooldef/AppearanceStyle"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EEnum" name="AppearanceStyle">
+      <eLiterals name="Font"/>
+      <eLiterals name="Fill" value="1"/>
+      <eLiterals name="Line" value="2"/>
+    </eClassifiers>
+  </eSubpackages>
+  <eSubpackages name="gmfgraph" nsURI="http://www.eclipse.org/gmf/2006/GraphicalDefinition"
+      nsPrefix="gmfgraph">
+    <eClassifiers xsi:type="ecore:EClass" name="Canvas" eSuperTypes="#//gmfgraph/Identity">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="figures" upperBound="-1"
+          eType="#//gmfgraph/FigureGallery" containment="true">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="containment here doesn't restrict nodes/connection from using figure galeries defined elsewhere. No assumption should be made whether or not node/connection figure is defined in the galery beloning to this canvas"/>
+        </eAnnotations>
+      </eStructuralFeatures>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="nodes" upperBound="-1"
+          eType="#//gmfgraph/Node" containment="true"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="connections" upperBound="-1"
+          eType="#//gmfgraph/Connection" containment="true"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="compartments" upperBound="-1"
+          eType="#//gmfgraph/Compartment" containment="true"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="labels" upperBound="-1"
+          eType="#//gmfgraph/DiagramLabel" containment="true"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="FigureGallery" eSuperTypes="#//gmfgraph/Identity">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Kind of explicit figure library notion. Bundle of figures. Allows to specify plugin id (allows importing it later from gmfgen code) in addition to figures"/>
+      </eAnnotations>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="figures" upperBound="-1"
+          eType="#//gmfgraph/RealFigure" containment="true"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="descriptors" upperBound="-1"
+          eType="#//gmfgraph/FigureDescriptor" containment="true"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="borders" upperBound="-1"
+          eType="#//gmfgraph/Border" containment="true">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="Borders for reuse"/>
+        </eAnnotations>
+      </eStructuralFeatures>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="layouts" upperBound="-1"
+          eType="#//gmfgraph/Layout" containment="true">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="Layouts for reuse"/>
+        </eAnnotations>
+      </eStructuralFeatures>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="implementationBundle"
+          eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="Identity" abstract="true" interface="true">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Easy and readable way to reference element of the model from another one"/>
+      </eAnnotations>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" lowerBound="1"
+          eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
+          iD="true"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="DiagramElement" abstract="true" eSuperTypes="#//gmfgraph/Identity">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="figure" lowerBound="1"
+          eType="#//gmfgraph/FigureDescriptor"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="facets" upperBound="-1"
+          eType="#//gmfgraph/VisualFacet" containment="true">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="anything to further specify constraint or any other aspect of the element"/>
+        </eAnnotations>
+      </eStructuralFeatures>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="AbstractNode" abstract="true" eSuperTypes="#//gmfgraph/DiagramElement"/>
+    <eClassifiers xsi:type="ecore:EClass" name="Node" eSuperTypes="#//gmfgraph/AbstractNode">
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="resizeConstraint" eType="#//gmfgraph/Direction"
+          defaultValueLiteral="NSEW"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="affixedParentSide" eType="#//gmfgraph/Direction"
+          defaultValueLiteral="NONE"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="contentPane" eType="#//gmfgraph/ChildAccess"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="Connection" eSuperTypes="#//gmfgraph/DiagramElement"/>
+    <eClassifiers xsi:type="ecore:EClass" name="Compartment" eSuperTypes="#//gmfgraph/DiagramElement">
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="collapsible" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="needsTitle" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="accessor" eType="#//gmfgraph/ChildAccess"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="DiagramLabel" eSuperTypes="#//gmfgraph/Node">
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="elementIcon" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"
+          defaultValueLiteral="true"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="accessor" eType="#//gmfgraph/ChildAccess"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="container" eType="#//gmfgraph/ChildAccess"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="external" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"
+          changeable="false" volatile="true" transient="true" derived="true"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="VisualFacet" abstract="true" interface="true"/>
+    <eClassifiers xsi:type="ecore:EClass" name="GeneralFacet" eSuperTypes="#//gmfgraph/VisualFacet">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="provide means to attach arbitrary data to your diagram element definition. It's up to you (template author) to process it somehow."/>
+      </eAnnotations>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="identifier" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
+          iD="true"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="data" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="AlignmentFacet" eSuperTypes="#//gmfgraph/VisualFacet">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Makes sense for DiagramLabels of Links only (now). Constants from {@link org.eclipse.draw2d.ConnectionLocator} are: MIDDLE = Alignment.CENTER, TARGET = Alignment.END, SOURCE = Alignment.BEGINNING"/>
+      </eAnnotations>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="alignment" eType="#//gmfgraph/Alignment"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="GradientFacet" eSuperTypes="#//gmfgraph/VisualFacet">
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="direction" eType="#//gmfgraph/Direction"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="LabelOffsetFacet" eSuperTypes="#//gmfgraph/VisualFacet">
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="x" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="y" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="DefaultSizeFacet" eSuperTypes="#//gmfgraph/VisualFacet">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="defaultSize" eType="#//gmfgraph/Dimension"
+          containment="true"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="Figure" abstract="true" interface="true"
+        eSuperTypes="#//gmfgraph/Layoutable">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Anything you could combine visual representation from. Ordinary GEF figures, custom-defined or references to defined elsewhere. org.eclipse.draw2d.Figure"/>
+      </eAnnotations>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="descriptor" eType="#//gmfgraph/FigureDescriptor"
+          changeable="false" volatile="true" transient="true" derived="true" resolveProxies="false"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="foregroundColor" eType="#//gmfgraph/Color"
+          containment="true"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="backgroundColor" eType="#//gmfgraph/Color"
+          containment="true"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="maximumSize" eType="#//gmfgraph/Dimension"
+          containment="true"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="minimumSize" eType="#//gmfgraph/Dimension"
+          containment="true"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="preferredSize" eType="#//gmfgraph/Dimension"
+          containment="true"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="font" eType="#//gmfgraph/Font"
+          containment="true"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="insets" eType="#//gmfgraph/Insets"
+          containment="true"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="border" eType="#//gmfgraph/Border"
+          containment="true"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="location" eType="#//gmfgraph/Point"
+          containment="true"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="size" eType="#//gmfgraph/Point"
+          containment="true"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="AbstractFigure" abstract="true" eSuperTypes="#//gmfgraph/Figure">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="This is merely an implementation artifact to get only one base implementation of Figure attributes"/>
+      </eAnnotations>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="FigureDescriptor" eSuperTypes="#//gmfgraph/Identity">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="The thing describes structure of a figure"/>
+      </eAnnotations>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="actualFigure" lowerBound="1"
+          eType="#//gmfgraph/Figure" containment="true"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="accessors" upperBound="-1"
+          eType="#//gmfgraph/ChildAccess" containment="true" eOpposite="#//gmfgraph/ChildAccess/owner"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="ChildAccess">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="owner" lowerBound="1"
+          eType="#//gmfgraph/FigureDescriptor" changeable="false" resolveProxies="false"
+          eOpposite="#//gmfgraph/FigureDescriptor/accessors"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="accessor" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="figure" lowerBound="1"
+          eType="#//gmfgraph/Figure">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="This may also point to RealFigure from FigureAccessor#typedFigure"/>
+        </eAnnotations>
+      </eStructuralFeatures>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="RealFigure" abstract="true" eSuperTypes="#//gmfgraph/AbstractFigure #//gmfgraph/PinOwner #//gmfgraph/CustomAttributeOwner">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="This is exact/specific/concrete figure, unlike proxy/reference-nature FigureRef"/>
+      </eAnnotations>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="children" upperBound="-1"
+          eType="#//gmfgraph/Figure" containment="true"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="FigureRef" eSuperTypes="#//gmfgraph/AbstractFigure">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Need this to facilitate reuse of figures while keeping (so nice looking) containment relationship in the Figure class"/>
+      </eAnnotations>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="figure" lowerBound="1"
+          eType="#//gmfgraph/RealFigure">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="not just Figure because don't want to reference figure references."/>
+        </eAnnotations>
+      </eStructuralFeatures>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="ConnectionFigure" abstract="true"
+        interface="true" eSuperTypes="#//gmfgraph/RealFigure"/>
+    <eClassifiers xsi:type="ecore:EClass" name="DecorationFigure" abstract="true"
+        interface="true" eSuperTypes="#//gmfgraph/RealFigure"/>
+    <eClassifiers xsi:type="ecore:EClass" name="Shape" abstract="true" eSuperTypes="#//gmfgraph/RealFigure">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="org.eclipse.draw2d.Shape"/>
+      </eAnnotations>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="outline" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"
+          defaultValueLiteral="true"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="fill" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"
+          defaultValueLiteral="true"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="lineWidth" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"
+          defaultValueLiteral="1"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="lineKind" eType="#//gmfgraph/LineKind"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="xorFill" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="xorOutline" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="resolvedChildren" upperBound="-1"
+          eType="#//gmfgraph/Figure" changeable="false" volatile="true" transient="true"
+          derived="true">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="Same as children, but resolves child FigureRefs, if any, to Figures"/>
+        </eAnnotations>
+      </eStructuralFeatures>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="Label" eSuperTypes="#//gmfgraph/RealFigure">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel"/>
+      </eAnnotations>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="text" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="LabeledContainer" eSuperTypes="#//gmfgraph/RealFigure">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="org.eclipse.draw2d.LabeledContainer"/>
+      </eAnnotations>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="VerticalLabel" eSuperTypes="#//gmfgraph/RealFigure">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="org.eclipse.gmf.tooling.runtime.draw2d.labels.VerticalLabel"/>
+      </eAnnotations>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="text" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="Rectangle" eSuperTypes="#//gmfgraph/Shape">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="org.eclipse.draw2d.RectangleFigure"/>
+      </eAnnotations>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="InvisibleRectangle" eSuperTypes="#//gmfgraph/RealFigure">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="org.eclipse.draw2d.RectangleFigure #opaque=false, #outline=false, #fill=false"/>
+      </eAnnotations>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="RoundedRectangle" eSuperTypes="#//gmfgraph/Shape">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="org.eclipse.draw2d.RoundedRectangle"/>
+      </eAnnotations>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="cornerWidth" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"
+          defaultValueLiteral="8"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="cornerHeight" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"
+          defaultValueLiteral="8"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="Ellipse" eSuperTypes="#//gmfgraph/Shape">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="org.eclipse.draw2d.Ellipse"/>
+      </eAnnotations>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="Polyline" eSuperTypes="#//gmfgraph/Shape">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="org.eclipse.draw2d.Polyline"/>
+      </eAnnotations>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="template" upperBound="-1"
+          eType="#//gmfgraph/Point" containment="true"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="Polygon" eSuperTypes="#//gmfgraph/Polyline">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="org.eclipse.draw2d.Polygon"/>
+      </eAnnotations>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="ScalablePolygon" eSuperTypes="#//gmfgraph/Polygon">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Marker interface to denote polygons with ability to autoscale to fit all available bounds. Separate class is needed instead of property in the Polygon class because of generalization PolygonDecoration extends Polygon"/>
+      </eAnnotations>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="PolylineConnection" eSuperTypes="#//gmfgraph/Polyline #//gmfgraph/ConnectionFigure">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="org.eclipse.draw2d.PolylineConnection"/>
+      </eAnnotations>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="sourceDecoration" eType="#//gmfgraph/DecorationFigure"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="targetDecoration" eType="#//gmfgraph/DecorationFigure"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="PolylineDecoration" eSuperTypes="#//gmfgraph/Polyline #//gmfgraph/DecorationFigure">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="org.eclipse.draw2d.PolylineDecoration"/>
+      </eAnnotations>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="PolygonDecoration" eSuperTypes="#//gmfgraph/Polygon #//gmfgraph/DecorationFigure">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="org.eclipse.draw2d.PolygonDecoration"/>
+      </eAnnotations>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="CustomAttributeOwner" abstract="true"
+        interface="true">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="attributes" upperBound="-1"
+          eType="#//gmfgraph/CustomAttribute" containment="true"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="CustomClass" abstract="true" interface="true"
+        eSuperTypes="#//gmfgraph/CustomAttributeOwner">
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="qualifiedClassName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="CustomAttribute">
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" lowerBound="1"
+          eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" lowerBound="1"
+          eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
+          defaultValueLiteral="null"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="directAccess" lowerBound="1"
+          eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"
+          defaultValueLiteral="false"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="multiStatementValue"
+          lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"
+          defaultValueLiteral="false"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="FigureAccessor">
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="accessor" lowerBound="1"
+          eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="typedFigure" lowerBound="1"
+          eType="#//gmfgraph/RealFigure" containment="true"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="CustomFigure" eSuperTypes="#//gmfgraph/RealFigure #//gmfgraph/CustomClass">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Any figure class provided by some bundle"/>
+      </eAnnotations>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="customChildren" upperBound="-1"
+          eType="#//gmfgraph/FigureAccessor" containment="true">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="Childrent enumerated with this feature are mere 'access points' to actual structure of the CustomFigure. They are not created, unlike those contained in regular Figure#children"/>
+        </eAnnotations>
+      </eStructuralFeatures>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="CustomDecoration" eSuperTypes="#//gmfgraph/CustomFigure #//gmfgraph/DecorationFigure">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Same as CustomFigure, but for Decorations"/>
+      </eAnnotations>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="CustomConnection" eSuperTypes="#//gmfgraph/CustomFigure #//gmfgraph/ConnectionFigure">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Same as CustomFigure, but for Connections"/>
+      </eAnnotations>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="Color" abstract="true" interface="true"/>
+    <eClassifiers xsi:type="ecore:EClass" name="RGBColor" eSuperTypes="#//gmfgraph/Color">
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="red" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="green" lowerBound="1"
+          eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="blue" lowerBound="1"
+          eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="ConstantColor" eSuperTypes="#//gmfgraph/Color">
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" lowerBound="1"
+          eType="#//gmfgraph/ColorConstants"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EEnum" name="ColorConstants">
+      <eLiterals name="white"/>
+      <eLiterals name="black" value="1"/>
+      <eLiterals name="lightGray" value="2"/>
+      <eLiterals name="gray" value="3"/>
+      <eLiterals name="darkGray" value="4"/>
+      <eLiterals name="red" value="5"/>
+      <eLiterals name="orange" value="6"/>
+      <eLiterals name="yellow" value="7"/>
+      <eLiterals name="green" value="8"/>
+      <eLiterals name="lightGreen" value="9"/>
+      <eLiterals name="darkGreen" value="10"/>
+      <eLiterals name="cyan" value="11"/>
+      <eLiterals name="lightBlue" value="12"/>
+      <eLiterals name="blue" value="13"/>
+      <eLiterals name="darkBlue" value="14"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="Font" abstract="true" interface="true"/>
+    <eClassifiers xsi:type="ecore:EClass" name="BasicFont" eSuperTypes="#//gmfgraph/Font">
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="faceName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="height" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"
+          defaultValueLiteral="9"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="style" eType="#//gmfgraph/FontStyle"
+          defaultValueLiteral="NORMAL"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EEnum" name="FontStyle">
+      <eLiterals name="NORMAL"/>
+      <eLiterals name="BOLD" value="1"/>
+      <eLiterals name="ITALIC" value="2"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="Point">
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="x" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="y" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="Dimension">
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="dx" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="dy" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="Insets">
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="top" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="left" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="bottom" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="right" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="Border" abstract="true" interface="true"/>
+    <eClassifiers xsi:type="ecore:EClass" name="BorderRef" eSuperTypes="#//gmfgraph/Border">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Border reuse mechanism"/>
+      </eAnnotations>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="actual" lowerBound="1"
+          eType="#//gmfgraph/Border">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="constraint: actual should not be another BorderRef"/>
+        </eAnnotations>
+      </eStructuralFeatures>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="LineBorder" eSuperTypes="#//gmfgraph/Border">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="color" eType="#//gmfgraph/Color"
+          containment="true"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="width" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"
+          defaultValueLiteral="1"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="MarginBorder" eSuperTypes="#//gmfgraph/Border">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="insets" eType="#//gmfgraph/Insets"
+          containment="true"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="CompoundBorder" eSuperTypes="#//gmfgraph/Border">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="outer" eType="#//gmfgraph/Border"
+          containment="true"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="inner" eType="#//gmfgraph/Border"
+          containment="true"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="CustomBorder" eSuperTypes="#//gmfgraph/Border #//gmfgraph/CustomClass"/>
+    <eClassifiers xsi:type="ecore:EEnum" name="Direction">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Geographical bit constants from org.eclipse.draw2d.PositionConstants"/>
+      </eAnnotations>
+      <eLiterals name="NONE"/>
+      <eLiterals name="NORTH" value="1"/>
+      <eLiterals name="SOUTH" value="4"/>
+      <eLiterals name="WEST" value="8"/>
+      <eLiterals name="EAST" value="16"/>
+      <eLiterals name="NORTH_EAST" value="17"/>
+      <eLiterals name="NORTH_WEST" value="9"/>
+      <eLiterals name="SOUTH_EAST" value="20"/>
+      <eLiterals name="SOUTH_WEST" value="12"/>
+      <eLiterals name="NORTH_SOUTH" value="5"/>
+      <eLiterals name="EAST_WEST" value="24"/>
+      <eLiterals name="NSEW" value="29"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EEnum" name="LineKind">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="org.eclipse.draw2d.Graphics.LINE_* (== org.eclipse.swt.SWT.LINE_*. Values are same as SWT constants"/>
+      </eAnnotations>
+      <eLiterals name="LINE_SOLID" value="1"/>
+      <eLiterals name="LINE_DASH" value="2"/>
+      <eLiterals name="LINE_DOT" value="3"/>
+      <eLiterals name="LINE_DASHDOT" value="4"/>
+      <eLiterals name="LINE_DASHDOTDOT" value="5"/>
+      <eLiterals name="LINE_CUSTOM" value="6"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="LayoutData" abstract="true" interface="true">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="owner" lowerBound="1"
+          eType="#//gmfgraph/Layoutable" eOpposite="#//gmfgraph/Layoutable/layoutData"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="CustomLayoutData" eSuperTypes="#//gmfgraph/LayoutData #//gmfgraph/CustomClass"/>
+    <eClassifiers xsi:type="ecore:EClass" name="GridLayoutData" eSuperTypes="#//gmfgraph/LayoutData">
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="grabExcessHorizontalSpace"
+          lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"
+          defaultValueLiteral="false"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="grabExcessVerticalSpace"
+          lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"
+          defaultValueLiteral="false"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="verticalAlignment" lowerBound="1"
+          eType="#//gmfgraph/Alignment" defaultValueLiteral="CENTER"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="horizontalAlignment"
+          lowerBound="1" eType="#//gmfgraph/Alignment" defaultValueLiteral="CENTER"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="verticalSpan" lowerBound="1"
+          eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt" defaultValueLiteral="1"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="horizontalSpan" lowerBound="1"
+          eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt" defaultValueLiteral="1"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="horizontalIndent" lowerBound="1"
+          eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="sizeHint" eType="#//gmfgraph/Dimension"
+          containment="true"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="BorderLayoutData" eSuperTypes="#//gmfgraph/LayoutData">
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="alignment" lowerBound="1"
+          eType="#//gmfgraph/Alignment" defaultValueLiteral="CENTER"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="vertical" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"
+          defaultValueLiteral="false"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EEnum" name="Alignment">
+      <eLiterals name="BEGINNING"/>
+      <eLiterals name="CENTER" value="1"/>
+      <eLiterals name="END" value="2"/>
+      <eLiterals name="FILL" value="3"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="Layoutable" abstract="true" interface="true">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="layoutData" eType="#//gmfgraph/LayoutData"
+          containment="true" eOpposite="#//gmfgraph/LayoutData/owner"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="layout" eType="#//gmfgraph/Layout"
+          containment="true"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="Layout" abstract="true" interface="true"/>
+    <eClassifiers xsi:type="ecore:EClass" name="LayoutRef" eSuperTypes="#//gmfgraph/Layout">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Layout reuse mechanism"/>
+      </eAnnotations>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="actual" lowerBound="1"
+          eType="#//gmfgraph/Layout">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="constraint: actual should not be another LayoutRef"/>
+        </eAnnotations>
+      </eStructuralFeatures>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="CustomLayout" eSuperTypes="#//gmfgraph/Layout #//gmfgraph/CustomClass"/>
+    <eClassifiers xsi:type="ecore:EClass" name="GridLayout" eSuperTypes="#//gmfgraph/Layout">
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="numColumns" lowerBound="1"
+          eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt" defaultValueLiteral="1"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="equalWidth" lowerBound="1"
+          eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"
+          defaultValueLiteral="true"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="margins" eType="#//gmfgraph/Dimension"
+          containment="true"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="spacing" eType="#//gmfgraph/Dimension"
+          containment="true"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="BorderLayout" eSuperTypes="#//gmfgraph/Layout">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="spacing" eType="#//gmfgraph/Dimension"
+          containment="true"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="FlowLayout" eSuperTypes="#//gmfgraph/Layout">
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="vertical" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"
+          defaultValueLiteral="false"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="matchMinorSize" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"
+          defaultValueLiteral="false"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="forceSingleLine" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"
+          defaultValueLiteral="false"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="majorAlignment" eType="#//gmfgraph/Alignment"
+          defaultValueLiteral="BEGINNING"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="minorAlignment" eType="#//gmfgraph/Alignment"
+          defaultValueLiteral="BEGINNING"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="majorSpacing" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"
+          defaultValueLiteral="5"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="minorSpacing" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"
+          defaultValueLiteral="5"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="XYLayout" eSuperTypes="#//gmfgraph/Layout"/>
+    <eClassifiers xsi:type="ecore:EClass" name="XYLayoutData" eSuperTypes="#//gmfgraph/LayoutData">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="topLeft" lowerBound="1"
+          eType="#//gmfgraph/Point" containment="true"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="size" lowerBound="1"
+          eType="#//gmfgraph/Dimension" containment="true"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="StackLayout" eSuperTypes="#//gmfgraph/Layout"/>
+    <eClassifiers xsi:type="ecore:EClass" name="CenterLayout" eSuperTypes="#//gmfgraph/Layout"/>
+    <eClassifiers xsi:type="ecore:EClass" name="SVGFigure" eSuperTypes="#//gmfgraph/RealFigure">
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="documentURI" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="properties" upperBound="-1"
+          eType="#//gmfgraph/SVGProperty" containment="true"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="areaOfInterest" eType="#//gmfgraph/Rectangle2D"
+          containment="true"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="noCanvasWidth" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="noCanvasHeight" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="SVGProperty">
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="query" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="attribute" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="type" eType="#//gmfgraph/SVGPropertyType"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="getter" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="setter" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="callSuper" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EEnum" name="SVGPropertyType">
+      <eLiterals name="STRING"/>
+      <eLiterals name="COLOR" value="1"/>
+      <eLiterals name="FLOAT" value="2"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="Rectangle2D">
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="x" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EFloat"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="y" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EFloat"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="width" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EFloat"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="height" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EFloat"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="Pin" abstract="true" interface="true"
+        eSuperTypes="#//gmfgraph/Identity">
+      <eOperations name="getOperationName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+      <eOperations name="getOperationType" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="CustomPin" eSuperTypes="#//gmfgraph/Pin">
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="customOperationName"
+          eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="customOperationType"
+          eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="ColorPin" eSuperTypes="#//gmfgraph/Pin">
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="backgroundNotForeground"
+          eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="VisiblePin" eSuperTypes="#//gmfgraph/Pin"/>
+    <eClassifiers xsi:type="ecore:EClass" name="PinOwner" abstract="true" interface="true">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="pins" upperBound="-1"
+          eType="#//gmfgraph/Pin" containment="true"/>
+    </eClassifiers>
+  </eSubpackages>
+</ecore:EPackage>

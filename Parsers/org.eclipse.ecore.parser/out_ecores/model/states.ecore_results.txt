@@ -1,0 +1,7 @@
+model	Statemachine (initial,EBoolean,attribute) (name,EString,attribute) (value,EInt,attribute) (events,Event,ref) (states,State,ref) 
+model	SimpleState (value,EInt,attribute) 
+model	CompoundState (machine,Statemachine,ref) 
+model	State (initial,EBoolean,attribute) (name,EString,attribute) (transitions,Transition,ref) 
+model	Transition (state,State,ref) (event,Event,ref) 
+model	Event (name,EString,attribute) 
+model	Module (name,EString,attribute) (machines,Statemachine,ref) 

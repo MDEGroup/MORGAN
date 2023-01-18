@@ -1,0 +1,8 @@
+model	Task (MinRequirement,EDouble,attribute) (MinRequirementType,MinRequirementType,attribute) (Name,EString,attribute) 
+model	GradingSystem (courses,Course,ref) 
+model	Grade (RequiredPoints,EDouble,attribute) (Name,EString,attribute) 
+model	ConcreteTask (MaxPoints,EDouble,attribute) 
+model	Course (Name,EString,attribute) (gradings,Grading,ref) (gradingscheme,GradingScheme,ref) (gradingschemes,GradingScheme,ref) (gradingScheme,GradingScheme,ref) 
+model	GradingScheme (grades,Grade,ref) (fallback,Grade,ref) 
+model	Grading (Semester,EString,attribute) (gradingscheme,GradingScheme,ref) (has,Task,ref) (tasks,Task,ref) 
+model	TaskGroup (contains,Task,ref) 

@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="mdsdassignment2" nsURI="http://www.jacob.sogaard/Mdsdassignment2"
+    nsPrefix="mdsdassignment2">
+  <eClassifiers xsi:type="ecore:EClass" name="MathExp">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="exp" eType="#//Exp" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Exp">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="left" eType="#//ExpOp"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="operator" eType="#//ExpOp"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="right" eType="#//Exp" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ExpOp"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Parenthesis" eSuperTypes="#//ExpOp">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="exp" eType="#//Exp" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Num" eSuperTypes="#//ExpOp">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Add" eSuperTypes="#//ExpOp">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="left" eType="#//ExpOp"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="right" eType="#//ExpOp"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Sub" eSuperTypes="#//ExpOp">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="left" eType="#//ExpOp"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="right" eType="#//ExpOp"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Mult" eSuperTypes="#//ExpOp">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="left" eType="#//ExpOp"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="right" eType="#//ExpOp"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Div" eSuperTypes="#//ExpOp">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="left" eType="#//ExpOp"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="right" eType="#//ExpOp"
+        containment="true"/>
+  </eClassifiers>
+</ecore:EPackage>

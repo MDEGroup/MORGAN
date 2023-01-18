@@ -1,0 +1,7 @@
+model	Entity (name,EString,attribute) (features,Feature,ref) (superEntity,Entity,ref) 
+model	Reference (unique,EBoolean,attribute) (reference,Entity,ref) (opposite,MultiReference,ref) 
+model	MultiDataType (unique,EBoolean,attribute) 
+model	DataType (type,DataTypes,attribute) (opposite,MultiDataType,ref) 
+model	Package (name,EString,attribute) (entities,Entity,ref) 
+model	Module (name,EString,attribute) (type,InternalDSLType,attribute) (packages,Package,ref) 
+model	Feature (name,EString,attribute) 

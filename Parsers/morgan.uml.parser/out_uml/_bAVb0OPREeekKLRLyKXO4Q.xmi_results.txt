@@ -1,0 +1,33 @@
+model	User id,property password,property login,operation 
+model	Admin name,property mail,property updateoperation,operation createoperation,operation deleteoperation,operation 
+model	pembeli id,property name,property address,property mail,property username,property password,property shippinginfo,property login,operation register,operation shop,operation 
+model	Cart cartid,property productid,property quantity,property date,property additem,operation updateitem,operation deleteitem,operation viewitem,operation checkout,operation 
+model	Order orderid,property shippingid,property customerid,property dateorder,property datedeliver,property status,property placeOrder,operation 
+model	Orderdetail orderid,property productid,property quantity,property cost,property total,property getPrice,operation 
+model	Shippinginfo shippingid,property type,property cost,property region,property total,property getInfoShipping,operation 
+model	Shippinginfo_Order order,property shippinginfo,property 
+model	Orderdetail_Order order,property orderdetail,property 
+model	Produk productid,property idkategori,property name,property desc,property price,property get prodcut,operation 
+model	Kategori idkategori,property productid,property name,property desc,property getProductkategori,operation 
+model	Cart_Customer customer,property cart,property 
+model	penjual id,property name,property address,property mail,property username,property password,property shippinginfo,property bussinessname,property bank,property login,operation register,operation shop,operation 
+model	penjual_User user,property penjual,property 
+model	Produk_Orderdetail orderdetail,property produk,property 
+model	Produk_Kategori kategori,property produk,property 
+model	barang id,property id_kategori,property nama_barang,property deskripsi_barang,property harga_barang,property getbarang,operation insert,operation update,operation delete,operation 
+model	kategori id,property nama_kategori,property deskripsi_kategori,property getkategori,operation insert,operation update,operation delete,operation 
+model	user id_user,property id_role,property id_order,property login,operation register,operation logout,operation order,operation 
+model	vendor id,property id_role,property name,property address,property mail,property username,property password,property shippinginfo,property bussinessname,property bank,property insert,operation update,operation delete,operation 
+model	pembeli id,property id_role,property name,property address,property mail,property username,property password,property insert,operation update,operation delete,operation 
+model	role id,property nama_role,property deskripsi_role,property getrole,operation insert,operation update,operation delete,operation 
+model	order order_id,property id_user,property dateorder,property status,property placeOrder,operation 
+model	orderdetail order_id,property barang_id,property total,property getPrice,operation 
+model	admin id,property username,property password,property updateoperation,operation createoperation,operation deleteoperation,operation 
+model	role_user user,property role,property 
+model	admin_user user,property admin,property 
+model	pembeli_user user,property pembeli,property 
+model	vendor_user user,property vendor,property 
+model	order_user user,property order,property 
+model	order_orderdetail orderdetail,property order,property 
+model	barang_kategori kategori,property barang,property 
+model	orderdetail_barang barang,property orderdetail,property 

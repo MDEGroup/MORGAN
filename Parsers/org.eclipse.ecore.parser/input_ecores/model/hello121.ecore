@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="hello121" nsURI="http://hello121" nsPrefix="_hello121">
+  <eAnnotations source="diagen">
+    <details key="knownas=simple world"/>
+    <details key="origin=http://org.isoe.fr"/>
+    <details key="leftparent=nil" value=""/>
+    <details key="rightparent=nil" value=""/>
+    <details key="requires=nil" value=""/>
+    <details key="context=startup"/>
+  </eAnnotations>
+  <eClassifiers xsi:type="ecore:EClass" name="Base">
+    <eAnnotations source="diagraph">
+      <details key="node" value="_"/>
+      <details key="pov" value="_"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="things" upperBound="-1"
+        eType="#//Thing" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="classocs" upperBound="-1"
+        eType="#//Classoc" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Thing" eSuperTypes="#//NamedElement">
+    <eAnnotations source="diagraph">
+      <details key="node" value="_"/>
+      <details key="nav:vwthing" value="_"/>
+      <details key="kref=foos" value="_"/>
+    </eAnnotations>
+    <eAnnotations source="diagraph">
+      <details key="node" value="_"/>
+      <details key="view=vwthing" value="_"/>
+      <details key="pov" value="_"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="id" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="relations" upperBound="-1"
+        eType="#//RelatedTo" containment="true" eOpposite="#//RelatedTo/fromThing"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="foos" upperBound="-1" eType="#//Third"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="classocs" upperBound="-1"
+        eType="#//Classoc" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="NamedElement" abstract="true">
+    <eAnnotations source="diagraph">
+      <details key="label=name" value="_"/>
+    </eAnnotations>
+    <eAnnotations source="diagraph">
+      <details key="node" value="_"/>
+      <details key="view=vwthing" value="_"/>
+      <details key="label=name" value="_"/>
+      <details key="kref=aliases" value="_"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="aliases" upperBound="-1"
+        eType="#//Alias" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="RelatedTo" eSuperTypes="#//NamedElement">
+    <eAnnotations source="diagraph">
+      <details key="link" value="_"/>
+      <details key="cont=Thing.relations" value="_"/>
+      <details key="lsrc=fromThing" value="_"/>
+      <details key="ltrg=toThing" value="_"/>
+    </eAnnotations>
+    <eAnnotations source="diagraph">
+      <details key="node" value="_"/>
+      <details key="view=vwthing" value="_"/>
+      <details key="label=since" value="_"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="fromThing" eType="#//Thing"
+        eOpposite="#//Thing/relations"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="toThing" eType="#//Thing"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="since" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Alias">
+    <eAnnotations source="diagraph">
+      <details key="node" value="_"/>
+      <details key="label=id" value="_"/>
+      <details key="view=vwthing" value="_"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="id" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Third">
+    <eAnnotations source="diagraph">
+      <details key="node" value="_"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="id" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Classoc">
+    <eAnnotations source="diagraph">
+      <details key="link" value="_"/>
+      <details key="ltrg=third" value="_"/>
+      <details key="label=id" value="_"/>
+      <details key="cont=Base.classocs" value="_"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="third" eType="#//Third"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="id" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="base" eType="#//Base"/>
+  </eClassifiers>
+</ecore:EPackage>

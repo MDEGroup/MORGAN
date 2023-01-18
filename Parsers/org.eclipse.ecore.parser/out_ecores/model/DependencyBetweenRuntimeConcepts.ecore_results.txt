@@ -1,0 +1,5 @@
+model	FSM (initialState,State,ref) (ownedState,State,ref) (finalState,State,ref) 
+model	State (name,EString,attribute) (outgoingTransition,Transition,ref) (owningFSM,FSM,ref) (incomingTransition,Transition,ref) 
+model	Transition (output,EString,attribute) (input,EString,attribute) (source,State,ref) (target,State,ref) 
+model	RuntimeConcept1 (foo,EInt,attribute) (myState,State,ref) 
+model	RuntimeConcept2 (bar,EString,attribute) (myFoos,RuntimeConcept1,ref) 

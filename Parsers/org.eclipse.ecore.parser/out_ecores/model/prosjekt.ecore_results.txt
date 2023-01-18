@@ -1,0 +1,4 @@
+model	Institute (name,EString,attribute) (shortName,EString,attribute) (course,Course,ref) (courseCoordinator,CourseCoordinator,ref) 
+model	Semester (name,EString,attribute) (course,Course,ref) 
+model	CourseCoordinator (name,EString,attribute) (course,Course,ref) (institute,Institute,ref) 
+model	Course (code,EString,attribute) (avgGrade,EInt,attribute) (name,EShort,attribute) (studyPoints,EDouble,attribute) (institute,Institute,ref) (semester,Semester,ref) (courseCoordinator,CourseCoordinator,ref) 

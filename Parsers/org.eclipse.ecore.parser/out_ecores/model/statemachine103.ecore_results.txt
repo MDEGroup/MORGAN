@@ -1,0 +1,7 @@
+model	StateMachineVariable (name,EString,attribute) (type,EString,attribute) 
+model	StateMachineObject (label,EString,attribute) 
+model	Action (actionStatement,EString,attribute) (actionLabel,EString,attribute) (next,Action,ref) 
+model	NormalState (s_actions,Action,ref) 
+model	StateMachine (label,EString,attribute) (machineVariables,StateMachineVariable,ref) (machineObjects,StateMachineObject,ref) 
+model	State (id,EInt,attribute) 
+model	Transition (guardLabel,EString,attribute) (guardExpression,EString,attribute) (t_actions,Action,ref) (source,State,ref) (target,State,ref) 

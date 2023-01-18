@@ -1,0 +1,203 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="nested102"
+    nsURI="http://nested102" nsPrefix="_nested102">
+  <eAnnotations source="diagen">
+    <details key="knownas=simple world"/>
+    <details key="origin=http://org.isoe.fr"/>
+    <details key="leftparent=nil" value=""/>
+    <details key="rightparent=nil" value=""/>
+    <details key="requires=nil" value=""/>
+    <details key="context=startup"/>
+  </eAnnotations>
+  <eClassifiers xsi:type="ecore:EClass" name="World">
+    <eAnnotations source="diagraph">
+      <details key="node"/>
+      <details key="pov"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="things" upperBound="-1"
+        eType="#//Thing" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Thing" eSuperTypes="#//NamedElement">
+    <eAnnotations source="diagraph">
+      <details key="node"/>
+      <details key="kref=EReference0"/>
+    </eAnnotations>
+    <eAnnotations source="diagraph">
+      <details key="node"/>
+      <details key="view=vweclass3"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="id" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="relations" upperBound="-1"
+        eType="#//RelatedTo" containment="true" eOpposite="#//RelatedTo/fromThing"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="EReference0" upperBound="-1"
+        eType="#//EClass0" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="NamedElement" abstract="true">
+    <eAnnotations source="diagraph">
+      <details key="label=name"/>
+    </eAnnotations>
+    <eAnnotations source="diagraph">
+      <details key="view=vweclass0"/>
+      <details key="label=name"/>
+    </eAnnotations>
+    <eAnnotations source="diagraph">
+      <details key="view=vweclass1"/>
+      <details key="label=name"/>
+    </eAnnotations>
+    <eAnnotations source="diagraph">
+      <details key="view=vweclass2"/>
+      <details key="label=name"/>
+    </eAnnotations>
+    <eAnnotations source="diagraph">
+      <details key="view=vweclass3"/>
+      <details key="label=name"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="RelatedTo" eSuperTypes="#//NamedElement">
+    <eAnnotations source="diagraph">
+      <details key="link"/>
+      <details key="cont=Thing.relations"/>
+      <details key="lsrc=fromThing"/>
+      <details key="ltrg=toThing"/>
+    </eAnnotations>
+    <eAnnotations source="diagraph">
+      <details key="link"/>
+      <details key="view=vweclass3"/>
+      <details key="cont=Thing.relations"/>
+      <details key="lsrc=fromThing"/>
+      <details key="ltrg=toThing"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="fromThing" eType="#//Thing"
+        eOpposite="#//Thing/relations"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="toThing" eType="#//Thing"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="since" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="EClass0" eSuperTypes="#//NamedElement">
+    <eAnnotations source="diagraph">
+      <details key="node"/>
+      <details key="kref=ecl1"/>
+      <details key="nav:vweclass0"/>
+    </eAnnotations>
+    <eAnnotations source="diagraph">
+      <details key="node"/>
+      <details key="pov"/>
+      <details key="kref=ecl1"/>
+      <details key="view=vweclass0"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="ecl1" upperBound="-1" eType="#//EClass1"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="EClass1" eSuperTypes="#//NamedElement">
+    <eAnnotations source="diagraph">
+      <details key="node"/>
+    </eAnnotations>
+    <eAnnotations source="diagraph">
+      <details key="node"/>
+      <details key="view=vweclass0"/>
+      <details key="kref=ecl2"/>
+      <details key="nav:vweclass1"/>
+    </eAnnotations>
+    <eAnnotations source="diagraph">
+      <details key="node"/>
+      <details key="kref=ecl2"/>
+      <details key="view=vweclass1"/>
+      <details key="pov"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="ecl2" upperBound="-1" eType="#//EClass2"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="EClass2" eSuperTypes="#//NamedElement">
+    <eAnnotations source="diagraph">
+      <details key="node"/>
+      <details key="view=vweclass0"/>
+      <details key="kref=ecl3"/>
+    </eAnnotations>
+    <eAnnotations source="diagraph">
+      <details key="node"/>
+      <details key="view=vweclass1"/>
+      <details key="kref=ecl3"/>
+      <details key="nav:vweclass2"/>
+    </eAnnotations>
+    <eAnnotations source="diagraph">
+      <details key="node"/>
+      <details key="kref=ecl3"/>
+      <details key="view=vweclass2"/>
+      <details key="pov"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="ecl3" upperBound="-1" eType="#//EClass3"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="EClass3" eSuperTypes="#//NamedElement">
+    <eAnnotations source="diagraph">
+      <details key="node"/>
+      <details key="view=vweclass1"/>
+    </eAnnotations>
+    <eAnnotations source="diagraph">
+      <details key="node"/>
+      <details key="view=vweclass0"/>
+      <details key="kref=ecl4"/>
+    </eAnnotations>
+    <eAnnotations source="diagraph">
+      <details key="node"/>
+      <details key="kref=ecl4"/>
+      <details key="view=vweclass2"/>
+      <details key="nav:vweclass3"/>
+    </eAnnotations>
+    <eAnnotations source="diagraph">
+      <details key="node"/>
+      <details key="kref=ecl4"/>
+      <details key="view=vweclass3"/>
+      <details key="pov"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="ecl4" upperBound="-1" eType="#//EClass4"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="EClass4" eSuperTypes="#//NamedElement">
+    <eAnnotations source="diagraph">
+      <details key="node"/>
+      <details key="view=vweclass1"/>
+    </eAnnotations>
+    <eAnnotations source="diagraph">
+      <details key="node"/>
+      <details key="view=vweclass0"/>
+    </eAnnotations>
+    <eAnnotations source="diagraph">
+      <details key="node"/>
+      <details key="view=vweclass2"/>
+    </eAnnotations>
+    <eAnnotations source="diagraph">
+      <details key="node"/>
+      <details key="view=vweclass3"/>
+      <details key="kref=ecl5"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="ecl5" upperBound="-1" eType="#//EClass5"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="EClass5" eSuperTypes="#//NamedElement #//EClass6">
+    <eAnnotations source="diagraph">
+      <details key="node"/>
+      <details key="view=vweclass3"/>
+    </eAnnotations>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="EClass6" abstract="true" eSuperTypes="#//EClass7 #//EClass8">
+    <eAnnotations source="diagraph">
+      <details key="node"/>
+      <details key="view=vweclass3"/>
+    </eAnnotations>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="EClass7" abstract="true" eSuperTypes="#//Thing">
+    <eAnnotations source="diagraph">
+      <details key="node"/>
+      <details key="view=vweclass3"/>
+    </eAnnotations>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="EClass8" abstract="true" eSuperTypes="#//NamedElement">
+    <eAnnotations source="diagraph">
+      <details key="node"/>
+      <details key="view=vweclass3"/>
+    </eAnnotations>
+  </eClassifiers>
+</ecore:EPackage>

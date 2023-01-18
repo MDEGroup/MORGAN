@@ -1,0 +1,7 @@
+model	Area (ymax,EInt,attribute) (xmax,EInt,attribute) 
+model	WayPoint (coord_x,EInt,attribute) (coord_y,EInt,attribute) (waypointtypes,WaypointType,ref) 
+model	LineTask (waypoints,WayPoint,ref) 
+model	Mission (task,Task,ref) 
+model	TurtleBot (area,Area,ref) (bot_start,WayPoint,ref) (missions,Mission,ref) (waypointtypes,WaypointType,ref) (waypoints,WayPoint,ref) 
+model	ShortestPathTask (waypoints,WayPoint,ref) 
+model	NamedElement (name,EString,attribute) 

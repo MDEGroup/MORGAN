@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="AssistantMVC"
+    nsURI="http://gts.inf.um.es/test/assistant_mvc" nsPrefix="mvc">
+  <eClassifiers xsi:type="ecore:EClass" name="Exam">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="examItems" upperBound="-1"
+        eType="#//ExamItem" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="controllers" upperBound="-1"
+        eType="#//Controller" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="views" upperBound="-1"
+        eType="#//View" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="question" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ExamItem">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="optional" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Open" eSuperTypes="#//ExamItem"/>
+  <eClassifiers xsi:type="ecore:EClass" name="MultipleChoice" eSuperTypes="#//ExamItem"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Observer"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Controller" eSuperTypes="#//Observer"/>
+  <eClassifiers xsi:type="ecore:EClass" name="View" eSuperTypes="#//Observer">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="fontName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="fontColor" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="controller" eType="#//Controller"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ExamController" eSuperTypes="#//Controller"/>
+  <eClassifiers xsi:type="ecore:EClass" name="ExamItemController" eSuperTypes="#//Controller"/>
+  <eClassifiers xsi:type="ecore:EClass" name="MultipleChoiceController" eSuperTypes="#//ExamItemController"/>
+  <eClassifiers xsi:type="ecore:EClass" name="OpenController" eSuperTypes="#//ExamItemController"/>
+  <eClassifiers xsi:type="ecore:EClass" name="ExamView" eSuperTypes="#//View"/>
+  <eClassifiers xsi:type="ecore:EClass" name="ExamItemView" eSuperTypes="#//View"/>
+  <eClassifiers xsi:type="ecore:EClass" name="OpenView" eSuperTypes="#//ExamView"/>
+  <eClassifiers xsi:type="ecore:EClass" name="MultipleChoiceView" eSuperTypes="#//ExamItemView"/>
+  <eClassifiers xsi:type="ecore:EClass" name="ArrowShape">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="question" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Subgraph"/>
+</ecore:EPackage>

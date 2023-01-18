@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="featureDiagram"
+    nsURI="http://www.kermeta.org/featureDiagram" nsPrefix="featureDiagram">
+  <eAnnotations source="TextualConstraint"/>
+  <eClassifiers xsi:type="ecore:EClass" name="FeatureDiagram">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="graphTypeTree" lowerBound="1"
+        eType="#//Boolean" defaultValueLiteral="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="features" upperBound="-1"
+        eType="#//Feature" containment="true" eOpposite="#//Feature/owningFeatureDiagram"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="root" lowerBound="1" eType="#//Feature"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="constraintEdges" upperBound="-1"
+        eType="#//ConstraintEdge" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Feature">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="#//String"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="owningFeatureDiagram" lowerBound="1"
+        eType="#//FeatureDiagram" eOpposite="#//FeatureDiagram/features"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="operator" eType="#//Operator"
+        containment="true" eOpposite="#//Operator/owningFeature"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="models" upperBound="-1"
+        eType="#//Model" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="selected" lowerBound="1"
+        eType="#//Boolean" defaultValueLiteral="false"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="optional" lowerBound="1"
+        eType="#//Boolean" defaultValueLiteral="false"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="children" upperBound="-1"
+        eType="#//Feature" eOpposite="#//Feature/parents"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="parents" upperBound="-1"
+        eType="#//Feature" eOpposite="#//Feature/children"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="PrimitiveFeature" eSuperTypes="#//Feature"/>
+  <eClassifiers xsi:type="ecore:EClass" name="ConstraintEdge">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="target" eType="#//Feature"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="constraint" eType="#//Constraint"
+        containment="true" eOpposite="#//Constraint/owningCE"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="source" eType="#//Feature"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Operator" abstract="true">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="owningFeature" eType="#//Feature"
+        eOpposite="#//Feature/operator"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Opt" eSuperTypes="#//Operator"/>
+  <eClassifiers xsi:type="ecore:EClass" name="And" eSuperTypes="#//Operator"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Or" eSuperTypes="#//Operator"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Xor" eSuperTypes="#//Operator"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Card" eSuperTypes="#//Operator"/>
+  <eClassifiers xsi:type="ecore:EDataType" name="Boolean" instanceClassName="java.lang.Boolean"/>
+  <eClassifiers xsi:type="ecore:EDataType" name="String" instanceClassName="java.lang.String"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Constraint" abstract="true">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="owningCE" eType="#//ConstraintEdge"
+        eOpposite="#//ConstraintEdge/constraint"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Require" eSuperTypes="#//Constraint"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Mutex" eSuperTypes="#//Constraint"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Model">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" lowerBound="1" eType="#//String"/>
+  </eClassifiers>
+</ecore:EPackage>

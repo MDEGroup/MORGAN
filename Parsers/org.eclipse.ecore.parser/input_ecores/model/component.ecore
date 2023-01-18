@@ -1,0 +1,411 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="component" nsURI="http:///jp/go/aist/rtm/toolscommon/model/component.ecore"
+    nsPrefix="jp.go.aist.rtm.toolscommon.model.component">
+  <eClassifiers xsi:type="ecore:EClass" name="SystemDiagram" eSuperTypes="core.ecore#//ModelElement #//IPropertyMap">
+    <eOperations name="setSynchronizeInterval">
+      <eParameters name="milliSecond" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//ELong"/>
+    </eOperations>
+    <eOperations name="addPropertyChangeListener">
+      <eParameters name="listener" eType="#//PropertyChangeListener"/>
+    </eOperations>
+    <eOperations name="removePropertyChangeListener">
+      <eParameters name="listener" eType="#//PropertyChangeListener"/>
+    </eOperations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="components" upperBound="-1"
+        eType="#//Component" containment="true" resolveProxies="false"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="kind" eType="#//SystemDiagramKind"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="ConnectorProcessing" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="systemId" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="creationDate" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="updateDate" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="parentSystemDiagram" eType="#//SystemDiagram"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="compositeComponent" eType="#//Component"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Component" abstract="true" eSuperTypes="core.ecore#//WrapperObject #//IPropertyMap">
+    <eOperations name="getAllComponents" upperBound="-1" eType="#//Component"/>
+    <eOperations name="isCompositeComponent" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    <eOperations name="isGroupingCompositeComponent" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    <eOperations name="hasComponentAction" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    <eOperations name="inOnlineSystemDiagram" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    <eOperations name="setComponentsR" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
+      <eParameters name="componentList" eType="#//List"/>
+    </eOperations>
+    <eOperations name="addComponentsR" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
+      <eParameters name="componentList" eType="#//List"/>
+    </eOperations>
+    <eOperations name="removeComponentR" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
+      <eParameters name="component" eType="#//Component"/>
+    </eOperations>
+    <eOperations name="setExportedPorts" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
+      <eParameters name="values" upperBound="-1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eOperations>
+    <eOperations name="updateConfigurationSetR" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
+      <eParameters name="configSet" eType="#//ConfigurationSet"/>
+      <eParameters name="isActive" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    </eOperations>
+    <eOperations name="updateConfigurationSetListR" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
+      <eParameters name="list" eType="#//List"/>
+      <eParameters name="activeConfigurationSet" eType="#//ConfigurationSet"/>
+      <eParameters name="originallist" eType="#//List"/>
+    </eOperations>
+    <eOperations name="getPath" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="configurationSets" upperBound="-1"
+        eType="#//ConfigurationSet" containment="true" resolveProxies="false"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="activeConfigurationSet"
+        eType="#//ConfigurationSet"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="ports" upperBound="-1"
+        eType="#//Port" containment="true" resolveProxies="false"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="inports" upperBound="-1"
+        eType="#//InPort" changeable="false" volatile="true" transient="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="outports" upperBound="-1"
+        eType="#//OutPort" changeable="false" volatile="true" transient="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="serviceports" upperBound="-1"
+        eType="#//ServicePort" changeable="false" volatile="true" transient="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="components" upperBound="-1"
+        eType="#//Component"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="primaryExecutionContext"
+        eType="#//ExecutionContext" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="executionContexts" upperBound="-1"
+        eType="#//ExecutionContext" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="participationContexts"
+        upperBound="-1" eType="#//ExecutionContext" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="executionContextHandler"
+        eType="#//ContextHandler" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="participationContextHandler"
+        eType="#//ContextHandler" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="childSystemDiagram" eType="#//SystemDiagram"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="instanceNameL" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
+        defaultValueLiteral=""/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="venderL" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
+        transient="true" defaultValueLiteral=""/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="descriptionL" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
+        transient="true" defaultValueLiteral=""/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="categoryL" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
+        transient="true" defaultValueLiteral=""/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="typeNameL" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
+        transient="true" defaultValueLiteral=""/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="versionL" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
+        transient="true" defaultValueLiteral=""/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="pathId" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="outportDirection" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
+        defaultValueLiteral="RIGHT"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="compositeTypeL" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
+        changeable="false" transient="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="componentId" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="required" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"
+        defaultValueLiteral="false"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="startUp" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="shutDown" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="activation" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="deActivation" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="resetting" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="initialize" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="finalize" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ComponentSpecification" eSuperTypes="#//Component">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="aliasName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="specUnLoad" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"
+        defaultValueLiteral="false"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="rtcType" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ExecutionContext" eSuperTypes="core.ecore#//WrapperObject #//IPropertyMap">
+    <eOperations name="getId" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eOperations name="getKindName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eOperations name="getStateName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eOperations name="setRateR" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
+      <eParameters name="rate" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDoubleObject"/>
+    </eOperations>
+    <eOperations name="addComponentR" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
+      <eParameters name="comp" eType="#//Component"/>
+    </eOperations>
+    <eOperations name="removeComponentR" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
+      <eParameters name="comp" eType="#//Component"/>
+    </eOperations>
+    <eOperations name="containsComponent" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
+      <eParameters name="comp" eType="#//Component"/>
+    </eOperations>
+    <eOperations name="isOwner" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
+      <eParameters name="comp" eType="#//Component"/>
+    </eOperations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="kindL" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"
+        defaultValueLiteral="-1"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="rateL" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDoubleObject"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="stateL" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="owner" eType="#//Component"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="participants" upperBound="-1"
+        eType="#//Component" resolveProxies="false"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ContextHandler" eSuperTypes="core.ecore#//IAdaptable">
+    <eOperations name="setContext" eType="#//ExecutionContext">
+      <eParameters name="id" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+      <eParameters name="ec" eType="#//ExecutionContext"/>
+    </eOperations>
+    <eOperations name="getContext" eType="#//ExecutionContext">
+      <eParameters name="id" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eOperations>
+    <eOperations name="getId" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
+      <eParameters name="ec" eType="#//ExecutionContext"/>
+    </eOperations>
+    <eOperations name="removeContext" eType="#//ExecutionContext">
+      <eParameters name="id" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eOperations>
+    <eOperations name="removeId" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
+      <eParameters name="ec" eType="#//ExecutionContext"/>
+    </eOperations>
+    <eOperations name="sync"/>
+    <eOperations name="values" eType="#//List"/>
+    <eOperations name="keys" eType="#//List"/>
+    <eOperations name="clear"/>
+    <eOperations name="getType" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eOperations name="getOwnerContexts" upperBound="-1" eType="#//ExecutionContext"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ConfigurationSet" eSuperTypes="core.ecore#//WrapperObject">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="id" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="configurationData" upperBound="-1"
+        eType="#//NameValue" containment="true" resolveProxies="false"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="NameValue" eSuperTypes="core.ecore#//WrapperObject">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
+        defaultValueLiteral=""/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="typeName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
+        defaultValueLiteral=""/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Port" eSuperTypes="core.ecore#//WrapperObject">
+    <eOperations name="disconnectAll"/>
+    <eOperations name="findPort" eType="#//Port">
+      <eParameters name="diagram" eType="#//SystemDiagram"/>
+      <eParameters name="originalPortString" unique="false" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eOperations>
+    <eOperations name="validateTargetConnector" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
+      <eParameters name="target" eType="#//Port"/>
+    </eOperations>
+    <eOperations name="validateSourceConnector" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
+      <eParameters name="source" eType="#//Port"/>
+    </eOperations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="originalPortString" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="synchronizer" eType="#//PortSynchronizer"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="nameL" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="allowAnyDataType" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"
+        changeable="false" volatile="true" transient="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="allowAnyInterfaceType"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean" changeable="false"
+        volatile="true" transient="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="allowAnyDataflowType" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"
+        changeable="false" volatile="true" transient="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="allowAnySubscriptionType"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean" changeable="false"
+        volatile="true" transient="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="connectorProfiles" upperBound="-1"
+        eType="#//ConnectorProfile" transient="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="interfaces" upperBound="-1"
+        eType="#//PortInterfaceProfile"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="dataflowType" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="subscriptionType" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="dataType" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="interfaceType" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="InPort" eSuperTypes="#//Port"/>
+  <eClassifiers xsi:type="ecore:EClass" name="OutPort" eSuperTypes="#//Port"/>
+  <eClassifiers xsi:type="ecore:EClass" name="ServicePort" eSuperTypes="#//Port"/>
+  <eClassifiers xsi:type="ecore:EClass" name="PortSynchronizer" eSuperTypes="#//IPropertyMap">
+    <eOperations name="disconnect" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
+      <eParameters name="conn_id" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eOperations>
+    <eOperations name="disconnect" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
+      <eParameters name="conn_prof" eType="#//ConnectorProfile"/>
+    </eOperations>
+    <eOperations name="disconnectAll" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="originalPortString" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="PortConnector" abstract="true" eSuperTypes="core.ecore#//WrapperObject">
+    <eOperations name="createConnectorR" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    <eOperations name="deleteConnectorR" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="connectorProfile" eType="#//ConnectorProfile"
+        containment="true" resolveProxies="false"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="routingConstraint" upperBound="-1"
+        eType="#//EIntegerObjectToPointMapEntry" containment="true" resolveProxies="false"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="source" eType="#//Port"
+        transient="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="target" eType="#//Port"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ConnectorProfile" eSuperTypes="core.ecore#//WrapperObject #//IPropertyMap">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="dataflowType" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="subscriptionType" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="subscriptionTypeAvailable"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean" changeable="false"
+        volatile="true" transient="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="pushIntervalAvailable"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean" changeable="false"
+        volatile="true" transient="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="connectorId" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="dataType" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="interfaceType" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="pushRate" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDoubleObject"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="pushPolicy" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="skipCount" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EIntegerObject"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="pushPolicyAvailable" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"
+        changeable="false" volatile="true" transient="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="skipCountAvailable" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"
+        changeable="false" volatile="true" transient="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="sourceString" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="targetString" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="outportBufferLength" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EIntegerObject"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="outportBufferFullPolicy"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="outportBufferWriteTimeout"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDoubleObject"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="outportBufferEmptyPolicy"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="outportBufferReadTimeout"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDoubleObject"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="inportBufferLength" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EIntegerObject"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="inportBufferFullPolicy"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="inportBufferWriteTimeout"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDoubleObject"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="inportBufferEmptyPolicy"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="inportBufferReadTimeout"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDoubleObject"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="timestampPolicy" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="isReverse" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="EIntegerObjectToPointMapEntry" instanceClassName="java.util.Map$Entry">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="key" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EIntegerObject"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" eType="ecore:EDataType core.ecore#//Point"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="IPropertyMap" abstract="true" interface="true"
+      eSuperTypes="core.ecore#//IAdaptable">
+    <eOperations name="getProperty" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
+      <eParameters name="key" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eOperations>
+    <eOperations name="setProperty">
+      <eParameters name="key" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+      <eParameters name="value" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eOperations>
+    <eOperations name="removeProperty" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
+      <eParameters name="key" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eOperations>
+    <eOperations name="getPropertyKeys" upperBound="-1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eOperations name="getPropertyMap" eType="#//IPropertyMap"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EDataType" name="SDOConfiguration" instanceClassName="_SDOPackage.Configuration"/>
+  <eClassifiers xsi:type="ecore:EDataType" name="SDOConfigurationSet" instanceClassName="_SDOPackage.ConfigurationSet"/>
+  <eClassifiers xsi:type="ecore:EDataType" name="SDOOrganization" instanceClassName="_SDOPackage.Organization"/>
+  <eClassifiers xsi:type="ecore:EDataType" name="SDOServiceProfile" instanceClassName="_SDOPackage.ServiceProfile"/>
+  <eClassifiers xsi:type="ecore:EDataType" name="RTCRTObject" instanceClassName="RTC.RTObject"/>
+  <eClassifiers xsi:type="ecore:EDataType" name="RTCComponentProfile" instanceClassName="RTC.ComponentProfile"/>
+  <eClassifiers xsi:type="ecore:EDataType" name="RTCConnectorProfile" instanceClassName="RTC.ConnectorProfile"/>
+  <eClassifiers xsi:type="ecore:EDataType" name="RTCPortProfile" instanceClassName="RTC.PortProfile"/>
+  <eClassifiers xsi:type="ecore:EDataType" name="RTCExecutionContext" instanceClassName="RTC.ExecutionContext"/>
+  <eClassifiers xsi:type="ecore:EDataType" name="RTCExecutionContextProfile" instanceClassName="RTC.ExecutionContextProfile"/>
+  <eClassifiers xsi:type="ecore:EEnum" name="SystemDiagramKind">
+    <eLiterals name="ONLINE" value="1" literal="ONLINE"/>
+    <eLiterals name="OFFLINE" value="2" literal="OFFLINE"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EDataType" name="PropertyChangeListener" instanceClassName="java.beans.PropertyChangeListener"/>
+  <eClassifiers xsi:type="ecore:EDataType" name="PortInterfaceProfile" instanceClassName="jp.go.aist.rtm.toolscommon.model.component.PortInterfaceProfile"/>
+  <eClassifiers xsi:type="ecore:EDataType" name="List" instanceClassName="java.util.List"/>
+  <eClassifiers xsi:type="ecore:EClass" name="CorbaComponent" eSuperTypes="#//Component core.ecore#//CorbaWrapperObject">
+    <eOperations name="startR" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    <eOperations name="stopR" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    <eOperations name="activateR" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    <eOperations name="deactivateR" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    <eOperations name="resetR" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    <eOperations name="finalizeR" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    <eOperations name="exitR" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    <eOperations name="getExecutionContextState" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    <eOperations name="getExecutionContextState" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt">
+      <eParameters name="ec" eType="#//ExecutionContext"/>
+    </eOperations>
+    <eOperations name="getExecutionContextStateName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eOperations name="getExecutionContextStateName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
+      <eParameters name="ec" eType="#//ExecutionContext"/>
+    </eOperations>
+    <eOperations name="getComponentStateName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eOperations name="getCorbaObjectInterface" eType="#//RTCRTObject"/>
+    <eOperations name="supportedCorbaObserver" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    <eOperations name="activateAll"/>
+    <eOperations name="deactivateAll"/>
+    <eOperations name="startAll"/>
+    <eOperations name="stopAll"/>
+    <eOperations name="attachPortEventObserver">
+      <eParameters name="observer" eType="#//ICorbaPortEventObserver"/>
+    </eOperations>
+    <eOperations name="detatchPortEventObserver">
+      <eParameters name="observer" eType="#//ICorbaPortEventObserver"/>
+    </eOperations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="rTCComponentProfile" eType="#//RTCComponentProfile"
+        transient="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="rTCExecutionContexts" upperBound="-1"
+        eType="#//RTCExecutionContext" transient="true" defaultValueLiteral=""/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="rTCParticipationContexts"
+        unique="false" upperBound="-1" eType="#//RTCExecutionContext" transient="true"
+        defaultValueLiteral=""/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="sDOConfiguration" eType="#//SDOConfiguration"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="sDOOrganization" eType="#//SDOOrganization"
+        defaultValueLiteral=""/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="rTCRTObjects" unique="false"
+        upperBound="-1" eType="#//RTCRTObject" transient="true" defaultValueLiteral=""/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="componentState" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="ior" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="statusObserver" eType="#//CorbaStatusObserver"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="logObserver" eType="#//CorbaLogObserver"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="CorbaPortSynchronizer" eSuperTypes="core.ecore#//CorbaWrapperObject #//PortSynchronizer">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="rTCPortProfile" eType="#//RTCPortProfile"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="CorbaConnectorProfile" eSuperTypes="#//ConnectorProfile">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="rtcConnectorProfile" eType="#//RTCConnectorProfile"
+        transient="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="CorbaConfigurationSet" eSuperTypes="#//ConfigurationSet">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="sDOConfigurationSet" eType="#//SDOConfigurationSet"
+        transient="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="CorbaExecutionContext" eSuperTypes="#//ExecutionContext core.ecore#//CorbaWrapperObject">
+    <eOperations name="startR" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    <eOperations name="stopR" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    <eOperations name="activateR" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt">
+      <eParameters name="comp" eType="#//Component"/>
+    </eOperations>
+    <eOperations name="deactivateR" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt">
+      <eParameters name="comp" eType="#//Component"/>
+    </eOperations>
+    <eOperations name="resetR" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt">
+      <eParameters name="comp" eType="#//Component"/>
+    </eOperations>
+    <eOperations name="getComponentState" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt">
+      <eParameters name="comp" eType="#//Component"/>
+    </eOperations>
+    <eOperations name="getComponentStateName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
+      <eParameters name="comp" eType="#//Component"/>
+    </eOperations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="rtcExecutionContextProfile"
+        eType="#//RTCExecutionContextProfile"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="CorbaContextHandler" eSuperTypes="#//ContextHandler"/>
+  <eClassifiers xsi:type="ecore:EClass" name="CorbaObserver" eSuperTypes="#//IPropertyMap core.ecore#//IAdaptable">
+    <eOperations name="activate"/>
+    <eOperations name="deactivate"/>
+    <eOperations name="attachComponent" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
+      <eParameters name="component" eType="#//CorbaComponent"/>
+    </eOperations>
+    <eOperations name="detachComponent" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    <eOperations name="finish" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="serviceProfile" eType="#//SDOServiceProfile"
+        changeable="false"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="servant" eType="#//Servant"
+        changeable="false"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="CorbaStatusObserver" eSuperTypes="#//CorbaObserver">
+    <eOperations name="isTimeOut" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="CorbaLogObserver" eSuperTypes="#//CorbaObserver"/>
+  <eClassifiers xsi:type="ecore:EDataType" name="Servant" instanceClassName="org.omg.PortableServer.Servant"/>
+  <eClassifiers xsi:type="ecore:EDataType" name="ICorbaPortEventObserver" instanceClassName="jp.go.aist.rtm.toolscommon.model.component.util.ICorbaPortEventObserver"/>
+</ecore:EPackage>

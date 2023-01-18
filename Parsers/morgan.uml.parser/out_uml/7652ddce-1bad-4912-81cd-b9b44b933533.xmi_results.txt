@@ -1,0 +1,24 @@
+model	Patient PatientId,property PId,property UserId,property FirstName,property LastName,property DateOfBirth,property Email,property IsEmailConfirmed,property activationcode,property PhoneNumber,property IsPhoneNumberConfirmed,property StreetAddress,property City,property State,property ZipCode,property enterPatientData,operation viewPatient,operation editPatientData,operation deletePatient,operation 
+model	Appointment AppointmentId,property Aid,property PatientId,property PatientName,property Did,property DoctorName,property ServiceId,property AppointmentDate,property AppointmentTime,property Reason,property AppointmentStatus,property createAppointment,operation viewAppointment,operation editAppointment,operation deleteAppoinment,operation 
+model	Doctor DoctorId,property DId,property UserId,property DoctorName,property DateOfBirth,property Email,property PhoneNumber,property Speciality,property enterNewDoctor,operation viewDoctor,operation editDoctor,operation deleteDoctor,operation 
+model	date 
+model	time 
+model	bit 
+model	Bill BillId,property BId,property Did,property DoctorName,property BillDate,property PId,property PatientName,property TotalAmount,property createBill,operation viewBill,operation editBill,operation deleteBill,operation 
+model	DoctorSchedule DSid,property DoctorId,property AvailableDate,property AvailableTime,property addSchedule,operation editaddSchedule,operation deleteaddSchedule,operation 
+model	DoctorServices ServiceId,property SId,property ServiceName,property ServiceDetails,property ServicePrice,property addService,operation editService,operation deleteService,operation 
+model	decimal 
+model	uniqueidentifier 
+model	Receptionist ReceptionistId,property RId,property UserId,property ReceptionistName,property DateOfBirth,property Email,property PhoneNumber,property 
+model	Users Id,property Email,property EmailConfirmed,property PasswordHash,property SecurityStamp,property PhoneNumber,property PhoneNumberConfirmed,property TwoFactorEnabled,property LockoutEndDateUtc,property LockoutEnabled,property AccessFailedCount,property UserName,property addUser,operation viewUser,operation editUser,operation deleteUser,operation 
+model	datetime 
+model	UserRoles Id,property Name,property 
+model	UserwithRole UserId,property RoleId,property 
+model	Appointment_Doctor doctor,property appointment,property 
+model	Doctor_DoctorSchedule doctorSchedule,property doctor,property 
+model	Doctor_Bill bill,property doctor,property 
+model	Patient_Bill bill,property patient,property 
+model	Patient_Appointment appointment,property patient,property 
+model	DoctorServices_Appointment appointment,property doctorServices,property 
+model	Users_UserwithRole userwithRole,property users,property 
+model	UserRoles_UserwithRole userwithRole,property userRoles,property 

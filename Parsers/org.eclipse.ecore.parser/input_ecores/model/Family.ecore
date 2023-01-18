@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="family" nsURI="http://www.phungkhac.com/family" nsPrefix="family">
+  <eClassifiers xsi:type="ecore:EClass" name="FNamedElement" abstract="true">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Person" abstract="true" eSuperTypes="#//FNamedElement">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="age" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="sex" lowerBound="1" eType="#//SexType"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Family" eSuperTypes="#//FNamedElement">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="members" lowerBound="1"
+        upperBound="-1" eType="#//Person" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="father" eType="#//Father"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="mother" eType="#//Mother"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="children" upperBound="-1"
+        eType="#//Child"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Father" eSuperTypes="#//Person">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="children" upperBound="-1"
+        eType="#//Child" eOpposite="#//Child/father"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="wife" eType="#//Mother"
+        eOpposite="#//Mother/husband"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Mother" eSuperTypes="#//Person">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="children" upperBound="-1"
+        eType="#//Child" eOpposite="#//Child/mother"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="husband" eType="#//Father"
+        eOpposite="#//Father/wife"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Child" eSuperTypes="#//Person">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="mother" eType="#//Mother"
+        eOpposite="#//Mother/children"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="father" eType="#//Father"
+        eOpposite="#//Father/children"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="SexType">
+    <eLiterals name="male"/>
+    <eLiterals name="female" value="1"/>
+  </eClassifiers>
+</ecore:EPackage>

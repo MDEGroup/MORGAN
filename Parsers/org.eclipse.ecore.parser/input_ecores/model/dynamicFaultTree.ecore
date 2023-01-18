@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="dynamicFaultTree" nsURI="http://www.example.org/dynamicFaultTree"
+    nsPrefix="dynamicFaultTree">
+  <eClassifiers xsi:type="ecore:EClass" name="DFT">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="topLevelEvent" eType="#//TopLevelEvent"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="dependencies" upperBound="-1"
+        eType="#//Dependency" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Element" abstract="true">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="probability" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EFloat"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="sequencePosition" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="elementID" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="TopLevelEvent" eSuperTypes="#//Element">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="gate" eType="#//Gate" containment="true"
+        eOpposite="#//Gate/toplevelevent"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Gate" abstract="true" eSuperTypes="#//Element">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="toplevelevent" eType="#//TopLevelEvent"
+        eOpposite="#//TopLevelEvent/gate"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="childGate" upperBound="-1"
+        eType="#//Gate" containment="true" eOpposite="#//Gate/parentGate"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="parentGate" eType="#//Gate"
+        eOpposite="#//Gate/childGate"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="childEvent" upperBound="-1"
+        eType="#//Event" containment="true" eOpposite="#//Event/parentGate"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Event" eSuperTypes="#//Element">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="parentGate" eType="#//Gate"
+        eOpposite="#//Gate/childEvent"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="dependency" upperBound="-1"
+        eType="#//Dependency" eOpposite="#//Dependency/events"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Dependency" abstract="true" eSuperTypes="#//Element">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="events" upperBound="-1"
+        eType="#//Event" eOpposite="#//Event/dependency"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Sequence" eSuperTypes="#//Dependency"/>
+  <eClassifiers xsi:type="ecore:EClass" name="FunctionalDependency" eSuperTypes="#//Dependency"/>
+  <eClassifiers xsi:type="ecore:EClass" name="AND" eSuperTypes="#//Gate"/>
+  <eClassifiers xsi:type="ecore:EClass" name="PAND" eSuperTypes="#//Gate"/>
+  <eClassifiers xsi:type="ecore:EClass" name="OR" eSuperTypes="#//Gate"/>
+  <eClassifiers xsi:type="ecore:EClass" name="POR" eSuperTypes="#//Gate"/>
+  <eClassifiers xsi:type="ecore:EClass" name="XOR" eSuperTypes="#//Gate"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Spare" eSuperTypes="#//Gate">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="spares" upperBound="-1"
+        eType="#//Event"/>
+  </eClassifiers>
+</ecore:EPackage>

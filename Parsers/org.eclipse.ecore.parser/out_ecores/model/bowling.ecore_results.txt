@@ -1,0 +1,5 @@
+model	Player (streetNumber,EInt,attribute) (street,EString,attribute) (isProfessional,EBoolean,attribute) (name,EString,attribute) (dateOfBirth,EDate,attribute) (height,EDouble,attribute) (eMail,EString,attribute) (games,Game,ref) 
+model	League (name,EString,attribute) (players,Player,ref) 
+model	Game (frames,EInt,attribute) (matchup,Matchup,ref) (player,Player,ref) 
+model	Matchup (date,EDate,attribute) (games,Game,ref) 
+model	Tournament (title,EString,attribute) (type,TournamentType,attribute) (matchups,Matchup,ref) (league,League,ref) 

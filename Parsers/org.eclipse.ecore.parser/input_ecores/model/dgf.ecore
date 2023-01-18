@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="ASCII"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="dgf" nsURI="http://diagraph-language" nsPrefix="dgf">
+  <eClassifiers xsi:type="ecore:EClass" name="DVertex" abstract="true" eSuperTypes="//DGraphElement">
+    <eAnnotations source="diagraph">
+      <details key="cont=DNode.vertices" value=""/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="target" eType="//DNode"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="source" eType="//DNode"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="targetReference">
+      <eType xsi:type="ecore:EClass" href="platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EReference"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="DGraphElement" abstract="true">
+    <eAnnotations source="diagraph"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name">
+      <eType xsi:type="ecore:EDataType" href="platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EString"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="DNode" eSuperTypes="//DGraphElement //DTypedElement //DContainedElement">
+    <eAnnotations source="diagraph">
+      <details key="node" value=""/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="vertices" upperBound="-1" eType="//DVertex" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="pointOfView">
+      <eType xsi:type="ecore:EDataType" href="platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EBoolean"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="DLink" eSuperTypes="//DContainedVertex //DTypedElement">
+    <eAnnotations source="diagraph">
+      <details key="link" value=""/>
+      <details key="cont=DNode.vertices" value=""/>
+      <details key="lsrc=source" value=""/>
+      <details key="ltrg=target" value=""/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="sourceReference">
+      <eType xsi:type="ecore:EClass" href="platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EReference"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="DReference" eSuperTypes="//DVertex">
+    <eAnnotations source="diagraph">
+      <details key="link" value=""/>
+      <details key="cont=DNode.vertices" value=""/>
+      <details key="lsrc=source" value=""/>
+      <details key="ltrg=target" value=""/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="property">
+      <eType xsi:type="ecore:EDataType" href="platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EBoolean"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="DContainment" eSuperTypes="//DContainedVertex">
+    <eAnnotations source="diagraph">
+      <details key="link" value=""/>
+      <details key="cont=DNode.vertices" value=""/>
+      <details key="lsrc=source" value=""/>
+      <details key="ltrg=target" value=""/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="compartment">
+      <eType xsi:type="ecore:EDataType" href="platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EBoolean"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Graph">
+    <eAnnotations source="diagraph">
+      <details key="node" value=""/>
+      <details key="pov" value=""/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="elements" upperBound="-1" eType="//DGraphElement" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="DTypedElement" abstract="true">
+    <eAnnotations source="diagraph"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="eClass">
+      <eType xsi:type="ecore:EClass" href="platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EClass"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="labelAttribute">
+      <eType xsi:type="ecore:EClass" href="platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EAttribute"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="DContainedElement" abstract="true" eSuperTypes="//DGraphElement">
+    <eAnnotations source="diagraph">
+      <details key="cont=Graph.elements" value=""/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="containment" eType="//DNode"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="DContainedVertex" abstract="true" eSuperTypes="//DContainedElement //DVertex">
+    <eAnnotations source="diagraph">
+      <details key="cont=Graph.elements" value=""/>
+    </eAnnotations>
+  </eClassifiers>
+</ecore:EPackage>

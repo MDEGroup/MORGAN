@@ -1,0 +1,7 @@
+model	Type (name,EString,attribute) 
+model	Table (name,EString,attribute) (foreignKeys,ForeignKey,ref) (columns,Column,ref) (keyColumns,Column,ref) (content,Record,ref) 
+model	Column (ctype,BasicType,attribute) (stype,EString,attribute) (name,EString,attribute) (type,Type,ref) 
+model	Schema (name,EString,attribute) (tables,Table,ref) (types,Type,ref) 
+model	RecordElement (value,EString,attribute) (type,Column,ref) 
+model	Record (elements,RecordElement,ref) 
+model	ForeignKey (references,Table,ref) (columns,Column,ref) 

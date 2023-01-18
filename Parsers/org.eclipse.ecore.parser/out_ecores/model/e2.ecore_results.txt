@@ -1,0 +1,8 @@
+model	Assingnment (StartDate,EDate,attribute) (Type,EString,attribute) (Content,EString,attribute) (Deadline,EDate,attribute) (Title,EString,attribute) (isMandatory,EBoolean,attribute) 
+model	Group (Name,EString,attribute) (GroupMember,Person,ref) (Submitted,AssignmentSubmission,ref) 
+model	Lecture (Length,EInt,attribute) (Date,EDate,attribute) (Content,LectureContent,ref) 
+model	University (Name,EString,attribute) (Persons,Person,ref) (Courses,Course,ref) 
+model	AssignmentSubmission (Comments,EString,attribute) (Assessment,EInt,attribute) (AssesedBy,Person,ref) (assignment,Assingnment,ref) 
+model	LectureContent (Type,EString,attribute) (Material,EString,attribute) (LectureAssignment,Assingnment,ref) 
+model	Course (Credit,EDouble,attribute) (ID,EString,attribute) (Name,EString,attribute) (Lecturerer,Person,ref) (Students,Person,ref) (TeachingAssistant,Person,ref) (StudentGroups,Group,ref) (Assingments,Assingnment,ref) (Lectures,Lecture,ref) 
+model	Person (Name,EString,attribute) (Submitted,AssignmentSubmission,ref) 

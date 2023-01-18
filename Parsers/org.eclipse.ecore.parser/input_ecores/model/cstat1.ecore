@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="cstat1"
+    nsURI="http://cstat1" nsPrefix="_cstat1">
+  <eClassifiers xsi:type="ecore:EClass" name="SubState1" eSuperTypes="#//AbstractState">
+    <eAnnotations source="diagraph">
+      <details key="node" value=""/>
+      <details key="kref=sub2s" value=""/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="sub2s" upperBound="-1"
+        eType="#//SubState2" containment="true" resolveProxies="false"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="StateChart">
+    <eAnnotations source="diagraph">
+      <details key="node" value=""/>
+      <details key="pov" value=""/>
+      <details key="cref=states"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="states" upperBound="-1"
+        eType="#//State" containment="true" resolveProxies="false"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="State" eSuperTypes="#//AbstractState">
+    <eAnnotations source="diagraph">
+      <details key="node" value=""/>
+      <details key="kref=sub1s" value=""/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="sub1s" upperBound="-1"
+        eType="#//SubState1" containment="true" resolveProxies="false"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="SubState2" eSuperTypes="#//AbstractState">
+    <eAnnotations source="diagraph">
+      <details key="node" value=""/>
+    </eAnnotations>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Transition">
+    <eAnnotations source="diagraph">
+      <details key="link"/>
+      <details key="lsrc=fromState"/>
+      <details key="ltrg=toState"/>
+      <details key="cont=AbstractState.transitions"/>
+      <details key="label=guard"/>
+      <details key="label=event"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="guard" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="event" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="fromState" eType="#//AbstractState"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="toState" eType="#//AbstractState"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="AbstractState" abstract="true">
+    <eAnnotations source="diagraph">
+      <details key="node"/>
+      <details key="label=id"/>
+      <details key="kref=actions"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="id" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="transitions" upperBound="-1"
+        eType="#//Transition" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="type" eType="#//StateType"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="actions" upperBound="-1"
+        eType="#//Action" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="EClass0"/>
+  <eClassifiers xsi:type="ecore:EEnum" name="StateType">
+    <eLiterals name="SIMPLE"/>
+    <eLiterals name="INITIAL" value="1"/>
+    <eLiterals name="FINAL" value="2"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Action">
+    <eAnnotations source="diagraph">
+      <details key="node"/>
+      <details key="label=expression"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="expression" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="mode" eType="#//ActionMode"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="ActionMode">
+    <eLiterals name="ENTRY"/>
+    <eLiterals name="EXIT" value="1"/>
+  </eClassifiers>
+</ecore:EPackage>

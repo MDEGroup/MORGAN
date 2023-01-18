@@ -1,0 +1,3 @@
+model	State (name,EString,attribute) (memRequirement,EInt,attribute) (owningStateMachine,StateMachine,ref) 
+model	StateMachine (ownedState,State,ref) (ownedTransition,Transition,ref) 
+model	Transition (cost,EInt,attribute) (effect,EString,attribute) (trigger,EString,attribute) (owningStateMachine,StateMachine,ref) (source,State,ref) (target,State,ref) 

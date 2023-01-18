@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="base" nsURI="http://www.eclipse.epsilon.org/incremental/base/ExecutionTrace/1.0"
+    nsPrefix="base_et">
+  <eClassifiers xsi:type="ecore:EClass" name="IdElement" abstract="true" interface="true">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="id" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"
+        changeable="false" iD="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ModuleTrace" abstract="true" eSuperTypes="#//IdElement">
+    <eAnnotations source="https://eclipse.org/epsilon/incremental/OrientDbIndex" references="#//ModuleTrace/source">
+      <details key="type" value="NOTUNIQUE_HASH_INDEX"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="source" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ExecutionTrace" abstract="true" eSuperTypes="#//IdElement">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="accesses" ordered="false"
+        lowerBound="1" upperBound="-1" eType="#//Access" resolveProxies="false"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Access" abstract="true" eSuperTypes="#//IdElement"/>
+  <eClassifiers xsi:type="ecore:EClass" name="ElementAccess" eSuperTypes="#//Access">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="element" lowerBound="1"
+        eType="#//ModelElementTrace"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="AllInstancesAccess" eSuperTypes="#//Access">
+    <eAnnotations source="https://eclipse.org/epsilon/incremental/equals" references="#//AllInstancesAccess/ofKind #//AllInstancesAccess/type"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="ofKind" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="type" lowerBound="1" eType="#//ModelTypeTrace"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="PropertyAccess" eSuperTypes="#//Access">
+    <eAnnotations source="https://eclipse.org/epsilon/incremental/equals" references="#//PropertyAccess/property #//PropertyAccess/value"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="property" lowerBound="1"
+        eType="#//PropertyTrace"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ModelTrace" eSuperTypes="#//IdElement">
+    <eAnnotations source="https://eclipse.org/epsilon/incremental/OrientDbIndex" references="#//ModelTrace/name">
+      <details key="type" value="NOTUNIQUE_HASH_INDEX"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ModelTypeTrace" eSuperTypes="#//IdElement">
+    <eAnnotations source="https://eclipse.org/epsilon/incremental/OrientDbIndex" references="#//ModelTypeTrace/name">
+      <details key="type" value="NOTUNIQUE_HASH_INDEX"/>
+    </eAnnotations>
+    <eAnnotations source="https://eclipse.org/epsilon/incremental/equals" references="#//ModelTypeTrace/model"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="model" lowerBound="1" eType="#//ModelTrace"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ModelElementTrace" eSuperTypes="#//IdElement">
+    <eAnnotations source="https://eclipse.org/epsilon/incremental/OrientDbIndex" references="#//ModelElementTrace/uri">
+      <details key="type" value="NOTUNIQUE_HASH_INDEX"/>
+    </eAnnotations>
+    <eAnnotations source="https://eclipse.org/epsilon/incremental/equals" references="#//ModelTypeTrace/model"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="uri" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2003/XMLType#//AnyURI"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="model" lowerBound="1" eType="#//ModelTrace"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="PropertyTrace" eSuperTypes="#//IdElement">
+    <eAnnotations source="https://eclipse.org/epsilon/incremental/OrientDbIndex" references="#//PropertyTrace/name">
+      <details key="type" value="NOTUNIQUE_HASH_INDEX"/>
+    </eAnnotations>
+    <eAnnotations source="https://eclipse.org/epsilon/incremental/equals" references="#//PropertyTrace/element"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="element" lowerBound="1"
+        eType="#//ModelElementTrace"/>
+  </eClassifiers>
+</ecore:EPackage>

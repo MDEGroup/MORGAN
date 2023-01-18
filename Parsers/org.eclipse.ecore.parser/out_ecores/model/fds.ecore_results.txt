@@ -1,0 +1,7 @@
+model	Restriction (restrictionsColumns,RestrictionColumn,ref) 
+model	Table (functionalDependencies,FunctionalDependency,ref) (columns,Column,ref) (restrictions,Restriction,ref) 
+model	FunctionalDependency (dependant,Column,ref) (determinant,Column,ref) 
+model	Database (tables,Table,ref) 
+model	RestrictionColumn (restriction,Restriction,ref) (column,Column,ref) (pkRestrictionColumn,RestrictionColumn,ref) 
+model	ForeignKey (primaryKey,PrimaryKey,ref) 
+model	NamedElement (name,EString,attribute) 

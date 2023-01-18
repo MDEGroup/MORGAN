@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="dependability2stochasticpetrinet" nsURI="platform:/plugin/hu.bme.mit.inf.viewmodel.benchmarks.models/model/dependability2stochasticpetrinet.ecore"
+    nsPrefix="dependability2stochasticpetrinet">
+  <eClassifiers xsi:type="ecore:EClass" name="Dependability2StochasticPetriNetTrace">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="railwayContainer" lowerBound="1"
+        eType="ecore:EClass railway.ecore#//RailwayContainer"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="dependabilityModel" lowerBound="1"
+        eType="ecore:EClass dependability.ecore#//DependabilityModel"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="traceLinks" upperBound="-1"
+        eType="#//TraceLink" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="TraceLink" abstract="true"/>
+  <eClassifiers xsi:type="ecore:EClass" name="ErrorModel2PetriNetModule" eSuperTypes="#//PetriNetModuleTraceLink">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="errorModel" lowerBound="1"
+        eType="ecore:EClass dependability.ecore#//ErrorModel"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="up" lowerBound="1" eType="ecore:EClass stochasticpetrinet.ecore#//Place"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="down" lowerBound="1" eType="ecore:EClass stochasticpetrinet.ecore#//Place"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="repair" lowerBound="1"
+        eType="ecore:EClass stochasticpetrinet.ecore#//Transition"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="RailwayContainer2PetriNet" eSuperTypes="#//TraceLink">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="railwayContainer" lowerBound="1"
+        eType="ecore:EClass railway.ecore#//RailwayContainer"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="petriNet" lowerBound="1"
+        eType="ecore:EClass stochasticpetrinet.ecore#//PetriNet"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="PetriNetModuleTraceLink" abstract="true"
+      eSuperTypes="#//TraceLink">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="nodes" upperBound="-1"
+        eType="ecore:EClass stochasticpetrinet.ecore#//Node"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="arcs" upperBound="-1" eType="ecore:EClass stochasticpetrinet.ecore#//Arc"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="RequiredElement2Connection" eSuperTypes="#//PetriNetModuleTraceLink">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="source" lowerBound="1"
+        eType="ecore:EClass dependability.ecore#//ErrorModel"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="target" lowerBound="1"
+        eType="ecore:EClass dependability.ecore#//ErrorModel"/>
+  </eClassifiers>
+</ecore:EPackage>

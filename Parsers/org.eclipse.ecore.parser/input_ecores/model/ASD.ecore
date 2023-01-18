@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="ASD"
+    nsURI="http://ASD" nsPrefix="ASD">
+  <eClassifiers xsi:type="ecore:EClass" name="ServiceDescription" eSuperTypes="#//NamedElement">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="operations" upperBound="-1"
+        eType="#//Operation" containment="true" eOpposite="#//Operation/service"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="infotypes" upperBound="-1"
+        eType="#//InfoType" containment="true" eOpposite="#//InfoType/service"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="profiles" upperBound="-1"
+        eType="#//Profile" containment="true" eOpposite="#//Profile/service"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Operation" eSuperTypes="#//NamedElement">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="messagePattern" eType="#//EEnumOp"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="contents" lowerBound="1"
+        upperBound="-1" eType="#//Message" containment="true" eOpposite="#//Message/operation"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="service" eType="#//ServiceDescription"
+        eOpposite="#//ServiceDescription/operations"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Message" eSuperTypes="#//NamedElement">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="role" eType="#//EEnumMes"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="subset" eType="#//EEnumSubset"
+        derived="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="infoType" lowerBound="1"
+        upperBound="-1" eType="#//InfoType" eOpposite="#//InfoType/message"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="operation" eType="#//Operation"
+        eOpposite="#//Operation/contents"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="InfoType" eSuperTypes="#//NamedElement">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="valueType" eType="#//EEnumValueType"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="valueRange" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="subset" eType="#//EEnumSubset"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="infoType" upperBound="-1"
+        eType="#//InfoType" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="ref" eType="#//InfoType"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="message" upperBound="-1"
+        eType="#//Message" eOpposite="#//Message/infoType"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="service" eType="#//ServiceDescription"
+        eOpposite="#//ServiceDescription/infotypes"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="EEnumOp">
+    <eLiterals name="oneway"/>
+    <eLiterals name="notification"/>
+    <eLiterals name="requestresponse"/>
+    <eLiterals name="solicitresponse"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="EEnumMes">
+    <eLiterals name="input"/>
+    <eLiterals name="output"/>
+    <eLiterals name="fault"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="EEnumSubset">
+    <eLiterals name="req" literal="req"/>
+    <eLiterals name="pro"/>
+    <eLiterals name="off" literal="off"/>
+    <eLiterals name="exp" literal="exp"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="EEnumValueType">
+    <eLiterals name="document" value="4"/>
+    <eLiterals name="int"/>
+    <eLiterals name="float" value="1"/>
+    <eLiterals name="double" value="2"/>
+    <eLiterals name="string" value="5"/>
+    <eLiterals name="date" value="3"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Profile" eSuperTypes="#//NamedElement">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="refers" lowerBound="1"
+        upperBound="-1" eType="#//Operation"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="sets" lowerBound="1" upperBound="-1"
+        eType="#//AssertionSet" containment="true" eOpposite="#//AssertionSet/profile"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="service" eType="#//ServiceDescription"
+        eOpposite="#//ServiceDescription/profiles"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="EEnumlogicalType">
+    <eLiterals name="AND"/>
+    <eLiterals name="OR" value="1"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="AssertionSet" eSuperTypes="#//NamedElement">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="lType" eType="#//EEnumlogicalType"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="profile" eType="#//Profile"
+        eOpposite="#//Profile/sets"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="assertions" lowerBound="1"
+        upperBound="-1" eType="#//Assertion" containment="true" eOpposite="#//Assertion/set"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="EEnumDimensionType">
+    <eLiterals name="monotonic"/>
+    <eLiterals name="antitonic" value="1"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="EEnumIntention">
+    <eLiterals name="offering" literal="offering"/>
+    <eLiterals name="expectation" value="1" literal="expectation"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Assertion" eSuperTypes="#//NamedElement">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="dimension" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="dimensionType" eType="#//EEnumDimensionType"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="role" eType="#//EEnumIntention"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="minVal" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDouble"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="maxVal" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDouble"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="lType" eType="#//EEnumlogicalType"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="set" eType="#//AssertionSet"
+        eOpposite="#//AssertionSet/assertions"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="subset" eType="#//EEnumSubset"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="NamedElement" abstract="true">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="annotations" upperBound="-1"
+        eType="#//Annotation" containment="true" eOpposite="#//Annotation/owner"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Annotation">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="key" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="owner" eType="#//NamedElement"
+        eOpposite="#//NamedElement/annotations"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="InfoTypeImported" eSuperTypes="#//InfoType">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="url" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+</ecore:EPackage>

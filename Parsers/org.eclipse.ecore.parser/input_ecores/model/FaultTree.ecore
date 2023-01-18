@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="faultTree" nsURI="http://www.fzi.de/fta/faulttree" nsPrefix="faultTree">
+  <eAnnotations source="http://www.eclipse.org/OCL/Import">
+    <details key="ecore" value="http://www.eclipse.org/emf/2002/Ecore"/>
+  </eAnnotations>
+  <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore">
+    <details key="invocationDelegates" value="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot"/>
+    <details key="settingDelegates" value="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot"/>
+    <details key="validationDelegates" value="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot"/>
+  </eAnnotations>
+  <eClassifiers xsi:type="ecore:EClass" name="FaultTree">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore">
+      <details key="constraints" value="nameNotNullOrEmpty"/>
+    </eAnnotations>
+    <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
+      <details key="nameNotNullOrEmpty" value="&#xA;&#x9;&#x9;&#x9;self.name &lt;> null and self.name &lt;> ''"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
+        iD="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="gates" upperBound="-1"
+        eType="#//Gate" containment="true" eOpposite="#//Gate/faultTree"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="events" upperBound="-1"
+        eType="#//Event" changeable="false" volatile="true" derived="true">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
+        <details key="derivation" value="&#xA;&#x9;&#x9;&#x9;self.primaryEvents -> includingAll(self.intermediateEvents -> includingAll(self.conditioningEvents))"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="intermediateEvents" upperBound="-1"
+        eType="#//IntermediateEvent" containment="true" eKeys="#//Event/name"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="primaryEvents" upperBound="-1"
+        eType="#//PrimaryEvent" containment="true" eKeys="#//Event/name"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="conditioningEvents" upperBound="-1"
+        eType="#//ConditioningEvent" containment="true" eKeys="#//Event/name"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="transferOut" eType="#//TransferOut"
+        containment="true" eOpposite="#//TransferOut/faultTree"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="transferIns" upperBound="-1"
+        eType="#//TransferIn" containment="true" eOpposite="#//TransferIn/faultTree"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="topEvent" eType="#//IntermediateEvent"
+        changeable="false" volatile="true" derived="true" eKeys="#//Event/name">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
+        <details key="derivation" value="&#xA;&#x9;&#x9;&#x9;let topEventCandiates = self.events -> select(e| e.oclIsTypeOf(IntermediateEvent)).oclAsType(IntermediateEvent) -> reject(i | i.topEvent &lt;> null or i.topGates -> size() > 0)&#xA;&#x9;&#x9;&#x9;in if (topEventCandiates -> size() = 1) then&#xA;&#x9;&#x9;&#x9;&#x9;topEventCandiates -> any(true)&#xA;&#x9;&#x9;&#x9;else&#xA;&#x9;&#x9;&#x9;&#x9;null&#xA;&#x9;&#x9;&#x9;endif"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Gate">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore">
+      <details key="constraints" value="atLeastOneInput"/>
+    </eAnnotations>
+    <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
+      <details key="atLeastOneInput" value="&#xA;&#x9;&#x9;&#x9;self.inputs -> size() > 0"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="inputs" upperBound="-1"
+        eType="#//Event" eOpposite="#//Event/topGates"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="output" eType="#//IntermediateEvent"
+        eOpposite="#//IntermediateEvent/bottomGate"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="faultTree" lowerBound="1"
+        eType="#//FaultTree" eOpposite="#//FaultTree/gates"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
+        changeable="false" volatile="true" derived="true">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
+        <details key="derivation" value="&#xA;&#x9;&#x9;&#x9;let concatInputsWithCommaAtEnd = inputs.name ->  iterate(n; result : ecore::EString = '' | result.concat(n).concat(',')),&#xA;&#x9;&#x9;&#x9;gateName =  if (self.type = GateType::AND) then&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;'AND'&#xA;&#x9;&#x9;&#x9;&#x9;elseif (self.type = GateType::OR) then&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;'OR'&#xA;&#x9;&#x9;&#x9;&#x9;elseif (self.type = GateType::XOR) then&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;'XOR'&#xA;&#x9;&#x9;&#x9;&#x9;elseif (self.type = GateType::PAND) then&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;'PAND'&#xA;&#x9;&#x9;&#x9;&#x9;else &#xA;&#x9;&#x9;&#x9;&#x9;&#x9;'INHIBIT'&#xA;&#x9;&#x9;&#x9;&#x9;endif&#xA;&#x9;&#x9;&#x9;in&#xA;&#x9;&#x9;&#x9;&#x9;if (concatInputsWithCommaAtEnd.size() = 0) then&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;gateName.concat('()')&#xA;&#x9;&#x9;&#x9;&#x9;else&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;gateName.concat('(').concat(concatInputsWithCommaAtEnd.substring(1, concatInputsWithCommaAtEnd.size() -1)).concat(')')&#xA;&#x9;&#x9;&#x9;&#x9;endif"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="type" eType="#//GateType"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="probability" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDouble" changeable="false"
+        volatile="true" derived="true">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
+        <details key="derivation" value="&#xA;&#x9;&#x9;&#x9;let primaryEvents = self.inputs -> select(i|i.oclIsTypeOf(PrimaryEvent)).oclAsType(PrimaryEvent),&#xA;&#x9;&#x9;&#x9;&#x9;intermediateEvents = self.inputs -> select(i|i.oclIsTypeOf(IntermediateEvent)).oclAsType(IntermediateEvent)&#xA;&#x9;&#x9;&#x9;in&#xA;&#x9;&#x9;&#x9;if (primaryEvents.probability -> size() = 0 and intermediateEvents.probability -> size() = 0) then &#xA;&#x9;&#x9;&#x9;&#x9;null&#xA;&#x9;&#x9;&#x9;elseif(primaryEvents.probability -> exists(p| p = null) or intermediateEvents.probability -> exists(p| p = null)) then&#xA;&#x9;&#x9;&#x9;&#x9;null&#xA;&#x9;&#x9;&#x9;elseif (self.inputs -> exists(i| i.topGates -> size() > 1)) then&#xA;&#x9;&#x9;&#x9;&#x9;null&#xA;&#x9;&#x9;&#x9;else&#xA;&#x9;&#x9;&#x9;&#x9;let probabilities = primaryEvents.probability -> includingAll(intermediateEvents.probability),&#xA;&#x9;&#x9;&#x9;&#x9;orProbability = 1 - probabilities -> iterate(p : ecore::EDouble; result : ecore::EDouble = 1 | result * (1-p)),&#xA;&#x9;&#x9;&#x9;&#x9;andProbability = probabilities -> iterate(p : ecore::EDouble; result : ecore::EDouble = 1 | result * p) in&#xA;&#x9;&#x9;&#x9;&#x9;if (probabilities -> size() = 1) then&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;probabilities -> any(p : ecore::EDouble | true)&#xA;&#x9;&#x9;&#x9;&#x9;elseif (self.type = GateType::AND) then &#xA;&#x9;&#x9;&#x9;&#x9;&#x9;andProbability&#xA;&#x9;&#x9;&#x9;&#x9;elseif (self.type = GateType::OR) then &#xA;&#x9;&#x9;&#x9;&#x9;&#x9;orProbability&#xA;&#x9;&#x9;&#x9;&#x9;elseif (self.type = GateType::XOR) then&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;primaryEvents -> collect(e | e.probability * ((primaryEvents -> excluding(e)).probability -> includingAll(intermediateEvents.probability) -> iterate(p ; result : ecore::EDouble = 1 | result * (1-p)).oclAsType(ecore::EDouble))) -> sum()&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;+  (intermediateEvents -> collect(e | e.probability * ((intermediateEvents -> excluding(e)).probability -> includingAll(primaryEvents.probability) -> iterate(p ; result : ecore::EDouble = 1 | result * (1-p)).oclAsType(ecore::EDouble))) -> sum())&#xA;&#x9;&#x9;&#x9;&#x9;else &#xA;&#x9;&#x9;&#x9;&#x9; &#x9;null&#xA;&#x9;&#x9;&#x9;&#x9;endif&#xA;&#x9;&#x9;&#x9;endif"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Event" abstract="true">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore">
+      <details key="constraints" value="nameNotNullOrEmpty"/>
+    </eAnnotations>
+    <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
+      <details key="nameNotNullOrEmpty" value="&#xA;&#x9;&#x9;self.name &lt;> null and self.name &lt;> ''"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
+        iD="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="description" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="topGates" upperBound="-1"
+        eType="#//Gate" eOpposite="#//Gate/inputs"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="faultTree" lowerBound="1"
+        eType="#//FaultTree" changeable="false" volatile="true" derived="true">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
+        <details key="derivation" value="&#xA;&#x9;&#x9;&#x9;self.oclContainer().oclAsType(FaultTree)"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="IntermediateEvent" eSuperTypes="#//Event">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore">
+      <details key="constraints" value="notBottomEventAndBottomGateAtTheSameTime atLeastOneChild"/>
+    </eAnnotations>
+    <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
+      <details key="notBottomEventAndBottomGateAtTheSameTime" value="&#xA;&#x9;not ((self.bottomEvent &lt;> null) and (self.bottomGate &lt;> null))"/>
+      <details key="atLeastOneChild" value="&#xA;&#x9;self.bottomEvent &lt;> null or self.bottomGate &lt;> null or self.transferIn &lt;> null"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="bottomGate" eType="#//Gate"
+        eOpposite="#//Gate/output"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="topEvent" eType="#//IntermediateEvent"
+        eOpposite="#//IntermediateEvent/bottomEvent"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="bottomEvent" eType="#//IntermediateEvent"
+        eOpposite="#//IntermediateEvent/topEvent"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="transferIn" eType="#//TransferIn"
+        eOpposite="#//TransferIn/event"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="transferOut" eType="#//TransferOut"
+        eOpposite="#//TransferOut/event"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="probability" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDouble" changeable="false"
+        volatile="true" derived="true">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
+        <details key="derivation" value="if (self.faultTree.transferIns -> size() > 0) then&#xA;&#x9;&#x9;0.0 &#xA;&#x9;elseif (self.bottomEvent &lt;> null) then &#xA;&#x9;&#x9;self.bottomEvent.probability &#xA;&#x9;elseif (self.bottomGate &lt;> null) then &#xA;&#x9;&#x9;self.bottomGate.probability &#xA;&#x9;else &#xA;&#x9;&#x9;0.0 &#xA;&#x9;endif"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="PrimaryEvent" eSuperTypes="#//Event">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore">
+      <details key="constraints" value="propbabilityBetweenZeroAndOne"/>
+    </eAnnotations>
+    <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
+      <details key="propbabilityBetweenZeroAndOne" value="&#xA;&#x9;&#x9;&#x9;(0.0 &lt;= self.probability and self.probability &lt;= 1.0) or self.probability = null"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="type" eType="#//PrimaryEventType"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="probability" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDouble"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ConditioningEvent" eSuperTypes="#//Event">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="condition" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="TransferIn" eSuperTypes="#//Transfer">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore">
+      <details key="constraints" value="onlyAttachedToLeafEvent"/>
+    </eAnnotations>
+    <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
+      <details key="onlyAttachedToLeafEvent" value="&#xA;&#x9;&#x9;&#x9;self.event.bottomGate = null and self.event.bottomEvent = null"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="event" eType="#//IntermediateEvent"
+        eOpposite="#//IntermediateEvent/transferIn"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="faultTree" lowerBound="1"
+        eType="#//FaultTree" eOpposite="#//FaultTree/transferIns"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="TransferOut" eSuperTypes="#//Transfer">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore">
+      <details key="constraints" value="onlyAttachedToTopEvent"/>
+    </eAnnotations>
+    <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
+      <details key="onlyAttachedToTopEvent" value="&#xA;&#x9;&#x9;&#x9;self.event = self.faultTree.topEvent"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="event" eType="#//IntermediateEvent"
+        eOpposite="#//IntermediateEvent/transferOut"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="faultTree" lowerBound="1"
+        eType="#//FaultTree" eOpposite="#//FaultTree/transferOut"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Transfer" abstract="true">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore">
+      <details key="constraints" value="nameNotNullOrEmpty"/>
+    </eAnnotations>
+    <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
+      <details key="nameNotNullOrEmpty" value="&#xA;&#x9;&#x9;&#x9;self.name &lt;> null and self.name &lt;> ''"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="GateType">
+    <eLiterals name="AND"/>
+    <eLiterals name="OR" value="1"/>
+    <eLiterals name="XOR" value="2"/>
+    <eLiterals name="PAND" value="3"/>
+    <eLiterals name="INHIBIT" value="4"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="PrimaryEventType">
+    <eLiterals name="BASIC"/>
+    <eLiterals name="UNDEVELOPED" value="1"/>
+    <eLiterals name="EXTERNAL" value="2"/>
+  </eClassifiers>
+</ecore:EPackage>

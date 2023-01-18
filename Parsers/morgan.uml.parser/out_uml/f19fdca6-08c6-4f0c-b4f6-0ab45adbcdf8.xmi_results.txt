@@ -1,0 +1,51 @@
+model	Login 
+model	Employee 
+model	User_Login login,property user,property 
+model	Change Password 
+model	Query Eligibility 
+model	User_Query Eligibility query Eligibility,property user,property 
+model	Query Leave Balance 
+model	User_Query Leave Balance query Leave Balance,property user,property 
+model	Query Leave History 
+model	User_Query Leave History query Leave History,property user,property 
+model	Apply Leave 
+model	Employee_Apply Leave apply Leave,property employee,property 
+model	Leave Request Status 
+model	Employee_Leave Request Status leave Request Status,property employee,property 
+model	Withdraw Application 
+model	Approver Jobs 
+model	Employee_Approver Jobs approver Jobs,property employee,property 
+model	Approve/RejectRequests 
+model	Cancel Leaves 
+model	Admin 
+model	CreateUser 
+model	Admin_CreateUser createUser,property admin,property 
+model	Update Calendar 
+model	Admin_Update Calendar update Calendar,property admin,property 
+model	Application 
+model	SendNotification 
+model	Credit Leaves 
+model	AutoApproval 
+model	GenerateSummary 
+model	Application_SendNotification sendNotification,property application,property 
+model	Credit Leaves_Application application,property credit Leaves,property 
+model	Application_AutoApproval autoApproval,property application,property 
+model	Application_GenerateSummary generateSummary,property application,property 
+model	Employee employeeId,property employeeName,property jobLevel,property password,property managerId,property noOfLeaves,property leavesTaken,property 
+model	Query requestId,property user,property 
+model	EligibilityQuery checkEligibility,operation 
+model	LeaveBalanceQuery checkLeaveBalance,operation 
+model	LeaveHistoryQuery fromDate,property toDate,property checkLeaveHistory,operation 
+model	LeaveApplication applicationId,property fromDate,property toDate,property reason,property employeeId,property status,property approverComments,property 
+model	Request requestId,property leaveApplication,property createRequest,operation 
+model	ApplyLeaveRequest createRequest,operation 
+model	WithdrawLeaveRequest createRequest,operation 
+model	CancelLeaveRequest createRequest,operation 
+model	LeaveStatusQuery checkOwnLeaveStatus,operation checkSubordinateLeaveStatus,operation 
+model	LeaveStatus 
+model	ApproveOrRejectStatus approveRequest,operation cancelRequest,operation 
+model	LoginAction employee,property validate,operation changePassword,operation 
+model	CreateUserAction employee,property createUser,operation 
+model	UpdateCalendar updateCalender,operation 
+model	ApplicationUtils sendMail,operation creditLeaves,operation autoApprove,operation generateSummary,operation 
+model	Interaction 

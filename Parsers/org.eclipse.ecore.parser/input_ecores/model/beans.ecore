@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<ecore:EPackage xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="beans"
+    nsURI="http://beans" nsPrefix="beans">
+  <eAnnotations source="http://www.topcased.org/uuid">
+    <details key="uuid" value="11380327744840"/>
+  </eAnnotations>
+  <eClassifiers xsi:type="ecore:EClass" name="BeanLibrary" eSuperTypes="#//NamedElement">
+    <eAnnotations source="http://www.topcased.org/uuid">
+      <details key="uuid" value="11380328734373"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="packageName" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
+      <eAnnotations source="http://www.topcased.org/uuid">
+        <details key="uuid" value="11380328734374"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="beans" lowerBound="1" upperBound="-1"
+        eType="#//Bean" containment="true" eOpposite="#//Bean/beanLibrary">
+      <eAnnotations source="http://www.topcased.org/uuid">
+        <details key="uuid" value="11380330393759"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Bean" eSuperTypes="#//NamedElement">
+    <eAnnotations source="http://www.topcased.org/uuid">
+      <details key="uuid" value="11380328734375"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="beanLibrary" lowerBound="1"
+        eType="#//BeanLibrary" eOpposite="#//BeanLibrary/beans">
+      <eAnnotations source="http://www.topcased.org/uuid">
+        <details key="uuid" value="113803303937513"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="properties" lowerBound="1"
+        upperBound="-1" eType="#//BeanProperty" containment="true" eOpposite="#//BeanProperty/bean">
+      <eAnnotations source="http://www.topcased.org/uuid">
+        <details key="uuid" value="113803303937514"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="BeanProperty" eSuperTypes="#//NamedElement">
+    <eAnnotations source="http://www.topcased.org/uuid">
+      <details key="uuid" value="11380328734376"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="typeName" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
+      <eAnnotations source="http://www.topcased.org/uuid">
+        <details key="uuid" value="113803294367115"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="bean" lowerBound="1" eType="#//Bean"
+        eOpposite="#//Bean/properties">
+      <eAnnotations source="http://www.topcased.org/uuid">
+        <details key="uuid" value="113803303937521"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="changeable" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
+      <eAnnotations source="http://www.topcased.org/uuid">
+        <details key="uuid" value="113803303937522"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="NamedElement" abstract="true">
+    <eAnnotations source="http://www.topcased.org/uuid">
+      <details key="uuid" value="11380328734377"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
+      <eAnnotations source="http://www.topcased.org/uuid">
+        <details key="uuid" value="113803294367119"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+  </eClassifiers>
+</ecore:EPackage>

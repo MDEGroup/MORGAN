@@ -1,0 +1,8 @@
+model	Assignment (expression,null,ref) (variable,null,ref) 
+model	Action (delay,EInt,attribute) (isImmediate,EBoolean,attribute) (label,EString,attribute) (effects,Effect,ref) (trigger,null,ref) 
+model	Substitution (formal,EString,attribute) (actual,EString,attribute) (parentScope,Scope,ref) 
+model	Scope (interfaceDeclaration,Parsable,attribute) (id,EString,attribute) (label,EString,attribute) (bodyReference,EObject,ref) (bodyContents,EObject,ref) (variables,null,ref) (signals,null,ref) (bodyText,null,ref) (exitActions,Action,ref) (suspensionTrigger,Action,ref) (innerActions,Action,ref) (entryActions,Action,ref) (renamings,Substitution,ref) 
+model	State (isInitial,EBoolean,attribute) (isFinal,EBoolean,attribute) (type,StateType,attribute) (outgoingTransitions,Transition,ref) (regions,Region,ref) (parentRegion,Region,ref) (incomingTransitions,Transition,ref) 
+model	Emission (newValue,null,ref) (signal,null,ref) 
+model	Transition (isHistory,EBoolean,attribute) (priority,EInt,attribute) (type,TransitionType,attribute) (targetState,State,ref) (sourceState,State,ref) 
+model	Region (parentState,State,ref) (states,State,ref) 

@@ -1,0 +1,6 @@
+model	Pseudostate (kind,PseudostateKind,attribute) 
+model	State (ownedRegions,Region,ref) 
+model	AbstractState (incoming,Transition,ref) (outgoing,Transition,ref) (ownerRegion,Region,ref) 
+model	Transition (source,AbstractState,ref) (target,AbstractState,ref) 
+model	Region (ownerState,State,ref) (subvertex,AbstractState,ref) 
+model	NamedElement (name,EString,attribute) 

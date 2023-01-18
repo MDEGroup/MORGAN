@@ -1,0 +1,82 @@
+model	Usuário 
+model	Aplicativo 
+model	Serviço Web 
+model	Autenticar-se 
+model	Selecionar treino 
+model	Iniciar/parar monitoramento cardíaco 
+model	Receber/responder requisições 
+model	Analisar dados 
+model	Sincronizar dados do usuário 
+model	Autenticar-se_Usuário usuário,property autenticar-se,property 
+model	Selecionar treino_Usuário usuário,property selecionar treino,property 
+model	Iniciar/parar monitoramento cardíaco_Usuário usuário,property iniciar/parar monitoramento cardíaco,property 
+model	Serviço Web_Receber/responder requisições receber/responder requisições,property serviço Web,property 
+model	Analisar dados_Serviço Web serviço Web,property analisar dados,property 
+model	Sincronizar dados_Aplicativo aplicativo,property sincronizar dados,property 
+model	Estabelecer comunicação com wearable 
+model	Aplicativo_Estabelecer comunicação com wearable estabelecer comunicação com wearable,property aplicativo,property 
+model	Usuario nome,property dataNascimento,property peso,property cpf,property senha,property getIdade,operation 
+model	Date 
+model	Double 
+model	MedicaoBatimento usuario,property valor,property enviado,property instante,property treino,property 
+model	DateTime 
+model	Treino nome,property 
+model	ServicoWeb sincronizarTreinos,operation autenticar,operation enviarMedicoes,operation 
+model	List<Treino> 
+model	TreinoMonitoramento inicio,property fim,property 
+model	DispositivoBluetooth macAddress,property nome,property 
+model	Aluno 
+model	Módulo Pedagógico 
+model	Sequenciar atividades 
+model	Sequenciar atividades_Módulo Pedagógico módulo Pedagógico,property sequenciar atividades,property 
+model	Avaliar plano de ensino 
+model	Adequar sequência 
+model	Fornecer feedback 
+model	Identificar erros comuns 
+model	Fornecer feedback_Módulo Pedagógico módulo Pedagógico,property fornecer feedback,property 
+model	Solicitar dica 
+model	Aluno_Solicitar dica solicitar dica,property aluno,property 
+model	Fornecer dica 
+model	Módulo Pedagógico_Fornecer dica fornecer dica,property módulo Pedagógico,property 
+model	Fornecer lista de atividades superadas 
+model	Fornecer lista de atividades superadas_Módulo Pedagógico módulo Pedagógico,property fornecer lista de atividades superadas,property 
+model	Propor desafio 
+model	Propor desafio_Módulo Pedagógico módulo Pedagógico,property propor desafio,property 
+model	Acessar atividade 
+model	Acessar atividade_Aluno aluno,property acessar atividade,property 
+model	Subject name,property 
+model	StudentSubject student,property subject,property level,property 
+model	Subject_StudentSubject studentSubject,property subject2,property 
+model	Activity content,property subject,property 
+model	Subject_Activity activity,property subject2,property 
+model	Exercise difficulty,property user_exercise,property 
+model	Instruction title,property level,property 
+model	Curriculum sequence,property activity,property 
+model	Activity_Curriculum curriculum,property activity2,property 
+model	StudentHistory student,property activity,property sequence,property 
+model	Activity_StudentHistory studentHistory,property activity2,property 
+model	Step exercise,property content,property 
+model	Exercise_Step step,property exercise2,property 
+model	TutorStep evidence,property difficulty,property 
+model	UserStep 
+model	AlternativeCategory name,property 
+model	Alternative step,property content,property answer,property answer_text,property category,property 
+model	Alternative_AlternativeCategory alternativeCategory,property alternative,property 
+model	Alternative_Step step2,property alternative,property 
+model	Feedback alternative,property feedback,property state,property level,property 
+model	Alternative_Feedback feedback,property alternative2,property 
+model	StudentStepHistory student,property step,property status,property tries,property 
+model	Step_StudentStepHistory studentStepHistory,property step2,property 
+model	Evidence 
+model	Student 
+model	is_exercise(activity_id) 
+model	is_user_step(step_id) 
+model	sequence(student) 
+model	select_activity(request) 
+model	student_module_views.get_student_domains(student) 
+model	select_exercise(student, subject) 
+model	update_history(request) 
+model	student_module_views.update_evidence(student, evidence_dict) 
+model	update_student_subject(student, student_knowledge) 
+model	handle_user_answer(request) 
+model	correct_alternative(alternative_id, alternative_answer, student, user_exercise) 

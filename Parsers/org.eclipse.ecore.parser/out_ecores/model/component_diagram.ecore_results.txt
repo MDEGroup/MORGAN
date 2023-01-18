@@ -1,0 +1,8 @@
+model	Connector (name,EString,attribute) (port,PortInstance,ref) 
+model	ComponentType (name,EString,attribute) (instance,ComponentInstance,ref) (port_types,PortType,ref) 
+model	PortInstance (name,EString,attribute) (inComponent,ComponentInstance,ref) (outComponent,ComponentInstance,ref) (type,PortType,ref) (connect,Connector,ref) 
+model	Architecture (component,ComponentType,ref) (connectors,Connector,ref) (port_type,PortType,ref) (instances,ComponentInstance,ref) (ports,PortInstance,ref) 
+model	HardwareComponent (powerSupply,EString,attribute) 
+model	ComponentInstance (name,EString,attribute) (version,EInt,attribute) (parentcomponent,ComponentInstance,ref) (subcomponent,ComponentInstance,ref) (inPorts,PortInstance,ref) (type,ComponentType,ref) (outPorts,PortInstance,ref) 
+model	Sensor (type,EString,attribute) 
+model	PortType (name,EString,attribute) (component_type,ComponentType,ref) (port_instance,PortInstance,ref) 

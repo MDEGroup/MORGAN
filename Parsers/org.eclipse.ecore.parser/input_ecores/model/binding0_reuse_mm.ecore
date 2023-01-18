@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="sm" nsURI="fma.subtyping.sm" nsPrefix="sm.concepts">
+  <eClassifiers xsi:type="ecore:EClass" name="sm_StateMachine" eSuperTypes="#//StateMachine">
+    <eAnnotations source="http://class/subtypePrefix">
+      <details key="subtyping_operand" value="subtype"/>
+    </eAnnotations>
+    <eAnnotations source="http://class/name">
+      <details key="name" value="StateMachine"/>
+    </eAnnotations>
+    <eAnnotations source="http://package/name">
+      <details key="package" value="sm"/>
+    </eAnnotations>
+    <eAnnotations source="http://class/subTypeOf">
+      <details key="subtype_of" value="StateMachine"/>
+    </eAnnotations>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="sm_State" eSuperTypes="#//State">
+    <eAnnotations source="http://class/subtypePrefix">
+      <details key="subtyping_operand" value="subtype"/>
+    </eAnnotations>
+    <eAnnotations source="http://class/name">
+      <details key="name" value="State"/>
+    </eAnnotations>
+    <eAnnotations source="http://package/name">
+      <details key="package" value="sm"/>
+    </eAnnotations>
+    <eAnnotations source="http://class/subTypeOf">
+      <details key="subtype_of" value="State"/>
+    </eAnnotations>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="sm_Transition" eSuperTypes="#//Transition">
+    <eAnnotations source="http://class/subtypePrefix">
+      <details key="subtyping_operand" value="subtype"/>
+    </eAnnotations>
+    <eAnnotations source="http://class/name">
+      <details key="name" value="Transition"/>
+    </eAnnotations>
+    <eAnnotations source="http://package/name">
+      <details key="package" value="sm"/>
+    </eAnnotations>
+    <eAnnotations source="http://class/subTypeOf">
+      <details key="subtype_of" value="Transition"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="event" lowerBound="1" eType="#//Event"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Event">
+    <eAnnotations source="http://class/subtypePrefix">
+      <details key="subtyping_operand" value="subtype"/>
+    </eAnnotations>
+    <eAnnotations source="http://class/name">
+      <details key="name" value="Event"/>
+    </eAnnotations>
+    <eAnnotations source="http://package/name">
+      <details key="package" value="sm"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="#//sm_String"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EDataType" name="sm_Boolean" instanceClassName="boolean">
+    <eAnnotations source="http://class/subtypePrefix">
+      <details key="subtyping_operand" value="subtype"/>
+    </eAnnotations>
+    <eAnnotations source="http://class/name">
+      <details key="name" value="Boolean"/>
+    </eAnnotations>
+    <eAnnotations source="http://package/name">
+      <details key="package" value="sm"/>
+    </eAnnotations>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EDataType" name="sm_Integer" instanceClassName="int">
+    <eAnnotations source="http://class/subtypePrefix">
+      <details key="subtyping_operand" value="subtype"/>
+    </eAnnotations>
+    <eAnnotations source="http://class/name">
+      <details key="name" value="Integer"/>
+    </eAnnotations>
+    <eAnnotations source="http://package/name">
+      <details key="package" value="sm"/>
+    </eAnnotations>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EDataType" name="sm_String" instanceClassName="java.lang.String">
+    <eAnnotations source="http://class/subtypePrefix">
+      <details key="subtyping_operand" value="subtype"/>
+    </eAnnotations>
+    <eAnnotations source="http://class/name">
+      <details key="name" value="String"/>
+    </eAnnotations>
+    <eAnnotations source="http://package/name">
+      <details key="package" value="sm"/>
+    </eAnnotations>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="StateMachine">
+    <eAnnotations source="http://class/name">
+      <details key="name" value="StateMachine"/>
+    </eAnnotations>
+    <eAnnotations source="http://package/name">
+      <details key="package" value="sm"/>
+    </eAnnotations>
+    <eAnnotations source="http://class/superTypeOf">
+      <details key="supertype_of" value="sm_StateMachine"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="#//String"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="initial" eType="#//State"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="final" upperBound="-1"
+        eType="#//State"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="nodes" upperBound="-1"
+        eType="#//State" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="edges" upperBound="-1"
+        eType="#//Transition" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="State">
+    <eAnnotations source="http://class/name">
+      <details key="name" value="State"/>
+    </eAnnotations>
+    <eAnnotations source="http://package/name">
+      <details key="package" value="sm"/>
+    </eAnnotations>
+    <eAnnotations source="http://class/superTypeOf">
+      <details key="supertype_of" value="sm_State"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="#//String"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="subMachines" upperBound="-1"
+        eType="#//StateMachine" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Transition">
+    <eAnnotations source="http://class/name">
+      <details key="name" value="Transition"/>
+    </eAnnotations>
+    <eAnnotations source="http://package/name">
+      <details key="package" value="sm"/>
+    </eAnnotations>
+    <eAnnotations source="http://class/superTypeOf">
+      <details key="supertype_of" value="sm_Transition"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="#//String"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="source" lowerBound="1"
+        eType="#//State"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="target" lowerBound="1"
+        eType="#//State"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EDataType" name="Boolean" instanceClassName="boolean">
+    <eAnnotations source="http://class/name">
+      <details key="name" value="Boolean"/>
+    </eAnnotations>
+    <eAnnotations source="http://package/name">
+      <details key="package" value="sm"/>
+    </eAnnotations>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EDataType" name="Integer" instanceClassName="int">
+    <eAnnotations source="http://class/name">
+      <details key="name" value="Integer"/>
+    </eAnnotations>
+    <eAnnotations source="http://package/name">
+      <details key="package" value="sm"/>
+    </eAnnotations>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EDataType" name="String" instanceClassName="java.lang.String">
+    <eAnnotations source="http://class/name">
+      <details key="name" value="String"/>
+    </eAnnotations>
+    <eAnnotations source="http://package/name">
+      <details key="package" value="sm"/>
+    </eAnnotations>
+  </eClassifiers>
+</ecore:EPackage>

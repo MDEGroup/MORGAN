@@ -1,0 +1,4 @@
+model	Project (longname,EString,attribute) (devmail,EString,attribute) (start,EDate,attribute) (end,EDate,attribute) (shortname,EString,attribute) (homepage,EString,attribute) (parent,Project,ref) (subprojects,Project,ref) (committers,CommitterShip,ref) (projectleads,Person,ref) 
+model	Foundation (persons,Person,ref) (projects,Project,ref) 
+model	CommitterShip (start,EDate,attribute) (end,EDate,attribute) (person,Person,ref) (project,Project,ref) 
+model	Person (image,EString,attribute) (firstname,EString,attribute) (email,EString,attribute) (lastname,EString,attribute) (committerships,CommitterShip,ref) 

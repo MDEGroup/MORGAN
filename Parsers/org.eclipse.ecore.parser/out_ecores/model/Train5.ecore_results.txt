@@ -1,0 +1,7 @@
+model	RailwayDiagram (routes,Route,ref) (sensors,SensorNetwork,ref) (trackelements,TrackElement,ref) 
+model	RoutePart (next,RoutePart,ref) (previous,RoutePart,ref) (element,TrackElement,ref) 
+model	Switch (neighbour,Segment,ref) 
+model	SensorNetwork (sensors,Switch,ref) 
+model	TrackElement (State,Signal,attribute) (length,EBigInteger,attribute) (train,Route,ref) 
+model	NamedElement (id,EString,attribute) 
+model	Route (leftOver,EBigInteger,attribute) (currentIndex,EBigInteger,attribute) (speed,EBigInteger,attribute) (route,RoutePart,ref) 

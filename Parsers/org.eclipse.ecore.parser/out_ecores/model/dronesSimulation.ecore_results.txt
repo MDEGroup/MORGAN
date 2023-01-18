@@ -1,0 +1,7 @@
+model	ObstacleObservation (obstacle,null,ref) 
+model	TaskInstance (state,TaskState,attribute) (task,null,ref) (roleInstances,RoleInstance,ref) 
+model	DroneObservation (position,null,ref) (drone,null,ref) 
+model	DronesSimulation (taskInstances,TaskInstance,ref) (scenario,null,ref) (droneInstances,DroneInstance,ref) 
+model	RoleInstance (role,null,ref) (taskInstance,TaskInstance,ref) (allocatedDrone,DroneInstance,ref) 
+model	Observation (time,ELong,attribute) (id,ELong,attribute) 
+model	DroneInstance (currentBattery,EDouble,attribute) (state,DroneState,attribute) (observations,Observation,ref) (currentRole,RoleInstance,ref) (position,null,ref) (drone,null,ref) 

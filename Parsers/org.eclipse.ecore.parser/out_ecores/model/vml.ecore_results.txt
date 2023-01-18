@@ -1,0 +1,7 @@
+model	Graph (ID,EIntegerObject,attribute) (title,EString,attribute) (nodes,Node,ref) (edges,Edge,ref) 
+model	Slice (title,EString,attribute) (value,EInt,attribute) 
+model	Node (title,EString,attribute) (outgoing,Edge,ref) (incoming,Edge,ref) 
+model	Model (diagrams,Diagram,ref) 
+model	Pie (ID,EIntegerObject,attribute) (title,EString,attribute) (slices,Slice,ref) 
+model	Edge (relation,EString,attribute) (source,Node,ref) (target,Node,ref) 
+model	Diagram (title,EString,attribute) (pies,Pie,ref) (graph,Graph,ref) 

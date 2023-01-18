@@ -1,0 +1,7 @@
+model	Test (ros,EString,attribute) 
+model	PrimitivePackage (statemachines,StateMachine,ref) 
+model	StateMachine (name,EString,attribute) (serviceclients,ServiceClient,ref) (actionclients,ActionClient,ref) (actionsstates,ActionState,ref) 
+model	ServiceClient (servicesrv,EString,attribute) (name,EString,attribute) (servicename,EString,attribute) 
+model	Transition (outcome,EString,attribute) (state,ActionState,ref) 
+model	ActionClient (actiontype,EString,attribute) (name,EString,attribute) (actionname,EString,attribute) 
+model	ActionState (name,EString,attribute) (clientname,ActionClient,ref) (transitions,Transition,ref) 

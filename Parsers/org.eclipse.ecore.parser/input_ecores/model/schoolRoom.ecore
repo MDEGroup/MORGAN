@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="School" nsURI="schoolRoom" nsPrefix="">
+  <eClassifiers xsi:type="ecore:EClass" name="School">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="room" upperBound="-1" eType="#//SchoolRoom"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="clock" lowerBound="1" eType="#//Clock"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="SchoolRoom">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="buzzer" lowerBound="1"
+        eType="#//Buzzer" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Buzzer">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="ring" lowerBound="1" eType="#//Clock"
+        eOpposite="#//Clock/alarm"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Clock">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="alarm" upperBound="-1"
+        eType="#//Buzzer" eOpposite="#//Buzzer/ring"/>
+  </eClassifiers>
+</ecore:EPackage>

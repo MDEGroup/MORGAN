@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="gtrace" nsURI="http://genesez.org/metamodel/traceability" nsPrefix="gtrace">
+  <eClassifiers xsi:type="ecore:EClass" name="TTraceModel">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="requirementTrace" upperBound="-1"
+        eType="#//TRequirementTrace" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="scenarioTrace" upperBound="-1"
+        eType="#//TScenarioTrace" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="scenarioStepTrace" upperBound="-1"
+        eType="#//TScenarioStepTrace" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="TTrace" abstract="true">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="reviewed" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="TRequirementTrace" eSuperTypes="#//TTrace">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="requirement" lowerBound="1"
+        eType="ecore:EClass ../../org.genesez.metamodel.requirements/model/greq.ecore#//RRequirement"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="structuralElement" lowerBound="1"
+        eType="ecore:EClass ../../org.genesez.metamodel.core/model/gcore.ecore#//MElement"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="TScenarioTrace" eSuperTypes="#//TTrace">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="scenario" lowerBound="1"
+        eType="ecore:EClass ../../org.genesez.metamodel.requirements/model/greq.ecore#//RScenario"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="classifier" eType="ecore:EClass ../../org.genesez.metamodel.core/model/gcore.ecore#//MClassifier"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="stateMachine" eType="ecore:EClass ../../org.genesez.metamodel.core/model/gcore.ecore#//MStateMachine"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="TScenarioStepTrace" eSuperTypes="#//TTrace">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="scenarioStep" lowerBound="1"
+        eType="ecore:EClass ../../org.genesez.metamodel.requirements/model/greq.ecore#//RScenarioStep"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="operation" eType="ecore:EClass ../../org.genesez.metamodel.core/model/gcore.ecore#//MOperation"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="state" eType="ecore:EClass ../../org.genesez.metamodel.core/model/gcore.ecore#//MState"/>
+  </eClassifiers>
+</ecore:EPackage>

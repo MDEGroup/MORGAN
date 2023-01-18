@@ -1,0 +1,216 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="fuzzyAutomaton" nsURI="fuzzyAutomaton" nsPrefix="fuzzyAutomaton">
+  <eClassifiers xsi:type="ecore:EClass" name="FuzzyAutomaton">
+    <eAnnotations source="gmf.diagram">
+      <details key="model.extension" value="fza"/>
+      <details key="diagram.extension" value="fza_diagram"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="tNorm" lowerBound="1" eType="#//TNormType"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="states" lowerBound="1"
+        upperBound="-1" eType="#//State" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="transitions" lowerBound="1"
+        upperBound="-1" eType="#//Transition" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="variableSet" lowerBound="1"
+        eType="#//VariableSet" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="transitionFeatures" lowerBound="1"
+        upperBound="-1" eType="#//TransitionFeature" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="TNormType">
+    <eLiterals name="HAMACHER"/>
+    <eLiterals name="GODEL" value="1"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="State">
+    <eAnnotations source="gmf.node">
+      <details key="label.placement" value="none"/>
+      <details key="margin" value="10"/>
+      <details key="figure" value="ellipse"/>
+      <details key="resizable" value="false"/>
+      <details key="tool.name" value="State"/>
+      <details key="border.width" value="2"/>
+      <details key="border.color" value="154,205,50"/>
+      <details key="color" value="154,205,50"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="isInitial" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBooleanObject"
+        defaultValueLiteral="false"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="incoming" upperBound="-1"
+        eType="#//Transition" eOpposite="#//Transition/target"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="outgoing" upperBound="-1"
+        eType="#//Transition" eOpposite="#//Transition/source"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Transition">
+    <eAnnotations source="gmf.link">
+      <details key="source" value="source"/>
+      <details key="target" value="target"/>
+      <details key="target.decoration" value="arrow"/>
+      <details key="color" value="255,140,0"/>
+      <details key="width" value="3"/>
+      <details key="tool.name" value="Transition"/>
+      <details key="tool.description" value="Add a transition"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="source" lowerBound="1"
+        eType="#//State" eOpposite="#//State/outgoing"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="target" lowerBound="1"
+        eType="#//State" eOpposite="#//State/incoming"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="feature" lowerBound="1"
+        eType="#//TransitionFeature" eOpposite="#//TransitionFeature/featureToTransition"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="VariableSet">
+    <eAnnotations source="gmf.node">
+      <details key="label.readOnly" value="true"/>
+      <details key="size" value="125,150"/>
+      <details key="label" value="name"/>
+      <details key="tool.name" value="Variable Set"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
+        changeable="false" defaultValueLiteral="Variable Set"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="variables" lowerBound="1"
+        upperBound="-1" eType="#//Variable" containment="true">
+      <eAnnotations source="gmf.compartment">
+        <details key="layout" value="list"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Variable">
+    <eAnnotations source="gmf.node">
+      <details key="label" value="name"/>
+      <details key="tool.name" value="Variable"/>
+      <details key="resizable" value="false"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDoubleObject"
+        defaultValueLiteral="0"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="TransitionFeature">
+    <eAnnotations source="gmf.node">
+      <details key="label.readOnly" value="true"/>
+      <details key="label" value="name"/>
+      <details key="size" value="160,160"/>
+      <details key="tool.name" value="Transition Features"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
+        changeable="false" defaultValueLiteral="Transition Feature"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="featureToTransition" lowerBound="1"
+        upperBound="-1" eType="#//Transition" eOpposite="#//Transition/feature">
+      <eAnnotations source="gmf.link">
+        <details key="style" value="dash"/>
+        <details key="width" value="3"/>
+        <details key="color" value="105,105,105"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="action" lowerBound="1"
+        eType="#//Action" containment="true">
+      <eAnnotations source="gmf.compartment">
+        <details key="layout" value="list"/>
+        <details key="collapsible" value="false"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="fuzzyConstraint" eType="#//FuzzyConstraint"
+        containment="true">
+      <eAnnotations source="gmf.compartment">
+        <details key="layout" value="list"/>
+        <details key="collapsible" value="false"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="varTransformation" eType="#//VarTransformation"
+        containment="true">
+      <eAnnotations source="gmf.compartment">
+        <details key="layout" value="list"/>
+        <details key="collapsible" value="false"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Action" abstract="true">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Input" eSuperTypes="#//Action">
+    <eAnnotations source="gmf.node">
+      <details key="label" value="name"/>
+      <details key="tool.name" value="Input Action"/>
+      <details key="size" value="150,25"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="parameters" upperBound="-1"
+        eType="#//Variable"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Output" eSuperTypes="#//Action">
+    <eAnnotations source="gmf.node">
+      <details key="label" value="name"/>
+      <details key="tool.name" value="Output Action"/>
+      <details key="size" value="150,25"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="expression" upperBound="-1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="FuzzyConstraint">
+    <eAnnotations source="gmf.node">
+      <details key="label" value="name, tNorm"/>
+      <details key="label.readOnly" value="true"/>
+      <details key="tool.name" value="Fuzzy Constraint"/>
+      <details key="label.pattern" value="{0} ({1})"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
+        changeable="false" defaultValueLiteral="Fuzzy Constraint"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="tNorm" lowerBound="1" eType="#//TNormType"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="fuzzyRelations" lowerBound="1"
+        upperBound="-1" eType="#//FuzzyRelation" containment="true">
+      <eAnnotations source="gmf.compartment">
+        <details key="layout" value="list"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="FuzzyRelation">
+    <eAnnotations source="gmf.node">
+      <details key="label" value="tFRelation, expression1, expression2, expression3, delta"/>
+      <details key="label.readOnly" value="true"/>
+      <details key="label.parser" value="MessageFormatParser"/>
+      <details key="label.pattern" value="{1} {0} {2} {0} {3} {4}"/>
+      <details key="size" value="150,25"/>
+      <details key="tool.name" value="Fuzzy Relation"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="tFRelation" lowerBound="1"
+        eType="#//FuzzyRelationType"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="expression1" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="expression2" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="expression3" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="delta" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDoubleObject"
+        defaultValueLiteral="0"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="FuzzyRelationType">
+    <eLiterals name="EQ"/>
+    <eLiterals name="GTE" value="1"/>
+    <eLiterals name="LTE" value="2"/>
+    <eLiterals name="TERN" value="3"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="VarTransformation">
+    <eAnnotations source="gmf.node">
+      <details key="label" value="name"/>
+      <details key="label.readOnly" value="true"/>
+      <details key="tool.name" value="Var Transformation"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
+        changeable="false" defaultValueLiteral="Var Transformation"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="varUpdates" lowerBound="1"
+        upperBound="-1" eType="#//VarUpdate" containment="true">
+      <eAnnotations source="gmf.compartment">
+        <details key="layout" value="list"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="VarUpdate">
+    <eAnnotations source="gmf.node">
+      <details key="label" value="expression"/>
+      <details key="tool.name" value="Var Update"/>
+      <details key="label.readOnly" value="true"/>
+      <details key="label.icon" value="false"/>
+      <details key="size" value="150,25"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="variable" lowerBound="1"
+        eType="#//Variable"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="expression" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+</ecore:EPackage>

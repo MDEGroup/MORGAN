@@ -1,0 +1,7 @@
+model	RealLiteral (decimalPart,EInt,attribute) (intPart,EInt,attribute) 
+model	Variable (name,EString,attribute) (value,Literal,ref) 
+model	BoolLiteral (bool,EString,attribute) 
+model	ExecTraces (ComponentName,EString,attribute) (Node,Node,ref) (Edge,Edge,ref) 
+model	Node (level,EInt,attribute) (name,EString,attribute) (id,EInt,attribute) (constraints,EString,attribute) (status,StateStatus,attribute) (VarData,Variable,ref) (incomingEdges,Edge,ref) (outgoingEdges,Edge,ref) 
+model	IntLiteral (int,EInt,attribute) 
+model	Edge (guard,EString,attribute) (trigger,EString,attribute) (actions,EString,attribute) (status,TransStatus,attribute) (destination,Node,ref) (source,Node,ref) 

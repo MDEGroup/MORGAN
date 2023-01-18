@@ -1,0 +1,7 @@
+model	FreeRoomTypesDTO (numFreeRooms,EInt,attribute) (roomTypeDescription,EString,attribute) (numBeds,EInt,attribute) (pricePerNight,EDouble,attribute) 
+model	RoomType (price,EDouble,attribute) (name,EString,attribute) (numberOfBeds,EInt,attribute) (description,EString,attribute) 
+model	RoomManager (rooms,IRoom,ref) (roomTypes,IRoomType,ref) 
+model	BookingSystem (bookingId,EInt,attribute) (roomProvider,IHotelRoomProvider,ref) (rooms,IRoom,ref) (bookings,IBooking,ref) (events,IEvent,ref) 
+model	Booking (firstName,EString,attribute) (lastName,EString,attribute) (endDate,EString,attribute) (id,EInt,attribute) (startDate,EString,attribute) (roomList,IRoom,ref) (checkedInRooms,IRoom,ref) 
+model	AbstractEvent (eventType,EventType,attribute) (bookingID,EInt,attribute) (timestamp,ELong,attribute) 
+model	Room (extraCostDescriptions,EString,attribute) (extraCostPrice,EDouble,attribute) (roomNumber,EInt,attribute) (blocked,EBoolean,attribute) (occupied,EBoolean,attribute) (roomType,IRoomType,ref) 

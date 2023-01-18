@@ -1,0 +1,283 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="cpntools" nsURI="http://io.github.abelgomez/cpntools/1.0" nsPrefix="cpntools">
+  <eClassifiers xsi:type="ecore:EClass" name="Cpnet">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="fusions" ordered="false"
+        upperBound="-1" eType="#//Fusion" containment="true" eOpposite="#//Fusion/cpnet"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="globbox" ordered="false"
+        eType="#//Globbox" containment="true" eOpposite="#//Globbox/cpnet"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="binder" eType="#//Binder"
+        containment="true" eOpposite="#//Binder/cpnet"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Page">
+    <eOperations name="layout">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="body" value="DirectedSparseGraph&lt;DiagramElement, Arc> graph = new DirectedSparseGraph&lt;DiagramElement, Arc>();&#xD;&#xA;&#xD;&#xA;for (Arc arc : this.getArcs()) {&#xD;&#xA;&#x9;graph.addVertex(arc.getPlace());&#xD;&#xA;&#x9;graph.addVertex(arc.getTrans());&#xD;&#xA;&#xD;&#xA;&#x9;Pair&lt;DiagramElement> pair = null;&#xD;&#xA;&#x9;if (arc.getOrientation() == Orientation.TTO_P) {&#xD;&#xA;&#x9;&#x9;pair = new Pair&lt;DiagramElement>(arc.getTrans(), arc.getPlace());&#xD;&#xA;&#x9;} else {&#xD;&#xA;&#x9;&#x9;pair = new Pair&lt;DiagramElement>(arc.getPlace(), arc.getTrans());&#xD;&#xA;&#x9;}&#xD;&#xA;&#x9;graph.addEdge(arc, pair);&#xD;&#xA;}&#xD;&#xA;&#xD;&#xA;KKLayout&lt;DiagramElement, Arc> layout = new KKLayout&lt;DiagramElement, Arc>(graph);&#xD;&#xA;layout.setSize(new Dimension(width, height));&#xD;&#xA;layout.setLengthFactor(1.5);&#xD;&#xA;layout.initialize();&#xD;&#xA;&#xD;&#xA;layout.setMaxIterations(steps);&#xD;&#xA;&#xD;&#xA;while (!layout.done()) {&#xD;&#xA;&#x9;layout.step();&#xD;&#xA;}&#xD;&#xA;&#xD;&#xA;for (DiagramElement element : graph.getVertices()) {&#xD;&#xA;&#x9;int x = (int) layout.getX(element) - (width / 2);&#xD;&#xA;&#x9;int y = (int) layout.getY(element) - (height / 2);&#xD;&#xA;&#xD;&#xA;&#x9;element.setPosx(x);&#xD;&#xA;&#x9;element.setPosy(y);&#xD;&#xA;&#x9;&#xD;&#xA;&#x9;if (element instanceof Trans) {&#xD;&#xA;&#x9;&#x9;Trans trans = (Trans) element;&#xD;&#xA;&#x9;&#x9;if (trans.getCond() != null) {&#xD;&#xA;&#x9;&#x9;&#x9;trans.getCond().setPosx(x - 40);&#xD;&#xA;&#x9;&#x9;&#x9;trans.getCond().setPosy(y + 30);&#xD;&#xA;&#x9;&#x9;}&#xD;&#xA;&#x9;&#x9;if (trans.getPriority() != null) {&#xD;&#xA;&#x9;&#x9;&#x9;trans.getPriority().setPosx(x - 40);&#xD;&#xA;&#x9;&#x9;&#x9;trans.getPriority().setPosy(y - 30);&#xD;&#xA;&#x9;&#x9;}&#xD;&#xA;&#x9;&#x9;if (trans.getTime() != null) {&#xD;&#xA;&#x9;&#x9;&#x9;trans.getTime().setPosx(x + 40);&#xD;&#xA;&#x9;&#x9;&#x9;trans.getTime().setPosy(y - 30);&#xD;&#xA;&#x9;&#x9;}&#xD;&#xA;&#x9;}&#xD;&#xA;}&#xD;&#xA;&#xD;&#xA;for (Arc arc : this.getArcs()) {&#xD;&#xA;&#x9;// We must retrieve the edges in this cumbersome way since some arcs may &#xD;&#xA;&#x9;// be omitted because they contain the same source and target nodes&#xD;&#xA;&#x9;Arc edge = null;&#xD;&#xA;&#x9;if (arc.getOrientation() == Orientation.TTO_P) {&#xD;&#xA;&#x9;&#x9;edge = graph.findEdge(arc.getTrans(), arc.getPlace());&#xD;&#xA;&#x9;} else {&#xD;&#xA;&#x9;&#x9;edge = graph.findEdge(arc.getPlace(), arc.getTrans());&#xD;&#xA;&#x9;};&#xD;&#xA;&#x9;DiagramElement source = graph.getSource(edge);&#xD;&#xA;&#x9;DiagramElement target = graph.getDest(edge);&#xD;&#xA;&#xD;&#xA;&#x9;int sourceX = (int) layout.getX(source) - (width / 2);&#xD;&#xA;&#x9;int sourceY = (int) layout.getY(source) - (height / 2);&#xD;&#xA;&#x9;int targetX = (int) layout.getX(target) - (width / 2);&#xD;&#xA;&#x9;int targetY = (int) layout.getY(target) - (height / 2);&#xD;&#xA;&#xD;&#xA;&#x9;if (arc.getAnnot() != null) {&#xD;&#xA;&#x9;&#x9;double pos = ThreadLocalRandom.current().nextDouble(0.35, 0.65); &#xD;&#xA;&#x9;&#x9;arc.getAnnot().setPosx(sourceX + (int) ((targetX - sourceX) * pos));&#xD;&#xA;&#x9;&#x9;arc.getAnnot().setPosy(sourceY + (int) ((targetY - sourceY) * pos));&#xD;&#xA;&#x9;}&#xD;&#xA;}"/>
+      </eAnnotations>
+      <eParameters name="width" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EIntegerObject"/>
+      <eParameters name="height" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EIntegerObject"/>
+      <eParameters name="steps" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EIntegerObject"/>
+    </eOperations>
+    <eOperations name="layout">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="body" value="int width = new Float(getBinder().getWidth() * 0.9).intValue();&#xD;&#xA;int height = new Float(getBinder().getHeight() * 0.9).intValue();&#xD;&#xA;layout(width, height, 5000);"/>
+      </eAnnotations>
+    </eOperations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="group" ordered="false"
+        upperBound="-1" eType="#//Group" containment="true" eOpposite="#//Group/page"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="places" ordered="false"
+        upperBound="-1" eType="#//Place" containment="true" eOpposite="#//Place/page"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="auxiliarys" ordered="false"
+        upperBound="-1" eType="#//Auxiliary" containment="true" eOpposite="#//Auxiliary/page"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" ordered="false" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="transs" upperBound="-1"
+        eType="#//Trans" containment="true" eOpposite="#//Trans/page"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="arcs" upperBound="-1" eType="#//Arc"
+        containment="true" eOpposite="#//Arc/page"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="binder" eType="#//Binder"
+        eOpposite="#//Binder/pages"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Group">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="groupElms" ordered="false"
+        upperBound="-1" eType="#//DiagramElement" containment="true" eOpposite="#//DiagramElement/group"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" ordered="false" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="page" lowerBound="1" eType="#//Page"
+        eOpposite="#//Page/group"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="DiagramElement" abstract="true">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="lineColour" ordered="false"
+        eType="#//Colour16" defaultValueLiteral="Black"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="fillFilled" ordered="false"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean" defaultValueLiteral="false"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="lineThick" ordered="false"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt" defaultValueLiteral="1"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="posx" ordered="false" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="lineType" ordered="false"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString" defaultValueLiteral="Solid"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="posy" ordered="false" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="fillColour" ordered="false"
+        eType="#//Colour16" defaultValueLiteral="White"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="fillPattern" ordered="false"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString" defaultValueLiteral=""/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="group" eType="#//Group"
+        eOpposite="#//Group/groupElms"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Place" eSuperTypes="#//DiagramElement">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="height" ordered="false"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt" defaultValueLiteral="40"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="width" ordered="false"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt" defaultValueLiteral="60"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="type" ordered="false" lowerBound="1"
+        eType="#//ColorSet"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="initmark" ordered="false"
+        eType="#//Initmark" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="port" ordered="false" eType="#//Port"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="fusion" ordered="false"
+        eType="#//Fusion" eOpposite="#//Fusion/places"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="page" lowerBound="1" eType="#//Page"
+        eOpposite="#//Page/places"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="text" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="arcs" upperBound="-1" eType="#//Arc"
+        eOpposite="#//Arc/place"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ColorSet" abstract="true" eSuperTypes="#//Declaration">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="idname" ordered="false"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="colorSetType" ordered="false"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="timed" ordered="false"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="declare" ordered="false"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Declaration" abstract="true">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="globbox" eType="#//Globbox"
+        eOpposite="#//Globbox/declarations"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="block" eType="#//Block"
+        eOpposite="#//Block/declarations"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Initmark" eSuperTypes="#//DiagramElement">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="expression" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Port" eSuperTypes="#//DiagramElement">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="portType" ordered="false"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Fusion">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" ordered="false" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="places" ordered="false"
+        upperBound="-1" eType="#//Place" eOpposite="#//Place/fusion"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="cpnet" eType="#//Cpnet"
+        eOpposite="#//Cpnet/fusions"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Auxiliary" abstract="true" eSuperTypes="#//DiagramElement">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="page" lowerBound="1" eType="#//Page"
+        eOpposite="#//Page/auxiliarys"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Globbox">
+    <eAnnotations source="http://www.obeo.fr/dsl/dnc/archetype">
+      <details key="archetype" value="Description"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="cpnet" eType="#//Cpnet"
+        eOpposite="#//Cpnet/globbox"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="declarations" upperBound="-1"
+        eType="#//Declaration" containment="true" eOpposite="#//Declaration/globbox"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Var" eSuperTypes="#//Declaration">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="idname" ordered="false"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="type" ordered="false" lowerBound="1"
+        eType="#//ColorSet"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Globref" eSuperTypes="#//Declaration">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="idname" ordered="false"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Ml" eSuperTypes="#//Declaration">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="expression" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Block" eSuperTypes="#//Declaration">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="idname" ordered="false"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="declarations" upperBound="-1"
+        eType="#//Declaration" containment="true" eOpposite="#//Declaration/block"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="AuxText" eSuperTypes="#//Auxiliary">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="text" ordered="false" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Arc" eSuperTypes="#//DiagramElement">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="headsize" ordered="false"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EFloat"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="place" ordered="false"
+        lowerBound="1" eType="#//Place" eOpposite="#//Place/arcs"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="orientation" ordered="false"
+        eType="#//Orientation" defaultValueLiteral="PtoT"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="currentcyckle" ordered="false"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString" defaultValueLiteral="2"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="order" ordered="false"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="trans" ordered="false"
+        lowerBound="1" eType="#//Trans" eOpposite="#//Trans/arcs"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="annot" ordered="false"
+        eType="#//Annot" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="page" lowerBound="1" eType="#//Page"
+        eOpposite="#//Page/arcs"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Trans" eSuperTypes="#//DiagramElement">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="height" ordered="false"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt" defaultValueLiteral="40"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="width" ordered="false"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt" defaultValueLiteral="60"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="explicit" ordered="false"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="cond" ordered="false" eType="#//TransCond"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="page" lowerBound="1" eType="#//Page"
+        eOpposite="#//Page/transs"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="text" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="arcs" upperBound="-1" eType="#//Arc"
+        eOpposite="#//Arc/trans"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="priority" ordered="false"
+        eType="#//TransPriority" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="time" eType="#//TransTime"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="TransCond" eSuperTypes="#//DiagramElement">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="text" ordered="false" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="TransPriority" eSuperTypes="#//DiagramElement">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="text" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="TransTime" eSuperTypes="#//DiagramElement">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="text" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Annot" eSuperTypes="#//DiagramElement">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="text" ordered="false" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="AuxEllipse" eSuperTypes="#//Auxiliary">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="height" ordered="false"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="width" ordered="false"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="AuxBox" eSuperTypes="#//Auxiliary">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="height" ordered="false"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="width" ordered="false"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="SimpleColorSet" abstract="true" eSuperTypes="#//ColorSet"/>
+  <eClassifiers xsi:type="ecore:EClass" name="CompoundColorSet" abstract="true" eSuperTypes="#//ColorSet">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="simpleColors" unique="false"
+        lowerBound="1" upperBound="-1" eType="#//SimpleColorSet"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Unit" eSuperTypes="#//SimpleColorSet">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="with" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Boolean" eSuperTypes="#//SimpleColorSet">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="with" upperBound="2" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Integer" eSuperTypes="#//SimpleColorSet">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="with" upperBound="2" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="LargeInteger" eSuperTypes="#//SimpleColorSet">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="with" upperBound="2" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Real" eSuperTypes="#//SimpleColorSet">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="with" upperBound="2" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Time" eSuperTypes="#//SimpleColorSet"/>
+  <eClassifiers xsi:type="ecore:EClass" name="String" eSuperTypes="#//SimpleColorSet">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="with" upperBound="2" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="and" upperBound="2" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Enumerated" eSuperTypes="#//SimpleColorSet">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="with" upperBound="-1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Index" eSuperTypes="#//SimpleColorSet">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="with" upperBound="2" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Product" eSuperTypes="#//CompoundColorSet"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Record" eSuperTypes="#//CompoundColorSet"/>
+  <eClassifiers xsi:type="ecore:EClass" name="List" eSuperTypes="#//CompoundColorSet"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Union" eSuperTypes="#//CompoundColorSet"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Subset" eSuperTypes="#//CompoundColorSet"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Alias" eSuperTypes="#//CompoundColorSet"/>
+  <eClassifiers xsi:type="ecore:EEnum" name="Orientation">
+    <eLiterals name="undefined"/>
+    <eLiterals name="PtoT" value="1"/>
+    <eLiterals name="TtoP" value="2"/>
+    <eLiterals name="Inhibitor" value="3"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Binder">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="posy" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="posx" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="width" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="height" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="cpnet" eType="#//Cpnet"
+        eOpposite="#//Cpnet/binder"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="pages" upperBound="-1"
+        eType="#//Page" containment="true" eOpposite="#//Page/binder"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="Colour16">
+    <eLiterals name="Aqua"/>
+    <eLiterals name="Black" value="1"/>
+    <eLiterals name="Blue" value="2"/>
+    <eLiterals name="Fuchsia" value="3"/>
+    <eLiterals name="Gray" value="4"/>
+    <eLiterals name="Green" value="5"/>
+    <eLiterals name="Lime" value="6"/>
+    <eLiterals name="Maroon" value="7"/>
+    <eLiterals name="Navy" value="8"/>
+    <eLiterals name="Olive" value="9"/>
+    <eLiterals name="Purple" value="10"/>
+    <eLiterals name="Red" value="11"/>
+    <eLiterals name="Silver" value="12"/>
+    <eLiterals name="Teal" value="13"/>
+    <eLiterals name="White" value="14"/>
+    <eLiterals name="Yellow" value="15"/>
+  </eClassifiers>
+</ecore:EPackage>

@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="Wires"
+    nsURI="http://www.lcc.uma.es/Wires/1.0" nsPrefix="Wires">
+  <eClassifiers xsi:type="ecore:EClass" name="Transformation" abstract="true" eSuperTypes="#//TypedElement">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="inParams" upperBound="-1"
+        eType="#//InputActualParameter" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="outParams" upperBound="-1"
+        eType="#//OutputActualParameter" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="controlNode" eType="#//DecisionNode"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Query" eSuperTypes="#//Transformation"/>
+  <eClassifiers xsi:type="ecore:EClass" name="AtomicModelTransformation" eSuperTypes="#//Transformation"/>
+  <eClassifiers xsi:type="ecore:EClass" name="TypedElement" abstract="true" eSuperTypes="#//ConnectableElement">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="type" eType="#//Type"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Type" abstract="true" eSuperTypes="#//ConnectableElement">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="path" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ModelType" eSuperTypes="#//DataType">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="uri" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="DataType" abstract="true" eSuperTypes="#//Type"/>
+  <eClassifiers xsi:type="ecore:EClass" name="ActualParameter" abstract="true" eSuperTypes="#//TypedElement"/>
+  <eClassifiers xsi:type="ecore:EClass" name="DecisionNode" eSuperTypes="#//WiresElement">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="trueBranch" upperBound="-1"
+        eType="#//Transformation"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="falseBranch" upperBound="-1"
+        eType="#//Transformation"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="expression" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="inParams" lowerBound="1"
+        upperBound="-1" eType="#//InputActualParameter" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="DataFlow" eSuperTypes="#//WiresElement">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="target" lowerBound="1"
+        eType="#//ConnectableElement" eOpposite="#//ConnectableElement/incoming"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="src" lowerBound="1" eType="#//ConnectableElement"
+        eOpposite="#//ConnectableElement/outgoing"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="TransformationType" abstract="true"
+      eSuperTypes="#//Type">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="outParams" upperBound="-1"
+        eType="#//OutputFormalParameter" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="libraries" upperBound="-1"
+        eType="#//LibraryRef" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="inParams" upperBound="-1"
+        eType="#//InputFormalParameter" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="FormalParameter" abstract="true" eSuperTypes="#//Type">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="typeEl" lowerBound="1"
+        eType="#//DataType"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="typeName" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="QueryType" eSuperTypes="#//TransformationType"/>
+  <eClassifiers xsi:type="ecore:EClass" name="ConnectableElement" abstract="true"
+      eSuperTypes="#//WiresElement">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="incoming" upperBound="-1"
+        eType="#//DataFlow" eOpposite="#//DataFlow/target"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="outgoing" upperBound="-1"
+        eType="#//DataFlow" eOpposite="#//DataFlow/src"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Model" eSuperTypes="#//TypedElement">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="path" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="BasicData" eSuperTypes="#//TypedElement">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="path" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="CompositeTransformationType" eSuperTypes="#//TransformationType #//WiresSpecification"/>
+  <eClassifiers xsi:type="ecore:EClass" name="CompositeTransformation" eSuperTypes="#//Transformation"/>
+  <eClassifiers xsi:type="ecore:EClass" name="BasicDataType" eSuperTypes="#//DataType"/>
+  <eClassifiers xsi:type="ecore:EClass" name="WiresSpecification">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="els" upperBound="-1" eType="#//WiresElement"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="WiresElement" abstract="true"/>
+  <eClassifiers xsi:type="ecore:EClass" name="LibraryRef">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="library" lowerBound="1"
+        eType="#//Library"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Library" eSuperTypes="#//WiresElement">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="path" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="libraries" upperBound="-1"
+        eType="#//LibraryRef" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="InputFormalParameter" eSuperTypes="#//FormalParameter"/>
+  <eClassifiers xsi:type="ecore:EClass" name="OutputFormalParameter" eSuperTypes="#//FormalParameter"/>
+  <eClassifiers xsi:type="ecore:EClass" name="InputActualParameter" eSuperTypes="#//ActualParameter"/>
+  <eClassifiers xsi:type="ecore:EClass" name="OutputActualParameter" eSuperTypes="#//ActualParameter"/>
+  <eClassifiers xsi:type="ecore:EClass" name="AtomicModelTransfomationType" eSuperTypes="#//TransformationType"/>
+  <eClassifiers xsi:type="ecore:EClass" name="IdentityTransformation" eSuperTypes="#//AtomicModelTransformation"/>
+  <eClassifiers xsi:type="ecore:EClass" name="GenericTransformation" eSuperTypes="#//AtomicModelTransformation">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="typeParam" lowerBound="1"
+        eType="#//TypeParameter" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="TypeParameter" eSuperTypes="#//ActualParameter"/>
+  <eClassifiers xsi:type="ecore:EClass" name="GenericQuery" eSuperTypes="#//Query">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="typeParam" lowerBound="1"
+        eType="#//TypeParameter" containment="true"/>
+  </eClassifiers>
+</ecore:EPackage>

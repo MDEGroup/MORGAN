@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="company104"
+    nsURI="http://company104" nsPrefix="_company104">
+  <eAnnotations source="diagen">
+    <details key="knownas=simple world"/>
+    <details key="origin=http://org.isoe.fr"/>
+    <details key="leftparent=nil" value=""/>
+    <details key="rightparent=nil" value=""/>
+    <details key="requires=nil" value=""/>
+    <details key="context=startup"/>
+  </eAnnotations>
+  <eClassifiers xsi:type="ecore:EClass" name="Company">
+    <eAnnotations source="diagraph">
+      <details key="node"/>
+      <details key="pov"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="agencies" upperBound="-1"
+        eType="#//Agency" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="goals" upperBound="-1"
+        eType="#//Goal" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Department" eSuperTypes="#//Function">
+    <eAnnotations source="diagraph">
+      <details key="node"/>
+      <details key="kref=rooms"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="rooms" upperBound="-1"
+        eType="#//Room" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="NamedElement" abstract="true">
+    <eAnnotations source="diagraph">
+      <details key="label=name"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Flow" eSuperTypes="#//NamedElement">
+    <eAnnotations source="diagraph">
+      <details key="link"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="fromFunction" eType="#//Function"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="toFunction" eType="#//Function"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Employee">
+    <eAnnotations source="diagraph">
+      <details key="node"/>
+      <details key="label=fullName"/>
+      <details key="ref=responsibleOf"/>
+      <details key="ref=inChargeOf"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="fullName" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="hierarchies" upperBound="-1"
+        eType="#//HierarchyLink" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="responsibleOf" eType="#//Room"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="inChargeOf" eType="#//Workstation"
+        eOpposite="#//Workstation/owners"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="socialSecurityNumber" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="address" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="HierarchyLink">
+    <eAnnotations source="diagraph">
+      <details key="link"/>
+      <details key="label=hierarchy"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="fromEmployee" eType="#//Employee"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="toEmployee" eType="#//Employee"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="hierarchy" eType="#//Hierarchy"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="Hierarchy">
+    <eLiterals name="Supervisor" literal="supervisor"/>
+    <eLiterals name="Subordinate" value="1" literal="subordinate"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Room" eSuperTypes="#//Function">
+    <eAnnotations source="diagraph">
+      <details key="node"/>
+      <details key="kref=workstations"/>
+      <details key="ref=parent"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="parent" upperBound="-1"
+        eType="#//Room"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="workstations" upperBound="-1"
+        eType="#//Workstation" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Workstation" eSuperTypes="#//NamedElement">
+    <eAnnotations source="diagraph">
+      <details key="node"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="ProfileDescription" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="owners" upperBound="-1"
+        eType="#//Employee" eOpposite="#//Employee/inChargeOf"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="RoleType">
+    <eLiterals name="Composite" literal="composite"/>
+    <eLiterals name="Decision" value="1" literal="decision"/>
+    <eLiterals name="Transformation" value="2" literal="transformation"/>
+    <eLiterals name="Control" value="3" literal="control"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Goal" eSuperTypes="#//Interval">
+    <eAnnotations source="diagraph">
+      <details key="node"/>
+      <details key="label=statement"/>
+      <details key="kref=objectives"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="statement" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="objectives" upperBound="-1"
+        eType="#//Objective" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Objective">
+    <eAnnotations source="diagraph">
+      <details key="node"/>
+      <details key="label=nature"/>
+      <details key="label=type"/>
+      <details key="label=value"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="nature" eType="#//ObjectiveNature"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="type" eType="#//ObjectiveType"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDouble"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Agency" eSuperTypes="#//Function">
+    <eAnnotations source="diagraph">
+      <details key="node"/>
+      <details key="kref=departments"/>
+      <details key="kref=employees"/>
+      <details key="label=Accronym"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="departments" upperBound="-1"
+        eType="#//Department" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="employees" upperBound="-1"
+        eType="#//Employee" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="Accronym" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="Status" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="reacheds" upperBound="-1"
+        eType="#//ObjectiveReach" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="ObjectiveType">
+    <eLiterals name="None" literal="none"/>
+    <eLiterals name="Strategic" value="1" literal="strategic"/>
+    <eLiterals name="Tactic" value="2" literal="tactic"/>
+    <eLiterals name="Operational" value="3" literal="operational"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="ObjectiveNature">
+    <eLiterals name="None" literal="none"/>
+    <eLiterals name="Performance" value="1" literal="performance"/>
+    <eLiterals name="Quality" value="2" literal="quality"/>
+    <eLiterals name="Delay" value="3" literal="delay"/>
+    <eLiterals name="Cost" value="4" literal="cost"/>
+    <eLiterals name="Environmental" value="5" literal="environmental"/>
+    <eLiterals name="Legal" value="6" literal="legal"/>
+    <eLiterals name="Human" value="7" literal="human"/>
+    <eLiterals name="Economical" value="8" literal="economical"/>
+    <eLiterals name="Other" value="9" literal="other"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Interval" abstract="true">
+    <eAnnotations source="diagraph">
+      <details key="node"/>
+      <details key="label=dateFrom"/>
+      <details key="label=dateTo"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="dateFrom" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="dateTo" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ObjectiveReach">
+    <eAnnotations source="diagraph">
+      <details key="link"/>
+      <details key="label=statement"/>
+      <details key="label=value"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="trgObjective" eType="#//Objective"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="srcAgency" eType="#//Agency"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDouble"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="statement" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Function" abstract="true" eSuperTypes="#//NamedElement">
+    <eAnnotations source="diagraph">
+      <details key="node"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="flows" upperBound="-1"
+        eType="#//Flow" containment="true"/>
+  </eClassifiers>
+</ecore:EPackage>

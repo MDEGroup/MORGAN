@@ -1,0 +1,5 @@
+model	StateMachine (transitions,Transition,ref) (states,State,ref) 
+model	State (Ord,EString,attribute) (OrdIf,EString,attribute) (Inh,EString,attribute) (name,EString,attribute) (InhIf,EString,attribute) (isActive,EBoolean,attribute) (container,CompositeState,ref) 
+model	CompositeState (initialState,InitialState,ref) (states,State,ref) 
+model	Transition (event,EString,attribute) (source,State,ref) (target,State,ref) 
+model	PseudoState (referencedState,State,ref) 

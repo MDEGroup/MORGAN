@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="iTrace" nsURI="org.eclipse.kybele.iTrace" nsPrefix="iTrace">
+  <eClassifiers xsi:type="ecore:EClass" name="iTraceModel">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="traceLinks" lowerBound="1"
+        upperBound="-1" eType="#//TraceLink" containment="true" eOpposite="#//TraceLink/iTraceModel"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="artefacts" lowerBound="1"
+        upperBound="-1" eType="#//Artefact" containment="true" eOpposite="#//Artefact/iTraceModel"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="version" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="projectName" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="specificFeatures" eType="#//SpecificFeature"
+        containment="true" eOpposite="#//SpecificFeature/iTraceModel"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="TraceLink" abstract="true">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="createdOn" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString" defaultValueLiteral="2011-09-01"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="type" lowerBound="1" eType="#//Type"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="fromFileName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="comment" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="sourceElements" upperBound="-1"
+        eType="#//SourceElement" containment="true" eOpposite="#//SourceElement/traceLink"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="iTraceModel" lowerBound="1"
+        eType="#//iTraceModel" eOpposite="#//iTraceModel/traceLinks"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="createdBy" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="mode" lowerBound="1" eType="#//Mode"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="technicalBinding" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="ruleName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="TraceLinkElement" abstract="true">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="ref" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="model" lowerBound="1" eType="#//Model"
+        eOpposite="#//Model/elements"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="type" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="object" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EObject"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="M2MLink" eSuperTypes="#//TraceLink">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="targetElements" upperBound="-1"
+        eType="#//TargetElement" containment="true" eOpposite="#//TargetElement/traceLink"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="M2TLink" eSuperTypes="#//TraceLink">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="targetBlocks" upperBound="-1"
+        eType="#//Block" containment="true" eOpposite="#//Block/traceLink"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Artefact" abstract="true">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="aspect" lowerBound="1"
+        eType="#//Aspect"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="iTraceModel" lowerBound="1"
+        eType="#//iTraceModel" eOpposite="#//iTraceModel/artefacts"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="abstractionLevel" lowerBound="1"
+        eType="#//AbstractionLevel"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="path" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Code" eSuperTypes="#//Artefact">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="blocks" upperBound="-1"
+        eType="#//Block" eOpposite="#//Block/code"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Block">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="blockNumber" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="startLine" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="endLine" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="startColumn" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="endColumn" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="code" lowerBound="1" eType="#//Code"
+        eOpposite="#//Code/blocks"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="traceLink" lowerBound="1"
+        eType="#//M2TLink" eOpposite="#//M2TLink/targetBlocks"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Model" eSuperTypes="#//Artefact">
+    <eOperations name="getModelType" eType="#//ModelType"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="elements" upperBound="-1"
+        eType="#//TraceLinkElement" eOpposite="#//TraceLinkElement/model"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="metamodel" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="SourceElement" eSuperTypes="#//TraceLinkElement">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="traceLink" lowerBound="1"
+        eType="#//TraceLink" eOpposite="#//TraceLink/sourceElements"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="TargetElement" eSuperTypes="#//TraceLinkElement">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="traceLink" lowerBound="1"
+        eType="#//M2MLink" eOpposite="#//M2MLink/targetElements"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="AbstractionLevel">
+    <eLiterals name="UNSPECIFIED"/>
+    <eLiterals name="CIM" value="1"/>
+    <eLiterals name="PIM" value="2"/>
+    <eLiterals name="PSM" value="3"/>
+    <eLiterals name="PDM" value="4"/>
+    <eLiterals name="CODE" value="5"/>
+    <eLiterals name="ANNOTATION" value="6"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="Aspect">
+    <eLiterals name="Unspecified" literal="Unspecified"/>
+    <eLiterals name="Architecture" value="1"/>
+    <eLiterals name="Behaviour" value="2"/>
+    <eLiterals name="Content" value="3"/>
+    <eLiterals name="Interface" value="4"/>
+    <eLiterals name="Quality" value="4"/>
+    <eLiterals name="Semantics" value="6"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="Mode">
+    <eLiterals name="Manual" value="1"/>
+    <eLiterals name="Automatic"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="Type">
+    <eLiterals name="Transformation"/>
+    <eLiterals name="Annotation" value="1"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Feature">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="attribute" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="specificFeature" lowerBound="1"
+        eType="#//SpecificFeature" eOpposite="#//SpecificFeature/features"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="SpecificFeature">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="features" lowerBound="1"
+        upperBound="-1" eType="#//Feature" containment="true" eOpposite="#//Feature/specificFeature"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="groupName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="iTraceModel" lowerBound="1"
+        eType="#//iTraceModel" eOpposite="#//iTraceModel/specificFeatures"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="ModelType">
+    <eLiterals name="Source"/>
+    <eLiterals name="Target" value="1"/>
+    <eLiterals name="Both" value="2"/>
+    <eLiterals name="None" value="3"/>
+  </eClassifiers>
+</ecore:EPackage>

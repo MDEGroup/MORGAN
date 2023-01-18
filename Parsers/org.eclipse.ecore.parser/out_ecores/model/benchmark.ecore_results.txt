@@ -1,0 +1,7 @@
+model	Variant (results,TimeResult,ref) 
+model	TestCase (inputData,InputData,ref) (results,TimeResult,ref) 
+model	TimeResult (elapsedMaxTime,ELong,attribute) (elapsedTime,ELong,attribute) (variant,Variant,ref) (properties,Property,ref) 
+model	InputData (tests,TestCase,ref) 
+model	Property (name,EString,attribute) (value,EString,attribute) 
+model	NamedElement (name,EString,attribute) (properties,Property,ref) 
+model	Scenario (inputData,InputData,ref) (testCases,TestCase,ref) (variants,Variant,ref) 

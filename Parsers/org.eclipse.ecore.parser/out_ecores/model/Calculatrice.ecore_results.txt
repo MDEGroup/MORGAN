@@ -1,0 +1,7 @@
+model	CalcExpr (op,EString,attribute) (left,CalcExpr,ref) (right,CalcExpr,ref) 
+model	BoolExpr (op,EString,attribute) (left,BoolExpr,ref) (thenBlock,Calc,ref) (right,BoolExpr,ref) (elseBlock,Calc,ref) 
+model	VarCall (varCall,EString,attribute) 
+model	Number (neg,EBoolean,attribute) (value,EInt,attribute) 
+model	Calculatrice (calculs,Calc,ref) 
+model	Calc (boolName,EString,attribute) (varName,EString,attribute) (decl,EBoolean,attribute) (b,BoolExpr,ref) (e,CalcExpr,ref) 
+model	Boolean (BoolValue,EString,attribute) 

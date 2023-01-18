@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="PolicyEngine" nsURI="platform:/resource/dk.itu.mdd.policyengine/model/PolicyEngine.ecore"
+    nsPrefix="policyengine">
+  <eClassifiers xsi:type="ecore:EClass" name="Building" eSuperTypes="#//NamedElement">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="ctsSystem" eType="#//CTS"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="accessControl" eType="#//AccessControl"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="calendarSystem" eType="#//CalendarSystem"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="meetingScheduleSystem"
+        eType="#//MeetingScheduleSystem" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="floors" upperBound="-1"
+        eType="#//Floor" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="timers" upperBound="-1"
+        eType="#//Timer" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Model" eSuperTypes="#//NamedElement">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="buildings" upperBound="-1"
+        eType="#//Building" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="predefinedRooms" upperBound="-1"
+        eType="#//Room" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="policyDefinition" upperBound="-1"
+        eType="#//Policy" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="stateDefinition" upperBound="-1"
+        eType="#//State" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="timers" upperBound="-1"
+        eType="#//Timer" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="schedules" upperBound="-1"
+        eType="#//Schedule" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="LightSwitchActuator" eSuperTypes="#//Actuator"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Sensor" abstract="true" eSuperTypes="#//HasIntegerValue"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Actuator" abstract="true" eSuperTypes="#//HasIntegerValue"/>
+  <eClassifiers xsi:type="ecore:EClass" name="SensorComponent" eSuperTypes="#//HasSensors #//NamedElement"/>
+  <eClassifiers xsi:type="ecore:EClass" name="MotionSensor" eSuperTypes="#//Sensor"/>
+  <eClassifiers xsi:type="ecore:EClass" name="TemperatureSensor" eSuperTypes="#//Sensor"/>
+  <eClassifiers xsi:type="ecore:EClass" name="PressureSensor" eSuperTypes="#//Sensor"/>
+  <eClassifiers xsi:type="ecore:EClass" name="TouchSensor" eSuperTypes="#//Sensor"/>
+  <eClassifiers xsi:type="ecore:EClass" name="WindowActuator" eSuperTypes="#//Actuator"/>
+  <eClassifiers xsi:type="ecore:EClass" name="HumidifierActuator" eSuperTypes="#//Actuator"/>
+  <eClassifiers xsi:type="ecore:EClass" name="LightSensor" eSuperTypes="#//Sensor"/>
+  <eClassifiers xsi:type="ecore:EClass" name="CTS">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="temperatureSensors" upperBound="-1"
+        eType="#//Sensor" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="ctsActuators" upperBound="-1"
+        eType="#//Actuator" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="AccessControl">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="accessControlSensors" upperBound="-1"
+        eType="#//Sensor" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="accessControlDoorLockActuator"
+        upperBound="-1" eType="#//Actuator" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="DoorActuator" eSuperTypes="#//Actuator"/>
+  <eClassifiers xsi:type="ecore:EClass" name="NamedElement" abstract="true">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="CalendarSystem"/>
+  <eClassifiers xsi:type="ecore:EClass" name="MeetingScheduleSystem"/>
+  <eClassifiers xsi:type="ecore:EClass" name="RadiatorActuator" eSuperTypes="#//Actuator"/>
+  <eClassifiers xsi:type="ecore:EClass" name="SmokeSensor" eSuperTypes="#//Sensor"/>
+  <eClassifiers xsi:type="ecore:EClass" name="HasSensors">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="sensors" upperBound="-1"
+        eType="#//Sensor" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="HasActuators">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="actuators" upperBound="-1"
+        eType="#//Actuator" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="CO2Sensor" eSuperTypes="#//Sensor"/>
+  <eClassifiers xsi:type="ecore:EClass" name="InfraredLightSensor" eSuperTypes="#//Sensor"/>
+  <eClassifiers xsi:type="ecore:EClass" name="HumiditySensor" eSuperTypes="#//Sensor"/>
+  <eClassifiers xsi:type="ecore:EClass" name="AudioAlarmActuator" eSuperTypes="#//Actuator"/>
+  <eClassifiers xsi:type="ecore:EClass" name="HasIntegerValue">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="valueState" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Room" eSuperTypes="#//NamedElement">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="declareSensor" upperBound="-1"
+        eType="#//SensorComponent" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="declareActuator" upperBound="-1"
+        eType="#//ActuatorComponent" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="extends" upperBound="-1"
+        eType="#//Room"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="timers" upperBound="-1"
+        eType="#//Timer" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="policies" upperBound="-1"
+        eType="#//Policy"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="during" upperBound="-1"
+        eType="#//Schedule"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Floor" eSuperTypes="#//NamedElement">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="rooms" upperBound="-1"
+        eType="#//Room" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="timers" upperBound="-1"
+        eType="#//Timer" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ActuatorComponent" eSuperTypes="#//HasActuators #//NamedElement"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Policy" eSuperTypes="#//NamedElement">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="usesActuators" upperBound="-1"
+        eType="#//Actuator" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="usesSensors" upperBound="-1"
+        eType="#//Sensor" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="specifiedBy" lowerBound="1"
+        upperBound="-1" eType="#//If" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="controlledBy" upperBound="-1"
+        eType="#//Timer" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="defineState" upperBound="-1"
+        eType="#//State"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="during" upperBound="-1"
+        eType="#//Schedule"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="usesRooms" upperBound="-1"
+        eType="#//Room"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="defineLocalState" upperBound="-1"
+        eType="#//State" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="State" eSuperTypes="#//NamedElement">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="valueState" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="exprStates" eType="#//Expression"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Timer" eSuperTypes="#//NamedElement"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Schedule" eSuperTypes="#//NamedElement">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="weekdays" upperBound="-1"
+        eType="#//Weekdays"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="from" eType="#//Time" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="to" eType="#//Time" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="Weekdays">
+    <eLiterals name="MONDAY"/>
+    <eLiterals name="TUESDAY" value="1"/>
+    <eLiterals name="WEDNESDAY" value="2"/>
+    <eLiterals name="THURSDAY" value="3"/>
+    <eLiterals name="FRIDAY" value="4"/>
+    <eLiterals name="SATURDAY" value="5"/>
+    <eLiterals name="SUNDAY" value="6"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Time">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="hours" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EShort"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="minutes" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EShort"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="If">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="cond" lowerBound="1" eType="#//Expression"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="then" upperBound="-1" eType="#//Expression"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="elseif" upperBound="-1"
+        eType="#//If" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="else" eType="#//Expression"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="CompOps">
+    <eLiterals name="GREATER" literal=">"/>
+    <eLiterals name="GREATEROREQUAL" value="1" literal=">="/>
+    <eLiterals name="EQUAL" value="2" literal="="/>
+    <eLiterals name="LESSOREQUAL" value="3" literal="&lt;="/>
+    <eLiterals name="LESS" value="4" literal="&lt;"/>
+    <eLiterals name="NOTEQUAL" value="5" literal="!="/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="TimeExpression" eSuperTypes="#//Expression">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="TimeBound" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="time" lowerBound="1" eType="#//Timer"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ResetExpression" eSuperTypes="#//Expression">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="reset" lowerBound="1" eType="#//Timer"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="RoomUsage" eSuperTypes="#//Expression">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="sen" eType="#//Sensor"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="act" eType="#//Actuator"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="defineState" eType="#//State"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Expression" abstract="true"/>
+  <eClassifiers xsi:type="ecore:EClass" name="BinaryOps" eSuperTypes="#//Expression">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="lexpr" lowerBound="1" eType="#//Expression"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="rexpr" lowerBound="1" eType="#//Expression"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="operator" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="UnaryOp" eSuperTypes="#//Expression">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="expr" lowerBound="1" eType="#//Expression"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="operator" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Id" eSuperTypes="#//Expression #//NamedElement"/>
+  <eClassifiers xsi:type="ecore:EClass" name="RoomActuators" eSuperTypes="#//Expression">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="definedRoomActuator" eType="#//Room"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="definedActuator" eType="#//ActuatorComponent"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Constant" eSuperTypes="#//Expression"/>
+</ecore:EPackage>

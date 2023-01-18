@@ -1,0 +1,5 @@
+model	DBScheme (tables,Table,ref) (relations,Relation,ref) 
+model	Relation (maxTargetMultiplicity,EInt,attribute) (minSourceMultiplicity,EInt,attribute) (minTargetMultiplicity,EInt,attribute) (maxSourceMultiplicity,EInt,attribute) (source,Table,ref) (target,Table,ref) 
+model	Table (outRelation,Relation,ref) (inRelation,Relation,ref) (columns,Column,ref) (primaryKey,Column,ref) 
+model	Column (type,EString,attribute) 
+model	NamedElement (name,EString,attribute) 

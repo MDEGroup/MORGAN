@@ -1,0 +1,354 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="spinefm" nsURI="spinefm.unice.fr" nsPrefix="spinefm">
+  <eSubpackages name="FMModel" nsURI="fmm.spinefm.unice.fr" nsPrefix="fmm">
+    <eClassifiers xsi:type="ecore:EClass" name="FeatureModel">
+      <eOperations name="getStateFT" lowerBound="1" eType="#//FMModel/GroupState">
+        <eParameters name="feature" lowerBound="1" eType="#//FMModel/Feature"/>
+      </eOperations>
+      <eOperations name="getFeatureFromName" lowerBound="1" eType="#//FMModel/Feature"
+          eExceptions="#//FMModel/exceptions/FeatureNotFoundException">
+        <eParameters name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+      </eOperations>
+      <eOperations name="addFeature" lowerBound="1">
+        <eParameters name="name" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+        <eParameters name="feature" lowerBound="1" eType="#//FMModel/Feature"/>
+        <eParameters name="state" lowerBound="1" eType="#//FMModel/GroupState"/>
+      </eOperations>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="root" lowerBound="1"
+          eType="#//FMModel/Feature" containment="true"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="constraints" ordered="false"
+          upperBound="-1" eType="#//FMModel/Constraint" containment="true"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="id" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" unique="false"
+          lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="Feature">
+      <eOperations name="getAllChildrenFeatures" ordered="false" upperBound="-1" eType="#//FMModel/Feature"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="id" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" unique="false"
+          lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="children" ordered="false"
+          upperBound="-1" eType="#//FMModel/Group" containment="true"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="Group">
+      <eOperations name="getAllChildren" ordered="false" upperBound="-1" eType="#//FMModel/Feature"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="features" ordered="false"
+          lowerBound="1" upperBound="-1" eType="#//FMModel/Feature" containment="true"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="state" lowerBound="1"
+          eType="#//FMModel/GroupState" defaultValueLiteral=""/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="Constraint">
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="Rule" lowerBound="1"
+          eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EEnum" name="GroupState">
+      <eLiterals name="MANDATORY" literal="man"/>
+      <eLiterals name="OPTIONAL" value="1" literal="opt"/>
+      <eLiterals name="ALTERNATIVE" value="2" literal="xor"/>
+      <eLiterals name="OR" value="3" literal="or"/>
+      <eLiterals name="MUTEX" value="4" literal="mutex"/>
+    </eClassifiers>
+    <eSubpackages name="exceptions" nsURI="exceptions.fmm.spinefm.unice.fr" nsPrefix="fmm.exceptions">
+      <eClassifiers xsi:type="ecore:EDataType" name="FeatureNotFoundException" instanceClassName="fr.unice.spinefm.FMModel.exceptions.FeatureNotFoundException"/>
+    </eSubpackages>
+  </eSubpackages>
+  <eSubpackages name="MSPLModel" nsURI="msplm.spinefm.unice.fr" nsPrefix="msplm">
+    <eClassifiers xsi:type="ecore:EClass" name="MultipleSoftwareProductLine">
+      <eOperations name="getDomainElementByName" lowerBound="1" eType="#//MSPLModel/DomainElement"
+          eExceptions="#//MSPLModel/exceptions/DomainElementNotFoundException">
+        <eParameters name="name" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+      </eOperations>
+      <eOperations name="getValidAssociationsForSourceAndTarget" ordered="false" upperBound="-1"
+          eType="#//MSPLModel/DEAssociation" eExceptions="#//MSPLModel/exceptions/DEAssociationNotFoundException">
+        <eParameters name="source" lowerBound="1" eType="#//MSPLModel/DomainElement"/>
+        <eParameters name="target" lowerBound="1" eType="#//MSPLModel/DomainElement"/>
+      </eOperations>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="domainElements" ordered="false"
+          lowerBound="1" upperBound="-1" eType="#//MSPLModel/DomainElement" containment="true"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="associations" ordered="false"
+          upperBound="-1" eType="#//MSPLModel/DEAssociation" containment="true"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="DEAssociation">
+      <eOperations name="computeActionsToDo" ordered="false" upperBound="-1" eType="#//ActionModel/Action"
+          eExceptions="#//fmengine/exceptions/FMEngineException #//exceptions/IllegalCallException">
+        <eParameters name="CPSSource" lowerBound="1" eType="#//ProcessModel/ConfigurationProcessStep"/>
+        <eParameters name="CPSTarget" lowerBound="1" eType="#//ProcessModel/ConfigurationProcessStep"/>
+      </eOperations>
+      <eOperations name="createAndAssociateInverseAssociation" eType="#//MSPLModel/DEAssociation"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="restrictionFunction"
+          ordered="false" upperBound="-1" eType="#//ActionModel/RestrictionFunction"
+          containment="true"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="source" lowerBound="1"
+          eType="#//MSPLModel/DEAssociationEnd" containment="true"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="target" lowerBound="1"
+          eType="#//MSPLModel/DEAssociationEnd" containment="true"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="id" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="inverse" lowerBound="1"
+          eType="#//MSPLModel/DEAssociation"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="MultiplicityElement">
+      <eOperations name="respectBoundaries" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
+        <eParameters name="value" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+      </eOperations>
+      <eOperations name="isExactlyOne" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+      <eOperations name="isLowerThanUpperBound" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
+        <eParameters name="value" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+      </eOperations>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="lowerBound" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="upperBound" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="id" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="DEAssociationEnd">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="LinkMultiplicity" lowerBound="1"
+          eType="#//MSPLModel/MultiplicityElement" containment="true"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="apply_on" lowerBound="1"
+          eType="#//MSPLModel/DomainElement"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="id" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="DomainElement">
+      <eOperations name="getSourcedAssociations" ordered="false" upperBound="-1" eType="#//MSPLModel/DEAssociation"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="MultiplicityElement"
+          lowerBound="1" eType="#//MSPLModel/MultiplicityElement" containment="true"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="refers_on" lowerBound="1"
+          eType="#//FMModel/FeatureModel"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="belongs_to" ordered="false"
+          upperBound="-1" eType="#//MSPLModel/DEAssociation"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="id" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eClassifiers>
+    <eSubpackages name="exceptions" nsURI="exceptions.msplm.spinefm.unice.fr" nsPrefix="msplm.exceptions">
+      <eClassifiers xsi:type="ecore:EDataType" name="DomainElementNotFoundException"
+          instanceClassName="fr.unice.spinefm.MSPLModel.exceptions.DomainElementNotFoundException"/>
+      <eClassifiers xsi:type="ecore:EDataType" name="DEAssociationNotFoundException"
+          instanceClassName="fr.unice.spinefm.MSPLModel.exceptions.DEAssociationNotFoundException"/>
+    </eSubpackages>
+  </eSubpackages>
+  <eSubpackages name="ConfigurationModel" nsURI="cm.spinefm.unice.fr" nsPrefix="cm">
+    <eClassifiers xsi:type="ecore:EClass" name="Configuration">
+      <eOperations name="canBeLinked" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
+        <eParameters name="association" lowerBound="1" eType="#//MSPLModel/DEAssociation"/>
+      </eOperations>
+      <eOperations name="getFeatureModel" lowerBound="1" eType="#//FMModel/FeatureModel"/>
+      <eOperations name="getLinkedConfigurationsOfDomainElement" ordered="false" upperBound="-1"
+          eType="#//ConfigurationModel/Configuration" eExceptions="#//ConfigurationModel/exceptions/ConfigNotFoundException">
+        <eParameters name="de" lowerBound="1" eType="#//MSPLModel/DomainElement"/>
+      </eOperations>
+      <eOperations name="isCompletlyLinked" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"
+          eExceptions="#//ConfigurationModel/exceptions/ConfigNotFoundException"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="CPS" lowerBound="1" eType="#//ProcessModel/ConfigurationProcessStep"
+          eOpposite="#//ProcessModel/ConfigurationProcessStep/configuration"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="id" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="belongs_to" ordered="false"
+          upperBound="-1" eType="#//ConfigurationModel/Link"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="state" lowerBound="1"
+          eType="#//ActionModel/ConfigurationState" containment="true"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="description" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="Link">
+      <eOperations name="getAssociatedConfiguration" lowerBound="1" eType="#//ConfigurationModel/Configuration"
+          eExceptions="#//ConfigurationModel/exceptions/ConfigNotFoundException">
+        <eParameters name="conf" lowerBound="1" eType="#//ConfigurationModel/Configuration"/>
+      </eOperations>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="source" lowerBound="1"
+          eType="#//ConfigurationModel/Configuration"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="relatedAssociation" lowerBound="1"
+          eType="#//MSPLModel/DEAssociation"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="target" lowerBound="1"
+          eType="#//ConfigurationModel/Configuration"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="id" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="CompositeConfiguration">
+      <eOperations name="isValid" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+      <eOperations name="addConfiguration">
+        <eParameters name="conf" lowerBound="1" eType="#//ConfigurationModel/Configuration"/>
+      </eOperations>
+      <eOperations name="getConfigurationByName" lowerBound="1" eType="#//ConfigurationModel/Configuration"
+          eExceptions="#//ConfigurationModel/exceptions/ConfigNotFoundException">
+        <eParameters name="confName" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+      </eOperations>
+      <eOperations name="createConfigurationLink" eExceptions="#//ConfigurationModel/exceptions/InvalidAssociationException">
+        <eParameters name="confSource" lowerBound="1" eType="#//ConfigurationModel/Configuration"/>
+        <eParameters name="confTarget" lowerBound="1" eType="#//ConfigurationModel/Configuration"/>
+        <eParameters name="asso" lowerBound="1" eType="#//MSPLModel/DEAssociation"/>
+      </eOperations>
+      <eOperations name="getCompatibleConfigurations" ordered="false" upperBound="-1"
+          eType="#//ConfigurationModel/Configuration" eExceptions="#//ConfigurationModel/exceptions/InvalidAssociationException #//exceptions/IllegalCallException #//fmengine/exceptions/FMEngineException">
+        <eParameters name="confSource" lowerBound="1" eType="#//ConfigurationModel/Configuration"/>
+        <eParameters name="asso" lowerBound="1" eType="#//MSPLModel/DEAssociation"/>
+      </eOperations>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="subConfigurations" ordered="false"
+          upperBound="-1" eType="#//ConfigurationModel/Configuration" containment="true"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="links" ordered="false"
+          upperBound="-1" eType="#//ConfigurationModel/Link" containment="true"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" lowerBound="1"
+          eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eClassifiers>
+    <eSubpackages name="exceptions" nsURI="exceptions.cm.spinefm.unice.fr" nsPrefix="cm.exceptions">
+      <eClassifiers xsi:type="ecore:EDataType" name="ConfigNotFoundException" instanceClassName="fr.unice.spinefm.ConfigurationModel.exceptions.ConfigNotFoundException"/>
+      <eClassifiers xsi:type="ecore:EDataType" name="InvalidAssociationException"
+          instanceClassName="fr.unice.spinefm.ConfigurationModel.exceptions.InvalidAssociationException"/>
+      <eClassifiers xsi:type="ecore:EDataType" name="LinkNotFoundException" instanceClassName="fr.unice.spinefm.ConfigurationModel.exceptions.LinkNotFoundException"/>
+    </eSubpackages>
+  </eSubpackages>
+  <eSubpackages name="ProcessModel" nsURI="pm.spinefm.unice.fr" nsPrefix="pm">
+    <eClassifiers xsi:type="ecore:EClass" name="ConfigurationProcessStep">
+      <eOperations name="isComplete" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"
+          eExceptions="#//fmengine/exceptions/FMEngineException"/>
+      <eOperations name="getState" lowerBound="1" eType="#//ActionModel/ConfigurationState"
+          eExceptions="#//exceptions/IllegalCallException"/>
+      <eOperations name="addActionToDo">
+        <eParameters name="a" lowerBound="1" eType="#//ActionModel/Action"/>
+      </eOperations>
+      <eOperations name="alreadyHaveAction" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"
+          eExceptions="#//fmengine/exceptions/FMEngineException">
+        <eParameters name="a" lowerBound="1" eType="#//ActionModel/Action"/>
+      </eOperations>
+      <eOperations name="getConfName" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+      <eOperations name="setFMA" eExceptions="#//fmengine/exceptions/FMEngineException">
+        <eParameters name="fma" lowerBound="1" eType="#//fmengine/FMSpineFMAdapter"/>
+      </eOperations>
+      <eOperations name="apply" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"
+          eExceptions="#//fmengine/exceptions/FMEngineException"/>
+      <eOperations name="mergeWithExternalCPS" eExceptions="#//fmengine/exceptions/FMEngineException">
+        <eParameters name="cps" lowerBound="1" eType="#//ProcessModel/ConfigurationProcessStep"/>
+      </eOperations>
+      <eOperations name="isCompatibleWithConfiguration" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"
+          eExceptions="#//fmengine/exceptions/FMEngineException">
+        <eParameters name="conf" lowerBound="1" eType="#//ConfigurationModel/Configuration"/>
+      </eOperations>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="actionsDone" upperBound="-1"
+          eType="#//ActionModel/Action"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="domainElement" lowerBound="1"
+          eType="#//MSPLModel/DomainElement"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="actionsToDo" upperBound="-1"
+          eType="#//ActionModel/Action"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="id" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="description" unique="false"
+          eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="context" lowerBound="1"
+          eType="#//ProcessModel/Context"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="configuration" eType="#//ConfigurationModel/Configuration"
+          eOpposite="#//ConfigurationModel/Configuration/CPS"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="userConfig" lowerBound="1"
+          eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="Context" abstract="true">
+      <eOperations name="addCPS">
+        <eParameters name="cps" lowerBound="1" eType="#//ProcessModel/ConfigurationProcessStep"/>
+      </eOperations>
+      <eOperations name="getCPSOfDE" lowerBound="1" eType="#//ProcessModel/ConfigurationProcessStep">
+        <eParameters name="de" lowerBound="1" eType="#//MSPLModel/DomainElement"/>
+      </eOperations>
+      <eOperations name="mergeExternalCPS">
+        <eParameters name="externalCPS" lowerBound="1" eType="#//ProcessModel/ConfigurationProcessStep"/>
+      </eOperations>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="CPS" ordered="false"
+          lowerBound="1" upperBound="-1" eType="#//ProcessModel/ConfigurationProcessStep"
+          containment="true"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="id" ordered="false" lowerBound="1"
+          eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="GlobalContext" eSuperTypes="#//ProcessModel/Context">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="configuration" lowerBound="1"
+          eType="#//ConfigurationModel/CompositeConfiguration" containment="true"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="LocalContext" eSuperTypes="#//ProcessModel/Context">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="configurations" ordered="false"
+          lowerBound="1" upperBound="-1" eType="#//ConfigurationModel/Configuration"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="ContextManager">
+      <eOperations name="propagate" eExceptions="#//fmengine/exceptions/FMEngineException #//exceptions/IllegalCallException">
+        <eParameters name="CPS" lowerBound="1" eType="#//ProcessModel/ConfigurationProcessStep"/>
+        <eParameters name="context" lowerBound="1" eType="#//ProcessModel/Context"/>
+      </eOperations>
+      <eOperations name="setFMAdapter">
+        <eParameters name="fma" lowerBound="1" eType="#//fmengine/FMSpineFMAdapter"/>
+      </eOperations>
+      <eOperations name="init" eExceptions="#//fmengine/exceptions/FMEngineException"/>
+      <eOperations name="createNewContext" lowerBound="1" eType="#//ProcessModel/Context"
+          eExceptions="#//fmengine/exceptions/FMEngineException"/>
+      <eOperations name="getContextFromId" lowerBound="1" eType="#//ProcessModel/Context"
+          eExceptions="#//ProcessModel/exceptions/ContextNotFoundException">
+        <eParameters name="id" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+      </eOperations>
+      <eOperations name="linkConfigurationsAndManageContexts" eType="#//ProcessModel/DeletedContextInformations"
+          eExceptions="#//fmengine/exceptions/FMEngineException #//ConfigurationModel/exceptions/InvalidAssociationException #//ProcessModel/exceptions/ContextMergingException">
+        <eParameters name="confSource" lowerBound="1" eType="#//ConfigurationModel/Configuration"/>
+        <eParameters name="confTarget" lowerBound="1" eType="#//ConfigurationModel/Configuration"/>
+        <eParameters name="association" lowerBound="1" eType="#//MSPLModel/DEAssociation"/>
+      </eOperations>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="mspl" lowerBound="1"
+          eType="#//MSPLModel/MultipleSoftwareProductLine"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="globalContext" lowerBound="1"
+          eType="#//ProcessModel/GlobalContext" containment="true"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="localContexts" ordered="false"
+          upperBound="-1" eType="#//ProcessModel/LocalContext" containment="true"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="DeletedContextInformations">
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="deletedContext" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="replacedBy" eType="#//ProcessModel/Context"/>
+    </eClassifiers>
+    <eSubpackages name="exceptions" nsURI="exceptions.pm.spinefm.unice.fr" nsPrefix="pm.exceptions">
+      <eClassifiers xsi:type="ecore:EDataType" name="ContextNotFoundException" instanceClassName="fr.unice.spinefm.ProcessModel.exceptions.ContextNotFoundException"/>
+      <eClassifiers xsi:type="ecore:EDataType" name="FMNotFoundException" instanceClassName="fr.unice.spinefm.ProcessModel.exceptions.FMNotFoundException"/>
+      <eClassifiers xsi:type="ecore:EDataType" name="ContextMergingException" instanceClassName="fr.unice.spinefm.ProcessModel.exceptions.ContextMergingException"/>
+    </eSubpackages>
+  </eSubpackages>
+  <eSubpackages name="fmengine" nsURI="fmengine.spinefm.unice.fr" nsPrefix="fmengine">
+    <eClassifiers xsi:type="ecore:EDataType" name="FMSpineFMAdapter" instanceClassName="fr.unice.spinefm.fmengine.FMSpineFMAdapter"/>
+    <eSubpackages name="exceptions" nsURI="exceptions.fmengine.spinefm.unice.fr" nsPrefix="fmengine.exceptions">
+      <eClassifiers xsi:type="ecore:EDataType" name="FMEngineException" instanceClassName="fr.unice.spinefm.fmengine.exceptions.FMEngineException"/>
+    </eSubpackages>
+  </eSubpackages>
+  <eSubpackages name="exceptions" nsURI="exceptions.spinefm.unice.fr" nsPrefix="exceptions">
+    <eClassifiers xsi:type="ecore:EDataType" name="IllegalCallException" instanceClassName="fr.unice.spinefm.exceptions.IllegalCallException"/>
+  </eSubpackages>
+  <eSubpackages name="ActionModel" nsURI="action.spinefm.unice.fr" nsPrefix="action">
+    <eClassifiers xsi:type="ecore:EClass" name="RestrictionFunction">
+      <eOperations name="createAndAssociateInverseRestFunc" eType="#//ActionModel/RestrictionFunction"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="id" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="rules" ordered="false"
+          lowerBound="1" upperBound="-1" eType="#//ActionModel/Rule" containment="true"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="inverse" lowerBound="1"
+          eType="#//ActionModel/RestrictionFunction"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="ConfigurationState">
+      <eOperations name="isIncludedIn" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
+        <eParameters name="otherState" lowerBound="1" eType="#//ActionModel/ConfigurationState"/>
+      </eOperations>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="selectedFeatures" ordered="false"
+          lowerBound="1" upperBound="-1" eType="#//FMModel/Feature"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="deselectedFeatures" ordered="false"
+          upperBound="-1" eType="#//FMModel/Feature"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="fm" lowerBound="1" eType="#//FMModel/FeatureModel"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="id" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="Rule">
+      <eOperations name="createInverseRule" lowerBound="1" eType="#//ActionModel/Rule"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="actions" lowerBound="1"
+          eType="#//ActionModel/Action" containment="true"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="state" lowerBound="1"
+          eType="#//ActionModel/ConfigurationState" containment="true"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="id" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
+          unsettable="true"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="Action" abstract="true">
+      <eOperations name="applyAction" eExceptions="#//fmengine/exceptions/FMEngineException">
+        <eParameters name="fma" lowerBound="1" eType="#//fmengine/FMSpineFMAdapter"/>
+        <eParameters name="confName" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+      </eOperations>
+      <eOperations name="isSameObject" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
+        <eParameters name="o" lowerBound="1" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EObject"/>
+      </eOperations>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="feature" eType="#//FMModel/Feature"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="fm" lowerBound="1" eType="#//FMModel/FeatureModel"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="id" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="ActionSelect" eSuperTypes="#//ActionModel/Action"/>
+    <eClassifiers xsi:type="ecore:EClass" name="ActionDeselect" eSuperTypes="#//ActionModel/Action"/>
+    <eClassifiers xsi:type="ecore:EClass" name="ActionAddCTConstraint" eSuperTypes="#//ActionModel/Action">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="constraint" lowerBound="1"
+          eType="#//FMModel/Constraint"/>
+    </eClassifiers>
+  </eSubpackages>
+</ecore:EPackage>

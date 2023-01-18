@@ -1,0 +1,5 @@
+model	Vertex (outgoing,Transition,ref) (incoming,Transition,ref) 
+model	StateMachine (name,EString,attribute) (vertex,Vertex,ref) (transition,Transition,ref) 
+model	State (name,EString,attribute) (statemachine,StateMachine,ref) 
+model	Transition (name,EString,attribute) (trigger,EString,attribute) (source,Vertex,ref) (target,Vertex,ref) 
+model	Application (name,EString,attribute) (statemachine,StateMachine,ref) 

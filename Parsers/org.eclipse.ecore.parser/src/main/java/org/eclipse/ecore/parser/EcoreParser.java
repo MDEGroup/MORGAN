@@ -96,21 +96,32 @@ public class EcoreParser {
         return ecoreElements;
     }
     
-    public static void getEcoreData (HashMap<String,HashMap<String,HashMap<String, String>>> ecoreList, File filename,String label) {
+    public static void getEcoreData (HashMap<String,HashMap<String,HashMap<String, String>>> ecoreList, File filename,String label, FileWriter statWriter) {
+    	
+    	int coutClass = 0;
+		int countAttr = 0;
+		int countRel = 0;
     	try {
+    		
+    		
 			FileWriter fw = new FileWriter(filename);
+			
+			StringBuilder featureBuilder = new StringBuilder();
+			
+			
+			featureBuilder.append(filename.getName()+"," );
 			
 			for (String key : ecoreList.keySet()) {
 				HashMap<String,HashMap<String,String>> elem = ecoreList.get(key);
 				
 				StringBuilder sb = new StringBuilder();				
 				sb.append(label+"\t"+key + " ");				
-				
+				coutClass++;
 				HashMap<String, String> attributeMap = elem.get("attributes");
 				
 				for(String attrName : attributeMap.keySet()) {					
 					String typeAttr= attributeMap.get(attrName);
-					
+					countAttr++;
 					sb.append('('+attrName+','+typeAttr+','+"attribute)"+" ");
 				}
 				
@@ -118,20 +129,24 @@ public class EcoreParser {
 				
 				for(String refName : refMap.keySet() ) {					
 					String typeRef= refMap.get(refName);
-					
+					countRel++;
 					sb.append('('+refName+','+typeRef+','+"ref)"+" ");
-				}
-				
+				}			
 				
 				
 				fw.write(sb.toString()+"\n");
 			}
+			featureBuilder.append(coutClass+","+countAttr+","+countRel+",model\n");			
+			statWriter.write(featureBuilder.toString());
+			
+			
 			
 			fw.flush();
 			fw.close();
 		} catch (IOException e) {			
 			e.printStackTrace();
 		}
+    
     	
     	
     	

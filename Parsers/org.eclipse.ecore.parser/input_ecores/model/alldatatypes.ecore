@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="alldatatypes" nsURI="http://obeo.fr/alldatatypes/1.0.0" nsPrefix="alldatatypes">
+  <eClassifiers xsi:type="ecore:EClass" name="Element" abstract="true">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="id" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
+        iD="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Root" eSuperTypes="#//Element">
+    <eOperations name="getAllTypes" upperBound="-1" eType="#//Type"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="types" upperBound="-1"
+        eType="#//Type" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Type" abstract="true" interface="true"
+      eSuperTypes="#//Element"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Strings" eSuperTypes="#//Type">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="text_01_EmptyDefault" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="text_01" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
+        defaultValueLiteral="SmartEA"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="text_1" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString" defaultValueLiteral="SmartEA"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="textarea" unique="false"
+        upperBound="-1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
+        defaultValueLiteral="SmartEA"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="link_01" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
+        defaultValueLiteral="http://www.smartea.fr"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="html_01" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
+        defaultValueLiteral="&lt;strong>Obeo&lt;/strong> SmartEA"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="notEditableText_01" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
+        changeable="false" defaultValueLiteral="SmartEA"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Dates" eSuperTypes="#//Type">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="dateEmptyDefault_01" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDate"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="date_01" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDate"
+        defaultValueLiteral="1987-07-16"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="date_1" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDate" defaultValueLiteral="1987-07-16"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="date_01_HM" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDate"
+        defaultValueLiteral="1987-07-16T12:14"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="date_01_HMS" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDate"
+        defaultValueLiteral="1987-07-16T12:14:010"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="date_01_HMSms" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDate"
+        defaultValueLiteral="1987-07-16T12:14:010+0010"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="notEditableDate_01" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDate"
+        changeable="false" defaultValueLiteral="1987-07-16"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="dates" upperBound="-1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDate" defaultValueLiteral="1987-07-16"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Enums" eSuperTypes="#//Type">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="enum_01" eType="#//AEnum"
+        defaultValueLiteral="enum0"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="enum_01_EmptyDefault" eType="#//AEnum"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="enum_1" eType="#//AEnum"
+        defaultValueLiteral="enum0"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="enums" upperBound="-1"
+        eType="#//AEnum" defaultValueLiteral="enum0"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="notEditableEnum_01" eType="#//AEnum"
+        changeable="false" defaultValueLiteral="enum0"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="states" upperBound="-1"
+        eType="#//StateWithoutDefault"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="statesMax2" upperBound="2"
+        eType="#//StateWithoutDefault"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="statesMin1Max2" lowerBound="1"
+        upperBound="2" eType="#//StateWithoutDefault" defaultValueLiteral="move"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="heavy" upperBound="-1"
+        eType="#//Heavy"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="AEnum">
+    <eLiterals name="ENUM0" literal="enum0"/>
+    <eLiterals name="ENUM1" value="1" literal="enum1"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Booleans" eSuperTypes="#//Type">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="boolean_01" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"
+        defaultValueLiteral="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="boolean_01_EmptyDefault"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="boolean_1" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean" defaultValueLiteral="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="notEditableBoolean_01"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean" changeable="false"
+        defaultValueLiteral="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Integers" eSuperTypes="#//Type">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="int_01" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"
+        defaultValueLiteral="23"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="int_1" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"
+        defaultValueLiteral="23"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="int_01_EmptyDefault" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="notEditableInt_01" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"
+        changeable="false" defaultValueLiteral="23"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="ints" upperBound="-1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"
+        defaultValueLiteral="23"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="hiddenInt_01" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"
+        defaultValueLiteral="23"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Longs" eSuperTypes="#//Type">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="long_01" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//ELong"
+        defaultValueLiteral="23"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="long_1" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//ELong" defaultValueLiteral="23"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="long_01_EmptyDefault" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//ELong"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="notEditableLong_01" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//ELong"
+        changeable="false" defaultValueLiteral="23"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Shorts" eSuperTypes="#//Type">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="short_01" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EShort"
+        defaultValueLiteral="23"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="short_1" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EShort" defaultValueLiteral="23"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="short_01_EmptyDefault"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EShort"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="notEditableShort_01" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EShort"
+        changeable="false" defaultValueLiteral="23"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Doubles" eSuperTypes="#//Type">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="double_01" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDouble"
+        defaultValueLiteral="12.1"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="double_1" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDouble" defaultValueLiteral="12.1"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="double_01_EmptyDefault"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDouble"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="notEditableDouble_01" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDouble"
+        changeable="false" defaultValueLiteral="12.1"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Floats" eSuperTypes="#//Type">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="float_01" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EFloat"
+        defaultValueLiteral="12.1"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="float_1" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EFloat" defaultValueLiteral="12.1"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="float_01_EmptyDefault"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EFloat"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="notEditableFloat_01" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EFloat"
+        changeable="false" defaultValueLiteral="12.1"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="StateWithoutDefault">
+    <eLiterals name="OPEN" literal="open"/>
+    <eLiterals name="MOVE" value="1" literal="move"/>
+    <eLiterals name="CLOSE" value="2" literal="close"/>
+    <eLiterals name="MOVING" value="3" literal="moving"/>
+    <eLiterals name="DELETE" value="4" literal="delete"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="Heavy">
+    <eLiterals name="OPEN" literal="open0"/>
+    <eLiterals name="MOVE" value="1" literal="move0"/>
+    <eLiterals name="CLOSE" value="2" literal="close0"/>
+    <eLiterals name="MOVING" value="3" literal="moving0"/>
+    <eLiterals name="DELETE" value="4" literal="delet0e"/>
+    <eLiterals name="OPEN1" value="5" literal="open1"/>
+    <eLiterals name="MOVE1" value="6" literal="move1"/>
+    <eLiterals name="CLOS1E" value="7" literal="close1"/>
+    <eLiterals name="MOVING1" value="8" literal="moving1"/>
+    <eLiterals name="DELETE1" value="9" literal="delete1"/>
+    <eLiterals name="OPEN2" value="10" literal="open2"/>
+    <eLiterals name="MOVE2" value="11" literal="move2"/>
+    <eLiterals name="CLOSE2" value="12" literal="close2"/>
+    <eLiterals name="MOVING2" value="13" literal="moving2"/>
+    <eLiterals name="DELETE2" value="14" literal="delete2"/>
+    <eLiterals name="OPEN3" value="15" literal="open3"/>
+    <eLiterals name="MOVE3" value="16" literal="move3"/>
+    <eLiterals name="CLOSE3" value="17" literal="close3"/>
+    <eLiterals name="MOVING3" value="18" literal="moving3"/>
+    <eLiterals name="DELETE3" value="19" literal="delete3"/>
+    <eLiterals name="OPEN4" value="20" literal="open4"/>
+    <eLiterals name="MOVE4" value="21" literal="move4"/>
+    <eLiterals name="CLOSE4" value="22" literal="close4"/>
+    <eLiterals name="MOVING4" value="23" literal="moving4"/>
+    <eLiterals name="DELETE4" value="24" literal="delete4"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="BigIntegers" eSuperTypes="#//Type">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="bigInt_01" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBigInteger"
+        defaultValueLiteral="23"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="bigInt_1" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBigInteger"
+        defaultValueLiteral="23"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="bigInt_01_EmptyDefault"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBigInteger"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="notEditableBigInt_01" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBigInteger"
+        changeable="false" defaultValueLiteral="23"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="bigInts" upperBound="-1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBigInteger"
+        defaultValueLiteral="23"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="BigDecimals" eSuperTypes="#//Type">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="bigDecimal_01" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBigDecimal"
+        defaultValueLiteral="23"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="bigDecimal_1" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBigDecimal"
+        defaultValueLiteral="23"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="bigDecimal_01_EmptyDefault"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBigDecimal"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="notEditableBigDecimal_01"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBigDecimal"
+        changeable="false" defaultValueLiteral="23"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="bigDecimals" upperBound="-1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBigDecimal"
+        defaultValueLiteral="23"/>
+  </eClassifiers>
+</ecore:EPackage>

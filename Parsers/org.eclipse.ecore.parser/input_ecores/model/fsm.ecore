@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="fsm"
+    nsURI="http://fsm" nsPrefix="_fsm">
+  <eAnnotations source="diagen">
+    <details key="knownas=State Machine"/>
+    <details key="origin=http://www.kermeta.org/docs/html.chunked/KerMeta-Tutorial/ch04.html"/>
+    <details key="leftparent=statemachine" value=""/>
+    <details key="rightparent=nil" value=""/>
+    <details key="requires=nil" value=""/>
+    <details key="context=behavior" value="kewords={fsm,behavior,state,transition}&#xD;&#xA;related={state*}&#xD;&#xA;Finite State Machine&#xD;&#xA;"/>
+  </eAnnotations>
+  <eClassifiers xsi:type="ecore:EClass" name="FSM">
+    <eAnnotations source="diagraph">
+      <details key="node"/>
+      <details key="pov"/>
+    </eAnnotations>
+    <eOperations name="run">
+      <eAnnotations source="http://www.topcased.org/uuid">
+        <details key="uuid" value="11491501338092"/>
+      </eAnnotations>
+    </eOperations>
+    <eOperations name="reset">
+      <eAnnotations source="http://www.topcased.org/uuid">
+        <details key="uuid" value="11491501338093"/>
+      </eAnnotations>
+    </eOperations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="ownedState" upperBound="-1"
+        eType="#//State" containment="true" eOpposite="#//State/owningFSM">
+      <eAnnotations source="http://www.topcased.org/uuid">
+        <details key="uuid" value="11491501338094"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="initialState" lowerBound="1"
+        eType="#//State">
+      <eAnnotations source="http://www.topcased.org/uuid">
+        <details key="uuid" value="11491501338095"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="currentState" eType="#//State">
+      <eAnnotations source="http://www.topcased.org/uuid">
+        <details key="uuid" value="11491501338096"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="finalState" lowerBound="1"
+        upperBound="-1" eType="#//State">
+      <eAnnotations source="http://www.topcased.org/uuid">
+        <details key="uuid" value="11491501338097"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="transition" upperBound="-1"
+        eType="#//Transition" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="fsmException" eType="#//FSMException"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="State">
+    <eAnnotations source="diagraph">
+      <details key="node"/>
+      <details key="ref=outgoingTransition"/>
+    </eAnnotations>
+    <eOperations name="step">
+      <eAnnotations source="http://www.topcased.org/uuid">
+        <details key="uuid" value="11491501338099"/>
+      </eAnnotations>
+      <eParameters name="c" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eOperations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="owningFSM" lowerBound="1"
+        eType="#//FSM" eOpposite="#//FSM/ownedState">
+      <eAnnotations source="http://www.topcased.org/uuid">
+        <details key="uuid" value="114915013380911"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
+      <eAnnotations source="http://www.topcased.org/uuid">
+        <details key="uuid" value="114915013382412"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="outgoingTransition" upperBound="-1"
+        eType="#//Transition" eOpposite="#//Transition/source">
+      <eAnnotations source="http://www.topcased.org/uuid">
+        <details key="uuid" value="114915013382413"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="incomingTransition" upperBound="-1"
+        eType="#//Transition" eOpposite="#//Transition/target">
+      <eAnnotations source="http://www.topcased.org/uuid">
+        <details key="uuid" value="114915013382414"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Transition">
+    <eAnnotations source="diagraph">
+      <details key="node"/>
+      <details key="ref=target"/>
+      <details key="label=input"/>
+      <details key="label=output"/>
+    </eAnnotations>
+    <eOperations name="fire">
+      <eAnnotations source="http://www.topcased.org/uuid">
+        <details key="uuid" value="114915013382416"/>
+      </eAnnotations>
+    </eOperations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="source" lowerBound="1"
+        eType="#//State" eOpposite="#//State/outgoingTransition">
+      <eAnnotations source="http://www.topcased.org/uuid">
+        <details key="uuid" value="114915013382417"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="target" lowerBound="1"
+        eType="#//State" eOpposite="#//State/incomingTransition">
+      <eAnnotations source="http://www.topcased.org/uuid">
+        <details key="uuid" value="114915013382418"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="input" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
+      <eAnnotations source="http://www.topcased.org/uuid">
+        <details key="uuid" value="114915013382419"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="output" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
+      <eAnnotations source="http://www.topcased.org/uuid">
+        <details key="uuid" value="114915013382420"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="FSMException">
+    <eAnnotations source="http://www.topcased.org/uuid">
+      <details key="uuid" value="114915013382421"/>
+    </eAnnotations>
+    <eAnnotations source="diagraph">
+      <details key="node"/>
+    </eAnnotations>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="NonDeterminism" eSuperTypes="#//FSMException">
+    <eAnnotations source="http://www.topcased.org/uuid">
+      <details key="uuid" value="114915013382422"/>
+    </eAnnotations>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="NoTransition" eSuperTypes="#//FSMException">
+    <eAnnotations source="http://www.topcased.org/uuid">
+      <details key="uuid" value="114915013382423"/>
+    </eAnnotations>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="NoInitialStateException" eSuperTypes="#//FSMException">
+    <eAnnotations source="http://www.topcased.org/uuid">
+      <details key="uuid" value="114915013382424"/>
+    </eAnnotations>
+  </eClassifiers>
+</ecore:EPackage>

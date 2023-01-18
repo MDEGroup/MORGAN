@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="uml" nsURI="http://uml" nsPrefix="uml">
+  <eClassifiers xsi:type="ecore:EClass" name="UML_NamedElement">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="UML_RedefinableElement" eSuperTypes="#//UML_NamedElement"/>
+  <eClassifiers xsi:type="ecore:EClass" name="UML_Feature" eSuperTypes="#//UML_RedefinableElement"/>
+  <eClassifiers xsi:type="ecore:EClass" name="UML_Namespace" eSuperTypes="#//UML_NamedElement">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="ownedRule" upperBound="-1"
+        eType="#//UML_Constraint" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="UML_Package" eSuperTypes="#//UML_Namespace">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="packagedElements" upperBound="-1"
+        eType="#//UML_PackageableElement" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="UML_PackageableElement" eSuperTypes="#//UML_NamedElement"/>
+  <eClassifiers xsi:type="ecore:EClass" name="UML_BehavioralFeature" eSuperTypes="#//UML_Namespace #//UML_Feature"/>
+  <eClassifiers xsi:type="ecore:EClass" name="UML_StructuralFeature" eSuperTypes="#//UML_Feature #//UML_TypedElement"/>
+  <eClassifiers xsi:type="ecore:EClass" name="UML_Type" eSuperTypes="#//UML_PackageableElement"/>
+  <eClassifiers xsi:type="ecore:EClass" name="UML_TypedElement" eSuperTypes="#//UML_NamedElement">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="type" lowerBound="1" eType="#//UML_Type"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="UML_Classifier" eSuperTypes="#//UML_Namespace #//UML_Type">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="feature" upperBound="-1"
+        eType="#//UML_Feature" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="UML_Interface" eSuperTypes="#//UML_Classifier">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="ownedOperation" upperBound="-1"
+        eType="#//UML_Operation" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="ownedAttribute" upperBound="-1"
+        eType="#//UML_Property" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="UML_InterfaceRealization">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="contract" lowerBound="1"
+        eType="#//UML_Interface"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="UML_BehavioredClassifier" eSuperTypes="#//UML_Classifier">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="interfaceRealization" upperBound="-1"
+        eType="#//UML_InterfaceRealization" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="ownedBehavior" upperBound="-1"
+        eType="#//UML_Behavior" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="UML_Operation" eSuperTypes="#//UML_BehavioralFeature"/>
+  <eClassifiers xsi:type="ecore:EClass" name="UML_Class" eSuperTypes="#//UML_BehavioredClassifier">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="ownedOperation" upperBound="-1"
+        eType="#//UML_Operation" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="nestedClassifier" upperBound="-1"
+        eType="#//UML_Classifier" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="ownedAttribute" upperBound="-1"
+        eType="#//UML_Property" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="UML_Property" eSuperTypes="#//UML_StructuralFeature #//UML_ConnectableElement"/>
+  <eClassifiers xsi:type="ecore:EClass" name="UML_Port" eSuperTypes="#//UML_Property"/>
+  <eClassifiers xsi:type="ecore:EClass" name="UML_Behavior" eSuperTypes="#//UML_Class"/>
+  <eClassifiers xsi:type="ecore:EClass" name="UML_Activity" eSuperTypes="#//UML_Behavior">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="edge" upperBound="-1" eType="#//UML_ActivityEdge"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="node" upperBound="-1" eType="#//UML_ActivityNode"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="UML_ConnectableElement" eSuperTypes="#//UML_TypedElement"/>
+  <eClassifiers xsi:type="ecore:EClass" name="UML_Connector" eSuperTypes="#//UML_Feature">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="connectorEnd" lowerBound="2"
+        upperBound="-1" eType="#//UML_ConnectorEnd" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="UML_CallOperationAction" eSuperTypes="#//UML_Action">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="operation" lowerBound="1"
+        eType="#//UML_Operation"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="UML_Action" eSuperTypes="#//UML_ActivityNode"/>
+  <eClassifiers xsi:type="ecore:EClass" name="UML_ActivityNode">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="incoming" upperBound="-1"
+        eType="#//UML_ActivityNode"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="outgoing" upperBound="-1"
+        eType="#//UML_ActivityEdge"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="UML_ActivityEdge">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="source" lowerBound="1"
+        eType="#//UML_ActivityNode"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="target" lowerBound="1"
+        eType="#//UML_ActivityNode"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="UML_ValueSpecification"/>
+  <eClassifiers xsi:type="ecore:EClass" name="UML_OpaqueExpression" eSuperTypes="#//UML_ValueSpecification">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="body" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="language" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="UML_Constraint" eSuperTypes="#//UML_PackageableElement">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="specification" lowerBound="1"
+        eType="#//UML_OpaqueExpression" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="UML_ConnectorEnd">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="role" lowerBound="1" eType="#//UML_ConnectableElement"/>
+  </eClassifiers>
+</ecore:EPackage>

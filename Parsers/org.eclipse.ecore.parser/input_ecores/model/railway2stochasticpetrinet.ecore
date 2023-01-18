@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="railway2stochasticpetrinet" nsURI="platform:/plugin/hu.bme.mit.inf.viewmodel.benchmarks.models/model/railway2stochasticpetrinet.ecore"
+    nsPrefix="railway2stochasticpetrinet">
+  <eClassifiers xsi:type="ecore:EClass" name="Railway2StochasticPetriNetTrace">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="traceLinks" upperBound="-1"
+        eType="#//TraceLink" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="source" eType="ecore:EClass railway.ecore#//RailwayContainer"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="PetriNetModuleTraceLink" abstract="true"
+      eSuperTypes="#//TraceLink">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="nodes" upperBound="-1"
+        eType="ecore:EClass stochasticpetrinet.ecore#//Node"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="arcs" upperBound="-1" eType="ecore:EClass stochasticpetrinet.ecore#//Arc"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Route2FailureModel" eSuperTypes="#//PetriNetModuleTraceLink">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="route" eType="ecore:EClass railway.ecore#//Route"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="operational" eType="ecore:EClass stochasticpetrinet.ecore#//Place"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="failed" eType="ecore:EClass stochasticpetrinet.ecore#//Place"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="repair" eType="ecore:EClass stochasticpetrinet.ecore#//ImmediateTransition"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="RequiredElement2FailureModel" eSuperTypes="#//PetriNetModuleTraceLink">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="railwayElement" eType="ecore:EClass railway.ecore#//RailwayElement"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="operational" eType="ecore:EClass stochasticpetrinet.ecore#//Place"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="failed" eType="ecore:EClass stochasticpetrinet.ecore#//Place"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="RequiredElement2Connection" eSuperTypes="#//PetriNetModuleTraceLink">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="route" eType="ecore:EClass railway.ecore#//Route"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="railwayElement" eType="ecore:EClass railway.ecore#//RailwayElement"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="RailwayContainer2PetriNet" eSuperTypes="#//TraceLink">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="railwayContainer" eType="ecore:EClass railway.ecore#//RailwayContainer"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="petriNet" eType="ecore:EClass stochasticpetrinet.ecore#//PetriNet"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="TraceLink" abstract="true"/>
+</ecore:EPackage>

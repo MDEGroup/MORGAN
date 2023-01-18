@@ -1,0 +1,5 @@
+model	Trace (granularity,TimeUnit,attribute) (consistsOf,TraceEntry,ref) 
+model	TraceModel (trace,Trace,ref) 
+model	Event (time,ELong,attribute) 
+model	TraceEntry (description,EString,attribute) (nextEntry,TraceEntry,ref) (affectedRDMElements,null,ref) (cause,Event,ref) 
+model	NamedElement (name,EString,attribute) 

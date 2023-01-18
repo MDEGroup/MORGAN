@@ -1,0 +1,5 @@
+model	WorkSequence (linkType,WorkSequenceType,attribute) (linksToPredecessors,WorkDefinition,ref) (linksToSuccessors,WorkDefinition,ref) 
+model	WorkProduct (name,EString,attribute) 
+model	WorkDefinition (name,EString,attribute) (successor,WorkSequence,ref) (predecessor,WorkSequence,ref) (parameters,WorkDefinitionParameter,ref) 
+model	Process (name,EString,attribute) (activities,WorkDefinition,ref) (workSequences,WorkSequence,ref) 
+model	WorkDefinitionParameter (parameterKind,ParameterDirectionKind,attribute) (parameterType,WorkProduct,ref) 

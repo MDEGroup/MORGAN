@@ -1,0 +1,4 @@
+model	Item (quantity,QuantityType,attribute) (uSPrice,Decimal,attribute) (comment,String,attribute) (shipDate,Date,attribute) (productName,String,attribute) (partNum,SKU,attribute) 
+model	DocumentRoot (mixed,EFeatureMapEntry,attribute) (comment,String,attribute) (xSISchemaLocation,EStringToStringMapEntry,ref) (xMLNSPrefixMap,EStringToStringMapEntry,ref) (order,PurchaseOrder,ref) 
+model	PurchaseOrder (comment,String,attribute) (orderDate,Date,attribute) (billTo,USAddress,ref) (items,Item,ref) (shipTo,USAddress,ref) 
+model	USAddress (zip,Decimal,attribute) (country,NMTOKEN,attribute) (city,String,attribute) (street,String,attribute) (name,String,attribute) (state,String,attribute) 

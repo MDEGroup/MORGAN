@@ -1,0 +1,8 @@
+model	CardExConstraint (condition,Operation,ref) (action,Operation,ref) (operator,Operator,ref) 
+model	Cardinality (min,EInt,attribute) (max,EInt,attribute) 
+model	Attribute (name,EString,attribute) (value,EString,attribute) 
+model	Operation (value,EInt,attribute) (feature,Feature,ref) 
+model	OrFeature (variants,Feature,ref) (groupCardinality,GroupCardinality,ref) 
+model	FeatureModel (root,Feature,ref) (constraints,Constraints,ref) 
+model	Feature (name,EString,attribute) (featureCardinality,FeatureCardinality,ref) (attributes,Attribute,ref) (subFeatures,Feature,ref) 
+model	BooleanConstraints (from,Feature,ref) (to,Feature,ref) 

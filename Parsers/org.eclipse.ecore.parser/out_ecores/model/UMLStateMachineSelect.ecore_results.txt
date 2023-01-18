@@ -1,0 +1,8 @@
+model	ConnectionPointReference (entry,PseudoState,ref) (exit,PseudoState,ref) (state,State,ref) 
+model	Vertex (container,Region,ref) (outgoing,Transition,ref) (incoming,Transition,ref) 
+model	Trigger (event,Event,ref) 
+model	StateMachine (submachineState,State,ref) (connectionPoint,PseudoState,ref) (region,Region,ref) 
+model	State (isComposite,EBoolean,attribute) (isSubmachineState,EBoolean,attribute) (isOrthogonal,EBoolean,attribute) (isSimple,EBoolean,attribute) (entry,Behavior,ref) (exit,Behavior,ref) (deferrableTrigger,Trigger,ref) (stateInvariant,Constraint,ref) (doActivity,Behavior,ref) (connection,ConnectionPointReference,ref) (region,Region,ref) (submachine,StateMachine,ref) 
+model	Transition (kind,TransitionKind,attribute) (container,Region,ref) (effect,Behavior,ref) (guard,Constraint,ref) (source,Vertex,ref) (trigger,Trigger,ref) (target,Vertex,ref) 
+model	Region (stateMachine,StateMachine,ref) (state,State,ref) (subvertex,Vertex,ref) (transition,Transition,ref) 
+model	PseudoState (kind,PseudostateKind,attribute) (stateMachine,StateMachine,ref) 

@@ -1,0 +1,5 @@
+model	Table (columns,Column,ref) 
+model	Column (size,EInt,attribute) (unique,EBoolean,attribute) (type,ColumnType,attribute) (primary,EBoolean,attribute) 
+model	Database (tables,Table,ref) (fkrelations,FKRelation,ref) 
+model	NamedElement (name,EString,attribute) 
+model	FKRelation (label,EString,attribute) (source,Column,ref) (target,Column,ref) 

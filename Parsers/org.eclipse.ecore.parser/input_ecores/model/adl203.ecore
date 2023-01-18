@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="adl203"
+    nsURI="http://adl203" nsPrefix="_adl203">
+  <eClassifiers xsi:type="ecore:EClass" name="Component">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore">
+      <details key="constraints" value="nameUnicity"/>
+    </eAnnotations>
+    <eAnnotations source="http://www.eclipse.org/ocl/examples/OCL">
+      <details key="nameUnicity" value="bindings->isUnique(name)&#xD;&#xA;and&#xD;&#xA;components->isUnique(name)&#xD;&#xA;and&#xD;&#xA;interfaces->isUnique(name)&#xD;&#xA;"/>
+    </eAnnotations>
+    <eAnnotations source="diagraph">
+      <details key="node"/>
+      <details key="pov"/>
+      <details key="label=name"/>
+      <details key="afx=requiredInterfaces"/>
+      <details key="afx=providedInterfaces"/>
+      <details key="cref=content"/>
+      <details key="cont=Component.subComponents"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="content" eType="#//Content"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="requiredInterfaces" upperBound="-1"
+        eType="#//Required" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="providedInterfaces" upperBound="-1"
+        eType="#//Provided" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="bindings" upperBound="-1"
+        eType="#//Binding" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="subComponents" upperBound="-1"
+        eType="#//Component" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Interface" abstract="true">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore">
+      <details key="constraints" value="contingency primitive uniqueClientsForServer"/>
+    </eAnnotations>
+    <eAnnotations source="http://www.eclipse.org/ocl/examples/OCL">
+      <details key="contingency" value="(self.contingency = InterfaceContingency::mandatory) &#xD;&#xA;implies &#xD;&#xA;(&#xD;&#xA;&#x9;(&#xD;&#xA;&#x9;&#x9;(self.role = InterfaceRole::client)&#xD;&#xA;&#x9;&#x9;&#x9;implies&#xD;&#xA;&#x9;&#x9;(self.clientBinding &lt;> null)&#xD;&#xA;&#x9;)&#xD;&#xA;&#x9;or&#xD;&#xA;&#x9;(&#xD;&#xA;&#x9;&#x9;(self.role = InterfaceRole::server)&#xD;&#xA;&#x9;&#x9;&#x9;implies&#xD;&#xA;&#x9;&#x9;not (self.serverBinding->isEmpty())&#xD;&#xA;&#x9;)&#xD;&#xA;)"/>
+      <details key="primitive" value="(interfaceParent.content = null)&#xD;&#xA;xor &#xD;&#xA;(&#xD;&#xA;&#x9;(&#xD;&#xA;&#x9;&#x9;(self.role = InterfaceRole::client)&#xD;&#xA;&#x9;&#x9;&#x9;implies&#xD;&#xA;&#x9;&#x9;(self.serverBinding->isEmpty())&#xD;&#xA;&#x9;)&#xD;&#xA;&#x9;and&#xD;&#xA;&#x9;(self.role = InterfaceRole::server)&#xD;&#xA;&#x9;&#x9;implies&#xD;&#xA;&#x9;(self.clientBinding = null)&#xD;&#xA;)"/>
+      <details key="uniqueClientsForServer" value="self->isUnique(serverBinding)"/>
+    </eAnnotations>
+    <eAnnotations source="diagraph">
+      <details key="node"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="signature" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Binding">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore">
+      <details key="constraints" value="roleCompatibility"/>
+    </eAnnotations>
+    <eAnnotations source="http://www.eclipse.org/ocl/examples/OCL">
+      <details key="roleCompatibility" value="(&#xD;&#xA;&#x9;(&#xD;&#xA;&#x9;&#x9;self.client.role = InterfaceRole::client&#xD;&#xA;&#x9;&#x9;and &#xD;&#xA;&#x9; &#x9;self.server.role = InterfaceRole::server&#xD;&#xA;&#x9;)&#xD;&#xA;    &#x9;and &#xD;&#xA;  &#x9;(&#xD;&#xA;&#x9;&#x9;self.client.interfaceParent.oclIsTypeOf(Component) &#xD;&#xA;&#x9;&#x9;and&#xD;&#xA;&#x9;&#x9;self.server.interfaceParent.oclIsTypeOf(Component)&#xD;&#xA;&#x9;) &#xD;&#xA;&#x9;and&#xD;&#xA;&#x9;(&#xD;&#xA;&#x9;&#x9;self.client.interfaceParent.oclAsType(Component).componentParent = self.server.interfaceParent.oclAsType(Component).componentParent&#xD;&#xA;&#x9;)&#xD;&#xA;)&#xD;&#xA;&#xD;&#xA;or&#xD;&#xA;&#xD;&#xA;(&#xD;&#xA;&#x9;(&#xD;&#xA;&#x9;&amp;#x9;self.client.role = InterfaceRole::client&#xD;&#xA;&#x9;&#x9;and &#xD;&#xA;&#x9; &#x9;self.server.role = InterfaceRole::client&#xD;&#xA;&#x9;)&#xD;&#xA;    &#x9;and &#xD;&#xA;  &#x9;(&#xD;&#xA;&#x9;&#x9;self.client.interfaceParent.oclIsTypeOf(Component) &#xD;&#xA;&#x9;) &#xD;&#xA;&#x9;and&#xD;&#xA;&#x9;(&#xD;&#xA;&#x9;&#x9;self.client.interfaceParent.oclAsType(Component).componentParent = self.server.interfaceParent&#xD;&#xA;&#x9;)&#xD;&#xA;)&#xD;&#xA;&#xD;&#xA;or&#xD;&#xA;&#xD;&#xA;(&#xD;&#xA;&#x9;(&#xD;&#xA;&#x9;&#x9;self.client.role = InterfaceRole::SERVER&#xD;&#xA;&#x9;&#x9;and &#xD;&#xA;&#x9; &#x9;self.server.role = InterfaceRole::SERVER&#xD;&#xA;&#x9;)&#xD;&#xA;    &#x9;and &#xD;&#xA;  &#x9;(&#xD;&#xA;&#x9;&#x9;self.server.interfaceParent.oclIsTypeOf(Component) &#xD;&#xA;&#x9;) &#xD;&#xA;&#x9;and&#xD;&#xA;&#x9;(&#xD;&#xA;&#x9;&#x9;self.server.interfaceParent.oclAsType(Component).componentParent = self.client.interfaceParent&#xD;&#xA;&#x9;)&#xD;&#xA;)&#xD;&#xA;"/>
+    </eAnnotations>
+    <eAnnotations source="diagraph"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="to" eType="#//Required"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="attributes" upperBound="-1"
+        eType="#//BindingAttributes" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="from" eType="#//Provided"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Content">
+    <eAnnotations source="diagraph">
+      <details key="node"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="contentParent" lowerBound="1"
+        eType="#//Component"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="expression" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString" defaultValueLiteral="content class"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="language" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Required" eSuperTypes="#//Interface">
+    <eAnnotations source="diagraph">
+      <details key="node"/>
+    </eAnnotations>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Provided" eSuperTypes="#//Interface">
+    <eAnnotations source="diagraph">
+      <details key="node"/>
+      <details key="ref=simpleBindings"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="bindings" upperBound="-1"
+        eType="#//Binding"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="simpleBindings" upperBound="-1"
+        eType="#//Required"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="BindingAttributes">
+    <eAnnotations source="diagraph">
+      <details key="label=name"/>
+      <details key="label=value"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+</ecore:EPackage>

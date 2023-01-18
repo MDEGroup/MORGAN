@@ -1,0 +1,8 @@
+model	TimeConstraint (type,TimeConstraintType,attribute) (timeConstraintSpecification,TimeConstraintSpecification,ref) 
+model	TimeConstraintSpecification (stopTimestamp,ELong,attribute) (id,EString,attribute) (expectedLength,ELong,attribute) (startTimestamp,ELong,attribute) 
+model	State (label,EString,attribute) (timeConstraints,TimeConstraint,ref) (lastProcessedEvent,null,ref) (outTransitions,Transition,ref) (inTransitions,Transition,ref) (eventTokens,EventToken,ref) 
+model	StateMachine (context,EventProcessingContext,attribute) (priority,EInt,attribute) (eventPattern,null,ref) (states,State,ref) 
+model	Transition (preState,State,ref) (guard,Guard,ref) (postState,State,ref) 
+model	Guard (eventType,null,ref) 
+model	InternalExecutionModel (context,EventProcessingContext,attribute) (stateMachines,StateMachine,ref) (latestEvent,null,ref) (eventTokens,EventToken,ref) 
+model	EventToken (currentState,State,ref) (recordedEvents,null,ref) 

@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="comicBooks" nsURI="comicBooks" nsPrefix="comicBooks">
+  <eClassifiers xsi:type="ecore:EClass" name="ComicBookCollection">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="books" upperBound="-1"
+        eType="#//Book" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="artists" upperBound="-1"
+        eType="#//Artist" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="editors" upperBound="-1"
+        eType="#//Editor" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="writers" upperBound="-1"
+        eType="#//Writer" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="publishingCompanies" upperBound="-1"
+        eType="#//Publisher" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="series" upperBound="-1"
+        eType="#//Series" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Publisher">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="publishersName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="booksPublished" upperBound="-1"
+        eType="#//Book" eOpposite="#//Book/publisher"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Series">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="seriesName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="booksInSeries" upperBound="-1"
+        eType="#//Book" eOpposite="#//Book/seriesPartOf"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Book">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="publicationDate" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="artists" lowerBound="1"
+        upperBound="-1" eType="#//Artist" eOpposite="#//Artist/booksArtistFor"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="editors" lowerBound="1"
+        upperBound="-1" eType="#//Editor" eOpposite="#//Editor/booksEditorFor"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="writers" lowerBound="1"
+        upperBound="-1" eType="#//Writer" eOpposite="#//Writer/booksWriterFor"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="coverArtist" lowerBound="1"
+        eType="#//Artist" eOpposite="#//Artist/booksCoverArtistFor"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="publisher" lowerBound="1"
+        eType="#//Publisher" eOpposite="#//Publisher/booksPublished"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="seriesPartOf" lowerBound="1"
+        eType="#//Series" eOpposite="#//Series/booksInSeries"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Artist">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="booksArtistFor" upperBound="-1"
+        eType="#//Book" eOpposite="#//Book/artists"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="booksCoverArtistFor" upperBound="-1"
+        eType="#//Book" eOpposite="#//Book/coverArtist"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Editor">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="booksEditorFor" upperBound="-1"
+        eType="#//Book" eOpposite="#//Book/editors"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Writer">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="booksWriterFor" upperBound="-1"
+        eType="#//Book" eOpposite="#//Book/writers"/>
+  </eClassifiers>
+</ecore:EPackage>

@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="contacts"
+    nsURI="http://www.eclipse.org/e4/ui/demo/contacts.ecore" nsPrefix="contacts">
+  <eClassifiers xsi:type="ecore:EClass" name="Contact">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="firstName" eType="#//NameString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="middleName" eType="#//NameString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="lastName" eType="#//NameString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="title" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="company" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="jobTitle" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="email" eType="#//EmailAddress"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="webPage" eType="#//URI"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="workAddress" eType="#//Address"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="phone" eType="#//PhoneNumber"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="mobile" eType="#//PhoneNumber"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="note" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="image" eType="#//URI"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="homeAddress" eType="#//Address"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Address">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="street" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="city" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="state" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="country" eType="#//Country"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="zipCode" eType="#//DigitsString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EDataType" name="Country" instanceClassName="java.lang.String"/>
+  <eClassifiers xsi:type="ecore:EDataType" name="URI" instanceClassName="java.lang.String"/>
+  <eClassifiers xsi:type="ecore:EDataType" name="EmailAddress" instanceClassName="java.lang.String"/>
+  <eClassifiers xsi:type="ecore:EClass" name="PhoneNumber">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="number" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="country" eType="#//Country"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="AddressBook">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="contacts" upperBound="-1"
+        eType="#//Contact" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="UoD">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="allAddressBooks" upperBound="-1"
+        eType="#//AddressBook" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EDataType" name="NameString" instanceClassName="java.lang.String"/>
+  <eClassifiers xsi:type="ecore:EDataType" name="DigitsString" instanceClassName="java.lang.String"/>
+</ecore:EPackage>

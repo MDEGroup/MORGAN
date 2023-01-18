@@ -1,0 +1,5 @@
+model	Player (firstname,EString,attribute) (city,EString,attribute) (street,EString,attribute) (isProfessional,EBoolean,attribute) (streetnumber,EInt,attribute) (dateOfBirth,EDate,attribute) (lastname,EString,attribute) (height,EDouble,attribute) (game,Game,ref) (playerlist,Playerlist,ref) 
+model	Game (date,EDate,attribute) (frames,EInt,attribute) (matchup,Matchup,ref) (player,Player,ref) 
+model	Matchup (game,Game,ref) (tournament,Tournament,ref) 
+model	Playerlist (name,EString,attribute) (tournament,Tournament,ref) (player,Player,ref) 
+model	Tournament (title,EString,attribute) (type,TournamentType,attribute) (matchups,Matchup,ref) (playerlist,Playerlist,ref) 

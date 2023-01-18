@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="workflow" nsURI="http://www.altran.com/optimind/model.workflow"
+    nsPrefix="workflow">
+  <eClassifiers xsi:type="ecore:EClass" name="AbstractTask" abstract="true" eSuperTypes="#//NamedElement">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="inputs" upperBound="-1"
+        eType="#//TaskInput" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="outputs" upperBound="-1"
+        eType="#//TaskOutput" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="status" eType="#//TaskStatus"
+        defaultValueLiteral="NOT_PREPARED"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="TypedElement">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="typeAsString" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="valueAsString" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="NamedElement">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="SimpleTask" abstract="true" eSuperTypes="#//AbstractTask"/>
+  <eClassifiers xsi:type="ecore:EClass" name="BaseTask" eSuperTypes="#//AbstractTask">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="children" upperBound="-1"
+        eType="#//AbstractTask" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="TaskOutput" eSuperTypes="#//NamedElement #//TypedElement"/>
+  <eClassifiers xsi:type="ecore:EClass" name="TaskInput" abstract="true" eSuperTypes="#//NamedElement"/>
+  <eClassifiers xsi:type="ecore:EClass" name="LibraryFunction" eSuperTypes="#//NamedElement">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="outputs" upperBound="-1"
+        eType="#//Output" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="inputs" upperBound="-1"
+        eType="#//Input" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="function" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="LibraryTask" eSuperTypes="#//SimpleTask">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="libraryfunction" lowerBound="1"
+        eType="#//LibraryFunction"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Workflow" eSuperTypes="#//NamedElement">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="baseTask" lowerBound="1"
+        eType="#//BaseTask" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="functions" upperBound="-1"
+        eType="#//LibraryFunction" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="language" eType="#//Language"
+        defaultValueLiteral="Python"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="TaskStatus">
+    <eLiterals name="FINISHED"/>
+    <eLiterals name="PREPARED" value="1" literal="PREPARED"/>
+    <eLiterals name="NOT_PREPARED" value="2" literal="NOT_PREPARED"/>
+    <eLiterals name="PROCESSING" value="3"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Setter" eSuperTypes="#//TypedElement #//TaskInput"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Connection" eSuperTypes="#//TaskInput">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="taskoutput" eType="#//TaskOutput"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="CustomTask" eSuperTypes="#//SimpleTask">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="runner" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Nsetter" eSuperTypes="#//Setter"/>
+  <eClassifiers xsi:type="ecore:EClass" name="IsInitSetter" eSuperTypes="#//Nsetter"/>
+  <eClassifiers xsi:type="ecore:EClass" name="IsNotInitSetter" eSuperTypes="#//IsInitSetter"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Input" eSuperTypes="#//TypedElement #//NamedElement"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Output" eSuperTypes="#//NamedElement #//TypedElement"/>
+  <eClassifiers xsi:type="ecore:EEnum" name="Language">
+    <eLiterals name="Python" literal="Python"/>
+    <eLiterals name="Java" value="1" literal="Java"/>
+  </eClassifiers>
+</ecore:EPackage>

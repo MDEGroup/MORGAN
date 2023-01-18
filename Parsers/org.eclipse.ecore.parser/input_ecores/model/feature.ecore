@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="feature" nsURI="http://hyvar-project.eu/feature/1.0" nsPrefix="feature">
+  <eAnnotations source="http://www.eclipse.org/OCL/Import">
+    <details key="dataValues" value="../../eu.hyvar.feature.data/model/DataValues.ecore#/"/>
+    <details key="ecore" value="http://www.eclipse.org/emf/2002/Ecore"/>
+    <details key="evolution" value="../../eu.hyvar.evolution/model/Evolution.ecore#/"/>
+  </eAnnotations>
+  <eClassifiers xsi:type="ecore:EClass" name="HyFeatureModel">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="rootFeature" lowerBound="1"
+        upperBound="-1" eType="#//HyRootFeature" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="features" upperBound="-1"
+        eType="#//HyFeature" containment="true" eOpposite="#//HyFeature/featureModel"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="groups" upperBound="-1"
+        eType="#//HyGroup" containment="true" eOpposite="#//HyGroup/featureModel"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="enums" upperBound="-1"
+        eType="ecore:EClass ../../eu.hyvar.feature.data/model/DataValues.ecore#//HyEnum"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="contexts" upperBound="-1"
+        eType="ecore:EClass ../../eu.hyvar.context.information/model/ContextInformation.ecore#//HyContextModel"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="HyFeature" eSuperTypes="../../eu.hyvar.evolution/model/Evolution.ecore#//HyTemporalElement ../../eu.hyvar.evolution/model/Evolution.ecore#//HyNamedElement">
+    <eOperations name="isOptional" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
+      <eParameters name="date" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDate"/>
+    </eOperations>
+    <eOperations name="isMandatory" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
+      <eParameters name="date" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDate"/>
+    </eOperations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="versions" upperBound="-1"
+        eType="#//HyVersion" containment="true" eOpposite="#//HyVersion/feature"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="groupMembership" upperBound="-1"
+        eType="#//HyGroupComposition" eOpposite="#//HyGroupComposition/features"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="parentOf" upperBound="-1"
+        eType="#//HyFeatureChild" containment="true" eOpposite="#//HyFeatureChild/parent"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="deprecatedSince" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDate"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="attributes" upperBound="-1"
+        eType="#//HyFeatureAttribute" containment="true" eOpposite="#//HyFeatureAttribute/feature"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="types" lowerBound="1" upperBound="-1"
+        eType="#//HyFeatureType" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="featureModel" lowerBound="1"
+        eType="#//HyFeatureModel" eOpposite="#//HyFeatureModel/features"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="HyGroup" eSuperTypes="../../eu.hyvar.evolution/model/Evolution.ecore#//HyTemporalElement">
+    <eOperations name="isAlternative" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
+      <eParameters name="date" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDate"/>
+    </eOperations>
+    <eOperations name="isOr" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
+      <eParameters name="date" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDate"/>
+    </eOperations>
+    <eOperations name="isAnd" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
+      <eParameters name="date" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDate"/>
+    </eOperations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="parentOf" lowerBound="1"
+        upperBound="-1" eType="#//HyGroupComposition" containment="true" eOpposite="#//HyGroupComposition/compositionOf"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="childOf" lowerBound="1"
+        upperBound="-1" eType="#//HyFeatureChild" eOpposite="#//HyFeatureChild/childGroup"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="types" lowerBound="1" upperBound="-1"
+        eType="#//HyGroupType" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="featureModel" lowerBound="1"
+        eType="#//HyFeatureModel" eOpposite="#//HyFeatureModel/groups"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="HyVersion" eSuperTypes="../../eu.hyvar.evolution/model/Evolution.ecore#//HyTemporalElement">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="number" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="feature" lowerBound="1"
+        eType="#//HyFeature" eOpposite="#//HyFeature/versions"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="supersedingVersions" upperBound="-1"
+        eType="#//HyVersion" eOpposite="#//HyVersion/supersededVersion"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="supersededVersion" eType="#//HyVersion"
+        eOpposite="#//HyVersion/supersedingVersions"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="HyNumberAttribute" eSuperTypes="#//HyFeatureAttribute">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="min" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="max" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="default" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="HyBooleanAttribute" eSuperTypes="#//HyFeatureAttribute">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="default" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="HyStringAttribute" eSuperTypes="#//HyFeatureAttribute">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="default" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="HyEnumAttribute" eSuperTypes="#//HyFeatureAttribute">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="enumType" lowerBound="1"
+        eType="ecore:EClass ../../eu.hyvar.feature.data/model/DataValues.ecore#//HyEnum"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="default" lowerBound="1"
+        eType="ecore:EClass ../../eu.hyvar.feature.data/model/DataValues.ecore#//HyEnumLiteral"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="HyFeatureAttribute" abstract="true"
+      interface="true" eSuperTypes="../../eu.hyvar.evolution/model/Evolution.ecore#//HyTemporalElement ../../eu.hyvar.evolution/model/Evolution.ecore#//HyNamedElement">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="feature" lowerBound="1"
+        eType="#//HyFeature" eOpposite="#//HyFeature/attributes"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="HyRootFeature" eSuperTypes="../../eu.hyvar.evolution/model/Evolution.ecore#//HyLinearTemporalElement">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="feature" lowerBound="1"
+        eType="#//HyFeature"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="HyGroupComposition" eSuperTypes="../../eu.hyvar.evolution/model/Evolution.ecore#//HyLinearTemporalElement">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="compositionOf" lowerBound="1"
+        eType="#//HyGroup" eOpposite="#//HyGroup/parentOf"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="features" lowerBound="1"
+        upperBound="-1" eType="#//HyFeature" eOpposite="#//HyFeature/groupMembership"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="HyFeatureChild" eSuperTypes="../../eu.hyvar.evolution/model/Evolution.ecore#//HyLinearTemporalElement">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="parent" lowerBound="1"
+        eType="#//HyFeature" eOpposite="#//HyFeature/parentOf"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="childGroup" lowerBound="1"
+        eType="#//HyGroup" eOpposite="#//HyGroup/childOf"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="HyFeatureTypeEnum">
+    <eLiterals name="OPTIONAL"/>
+    <eLiterals name="MANDATORY" value="1"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="HyGroupTypeEnum">
+    <eLiterals name="AND"/>
+    <eLiterals name="OR" value="1"/>
+    <eLiterals name="ALTERNATIVE" value="2"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="HyFeatureType" eSuperTypes="../../eu.hyvar.evolution/model/Evolution.ecore#//HyLinearTemporalElement">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="type" lowerBound="1" eType="#//HyFeatureTypeEnum"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="HyGroupType" eSuperTypes="../../eu.hyvar.evolution/model/Evolution.ecore#//HyLinearTemporalElement">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="type" lowerBound="1" eType="#//HyGroupTypeEnum"/>
+  </eClassifiers>
+</ecore:EPackage>

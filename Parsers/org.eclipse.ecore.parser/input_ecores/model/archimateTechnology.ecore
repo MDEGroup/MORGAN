@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="ArchimateTechnology" nsURI="archimate-technology" nsPrefix="archimate-technology">
+  <eAnnotations source="Diagram">
+    <details key="name" value="Archimate Technology"/>
+    <details key="icon" value="icons/technology-diagram-16.png"/>
+  </eAnnotations>
+  <eClassifiers xsi:type="ecore:EClass" name="NodeElement" abstract="true"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Node" eSuperTypes="#//NodeElement">
+    <eAnnotations source="Node">
+      <details key="base" value="Node"/>
+      <details key="shape" value="shapes/Node.svg"/>
+      <details key="icon" value="icons/node-16.png"/>
+    </eAnnotations>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Device" eSuperTypes="#//NodeElement">
+    <eAnnotations source="Node">
+      <details key="base" value="Device"/>
+      <details key="shape" value="shapes/Device.svg"/>
+      <details key="icon" value="icons/device-16.png"/>
+    </eAnnotations>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Network" eSuperTypes="#//NodeElement">
+    <eAnnotations source="Node">
+      <details key="base" value="CommunicationPath"/>
+      <details key="shape" value="shapes/Network.svg"/>
+      <details key="icon" value="icons/network-16.png"/>
+    </eAnnotations>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="CommunicationPath" eSuperTypes="#//NodeElement">
+    <eAnnotations source="Node">
+      <details key="base" value="CommunicationPath"/>
+      <details key="shape" value="shapes/CommunicationPath.svg"/>
+      <details key="icon" value="icons/communication-path-16.png"/>
+    </eAnnotations>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="InfrastructureInterface" eSuperTypes="#//NodeElement">
+    <eAnnotations source="Node">
+      <details key="base" value="Interface"/>
+      <details key="shape" value="shapes/InfrastructureInterface.svg"/>
+      <details key="icon" value="icons/infrastructure-interface-16.png"/>
+    </eAnnotations>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="SystemSoftware" eSuperTypes="#//NodeElement">
+    <eAnnotations source="Node">
+      <details key="base" value="ExecutionEnvironment"/>
+      <details key="shape" value="shapes/SystemSoftware.svg"/>
+      <details key="icon" value="icons/system-software-16.png"/>
+    </eAnnotations>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="InfrastructureFunction" eSuperTypes="#//NodeElement">
+    <eAnnotations source="Node">
+      <details key="base" value="Class"/>
+      <details key="shape" value="shapes/InfrastructureFunction.svg"/>
+      <details key="icon" value="icons/infrastructure-function-16.png"/>
+    </eAnnotations>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="InfrastructureService" eSuperTypes="#//NodeElement">
+    <eAnnotations source="Node">
+      <details key="base" value="Collaboration"/>
+      <details key="shape" value="shapes/InfrastructureService.svg"/>
+      <details key="icon" value="icons/infrastructure-service-16.png"/>
+    </eAnnotations>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Artifact" eSuperTypes="#//NodeElement">
+    <eAnnotations source="Node">
+      <details key="base" value="Artifact"/>
+      <details key="shape" value="shapes/Artifact.svg"/>
+      <details key="icon" value="icons/artifact-16.png"/>
+    </eAnnotations>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Grouping" eSuperTypes="#//NodeElement">
+    <eAnnotations source="Node">
+      <details key="base" value="Class"/>
+      <details key="shape" value="shapes/Grouping.svg"/>
+      <details key="icon" value="icons/grouping-16.png"/>
+    </eAnnotations>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Junction" eSuperTypes="#//Relationship">
+    <eAnnotations source="Node">
+      <details key="base" value="OpaqueBehavior"/>
+      <details key="shape" value="shapes/Junction.svg"/>
+      <details key="icon" value="icons/junction-16.png"/>
+    </eAnnotations>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Relationship" abstract="true">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="source" lowerBound="1"
+        eType="#//NodeElement"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="target" lowerBound="1"
+        eType="#//NodeElement"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Association" eSuperTypes="#//Relationship">
+    <eAnnotations source="Edge">
+      <details key="base" value="Association"/>
+      <details key="source" value="source"/>
+      <details key="target" value="target"/>
+      <details key="icon" value="icons/association-16.png"/>
+    </eAnnotations>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Access" eSuperTypes="#//Relationship">
+    <eAnnotations source="Edge">
+      <details key="base" value="Usage"/>
+      <details key="source" value="source"/>
+      <details key="target" value="target"/>
+      <details key="icon" value="icons/access-16.png"/>
+    </eAnnotations>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="UsedBy" eSuperTypes="#//Relationship">
+    <eAnnotations source="Edge">
+      <details key="base" value="Usage"/>
+      <details key="source" value="source"/>
+      <details key="target" value="target"/>
+      <details key="icon" value="icons/used-by-16.png"/>
+    </eAnnotations>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Realization" eSuperTypes="#//Relationship">
+    <eAnnotations source="Edge">
+      <details key="base" value="Realization"/>
+      <details key="source" value="source"/>
+      <details key="target" value="target"/>
+      <details key="icon" value="icons/realization-16.png"/>
+    </eAnnotations>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Assignment" eSuperTypes="#//Relationship">
+    <eAnnotations source="Edge">
+      <details key="base" value="Dependency"/>
+      <details key="source" value="source"/>
+      <details key="target" value="target"/>
+      <details key="icon" value="icons/assignment-16.png"/>
+    </eAnnotations>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Aggregation" eSuperTypes="#//Relationship">
+    <eAnnotations source="Edge">
+      <details key="base" value="Association"/>
+      <details key="source" value="source"/>
+      <details key="target" value="target"/>
+      <details key="icon" value="icons/aggregation-16.png"/>
+    </eAnnotations>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Composition" eSuperTypes="#//Relationship">
+    <eAnnotations source="Edge">
+      <details key="base" value="Association"/>
+      <details key="source" value="source"/>
+      <details key="target" value="target"/>
+      <details key="icon" value="icons/composition-16.png"/>
+    </eAnnotations>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Flow" eSuperTypes="#//Relationship">
+    <eAnnotations source="Edge">
+      <details key="base" value="InformationFlow"/>
+      <details key="source" value="source"/>
+      <details key="target" value="target"/>
+      <details key="icon" value="icons/flow-16.png"/>
+    </eAnnotations>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Triggering" eSuperTypes="#//Relationship">
+    <eAnnotations source="Edge">
+      <details key="base" value="InformationFlow"/>
+      <details key="source" value="source"/>
+      <details key="target" value="target"/>
+      <details key="icon" value="icons/triggering-16.png"/>
+    </eAnnotations>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Specialization" eSuperTypes="#//Relationship">
+    <eAnnotations source="Edge">
+      <details key="base" value="Generalization"/>
+      <details key="source" value="source"/>
+      <details key="target" value="target"/>
+      <details key="icon" value="icons/specialization-16.png"/>
+    </eAnnotations>
+  </eClassifiers>
+</ecore:EPackage>

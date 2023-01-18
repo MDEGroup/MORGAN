@@ -1,0 +1,8 @@
+model	PTEdge (fromPlace,Place,ref) (toTransition,Transition,ref) 
+model	TPEdge (fromTransition,Transition,ref) (toPlace,Place,ref) 
+model	Transition (inPTEdges,PTEdge,ref) (outTPEdges,TPEdge,ref) 
+model	NetElement (net,Net,ref) 
+model	Net (incrementalID,EString,attribute) (elements,NetElement,ref) 
+model	NamedElement (name,EString,attribute) 
+model	Edge (weight,EInt,attribute) 
+model	Place (noOfTokens,EInt,attribute) (outPTEdges,PTEdge,ref) (inTPEdges,TPEdge,ref) 

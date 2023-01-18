@@ -1,0 +1,248 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="ioT_metamodel" nsURI="http://www.example.org/ioT_metamodel"
+    nsPrefix="ioT_metamodel">
+  <eClassifiers xsi:type="ecore:EClass" name="Thing" eSuperTypes="#//Entity">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="virtual_entity" lowerBound="1"
+        eType="#//VirtualThing" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="fog" lowerBound="1" eType="#//Fog"
+        eOpposite="#//Fog/request_service"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="physical_entity" eType="#//PhysicalThing"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="contains" upperBound="-1"
+        eType="#//Thing"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="property" upperBound="-1"
+        eType="#//Property" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="VirtualThing" eSuperTypes="#//Active_Digital_Artifact #//Passive_Digital_Artifact">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="represents" lowerBound="1"
+        eType="#//PhysicalThing"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="URI" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="is_associated_with" upperBound="-1"
+        eType="#//InformationResource"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="PhysicalThing">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="has" upperBound="-1" eType="#//Device"
+        eOpposite="#//Device/is_attached_to"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Fog">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="request_service" lowerBound="1"
+        upperBound="-1" eType="#//Thing" eOpposite="#//Thing/fog"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="fognode" upperBound="-1"
+        eType="#//FogNode" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="request_cloud_service"
+        lowerBound="1" upperBound="-1" eType="#//Cloud" eOpposite="#//Cloud/respond_to_fog"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="database" lowerBound="1"
+        upperBound="-1" eType="#//Database" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="define_control_policies_to"
+        lowerBound="1" eType="#//Authorizor" eOpposite="#//Authorizor/connects_with"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="FogNode">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="runs_on_vm" lowerBound="1"
+        upperBound="-1" eType="#//VM" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="runs_in_container" lowerBound="1"
+        upperBound="-1" eType="#//Container" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="analytics_engine" lowerBound="1"
+        eType="#//Analytics_Engine" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="associates_with" lowerBound="1"
+        upperBound="-1" eType="#//Fog_Services"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Device" eSuperTypes="#//PhysicalThing">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="is_attached_to" upperBound="-1"
+        eType="#//PhysicalThing" eOpposite="#//PhysicalThing/has"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="contains" upperBound="-1"
+        eType="#//Device" transient="true" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="Technology" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
+        defaultValueLiteral=""/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="has_rules" upperBound="-1"
+        eType="#//Rule" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="devicestate" lowerBound="1"
+        eType="#//DeviceState" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="has_communicators" upperBound="-1"
+        eType="#//Communicator" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="hosts" upperBound="-1"
+        eType="#//On_Device_Resource" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Actuator" eSuperTypes="#//Device">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="acts" upperBound="-1" eType="#//PhysicalThing"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="observes" eType="#//DeviceState"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Tag" eSuperTypes="#//Device">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="Name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="identifies" upperBound="-1"
+        eType="#//PhysicalThing"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Sensor" abstract="true" eSuperTypes="#//Device">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="Name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="State" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="frequency" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDouble"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="monitors" upperBound="-1"
+        eType="#//PhysicalThing"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="observes" eType="#//DeviceState"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Rule">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="conditionLiteral" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="conditionValue" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDouble"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="involves" upperBound="-1"
+        eType="#//Action" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ExternalSensor" eSuperTypes="#//Sensor">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="sensor_actions" upperBound="-1"
+        eType="#//Action"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="DeviceActuator" eSuperTypes="#//Actuator">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="actuator_actions" upperBound="-1"
+        eType="#//Action"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ExternalActuator" eSuperTypes="#//Actuator">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="actuator_actions" upperBound="-1"
+        eType="#//Action"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Action">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="Description" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="DeviceState">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="Enabled" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="CompositeState" eSuperTypes="#//DeviceState"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Transition">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="action" upperBound="-1"
+        eType="#//Action" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="incoming_states" upperBound="-1"
+        eType="#//DeviceState"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="outgoing_states" upperBound="-1"
+        eType="#//DeviceState"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Digital_Artifact"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Active_Digital_Artifact" eSuperTypes="#//Digital_Artifact #//User"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Passive_Digital_Artifact" eSuperTypes="#//Digital_Artifact"/>
+  <eClassifiers xsi:type="ecore:EClass" name="User" eSuperTypes="#//Entity">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="subscribes_invokes" upperBound="-1"
+        eType="#//Fog_Services"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Human_User" eSuperTypes="#//User"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Communicator">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="has_ports" upperBound="-1"
+        eType="#//Port" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="Type" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="ports_number" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Port"/>
+  <eClassifiers xsi:type="ecore:EClass" name="InformationResource">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="has_information_about"
+        upperBound="-1" eType="#//PhysicalThing"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="has" lowerBound="1" upperBound="-1"
+        eType="#//Information" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="has_attributes" upperBound="-1"
+        eType="#//Attribute"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="On_Device_Resource" eSuperTypes="#//InformationResource">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="contains_device_resource"
+        upperBound="-1" eType="#//Device_Resource" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="contains_service_resource"
+        upperBound="-1" eType="#//Service_Resource" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Network_Resource" eSuperTypes="#//InformationResource">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="contains_device_resource"
+        upperBound="-1" eType="#//Device_Resource" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="contains_service_resource"
+        upperBound="-1" eType="#//Service_Resource" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Device_Resource"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Service_Resource"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Property">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="changeable" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="VM"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Container">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="ID" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="IP_address" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Analytics_Engine"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Cloud">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="respond_to_fog" lowerBound="1"
+        upperBound="-1" eType="#//Fog" eOpposite="#//Fog/request_cloud_service"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Database">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="policy_repository" lowerBound="1"
+        eType="#//Policy_Repository" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Policy_Repository">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="interacts_with" lowerBound="1"
+        eType="#//Reference_Monitor" eOpposite="#//Reference_Monitor/orchestrate_policies"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="contains" lowerBound="1"
+        eType="#//Authorizor" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Reference_Monitor">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="orchestrate_policies" lowerBound="1"
+        eType="#//Policy_Repository" eOpposite="#//Policy_Repository/interacts_with"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="enforces" upperBound="-1"
+        eType="#//Authorizor"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Authorizor">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="connects_with" lowerBound="1"
+        eType="#//Fog" eOpposite="#//Fog/define_control_policies_to"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Information">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="atomicdata" upperBound="-1"
+        eType="#//AtomicData" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="datastreams" upperBound="-1"
+        eType="#//DataStreams" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="DataStreams">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="consists_of" lowerBound="1"
+        upperBound="-1" eType="#//AtomicData"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="has_datastreamattributes"
+        lowerBound="1" eType="#//DataStreamAttributes"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="AtomicData">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="has_atomicdataattributes"
+        lowerBound="1" eType="#//AtomicDataAttributes"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="DataStreamAttributes" abstract="true">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="MeanBitRate" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//ELong"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="Timestamp" eType="ecore:EDataType http://www.eclipse.org/emf/2003/XMLType#//DateTime"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="MaxBitrate" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//ELong"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="Description" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="DataFormat" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="DataEncoding" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="DeviceID" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="AtomicDataAttributes" abstract="true">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="DataEncoding" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="DeviceID" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Fog_Services">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="runs_in" lowerBound="1"
+        eType="#//Container"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="invokes" upperBound="-1"
+        eType="#//Operations" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="invokes_fog_services" upperBound="-1"
+        eType="#//Fog_Services"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="exposes" lowerBound="1"
+        upperBound="-1" eType="#//InformationResource"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="is_connected_with" lowerBound="1"
+        upperBound="-1" eType="#//VirtualThing"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Operations">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="points_to_processing_logic"
+        eType="#//Evaluators"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="runs_in" eType="#//Container"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="subscribes_to" lowerBound="1"
+        upperBound="-1" eType="#//InformationResource"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Evaluators" abstract="true"/>
+  <eClassifiers xsi:type="ecore:EClass" name="JavaEvaluator" eSuperTypes="#//Evaluators"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Entity"/>
+  <eClassifiers xsi:type="ecore:EClass" name="ScriptEvaluator" eSuperTypes="#//Evaluators"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Attribute" abstract="true" eSuperTypes="#//Entity">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="Type" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="DeviceSensor" eSuperTypes="#//Sensor">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="sensor_actions" upperBound="-1"
+        eType="#//Action"/>
+  </eClassifiers>
+</ecore:EPackage>

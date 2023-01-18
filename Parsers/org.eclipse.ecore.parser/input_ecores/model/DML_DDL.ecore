@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="DML_DDL"
+    nsURI="http://modelum.es/DML_DDL" nsPrefix="DML_DDL">
+  <eClassifiers xsi:type="ecore:EClass" name="Statement"/>
+  <eClassifiers xsi:type="ecore:EClass" name="DataDefinition" eSuperTypes="#//Statement"/>
+  <eClassifiers xsi:type="ecore:EClass" name="DataType">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="types" upperBound="-1"
+        eType="#//Type" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="DDLDefinition">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="statements" upperBound="-1"
+        eType="#//Statement" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="dataType" eType="#//DataType"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Pk">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="namePk" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="columnName" upperBound="-1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Fk">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="nameFk" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="columnName" upperBound="-1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="references" eType="#//Table"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="columnReference" upperBound="-1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="status" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Ck">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="nameCk" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="status" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
+        defaultValueLiteral=""/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="valuesCk" upperBound="-1"
+        eType="#//ValuesCk" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ValuesCk">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" upperBound="-1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="comparator" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="columnName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="logConjuntion" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Column">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="columnName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="commentColumn" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="columnNull" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="columnType" lowerBound="1"
+        eType="#//Type"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Database" eSuperTypes="#//DataDefinition">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="databaseName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Table" eSuperTypes="#//DataDefinition">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="tableName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="commentTable" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="columns" upperBound="-1"
+        eType="#//Column" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="columnsPk" eType="#//Pk"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="columnsFk" upperBound="-1"
+        eType="#//Fk" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="checks" upperBound="-1"
+        eType="#//Ck" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="registries" upperBound="-1"
+        eType="#//Registry" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Registry">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="registryValues" upperBound="-1"
+        eType="#//Value" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Value">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="column" lowerBound="1"
+        eType="#//Column"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="CommentTable" eSuperTypes="#//DataDefinition">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="tableName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="tableComment" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="CommentColumn" eSuperTypes="#//DataDefinition">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="tableName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="columnName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="columnComment" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Type">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Exacto" eSuperTypes="#//Type"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Integer" eSuperTypes="#//Exacto"/>
+  <eClassifiers xsi:type="ecore:EClass" name="SmallInteger" eSuperTypes="#//Exacto"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Int" eSuperTypes="#//Exacto"/>
+  <eClassifiers xsi:type="ecore:EClass" name="SmallInt" eSuperTypes="#//Exacto"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Number" eSuperTypes="#//Exacto"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Numeric" eSuperTypes="#//Exacto"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Decimal" eSuperTypes="#//Exacto"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Aproximado" eSuperTypes="#//Type"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Real" eSuperTypes="#//Aproximado"/>
+  <eClassifiers xsi:type="ecore:EClass" name="DoublePrecision" eSuperTypes="#//Aproximado"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Float" eSuperTypes="#//Aproximado"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Long" eSuperTypes="#//Aproximado"/>
+  <eClassifiers xsi:type="ecore:EClass" name="LongRaw" eSuperTypes="#//Aproximado"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Characters" eSuperTypes="#//Type">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="n" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
+        defaultValueLiteral=""/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Character" eSuperTypes="#//Characters"/>
+  <eClassifiers xsi:type="ecore:EClass" name="CharacterVarying" eSuperTypes="#//Characters"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Char" eSuperTypes="#//Characters"/>
+  <eClassifiers xsi:type="ecore:EClass" name="VarChar" eSuperTypes="#//Characters"/>
+  <eClassifiers xsi:type="ecore:EClass" name="VarChar2" eSuperTypes="#//Characters"/>
+  <eClassifiers xsi:type="ecore:EClass" name="NVarChar2" eSuperTypes="#//Characters"/>
+  <eClassifiers xsi:type="ecore:EClass" name="NChar" eSuperTypes="#//Characters"/>
+  <eClassifiers xsi:type="ecore:EClass" name="CharVarying" eSuperTypes="#//Characters"/>
+  <eClassifiers xsi:type="ecore:EClass" name="NationalChar" eSuperTypes="#//Characters"/>
+  <eClassifiers xsi:type="ecore:EClass" name="NationalCharVarying" eSuperTypes="#//Characters"/>
+  <eClassifiers xsi:type="ecore:EClass" name="NationalCharacter" eSuperTypes="#//Characters"/>
+  <eClassifiers xsi:type="ecore:EClass" name="NationalCharacterVarying" eSuperTypes="#//Characters"/>
+  <eClassifiers xsi:type="ecore:EClass" name="NCharVarying" eSuperTypes="#//Characters"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Clob" eSuperTypes="#//Characters"/>
+  <eClassifiers xsi:type="ecore:EClass" name="NClob" eSuperTypes="#//Characters"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Bits" eSuperTypes="#//Type">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="n" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
+        defaultValueLiteral=""/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Bit" eSuperTypes="#//Bits"/>
+  <eClassifiers xsi:type="ecore:EClass" name="BitVarying" eSuperTypes="#//Bit"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Times" eSuperTypes="#//Type"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Date" eSuperTypes="#//Times"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Time" eSuperTypes="#//Times"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Timestamp" eSuperTypes="#//Times"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Intervals" eSuperTypes="#//Type"/>
+  <eClassifiers xsi:type="ecore:EClass" name="YearMonth" eSuperTypes="#//Intervals"/>
+  <eClassifiers xsi:type="ecore:EClass" name="DayTime" eSuperTypes="#//Intervals"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Binaries" eSuperTypes="#//Type"/>
+  <eClassifiers xsi:type="ecore:EClass" name="BinaryDouble" eSuperTypes="#//Binaries"/>
+  <eClassifiers xsi:type="ecore:EClass" name="BinaryFloat" eSuperTypes="#//Binaries"/>
+  <eClassifiers xsi:type="ecore:EClass" name="BFile" eSuperTypes="#//Binaries"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Blob" eSuperTypes="#//Binaries"/>
+</ecore:EPackage>

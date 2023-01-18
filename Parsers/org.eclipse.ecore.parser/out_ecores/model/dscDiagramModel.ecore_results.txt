@@ -1,0 +1,6 @@
+model	DSCDiagram (functionFile,EString,attribute) (guardFile,EString,attribute) (actionFile,EString,attribute) (eventFile,EString,attribute) (diagramVariables,DiagramVariable,attribute) 
+model	Transition (showTransitionID,EBoolean,attribute) (eventID,EString,attribute) (showProperties,EBoolean,attribute) (transitionID,EString,attribute) (guardID,EString,attribute) (triggeredByEvent,EBoolean,attribute) (actionID,EString,attribute) 
+model	StartPoint (compositeState,DSCState,ref) 
+model	ShallowHistory (compositeState,DSCState,ref) 
+model	DSCState (Variables,Variable,attribute) (isSimple,EBoolean,attribute) (shallowHistory,ShallowHistory,ref) (deepHistory,DeepHistory,ref) (startPoint,StartPoint,ref) 
+model	DeepHistory (compositeState,DSCState,ref) 

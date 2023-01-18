@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="faultTree" nsURI="http://faulttree/1.0" nsPrefix="fta">
+  <eAnnotations source="Diagram">
+    <details key="name" value="FaultTree"/>
+  </eAnnotations>
+  <eClassifiers xsi:type="ecore:EClass" name="FTElement" abstract="true"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Connector" eSuperTypes="#//FTElement">
+    <eAnnotations source="Edge">
+      <details key="base" value="Association"/>
+      <details key="source" value="source"/>
+      <details key="target" value="target"/>
+      <details key="icon" value="icons/line.png"/>
+      <details key="fontHeight" value="18"/>
+      <details key="bold" value="true"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="source" eType="#//FTElement"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="target" eType="#//FTElement"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="FaultTree" eSuperTypes="#//FTElement"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Event" eSuperTypes="#//FTElement">
+    <eAnnotations source="Node">
+      <details key="base" value="Class"/>
+      <details key="shape" value="shapes/event.svg"/>
+      <details key="icon" value="icons/event.png"/>
+      <details key="fontHeight" value="18"/>
+      <details key="bold" value="true"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="title" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="description" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ProbabalisticEvent" abstract="true"
+      eSuperTypes="#//Event">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="probability" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EFloat"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="BasicEvent" eSuperTypes="#//ProbabalisticEvent">
+    <eAnnotations source="Node">
+      <details key="base" value="Class"/>
+      <details key="shape" value="shapes/basicEvent.svg"/>
+      <details key="icon" value="icons/basicEvent.png"/>
+      <details key="fontHeight" value="18"/>
+      <details key="bold" value="true"/>
+    </eAnnotations>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="UndevelopedEvent" eSuperTypes="#//ProbabalisticEvent">
+    <eAnnotations source="Node">
+      <details key="base" value="Class"/>
+      <details key="shape" value="shapes/undevelopedEvent.svg"/>
+      <details key="icon" value="icons/undevelopedEvent.png"/>
+      <details key="fontHeight" value="18"/>
+      <details key="bold" value="true"/>
+    </eAnnotations>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ExternalEvent" eSuperTypes="#//ProbabalisticEvent">
+    <eAnnotations source="Node">
+      <details key="base" value="Class"/>
+      <details key="shape" value="shapes/externalEvent.svg"/>
+      <details key="icon" value="icons/externalEvent.png"/>
+      <details key="fontHeight" value="18"/>
+      <details key="bold" value="true"/>
+    </eAnnotations>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="IntermediateEvent" eSuperTypes="#//Event">
+    <eAnnotations source="Node">
+      <details key="base" value="Class"/>
+      <details key="shape" value="shapes/intermediateEvent.svg"/>
+      <details key="icon" value="icons/intermediateEvent.png"/>
+      <details key="fontHeight" value="18"/>
+      <details key="bold" value="true"/>
+    </eAnnotations>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Gate" abstract="true" eSuperTypes="#//FTElement"/>
+  <eClassifiers xsi:type="ecore:EClass" name="AND_Gate" eSuperTypes="#//Gate">
+    <eAnnotations source="Node">
+      <details key="base" value="Class"/>
+      <details key="shape" value="shapes/andGate.svg"/>
+      <details key="icon" value="icons/andGate.png"/>
+      <details key="fontHeight" value="18"/>
+      <details key="bold" value="true"/>
+    </eAnnotations>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="OR_Gate" eSuperTypes="#//Gate">
+    <eAnnotations source="Node">
+      <details key="base" value="Class"/>
+      <details key="shape" value="shapes/orGate.svg"/>
+      <details key="icon" value="icons/orGate.png"/>
+      <details key="fontHeight" value="18"/>
+      <details key="bold" value="true"/>
+    </eAnnotations>
+  </eClassifiers>
+</ecore:EPackage>

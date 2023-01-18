@@ -1,0 +1,7 @@
+model	Guidance (text,EString,attribute) 
+model	WorkSequenceKindStart (Started2Finish,EString,attribute) (Started2Start,EString,attribute) 
+model	DependanceFinish (link,WorkSequenceKindFinish,ref) (predecessor,WorkDefinition,ref) 
+model	DependanceStart (link,WorkSequenceKindStart,ref) (predecessor,WorkDefinition,ref) 
+model	WorkDefinition (name,EString,attribute) (linksToPredecessors,DependanceStart,ref) (linksToSuccessors,DependanceFinish,ref) 
+model	Process (name,EString,attribute) (processElements,ProcessElement,ref) 
+model	WorkSequenceKindFinish (Finished2Start,EString,attribute) (Finished2Finish,EString,attribute) 

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<ecore:EPackage xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="familytree"
+    nsURI="http://www.topcased.org/familytree/1.0" nsPrefix="familytree">
+  <eClassifiers xsi:type="ecore:EClass" name="FamilyTree">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="persons" lowerBound="1"
+        upperBound="-1" eType="#//Person" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="weddings" upperBound="-1"
+        eType="#//Wedding" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Person" abstract="true">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="firstName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="lastName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="birthYear" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="deathYear" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="children" upperBound="-1"
+        eType="#//Person" eOpposite="#//Person/parents"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="parents" lowerBound="2"
+        upperBound="2" eType="#//Person" eOpposite="#//Person/children"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Man" eSuperTypes="#//Person">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="wife" eType="#//Woman"
+        eOpposite="#//Woman/husband"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Woman" eSuperTypes="#//Person">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="husband" eType="#//Man"
+        eOpposite="#//Man/wife"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Wedding">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="wife" lowerBound="1" eType="#//Woman"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="husband" lowerBound="1"
+        eType="#//Man"/>
+  </eClassifiers>
+</ecore:EPackage>

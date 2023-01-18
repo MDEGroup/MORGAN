@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="units" nsURI="http://www.modelexecution.org/units" nsPrefix="units">
+  <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore">
+    <details key="invocationDelegates" value="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot"/>
+    <details key="settingDelegates" value="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot"/>
+    <details key="validationDelegates" value="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot"/>
+  </eAnnotations>
+  <eClassifiers xsi:type="ecore:EClass" name="Unit" abstract="true"/>
+  <eClassifiers xsi:type="ecore:EClass" name="LengthUnit" abstract="true" eSuperTypes="//Unit"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Centimeter" eSuperTypes="//MetricSystemUnit //LengthUnit"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Millimeter" eSuperTypes="//MetricSystemUnit //LengthUnit"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Meter" eSuperTypes="//MetricSystemUnit //LengthUnit"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Foot" eSuperTypes="//ImperialSystemUnit //LengthUnit"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Inch" eSuperTypes="//ImperialSystemUnit //LengthUnit"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Yard" eSuperTypes="//ImperialSystemUnit //LengthUnit"/>
+  <eClassifiers xsi:type="ecore:EClass" name="MetricSystemUnit" abstract="true" eSuperTypes="//Unit"/>
+  <eClassifiers xsi:type="ecore:EClass" name="ImperialSystemUnit" abstract="true" eSuperTypes="//Unit"/>
+  <eClassifiers xsi:type="ecore:EClass" name="AngleUnit" abstract="true" eSuperTypes="//Unit"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Radian" eSuperTypes="//AngleUnit"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Degree" eSuperTypes="//AngleUnit"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Turn" eSuperTypes="//AngleUnit"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Gradian" eSuperTypes="//AngleUnit"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Quantity" abstract="true">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="unit" lowerBound="1" eType="//Unit" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="value">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EDouble"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Length" eSuperTypes="//Quantity">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore">
+      <details key="constraints" value="LengthRequiresLengthUnit"/>
+    </eAnnotations>
+    <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
+      <details key="LengthRequiresLengthUnit" value="self.unit.oclIsKindOf(LengthUnit)"/>
+    </eAnnotations>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Angle" eSuperTypes="//Quantity">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore">
+      <details key="constraints" value="AngleRequiresAngleUnit"/>
+    </eAnnotations>
+    <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
+      <details key="AngleRequiresAngleUnit" value="self.unit.oclIsKindOf(AngleUnit)"/>
+    </eAnnotations>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="QuantityOperation" abstract="true"/>
+  <eClassifiers xsi:type="ecore:EClass" name="LengthOperation" abstract="true" eSuperTypes="//QuantityOperation"/>
+  <eClassifiers xsi:type="ecore:EClass" name="LengthAdd" eSuperTypes="//LengthOperation //QuantityHomogenousOperation">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore">
+      <details key="constraints" value="QuantityHomogenousOperationRequiresHomogenousQuantities"/>
+    </eAnnotations>
+    <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
+      <details key="QuantityHomogenousOperationRequiresHomogenousQuantities" value="self.lhs.oclType() = self.rhs.oclType()"/>
+    </eAnnotations>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="LengthSubtract" eSuperTypes="//LengthOperation //QuantityHomogenousOperation"/>
+  <eClassifiers xsi:type="ecore:EClass" name="LengthScalarMultiply" eSuperTypes="//LengthOperation //QuantityScalarOperation"/>
+  <eClassifiers xsi:type="ecore:EClass" name="LengthScalarDivide" eSuperTypes="//LengthOperation //QuantityScalarOperation"/>
+  <eClassifiers xsi:type="ecore:EClass" name="LengthEquals" eSuperTypes="//LengthOperation //QuantityHomogenousOperation"/>
+  <eClassifiers xsi:type="ecore:EClass" name="LengthDistinct" eSuperTypes="//LengthOperation //QuantityHomogenousOperation"/>
+  <eClassifiers xsi:type="ecore:EClass" name="LengthSmaller" eSuperTypes="//LengthOperation //QuantityHomogenousOperation"/>
+  <eClassifiers xsi:type="ecore:EClass" name="LengthGreater" eSuperTypes="//LengthOperation //QuantityHomogenousOperation"/>
+  <eClassifiers xsi:type="ecore:EClass" name="AngleOperation" abstract="true" eSuperTypes="//QuantityOperation"/>
+  <eClassifiers xsi:type="ecore:EClass" name="AngleAdd" eSuperTypes="//AngleOperation //QuantityHomogenousOperation"/>
+  <eClassifiers xsi:type="ecore:EClass" name="AngleSubtract" eSuperTypes="//AngleOperation //QuantityHomogenousOperation"/>
+  <eClassifiers xsi:type="ecore:EClass" name="AngleScalarMultiply" eSuperTypes="//AngleOperation //QuantityScalarOperation"/>
+  <eClassifiers xsi:type="ecore:EClass" name="AngleScalarDivide" eSuperTypes="//AngleOperation //QuantityScalarOperation"/>
+  <eClassifiers xsi:type="ecore:EClass" name="AngleEquals" eSuperTypes="//AngleOperation //QuantityHomogenousOperation"/>
+  <eClassifiers xsi:type="ecore:EClass" name="AngleDistinct" eSuperTypes="//AngleOperation //QuantityHomogenousOperation"/>
+  <eClassifiers xsi:type="ecore:EClass" name="AngleSmaller" eSuperTypes="//AngleOperation //QuantityHomogenousOperation"/>
+  <eClassifiers xsi:type="ecore:EClass" name="AngleGreater" eSuperTypes="//AngleOperation //QuantityHomogenousOperation"/>
+  <eClassifiers xsi:type="ecore:EClass" name="QuantityArithmeticOperation" abstract="true" eSuperTypes="//QuantityOperation"/>
+  <eClassifiers xsi:type="ecore:EClass" name="QuantityComparisonOperation" abstract="true" eSuperTypes="//QuantityOperation"/>
+  <eClassifiers xsi:type="ecore:EClass" name="QuantityHomogenousOperation" abstract="true" eSuperTypes="//QuantityOperation">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="lhs" lowerBound="1" eType="//Quantity"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="rhs" lowerBound="1" eType="//Quantity"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="QuantityScalarOperation" abstract="true" eSuperTypes="//QuantityOperation">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="lhs" lowerBound="1" eType="//Quantity"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="rhs">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EDouble"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+</ecore:EPackage>

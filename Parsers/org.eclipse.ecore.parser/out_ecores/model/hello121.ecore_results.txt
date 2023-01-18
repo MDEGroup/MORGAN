@@ -1,0 +1,7 @@
+model	Classoc (id,EString,attribute) (third,Third,ref) (base,Base,ref) 
+model	Alias (id,EString,attribute) 
+model	Third (id,EString,attribute) 
+model	NamedElement (name,EString,attribute) (aliases,Alias,ref) 
+model	RelatedTo (since,EString,attribute) (fromThing,Thing,ref) (toThing,Thing,ref) 
+model	Base (classocs,Classoc,ref) (things,Thing,ref) 
+model	Thing (id,EInt,attribute) (classocs,Classoc,ref) (relations,RelatedTo,ref) (foos,Third,ref) 

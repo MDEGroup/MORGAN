@@ -1,0 +1,7 @@
+model	Spare (spares,Event,ref) 
+model	DFT (name,EString,attribute) (topLevelEvent,TopLevelEvent,ref) (dependencies,Dependency,ref) 
+model	TopLevelEvent (gate,Gate,ref) 
+model	Element (elementID,EInt,attribute) (sequencePosition,EInt,attribute) (probability,EFloat,attribute) (name,EString,attribute) 
+model	Event (parentGate,Gate,ref) (dependency,Dependency,ref) 
+model	Gate (parentGate,Gate,ref) (childEvent,Event,ref) (toplevelevent,TopLevelEvent,ref) (childGate,Gate,ref) 
+model	Dependency (events,Event,ref) 

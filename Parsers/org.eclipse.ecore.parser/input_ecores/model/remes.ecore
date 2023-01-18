@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="remes"
+    nsURI="http:///remes.ecore" nsPrefix="remes">
+  <eClassifiers xsi:type="ecore:EClass" name="CompositeMode" eSuperTypes="#//Mode">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="exitEdges" lowerBound="1"
+        upperBound="-1" eType="#//ToCompositeModeEdge" eOpposite="#//ToCompositeModeEdge/connectTo"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="initEdge" lowerBound="1"
+        eType="#//FromCompositeModeInitEdge" containment="true" resolveProxies="false"
+        eOpposite="#//FromCompositeModeInitEdge/connectFrom"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="entryEdge" lowerBound="1"
+        eType="#//FromCompositeModeEdge" containment="true" resolveProxies="false"
+        eOpposite="#//FromCompositeModeEdge/connectFrom"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="subModes" lowerBound="1"
+        upperBound="-1" eType="#//SubMode" containment="true" resolveProxies="false"
+        eOpposite="#//SubMode/parent"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="conditionalConnectors"
+        upperBound="-1" eType="#//ConditionalConnector" containment="true" resolveProxies="false"
+        eOpposite="#//ConditionalConnector/parent"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ConditionalConnector">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="entryEdges" lowerBound="1"
+        upperBound="-1" eType="#//ToConditionalConnectorEdge" eOpposite="#//ToConditionalConnectorEdge/connectTo"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="exitEdges" lowerBound="1"
+        upperBound="-1" eType="#//FromConditionalConnectorEdge" containment="true"
+        resolveProxies="false" eOpposite="#//FromConditionalConnectorEdge/connectFrom"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="parent" eType="#//CompositeMode"
+        eOpposite="#//CompositeMode/conditionalConnectors"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Edge" abstract="true">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="actionGuard" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="actionBody" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="EntryConditionalSubEdge" eSuperTypes="#//FromConditionalConnectorEdge #//ToSubModeEdge #//Edge"/>
+  <eClassifiers xsi:type="ecore:EClass" name="EntryConditionalTopEdge" eSuperTypes="#//FromCompositeModeEdge #//ToConditionalConnectorEdge #//Edge"/>
+  <eClassifiers xsi:type="ecore:EClass" name="EntryConditionalTopInitEdge" eSuperTypes="#//FromCompositeModeInitEdge #//ToConditionalConnectorEdge #//InitEdge"/>
+  <eClassifiers xsi:type="ecore:EClass" name="EntryEdge" eSuperTypes="#//FromCompositeModeEdge #//ToSubModeEdge #//Edge"/>
+  <eClassifiers xsi:type="ecore:EClass" name="EntryInitEdge" eSuperTypes="#//FromCompositeModeInitEdge #//ToSubModeEdge #//InitEdge"/>
+  <eClassifiers xsi:type="ecore:EClass" name="ExitConditionalSubEdge" eSuperTypes="#//FromSubModeEdge #//ToConditionalConnectorEdge #//Edge"/>
+  <eClassifiers xsi:type="ecore:EClass" name="ExitConditionalTopEdge" eSuperTypes="#//FromConditionalConnectorEdge #//ToCompositeModeEdge #//Edge"/>
+  <eClassifiers xsi:type="ecore:EClass" name="ExitEdge" eSuperTypes="#//FromSubModeEdge #//ToCompositeModeEdge #//Edge"/>
+  <eClassifiers xsi:type="ecore:EClass" name="FromCompositeModeEdge" abstract="true">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="connectFrom" eType="#//CompositeMode"
+        transient="true" eOpposite="#//CompositeMode/entryEdge"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="FromCompositeModeInitEdge" abstract="true">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="connectFrom" eType="#//CompositeMode"
+        transient="true" eOpposite="#//CompositeMode/initEdge"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="FromConditionalConnectorEdge" abstract="true">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="connectFrom" eType="#//ConditionalConnector"
+        transient="true" eOpposite="#//ConditionalConnector/exitEdges"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="FromSubModeEdge" abstract="true">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="connectFrom" eType="#//SubMode"
+        transient="true" eOpposite="#//SubMode/exitEdges"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="InitEdge" abstract="true">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="initialization" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="InternalEdge" eSuperTypes="#//FromSubModeEdge #//ToSubModeEdge #//Edge"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Mode" abstract="true">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="initialization" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="RemesDiagram">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="modes" upperBound="-1"
+        eType="#//Mode" containment="true" resolveProxies="false"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="SubMode" eSuperTypes="#//Mode">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="entryEdges" lowerBound="1"
+        upperBound="-1" eType="#//ToSubModeEdge" eOpposite="#//ToSubModeEdge/connectTo"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="exitEdges" lowerBound="1"
+        upperBound="-1" eType="#//FromSubModeEdge" containment="true" resolveProxies="false"
+        eOpposite="#//FromSubModeEdge/connectFrom"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="resourceClassA" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="resourceClassB" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="resourceClassC" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="invariant" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="isUrgent" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBooleanObject"
+        defaultValueLiteral="false"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="parent" eType="#//CompositeMode"
+        eOpposite="#//CompositeMode/subModes"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ToCompositeModeEdge" abstract="true">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="connectTo" lowerBound="1"
+        eType="#//CompositeMode" eOpposite="#//CompositeMode/exitEdges"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ToConditionalConnectorEdge" abstract="true">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="connectTo" lowerBound="1"
+        eType="#//ConditionalConnector" eOpposite="#//ConditionalConnector/entryEdges"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ToSubModeEdge" abstract="true">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="connectTo" lowerBound="1"
+        eType="#//SubMode" eOpposite="#//SubMode/entryEdges"/>
+  </eClassifiers>
+</ecore:EPackage>

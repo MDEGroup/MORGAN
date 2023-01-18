@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="cbpmn" nsURI="http://www.latece.uqam.ca/cbpmn/" nsPrefix="cbpmn">
+  <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore">
+    <details key="invocationDelegates" value="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot"/>
+    <details key="settingDelegates" value="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot"/>
+    <details key="validationDelegates" value="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot"/>
+  </eAnnotations>
+  <eClassifiers xsi:type="ecore:EClass" name="ProcessModel">
+    <eOperations name="iterator" eType="#//CbpmnIterator">
+      <eParameters name="iterator" eType="#//CbpmnIterator"/>
+    </eOperations>
+    <eOperations name="iterator" eType="#//CbpmnIterator">
+      <eParameters name="iterator" eType="#//CbpmnIterator"/>
+      <eParameters name="start" eType="#//FlowNode"/>
+    </eOperations>
+    <eOperations name="getRandomStartEvent" eType="#//StartEvent"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="mainBranch" lowerBound="1"
+        eType="#//Branch" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="processInvariants" upperBound="-1"
+        eType="#//OCLConstraint" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EString"
+        defaultValueLiteral="DefaultProcess"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Activity" eSuperTypes="#//FlowNode">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="preConditions" upperBound="-1"
+        eType="#//OCLConstraint" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="postConditions" upperBound="-1"
+        eType="#//OCLConstraint" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="type" eType="#//ActivityType"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="outputs" upperBound="-1"
+        eType="#//DataObjectReference" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="invariabilityClauses" upperBound="-1"
+        eType="#//OCLConstraint" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Branch">
+    <eOperations name="getFirstNode" eType="#//FlowNode"/>
+    <eOperations name="getLastNode" eType="#//FlowNode"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="nodes" lowerBound="1" upperBound="-1"
+        eType="#//FlowNode" containment="true" eOpposite="#//FlowNode/branch"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="default" eType="ecore:EDataType platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EBoolean"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="entryConditions" upperBound="-1"
+        eType="#//OCLConstraint" containment="true" eOpposite="#//OCLConstraint/branch"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="gateway" eType="#//SplitGateway"
+        eOpposite="#//SplitGateway/branches"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="DecisionGateway" eSuperTypes="#//SplitGateway">
+    <eOperations name="addBranchWithCondition">
+      <eParameters name="branch" eType="#//Branch"/>
+      <eParameters name="condition" eType="#//OCLConstraint"/>
+      <eParameters name="default" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    </eOperations>
+    <eOperations name="getDefaultBranch" eType="#//Branch"/>
+    <eOperations name="getRandomBranch" eType="#//Branch"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="type" eType="#//DecisionType"
+        defaultValueLiteral="EXCLUSIVE"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="FlowNode" abstract="true" interface="true">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="branch" eType="#//Branch"
+        eOpposite="#//Branch/nodes"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="next" eType="#//FlowNode"
+        eOpposite="#//FlowNode/previous"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="previous" eType="#//FlowNode"
+        eOpposite="#//FlowNode/next"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="inputs" upperBound="-1"
+        eType="#//DataObjectReference" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="OCLConstraint">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="constraintName" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString" iD="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="constraintStr" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="branch" eType="#//Branch"
+        eOpposite="#//Branch/entryConditions"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Event" abstract="true" eSuperTypes="#//FlowNode">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="trigger" eType="#//OCLConstraint"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="ActivityType">
+    <eLiterals name="MANUAL"/>
+    <eLiterals name="RECEIVE" value="1"/>
+    <eLiterals name="SEND" value="2"/>
+    <eLiterals name="SERVICE" value="3"/>
+    <eLiterals name="USER" value="4"/>
+    <eLiterals name="BUSINESSRULE" value="5"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="EventType">
+    <eLiterals name="EEnumLiteral0"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="DecisionType">
+    <eLiterals name="EXCLUSIVE"/>
+    <eLiterals name="INCLUSIVE" value="1"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ParallelGateway" eSuperTypes="#//SplitGateway"/>
+  <eClassifiers xsi:type="ecore:EClass" name="SplitGateway" abstract="true" interface="true"
+      eSuperTypes="#//FlowNode">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="branches" upperBound="-1"
+        eType="#//Branch" containment="true" eOpposite="#//Branch/gateway"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="GatewayType">
+    <eLiterals name="SPLIT"/>
+    <eLiterals name="JOIN" value="1"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="DataObjectReference">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore">
+      <details key="constraints" value="lowerBoundLessThanHigherBound lowerBoundPositive higherBoundPositive"/>
+    </eAnnotations>
+    <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
+      <details key="lowerBoundLessThanHigherBound" value="higherBound = -1 or lowerBound &lt;= higherBound"/>
+      <details key="lowerBoundPositive" value="lowerBound>=0"/>
+      <details key="higherBoundPositive" value="higherBound>=-1"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" lowerBound="1" eType="ecore:EDataType platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EString"
+        defaultValueLiteral="" iD="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="lowerBound" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt" defaultValueLiteral="0"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="higherBound" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt" defaultValueLiteral="1"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="dataObjectClass" lowerBound="1"
+        eType="ecore:EClass platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EClass"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="DataObjectType">
+    <eLiterals name="PHYSICAL"/>
+    <eLiterals name="INFORMATIONAL" value="1"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ProcessInstance">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="processModel" lowerBound="1"
+        eType="#//ProcessModel"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="executedNodes" upperBound="-1"
+        eType="#//FlowNodeInstance" containment="true" eOpposite="#//FlowNodeInstance/processInstance"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="id" eType="ecore:EDataType platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="dataObjects" upperBound="-1"
+        eType="ecore:EClass platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EObject"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="FlowNodeInstance">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="nodeDef" lowerBound="1"
+        eType="#//FlowNode"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="inputs" upperBound="-1"
+        eType="ecore:EClass platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EObject"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="outputs" upperBound="-1"
+        eType="ecore:EClass platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EObject"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="processInstance" lowerBound="1"
+        eType="#//ProcessInstance" eOpposite="#//ProcessInstance/executedNodes"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="status" eType="#//FlowNodeInstanceStatus"
+        defaultValueLiteral="SUCCESS"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="FlowNodeInstanceStatus">
+    <eLiterals name="INIT"/>
+    <eLiterals name="STARTED" value="1"/>
+    <eLiterals name="INTERRUPTED" value="2"/>
+    <eLiterals name="SUCCESS" value="3"/>
+    <eLiterals name="FAILED" value="4"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="DataObject" eSuperTypes="platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EObject">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="type" lowerBound="1" eType="ecore:EClass platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EClass"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="StartEvent" eSuperTypes="#//Event"/>
+  <eClassifiers xsi:type="ecore:EClass" name="EndEvent" eSuperTypes="#//Event"/>
+  <eClassifiers xsi:type="ecore:EClass" name="IntermediateEvent" eSuperTypes="#//Event"/>
+  <eClassifiers xsi:type="ecore:EDataType" name="CbpmnIterator" instanceClassName="cbpmn.util.CbpmnIterator"/>
+</ecore:EPackage>
