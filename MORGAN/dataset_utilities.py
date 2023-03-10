@@ -1,10 +1,19 @@
+import os
+
 from nltk.stem.porter import PorterStemmer
 from nltk.stem import WordNetLemmatizer
 import networkx as nx
+from networkx import degree_centrality, density
 import re
 from dinstance_measures import scikit_cosine, levenshtein_ratio_and_distance
-
+#from ranker import glove_sematic_sim
+import numpy as np
 import pandas as pd
+from scipy.cluster.hierarchy import dendrogram
+
+from jinja2 import Environment, FileSystemLoader
+
+
 
 def preprocess_term(term):
     return term.split(',')[0].split(' ')[0].replace('(', '').replace(')', '')
@@ -385,11 +394,7 @@ def preprocessing(docs):
 
         new_values = []
 
-        dict_terms = mapping_vce_terms("C:\\Users\\claud\\OneDrive\\Desktop\\Grakel\\Grakel\\unique_values.txt")
-        for d in doc:
-            new_values.append(dict_terms.get(d))
-
-        print(new_values)
+        #print(new_values)
         preprocessed_docs.append([stemmer.stem(w) for w in clean_doc])
         #preprocessed_docs.append([wordnet_lemmatizer.lemmatize(w) for w in clean_doc])
     return preprocessed_docs
@@ -460,7 +465,7 @@ def enrich_gt_data(gt_context):
 def enrich_data(train_context):
 
     y_train, train_data = load_file(train_context)
-    print('len original data', len(train_data))
+    #print('len original data', len(train_data))
    # similar_class = get_synonyms_class(y_train, 'C:/Users/claudio/PycharmProjects/Grakel/Datasets/Ontologies/', train_data)
 
     #similar_attributes = get_synonyms_attributes(y_train, 'C:/Users/claudio/PycharmProjects/Grakel/Datasets/Ontologies/', train_data)
@@ -650,3 +655,125 @@ def recall(predicted,actual):
         return (true_p/(true_p + false_n))*100
     else:
         return 0
+
+
+def format_dict(dict):
+
+    out_string = ""
+    i = 0
+    for key, value in dict.items():
+        out_string += str(key)+":"+str(value)+"#"
+    return out_string
+
+
+
+def compute_graph_metrics(graph_list, file_out):
+
+    for graph in graph_list:
+        #print("Graph size:", graph.size())
+        file_out.write(str(graph.size())+',')
+        #print("Graph order: ", graph.order())
+        file_out.write(str(graph.order()) + ',')
+        degree_sequence = [str(d) for n, d in graph.degree()]
+        #print("Graph degree sequence:", degree_sequence)
+        file_out.write(":".join(degree_sequence)+",")
+        #print("Graph density: ", density(graph))
+        file_out.write(str(density(graph)) + ',')
+        centrality =  degree_centrality(graph)
+        #print("Graph centrality: ", centrality)
+        file_out.write(format_dict(centrality))
+        file_out.write("\n")
+
+        file_out.flush()
+
+
+# def compute_semantic_similarity(folder, out_file):
+#     list_docs = []
+#     stop_words = []
+#
+#     with open(out_file, "w", encoding="utf8", errors='ignore') as res:
+#         for file in os.listdir(folder):
+#             f = open(folder+file, 'r', encoding="utf8", errors="encoding")
+#             list_docs.append(f.read().rstrip())
+#
+#         similarity_matrix=[]
+#         for i in range(0, len(list_docs)):
+#             doc = list_docs.pop(i)
+#
+#             list_similarities = list(1-glove_sematic_sim(doc,list_docs, stop_words))
+#             list_similarities.insert(i,1.0)
+#             res.write(','.join(str(s) for s in list_similarities)+'\n')
+#             similarity_matrix.append(list_similarities)
+#             list_docs.insert(i,doc)
+#
+#
+#     return similarity_matrix
+
+def plot_dendrogram(model, **kwargs):
+    # Create linkage matrix and then plot the dendrogram
+
+    # create the counts of samples under each node
+    counts = np.zeros(model.children_.shape[0])
+    n_samples = len(model.labels_)
+    for i, merge in enumerate(model.children_):
+        current_count = 0
+        for child_idx in merge:
+            if child_idx < n_samples:
+                current_count += 1  # leaf node
+            else:
+                current_count += counts[child_idx - n_samples]
+        counts[i] = current_count
+
+    linkage_matrix = np.column_stack(
+        [model.children_, model.distances_, counts]
+    ).astype(float)
+
+    # Plot the corresponding dendrogram
+    dendrogram(linkage_matrix, **kwargs)
+
+
+
+def read_similarity_matrix(file_path):
+
+    matrix=[]
+    f= open(file_path, "r", encoding="utf8", errors="ignore")
+    lines = f.readlines()
+    for l in lines:
+        l = l.strip()
+        list_sim= l.split(",")
+        list_float = [float(s) for s in list_sim]
+        matrix.append(list_float)
+
+    return matrix
+
+
+
+def present_recommendations(recommendations):
+    max_score = 100
+    test_name = "Python Challenge"
+    students = [
+        {"name": "Sandrine", "score": 100},
+        {"name": "Gergeley", "score": 87},
+        {"name": "Frieda", "score": 92},
+    ]
+
+    environment = Environment(loader=FileSystemLoader("templates/"))
+    template = environment.get_template("message.txt")
+
+    for student in students:
+        filename = f"message_{student['name'].lower()}.txt"
+        content = template.render(
+            student,
+            max_score=max_score,
+            test_name=test_name
+        )
+        with open(filename, mode="w", encoding="utf-8") as message:
+            message.write(content)
+            print(f"... wrote {filename}")
+
+
+
+
+
+
+
