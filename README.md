@@ -4,3 +4,4 @@ This repository contains all needed materials to replicate the experiments prese
 
  - **Parsers** folder contains the two parsers used to extract information from metamodels and models 
  - **Morgan** folder contains the Python implementation of the tool and the datasets employed in the evaluation
+ - **Results** folder contains the results obtained in the paper
